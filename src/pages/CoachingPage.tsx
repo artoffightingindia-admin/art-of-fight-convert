@@ -737,10 +737,20 @@ const handleMouseMove = (e: React.MouseEvent) => {
   if (!isDown || !sliderRef.current) return;
 
   e.preventDefault();
-  const x = e.pageX - sliderRef.current.offsetLeft;
+
+  const slider = sliderRef.current;
+  const x = e.pageX - slider.offsetLeft;
   const walk = (x - startX) * 1.5;
 
-  sliderRef.current.scrollLeft = scrollLeft - walk;
+  slider.scrollLeft = scrollLeft - walk;
+
+  // 🔥 LOOP WHILE DRAGGING
+  if (slider.scrollLeft >= slider.scrollWidth / 2) {
+    slider.scrollLeft -= slider.scrollWidth / 2;
+  }
+  if (slider.scrollLeft <= 0) {
+    slider.scrollLeft += slider.scrollWidth / 2;
+  }
 };
 useEffect(() => {
   const slider = sliderRef.current;
@@ -753,9 +763,9 @@ useEffect(() => {
     if (!isPaused) {
       slider.scrollLeft += 0.6;
 
-      // infinite loop
+      // 🔥 PERFECT LOOP (NO JUMP)
       if (slider.scrollLeft >= slider.scrollWidth / 2) {
-        slider.scrollLeft = 0;
+        slider.scrollLeft -= slider.scrollWidth / 2;
       }
     }
 
@@ -764,10 +774,8 @@ useEffect(() => {
 
   autoScroll();
 
-  // pause on interaction
+  // 🔥 interaction handling
   const stop = () => (isPaused = true);
-
-  // resume after delay
   const resume = () => {
     setTimeout(() => {
       isPaused = false;
@@ -781,9 +789,7 @@ useEffect(() => {
   slider.addEventListener("mouseleave", resume);
   slider.addEventListener("touchend", resume);
 
-  return () => {
-    cancelAnimationFrame(animationFrame);
-  };
+  return () => cancelAnimationFrame(animationFrame);
 }, []);
   const [lead, setLead] = useState<LeadForm>({ name: "", phone: "", goal: "" });
   const [stage, setStage] = useState<1 | 2 | 3>(1); // 1=lead form, 2=calendar, 3=done
