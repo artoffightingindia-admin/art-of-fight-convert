@@ -591,6 +591,36 @@ const css = `
   @media (max-width: 768px) {
     .cp-nav { padding: 14px 20px; }
     .cp-hero-content { padding: 100px 20px 48px; }
+    /* 🔥 MOBILE: WHAT YOU GET → VERTICAL STACK */
+.cp-what-cards {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.cp-what-card {
+  width: 100%;
+  max-width: 320px;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  padding: 16px;
+  gap: 14px;
+}
+
+.cp-what-card-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.cp-what-card h4 {
+  font-size: 14px;
+}
+
+.cp-what-card p {
+  font-size: 12px;
+}
     .cp-trust { padding: 0 20px; }
     .cp-section { padding: 48px 10px; }
     .cp-pain-grid { flex-direction: column; gap: 35px; }
