@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, CSSProperties, ReactNode } from "re
 import { useNavigate } from "react-router-dom";
 
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
-interface LeadForm { name: string; phone: int; goal: string; date: string; time: string; }
+interface LeadForm { name: string; phone: string; goal: string; date: string; time: string; }
 function Reveal({ children, style = {} }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -978,7 +978,9 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z
 
 const handleLeadSubmit = async () => {
   if (!lead.name.trim() || !lead.phone.trim()) return;
-
+  // No fetch here — we wait for date/time before saving to sheet
+  setStage(2);
+};
   try {
     const params = new URLSearchParams({
       name:  lead.name.trim(),
@@ -1015,11 +1017,10 @@ const handleBookingConfirm = async (date: string, time: string) => {
       body:    params.toString(),
     });
   } catch (err) {
-    console.error("Booking sheet error:", err);
+    console.error("Sheet error:", err);
   }
   setStage(3);
 };
-
   const painPoints = [
     "You train 4-5 days a week but your technique isn't improving",
     "Your sparring partners are getting better — you feel stuck",
