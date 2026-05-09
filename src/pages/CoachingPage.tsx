@@ -486,6 +486,57 @@ const css = `
   }
   .cp-footer-logo { color: #07b4ba; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; }
   .cp-footer p { color: rgba(255,255,255,0.28); font-family: 'Barlow', sans-serif; font-size: 13px; }
+/* 🔥 TESTIMONIAL SLIDER */
+.cp-feedback-slider {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.cp-feedback-track {
+  display: flex;
+  gap: 20px;
+
+  animation: scrollFeedback 20s linear infinite;
+}
+
+.cp-feedback-card {
+  min-width: 280px;
+  max-width: 280px;
+
+  border-radius: 14px;
+  background: #161616;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.cp-feedback-card p {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cp-feedback-card .author {
+  color: #07b4ba;
+  font-weight: 700;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+/* 🔥 SMOOTH LOOP ANIMATION */
+@keyframes scrollFeedback {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.cp-feedback-track:hover {
+  animation-play-state: paused;
+}
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -873,16 +924,16 @@ export default function CoachingPage() {
               </div>
             </Reveal>
 
-            <div className="cp-feedback-cards">
-              {feedbackCards.map((t, i) => (
-                <Reveal key={i}>
-                  <div className="cp-feedback-card">
-                    <p>{t.text}</p>
-                    <p className="author">— {t.author}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+   <div className="cp-feedback-slider">
+  <div className="cp-feedback-track">
+    {[...feedbackCards, ...feedbackCards].map((t, i) => (
+      <div className="cp-feedback-card" key={i}>
+        <p>{t.text}</p>
+        <p className="author">— {t.author}</p>
+      </div>
+    ))}
+  </div>
+</div>
           </div>
         </div>
 
