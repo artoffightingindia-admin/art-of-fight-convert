@@ -658,16 +658,22 @@ const css = `
     .cp-trust { padding: 0 20px; }
     .cp-section { padding: 48px 10px; }
     /* 🔥 MOBILE TESTIMONIAL FIX */
+/* 🔥 MOBILE → VERTICAL STACK (LIKE IMAGE) */
+.cp-feedback-slider {
+  overflow: hidden;
+  height: 300px;
+}
+
 .cp-feedback-track {
   display: flex;
+  flex-direction: column;   /* 🔥 THIS IS THE KEY */
 }
 
 .cp-feedback-card {
-  min-width: calc(100% / 3);   /* 🔥 3 cards visible */
-  max-width: calc(100% / 3);
+  min-width: 100% !important;
+  max-width: 100% !important;
 
-  margin-right: 10px;
-  padding: 14px;
+  margin-bottom: 14px;
 }
 
 .cp-feedback-card p {
