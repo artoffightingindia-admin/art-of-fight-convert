@@ -488,16 +488,29 @@ const css = `
   .cp-footer p { color: rgba(255,255,255,0.28); font-family: 'Barlow', sans-serif; font-size: 13px; }
 /* 🔥 TESTIMONIAL SLIDER */
 .cp-feedback-slider {
-  overflow: hidden;
-  width: 100%;
-  margin-top: 30px;
+  overflow-x: auto;     /* 🔥 enables manual scroll */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
 }
+
+.cp-feedback-slider::-webkit-scrollbar {
+  display: none;
+}}
 
 .cp-feedback-track {
   display: flex;
   gap: 20px;
 
   animation: scrollFeedback 20s linear infinite;
+
+  cursor: grab;                 /* 🔥 shows draggable */
+  user-select: none;            /* 🔥 prevents text selection */
+}
+
+.cp-feedback-track:active {
+  cursor: grabbing;
 }
 
 .cp-feedback-card {
@@ -656,6 +669,42 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
 export default function CoachingPage() {
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+let isDown = false;
+let startX = 0;
+let scrollLeft = 0;
+  const handleMouseDown = (e: React.MouseEvent) => {
+  if (!sliderRef.current) return;
+
+  isDown = true;
+  sliderRef.current.style.animation = "none"; // 🔥 stop auto scroll
+
+  startX = e.pageX - sliderRef.current.offsetLeft;
+  scrollLeft = sliderRef.current.scrollLeft;
+};
+
+const handleMouseLeave = () => {
+  isDown = false;
+};
+
+const handleMouseUp = () => {
+  isDown = false;
+
+  if (sliderRef.current) {
+    sliderRef.current.style.animation = "scrollFeedback 20s linear infinite";
+  }
+};
+
+const handleMouseMove = (e: React.MouseEvent) => {
+  if (!isDown || !sliderRef.current) return;
+
+  e.preventDefault();
+  const x = e.pageX - sliderRef.current.offsetLeft;
+  const walk = (x - startX) * 1.5;
+
+  sliderRef.current.scrollLeft = scrollLeft - walk;
+};
   const [lead, setLead] = useState<LeadForm>({ name: "", phone: "", goal: "" });
   const [stage, setStage] = useState<1 | 2 | 3>(1); // 1=lead form, 2=calendar, 3=done
 
@@ -925,7 +974,14 @@ export default function CoachingPage() {
             </Reveal>
 
    <div className="cp-feedback-slider">
-  <div className="cp-feedback-track">
+  <div
+    className="cp-feedback-track"
+    ref={sliderRef}
+    onMouseDown={handleMouseDown}
+    onMouseLeave={handleMouseLeave}
+    onMouseUp={handleMouseUp}
+    onMouseMove={handleMouseMove}
+  >
     {[...feedbackCards, ...feedbackCards].map((t, i) => (
       <div className="cp-feedback-card" key={i}>
         <p>{t.text}</p>
