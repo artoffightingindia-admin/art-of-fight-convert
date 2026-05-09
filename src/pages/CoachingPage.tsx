@@ -497,16 +497,17 @@ const css = `
 
 .cp-feedback-slider::-webkit-scrollbar {
   display: none;
-}}
+}
 
 .cp-feedback-track {
   display: flex;
+  flex-direction: row;   /* 🔥 FORCE HORIZONTAL */
   gap: 20px;
 
   animation: scrollFeedback 20s linear infinite;
 
-  cursor: grab;                 /* 🔥 shows draggable */
-  user-select: none;            /* 🔥 prevents text selection */
+  cursor: grab;
+  user-select: none;
 }
 
 .cp-feedback-track:active {
