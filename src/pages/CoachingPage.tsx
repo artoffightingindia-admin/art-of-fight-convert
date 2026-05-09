@@ -975,29 +975,30 @@ useEffect(() => {
 
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z8wTj9FLPdZuzOzSRhJ8-1JvlPxYk1210TelUjKuaSyYvVl/exec";
+
 const handleLeadSubmit = async () => {
   if (!lead.name.trim() || !lead.phone.trim()) return;
 
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbzVwJMFLL2PkIw256b-aZWNHADftqZ_-J2QGkfX_LZDkglkF62JujPQr-_ztOBCPG9t/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    name: lead.name,
-    phone: lead.phone,
-    goal: lead.goal,
-  }),
-});
-    console.log("Lead saved to Google Sheets");
+    const params = new URLSearchParams({
+      name:  lead.name.trim(),
+      phone: lead.phone.trim(),
+      goal:  lead.goal || "Not specified",
+    });
 
-    setStage(2); // 👉 show calendar after saving
+    await fetch(SHEET_URL, {
+      method: "POST",
+      mode:   "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
 
   } catch (err) {
-    console.error("Error saving lead:", err);
-    setStage(2); // still move forward
+    console.error("Sheet submission error:", err);
   }
+
+  setStage(2);
 };
   const handleBookingConfirm = (_date: string, _time: string) => {
     setStage(3);
