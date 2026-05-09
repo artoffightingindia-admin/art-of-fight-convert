@@ -244,7 +244,7 @@ const css = `
   /* TRUST STRIP */
  .cp-trust {
   position: absolute;     /* 🔥 attach to hero */
-  bottom: 0;              /* 🔥 stick to bottom */
+  bottom: 30px;              /* 🔥 stick to bottom */
   left: 0;
   width: 100%;
 
@@ -256,10 +256,19 @@ const css = `
   justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
   }
-  .cp-trust-item { display: flex; align-items: center; gap: 8px; }
+  .cp-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 6px 14px;
+  border-radius: 6px;
+
+  background: rgba(0,0,0,0.15);   /* subtle glass look */
+}
   .cp-trust-item span {
-    font-family: 'Bebas Neue', sans-serif; color: #000;
-    font-size: clamp(14px,2vw,18px); letter-spacing: 2px;
+    font-family: 'Bebas Neue', sans-serif; color: #fff;
+    font-size: clamp(15px,2.2vw,21px); letter-spacing: 2px;
     white-space: nowrap;
   }
 
