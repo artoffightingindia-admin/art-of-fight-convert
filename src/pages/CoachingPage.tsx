@@ -194,7 +194,12 @@ const css = `
     background: rgba(10,10,10,0.96); backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .cp-nav-logo { color: #07b4ba; font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 4px; }
+  .cp-nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;          /* 🔥 bigger */
+  letter-spacing: 6px;      /* 🔥 more spaced */
+  color: #07b4ba;
+}
   .cp-nav-right { display: flex; align-items: center; gap: 20px; }
   .cp-back {
     display: flex; align-items: center; gap: 8px;
@@ -223,7 +228,11 @@ const css = `
   }
   .cp-hero-content { position: relative; z-index: 2; max-width: 800px; padding: 120px 40px 60px; }
   .cp-hero-tag { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
-  .cp-hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px,7vw,90px); line-height: 0.95; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  .cp-hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 8vw, 110px);  /* 🔥 BIGGER LIKE IMAGE */
+  line-height: 0.9;
+  letter-spacing: 2px; line-height: 0.95; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
   .cp-hero-h1 span { color: #07b4ba; }
   .cp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
   .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -233,11 +242,19 @@ const css = `
   .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 
   /* TRUST STRIP */
-  .cp-trust {
-    position: relative; z-index: 2;
-    background: #07b4ba; height: 2cm;
-    display: flex; align-items: center; justify-content: space-around;
-    padding: 0 40px; gap: 12px; flex-wrap: wrap;
+ .cp-trust {
+  position: absolute;     /* 🔥 attach to hero */
+  bottom: 0;              /* 🔥 stick to bottom */
+  left: 0;
+  width: 100%;
+
+  background: #07b4ba;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 40px; gap: 12px; flex-wrap: wrap;
   }
   .cp-trust-item { display: flex; align-items: center; gap: 8px; }
   .cp-trust-item span {
@@ -767,7 +784,11 @@ useEffect(() => {
 
         {/* NAVBAR */}
         <nav className="cp-nav">
-          <span className="cp-nav-logo">AOF</span>
+          <span className="cp-nav-logo">
+  <span style={{ color: "#07b4ba" }}>A</span>
+  <span style={{ color: "#fff" }}>O</span>
+  <span style={{ color: "#07b4ba" }}>F</span>
+</span>
           <div className="cp-nav-right">
             <button className="cp-back" onClick={() => navigate("/")}>
               <ArrowLeftIcon /> Back To Home
@@ -791,7 +812,7 @@ useEffect(() => {
           <div className="cp-hero-content">
             <Reveal>
               <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
-              <h2 className="cp-hero-h2">
+              <h1 className="cp-hero-h1">
                 Train Like A<br />
                 <span>Champion.</span><br />
                 Fight Like One
