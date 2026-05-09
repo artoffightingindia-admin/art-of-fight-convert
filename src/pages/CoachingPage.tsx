@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState, CSSProperties, ReactNode } from "re
 import { useNavigate } from "react-router-dom";
 
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
-interface LeadForm { name: string; phone: string; goal: string; }
-
+interface LeadForm { name: string; phone: int; goal: string; date: string; time: string; }
 function Reveal({ children, style = {} }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -1000,9 +999,26 @@ const handleLeadSubmit = async () => {
 
   setStage(2);
 };
-  const handleBookingConfirm = (_date: string, _time: string) => {
-    setStage(3);
-  };
+const handleBookingConfirm = async (date: string, time: string) => {
+  try {
+    const params = new URLSearchParams({
+      name:  lead.name.trim(),
+      phone: lead.phone.trim(),
+      goal:  lead.goal || "Not specified",
+      date,
+      time,
+    });
+    await fetch(SHEET_URL, {
+      method:  "POST",
+      mode:    "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body:    params.toString(),
+    });
+  } catch (err) {
+    console.error("Booking sheet error:", err);
+  }
+  setStage(3);
+};
 
   const painPoints = [
     "You train 4-5 days a week but your technique isn't improving",
