@@ -597,7 +597,39 @@ const css = `
   align-items: center;
   gap: 18px;
 }
+/* 🔥 MOBILE TESTIMONIAL PAGINATION */
+.cp-feedback-wrapper {
+  overflow: hidden;
+}
 
+.cp-feedback-pages {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.cp-feedback-page {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cp-feedback-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.cp-feedback-nav button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+}
 .cp-what-card {
   width: 100%;
   max-width: 320px;
@@ -812,7 +844,8 @@ export default function CoachingPage() {
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
-
+const [currentIndex, setCurrentIndex] = useState(0);
+const visibleCount = 3;
 let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
@@ -1196,23 +1229,105 @@ useEffect(() => {
               </div>
             </Reveal>
 
-   <div className="cp-feedback-slider"
-    ref={sliderRef}
-    onMouseDown={handleMouseDown}
-    onMouseLeave={handleMouseLeave}
-    onMouseUp={handleMouseUp}
-    onMouseMove={handleMouseMove}
-  >
-  <div
-    className="cp-feedback-track">
-    {[...feedbackCards, ...feedbackCards].map((t, i) => (
-      <div className="cp-feedback-card" key={i}>
-        <p>{t.text}</p>
-        <p className="author">— {t.author}</p>
+   {/* ── TESTIMONIALS ── */}
+<section id="testimonials" className="cp-section">
+
+  {window.innerWidth <= 768 ? (
+
+    /* 📱 MOBILE VERSION */
+    (() => {
+      const visibleCount = 3;
+
+      const feedbackCards = [
+        { text: "The coaches actually care. I've gained real skill.", author: "Seity" },
+        { text: "Best decision I made this year.", author: "Rolen" },
+        { text: "From beginner to ring-ready in months.", author: "Karthik" },
+        { text: "Training feels structured now.", author: "Arjun" },
+        { text: "Confidence is way higher now.", author: "Vijay" },
+      ];
+
+      const pages = [];
+      for (let i = 0; i < feedbackCards.length; i += visibleCount) {
+        pages.push(feedbackCards.slice(i, i + visibleCount));
+      }
+
+      const [currentIndex, setCurrentIndex] = useState(0);
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setCurrentIndex((prev) =>
+            prev === pages.length - 1 ? 0 : prev + 1
+          );
+        }, 3000);
+
+        return () => clearInterval(interval);
+      }, [pages.length]);
+
+      const nextSlide = () => {
+        setCurrentIndex((prev) =>
+          prev === pages.length - 1 ? 0 : prev + 1
+        );
+      };
+
+      const prevSlide = () => {
+        setCurrentIndex((prev) =>
+          prev === 0 ? pages.length - 1 : prev - 1
+        );
+      };
+
+      return (
+        <div className="cp-feedback-wrapper">
+
+          <div
+            className="cp-feedback-pages"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`
+            }}
+          >
+            {pages.map((page, i) => (
+              <div className="cp-feedback-page" key={i}>
+                {page.map((t, idx) => (
+                  <div className="cp-feedback-card" key={idx}>
+                    <p>{t.text}</p>
+                    <p className="author">— {t.author}</p>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          <div className="cp-feedback-nav">
+            <button onClick={prevSlide}>‹</button>
+            <button onClick={nextSlide}>›</button>
+          </div>
+
+        </div>
+      );
+    })()
+
+  ) : (
+
+    /* 💻 DESKTOP VERSION (UNCHANGED) */
+    <div className="cp-feedback-slider"
+      ref={sliderRef}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={handleMouseLeave}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+    >
+      <div className="cp-feedback-track">
+        {[...feedbackCards, ...feedbackCards].map((t, i) => (
+          <div className="cp-feedback-card" key={i}>
+            <p>{t.text}</p>
+            <p className="author">— {t.author}</p>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-</div>
+    </div>
+
+  )}
+
+</section>
           </div>
         </div>
 
