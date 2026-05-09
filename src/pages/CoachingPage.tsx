@@ -706,7 +706,7 @@ export default function CoachingPage() {
                   <div className="cp-method-item">
   <div className="cp-method-item-icon">{item.icon}</div>
   <p className="cp-method-line">
-    {item.title}
+    {item.desc}
   </p>
 </div>
                   </Reveal>
