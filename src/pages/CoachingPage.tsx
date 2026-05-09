@@ -275,7 +275,7 @@ const css = `
   .cp-pain-item {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 35px;
   margin-bottom: 14px;
 }
 .cp-pain-item::before {
