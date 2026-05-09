@@ -304,10 +304,23 @@ const css = `
   .cp-method-text { flex: 1; min-width: 260px; order: 1; }
   .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
   .cp-method-item {
-    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
-    padding: 14px 16px; border-radius: 10px;
-    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
-  }
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+
+  padding: 10px 12px; /* 🔥 reduced height */
+  border-radius: 8px;
+
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.cp-method-line {
+  font-family: 'Barlow', sans-serif;
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  line-height: 1.5;
+}
   .cp-method-item-icon { flex-shrink: 0; margin-top: 2px; }
   .cp-method-item h4 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #fff; margin-bottom: 4px; }
   .cp-method-item p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52); font-size: 13px; line-height: 1.55; }
@@ -690,13 +703,12 @@ export default function CoachingPage() {
               <div className="cp-method-text">
                 {methodItems.map((item, i) => (
                   <Reveal key={i}>
-                    <div className="cp-method-item">
-                      <div className="cp-method-item-icon">{item.icon}</div>
-                      <div>
-                        <h4>{item.title}</h4>
-                        <p>{item.desc}</p>
-                      </div>
-                    </div>
+                  <div className="cp-method-item">
+  <div className="cp-method-item-icon">{item.icon}</div>
+  <p className="cp-method-line">
+    {item.title}
+  </p>
+</div>
                   </Reveal>
                 ))}
               </div>
