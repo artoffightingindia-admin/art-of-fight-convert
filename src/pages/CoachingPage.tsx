@@ -250,7 +250,7 @@ const css = `
   .cp-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 15px; /* 🔥 reduced side gap */
+  padding: 48px 10px; /* 🔥 reduced side gap */
 }
 
   /* PAIN SECTION */
@@ -302,7 +302,7 @@ const css = `
     display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap;
   }
   .cp-method-text { flex: 1; min-width: 260px; order: 1; }
-  .cp-method-image { flex: 0 0 400px; max-width: 100%; order: 2; }
+  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
   .cp-method-item {
     display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
     padding: 14px 16px; border-radius: 10px;
@@ -315,7 +315,7 @@ const css = `
   /* WHAT YOU GET */
   .cp-what-cards { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
   .cp-what-card {
-    width: 170px; padding: 22px 12px; border-radius: 14px;
+    width: 170px; padding: 22px 25px; border-radius: 14px;
     background: #1a1a1a; border: 2px solid #07b4ba;
     text-align: center; display: flex; flex-direction: column;
     align-items: center; gap: 10px;
@@ -438,7 +438,7 @@ const css = `
     .cp-nav { padding: 14px 20px; }
     .cp-hero-content { padding: 100px 20px 48px; }
     .cp-trust { padding: 0 20px; }
-    .cp-section { padding: 48px 15px; }
+    .cp-section { padding: 48px 10px; }
     .cp-pain-grid { flex-direction: column; gap: 35px; }
     .cp-pain-media { flex: unset; width: 100%; }
     .cp-method-grid { flex-direction: column; gap: 35px; }
