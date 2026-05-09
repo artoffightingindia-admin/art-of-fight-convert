@@ -305,23 +305,30 @@ const css = `
   .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
   .cp-method-item {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
+  align-items: flex-start;   /* 🔥 aligns icon + text nicely */
+  gap: 12px;
 
-  padding: 10px 12px; /* 🔥 reduced height */
-  border-radius: 8px;
+  margin-bottom: 10px;       /* 🔥 tighter spacing */
+  padding: 8px 10px;         /* 🔥 reduced height */
+
+  border-radius: 6px;
 
   background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.04);
 }
 .cp-method-line {
   font-family: 'Barlow', sans-serif;
   color: rgba(255,255,255,0.75);
-  font-size: 14px;
-  line-height: 1.5;
+
+  font-size: 13.5px;     /* 🔥 slightly tighter */
+  line-height: 1.45;     /* 🔥 compact but readable */
+
+  margin: 0;             /* 🔥 removes default paragraph gap */
 }
-  .cp-method-item-icon { flex-shrink: 0; margin-top: 2px; }
+  .cp-method-item-icon {
+  margin-top: 3px;   /* 🔥 aligns with first text line perfectly */
+  flex-shrink: 0;
+}
   .cp-method-item h4 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #fff; margin-bottom: 4px; }
   .cp-method-item p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52); font-size: 13px; line-height: 1.55; }
 
