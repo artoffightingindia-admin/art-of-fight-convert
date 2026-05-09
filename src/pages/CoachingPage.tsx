@@ -244,7 +244,7 @@ const css = `
   /* TRUST STRIP */
  .cp-trust {
   position: absolute;     /* 🔥 attach to hero */
-  bottom: 30px;              /* 🔥 stick to bottom */
+  bottom: 55px;              /* 🔥 stick to bottom */
   left: 0;
   width: 100%;
 
@@ -264,7 +264,7 @@ const css = `
   padding: 6px 14px;
   border-radius: 6px;
 
-  background: rgba(0,0,0,0.15);   /* subtle glass look */
+  background: rgba(0,0,0,0.0);   /* subtle glass look */
 }
   .cp-trust-item span {
     font-family: 'Bebas Neue', sans-serif; color: #fff;
