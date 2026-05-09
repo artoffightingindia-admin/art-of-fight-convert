@@ -313,9 +313,9 @@ const css = `
   .cp-method-item p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52); font-size: 13px; line-height: 1.55; }
 
   /* WHAT YOU GET */
-  .cp-what-cards { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .cp-what-cards { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
   .cp-what-card {
-    width: 170px; padding: 22px 25px; border-radius: 14px;
+    width: 170px; padding: 25px 12px; border-radius: 14px;
     background: #1a1a1a; border: 2px solid #07b4ba;
     text-align: center; display: flex; flex-direction: column;
     align-items: center; gap: 10px;
