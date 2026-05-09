@@ -677,6 +677,22 @@ const css = `
 .cp-feedback-card .author {
   font-size: 11px;
 }
+/* 🔥 MOBILE BUTTON STYLE */
+.cp-hero-btns {
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+.cp-btn-primary,
+.cp-btn-outline {
+  width: 100%;
+  border-radius: 4px;   /* 🔥 rectangle */
+  padding: 14px 0;
+
+  font-size: 16px;
+  letter-spacing: 1.5px;
+}
     .cp-pain-grid { flex-direction: column; gap: 35px; }
     .cp-pain-media { flex: unset; width: 100%; }
     .cp-method-grid { flex-direction: column; gap: 35px; }
