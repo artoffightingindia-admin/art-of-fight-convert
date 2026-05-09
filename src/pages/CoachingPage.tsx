@@ -504,8 +504,6 @@ const css = `
   flex-direction: row;   /* 🔥 FORCE HORIZONTAL */
   gap: 20px;
 
-  animation: scrollFeedback 20s linear infinite;
-
   cursor: grab;
   user-select: none;
 }
@@ -540,14 +538,6 @@ const css = `
 }
 
 /* 🔥 SMOOTH LOOP ANIMATION */
-@keyframes scrollFeedback {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 .cp-feedback-track:hover {
   animation-play-state: paused;
 }
@@ -706,6 +696,52 @@ const handleMouseMove = (e: React.MouseEvent) => {
 
   sliderRef.current.scrollLeft = scrollLeft - walk;
 };
+  useEffect(() => {
+  const slider = sliderRef.current;
+  if (!slider) return;
+
+  let animationFrame: number;
+  let isUserInteracting = false;
+
+  const autoScroll = () => {
+    if (!isUserInteracting) {
+      slider.scrollLeft += 0.5; // 🔥 speed control
+
+      // infinite loop effect
+      if (slider.scrollLeft >= slider.scrollWidth / 2) {
+        slider.scrollLeft = 0;
+      }
+    }
+
+    animationFrame = requestAnimationFrame(autoScroll);
+  };
+
+  autoScroll();
+
+  const stopInteraction = () => (isUserInteracting = true);
+  const resumeInteraction = () => {
+    setTimeout(() => {
+      isUserInteracting = false;
+    }, 800); // delay before auto resumes
+  };
+
+  slider.addEventListener("mousedown", stopInteraction);
+  slider.addEventListener("touchstart", stopInteraction);
+
+  slider.addEventListener("mouseup", resumeInteraction);
+  slider.addEventListener("mouseleave", resumeInteraction);
+  slider.addEventListener("touchend", resumeInteraction);
+
+  return () => {
+    cancelAnimationFrame(animationFrame);
+
+    slider.removeEventListener("mousedown", stopInteraction);
+    slider.removeEventListener("touchstart", stopInteraction);
+    slider.removeEventListener("mouseup", resumeInteraction);
+    slider.removeEventListener("mouseleave", resumeInteraction);
+    slider.removeEventListener("touchend", resumeInteraction);
+  };
+}, []);
   const [lead, setLead] = useState<LeadForm>({ name: "", phone: "", goal: "" });
   const [stage, setStage] = useState<1 | 2 | 3>(1); // 1=lead form, 2=calendar, 3=done
 
