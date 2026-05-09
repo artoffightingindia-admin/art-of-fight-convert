@@ -981,27 +981,7 @@ const handleLeadSubmit = async () => {
   // No fetch here — we wait for date/time before saving to sheet
   setStage(2);
 };
-  try {
-    const params = new URLSearchParams({
-      name:  lead.name.trim(),
-      phone: lead.phone.trim(),
-      goal:  lead.goal || "Not specified",
-    });
-
-    await fetch(SHEET_URL, {
-      method: "POST",
-      mode:   "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
-    });
-
-  } catch (err) {
-    console.error("Sheet submission error:", err);
-  }
-
-  setStage(2);
-};
-const handleBookingConfirm = async (date: string, time: string) => {
+ const handleBookingConfirm = async (date: string, time: string) => {
   try {
     const params = new URLSearchParams({
       name:  lead.name.trim(),
