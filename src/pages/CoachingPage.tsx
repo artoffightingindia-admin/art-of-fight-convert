@@ -274,6 +274,23 @@ const css = `
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 2px;
 }
+.trust-icon-box {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-icon-box svg {
+  width: 20px;
+  height: 20px;
+
+  stroke: #fff;        /* 🔥 black for teal bg */
+  fill: none;
+  stroke-width: 2;
+}
 
   /* SECTION WRAPPER */
   .cp-section {
