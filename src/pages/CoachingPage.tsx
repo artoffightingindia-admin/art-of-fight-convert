@@ -548,8 +548,6 @@ const css = `
 .cp-feedback-track {
   display: flex;
   flex-direction: row;   /* 🔥 FORCE HORIZONTAL */
-  gap: 20px;
-
   cursor: grab;
   user-select: none;
 }
@@ -568,6 +566,7 @@ const css = `
 
   padding: 20px;
   flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .cp-feedback-card p {
@@ -711,12 +710,11 @@ export default function CoachingPage() {
 let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
-  const handleMouseDown = (e: React.MouseEvent) => {
+
+const handleMouseDown = (e: React.MouseEvent) => {
   if (!sliderRef.current) return;
 
   isDown = true;
-  sliderRef.current.style.animation = "none"; // 🔥 stop auto scroll
-
   startX = e.pageX - sliderRef.current.offsetLeft;
   scrollLeft = sliderRef.current.scrollLeft;
 };
@@ -727,10 +725,6 @@ const handleMouseLeave = () => {
 
 const handleMouseUp = () => {
   isDown = false;
-
-  if (sliderRef.current) {
-    sliderRef.current.style.animation = "scrollFeedback 20s linear infinite";
-  }
 };
 
 const handleMouseMove = (e: React.MouseEvent) => {
@@ -744,17 +738,20 @@ const handleMouseMove = (e: React.MouseEvent) => {
 
   slider.scrollLeft = scrollLeft - walk;
 
-  // 🔥 LOOP WHILE DRAGGING
-  if (slider.scrollLeft >= slider.scrollWidth / 2) {
-    slider.scrollLeft -= slider.scrollWidth / 2;
+  // 🔥 LOOP FIX DURING DRAG
+  if (slider.scrollLeft >= slider.scrollWidth) {
+    slider.scrollLeft = slider.scrollWidth / 2;
   }
   if (slider.scrollLeft <= 0) {
-    slider.scrollLeft += slider.scrollWidth / 2;
+    slider.scrollLeft = slider.scrollWidth / 2;
   }
 };
 useEffect(() => {
   const slider = sliderRef.current;
   if (!slider) return;
+
+  // 🔥 START FROM MIDDLE (IMPORTANT FOR LOOP)
+  slider.scrollLeft = slider.scrollWidth / 2;
 
   let animationFrame: number;
   let isPaused = false;
@@ -763,9 +760,9 @@ useEffect(() => {
     if (!isPaused) {
       slider.scrollLeft += 0.6;
 
-      // 🔥 PERFECT LOOP (NO JUMP)
-      if (slider.scrollLeft >= slider.scrollWidth / 2) {
-        slider.scrollLeft -= slider.scrollWidth / 2;
+      // 🔥 PERFECT LOOP
+      if (slider.scrollLeft >= slider.scrollWidth) {
+        slider.scrollLeft = slider.scrollWidth / 2;
       }
     }
 
@@ -774,12 +771,9 @@ useEffect(() => {
 
   autoScroll();
 
-  // 🔥 interaction handling
   const stop = () => (isPaused = true);
   const resume = () => {
-    setTimeout(() => {
-      isPaused = false;
-    }, 800);
+    setTimeout(() => (isPaused = false), 800);
   };
 
   slider.addEventListener("mousedown", stop);
