@@ -250,7 +250,7 @@ const css = `
   .cp-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 10px; /* 🔥 reduced side gap */
+  padding: 45px 0px; /* 🔥 reduced side gap */
 }
 
   /* PAIN SECTION */
