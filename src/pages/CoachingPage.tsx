@@ -520,7 +520,7 @@ body { background: #0a0a0a; }
 .cp-promise { max-width: 670px; margin: 36px auto 0; text-align: center; padding: 0 20px; position: relative; }
 .cp-promise-text {
   font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.7);
-  font-size: 15px; line-height: 0.85; font-style: italic;
+  font-size: 15px; line-height: 1; font-style: italic;
   max-width: 570px; margin: 0 auto;
 }
 .cp-promise-text::before { content: "\u201C"; color: #07b4ba; font-size: 50px; margin-right: 6px; }
