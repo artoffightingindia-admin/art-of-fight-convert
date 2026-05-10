@@ -248,7 +248,7 @@ const css = `
   width: 100%;
 
   background: #07b4ba;
-  height: 70px;
+  height: 50px;
 
   display: flex;
   align-items: center;
