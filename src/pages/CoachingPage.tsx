@@ -687,20 +687,45 @@ body { background: #0a0a0a; }
 
  .cp-what-card {
   width: 100%;
-  min-height: 130px;
+  min-height: 90px;
 
-  flex-direction: column;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+
   align-items: center;
+  justify-content: flex-start;
 
-  text-align: center;
+  text-align: left;
 
-  padding: 18px 12px;
-  gap: 10px;
+  padding: 14px 16px;
+  gap: 14px;
 
-  border-radius: 14px;
+  border-radius: 12px;
 }
-  .cp-what-card-icon { width: 42px; height: 42px; flex-shrink: 0; }
+  .cp-what-card-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+.cp-what-card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.cp-what-card h4 {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.cp-what-card p {
+  font-size: 11px;
+  line-height: 1.4;
+}
   .cp-what-card h4 { font-size: 14px; }
   .cp-what-card p { font-size: 12px; }
 
