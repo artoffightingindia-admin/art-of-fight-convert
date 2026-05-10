@@ -390,7 +390,7 @@ const css = `
   .cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
  .cp-what-card {
   width: 175px;              /* 🔥 bigger card width */
-  min-height: 320px;         /* 🔥 taller cards */
+  min-height: 2550px;         /* 🔥 taller cards */
 
   padding: 11px 6px;        /* 🔥 more spacing inside */
 
