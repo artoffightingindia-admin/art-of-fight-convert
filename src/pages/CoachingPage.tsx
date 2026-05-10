@@ -389,10 +389,10 @@ const css = `
   /* WHAT YOU GET */
   .cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
  .cp-what-card {
-  width: 240px;              /* 🔥 bigger card width */
-  min-height: 260px;         /* 🔥 taller cards */
+  width: 150px;              /* 🔥 bigger card width */
+  min-height: 450px;         /* 🔥 taller cards */
 
-  padding: 28px 20px;        /* 🔥 more spacing inside */
+  padding: 11px 6px;        /* 🔥 more spacing inside */
 
   border-radius: 18px;
 
@@ -411,11 +411,6 @@ const css = `
  .cp-what-card-icon {
   width: 68px;
   height: 68px;
-
-  border-radius: 14px;
-
-  border: 1.5px solid rgba(7,180,186,0.35);
-
   display: flex;
   align-items: center;
   justify-content: center;
