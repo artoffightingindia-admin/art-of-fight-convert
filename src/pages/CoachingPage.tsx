@@ -1275,11 +1275,11 @@ export default function CoachingPage() {
       style={{
         background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
         border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: 18,
-        padding: "28px 34px",
-        minWidth: 170,
+        borderRadius: 14,
+        padding: "18px 22px",
+        minWidth: 130,
         textAlign: "center",
-        boxShadow: "0 0 20px rgba(0,0,0,0.2)",
+        boxShadow: "0 0 14px rgba(0,0,0,0.18)",
       }}
     >
       <p
