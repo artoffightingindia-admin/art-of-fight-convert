@@ -495,10 +495,6 @@ body { background: #0a0a0a; }
   font-family: 'Bebas Neue', sans-serif; font-size: 16px;
   letter-spacing: 1px; color: #fff; margin-bottom: 4px;
 }
-.cp-promise-text br {
-  display: block;
-  margin-bottom: 10px;
-}
 .cp-method-item p {
   font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52);
   font-size: 13px; line-height: 1.55;
@@ -521,11 +517,11 @@ body { background: #0a0a0a; }
 .cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
 
 /* OUR PROMISE */
-.cp-promise { max-width: 620px; margin: 36px auto 0; text-align: center; padding: 0 20px; position: relative; }
+.cp-promise { max-width: 670px; margin: 36px auto 0; text-align: center; padding: 0 20px; position: relative; }
 .cp-promise-text {
   font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.7);
   font-size: 15px; line-height: 1.1; font-style: italic;
-  max-width: 520px; margin: 0 auto;
+  max-width: 570px; margin: 0 auto;
 }
 .cp-promise-text::before { content: "\u201C"; color: #07b4ba; font-size: 50px; margin-right: 6px; }
 .cp-promise h4 {
@@ -1273,7 +1269,7 @@ export default function CoachingPage() {
                 <p className="cp-promise-text">
                   We don't just hand you a plan and disappear. Every session is tracked,
                   every milestone is celebrated, and every setback is coached through.
-                  <br />You will not plateau with AOF.
+                  You will not plateau with AOF.
                 </p>
               </div>
             </Reveal>
