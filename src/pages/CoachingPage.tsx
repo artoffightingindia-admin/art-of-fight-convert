@@ -1016,14 +1016,53 @@ const handleLeadSubmit = async () => {
                 Stop training in the crowd. Get a personalized coaching program built around your body, your goals, and your timeline — guided by coaches who have been in the ring.
               </p>
               <div className="cp-hero-btns">
-                <button className="cp-btn-primary" onClick={scrollToForm}>Book A Call</button>
-                <button
-                  className="cp-btn-outline"
-                  onClick={() => document.getElementById("cp-testimonials")?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  See Results
-                </button>
-              </div>
+
+  <button
+    onClick={scrollToForm}
+    className="
+      border-2 border-[#07b4ba]
+      text-[#07b4ba]
+      hover:bg-[#07b4ba]
+      hover:text-black
+      font-semibold
+      text-sm
+      uppercase
+      tracking-wide
+      px-8
+      py-4
+      rounded-md
+      transition-all
+      duration-300
+    "
+  >
+    1 on 1 Coaching
+  </button>
+
+  <button
+    onClick={() =>
+      document
+        .getElementById("cp-testimonials")
+        ?.scrollIntoView({ behavior: "smooth" })
+    }
+    className="
+      bg-[#07b4ba]
+      text-black
+      hover:bg-[#059aa0]
+      font-semibold
+      text-sm
+      uppercase
+      tracking-wide
+      px-8
+      py-4
+      rounded-md
+      transition-all
+      duration-300
+    "
+  >
+    See Results
+  </button>
+
+</div>
             </Reveal>
           </div>
 
