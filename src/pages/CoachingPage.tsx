@@ -704,7 +704,7 @@ const css = `
 
 .cp-what-card {
   width: 100%;
-  max-width: 100px;
+  max-width: 360px;
   flex-direction: row;
   align-items: center;
   text-align: left;
