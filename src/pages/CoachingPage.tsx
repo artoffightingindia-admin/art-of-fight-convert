@@ -352,7 +352,7 @@ const css = `
     display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap;
   }
   .cp-method-text { flex: 1; min-width: 260px; order: 1; }
-  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2;aspect-ratio: 16/9 }
+  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2;aspect-ratio: 16/9; }
   .cp-method-item {
   display: flex;
   align-items: flex-start;   /* 🔥 aligns icon + text nicely */
