@@ -1177,7 +1177,7 @@ const handleLeadSubmit = async () => {
                   alt="MMA Training"
                   style={{
   width: "100%",
-  aspectRatio: "4/5",
+  aspectRatio: "16/9",
   borderRadius: 12,
   border: "1px solid rgba(255,255,255,0.08)",
   objectFit: "cover"
