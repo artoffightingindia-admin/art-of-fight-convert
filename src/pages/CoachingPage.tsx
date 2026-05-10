@@ -44,8 +44,8 @@ const ArrowLeftIcon = () => (
 
 const WhatsAppIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.[...]
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.335-1.508A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.681-.513-5.21-1.408l-.374-.222-3.[...]
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.65-2.059-.17-.297-.347-.348-.644-.105-.297.242-.767.966-.94 1.164-.173.199-.422.348-.644.105-.297-.242-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.65-2.059-.17-.297-.348-.348-.644.105-.297.242-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.65-2.059" />
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.335-1.508A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.681-.513-5.21-1.408l-.374-.222-3.871.923.923-3.871-.222-.374C2.513 15.681 2 13.9 2 12c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10z" />
   </svg>
 );
 
@@ -195,8 +195,8 @@ const css = `
   }
   .cp-nav-logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;          /* 🔥 bigger */
-  letter-spacing: 6px;      /* 🔥 more spaced */
+  font-size: 32px;
+  letter-spacing: 6px;
   color: #07b4ba;
 }
   .cp-nav-right { display: flex; align-items: center; gap: 20px; }
@@ -219,7 +219,7 @@ const css = `
   .cp-hero {
   position: relative;
   min-height: 35vh;
-  padding-bottom: 70px;           /* 🔥 ensures visibility */
+  padding-bottom: 70px;
 }
   .cp-hero-bg { position: absolute; inset: 0; z-index: 0; }
   .cp-hero-overlay {
@@ -229,54 +229,46 @@ const css = `
   .cp-hero-tag { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
   .cp-hero-h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(42px, 5.5vw, 72px);  /* 🔥 BIGGER LIKE IMAGE */
-  line-height: 0.9;
-  letter-spacing: 2px; line-height: 0.95; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  font-size: clamp(42px, 5.5vw, 72px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 20px;
+}
   .cp-hero-h1 span { color: #07b4ba; }
   .cp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
   .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-  .cp-btn-primary { padding: 14px 34px; border-radius: 7px; background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px; border: none; cursor: po[...]
+  .cp-btn-primary { padding: 14px 34px; border-radius: 7px; background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px; border: none; cursor: pointer; transition: background 0.2s; }
   .cp-btn-primary:hover { background: #059a9f; }
-  .cp-btn-outline { padding: 14px 34px; border-radius: 7px; background: transparent; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px; border: 2px solid #0[...]
+  .cp-btn-outline { padding: 14px 34px; border-radius: 7px; background: transparent; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px; border: 2px solid #07b4ba; cursor: pointer; transition: all 0.2s; }
   .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 
   /* TRUST STRIP */
  .cp-trust {
-  position: absolute;     /* 🔥 attach to hero */
-  bottom: 10px;              /* 🔥 stick to bottom */
+  position: absolute;
+  bottom: 10px;
   left: 0;
   width: 100%;
-
   background: #07b4ba;
   height: 50px;
-
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 40px; gap: 12px; flex-wrap: wrap;
+  padding: 0 40px;
+  gap: 12px;
+  flex-wrap: wrap;
   }
   .cp-trust-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  padding: 6px 14px;
-  border-radius: 6px;
-
-  background: rgba(0,0,0,0.0);   /* subtle glass look */
-}
-  .cp-trust-item {
-  display: flex;
-  align-items: center;
   gap: 12px;
-
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 2px;
 }
 .trust-icon-box {
   width: 42px;
   height: 42px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,8 +277,7 @@ const css = `
 .trust-icon-box svg {
   width: 30px;
   height: 30px;
-
-  stroke: #fff;        /* 🔥 black for teal bg */
+  stroke: #fff;
   fill: none;
   stroke-width: 2;
 }
@@ -295,14 +286,14 @@ const css = `
   .cp-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 45px 0px; /* 🔥 reduced side gap */
+  padding: 45px 0px;
 }
 
   /* PAIN SECTION */
   .cp-pain-grid {
   display: flex;
-  gap: 100px; /* 🔥 tighter */
-  align-items: center; /* 🔥 vertically aligned */
+  gap: 100px;
+  align-items: center;
   flex-wrap: wrap;
 }
   .cp-pain-media { flex: 0 0 500px; max-width: 100%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
@@ -311,7 +302,7 @@ const css = `
   flex: 1;
   min-width: 260px;
   padding-top: 8px;
-  padding-left: 8px;   /* 🔥 pushes text slightly right */
+  padding-left: 8px;
 }
   .cp-pain-label { color: #07b4ba; font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 8px; }
   .cp-pain-heading { color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: clamp(24px,3vw,32px); letter-spacing: 1px; margin-bottom: 16px; line-height: 1.1; }
@@ -334,7 +325,6 @@ const css = `
   height: 18px;
   background: #ff2d2d;
   border-radius: 2px;
-
   box-shadow:
     0 0 6px rgba(255,45,45,0.9),
     0 0 16px rgba(255,45,45,0.6),
@@ -355,28 +345,23 @@ const css = `
   .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2;}
   .cp-method-item {
   display: flex;
-  align-items: flex-start;   /* 🔥 aligns icon + text nicely */
+  align-items: flex-start;
   gap: 12px;
-
-  margin-bottom: 10px;       /* 🔥 tighter spacing */
-  padding: 16px 10px;         /* 🔥 reduced height */
-
+  margin-bottom: 10px;
+  padding: 16px 10px;
   border-radius: 6px;
-
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.04);
 }
 .cp-method-line {
   font-family: 'Barlow', sans-serif;
   color: rgba(255,255,255,0.75);
-
-  font-size: 13.5px;     /* 🔥 slightly tighter */
-  line-height: 1.45;     /* 🔥 compact but readable */
-
-  margin: 0;             /* 🔥 removes default paragraph gap */
+  font-size: 13.5px;
+  line-height: 1.45;
+  margin: 0;
 }
   .cp-method-item-icon {
-  margin-top: 3px;   /* 🔥 aligns with first text line perfectly */
+  margin-top: 3px;
   flex-shrink: 0;
 }
 .cp-method-item-icon svg {
@@ -389,23 +374,17 @@ const css = `
   /* WHAT YOU GET */
   .cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
  .cp-what-card {
-  width: 175px;              /* 🔥 bigger card width */
-  min-height: 255px;         /* 🔥 taller cards */
-
-  padding: 11px 6px;        /* 🔥 more spacing inside */
-
+  width: 175px;
+  min-height: 255px;
+  padding: 11px 6px;
   border-radius: 18px;
-
   background: #1a1a1a;
   border: 2px solid #07b4ba;
-
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 18px;
 }
  .cp-what-card-icon {
@@ -431,21 +410,6 @@ const css = `
   .cp-promise-text {
   font-family: 'Barlow', sans-serif;
   color: rgba(255,255,255,0.7);
-
-  font-size: 15px;
-  line-height: 1;
-
-  font-style: italic;
-
-  max-width: 520px;
-  margin: 0 auto;
-
-  position: relative;
-}
-  .cp-promise h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 22px; letter-spacing: 1.5px; margin-bottom: 10px; }
-  .cp-promise-text {
-  font-family: 'Barlow', sans-serif;
-  color: rgba(255,255,255,0.7);
   font-size: 15px;
   line-height: 1.7;
   font-style: italic;
@@ -458,6 +422,8 @@ const css = `
   font-size: 50px;
   margin-right: 6px;
 }
+  .cp-promise h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 22px; letter-spacing: 1.5px; margin-bottom: 10px; }
+  
   /* COACH */
   .cp-coach-bg { background: #0a0a0a; }
   .cp-book-strip {
@@ -546,12 +512,11 @@ const css = `
   }
   .cp-footer-logo { color: #07b4ba; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; }
   .cp-footer p { color: rgba(255,255,255,0.28); font-family: 'Barlow', sans-serif; font-size: 13px; }
-/* 🔥 TESTIMONIAL SLIDER */
+
 .cp-feedback-slider {
-  overflow-x: auto;     /* 🔥 enables manual scroll */
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-
   scrollbar-width: none;
 }
 
@@ -561,7 +526,7 @@ const css = `
 
 .cp-feedback-track {
   display: flex;
-  flex-direction: row;   /* 🔥 FORCE HORIZONTAL */
+  flex-direction: row;
   cursor: grab;
   user-select: none;
 }
@@ -573,11 +538,9 @@ const css = `
 .cp-feedback-card {
   min-width: 280px;
   max-width: 280px;
-
   border-radius: 14px;
   background: #161616;
   border: 1px solid rgba(255,255,255,0.08);
-
   padding: 20px;
   flex-shrink: 0;
   margin-right: 20px;
@@ -596,7 +559,6 @@ const css = `
   font-size: 13px;
 }
 
-/* 🔥 SMOOTH LOOP ANIMATION */
 .cp-feedback-track:hover {
   animation-play-state: paused;
 }
@@ -605,41 +567,35 @@ const css = `
   @media (max-width: 768px) {
     .cp-nav { padding: 14px 20px; }
     .cp-hero-content { padding: 100px 20px 48px; }
-    /* 🔥 MOBILE: WHAT YOU GET → VERTICAL STACK */
+
 .cp-what-cards {
   flex-direction: column;
   align-items: center;
   gap: 18px;
 }
-/* 🔥 MOBILE TESTIMONIAL PAGINATION */
+
 .cp-feedback-wrapper {
   overflow: hidden;
 }
-/* 🔥 FIX MOBILE TESTIMONIAL CLEAN LAYOUT */
 
 .cp-feedback-page {
   min-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
-
   padding: 0 6px;
 }
 
-/* uniform card size */
 .cp-feedback-card {
   width: 100%;
-  min-height: 90px;   /* 🔥 keeps equal height */
+  min-height: 90px;
   padding: 16px;
-
   border-radius: 12px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* text cleanup */
 .cp-feedback-card p {
   font-size: 13px;
   line-height: 1.5;
@@ -648,12 +604,6 @@ const css = `
 .cp-feedback-card .author {
   font-size: 12px;
   margin-top: 8px;
-}
-
-/* smoother page switch */
-.cp-feedback-pages {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
 }
 
 .cp-feedback-pages {
@@ -684,6 +634,7 @@ const css = `
   color: #fff;
   font-size: 18px;
 }
+
 .cp-what-card {
   width: 100%;
   max-width: 320px;
@@ -707,14 +658,12 @@ const css = `
 .cp-what-card p {
   font-size: 12px;
 }
-/* 🔥 MOBILE TRUST STRIP FIX */
-.cp-trust {
-  position: relative;        /* remove absolute behavior */
-  height: auto;
 
+.cp-trust {
+  position: relative;
+  height: auto;
   flex-direction: row;
   justify-content: space-between;
-
   padding: 12px 14px;
   gap: 10px;
 }
@@ -728,7 +677,7 @@ const css = `
 .cp-trust-item span {
   font-size: 23px;
   letter-spacing: 1.6px;
-  color: #fff;   /* black text like your image */
+  color: #fff;
 }
 
 .trust-icon-box {
@@ -739,12 +688,12 @@ const css = `
 .trust-icon-box svg {
   width: 16px;
   height: 16px;
-  stroke: #fff;   /* black icons */
+  stroke: #fff;
 }
+
     .cp-trust { padding: 0 20px; }
     .cp-section { padding: 48px 10px; }
-    /* 🔥 MOBILE TESTIMONIAL FIX */
-/* 🔥 MOBILE → VERTICAL STACK (LIKE IMAGE) */
+
 .cp-feedback-slider {
   overflow: hidden;
   height: 300px;
@@ -752,13 +701,12 @@ const css = `
 
 .cp-feedback-track {
   display: flex;
-  flex-direction: column;   /* 🔥 THIS IS THE KEY */
+  flex-direction: column;
 }
 
 .cp-feedback-card {
   min-width: 100% !important;
   max-width: 100% !important;
-
   margin-bottom: 14px;
 }
 
@@ -769,7 +717,7 @@ const css = `
 .cp-feedback-card .author {
   font-size: 11px;
 }
-/* 🔥 MOBILE BUTTON STYLE */
+
 .cp-hero-btns {
   flex-direction: column;
   width: 100%;
@@ -779,12 +727,12 @@ const css = `
 .cp-btn-primary,
 .cp-btn-outline {
   width: 100%;
-  border-radius: 4px;   /* 🔥 rectangle */
+  border-radius: 4px;
   padding: 14px 0;
-
   font-size: 16px;
   letter-spacing: 1.5px;
 }
+
     .cp-pain-grid { flex-direction: column; gap: 35px; }
     .cp-pain-media { flex: unset; width: 100%; }
     .cp-method-grid { flex-direction: column; gap: 35px; }
@@ -827,9 +775,9 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
     <div>
       {/* Month nav */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
-        <button onClick={prevMonth} style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", width: 32, height: 32, borderRadius: 6, cursor: "pointer", fontSize: 16 [...]
+        <button onClick={prevMonth} style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", width: 32, height: 32, borderRadius: 6, cursor: "pointer", fontSize: 16 }}>‹</button>
         <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 2, color: "#fff" }}>{months[month]} {year}</span>
-        <button onClick={nextMonth} style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", width: 32, height: 32, borderRadius: 6, cursor: "pointer", fontSize: 16 [...]
+        <button onClick={nextMonth} style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", width: 32, height: 32, borderRadius: 6, cursor: "pointer", fontSize: 16 }}>›</button>
       </div>
 
       {/* Day labels */}
@@ -950,14 +898,12 @@ useEffect(() => {
   const autoScroll = () => {
     if (!isPaused) {
       if (isMobile) {
-        // 🔥 VERTICAL LOOP
         slider.scrollTop += 0.5;
 
         if (slider.scrollTop >= slider.scrollHeight / 2) {
           slider.scrollTop -= slider.scrollHeight / 2;
         }
       } else {
-        // desktop stays horizontal
         slider.scrollLeft += 0.6;
 
         if (slider.scrollLeft >= slider.scrollWidth / 2) {
@@ -985,7 +931,7 @@ useEffect(() => {
   return () => cancelAnimationFrame(animationFrame);
 }, []);
   const [lead, setLead] = useState<LeadForm>({ name: "", phone: "", goal: "" });
-  const [stage, setStage] = useState<1 | 2 | 3>(1); // 1=lead form, 2=calendar, 3=done
+  const [stage, setStage] = useState<1 | 2 | 3>(1);
 
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
@@ -993,7 +939,6 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z
 
 const handleLeadSubmit = async () => {
   if (!lead.name.trim() || !lead.phone.trim()) return;
-  // No fetch here — we wait for date/time before saving to sheet
   setStage(2);
 };
  const handleBookingConfirm = async (date: string, time: string) => {
@@ -1426,7 +1371,7 @@ const handleLeadSubmit = async () => {
                     <span style={{ color: "#07b4ba" }}>1-On-1 Coaching Spot</span>
                   </h2>
                   <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380 }}>
-                    Spots are limited. We only take on a small number of students at a time to ensure every athlete gets the attention they deserve. Fill out the form and we'll reach out within [...]
+                    Spots are limited. We only take on a small number of students at a time to ensure every athlete gets the attention they deserve. Fill out the form and we'll reach out within 24 hours.
                   </p>
                   {checklistItems.map((item, i) => (
                     <div className="cp-checklist-item" key={i}>
