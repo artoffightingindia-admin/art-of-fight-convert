@@ -445,7 +445,7 @@ const css = `
 
   position: relative;
 }
-  .cp-promise h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 22px; letter-spacing: 2px; margin-bottom: 10px; }
+  .cp-promise h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 22px; letter-spacing: 1.5px; margin-bottom: 10px; }
   .cp-promise-text {
   font-family: 'Barlow', sans-serif;
   color: rgba(255,255,255,0.7);
@@ -458,17 +458,9 @@ const css = `
 .cp-promise-text::before {
   content: "“";
   color: #07b4ba;
-  font-size: 22px;
+  font-size: 33px;
   margin-right: 6px;
 }
-
-.cp-promise-text::after {
-  content: "”";
-  color: #07b4ba;
-  font-size: 22px;
-  margin-left: 4px;
-}
-
   /* COACH */
   .cp-coach-bg { background: #0a0a0a; }
   .cp-book-strip {
