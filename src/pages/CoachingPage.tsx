@@ -436,7 +436,7 @@ const css = `
   color: rgba(255,255,255,0.7);
 
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1;
 
   font-style: italic;
 
