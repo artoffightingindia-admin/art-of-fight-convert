@@ -537,14 +537,16 @@ const css = `
 }
 
 .cp-feedback-card {
-  min-width: 280px;
-  max-width: 280px;
-  border-radius: 14px;
-  background: #161616;
+  min-width: 320px;
+  max-width: 320px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #1a1d27 0%, #121212 100%);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 20px;
+  padding: 24px;
   flex-shrink: 0;
   margin-right: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .cp-feedback-card p {
@@ -1190,10 +1192,24 @@ const handleLeadSubmit = async () => {
                   style={{ width: 240, height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}
                 />
                 <div style={{ flex: 1, minWidth: 280 }}>
-                  <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: 2, color: "#fff", marginBottom: 10 }}>
-                    Head Coach
-                  </h2>
-                  <div style={{ width: 60, height: 2, background: "#07b4ba", marginBottom: 22 }} />
+                <h2 style={{
+  fontFamily: "'Bebas Neue', sans-serif",
+  fontSize: 48,
+  letterSpacing: 2,
+  color: "#fff",
+  marginBottom: 4
+}}>
+  Head Coach
+</h2>
+
+<p style={{
+  fontSize: 18,
+  color: "#07b4ba",
+  fontWeight: 600,
+  marginBottom: 20
+}}>
+  Purusothaman — MFN Fighter
+</p>
                   {coachCredentials.map((item, i) => (
                     <div key={i} style={{ display: "flex", gap: 12, marginBottom: 14 }}>
                       <span style={{ color: "#07b4ba", fontSize: 16, flexShrink: 0 }}>★</span>
@@ -1343,9 +1359,64 @@ const handleLeadSubmit = async () => {
       <div className="cp-feedback-track">
         {[...feedbackCards, ...feedbackCards].map((t, i) => (
           <div className="cp-feedback-card" key={i}>
-            <p>{t.text}</p>
-            <p className="author">— {t.author}</p>
-          </div>
+
+  <div style={{
+    display: "flex",
+    gap: 4,
+    marginBottom: 14,
+    color: "#07b4ba",
+    fontSize: 18
+  }}>
+    ★ ★ ★ ★ ★
+  </div>
+
+  <p style={{
+    fontStyle: "italic"
+  }}>
+    "{t.text}"
+  </p>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    marginTop: 18
+  }}>
+
+    <div style={{
+      width: 44,
+      height: 44,
+      borderRadius: "50%",
+      background: "#202533",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#8d96a8",
+      fontSize: 20
+    }}>
+      👤
+    </div>
+
+    <div>
+      <p style={{
+        color: "#fff",
+        fontWeight: 700,
+        marginBottom: 2
+      }}>
+        {t.author}
+      </p>
+
+      <span style={{
+        color: "rgba(255,255,255,0.45)",
+        fontSize: 13
+      }}>
+        Member
+      </span>
+    </div>
+
+  </div>
+
+</div>
         ))}
       </div>
     </div>
