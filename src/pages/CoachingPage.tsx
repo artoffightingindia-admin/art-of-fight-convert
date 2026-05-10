@@ -458,7 +458,7 @@ const css = `
 .cp-promise-text::before {
   content: "“";
   color: #07b4ba;
-  font-size: 33px;
+  font-size: 50px;
   margin-right: 6px;
 }
   /* COACH */
