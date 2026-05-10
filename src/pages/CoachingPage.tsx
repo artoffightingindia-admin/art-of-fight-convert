@@ -240,15 +240,15 @@ const css = `
   .cp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
   .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
   .cp-btn-primary {
-  min-width: 260px;
-  height: 58px;
+  min-width: 300px;
+  height: 48px;
   padding: 0 34px;
 
   border-radius: 8px;
   background: #07b4ba;
   color: #fff;
 
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -266,15 +266,15 @@ const css = `
 }
 
 .cp-btn-outline {
-  min-width: 260px;
-  height: 58px;
+  min-width: 300px;
+  height: 48px;
   padding: 0 34px;
 
   border-radius: 8px;
   background: transparent;
   color: #07b4ba;
 
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.5px;
