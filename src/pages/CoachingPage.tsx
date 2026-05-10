@@ -218,7 +218,7 @@ const css = `
   /* HERO */
   .cp-hero {
   position: relative;
-  min-height:75vh; /* 🔥 ADD TRUST HEIGHT */
+  min-height:69vh; /* 🔥 ADD TRUST HEIGHT */
   padding-bottom: 70px;           /* 🔥 ensures visibility */
 }
   .cp-hero-bg { position: absolute; inset: 0; z-index: 0; }
