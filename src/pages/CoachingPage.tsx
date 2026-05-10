@@ -247,7 +247,7 @@ const css = `
   /* TRUST STRIP */
  .cp-trust {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   left: 0;
   width: 100%;
   background: #07b4ba;
