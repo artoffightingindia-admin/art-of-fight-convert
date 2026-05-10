@@ -416,6 +416,7 @@ const css = `
   max-width: 520px;
   margin: 0 auto;
 }
+.cp-promise-text::before {content: "“";color: #07b4ba;font-size: 50px;margin-right: 6px;}
 .cp-promise-text::before {
   content: """;
   color: #07b4ba;
