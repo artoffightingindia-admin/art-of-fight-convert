@@ -423,7 +423,7 @@ const css = `
   background: rgba(7,180,186,0.06);
 }
   .cp-what-card h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 16px; letter-spacing: 0.8px; line-height: 1.3; }
-  .cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 11px; line-height: 1.5; }
+  .cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
 
   /* OUR PROMISE — quote style */
   .cp-promise {
