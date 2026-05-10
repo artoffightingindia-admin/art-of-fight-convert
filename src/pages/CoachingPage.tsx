@@ -523,7 +523,7 @@ body { background: #0a0a0a; }
   font-size: 15px; line-height: 1.7; font-style: italic;
   max-width: 520px; margin: 0 auto;
 }
-.cp-promise-text::before { content: "\201C"; color: #07b4ba; font-size: 50px; margin-right: 6px; }
+.cp-promise-text::before { content: "\u201C"; color: #07b4ba; font-size: 50px; margin-right: 6px; }
 .cp-promise h4 {
   font-family: 'Bebas Neue', sans-serif; color: #07b4ba;
   font-size: 22px; letter-spacing: 1.5px; margin-bottom: 10px;
