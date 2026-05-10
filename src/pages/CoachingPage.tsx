@@ -1261,28 +1261,53 @@ export default function CoachingPage() {
                     ))}
                   </div>
                   {/* Stats */}
-                  <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
-                    {stats.map((stat, i) => (
-                      <div key={i}>
-                        <p
-                          style={{
-                            fontFamily: "'Bebas Neue', sans-serif", fontSize: 32,
-                            color: "#07b4ba", letterSpacing: 1,
-                          }}
-                        >
-                          {stat.val}
-                        </p>
-                        <p
-                          style={{
-                            fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.45)",
-                            fontSize: 12, letterSpacing: 1, textTransform: "uppercase",
-                          }}
-                        >
-                          {stat.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                  <div
+  style={{
+    display: "flex",
+    gap: 22,
+    flexWrap: "wrap",
+    marginTop: 26,
+  }}
+>
+  {stats.map((stat, i) => (
+    <div
+      key={i}
+      style={{
+        background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: 18,
+        padding: "28px 34px",
+        minWidth: 170,
+        textAlign: "center",
+        boxShadow: "0 0 20px rgba(0,0,0,0.2)",
+      }}
+    >
+      <p
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 42,
+          color: "#07b4ba",
+          letterSpacing: 1,
+          marginBottom: 10,
+        }}
+      >
+        {stat.val}
+      </p>
+
+      <p
+        style={{
+          fontFamily: "'Barlow', sans-serif",
+          color: "rgba(255,255,255,0.45)",
+          fontSize: 12,
+          letterSpacing: 2,
+          textTransform: "uppercase",
+        }}
+      >
+        {stat.label}
+      </p>
+    </div>
+  ))}
+</div>
                 </div>
               </div>
             </Reveal>
@@ -1398,36 +1423,87 @@ export default function CoachingPage() {
               >
                 <div className="cp-feedback-track">
                   {[...feedbackCards, ...feedbackCards].map((t, i) => (
-                    <div className="cp-feedback-card" key={i}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                        <div
-                          style={{
-                            width: 44, height: 44, borderRadius: "50%",
-                            background: "#202533", display: "flex",
-                            alignItems: "center", justifyContent: "center",
-                            color: "#8d96a8", fontSize: 20,
-                          }}
-                        >
-                          👤
-                        </div>
-                        <div>
-                          <p style={{ color: "#fff", fontWeight: 700, marginBottom: 2 }}>
-                            {t.author}
-                          </p>
-                          <span style={{ color: "rgba(255,255,255,0.45)", fontSize: 13 }}>
-                            Member
-                          </span>
-                        </div>
-                      </div>
-                      <p>{t.text}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+                   <div className="cp-feedback-card" key={i}>
 
+  {/* ⭐ STARS */}
+  <div
+    style={{
+      display: "flex",
+      gap: 6,
+      marginBottom: 18,
+      color: "#07b4ba",
+      fontSize: 18,
+    }}
+  >
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+  </div>
+
+  {/* FEEDBACK */}
+  <p
+    style={{
+      color: "rgba(255,255,255,0.72)",
+      fontSize: 15,
+      lineHeight: 1.8,
+      fontStyle: "italic",
+      marginBottom: 22,
+    }}
+  >
+    "{t.text}"
+  </p>
+
+  {/* PROFILE */}
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 14,
+    }}
+  >
+    <div
+      style={{
+        width: 52,
+        height: 52,
+        borderRadius: "50%",
+        background: "#202533",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#8d96a8",
+        fontSize: 22,
+        flexShrink: 0,
+      }}
+    >
+      👤
+    </div>
+
+    <div>
+      <p
+        style={{
+          color: "#fff",
+          fontWeight: 700,
+          fontSize: 18,
+          marginBottom: 2,
+        }}
+      >
+        {t.author}
+      </p>
+
+      <span
+        style={{
+          color: "rgba(255,255,255,0.45)",
+          fontSize: 14,
+        }}
+      >
+        Member
+      </span>
+    </div>
+  </div>
+
+</div>
         {/* ── SECTION 5: APPLY FORM ── */}
         <div className="cp-apply-bg" ref={formRef}>
           <div className="cp-section">
