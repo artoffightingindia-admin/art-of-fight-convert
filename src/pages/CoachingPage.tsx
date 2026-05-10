@@ -647,17 +647,34 @@ body { background: #0a0a0a; }
   .cp-nav { padding: 14px 20px; }
   .cp-hero-content { padding: 100px 20px 48px; }
 
-  .cp-what-cards { flex-direction: column; align-items: center; gap: 18px; }
+.cp-what-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 0 8px;
+}
 
   .cp-feedback-wrapper { overflow: hidden; }
   .cp-feedback-pages { display: flex; transition: transform 0.5s ease; }
   .cp-feedback-page { min-width: 100%; display: flex; flex-direction: column; gap: 14px; padding: 0 6px; }
 
   .cp-feedback-card {
-    width: 100%; min-width: unset; max-width: 100%;
-    margin-bottom: 14px; padding: 16px; border-radius: 12px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
+  width: 100%;
+  min-width: unset;
+  max-width: 100%;
+
+  min-height: 170px;
+
+  margin-bottom: 10px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
   .cp-feedback-card p { font-size: 13px; line-height: 1.5; }
   .cp-feedback-card .author { font-size: 12px; margin-top: 8px; }
 
@@ -668,10 +685,21 @@ body { background: #0a0a0a; }
     color: #fff; font-size: 18px;
   }
 
-  .cp-what-card {
-    width: 100%; max-width: 320px; flex-direction: row;
-    align-items: center; text-align: left; padding: 16px; gap: 14px;
-  }
+ .cp-what-card {
+  width: 100%;
+  min-height: 130px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 18px 12px;
+  gap: 10px;
+
+  border-radius: 14px;
+}
   .cp-what-card-icon { width: 42px; height: 42px; flex-shrink: 0; }
   .cp-what-card h4 { font-size: 14px; }
   .cp-what-card p { font-size: 12px; }
@@ -701,6 +729,16 @@ body { background: #0a0a0a; }
     width: 100%; border-radius: 4px; padding: 14px 0;
     font-size: 16px; letter-spacing: 1.5px;
   }
+  .cp-coach-stats {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cp-coach-stats > div {
+  width: 100% !important;
+  height: 120px !important;
+}
 
   .cp-pain-grid { flex-direction: column; gap: 35px; }
   .cp-pain-media { flex: unset; width: 100%; }
@@ -1261,7 +1299,8 @@ export default function CoachingPage() {
                     ))}
                   </div>
                   {/* Stats */}
-                  <div
+ <div
+  className="cp-coach-stats"
   style={{
     display: "flex",
     gap: 22,
