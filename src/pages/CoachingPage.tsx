@@ -409,8 +409,8 @@ const css = `
   gap: 18px;
 }
  .cp-what-card-icon {
-  width: 68px;
-  height: 68px;
+  width: 75px;
+  height: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
