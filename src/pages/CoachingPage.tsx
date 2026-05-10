@@ -274,8 +274,8 @@ const css = `
   letter-spacing: 2px;
 }
 .trust-icon-box {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
 
   display: flex;
   align-items: center;
@@ -283,8 +283,8 @@ const css = `
 }
 
 .trust-icon-box svg {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 
   stroke: #fff;        /* 🔥 black for teal bg */
   fill: none;
