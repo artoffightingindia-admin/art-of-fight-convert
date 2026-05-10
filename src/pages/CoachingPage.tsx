@@ -352,7 +352,7 @@ const css = `
     display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap;
   }
   .cp-method-text { flex: 1; min-width: 260px; order: 1; }
-  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2;aspect-ratio: 16/9; }
+  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2;}
   .cp-method-item {
   display: flex;
   align-items: flex-start;   /* 🔥 aligns icon + text nicely */
@@ -378,6 +378,10 @@ const css = `
   .cp-method-item-icon {
   margin-top: 3px;   /* 🔥 aligns with first text line perfectly */
   flex-shrink: 0;
+}
+.cp-method-item-icon svg {
+  width: 34px;
+  height: 34px;
 }
   .cp-method-item h4 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #fff; margin-bottom: 4px; }
   .cp-method-item p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52); font-size: 13px; line-height: 1.55; }
@@ -1171,7 +1175,13 @@ const handleLeadSubmit = async () => {
                 <img
                   src="https://images.unsplash.com/photo-1605296867424-35fc25c9212a?w=900&q=80"
                   alt="MMA Training"
-                  style={{ width: "100%", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", objectFit: "cover" }}
+                  style={{
+  width: "100%",
+  aspectRatio: "4/5",
+  borderRadius: 12,
+  border: "1px solid rgba(255,255,255,0.08)",
+  objectFit: "cover"
+}}
                 />
               </div>
             </div>
