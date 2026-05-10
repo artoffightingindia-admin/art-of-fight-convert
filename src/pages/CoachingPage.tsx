@@ -218,7 +218,7 @@ const css = `
   /* HERO */
   .cp-hero {
   position: relative;
-  min-height:80vh; /* 🔥 ADD TRUST HEIGHT */
+  min-height:75vh; /* 🔥 ADD TRUST HEIGHT */
   padding-bottom: 70px;           /* 🔥 ensures visibility */
 }
   .cp-hero-bg { position: absolute; inset: 0; z-index: 0; }
@@ -352,7 +352,7 @@ const css = `
     display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap;
   }
   .cp-method-text { flex: 1; min-width: 260px; order: 1; }
-  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
+  .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2;aspect-ratio 16/9 }
   .cp-method-item {
   display: flex;
   align-items: flex-start;   /* 🔥 aligns icon + text nicely */
