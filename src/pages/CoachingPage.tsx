@@ -711,8 +711,8 @@ const css = `
 }
 
 .cp-trust-item span {
-  font-size: 17px;
-  letter-spacing: 1px;
+  font-size: 20px;
+  letter-spacing: 1.6px;
   color: #fff;   /* black text like your image */
 }
 
