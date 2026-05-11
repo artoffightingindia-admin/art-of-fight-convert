@@ -496,7 +496,7 @@ body { background: #0a0a0a; }
 }
 .cp-method-item p {
   font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52);
-  font-size: 13px; line-height: 1.55;
+  font-size: 15px; line-height: 1.55;
 }
 
 /* WHAT YOU GET */
