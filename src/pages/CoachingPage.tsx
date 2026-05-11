@@ -427,6 +427,80 @@ body { background: #0a0a0a; }
   border: 2px solid #07b4ba; cursor: pointer; transition: all 0.2s;
 }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
+/* ───────── TEXTURE BACKGROUNDS ───────── */
+
+/* AOF METHOD — GRID + DARK GLOW */
+.cp-method-bg {
+  background:
+    linear-gradient(
+      rgba(7,180,186,0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(7,180,186,0.06) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at top,
+      rgba(7,180,186,0.06),
+      transparent 55%
+    ),
+    #0d0d0d;
+
+  background-size: 38px 38px, 38px 38px, 100% 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* TESTIMONIALS — DIAGONAL LINES */
+.cp-testi-bg {
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(7,180,186,0.04) 0px,
+      rgba(7,180,186,0.04) 2px,
+      transparent 2px,
+      transparent 24px
+    ),
+    #0b0b0b;
+}
+
+/* APPLY FORM — DOTTED GRID */
+.cp-apply-bg {
+  position: relative;
+  overflow: hidden;
+
+  background-color: #0a0a0a;
+
+  background-image:
+    radial-gradient(
+      rgba(7,180,186,0.14) 1.2px,
+      transparent 1.2px
+    );
+
+  background-size: 32px 32px;
+}
+
+/* OPTIONAL GLOW OVERLAY */
+.cp-method-bg::before,
+.cp-testi-bg::before,
+.cp-apply-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(7,180,186,0.06),
+      transparent 40%
+    );
+
+  pointer-events: none;
+}
 
 /* TRUST STRIP */
 .cp-trust {
