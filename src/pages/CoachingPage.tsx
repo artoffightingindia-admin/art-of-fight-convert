@@ -430,7 +430,7 @@ body { background: #0a0a0a; }
 
 /* TRUST STRIP */
 .cp-trust {
-  position: absolute; bottom: 20px; left: 0; width: 100%;
+  position: absolute; bottom: 27px; left: 0; width: 100%;
   background: #07b4ba; height: 50px;
   display: flex; align-items: center; justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
