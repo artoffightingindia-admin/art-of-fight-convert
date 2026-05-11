@@ -649,8 +649,8 @@ body { background: #0a0a0a; }
   background-color: #0b0b0b;
 
   background-image:
-    linear-gradient(rgba(7,180,186,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 1px);
+    linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px),
+    linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px);
 
   background-size: 30px 30px;
 }
@@ -664,7 +664,7 @@ body { background: #0a0a0a; }
     radial-gradient(
       circle at top right,
       rgba(7,180,186,0.08),
-      transparent 30%
+      transparent 7%
     );
 
   pointer-events: none;
@@ -680,9 +680,9 @@ body { background: #0a0a0a; }
     repeating-linear-gradient(
       -45deg,
       rgba(7,180,186,0.05) 0px,
-      rgba(7,180,186,0.05) 2px,
-      transparent 2px,
-      transparent 10px
+      rgba(7,180,186,0.05) 1px,
+      transparent 1px,
+      transparent 5px
     );
 }
 
@@ -695,7 +695,7 @@ body { background: #0a0a0a; }
     radial-gradient(
       circle at top left,
       rgba(7,180,186,0.06),
-      transparent 30%
+      transparent 7%
     );
 
   pointer-events: none;
@@ -709,11 +709,11 @@ body { background: #0a0a0a; }
 
   background-image:
     radial-gradient(
-      rgba(7,180,186,0.18) 1.3px,
-      transparent 1.3px
+      rgba(7,180,186,0.18) 0.75px,
+      transparent 0.75px
     );
 
-  background-size: 18px 18px;
+  background-size: 20px 20px;
 }
 
 .cp-apply-bg::before {
@@ -725,7 +725,7 @@ body { background: #0a0a0a; }
     radial-gradient(
       circle at bottom right,
       rgba(7,180,186,0.07),
-      transparent 30%
+      transparent 7%
     );
 
   pointer-events: none;
