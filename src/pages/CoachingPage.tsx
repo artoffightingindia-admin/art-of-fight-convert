@@ -429,79 +429,52 @@ body { background: #0a0a0a; }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 /* ───────── TEXTURE BACKGROUNDS ───────── */
 
-/* AOF METHOD — GRID + DARK GLOW */
+/* AOF METHOD — GRID */
 .cp-method-bg {
-  background:
-    linear-gradient(
-      rgba(7,180,186,0.06) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(7,180,186,0.06) 1px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at top,
-      rgba(7,180,186,0.06),
-      transparent 55%
-    ),
-    #0d0d0d;
-
-  background-size: 38px 38px, 38px 38px, 100% 100%;
   position: relative;
   overflow: hidden;
+
+  background-color: #0b0b0b;
+
+  background-image:
+    linear-gradient(rgba(7,180,186,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7,180,186,0.08) 1px, transparent 1px);
+
+  background-size: 42px 42px;
 }
 
-/* TESTIMONIALS — DIAGONAL LINES */
+/* TESTIMONIALS — DIAGONAL */
 .cp-testi-bg {
   position: relative;
   overflow: hidden;
-  background:
+
+  background-color: #0b0b0b;
+
+  background-image:
     repeating-linear-gradient(
       -45deg,
-      rgba(7,180,186,0.04) 0px,
-      rgba(7,180,186,0.04) 2px,
+      rgba(7,180,186,0.06) 0px,
+      rgba(7,180,186,0.06) 2px,
       transparent 2px,
-      transparent 24px
-    ),
-    #0b0b0b;
+      transparent 22px
+    );
 }
 
-/* APPLY FORM — DOTTED GRID */
+/* APPLY FORM — DOTTED */
 .cp-apply-bg {
   position: relative;
   overflow: hidden;
 
-  background-color: #0a0a0a;
+  background-color: #0b0b0b;
 
   background-image:
     radial-gradient(
-      rgba(7,180,186,0.14) 1.2px,
-      transparent 1.2px
+      rgba(7,180,186,0.22) 1.4px,
+      transparent 1.4px
     );
 
-  background-size: 32px 32px;
+  background-size: 26px 26px;
 }
-
-/* OPTIONAL GLOW OVERLAY */
-.cp-method-bg::before,
-.cp-testi-bg::before,
-.cp-apply-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(7,180,186,0.06),
-      transparent 40%
-    );
-
-  pointer-events: none;
-}
-
 /* TRUST STRIP */
 .cp-trust {
   position: absolute; bottom: 0px; left: 0; width: 100%;
