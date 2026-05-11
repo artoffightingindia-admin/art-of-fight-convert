@@ -427,54 +427,6 @@ body { background: #0a0a0a; }
   border: 2px solid #07b4ba; cursor: pointer; transition: all 0.2s;
 }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
-/* ───────── TEXTURE BACKGROUNDS ───────── */
-
-/* AOF METHOD — GRID */
-.cp-method-bg {
-  position: relative;
-  overflow: hidden;
-
-  background-color: #0b0b0b;
-
-  background-image:
-    linear-gradient(rgba(7,180,186,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7,180,186,0.08) 1px, transparent 1px);
-
-  background-size: 42px 42px;
-}
-
-/* TESTIMONIALS — DIAGONAL */
-.cp-testi-bg {
-  position: relative;
-  overflow: hidden;
-
-  background-color: #0b0b0b;
-
-  background-image:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(7,180,186,0.06) 0px,
-      rgba(7,180,186,0.06) 2px,
-      transparent 2px,
-      transparent 22px
-    );
-}
-
-/* APPLY FORM — DOTTED */
-.cp-apply-bg {
-  position: relative;
-  overflow: hidden;
-
-  background-color: #0b0b0b;
-
-  background-image:
-    radial-gradient(
-      rgba(7,180,186,0.22) 1.4px,
-      transparent 1.4px
-    );
-
-  background-size: 26px 26px;
-}
 /* TRUST STRIP */
 .cp-trust {
   position: absolute; bottom: 0px; left: 0; width: 100%;
