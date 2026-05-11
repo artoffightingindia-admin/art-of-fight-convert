@@ -652,7 +652,7 @@ body { background: #0a0a0a; }
     linear-gradient(rgba(7,180,186,0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 1px);
 
-  background-size: 42px 42px;
+  background-size: 20px 20px;
 }
 
 .cp-method-bg::before {
