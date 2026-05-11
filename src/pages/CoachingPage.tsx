@@ -398,7 +398,7 @@ body { background: #0a0a0a; }
 .cp-hero-overlay {
   background: linear-gradient(to right, #0a0a0a 35%, rgba(10,10,10,0.55) 60%, transparent 100%);
 }
-.cp-hero-content { position: relative; z-index: 2; max-width: 740px; padding: 95px 40px 30px; }
+.cp-hero-content { position: relative; z-index: 2; max-width: 750px; padding: 100px 40px 38px; }
 .cp-hero-tag {
   color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px;
   font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;
@@ -430,7 +430,7 @@ body { background: #0a0a0a; }
 
 /* TRUST STRIP */
 .cp-trust {
-  position: absolute; bottom: 27px; left: 0; width: 100%;
+  position: absolute; bottom: 0px; left: 0; width: 100%;
   background: #07b4ba; height: 50px;
   display: flex; align-items: center; justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
