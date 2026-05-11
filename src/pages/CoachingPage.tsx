@@ -393,7 +393,7 @@ body { background: #0a0a0a; }
 .cp-book-nav:hover { background: #059a9f; }
 
 /* HERO */
-.cp-hero { position: relative; min-height: 35vh; padding-bottom: 70px; }
+.cp-hero { position: relative; min-height: 25vh; padding-bottom: 48px; }
 .cp-hero-bg { position: absolute; inset: 0; z-index: 0; }
 .cp-hero-overlay {
   background: linear-gradient(to right, #0a0a0a 35%, rgba(10,10,10,0.55) 60%, transparent 100%);
