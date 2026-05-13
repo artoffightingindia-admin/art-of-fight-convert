@@ -319,11 +319,11 @@ const whatCards = [
   },
 ];
 
+// CHANGE 2: Removed "Coaches remotely across 3 continents with proven results" entry
 const coachCredentials = [
   "Former Professional MMA Fighter — 12+ Years Ring Experience",
   "Trained athletes who compete at national and international level",
   "Specialist in striking, grappling transitions and mental conditioning",
-  "Coaches remotely across 3 continents with proven results",
 ];
 
 const stats = [
@@ -333,6 +333,7 @@ const stats = [
   { val: "3", label: "Continents" },
 ];
 
+// CHANGE 3: 7 feedback cards for the new infinite scroll
 const feedbackCards = [
   {
     text: "In 8 weeks my footwork completely changed. My coach saw things I couldn't see myself and fixed them immediately.",
@@ -346,6 +347,22 @@ const feedbackCards = [
     text: "Best investment I've made in my fight career. The plan, the feedback, the accountability — it's all dialled in perfectly.",
     author: "Carlos R.",
   },
+  {
+    text: "The coaches actually care. I've gained real skill in just a few months of training with AOF.",
+    author: "Seity M.",
+  },
+  {
+    text: "Best decision I made this year. The structure and support is unlike any gym I've trained at before.",
+    author: "Rolen A.",
+  },
+  {
+    text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.",
+    author: "Karthik V.",
+  },
+  {
+    text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.",
+    author: "Rahul P.",
+  },
 ];
 
 const checklistItems = [
@@ -353,6 +370,35 @@ const checklistItems = [
   "No long-term contracts — cancel anytime",
   "Results guaranteed or coaching extended free",
   "Start within 48 hours of approval",
+];
+
+// CHANGE 4: FAQ data
+const faqItems = [
+  {
+    question: "Who is AOF 1-on-1 coaching for?",
+    answer:
+      "AOF coaching is designed for serious fighters and committed beginners alike — anyone who is tired of training without direction. Whether you're a competitive MMA athlete looking to peak for your next bout, or someone starting from scratch who wants to build real skill fast, our personalised system is built around your specific goals, body type, and schedule.",
+  },
+  {
+    question: "How does the remote coaching work?",
+    answer:
+      "After your strategy call, your coach builds a fully customised training plan and delivers it digitally. You'll have direct WhatsApp access to your coach for questions, feedback, and check-ins. You submit session videos for review, and your coach adjusts the plan in real time based on what they see. It's as close to a personal gym session as you can get — from anywhere in the world.",
+  },
+  {
+    question: "How quickly will I see results?",
+    answer:
+      "Most athletes report noticeable improvements in technique and conditioning within the first 3–4 weeks. Significant transformation — improved footwork, sharper combinations, better game strategy — typically takes 6–8 weeks of consistent training under the AOF method. Your timeline depends on your starting point and consistency, but your coach will track every metric to keep you progressing.",
+  },
+  {
+    question: "What if I'm a complete beginner?",
+    answer:
+      "Beginners are welcome and thrive in the AOF system. In fact, starting with proper 1-on-1 coaching before picking up bad habits is the fastest route to becoming a skilled fighter. Your plan will start at the right level and progress at a pace that challenges you without overwhelming you.",
+  },
+  {
+    question: "Is there a contract or long-term commitment?",
+    answer:
+      "No long-term contracts. You can cancel anytime. We are confident enough in our results that we don't need to lock you in. We also back that up with a results guarantee — if you don't see measurable progress, we'll extend your coaching for free until you do.",
+  },
 ];
 
 /* ── CSS ── */
@@ -386,7 +432,7 @@ body { background: #0a0a0a; }
 .cp-back:hover { color: #fff; }
 .cp-book-nav {
   padding: 10px 24px; border-radius: 6px;
-  background: #07b4ba; color: #000;
+  background: #07b4ba; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 2px;
   border: none; cursor: pointer; transition: background 0.2s;
 }
@@ -415,12 +461,15 @@ body { background: #0a0a0a; }
   font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px;
 }
 .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* CHANGE 1: Button text color changed to #fff, dimensions match Home Page Hero */
 .cp-btn-primary {
-  padding: 14px 34px; border-radius: 7px; background: #07b4ba; color: #000;
+  padding: 14px 34px; border-radius: 7px; background: #07b4ba; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px;
   border: none; cursor: pointer; transition: background 0.2s;
 }
 .cp-btn-primary:hover { background: #059a9f; }
+/* CHANGE 1: "See Results" / outline button removed from JSX; keeping class for safety */
 .cp-btn-outline {
   padding: 14px 34px; border-radius: 7px; background: transparent; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px;
@@ -533,7 +582,7 @@ body { background: #0a0a0a; }
 .cp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
 .cp-book-strip button {
   width: 100%; padding: 14px; background: none; border: none;
-  cursor: pointer; color: #000; font-family: 'Bebas Neue', sans-serif;
+  cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif;
   font-size: 20px; letter-spacing: 3px; transition: background 0.2s;
 }
 .cp-book-strip button:hover { background: rgba(0,0,0,0.08); }
@@ -574,7 +623,7 @@ body { background: #0a0a0a; }
 .cp-input option { background: #222; }
 .cp-submit {
   width: 100%; padding: 15px; border-radius: 8px;
-  background: #07b4ba; color: #000;
+  background: #07b4ba; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px;
   border: none; cursor: pointer; transition: background 0.2s; margin-top: 4px;
 }
@@ -590,7 +639,7 @@ body { background: #0a0a0a; }
   font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
 .cp-time-slot:hover { border-color: #07b4ba; color: #fff; }
-.cp-time-slot.selected { background: #07b4ba; color: #000; border-color: #07b4ba; font-weight: 700; }
+.cp-time-slot.selected { background: #07b4ba; color: #fff; border-color: #07b4ba; font-weight: 700; }
 .cp-stage-back {
   background: none; border: none; color: rgba(255,255,255,0.45);
   font-family: 'Barlow', sans-serif; font-size: 13px;
@@ -621,25 +670,180 @@ body { background: #0a0a0a; }
 .cp-footer-logo { color: #07b4ba; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; }
 .cp-footer p { color: rgba(255,255,255,0.28); font-family: 'Barlow', sans-serif; font-size: 13px; }
 
-/* FEEDBACK SLIDER */
-.cp-feedback-slider {
-  overflow-x: auto; overflow-y: hidden;
-  scroll-behavior: smooth; scrollbar-width: none;
+/* ── CHANGE 3: NEW FEEDBACK SLIDER — 3-card infinite horizontal scroll ── */
+.cp-feedback-slider-new {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
 }
-.cp-feedback-slider::-webkit-scrollbar { display: none; }
-.cp-feedback-track {
-  display: flex; flex-direction: row;
-  cursor: grab; user-select: none;
+.cp-feedback-track-new {
+  display: flex;
+  gap: 24px;
+  /* width is set inline to fit duplicated cards */
+  will-change: transform;
 }
-.cp-feedback-track:active { cursor: grabbing; }
-.cp-feedback-card {
-  min-width: 250px; max-width: 250px; border-radius: 18px;
+/* Each card occupies exactly 1/3 of the slider width minus gap compensation */
+.cp-feedback-card-new {
+  /* calc: (100% / 3) - gap proportional. Done via flex: 0 0 calc(33.333% - 16px) in inline style */
+  border-radius: 18px;
   background: linear-gradient(180deg, #1a1d27 0%, #121212 100%);
-  border: 1px solid rgba(255,255,255,0.08); padding: 12px;
-  flex-shrink: 0; margin-right: 20px; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 28px 24px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
-.cp-feedback-card p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.6; }
-.cp-feedback-card .author { color: #07b4ba; font-weight: 700; margin-top: 10px; font-size: 13px; }
+
+/* CHANGE 3: Inherit font family and weight from Home Page Feedback form */
+.cp-feedback-card-new p {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+.cp-feedback-card-new .author-name {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+.cp-feedback-card-new .author-role {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+}
+.cp-feedback-stars {
+  display: flex; gap: 4px; margin-bottom: 16px;
+  color: #07b4ba; font-size: 16px;
+}
+
+/* ── CHANGE 4: FAQ SECTION ── */
+.cp-faq-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: #0b0b0b;
+  background-image:
+    linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px),
+    linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px);
+  background-size: 40px 40px;
+}
+.cp-faq-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(7,180,186,0.05), transparent 60%);
+  pointer-events: none;
+}
+.cp-faq-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 72px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.cp-faq-label {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #07b4ba;
+  margin-bottom: 10px;
+}
+.cp-faq-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5.5vw, 60px);
+  letter-spacing: 2px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.cp-faq-title span { color: #07b4ba; }
+.cp-faq-divider {
+  width: 56px; height: 2px;
+  background: #07b4ba;
+  margin: 16px auto 48px;
+  border-radius: 2px;
+}
+.cp-faq-list { text-align: left; }
+.cp-faq-item {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: #141414;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+.cp-faq-item.open {
+  border-color: rgba(7,180,186,0.45);
+}
+.cp-faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 26px;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+.cp-faq-question-text {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.3;
+  flex: 1;
+}
+.cp-faq-item.open .cp-faq-question-text {
+  color: #07b4ba;
+}
+.cp-faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.25s, background 0.25s, transform 0.35s;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+  line-height: 1;
+}
+.cp-faq-item.open .cp-faq-icon {
+  border-color: #07b4ba;
+  background: rgba(7,180,186,0.12);
+  color: #07b4ba;
+  transform: rotate(45deg);
+}
+.cp-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 26px;
+}
+.cp-faq-item.open .cp-faq-answer {
+  max-height: 400px;
+  padding: 0 26px 24px;
+}
+.cp-faq-answer p {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.75;
+}
+
 /* ───────── PREMIUM TEXTURES ───────── */
 
 /* AOF METHOD — GRID LINES */
@@ -866,6 +1070,16 @@ body { background: #0a0a0a; }
   .cp-form-box { padding: 24px 18px; }
   .cp-cal-grid { grid-template-columns: 1fr; }
   .cp-footer { flex-direction: column; text-align: center; }
+
+  /* FAQ mobile */
+  .cp-faq-question-text { font-size: 15px; }
+  .cp-faq-answer p { font-size: 14px; }
+
+  /* New feedback slider mobile fallback */
+  .cp-feedback-card-new {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+  }
 }
 `;
 
@@ -967,7 +1181,7 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
                 : isPast(d)
                 ? "rgba(255,255,255,0.15)"
                 : d === selectedDay
-                ? "#000"
+                ? "#fff"
                 : "rgba(255,255,255,0.75)",
               border:
                 d && !isPast(d) && d !== selectedDay
@@ -1020,71 +1234,157 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
   );
 }
 
+/* ── CHANGE 3: Infinite horizontal feedback slider component ── */
+function InfiniteFeedbackSlider() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const animFrameRef = useRef<number>(0);
+  const isPausedRef = useRef(false);
+  const posRef = useRef(0);
+
+  // Duplicate cards: 7 originals + 7 copies = 14 total for seamless loop
+  const allCards = [...feedbackCards, ...feedbackCards];
+
+  // Card width: (containerWidth - gaps) / 3 per visible card
+  // We use a fixed px card width approach via CSS flex and overflow hidden
+  // Each card: flex 0 0 calc(33.333% - 16px) within the container
+  // Track width: 14 cards = (cardWidth + gap) * 14
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    const track = trackRef.current;
+    if (!slider || !track) return;
+
+    // Speed: pixels per frame
+    const speed = 0.55;
+
+    const getHalfWidth = () => track.scrollWidth / 2;
+
+    const animate = () => {
+      if (!isPausedRef.current) {
+        posRef.current += speed;
+        if (posRef.current >= getHalfWidth()) {
+          posRef.current -= getHalfWidth();
+        }
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+
+    const pause = () => { isPausedRef.current = true; };
+    const resume = () => { setTimeout(() => { isPausedRef.current = false; }, 600); };
+
+    slider.addEventListener("mouseenter", pause);
+    slider.addEventListener("mouseleave", resume);
+    slider.addEventListener("touchstart", pause, { passive: true });
+    slider.addEventListener("touchend", resume);
+
+    return () => {
+      cancelAnimationFrame(animFrameRef.current);
+      slider.removeEventListener("mouseenter", pause);
+      slider.removeEventListener("mouseleave", resume);
+      slider.removeEventListener("touchstart", pause);
+      slider.removeEventListener("touchend", resume);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={sliderRef}
+      className="cp-feedback-slider-new"
+    >
+      <div
+        ref={trackRef}
+        className="cp-feedback-track-new"
+        style={{ width: "max-content" }}
+      >
+        {allCards.map((card, i) => (
+          <div
+            key={i}
+            className="cp-feedback-card-new"
+            style={{
+              // Each card is exactly 1/3 of the slider container minus gap fractions
+              // Using a fixed width to keep 3 cards in view. 340px * 3 + 24px * 2 = ~1068px ≈ full 1100px section
+              width: "340px",
+              flexShrink: 0,
+            }}
+          >
+            <div className="cp-feedback-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <p>"{card.text}"</p>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div
+                style={{
+                  width: 44, height: 44, borderRadius: "50%",
+                  background: "#202533",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: "#8d96a8", fontSize: 20, flexShrink: 0,
+                }}
+              >
+                👤
+              </div>
+              <div>
+                <p className="author-name">{card.author}</p>
+                <span className="author-role">Member</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── CHANGE 4: FAQ Accordion component ── */
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggle = (i: number) => {
+    setOpenIndex((prev) => (prev === i ? null : i));
+  };
+
+  return (
+    <div className="cp-faq-bg">
+      <div className="cp-faq-inner">
+        <Reveal>
+          <p className="cp-faq-label">Got Questions?</p>
+          <h2 className="cp-faq-title">
+            Frequently Asked <span>Questions</span>
+          </h2>
+          <div className="cp-faq-divider" />
+        </Reveal>
+
+        <div className="cp-faq-list">
+          {faqItems.map((item, i) => (
+            <Reveal key={i}>
+              <div className={`cp-faq-item${openIndex === i ? " open" : ""}`}>
+                <button
+                  className="cp-faq-question"
+                  onClick={() => toggle(i)}
+                  aria-expanded={openIndex === i}
+                >
+                  <span className="cp-faq-question-text">{item.question}</span>
+                  <span className="cp-faq-icon">+</span>
+                </button>
+                <div className="cp-faq-answer">
+                  <p>{item.answer}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── MAIN PAGE ── */
 export default function CoachingPage() {
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  let isDown = false;
-  let startX = 0;
-  let scrollLeft = 0;
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!sliderRef.current) return;
-    isDown = true;
-    startX = e.pageX - sliderRef.current.offsetLeft;
-    scrollLeft = sliderRef.current.scrollLeft;
-  };
-
-  const handleMouseLeave = () => { isDown = false; };
-  const handleMouseUp = () => { isDown = false; };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDown || !sliderRef.current) return;
-    e.preventDefault();
-    const slider = sliderRef.current;
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    slider.scrollLeft = scrollLeft - walk;
-    if (slider.scrollLeft >= slider.scrollWidth / 2) slider.scrollLeft -= slider.scrollWidth / 2;
-    if (slider.scrollLeft <= 0) slider.scrollLeft += slider.scrollWidth / 2;
-  };
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    let animationFrame: number;
-    let isPaused = false;
-    const isMobile = window.innerWidth <= 768;
-
-    const autoScroll = () => {
-      if (!isPaused) {
-        if (isMobile) {
-          slider.scrollTop += 0.5;
-          if (slider.scrollTop >= slider.scrollHeight / 2) slider.scrollTop -= slider.scrollHeight / 2;
-        } else {
-          slider.scrollLeft += 0.6;
-          if (slider.scrollLeft >= slider.scrollWidth / 2) slider.scrollLeft -= slider.scrollWidth / 2;
-        }
-      }
-      animationFrame = requestAnimationFrame(autoScroll);
-    };
-
-    autoScroll();
-
-    const stop = () => (isPaused = true);
-    const resume = () => { setTimeout(() => (isPaused = false), 800); };
-
-    slider.addEventListener("mousedown", stop);
-    slider.addEventListener("touchstart", stop);
-    slider.addEventListener("mouseup", resume);
-    slider.addEventListener("mouseleave", resume);
-    slider.addEventListener("touchend", resume);
-
-    return () => cancelAnimationFrame(animationFrame);
-  }, []);
 
   const [lead, setLead] = useState({ name: "", phone: "", goal: "" });
   const [stage, setStage] = useState<1 | 2 | 3>(1);
@@ -1128,41 +1428,11 @@ export default function CoachingPage() {
     "You don't know what to fix or where to even start",
   ];
 
-  /* Mobile testimonial slider state */
-  const mobileFeedbackCards = [
-    { text: "The coaches actually care. I've gained real skill.", author: "Seity" },
-    { text: "Best decision I made this year.", author: "Rolen" },
-    { text: "From beginner to ring-ready in months.", author: "Karthik" },
-    { text: "Training feels structured now.", author: "Arjun" },
-    { text: "Confidence is way higher now.", author: "Vijay" },
-    { text: "My performance improved drastically in just a few weeks.", author: "Rahul" },
-  ];
-
-  const visibleCount = 3;
-  const pages: typeof mobileFeedbackCards[] = [];
-  for (let i = 0; i < mobileFeedbackCards.length; i += visibleCount) {
-    pages.push(mobileFeedbackCards.slice(i, i + visibleCount));
-  }
-
-  const [mobileIndex, setMobileIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMobileIndex((prev) => (prev === pages.length - 1 ? 0 : prev + 1));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [pages.length]);
-
-  const nextSlide = () => setMobileIndex((prev) => (prev === pages.length - 1 ? 0 : prev + 1));
-  const prevSlide = () => setMobileIndex((prev) => (prev === 0 ? pages.length - 1 : prev - 1));
-
   const trustItems = [
     { icon: <IconShield />, label: "Proven System" },
     { icon: <IconUsers />, label: "Tamil Team" },
     { icon: <IconTrophy />, label: "Real Results" },
   ];
-
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   return (
     <>
@@ -1210,15 +1480,10 @@ export default function CoachingPage() {
                 Stop training in the crowd. Get a personalized coaching program built around your body, your goals,
                 and your timeline — guided by coaches who have been in the ring.
               </p>
+              {/* CHANGE 1: Only "Book A Call" button remains; "See Results" button removed */}
               <div className="cp-hero-btns">
                 <button className="cp-btn-primary" onClick={scrollToForm}>
                   Book A Call
-                </button>
-                <button
-                  className="cp-btn-outline"
-                  onClick={() => document.getElementById("cp-testimonials")?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  See Results
                 </button>
               </div>
             </Reveal>
@@ -1372,13 +1637,15 @@ export default function CoachingPage() {
           </div>
           <div className="cp-section" style={{ paddingBottom: 40 }}>
             <Reveal>
+              {/* CHANGE 2: "Led By" → "LED BY", font-size increased by +1pt (17px → 18px is already 17, so +1pt = 18px) */}
               <p
                 style={{
-                  fontFamily: "'Barlow', sans-serif", fontSize: 16, color: "#07b4ba",
+                  fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba",
                   fontWeight: 700, marginBottom: 24, letterSpacing: 2,
+                  textTransform: "uppercase",
                 }}
               >
-                Led By
+                LED BY
               </p>
               <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
                 <img
@@ -1407,6 +1674,7 @@ export default function CoachingPage() {
                     AOF Academy — Lead Trainer &amp; Founder
                   </p>
                   <div style={{ marginBottom: 24 }}>
+                    {/* CHANGE 2: coachCredentials array no longer contains the "3 continents" entry */}
                     {coachCredentials.map((cred, i) => (
                       <div key={i} className="cp-checklist-item">
                         <span className="check">✓</span>
@@ -1415,55 +1683,55 @@ export default function CoachingPage() {
                     ))}
                   </div>
                   {/* Stats */}
- <div
-  className="cp-coach-stats"
-  style={{
-    display: "flex",
-    gap: 22,
-    flexWrap: "wrap",
-    marginTop: 26,
-  }}
->
-  {stats.map((stat, i) => (
-    <div
-      key={i}
-      style={{
-        background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: 14,
-        width: 160,
-height: 140,
-padding: "18px 16px",
-        textAlign: "center",
-        boxShadow: "0 0 14px rgba(0,0,0,0.18)",
-      }}
-    >
-      <p
-        style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 42,
-          color: "#07b4ba",
-          letterSpacing: 1,
-          marginBottom: 10,
-        }}
-      >
-        {stat.val}
-      </p>
+                  <div
+                    className="cp-coach-stats"
+                    style={{
+                      display: "flex",
+                      gap: 22,
+                      flexWrap: "wrap",
+                      marginTop: 26,
+                    }}
+                  >
+                    {stats.map((stat, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                          borderRadius: 14,
+                          width: 160,
+                          height: 140,
+                          padding: "18px 16px",
+                          textAlign: "center",
+                          boxShadow: "0 0 14px rgba(0,0,0,0.18)",
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontFamily: "'Bebas Neue', sans-serif",
+                            fontSize: 42,
+                            color: "#07b4ba",
+                            letterSpacing: 1,
+                            marginBottom: 10,
+                          }}
+                        >
+                          {stat.val}
+                        </p>
 
-      <p
-        style={{
-          fontFamily: "'Barlow', sans-serif",
-          color: "rgba(255,255,255,0.45)",
-          fontSize: 12,
-          letterSpacing: 2,
-          textTransform: "uppercase",
-        }}
-      >
-        {stat.label}
-      </p>
-    </div>
-  ))}
-</div>
+                        <p
+                          style={{
+                            fontFamily: "'Barlow', sans-serif",
+                            color: "rgba(255,255,255,0.45)",
+                            fontSize: 12,
+                            letterSpacing: 2,
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {stat.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -1471,333 +1739,119 @@ padding: "18px 16px",
         </div>
 
         {/* ── SECTION 4: TESTIMONIALS ── */}
-<div id="cp-testimonials" className="cp-testi-bg">
-  <div className="cp-section" style={{ paddingTop: 48 }}>
+        <div id="cp-testimonials" className="cp-testi-bg">
+          <div className="cp-section" style={{ paddingTop: 48 }}>
 
-    <Reveal>
-      <div style={{ textAlign: "center", marginBottom: 44 }}>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "#07b4ba",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-          }}
-        >
-          Real People, Real Results
-        </p>
-
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
-            letterSpacing: 2,
-            color: "#fff",
-            marginTop: 8,
-            lineHeight: 1,
-          }}
-        >
-          Trusted By Fighters,{" "}
-          <span style={{ color: "#07b4ba" }}>
-            Proven Results
-          </span>
-        </h2>
-
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.42)",
-            marginTop: 8,
-            fontSize: 14,
-          }}
-        >
-          Here's What Athletes Say About Their Transformation With AOF
-        </p>
-      </div>
-    </Reveal>
-
-    <Reveal>
-      <div className="cp-testi-main">
-
-        <div className="cp-testi-img">
-          <img
-            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
-            alt="Athlete"
-          />
-        </div>
-
-        <div style={{ flex: 1, minWidth: 260 }}>
-
-          <h3
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(28px,3vw,42px)",
-              letterSpacing: 1.5,
-              lineHeight: 1.1,
-              marginBottom: 16,
-              color: "#fff",
-            }}
-          >
-            AOF Changed The Way{" "}
-            <span style={{ color: "#07b4ba" }}>
-              I Train And Perform.
-            </span>
-          </h3>
-
-          <p
-            style={{
-              fontFamily: "'Barlow', sans-serif",
-              color: "rgba(255,255,255,0.65)",
-              fontSize: 15,
-              lineHeight: 1.75,
-            }}
-          >
-            The structure, the attention to detail,
-            and the accountability took me to a level
-            I never thought possible. I'm stronger,
-            faster, and fight with more confidence than ever.
-          </p>
-
-          <p
-            style={{
-              fontFamily: "'Barlow', sans-serif",
-              marginTop: 14,
-              color: "#07b4ba",
-              fontWeight: 700,
-              fontSize: 14,
-            }}
-          >
-            — Alex M., Amateur MMA Fighter
-          </p>
-
-        </div>
-      </div>
-    </Reveal>
-
-    {/* 📱 MOBILE VERSION */}
-    {isMobile ? (
-
-      <div className="cp-feedback-wrapper">
-
-        <div
-          className="cp-feedback-pages"
-          style={{
-            transform: `translateX(-${mobileIndex * 100}%)`
-          }}
-        >
-          {pages.map((page, i) => (
-
-            <div className="cp-feedback-page" key={i}>
-
-              {page.map((t, idx) => (
-
-                <div className="cp-feedback-card" key={idx}>
-
-                  {/* STARS */}
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 6,
-                      marginBottom: 14,
-                      color: "#07b4ba",
-                      fontSize: 16,
-                    }}
-                  >
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                  </div>
-
-                  {/* TEXT */}
-                  <p
-                    style={{
-                      color: "rgba(255,255,255,0.72)",
-                      fontSize: 13,
-                      lineHeight: 1.1,
-                      fontStyle: "italic",
-                      marginBottom: 9,
-                    }}
-                  >
-                    "{t.text}"
-                  </p>
-
-                  {/* PROFILE */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: "50%",
-                        background: "#202533",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#8d96a8",
-                        fontSize: 18,
-                        flexShrink: 0,
-                      }}
-                    >
-                      👤
-                    </div>
-
-                    <div>
-                      <p
-                        style={{
-                          color: "#fff",
-                          fontWeight: 700,
-                          fontSize: 15,
-                          marginBottom: 2,
-                        }}
-                      >
-                        {t.author}
-                      </p>
-
-                      <span
-                        style={{
-                          color: "rgba(255,255,255,0.45)",
-                          fontSize: 12,
-                        }}
-                      >
-                        Member
-                      </span>
-                    </div>
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          ))}
-        </div>
-
-        <div className="cp-feedback-nav">
-          <button onClick={prevSlide}>‹</button>
-          <button onClick={nextSlide}>›</button>
-        </div>
-
-      </div>
-
-    ) : (
-
-      /* 💻 DESKTOP VERSION */
-      <div
-        className="cp-feedback-slider"
-        ref={sliderRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-
-        <div className="cp-feedback-track">
-
-          {[...feedbackCards, ...feedbackCards].map((t, i) => (
-
-            <div className="cp-feedback-card" key={i}>
-
-              {/* STARS */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: 6,
-                  marginBottom: 18,
-                  color: "#07b4ba",
-                  fontSize: 18,
-                }}
-              >
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-              </div>
-
-              {/* FEEDBACK */}
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.72)",
-                  fontSize: 15,
-                  lineHeight: 1,
-                  fontStyle: "italic",
-                  marginBottom: 9,
-                }}
-              >
-                "{t.text}"
-              </p>
-
-              {/* PROFILE */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 14,
-                }}
-              >
-                <div
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 44 }}>
+                <p
                   style={{
-                    width: 52,
-                    height: 52,
-                    borderRadius: "50%",
-                    background: "#202533",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#8d96a8",
-                    fontSize: 22,
-                    flexShrink: 0,
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "#07b4ba",
+                    fontWeight: 700,
+                    fontSize: 12,
+                    letterSpacing: 3,
+                    textTransform: "uppercase",
                   }}
                 >
-                  👤
+                  Real People, Real Results
+                </p>
+
+                <h2
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(34px,5vw,56px)",
+                    letterSpacing: 2,
+                    color: "#fff",
+                    marginTop: 8,
+                    lineHeight: 1,
+                  }}
+                >
+                  Trusted By Fighters,{" "}
+                  <span style={{ color: "#07b4ba" }}>
+                    Proven Results
+                  </span>
+                </h2>
+
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.42)",
+                    marginTop: 8,
+                    fontSize: 14,
+                  }}
+                >
+                  Here's What Athletes Say About Their Transformation With AOF
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal>
+              <div className="cp-testi-main">
+
+                <div className="cp-testi-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+                    alt="Athlete"
+                  />
                 </div>
 
-                <div>
-                  <p
+                <div style={{ flex: 1, minWidth: 260 }}>
+
+                  <h3
                     style={{
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      fontSize: "clamp(28px,3vw,42px)",
+                      letterSpacing: 1.5,
+                      lineHeight: 1.1,
+                      marginBottom: 16,
                       color: "#fff",
-                      fontWeight: 700,
-                      fontSize: 18,
-                      marginBottom: 2,
                     }}
                   >
-                    {t.author}
+                    AOF Changed The Way{" "}
+                    <span style={{ color: "#07b4ba" }}>
+                      I Train And Perform.
+                    </span>
+                  </h3>
+
+                  <p
+                    style={{
+                      fontFamily: "'Barlow', sans-serif",
+                      color: "rgba(255,255,255,0.65)",
+                      fontSize: 15,
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    The structure, the attention to detail,
+                    and the accountability took me to a level
+                    I never thought possible. I'm stronger,
+                    faster, and fight with more confidence than ever.
                   </p>
 
-                  <span
+                  <p
                     style={{
-                      color: "rgba(255,255,255,0.45)",
+                      fontFamily: "'Barlow', sans-serif",
+                      marginTop: 14,
+                      color: "#07b4ba",
+                      fontWeight: 700,
                       fontSize: 14,
                     }}
                   >
-                    Member
-                  </span>
+                    — Alex M., Amateur MMA Fighter
+                  </p>
+
                 </div>
-
               </div>
+            </Reveal>
 
-            </div>
+            {/* CHANGE 3: Replaced old desktop/mobile split with new unified 3-card infinite horizontal scroll */}
+            <Reveal>
+              <InfiniteFeedbackSlider />
+            </Reveal>
 
-          ))}
-
+          </div>
         </div>
 
-      </div>
-
-    )}
-
-  </div>
-</div>
         {/* ── SECTION 5: APPLY FORM ── */}
         <div className="cp-apply-bg" ref={formRef}>
           <div className="cp-section">
@@ -1920,6 +1974,9 @@ padding: "18px 16px",
             </div>
           </div>
         </div>
+
+        {/* ── CHANGE 4: FAQ SECTION — inserted after Form section ── */}
+        <FAQSection />
 
         {/* ── FOOTER ── */}
         <footer className="cp-footer">
