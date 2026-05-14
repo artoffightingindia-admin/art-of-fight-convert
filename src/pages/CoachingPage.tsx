@@ -747,7 +747,7 @@ body { background: #0a0a0a; }
 .cp-faq-inner {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 42px 18px;
+  padding: 32px 18px;
   text-align: center;
   position: relative;
   z-index: 1;
