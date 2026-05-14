@@ -934,11 +934,25 @@ body { background: #0a0a0a; }
 
   pointer-events: none;
 }
+/* FAQ GRID LAYOUT */
+.cp-faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
 
+.cp-faq-item {
+  margin-bottom: 0;
+  height: fit-content;
+}
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .cp-nav { padding: 14px 20px; }
   .cp-hero-content { padding: 100px 20px 48px; }
+  .cp-faq-grid {
+  grid-template-columns: 1fr;
+}
 
 .cp-what-cards {
   display: flex;
@@ -1357,7 +1371,7 @@ function FAQSection() {
           <div className="cp-faq-divider" />
         </Reveal>
 
-        <div className="cp-faq-list">
+        <div className="cp-faq-grid">
           {faqItems.map((item, i) => (
             <Reveal key={i}>
               <div className={`cp-faq-item${openIndex === i ? " open" : ""}`}>
@@ -1577,8 +1591,7 @@ export default function CoachingPage() {
                     <div className="cp-method-item">
                       <div className="cp-method-item-icon">{item.icon}</div>
                       <div>
-                        <h4>{item.title}</h4>
-                        <p>{item.desc}</p>
+                       <p className="cp-method-line">{item.desc}</p>
                       </div>
                     </div>
                   </Reveal>
