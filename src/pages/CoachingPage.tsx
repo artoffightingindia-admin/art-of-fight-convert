@@ -673,9 +673,12 @@ body { background: #0a0a0a; }
 
 //* ── NEW FOOTER ── */
 .cp-footer {
-  background: #060606;
+  background: #101318;
   border-top: 1px solid rgba(255,255,255,0.06);
-  padding: 70px 40px 30px;
+
+  padding: 95px 40px 40px;
+
+  margin-top: 70px;
 }
 
 .cp-footer-inner {
@@ -2119,12 +2122,27 @@ export default function CoachingPage() {
         NAVIGATION
       </h3>
 
-      <div className="cp-footer-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#program">Program</a>
-        <a href="#contact">Contact</a>
-      </div>
+<div className="cp-footer-links">
+
+  <a href="#home">Home</a>
+
+  <a href="#method">
+    AOF Method
+  </a>
+
+  <a href="#testimonials">
+    Testimonials
+  </a>
+
+  <a href="#faq">
+    FAQ
+  </a>
+
+  <a href="#contact">
+    Apply Now
+  </a>
+
+</div>
     </div>
 
     {/* AOF */}
