@@ -577,16 +577,33 @@ body { background: #0a0a0a; }
 .cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
 
 /* OUR PROMISE */
-.cp-promise { max-width: 670px; margin: 36px auto 0; text-align: center; padding: 0 20px; position: relative; }
+.cp-promise {
+  max-width: 760px;
+  margin: 70px auto 0;
+
+  text-align: center;
+
+  padding: 0 32px;
+
+  position: relative;
+}
 .cp-promise-text {
   font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.7);
-  font-size: 15px; line-height: 0.9; font-style: italic;
+  font-size: 17px; line-height: 1.9; font-style: italic;
   max-width: 570px; margin: 0 auto;
 }
 .cp-promise-text::before { content: "\u201C"; color: #07b4ba; font-size: 50px; margin-right: 6px; }
 .cp-promise h4 {
-  font-family: 'Bebas Neue', sans-serif; color: #07b4ba;
-  font-size: 22px; letter-spacing: 1.5px; margin-bottom: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #07b4ba;
+
+  font-size: 26px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 22px;
+
+  line-height: 1.15;
 }
 
 /* COACH */
