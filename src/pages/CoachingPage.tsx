@@ -661,7 +661,7 @@ body { background: #0a0a0a; }
 
 
 /* COACH */
-.cp-coach-bg { background: #0a0a0a; }
+.cp-coach-bg { background: #101318; }
 .cp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
 .cp-book-strip button {
   width: 100%; padding: 14px; background: none; border: none;
@@ -688,7 +688,7 @@ body { background: #0a0a0a; }
 
 /* APPLY */
 .cp-apply-bg { background: #0a0a0a; }
-.cp-form-box { background: #161616; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; }
+.cp-form-box { background: #101318; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; }
 .cp-form-box h3 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
 .cp-form-stage-label {
   color: rgba(255,255,255,0.35); font-family: 'Barlow', sans-serif;
@@ -1699,7 +1699,7 @@ export default function CoachingPage() {
         </section>
 
         {/* ── SOUNDS FAMILIAR ── */}
-        <div style={{ background: "#111" }}>
+        <div style={{ background: "#101318" }}>
           <div className="cp-section">
             <Reveal>
               <div className="cp-pain-grid">
