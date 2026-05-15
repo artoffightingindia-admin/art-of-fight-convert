@@ -539,7 +539,7 @@ body { background: #0a0a0a; }
   max-width: 1100px;
   margin: 0 auto;
 
-  padding: 0 40px 60px;
+  padding: 0 20px 30px;
 }
 .cp-method-text { flex: 1; min-width: 260px; order: 1; }
 .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
