@@ -578,8 +578,8 @@ body { background: #0a0a0a; }
 
 /* OUR  */
 .cp-promise {
-  max-width: 750x;
-  margin: 60px auto 0;
+  max-width: 760px;
+  margin: 70px auto 0;
 
   text-align: center;
 
@@ -590,7 +590,7 @@ body { background: #0a0a0a; }
 .cp-promise-text {
   font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.7);
   font-size: 17px; line-height: 1.9; font-style: italic;
-  max-width: 570px; margin: 0 auto;
+  max-width: 630px; margin: 0 auto;
 }
 .cp-promise-text::before { content: "\u201C"; color: #07b4ba; font-size: 50px; margin-right: 6px; }
 .cp-promise h4 {
