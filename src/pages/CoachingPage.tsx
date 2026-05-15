@@ -530,7 +530,14 @@ body { background: #0a0a0a; }
 
 /* METHOD SECTION */
 .cp-method-bg { background: #0d0d0d; }
-.cp-method-grid { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
+..cp-method-grid {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  padding: 0 24px;
+}
 .cp-method-text { flex: 1; min-width: 260px; order: 1; }
 .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
 .cp-method-item {
@@ -1577,7 +1584,7 @@ export default function CoachingPage() {
         </nav>
 
         {/* ── SECTION 1: HERO ── */}
-        <section className="cp-hero">
+        <section id="home" className="cp-hero">
           <div
             className="cp-hero-bg"
             style={{
@@ -1858,7 +1865,7 @@ export default function CoachingPage() {
         </div>
 
         {/* ── SECTION 4: TESTIMONIALS ── */}
-        <div id="cp-testimonials" className="cp-testi-bg">
+        <div id="testimonials" className="cp-testi-bg">
           <div className="cp-section" style={{ paddingTop: 48 }}>
 
             <Reveal>
