@@ -536,7 +536,7 @@ body { background: #0a0a0a; }
   align-items: flex-start;
   flex-wrap: wrap;
 
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 
   padding: 0 0px 0px;
@@ -580,7 +580,7 @@ body { background: #0a0a0a; }
 
 .cp-promise {
   max-width: 760px;
-  margin: 90px auto 0;
+  margin: 70px auto 0;
 
   padding: 48px 40px;
 
