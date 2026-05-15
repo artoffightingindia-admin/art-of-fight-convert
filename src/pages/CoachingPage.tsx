@@ -585,40 +585,10 @@ body { background: #0a0a0a; }
 
   padding: 34px 42px;
 
-  border-radius: 20px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.03),
-      rgba(255,255,255,0.015)
-    );
-
-  border: 1px solid rgba(255,255,255,0.07);
-
   text-align: center;
 
   position: relative;
-
-  overflow: hidden;
 }
-
-.cp-new-promise::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(7,180,186,0.08),
-      transparent 25%
-    );
-
-  pointer-events: none;
-}
-
 .cp-new-promise-line {
   width: 70px;
   height: 2px;
