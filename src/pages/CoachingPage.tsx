@@ -576,10 +576,10 @@ body { background: #0a0a0a; }
 }
 .cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
 
-/* OUR PROMISE */
+/* OUR  */
 .cp-promise {
-  max-width: 850x;
-  margin: 70px auto 0;
+  max-width: 950x;
+  margin: 90px auto 0;
 
   text-align: center;
 
@@ -1759,11 +1759,11 @@ export default function CoachingPage() {
               </div>
             </Reveal>
 
-            {/* OUR PROMISE */}
+            {/* OUR  */}
             <Reveal>
-              <div className="cp-promise">
-                <h4>Our Promise</h4>
-                <p className="cp-promise-text">
+              <div className="cp-">
+                <h4>Our </h4>
+                <p className="cp--text">
                   We don't just hand you a plan and disappear. Every session is tracked,
                   every milestone is celebrated, and every setback is coached through.
                   You will not plateau with AOF.
