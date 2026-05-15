@@ -541,6 +541,7 @@ body { background: #0a0a0a; }
 
   padding: 0 0px 0px;
 }
+
 .cp-method-text { flex: 1; min-width: 260px; order: 1; }
 .cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
 .cp-method-item {
@@ -575,7 +576,89 @@ body { background: #0a0a0a; }
   font-size: 16px; letter-spacing: 1px; line-height: 1.3;
 }
 .cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
+/* ── NEW PROMISE SECTION ── */
 
+.cp-new-promise {
+  max-width: 820px;
+
+  margin: 0 auto;
+
+  padding: 34px 42px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.015)
+    );
+
+  border: 1px solid rgba(255,255,255,0.07);
+
+  text-align: center;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.cp-new-promise::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(7,180,186,0.08),
+      transparent 25%
+    );
+
+  pointer-events: none;
+}
+
+.cp-new-promise-line {
+  width: 70px;
+  height: 2px;
+
+  background: #07b4ba;
+
+  margin: 0 auto 22px;
+
+  border-radius: 999px;
+}
+
+.cp-new-promise-text {
+  font-family: 'Barlow', sans-serif;
+
+  font-size: 19px;
+
+  line-height: 1.9;
+
+  color: rgba(255,255,255,0.76);
+
+  font-style: italic;
+
+  max-width: 720px;
+
+  margin: 0 auto;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .cp-new-promise {
+    padding: 26px 22px;
+    border-radius: 16px;
+  }
+
+  .cp-new-promise-text {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+}
 
 
 /* COACH */
@@ -1730,6 +1813,21 @@ export default function CoachingPage() {
                 ))}
               </div>
             </Reveal>
+            {/* ── NEW PROMISE SECTION ── */}
+<Reveal style={{ marginTop: 50 }}>
+  <div className="cp-new-promise">
+
+    <div className="cp-new-promise-line" />
+
+    <p className="cp-new-promise-text">
+      “Most fighters train hard. Very few train correctly.
+      AOF exists to close that gap — with structure,
+      accountability, and coaching that actually evolves
+      with you.”
+    </p>
+
+  </div>
+</Reveal>
           </div>
         </div>
 
