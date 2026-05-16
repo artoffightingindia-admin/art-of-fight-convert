@@ -1676,93 +1676,166 @@ function InfiniteFeedbackSlider() {
         }}
       >
 {
-  window.innerWidth <= 768 ? (
+      window.innerWidth <= 768 ? (
 
-    <>
+        <>
 
-      {[0, 3, 6].map((start, pageIndex) => (
+          {[0, 3, 6].map((start, pageIndex) => (
 
-        <div
-          key={pageIndex}
-          className="cp-feedback-page-mobile"
-        >
+            <div
+              key={pageIndex}
+              className="cp-feedback-page-mobile"
+            >
 
-          {feedbackCards
-            .slice(start, start + 3)
-            .map((card, i) => (
-
-              <div
-                key={i}
-                className="cp-feedback-card-new"
-              >
-
-                <div className="cp-feedback-stars">
-
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-
-                </div>
-
-                <p>"{card.text}"</p>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
+              {feedbackCards
+                .slice(start, start + 3)
+                .map((card, i) => (
 
                   <div
-                    style={{
-                      width: 36,
-                      height: 36,
-
-                      borderRadius: "50%",
-
-                      background: "#202533",
-
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-
-                      fontSize: 16,
-                    }}
+                    key={i}
+                    className="cp-feedback-card-new"
                   >
-                    👤
+
+                    <div className="cp-feedback-stars">
+
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+
+                    </div>
+
+                    <p>"{card.text}"</p>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 10,
+                      }}
+                    >
+
+                      <div
+                        style={{
+                          width: 36,
+                          height: 36,
+
+                          borderRadius: "50%",
+
+                          background: "#202533",
+
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+
+                          fontSize: 16,
+                        }}
+                      >
+                        👤
+                      </div>
+
+                      <div>
+
+                        <p className="author-name">
+                          {card.author}
+                        </p>
+
+                        <span className="author-role">
+                          Member
+                        </span>
+
+                      </div>
+
+                    </div>
+
                   </div>
 
-                  <div>
+              ))}
 
-                    <p className="author-name">
-                      {card.author}
-                    </p>
-
-                    <span className="author-role">
-                      Member
-                    </span>
-
-                  </div>
-
-                </div>
-
-              </div>
+            </div>
 
           ))}
 
-        </div>
+        </>
 
-      ))}
+      ) : (
 
-    </>
+        allCards.map((card, i) => (
 
-  ) : (
+          <div
+            key={i}
+            className="cp-feedback-card-new"
 
-    allCards.map((card, i) => (
-      {/* MOBILE NAV */}
+            style={{
+              width: "340px",
+              flexShrink: 0,
+            }}
+          >
+
+            <div className="cp-feedback-stars">
+
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+
+            </div>
+
+            <p>"{card.text}"</p>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+
+                  borderRadius: "50%",
+
+                  background: "#202533",
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+
+                  fontSize: 16,
+                }}
+              >
+                👤
+              </div>
+
+              <div>
+
+                <p className="author-name">
+                  {card.author}
+                </p>
+
+                <span className="author-role">
+                  Member
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        ))
+
+      )
+
+    }
+
+  </div>
+  {/* MOBILE NAV */}
       <div className="cp-feedback-mobile-nav">
 
         <button onClick={prevMobile}>
