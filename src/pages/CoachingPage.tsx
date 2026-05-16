@@ -1275,10 +1275,98 @@ body { background: #0a0a0a; }
   .cp-faq-answer p { font-size: 14px; }
 
   /* New feedback slider mobile fallback */
-  .cp-feedback-card-new {
-    flex: 0 0 85vw !important;
-    width: 85vw !important;
+/* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
+@media (max-width: 768px) {
+
+  .cp-feedback-slider-new {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+
+    padding-bottom: 60px;
   }
+
+  .cp-feedback-track-new {
+    display: flex;
+
+    transition: transform 0.45s ease;
+    gap: 12px;
+  }
+
+  /* 3 cards visible as rows */
+  .cp-feedback-card-new {
+    flex: 0 0 calc((100% - 24px) / 3) !important;
+
+    width: calc((100% - 24px) / 3) !important;
+
+    min-height: 260px;
+
+    padding: 14px 10px;
+
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .cp-feedback-card-new p {
+    font-size: 11px;
+    line-height: 1.45;
+
+    margin-bottom: 12px;
+  }
+
+  .cp-feedback-stars {
+    margin-bottom: 10px;
+  }
+
+  .cp-feedback-card-new .author-name {
+    font-size: 11px;
+  }
+
+  .cp-feedback-card-new .author-role {
+    font-size: 10px;
+  }
+
+  /* NAV BUTTONS */
+  .cp-feedback-mobile-nav {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 14px;
+  }
+
+  .cp-feedback-mobile-nav button {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    background: #15181d;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+  }
+
+  .cp-feedback-mobile-nav button:hover {
+    border-color: #07b4ba;
+
+    color: #07b4ba;
+  }
+}
 }
 `;
 
@@ -1435,108 +1523,212 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
 
 /* ── CHANGE 3: Infinite horizontal feedback slider component ── */
 function InfiniteFeedbackSlider() {
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+
   const animFrameRef = useRef<number>(0);
+
   const isPausedRef = useRef(false);
+
   const posRef = useRef(0);
 
-  // Duplicate cards: 7 originals + 7 copies = 14 total for seamless loop
+  const [mobileIndex, setMobileIndex] = useState(0);
+
   const allCards = [...feedbackCards, ...feedbackCards];
 
-  // Card width: (containerWidth - gaps) / 3 per visible card
-  // We use a fixed px card width approach via CSS flex and overflow hidden
-  // Each card: flex 0 0 calc(33.333% - 16px) within the container
-  // Track width: 14 cards = (cardWidth + gap) * 14
-
   useEffect(() => {
+
+    if (window.innerWidth <= 768) return;
+
     const slider = sliderRef.current;
     const track = trackRef.current;
+
     if (!slider || !track) return;
 
-    // Speed: pixels per frame
     const speed = 0.55;
 
     const getHalfWidth = () => track.scrollWidth / 2;
 
     const animate = () => {
+
       if (!isPausedRef.current) {
+
         posRef.current += speed;
+
         if (posRef.current >= getHalfWidth()) {
           posRef.current -= getHalfWidth();
         }
-        track.style.transform = `translateX(-${posRef.current}px)`;
+
+        track.style.transform =
+          `translateX(-${posRef.current}px)`;
       }
-      animFrameRef.current = requestAnimationFrame(animate);
+
+      animFrameRef.current =
+        requestAnimationFrame(animate);
     };
 
-    animFrameRef.current = requestAnimationFrame(animate);
+    animFrameRef.current =
+      requestAnimationFrame(animate);
 
-    const pause = () => { isPausedRef.current = true; };
-    const resume = () => { setTimeout(() => { isPausedRef.current = false; }, 600); };
+    const pause = () => {
+      isPausedRef.current = true;
+    };
+
+    const resume = () => {
+      setTimeout(() => {
+        isPausedRef.current = false;
+      }, 600);
+    };
 
     slider.addEventListener("mouseenter", pause);
     slider.addEventListener("mouseleave", resume);
-    slider.addEventListener("touchstart", pause, { passive: true });
-    slider.addEventListener("touchend", resume);
 
     return () => {
+
       cancelAnimationFrame(animFrameRef.current);
-      slider.removeEventListener("mouseenter", pause);
-      slider.removeEventListener("mouseleave", resume);
-      slider.removeEventListener("touchstart", pause);
-      slider.removeEventListener("touchend", resume);
+
+      slider.removeEventListener(
+        "mouseenter",
+        pause
+      );
+
+      slider.removeEventListener(
+        "mouseleave",
+        resume
+      );
     };
+
   }, []);
 
+  const nextMobile = () => {
+
+    if (mobileIndex < feedbackCards.length - 3) {
+
+      setMobileIndex((prev) => prev + 1);
+    }
+  };
+
+  const prevMobile = () => {
+
+    if (mobileIndex > 0) {
+
+      setMobileIndex((prev) => prev - 1);
+    }
+  };
+
   return (
+
     <div
       ref={sliderRef}
       className="cp-feedback-slider-new"
     >
+
       <div
         ref={trackRef}
         className="cp-feedback-track-new"
-        style={{ width: "max-content" }}
+
+        style={{
+          width: "max-content",
+
+          transform:
+            window.innerWidth <= 768
+              ? `translateX(-${mobileIndex * 34}%)`
+              : undefined,
+        }}
       >
+
         {allCards.map((card, i) => (
+
           <div
             key={i}
             className="cp-feedback-card-new"
+
             style={{
-              // Each card is exactly 1/3 of the slider container minus gap fractions
-              // Using a fixed width to keep 3 cards in view. 340px * 3 + 24px * 2 = ~1068px ≈ full 1100px section
-              width: "340px",
+              width:
+                window.innerWidth <= 768
+                  ? undefined
+                  : "340px",
+
               flexShrink: 0,
             }}
           >
+
             <div className="cp-feedback-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+
             </div>
+
             <p>"{card.text}"</p>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+
               <div
                 style={{
-                  width: 44, height: 44, borderRadius: "50%",
+                  width: 36,
+                  height: 36,
+
+                  borderRadius: "50%",
+
                   background: "#202533",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  color: "#8d96a8", fontSize: 20, flexShrink: 0,
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+
+                  fontSize: 16,
                 }}
               >
                 👤
               </div>
+
               <div>
-                <p className="author-name">{card.author}</p>
-                <span className="author-role">Member</span>
+
+                <p className="author-name">
+                  {card.author}
+                </p>
+
+                <span className="author-role">
+                  Member
+                </span>
+
               </div>
+
             </div>
+
           </div>
+
         ))}
+
       </div>
+
+      {/* MOBILE NAV */}
+      <div className="cp-feedback-mobile-nav">
+
+        <button onClick={prevMobile}>
+          ‹
+        </button>
+
+        <button onClick={nextMobile}>
+          ›
+        </button>
+
+      </div>
+
     </div>
   );
 }
-
 /* ── CHANGE 4: FAQ Accordion component ── */
 function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
