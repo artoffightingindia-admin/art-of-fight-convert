@@ -2220,18 +2220,19 @@ export default function CoachingPage() {
     </div>
 
     {/* AOF */}
-    <div>
-      <h3 className="cp-footer-title cp-footer-logo">
-        AOF
-      </h3>
+<div>
+  <h3 className="cp-footer-title cp-footer-logo">
+    <span style={{ color: "#07b4ba" }}>A</span>
+    <span style={{ color: "#fff" }}>O</span>
+    <span style={{ color: "#07b4ba" }}>F</span>
+  </h3>
 
-      <div className="cp-footer-about">
-        <p>
-          Art of Fighting Academy — building champions through proven systems and disciplined training.
-        </p>
-      </div>
-    </div>
-
+  <div className="cp-footer-about">
+    <p>
+      Art of Fighting Academy — building champions through proven systems and disciplined training.
+    </p>
+  </div>
+</div>
   </div>
 
   <div className="cp-footer-bottom">
