@@ -2187,8 +2187,8 @@ export default function CoachingPage() {
         {/* ── CHANGE 4: FAQ SECTION — inserted after Form section ── */}
         <FAQSection />
 
-        {/* ── FOOTER ── */}
-     <footer className="cp-footer">
+     {/* ── FOOTER ── */}
+<footer className="cp-footer" style={{ background: "#0f1115" }}>
   <div className="cp-footer-inner">
 
     {/* CONTACT */}
@@ -2210,27 +2210,13 @@ export default function CoachingPage() {
         NAVIGATION
       </h3>
 
-<div className="cp-footer-links">
-
-  <a href="#home">Home</a>
-
-  <a href="#method">
-    AOF Method
-  </a>
-
-  <a href="#testimonials">
-    Testimonials
-  </a>
-
-  <a href="#faq">
-    FAQ
-  </a>
-
-  <a href="#contact">
-    Apply Now
-  </a>
-
-</div>
+      <div className="cp-footer-links">
+        <a href="#home">Home</a>
+        <a href="#method">AOF Method</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Apply Now</a>
+      </div>
     </div>
 
     {/* AOF */}
