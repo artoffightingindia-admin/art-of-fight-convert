@@ -1276,8 +1276,6 @@ body { background: #0a0a0a; }
 
   /* New feedback slider mobile fallback */
 /* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
-@media (max-width: 768px) {
-
 /* ───────── MOBILE FEEDBACK STACK ───────── */
 
 .cp-feedback-slider-new {
@@ -1365,7 +1363,6 @@ body { background: #0a0a0a; }
 
     color: #07b4ba;
   }
-}
 }
 `;
 
