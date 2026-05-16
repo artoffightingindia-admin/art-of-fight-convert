@@ -870,8 +870,8 @@ body { background: #0a0a0a; }
 .cp-feedback-card-new {
   /* calc: (100% / 3) - gap proportional. Done via flex: 0 0 calc(33.333% - 16px) in inline style */
   border-radius: 18px;
-  background: linear-gradient(180deg, #1a1d27 0%, #121212 100%);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #101318;
+  border: 1px solid rgba(255,255,255,0.05);
   padding: 28px 24px;
   flex-shrink: 0;
   position: relative;
