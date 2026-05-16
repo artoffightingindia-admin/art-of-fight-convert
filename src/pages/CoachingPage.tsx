@@ -1522,282 +1522,228 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
 
 /* ── CHANGE 3: Infinite horizontal feedback slider component ── */
 function InfiniteFeedbackSlider() {
-
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
   const animFrameRef = useRef<number>(0);
-
   const isPausedRef = useRef(false);
-
   const posRef = useRef(0);
+  const [mobilePage, setMobilePage] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const [mobileIndex, setMobileIndex] = useState(0);
-
+  const CARDS_PER_PAGE = 3;
+  const totalPages = Math.ceil(feedbackCards.length / CARDS_PER_PAGE);
   const allCards = [...feedbackCards, ...feedbackCards];
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-    if (window.innerWidth <= 768) return;
-
+  useEffect(() => {
+    if (isMobile) return;
     const slider = sliderRef.current;
     const track = trackRef.current;
-
     if (!slider || !track) return;
 
     const speed = 0.55;
-
     const getHalfWidth = () => track.scrollWidth / 2;
 
     const animate = () => {
-
       if (!isPausedRef.current) {
-
         posRef.current += speed;
-
         if (posRef.current >= getHalfWidth()) {
           posRef.current -= getHalfWidth();
         }
-
-        track.style.transform =
-          `translateX(-${posRef.current}px)`;
+        track.style.transform = `translateX(-${posRef.current}px)`;
       }
-
-      animFrameRef.current =
-        requestAnimationFrame(animate);
+      animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animFrameRef.current =
-      requestAnimationFrame(animate);
+    animFrameRef.current = requestAnimationFrame(animate);
 
-    const pause = () => {
-      isPausedRef.current = true;
-    };
-
-    const resume = () => {
-      setTimeout(() => {
-        isPausedRef.current = false;
-      }, 600);
-    };
+    const pause = () => { isPausedRef.current = true; };
+    const resume = () => { setTimeout(() => { isPausedRef.current = false; }, 600); };
 
     slider.addEventListener("mouseenter", pause);
     slider.addEventListener("mouseleave", resume);
 
     return () => {
-
       cancelAnimationFrame(animFrameRef.current);
-
-      slider.removeEventListener(
-        "mouseenter",
-        pause
-      );
-
-      slider.removeEventListener(
-        "mouseleave",
-        resume
-      );
+      slider.removeEventListener("mouseenter", pause);
+      slider.removeEventListener("mouseleave", resume);
     };
+  }, [isMobile]);
 
-  }, []);
+  const pageCards = feedbackCards.slice(
+    mobilePage * CARDS_PER_PAGE,
+    mobilePage * CARDS_PER_PAGE + CARDS_PER_PAGE
+  );
 
-  const nextMobile = () => {
+  /* ── MOBILE ── */
+  if (isMobile) {
+    return (
+      <div style={{ width: "100%" }}>
+        {/* 3 cards in a row */}
+        <div style={{ display: "flex", gap: 10, width: "100%" }}>
+          {pageCards.map((card, i) => (
+            <div
+              key={i}
+              style={{
+                flex: "1 1 0",
+                minWidth: 0,
+                borderRadius: 14,
+                background: "#1a1d23",
+                border: "1px solid rgba(255,255,255,0.05)",
+                padding: "14px 12px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
+              <div style={{ display: "flex", gap: 2, color: "#07b4ba", fontSize: 11 }}>
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p style={{
+                fontFamily: "'Barlow', sans-serif",
+                fontSize: 11,
+                lineHeight: 1.55,
+                color: "rgba(255,255,255,0.72)",
+                fontStyle: "italic",
+                flex: 1,
+              }}>
+                "{card.text}"
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                <div style={{
+                  width: 28, height: 28, borderRadius: "50%",
+                  background: "#202533", display: "flex",
+                  alignItems: "center", justifyContent: "center",
+                  fontSize: 13, flexShrink: 0,
+                }}>
+                  👤
+                </div>
+                <div>
+                  <p style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    fontWeight: 700, color: "#fff", fontSize: 11,
+                  }}>
+                    {card.author}
+                  </p>
+                  <span style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.4)", fontSize: 10,
+                  }}>
+                    Member
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-    if (mobileIndex < feedbackCards.length - 3) {
+        {/* Navigation */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 16,
+          marginTop: 20,
+        }}>
+          <button
+            onClick={() => setMobilePage((p) => Math.max(0, p - 1))}
+            disabled={mobilePage === 0}
+            style={{
+              width: 40, height: 40, borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.18)",
+              background: mobilePage === 0 ? "transparent" : "#15181d",
+              color: mobilePage === 0 ? "rgba(255,255,255,0.2)" : "#fff",
+              fontSize: 20, cursor: mobilePage === 0 ? "default" : "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+          >
+            ‹
+          </button>
 
-      setMobileIndex((prev) => prev + 1);
-    }
-  };
+          {/* Dots */}
+          <div style={{ display: "flex", gap: 6 }}>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <div
+                key={i}
+                onClick={() => setMobilePage(i)}
+                style={{
+                  width: i === mobilePage ? 18 : 6,
+                  height: 6,
+                  borderRadius: 999,
+                  background: i === mobilePage ? "#07b4ba" : "rgba(255,255,255,0.2)",
+                  cursor: "pointer",
+                  transition: "all 0.3s",
+                }}
+              />
+            ))}
+          </div>
 
-  const prevMobile = () => {
+          <button
+            onClick={() => setMobilePage((p) => Math.min(totalPages - 1, p + 1))}
+            disabled={mobilePage === totalPages - 1}
+            style={{
+              width: 40, height: 40, borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.18)",
+              background: mobilePage === totalPages - 1 ? "transparent" : "#15181d",
+              color: mobilePage === totalPages - 1 ? "rgba(255,255,255,0.2)" : "#fff",
+              fontSize: 20,
+              cursor: mobilePage === totalPages - 1 ? "default" : "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+          >
+            ›
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-    if (mobileIndex > 0) {
-
-      setMobileIndex((prev) => prev - 1);
-    }
-  };
-
+  /* ── DESKTOP: infinite scroll ── */
   return (
-
-    <div
-      ref={sliderRef}
-      className="cp-feedback-slider-new"
-    >
-
+    <div ref={sliderRef} className="cp-feedback-slider-new">
       <div
         ref={trackRef}
         className="cp-feedback-track-new"
-
-        style={{
-          width: "max-content",
-
-          transform:
-            window.innerWidth <= 768
-              ? `translateX(-${mobileIndex * 34}%)`
-              : undefined,
-        }}
+        style={{ width: "max-content" }}
       >
-
-        {
-  window.innerWidth <= 768 ? (
-
-    <>
-      {[0, 3, 6].map((start, pageIndex) => (
-
-        <div
-          key={pageIndex}
-          className="cp-feedback-page-mobile"
-        >
-
-          {feedbackCards
-            .slice(start, start + 3)
-            .map((card, i) => (
-
-              <div
-                key={i}
-                className="cp-feedback-card-new"
-
-                style={{
-                  width: "100%",
-                  flexShrink: 0,
-                }}
-              >
-
-                <div className="cp-feedback-stars">
-
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-                  <span style={{ color: "#07b4ba" }}>★</span>
-
-                </div>
-
-                <p>"{card.text}"</p>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-
-                  <div
-                    style={{
-                      width: 36,
-                      height: 36,
-
-                      borderRadius: "50%",
-
-                      background: "#202533",
-
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-
-                      fontSize: 16,
-                    }}
-                  >
-                    👤
-                  </div>
-
-                  <div>
-
-                    <p className="author-name">
-                      {card.author}
-                    </p>
-
-                    <span className="author-role">
-                      Member
-                    </span>
-
-                  </div>
-
-                </div>
-
+        {allCards.map((card, i) => (
+          <div
+            key={i}
+            className="cp-feedback-card-new"
+            style={{ width: "340px", flexShrink: 0 }}
+          >
+            <div className="cp-feedback-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <p>"{card.text}"</p>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: "50%",
+                background: "#202533", display: "flex",
+                alignItems: "center", justifyContent: "center",
+                color: "#8d96a8", fontSize: 20, flexShrink: 0,
+              }}>
+                👤
               </div>
-
-          ))}
-
-        </div>
-
-      ))}
-    </>
-
-  ) : (
-
-    allCards.map((card, i) => (
-
-      <div
-        key={i}
-        className="cp-feedback-card-new"
-
-        style={{
-          width: "340px",
-          flexShrink: 0,
-        }}
-      >
-      </div>
-
-      {/* MOBILE NAV */}
-      <div className="cp-feedback-mobile-nav">
-
-        <button onClick={prevMobile}>
-          ‹
-        </button>
-
-        <button onClick={nextMobile}>
-          ›
-        </button>
-
-      </div>
-
-    </div>
-  );
-}
-/* ── CHANGE 4: FAQ Accordion component ── */
-function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggle = (i: number) => {
-    setOpenIndex((prev) => (prev === i ? null : i));
-  };
-
-  return (
-    <div id="faq" className="cp-faq-bg">
-      <div className="cp-faq-inner">
-        <Reveal>
-          <p className="cp-faq-label">Got Questions?</p>
-          <h2 className="cp-faq-title">
-            Frequently Asked <span>Questions</span>
-          </h2>
-          <div className="cp-faq-divider" />
-        </Reveal>
-
-        <div className="cp-faq-grid">
-          {faqItems.map((item, i) => (
-            <Reveal key={i}>
-              <div className={`cp-faq-item${openIndex === i ? " open" : ""}`}>
-                <button
-                  className="cp-faq-question"
-                  onClick={() => toggle(i)}
-                  aria-expanded={openIndex === i}
-                >
-                  <span className="cp-faq-question-text">{item.question}</span>
-                  <span className="cp-faq-icon">+</span>
-                </button>
-                <div className="cp-faq-answer">
-                  <p>{item.answer}</p>
-                </div>
+              <div>
+                <p className="author-name">{card.author}</p>
+                <span className="author-role">Member</span>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-
 /* ── MAIN PAGE ── */
 export default function CoachingPage() {
   const navigate = useNavigate();
