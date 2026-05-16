@@ -1278,89 +1278,88 @@ body { background: #0a0a0a; }
 /* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
 @media (max-width: 768px) {
 
-  .cp-feedback-slider-new {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
+/* ───────── MOBILE FEEDBACK STACK ───────── */
 
-    padding-bottom: 60px;
-  }
+.cp-feedback-slider-new {
+  overflow: hidden;
 
-  .cp-feedback-track-new {
-    display: flex;
+  position: relative;
 
-    transition: transform 0.45s ease;
-    gap: 12px;
-  }
+  width: 100%;
 
-  /* 3 cards visible as rows */
-  .cp-feedback-card-new {
-    flex: 0 0 calc((100% - 24px) / 3) !important;
+  padding-bottom: 60px;
+}
 
-    width: calc((100% - 24px) / 3) !important;
+.cp-feedback-track-new {
 
-    min-height: 260px;
+  display: flex;
 
-    padding: 14px 10px;
+  transition: transform 0.4s ease;
+}
 
-    border-radius: 12px;
+.cp-feedback-page-mobile {
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  min-width: 100%;
 
-  .cp-feedback-card-new p {
-    font-size: 11px;
-    line-height: 1.45;
+  display: flex;
 
-    margin-bottom: 12px;
-  }
+  flex-direction: column;
 
-  .cp-feedback-stars {
-    margin-bottom: 10px;
-  }
+  gap: 12px;
+}
 
-  .cp-feedback-card-new .author-name {
-    font-size: 11px;
-  }
+.cp-feedback-card-new {
 
-  .cp-feedback-card-new .author-role {
-    font-size: 10px;
-  }
+  width: 100% !important;
 
-  /* NAV BUTTONS */
-  .cp-feedback-mobile-nav {
-    position: absolute;
+  min-height: 115px;
 
-    left: 50%;
-    bottom: 0;
+  padding: 14px;
 
-    transform: translateX(-50%);
+  border-radius: 12px;
+}
 
-    display: flex;
-    gap: 14px;
-  }
+.cp-feedback-card-new p {
 
-  .cp-feedback-mobile-nav button {
-    width: 42px;
-    height: 42px;
+  font-size: 12px;
 
-    border-radius: 50%;
+  line-height: 1.5;
 
-    border: 1px solid rgba(255,255,255,0.14);
+  margin-bottom: 10px;
+}
 
-    background: #15181d;
+.cp-feedback-mobile-nav {
 
-    color: #fff;
+  position: absolute;
 
-    font-size: 18px;
+  bottom: 0;
 
-    cursor: pointer;
+  left: 50%;
 
-    transition: 0.2s;
-  }
+  transform: translateX(-50%);
 
+  display: flex;
+
+  gap: 14px;
+}
+
+.cp-feedback-mobile-nav button {
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.14);
+
+  background: #15181d;
+
+  color: #fff;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
   .cp-feedback-mobile-nav button:hover {
     border-color: #07b4ba;
 
@@ -1638,79 +1637,106 @@ function InfiniteFeedbackSlider() {
         }}
       >
 
-        {allCards.map((card, i) => (
+        {
+  window.innerWidth <= 768 ? (
 
-          <div
-            key={i}
-            className="cp-feedback-card-new"
+    <>
+      {[0, 3, 6].map((start, pageIndex) => (
 
-            style={{
-              width:
-                window.innerWidth <= 768
-                  ? undefined
-                  : "340px",
+        <div
+          key={pageIndex}
+          className="cp-feedback-page-mobile"
+        >
 
-              flexShrink: 0,
-            }}
-          >
-
-            <div className="cp-feedback-stars">
-
-              <span style={{ color: "#07b4ba" }}>★</span>
-              <span style={{ color: "#07b4ba" }}>★</span>
-              <span style={{ color: "#07b4ba" }}>★</span>
-              <span style={{ color: "#07b4ba" }}>★</span>
-              <span style={{ color: "#07b4ba" }}>★</span>
-
-            </div>
-
-            <p>"{card.text}"</p>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
+          {feedbackCards
+            .slice(start, start + 3)
+            .map((card, i) => (
 
               <div
+                key={i}
+                className="cp-feedback-card-new"
+
                 style={{
-                  width: 36,
-                  height: 36,
-
-                  borderRadius: "50%",
-
-                  background: "#202533",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-
-                  fontSize: 16,
+                  width: "100%",
+                  flexShrink: 0,
                 }}
               >
-                👤
+
+                <div className="cp-feedback-stars">
+
+                  <span style={{ color: "#07b4ba" }}>★</span>
+                  <span style={{ color: "#07b4ba" }}>★</span>
+                  <span style={{ color: "#07b4ba" }}>★</span>
+                  <span style={{ color: "#07b4ba" }}>★</span>
+                  <span style={{ color: "#07b4ba" }}>★</span>
+
+                </div>
+
+                <p>"{card.text}"</p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+
+                      borderRadius: "50%",
+
+                      background: "#202533",
+
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+
+                      fontSize: 16,
+                    }}
+                  >
+                    👤
+                  </div>
+
+                  <div>
+
+                    <p className="author-name">
+                      {card.author}
+                    </p>
+
+                    <span className="author-role">
+                      Member
+                    </span>
+
+                  </div>
+
+                </div>
+
               </div>
 
-              <div>
+          ))}
 
-                <p className="author-name">
-                  {card.author}
-                </p>
+        </div>
 
-                <span className="author-role">
-                  Member
-                </span>
+      ))}
+    </>
 
-              </div>
+  ) : (
 
-            </div>
+    allCards.map((card, i) => (
 
-          </div>
+      <div
+        key={i}
+        className="cp-feedback-card-new"
 
-        ))}
-
+        style={{
+          width: "340px",
+          flexShrink: 0,
+        }}
+      >
       </div>
 
       {/* MOBILE NAV */}
