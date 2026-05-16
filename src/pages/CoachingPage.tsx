@@ -749,7 +749,7 @@ body { background: #0a0a0a; }
 }
 .cp-wa-btn:hover { background: #1ebe57; }
 
-//* ── NEW FOOTER ── */
+/* ── NEW FOOTER ── */
 .cp-footer {
   background: #0f1115;
 
