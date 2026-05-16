@@ -1275,94 +1275,64 @@ body { background: #0a0a0a; }
   .cp-faq-answer p { font-size: 14px; }
 
   /* New feedback slider mobile fallback */
-/* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
 /* ───────── MOBILE FEEDBACK STACK ───────── */
 
 .cp-feedback-slider-new {
   overflow: hidden;
-
   position: relative;
-
   width: 100%;
-
   padding-bottom: 60px;
 }
 
 .cp-feedback-track-new {
-
   display: flex;
-
   transition: transform 0.4s ease;
 }
 
 .cp-feedback-page-mobile {
-
   min-width: 100%;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 12px;
 }
 
 .cp-feedback-card-new {
-
   width: 100% !important;
-
   min-height: 115px;
-
   padding: 14px;
-
   border-radius: 12px;
 }
 
 .cp-feedback-card-new p {
-
   font-size: 12px;
-
   line-height: 1.5;
-
   margin-bottom: 10px;
 }
 
 .cp-feedback-mobile-nav {
-
   position: absolute;
-
   bottom: 0;
-
   left: 50%;
-
   transform: translateX(-50%);
-
   display: flex;
-
   gap: 14px;
 }
 
 .cp-feedback-mobile-nav button {
-
   width: 42px;
   height: 42px;
-
   border-radius: 50%;
-
   border: 1px solid rgba(255,255,255,0.14);
-
   background: #15181d;
-
   color: #fff;
-
   font-size: 18px;
-
   cursor: pointer;
 }
-  .cp-feedback-mobile-nav button:hover {
-    border-color: #07b4ba;
 
-    color: #07b4ba;
-  }
+.cp-feedback-mobile-nav button:hover {
+  border-color: #07b4ba;
+  color: #07b4ba;
+}
 }
 `;
 
