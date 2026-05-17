@@ -207,24 +207,100 @@ const css = `
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
   .pp-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
-  .pp-hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 118px); line-height: 0.92; letter-spacing: 3px; color: #fff; margin-bottom: 14px; max-width: 820px; }
-  .pp-hero-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px,4vw,54px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 24px; }
-  .pp-hero-desc { font-family: 'Barlow', sans-serif; font-size: clamp(15px,1.5vw,19px); color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 620px; margin: 0 0 34px; }
+  .pp-hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 72px); line-height: 0.92; letter-spacing: 3px; color: #fff; margin-bottom: 14px; max-width: 820px; }
+  .pp-hero-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px,4vw,34px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 24px; }
+  .pp-hero-desc { font-family: 'Barlow', sans-serif; font-size: clamp(15px,1.5vw,16px); color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 620px; margin: 0 0 34px; }
   .pp-hero-desc strong { color: #07b4ba; }
   .pp-join-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 52px; border-radius: 14px; background: #07b4ba; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 10px 35px rgba(7,180,186,0.28); }
   .pp-join-btn:hover { background: #059a9f; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
-  /* STATS BAND */
-  .pp-stats { background: #07b4ba; padding: 0 40px; display: flex; align-items: center; gap: 0; flex-wrap: wrap; min-height: 110px; }
-  .pp-stats-coach { flex-shrink: 0; width: 90px; height: 90px; border-radius: 50%; border: 3px solid #000; overflow: hidden; background: #1a1a1a; margin: 10px 32px 10px 0; display: flex; align-items: center; justify-content: center; }
-  .pp-stats-coach img { width: 100%; height: 100%; object-fit: cover; }
-  .pp-stats-coach-placeholder { color: rgba(0,0,0,0.3); font-size: 28px; }
-  .pp-stats-divider { width: 1px; background: rgba(0,0,0,0.2); align-self: stretch; margin: 0 32px; }
-  .pp-stat { flex: 1; min-width: 120px; text-align: center; padding: 20px 0; }
-  .pp-stat h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,42px); color: #000; letter-spacing: 2px; line-height: 1; }
-  .pp-stat p { font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(0,0,0,0.65); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  /* ───────── TRUST STRIP ───────── */
 
+.pp-trust-strip {
+
+  width: 100%;
+
+  background: #07b4ba;
+
+  min-height: 84px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 120px;
+
+  padding: 0 40px;
+}
+
+.pp-trust-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.pp-trust-icon {
+
+  font-size: 34px;
+
+  color: #fff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.pp-trust-item p {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 24px;
+
+  letter-spacing: 2px;
+
+  color: #fff;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .pp-trust-strip {
+
+    gap: 26px;
+
+    padding: 16px 14px;
+
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+  }
+
+  .pp-trust-item {
+
+    gap: 8px;
+  }
+
+  .pp-trust-icon {
+
+    font-size: 22px;
+  }
+
+  .pp-trust-item p {
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+  }
+}
   /* SECTION */
   .pp-section { max-width: 1100px; margin: 0 auto; padding: 72px 40px; }
 
@@ -452,19 +528,26 @@ export default function ProgramPage() {
           </div>
         </section>
 
-        {/* ── STATS BAND ── */}
-        <div className="pp-stats">
-          <div className="pp-stats-coach"><span className="pp-stats-coach-placeholder">👤</span></div>
-          <div className="pp-stats-divider" />
-          <div className="pp-stat"><h3>5+</h3><p>Years Experience</p></div>
-          <div className="pp-stats-divider" />
-          <div className="pp-stat"><h3>500+</h3><p>Clients Trained</p></div>
-          <div className="pp-stats-divider" />
-          <div className="pp-stat"><h3>5K+</h3><p>Audience Reached</p></div>
-          <div className="pp-stats-divider" />
-          <div className="pp-stat"><h3>30</h3><p>Days Program</p></div>
-        </div>
+  
+        {/* ── TRUST STRIP ── */}
+<div className="pp-trust-strip">
 
+  <div className="pp-trust-item">
+    <span className="pp-trust-icon">🛡️</span>
+    <p>PROVEN SYSTEM</p>
+  </div>
+
+  <div className="pp-trust-item">
+    <span className="pp-trust-icon">👥</span>
+    <p>TAMIL TEAM</p>
+  </div>
+
+  <div className="pp-trust-item">
+    <span className="pp-trust-icon">🏆</span>
+    <p>REAL RESULTS</p>
+  </div>
+
+</div>
         {/* ── PAIN SECTION (image 7) ── */}
         <div className="pp-problem">
           <div className="pp-section">
