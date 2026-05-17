@@ -895,7 +895,11 @@ body { background: #0a0a0a; }
 /* CARD */
 .cp-feedback-card-new {
 
-  width: 100% !important;
+  width: 86% !important;
+
+margin-left: auto;
+
+margin-right: auto;
 
   background: #15181d;
 
