@@ -2054,32 +2054,63 @@ export default function CoachingPage() {
         </section>
 
         {/* ── SOUNDS FAMILIAR ── */}
-        <div style={{ background: "#0f1115" }}>
-          <div className="cp-section">
-            <Reveal>
-              <div className="cp-pain-grid">
-                <div className="cp-pain-media">
-                  <img
-                    src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80"
-                    alt="UFC Training"
-                  />
-                </div>
-                <div className="cp-pain-right">
-                  <p className="cp-pain-label">Sound's Familiar?</p>
-                  <p className="cp-pain-heading">
-                    You're Putting In The Work,<br />But Not Seeing The Results.
-                  </p>
-                  <div className="cp-red-divider" />
-                  {painPoints.map((item, i) => (
-                    <div className="cp-pain-item" key={i}>
-                      <p>{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+<section className="cp-section">
+
+  <div className="cp-pain-grid">
+
+    {/* LEFT CONTENT */}
+    <div className="cp-pain-right">
+
+      <Reveal>
+        <p className="cp-pain-label">
+          Sounds Familiar?
+        </p>
+
+        <h2 className="cp-pain-heading">
+          You're Training Hard...
+          <br />
+          But Still Not Improving
+        </h2>
+
+        <div className="cp-red-divider" />
+      </Reveal>
+
+      {painPoints.map((p, i) => (
+
+        <Reveal
+          key={i}
+          style={{
+            transitionDelay: `${i * 70}ms`
+          }}
+        >
+
+          <div className="cp-pain-item">
+            <p>{p}</p>
           </div>
-        </div>
+
+        </Reveal>
+
+      ))}
+
+    </div>
+
+    {/* RIGHT IMAGE / VIDEO */}
+    <div className="cp-pain-media">
+
+      <Reveal>
+
+        <img
+          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1400&auto=format&fit=crop"
+          alt="AOF Training"
+        />
+
+      </Reveal>
+
+    </div>
+
+  </div>
+
+</section>
 
         {/* ── SECTION 2: AOF METHOD ── */}
         <div className="cp-method-bg">
