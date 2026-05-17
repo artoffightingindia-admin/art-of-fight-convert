@@ -2041,7 +2041,7 @@ export default function CoachingPage() {
             </Reveal>
           </div>
 
-          {/* TRUST STRIP */}
+
           <div className="cp-trust">
             {trustItems.map(({ icon, label }) => (
               <div className="cp-trust-item" key={label}>
