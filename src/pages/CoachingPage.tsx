@@ -1819,19 +1819,7 @@ transform:
 
                     </div>
 
-                    <p style={{
-  fontSize: 11,
-  lineHeight: 1.55,
-  color: "rgba(255,255,255,0.72)",
-  fontStyle: "italic",
-  display: "-webkit-box",
-  WebkitLineClamp: 3,
-  WebkitBoxOrient: "vertical",
-  overflow: "hidden",
-  marginBottom: 10,
-}}>
-  "{card.text}"
-</p>
+                    <p>"{card.text}"</p>
 
                     <div
                       style={{
