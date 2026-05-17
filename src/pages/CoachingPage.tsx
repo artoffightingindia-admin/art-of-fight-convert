@@ -856,169 +856,57 @@ body { background: #0a0a0a; }
 }
 
 /* ── CHANGE 3: NEW FEEDBACK SLIDER — 3-card infinite horizontal scroll ── */
-/* ───────── PREMIUM MOBILE TESTIMONIAL UI ───────── */
-
-/* ───────── MOBILE TESTIMONIAL UI ───────── */
-
-/* ───────── MOBILE TESTIMONIAL UI ───────── */
-
 .cp-feedback-slider-new {
-
   overflow: hidden;
   width: 100%;
   position: relative;
-
-  padding-bottom: 72px;
 }
-
 .cp-feedback-track-new {
-
   display: flex;
-
-  transition: transform 0.45s cubic-bezier(.22,.61,.36,1);
+  gap: 24px;
+  /* width is set inline to fit duplicated cards */
+  will-change: transform;
 }
-
-/* EACH MOBILE PAGE */
-.cp-feedback-page-mobile {
-
-  min-width: 100%;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-
-  padding: 0 14px;
-}
-
-/* CARD */
+/* Each card occupies exactly 1/3 of the slider width minus gap compensation */
 .cp-feedback-card-new {
-
-  width: 100% !important;
-
-  background: #15181d;
-
+  /* calc: (100% / 3) - gap proportional. Done via flex: 0 0 calc(33.333% - 16px) in inline style */
+  border-radius: 18px;
+  background: #1a1d23;
   border: 1px solid rgba(255,255,255,0.05);
-
-  border-radius: 16px;
-
-  padding: 16px;
-
-  min-height: 132px;
-
-  box-shadow:
-    0 8px 24px rgba(0,0,0,0.28);
-
-  animation: mobileFade 0.45s ease;
+  padding: 28px 24px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-/* REMOVE DESKTOP ROTATION */
-.cp-feedback-page-mobile .cp-feedback-card-new:nth-child(1),
-.cp-feedback-page-mobile .cp-feedback-card-new:nth-child(2),
-.cp-feedback-page-mobile .cp-feedback-card-new:nth-child(3) {
-
-  transform: none;
-}
-
-/* ANIMATION */
-@keyframes mobileFade {
-
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* STARS */
-.cp-feedback-stars {
-
-  display: flex;
-
-  gap: 2px;
-
-  margin-bottom: 10px;
-
-  font-size: 11px;
-}
-
-/* TEXT */
+/* CHANGE 3: Inherit font family and weight from Home Page Feedback form */
 .cp-feedback-card-new p {
-
-  font-size: 12px;
-
-  line-height: 1.65;
-
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
   color: rgba(255,255,255,0.72);
-
-  margin-bottom: 14px;
-
+  font-size: 15px;
+  line-height: 1.65;
   font-style: italic;
+  margin-bottom: 20px;
 }
-
-/* AUTHOR */
 .cp-feedback-card-new .author-name {
-
-  font-size: 12px;
-
-  font-weight: 600;
-
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
   color: #fff;
+  font-size: 15px;
+  margin-bottom: 2px;
 }
-
 .cp-feedback-card-new .author-role {
-
-  font-size: 10px;
-
-  color: rgba(255,255,255,0.45);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+}
+.cp-feedback-stars {
+  display: flex; gap: 4px; margin-bottom: 16px;
+  color: #07b4ba; font-size: 16px;
 }
 
-/* NAV */
-.cp-feedback-mobile-nav {
-
-  position: absolute;
-
-  bottom: 0;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  display: flex;
-
-  gap: 14px;
-}
-
-.cp-feedback-mobile-nav button {
-
-  width: 42px;
-
-  height: 42px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  background: #15181d;
-
-  color: #fff;
-
-  font-size: 18px;
-
-  transition: 0.25s ease;
-}
-
-.cp-feedback-mobile-nav button:hover {
-
-  border-color: #07b4ba;
-
-  color: #07b4ba;
-}
 /* ── CHANGE 4: FAQ SECTION ── */
 .cp-faq-bg {
   position: relative;
@@ -1778,9 +1666,10 @@ function InfiniteFeedbackSlider() {
 
         style={{
           width: "max-content",
-transform:
-  window.innerWidth <= 768
-    ? `translateX(-${mobileIndex * 100}%)`
+
+          transform:
+            window.innerWidth <= 768
+              ? `translateX(-${mobileIndex * 34}%)`
               : undefined,
         }}
       >
