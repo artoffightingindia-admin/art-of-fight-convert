@@ -909,7 +909,7 @@ margin-right: auto;
 
   padding: 16px;
 
-  min-height: 132px;
+  min-height: 72px;
 
   box-shadow:
     0 8px 24px rgba(0,0,0,0.28);
