@@ -75,8 +75,8 @@ const WhatsAppIcon = () => (
     width="24"
     height="24"
   >
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.48-2.435 0-.674.481-1.264 1.079-1.434.598-.17 1.184-.051 1.622.086.438.137.766.02 1.15-.296.382-.316 1.476-1.546 1.745-1.84.269-.294.538-.36.995-.122.458.238 1.92.713 2.249.836.329.122.548.183.628.286.08.103.08.598-.219 1.021-.299.422-.691.989-.987 1.27-.296.281-.598.502-1.149.798-.55.296-1.007.44-1.468.686-.46.246-.939.816-.939 1.49 0 .674.72 1.5 1.145 1.847.425.347 1.789 1.79 2.285 2.162.497.373.78.392 1.032.326.252-.067 1.274-.52 1.455-.873.18-.353.18-1.036-.119-1.336-.298-.3-1.02-.487-1.44-.636-.42-.148-1.213-.522-1.51-.672-.298-.15-.598-.224-1.085-.449z" />
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.335-1.508A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.681-.513-5.21-1.408l-.374-.222-4.074 1.002 1.002-4.074-.222-.374C2.513 15.681 2 13.9 2 12 2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.335-1.508A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.681-.513-5.21-1.408l-.374-.222-3.876.923.938-3.792-.244-.39A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
   </svg>
 );
 
@@ -96,65 +96,165 @@ const IconPlan = () => (
     <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
   </svg>
 );
+
 const IconChat = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
+
 const IconLeaf = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" />
   </svg>
 );
+
 const IconChart = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
   </svg>
 );
+
 const IconGlobe = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <circle cx="12" cy="12" r="10" />
     <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
   </svg>
 );
+
+/* Method icons — teal stroke consistent */
 const IconTarget = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <circle cx="12" cy="12" r="10" />
     <circle cx="12" cy="12" r="6" />
     <circle cx="12" cy="12" r="2" />
   </svg>
 );
+
 const IconZap = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
   </svg>
 );
+
 const IconTrend = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
     <polyline points="17 6 23 6 23 12" />
   </svg>
 );
+
 const IconUser = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
     <circle cx="12" cy="7" r="4" />
   </svg>
 );
+
 const IconTrophy = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
     <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
     <path d="M4 22h16M12 17v5M7 4v6a5 5 0 0 0 10 0V4H7z" />
   </svg>
 );
+
 const IconShield = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
   </svg>
 );
+
 const IconUsers = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
     <circle cx="9" cy="7" r="4" />
     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -277,33 +377,33 @@ const faqItems = [
   {
     question: "Who is AOF 1-on-1 coaching for?",
     answer:
-      "AOF coaching is designed for serious fighters and committed beginners alike — anyone who is tired of training without direction. Whether you're a competitive MMA athlete looking to peak at the right time or a complete novice, we provide a clear roadmap and hands-on coaching.",
+      "AOF coaching is designed for serious fighters and committed beginners alike — anyone who is tired of training without direction. Whether you're a competitive MMA athlete looking to peak for your next bout, or someone starting from scratch who wants to build real skill fast, our personalised system is built around your specific goals, body type, and schedule.",
   },
   {
     question: "How does the remote coaching work?",
     answer:
-      "After your strategy call, your coach builds a fully customised training plan and delivers it digitally. You'll have direct WhatsApp access to your coach for questions, feedback, and check-ins, plus video reviews and weekly adjustments.",
+      "After your strategy call, your coach builds a fully customised training plan and delivers it digitally. You'll have direct WhatsApp access to your coach for questions, feedback, and check-ins. You submit session videos for review, and your coach adjusts the plan in real time based on what they see. It's as close to a personal gym session as you can get — from anywhere in the world.",
   },
   {
     question: "How quickly will I see results?",
     answer:
-      "Most athletes report noticeable improvements in technique and conditioning within the first 3–4 weeks. Significant transformation — improved footwork, sharper combinations, better game sense — typically follows within 8–12 weeks with consistent work.",
+      "Most athletes report noticeable improvements in technique and conditioning within the first 3–4 weeks. Significant transformation — improved footwork, sharper combinations, better game strategy — typically takes 6–8 weeks of consistent training under the AOF method. Your timeline depends on your starting point and consistency, but your coach will track every metric to keep you progressing.",
   },
   {
     question: "What if I'm a complete beginner?",
     answer:
-      "Beginners are welcome and thrive in the AOF system. In fact, starting with proper 1-on-1 coaching before picking up bad habits is the fastest route to becoming a skilled fighter. Your plan will begin with fundamentals and scale up safely.",
+      "Beginners are welcome and thrive in the AOF system. In fact, starting with proper 1-on-1 coaching before picking up bad habits is the fastest route to becoming a skilled fighter. Your plan will start at the right level and progress at a pace that challenges you without overwhelming you.",
   },
   {
     question: "Is there a contract or long-term commitment?",
     answer:
-      "No long-term contracts. You can cancel anytime. We are confident enough in our results that we don't need to lock you in. We also back that up with a results guarantee — if you don't see progress we extend coaching.",
+      "No long-term contracts. You can cancel anytime. We are confident enough in our results that we don't need to lock you in. We also back that up with a results guarantee — if you don't see measurable progress, we'll extend your coaching for free until you do.",
   },
   {
-    question: "How many sessions should I train per week?",
-    answer:
-      "Most athletes train between 3–6 sessions per week depending on their goals, recovery capacity, and schedule. Your coach will create the optimal structure for you to ensure consistent improvement.",
-  },
+  question: "How many sessions should I train per week?",
+  answer:
+    "Most athletes train between 3–6 sessions per week depending on their goals, recovery capacity, and schedule. Your coach will create the optimal structure for you to ensure consistent improvement without burnout.",
+},
 ];
 
 /* ── CSS ── */
@@ -1304,4 +1404,1154 @@ body { background: #0a0a0a; }
   color: #07b4ba;
 }
 }
-`,
+`;
+
+/* ── CALENDAR COMPONENT ── */
+const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const timeSlots = ["9:00 AM","10:00 AM","11:00 AM","12:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM"];
+
+function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string) => void }) {
+  const today = new Date();
+  const [year, setYear] = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth());
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
+  const days: (number | null)[] = [
+    ...Array(firstDay).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ];
+
+  const prevMonth = () => {
+    if (month === 0) { setMonth(11); setYear((y) => y - 1); }
+    else setMonth((m) => m - 1);
+    setSelectedDay(null);
+  };
+
+  const nextMonth = () => {
+    if (month === 11) { setMonth(0); setYear((y) => y + 1); }
+    else setMonth((m) => m + 1);
+    setSelectedDay(null);
+  };
+
+  const isPast = (day: number) => {
+    const d = new Date(year, month, day);
+    d.setHours(0, 0, 0, 0);
+    const t = new Date();
+    t.setHours(0, 0, 0, 0);
+    return d < t;
+  };
+
+  return (
+    <div>
+      {/* Month nav */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+        <button
+          onClick={prevMonth}
+          style={{
+            background: "none", border: "1px solid rgba(255,255,255,0.1)",
+            color: "#fff", width: 32, height: 32, borderRadius: 6,
+            cursor: "pointer", fontSize: 16,
+          }}
+        >
+          ‹
+        </button>
+        <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 2, color: "#fff" }}>
+          {months[month]} {year}
+        </span>
+        <button
+          onClick={nextMonth}
+          style={{
+            background: "none", border: "1px solid rgba(255,255,255,0.1)",
+            color: "#fff", width: 32, height: 32, borderRadius: 6,
+            cursor: "pointer", fontSize: 16,
+          }}
+        >
+          ›
+        </button>
+      </div>
+
+      {/* Day labels */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, marginBottom: 6 }}>
+        {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
+          <div
+            key={d}
+            style={{
+              textAlign: "center", fontFamily: "'Barlow', sans-serif",
+              fontSize: 11, color: "rgba(255,255,255,0.3)", fontWeight: 700, padding: "4px 0",
+            }}
+          >
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Day grid */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, marginBottom: 18 }}>
+        {days.map((d, i) => (
+          <div
+            key={i}
+            onClick={() => d && !isPast(d) ? setSelectedDay(d) : undefined}
+            style={{
+              textAlign: "center", padding: "7px 0", borderRadius: 6,
+              fontFamily: "'Barlow', sans-serif", fontSize: 13,
+              cursor: d && !isPast(d) ? "pointer" : "default",
+              background: d === selectedDay ? "#07b4ba" : "transparent",
+              color: !d
+                ? "transparent"
+                : isPast(d)
+                ? "rgba(255,255,255,0.15)"
+                : d === selectedDay
+                ? "#fff"
+                : "rgba(255,255,255,0.75)",
+              border:
+                d && !isPast(d) && d !== selectedDay
+                  ? "1px solid rgba(255,255,255,0.06)"
+                  : "1px solid transparent",
+              fontWeight: d === selectedDay ? 700 : 400,
+              transition: "all 0.15s",
+            }}
+          >
+            {d || ""}
+          </div>
+        ))}
+      </div>
+
+      {/* Time slots */}
+      {selectedDay && (
+        <div>
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif", fontSize: 12,
+              color: "rgba(255,255,255,0.4)", marginBottom: 10,
+              letterSpacing: 1, textTransform: "uppercase",
+            }}
+          >
+            Select a time
+          </p>
+          <div className="cp-time-slots">
+            {timeSlots.map((t) => (
+              <button
+                key={t}
+                className={`cp-time-slot${selectedTime === t ? " selected" : ""}`}
+                onClick={() => setSelectedTime(t)}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {selectedDay && selectedTime && (
+        <button
+          className="cp-submit"
+          onClick={() => onConfirm(`${months[month]} ${selectedDay}, ${year}`, selectedTime!)}
+        >
+          Confirm Booking
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* ── CHANGE 3: Infinite horizontal feedback slider component ── */
+function InfiniteFeedbackSlider() {
+
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const animFrameRef = useRef<number>(0);
+
+  const isPausedRef = useRef(false);
+
+  const posRef = useRef(0);
+
+  const [mobileIndex, setMobileIndex] = useState(0);
+
+  const allCards = [...feedbackCards, ...feedbackCards];
+
+  useEffect(() => {
+
+    if (window.innerWidth <= 768) return;
+
+    const slider = sliderRef.current;
+    const track = trackRef.current;
+
+    if (!slider || !track) return;
+
+    const speed = 0.55;
+
+    const getHalfWidth = () => track.scrollWidth / 2;
+
+    const animate = () => {
+
+      if (!isPausedRef.current) {
+
+        posRef.current += speed;
+
+        if (posRef.current >= getHalfWidth()) {
+          posRef.current -= getHalfWidth();
+        }
+
+        track.style.transform =
+          `translateX(-${posRef.current}px)`;
+      }
+
+      animFrameRef.current =
+        requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current =
+      requestAnimationFrame(animate);
+
+    const pause = () => {
+      isPausedRef.current = true;
+    };
+
+    const resume = () => {
+      setTimeout(() => {
+        isPausedRef.current = false;
+      }, 600);
+    };
+
+    slider.addEventListener("mouseenter", pause);
+    slider.addEventListener("mouseleave", resume);
+
+    return () => {
+
+      cancelAnimationFrame(animFrameRef.current);
+
+      slider.removeEventListener(
+        "mouseenter",
+        pause
+      );
+
+      slider.removeEventListener(
+        "mouseleave",
+        resume
+      );
+    };
+
+  }, []);
+
+  const nextMobile = () => {
+
+    if (mobileIndex < feedbackCards.length - 3) {
+
+      setMobileIndex((prev) => prev + 1);
+    }
+  };
+
+  const prevMobile = () => {
+
+    if (mobileIndex > 0) {
+
+      setMobileIndex((prev) => prev - 1);
+    }
+  };
+
+  return (
+
+    <div
+      ref={sliderRef}
+      className="cp-feedback-slider-new"
+    >
+
+      <div
+        ref={trackRef}
+        className="cp-feedback-track-new"
+
+        style={{
+          width: "max-content",
+
+          transform:
+            window.innerWidth <= 768
+              ? `translateX(-${mobileIndex * 34}%)`
+              : undefined,
+        }}
+      >
+{
+      window.innerWidth <= 768 ? (
+
+        <>
+
+          {[0, 3, 6].map((start, pageIndex) => (
+
+            <div
+              key={pageIndex}
+              className="cp-feedback-page-mobile"
+            >
+
+              {feedbackCards
+                .slice(start, start + 3)
+                .map((card, i) => (
+
+                  <div
+                    key={i}
+                    className="cp-feedback-card-new"
+                  >
+
+                    <div className="cp-feedback-stars">
+
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+                      <span style={{ color: "#07b4ba" }}>★</span>
+
+                    </div>
+
+                    <p>"{card.text}"</p>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 10,
+                      }}
+                    >
+
+                      <div
+                        style={{
+                          width: 36,
+                          height: 36,
+
+                          borderRadius: "50%",
+
+                          background: "#202533",
+
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+
+                          fontSize: 16,
+                        }}
+                      >
+                        👤
+                      </div>
+
+                      <div>
+
+                        <p className="author-name">
+                          {card.author}
+                        </p>
+
+                        <span className="author-role">
+                          Member
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+              ))}
+
+            </div>
+
+          ))}
+
+        </>
+
+      ) : (
+
+        allCards.map((card, i) => (
+
+          <div
+            key={i}
+            className="cp-feedback-card-new"
+
+            style={{
+              width: "340px",
+              flexShrink: 0,
+            }}
+          >
+
+            <div className="cp-feedback-stars">
+
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+              <span style={{ color: "#07b4ba" }}>★</span>
+
+            </div>
+
+            <p>"{card.text}"</p>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+
+                  borderRadius: "50%",
+
+                  background: "#202533",
+
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+
+                  fontSize: 16,
+                }}
+              >
+                👤
+              </div>
+
+              <div>
+
+                <p className="author-name">
+                  {card.author}
+                </p>
+
+                <span className="author-role">
+                  Member
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        ))
+
+      )
+
+    }
+
+  </div>
+  {/* MOBILE NAV */}
+      <div className="cp-feedback-mobile-nav">
+
+        <button onClick={prevMobile}>
+          ‹
+        </button>
+
+        <button onClick={nextMobile}>
+          ›
+        </button>
+
+      </div>
+
+    </div>
+  );
+}
+/* ── CHANGE 4: FAQ Accordion component ── */
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggle = (i: number) => {
+    setOpenIndex((prev) => (prev === i ? null : i));
+  };
+
+  return (
+    <div id="faq" className="cp-faq-bg">
+      <div className="cp-faq-inner">
+        <Reveal>
+          <p className="cp-faq-label">Got Questions?</p>
+          <h2 className="cp-faq-title">
+            Frequently Asked <span>Questions</span>
+          </h2>
+          <div className="cp-faq-divider" />
+        </Reveal>
+
+        <div className="cp-faq-grid">
+          {faqItems.map((item, i) => (
+            <Reveal key={i}>
+              <div className={`cp-faq-item${openIndex === i ? " open" : ""}`}>
+                <button
+                  className="cp-faq-question"
+                  onClick={() => toggle(i)}
+                  aria-expanded={openIndex === i}
+                >
+                  <span className="cp-faq-question-text">{item.question}</span>
+                  <span className="cp-faq-icon">+</span>
+                </button>
+                <div className="cp-faq-answer">
+                  <p>{item.answer}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MAIN PAGE ── */
+export default function CoachingPage() {
+  const navigate = useNavigate();
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const [lead, setLead] = useState({ name: "", phone: "", goal: "" });
+  const [stage, setStage] = useState<1 | 2 | 3>(1);
+
+  const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  const SHEET_URL =
+    "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z8wTj9FLPdZuzOzSRhJ8-1JvlPxYk1210TelUjKuaSyYvVl/exec";
+
+  const handleLeadSubmit = async () => {
+    if (!lead.name.trim() || !lead.phone.trim()) return;
+    setStage(2);
+  };
+
+  const handleBookingConfirm = async (date: string, time: string) => {
+    try {
+      const params = new URLSearchParams({
+        name: lead.name.trim(),
+        phone: lead.phone.trim(),
+        goal: lead.goal || "Not specified",
+        date,
+        time,
+      });
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString(),
+      });
+    } catch (err) {
+      console.error("Sheet error:", err);
+    }
+    setStage(3);
+  };
+
+  const painPoints = [
+    "You train 4-5 days a week but your technique isn't improving",
+    "Your sparring partners are getting better — you feel stuck",
+    "You have no structured plan, just random gym sessions",
+    "Coaches at your gym don't give you personal attention",
+    "You don't know what to fix or where to even start",
+  ];
+
+  const trustItems = [
+    { icon: <IconShield />, label: "Proven System" },
+    { icon: <IconUsers />, label: "Tamil Team" },
+    { icon: <IconTrophy />, label: "Real Results" },
+  ];
+
+  return (
+    <>
+      <style>{css}</style>
+
+      <div className="cp">
+        {/* ── NAVBAR ── */}
+        <nav className="cp-nav">
+          <span className="cp-nav-logo">
+            <span style={{ color: "#07b4ba" }}>A</span>
+            <span style={{ color: "#fff" }}>O</span>
+            <span style={{ color: "#07b4ba" }}>F</span>
+          </span>
+          <div className="cp-nav-right">
+            <button className="cp-back" onClick={() => navigate("/")}>
+              <ArrowLeftIcon /> Back To Home
+            </button>
+            <button className="cp-book-nav" onClick={scrollToForm}>
+              Book A Call
+            </button>
+          </div>
+        </nav>
+
+        {/* ── SECTION 1: HERO ── */}
+        <section id="home" className="cp-hero">
+          <div
+            className="cp-hero-bg"
+            style={{
+              background: `
+                linear-gradient(to right, #0a0a0a 38%, rgba(10,10,10,0.65) 62%, transparent 100%),
+                url("https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80") center right / cover no-repeat
+              `,
+            }}
+          />
+          <div className="cp-hero-overlay" />
+          <div className="cp-hero-content">
+            <Reveal>
+              <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
+              <h1 className="cp-hero-h1">
+                Train Like A<br />
+                <span>Champion.</span><br />
+                Fight Like One
+              </h1>
+              <p className="cp-hero-desc">
+                Stop training in the crowd. Get a personalized coaching program built around your body, your goals,
+                and your timeline — guided by coaches who have been in the ring.
+              </p>
+              {/* CHANGE 1: Only "Book A Call" button remains; "See Results" button removed */}
+              <div className="cp-hero-btns">
+                <button className="cp-btn-primary" onClick={scrollToForm}>
+                  Book A Call
+                </button>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* TRUST STRIP */}
+          <div className="cp-trust">
+            {trustItems.map(({ icon, label }) => (
+              <div className="cp-trust-item" key={label}>
+                <div className="trust-icon-box">{icon}</div>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── SOUNDS FAMILIAR ── */}
+        <div style={{ background: "#0f1115" }}>
+          <div className="cp-section">
+            <Reveal>
+              <div className="cp-pain-grid">
+                <div className="cp-pain-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80"
+                    alt="UFC Training"
+                  />
+                </div>
+                <div className="cp-pain-right">
+                  <p className="cp-pain-label">Sound's Familiar?</p>
+                  <p className="cp-pain-heading">
+                    You're Putting In The Work,<br />But Not Seeing The Results.
+                  </p>
+                  <div className="cp-red-divider" />
+                  {painPoints.map((item, i) => (
+                    <div className="cp-pain-item" key={i}>
+                      <p>{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* ── SECTION 2: AOF METHOD ── */}
+        <div className="cp-method-bg">
+          <div id="method" className="cp-method-bg">
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 40 }}>
+                <p
+                  style={{
+                    color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700,
+                    fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6,
+                  }}
+                >
+                  The AOF Method
+                </p>
+                <h2
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+                    letterSpacing: 2, color: "#fff", lineHeight: 1,
+                  }}
+                >
+                  A Proven System.
+                </h2>
+                <h2
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+                    letterSpacing: 2, color: "#07b4ba", lineHeight: 1,
+                  }}
+                >
+                  Real Transformation.
+                </h2>
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.38)", fontFamily: "'Barlow', sans-serif",
+                    fontSize: 11, marginTop: 10, letterSpacing: 3, textTransform: "uppercase",
+                  }}
+                >
+                  Complete Support. Every Step.
+                </p>
+                <div style={{ width: 48, height: 2, background: "#07b4ba", margin: "14px auto 0" }} />
+              </div>
+            </Reveal>
+
+            <div className="cp-method-grid">
+              {/* Text left on desktop */}
+              <div className="cp-method-text">
+                {methodItems.map((item, i) => (
+                  <Reveal key={i}>
+                    <div className="cp-method-item">
+                      <div className="cp-method-item-icon">{item.icon}</div>
+                      <div>
+                       <p className="cp-method-line">{item.desc}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+
+              {/* Image right on desktop */}
+              <div className="cp-method-image">
+                <img
+                  src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80"
+                  alt="AOF Method Training"
+                  style={{ width: "100%", borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", display: "block" }}
+                />
+              </div>
+            </div>
+
+            {/* WHAT YOU GET */}
+            <Reveal style={{ marginTop: 52 }}>
+              <h3
+                style={{
+                  textAlign: "center", fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: 28, letterSpacing: 2, color: "#fff", marginBottom: 20,
+                }}
+              >
+                What You Get
+              </h3>
+              <div className="cp-what-cards">
+                {whatCards.map((card, i) => (
+                  <div key={i} className="cp-what-card">
+                    <div className="cp-what-card-icon">{card.icon}</div>
+                    <h4>{card.title}</h4>
+                    <p>{card.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            {/* ── NEW PROMISE SECTION ── */}
+{/* ── NEW PROMISE SECTION ── */}
+<Reveal style={{ marginTop: 50 }}>
+  <div className="cp-new-promise">
+
+    <p className="cp-new-promise-title">
+      Our Promise
+    </p>
+
+    <div className="cp-new-promise-line" />
+
+    <p className="cp-new-promise-text">
+      <span className="cp-quote-mark">“</span>
+      Most fighters train hard. Very few train correctly.
+      AOF exists to close that gap — with structure,
+      accountability, and coaching that actually evolves
+      with you.
+    </p>
+
+  </div>
+</Reveal>
+          </div>
+        </div>
+
+        {/* ── SECTION 3: YOUR COACH ── */}
+        <div className="cp-coach-bg">
+          <div className="cp-book-strip">
+            <button onClick={scrollToForm}>Book A Call</button>
+          </div>
+          <div className="cp-section" style={{ paddingBottom: 40 }}>
+            <Reveal>
+              {/* CHANGE 2: "Led By" → "LED BY", font-size increased by +1pt (17px → 18px is already 17, so +1pt = 18px) */}
+              <p
+                style={{
+                  fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba",
+                  fontWeight: 700, marginBottom: 24, letterSpacing: 2,
+                  textTransform: "uppercase",
+                }}
+              >
+                LED BY
+              </p>
+              <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
+                  alt="Head Coach"
+                  style={{
+                    width: 240, height: 300, objectFit: "cover", objectPosition: "top",
+                    borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0,
+                  }}
+                />
+                <div style={{ flex: 1, minWidth: 280 }}>
+                  <h2
+                    style={{
+                      fontFamily: "'Bebas Neue', sans-serif", fontSize: 48,
+                      letterSpacing: 2, color: "#fff", marginBottom: 4,
+                    }}
+                  >
+                    Head Coach
+                  </h2>
+                  <p
+                    style={{
+                      color: "#07b4ba", fontFamily: "'Barlow', sans-serif",
+                      fontWeight: 700, fontSize: 14, marginBottom: 20,
+                    }}
+                  >
+                    AOF Academy — Lead Trainer &amp; Founder
+                  </p>
+                  <div style={{ marginBottom: 24 }}>
+                    {/* CHANGE 2: coachCredentials array no longer contains the "3 continents" entry */}
+                    {coachCredentials.map((cred, i) => (
+                      <div key={i} className="cp-checklist-item">
+                        <span className="check">✓</span>
+                        <p>{cred}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Stats */}
+                  <div
+                    className="cp-coach-stats"
+                    style={{
+                      display: "flex",
+                      gap: 22,
+                      flexWrap: "wrap",
+                      marginTop: 26,
+                    }}
+                  >
+                    {stats.map((stat, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                          borderRadius: 14,
+                          width: 160,
+                          height: 140,
+                          padding: "18px 16px",
+                          textAlign: "center",
+                          boxShadow: "0 0 14px rgba(0,0,0,0.18)",
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontFamily: "'Bebas Neue', sans-serif",
+                            fontSize: 42,
+                            color: "#07b4ba",
+                            letterSpacing: 1,
+                            marginBottom: 10,
+                          }}
+                        >
+                          {stat.val}
+                        </p>
+
+                        <p
+                          style={{
+                            fontFamily: "'Barlow', sans-serif",
+                            color: "rgba(255,255,255,0.45)",
+                            fontSize: 12,
+                            letterSpacing: 2,
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {stat.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* ── SECTION 4: TESTIMONIALS ── */}
+        <div id="testimonials" className="cp-testi-bg">
+          <div className="cp-section" style={{ paddingTop: 48 }}>
+
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 44 }}>
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "#07b4ba",
+                    fontWeight: 700,
+                    fontSize: 12,
+                    letterSpacing: 3,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Real People, Real Results
+                </p>
+
+                <h2
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(34px,5vw,56px)",
+                    letterSpacing: 2,
+                    color: "#fff",
+                    marginTop: 8,
+                    lineHeight: 1,
+                  }}
+                >
+                  Trusted By Fighters,{" "}
+                  <span style={{ color: "#07b4ba" }}>
+                    Proven Results
+                  </span>
+                </h2>
+
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.42)",
+                    marginTop: 8,
+                    fontSize: 14,
+                  }}
+                >
+                  Here's What Athletes Say About Their Transformation With AOF
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal>
+              <div className="cp-testi-main">
+
+                <div className="cp-testi-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+                    alt="Athlete"
+                  />
+                </div>
+
+                <div style={{ flex: 1, minWidth: 260 }}>
+
+                  <h3
+                    style={{
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      fontSize: "clamp(28px,3vw,42px)",
+                      letterSpacing: 1.5,
+                      lineHeight: 1.1,
+                      marginBottom: 16,
+                      color: "#fff",
+                    }}
+                  >
+                    AOF Changed The Way{" "}
+                    <span style={{ color: "#07b4ba" }}>
+                      I Train And Perform.
+                    </span>
+                  </h3>
+
+                  <p
+                    style={{
+                      fontFamily: "'Barlow', sans-serif",
+                      color: "rgba(255,255,255,0.65)",
+                      fontSize: 15,
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    The structure, the attention to detail,
+                    and the accountability took me to a level
+                    I never thought possible. I'm stronger,
+                    faster, and fight with more confidence than ever.
+                  </p>
+
+                  <p
+                    style={{
+                      fontFamily: "'Barlow', sans-serif",
+                      marginTop: 14,
+                      color: "#07b4ba",
+                      fontWeight: 700,
+                      fontSize: 14,
+                    }}
+                  >
+                    — Alex M., Amateur MMA Fighter
+                  </p>
+
+                </div>
+              </div>
+            </Reveal>
+
+            {/* CHANGE 3: Replaced old desktop/mobile split with new unified 3-card infinite horizontal scroll */}
+            <Reveal>
+              <InfiniteFeedbackSlider />
+            </Reveal>
+
+          </div>
+        </div>
+
+        {/* ── SECTION 5: APPLY FORM ── */}
+        <div id="contact" className="cp-apply-bg" ref={formRef}>
+          <div className="cp-section">
+            <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+
+              {/* LEFT */}
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <Reveal>
+                  <p
+                    style={{
+                      fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700,
+                      fontSize: 12, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
+                    }}
+                  >
+                    Ready To Start?
+                  </p>
+                  <h2
+                    style={{
+                      fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)",
+                      letterSpacing: 2, lineHeight: 1.0, marginBottom: 18, color: "#fff",
+                    }}
+                  >
+                    Apply For Your<br />
+                    <span style={{ color: "#07b4ba" }}>1-On-1 Coaching Spot</span>
+                  </h2>
+                  <p
+                    style={{
+                      fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)",
+                      fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380,
+                    }}
+                  >
+                    Spots are limited. We only take on a small number of students at a time to ensure
+                    every athlete gets the attention they deserve. Fill out the form and we'll reach
+                    out within 24 hours.
+                  </p>
+                  {checklistItems.map((item, i) => (
+                    <div className="cp-checklist-item" key={i}>
+                      <span className="check">✓</span>
+                      <p>{item}</p>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: 32 }}>
+                    <p className="cp-wa-label">Any Queries?</p>
+                   <div className="cp-wa-wrapper">
+  <button className="cp-wa-btn">
+    <WhatsAppIcon />
+    Chat On WhatsApp
+  </button>
+</div>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* RIGHT — 2-STAGE FORM */}
+              <div style={{ flex: 1, minWidth: 300 }}>
+                <Reveal>
+                  <div className="cp-form-box">
+                    {stage === 3 ? (
+                      /* DONE */
+                      <div style={{ textAlign: "center", padding: "48px 0" }}>
+                        <div style={{ fontSize: 52, marginBottom: 16 }}>✅</div>
+                        <h4
+                          style={{
+                            fontFamily: "'Bebas Neue', sans-serif", color: "#fff",
+                            fontSize: 28, letterSpacing: 2, marginBottom: 8,
+                          }}
+                        >
+                          Booking Confirmed!
+                        </h4>
+                        <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)", fontSize: 15 }}>
+                          We'll reach out within 24 hours to confirm your session.
+                        </p>
+                      </div>
+                    ) : stage === 2 ? (
+                      /* STAGE 2 — CALENDAR */
+                      <>
+                        <h3>Schedule Your Call</h3>
+                        <p className="cp-form-stage-label">STEP 2 OF 2 — PICK A DATE AND TIME</p>
+                        <CalendarPicker onConfirm={handleBookingConfirm} />
+                        <button className="cp-stage-back" onClick={() => setStage(1)}>
+                          Back to details
+                        </button>
+                      </>
+                    ) : (
+                      /* STAGE 1 — LEAD FORM */
+                      <>
+                        <h3>Start Your Journey With AOF</h3>
+                        <p className="cp-form-stage-label">STEP 1 OF 2 — YOUR DETAILS</p>
+                        <input
+                          className="cp-input"
+                          type="text"
+                          placeholder="Full Name"
+                          value={lead.name}
+                          onChange={(e) => setLead((f) => ({ ...f, name: e.target.value }))}
+                        />
+                        <input
+                          className="cp-input"
+                          type="tel"
+                          placeholder="Phone Number"
+                          value={lead.phone}
+                          onChange={(e) => setLead((f) => ({ ...f, phone: e.target.value }))}
+                        />
+                        <select
+                          className="cp-input"
+                          value={lead.goal}
+                          onChange={(e) => setLead((f) => ({ ...f, goal: e.target.value }))}
+                        >
+                          <option value="">Main Goal</option>
+                          <option value="technique">Improve Technique</option>
+                          <option value="competition">Competition Prep</option>
+                          <option value="fitness">Fitness and Conditioning</option>
+                          <option value="beginner">Learn MMA from Scratch</option>
+                        </select>
+                        <button className="cp-submit" onClick={handleLeadSubmit}>
+                          Next — Schedule a Time
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── CHANGE 4: FAQ SECTION — inserted after Form section ── */}
+        <FAQSection />
+
+     {/* ── FOOTER ── */}
+<footer className="cp-footer" style={{ background: "#0f1115" }}>
+  <div className="cp-footer-inner">
+
+    {/* CONTACT */}
+    <div>
+      <h3 className="cp-footer-title">
+        CONTACT
+      </h3>
+
+      <div className="cp-footer-contact">
+        <p>+91 00000 00000</p>
+        <p>info@aofacademy.com</p>
+        <p>Chennai, Tamil Nadu, India</p>
+      </div>
+    </div>
+
+    {/* NAVIGATION */}
+    <div>
+      <h3 className="cp-footer-title">
+        NAVIGATION
+      </h3>
+
+      <div className="cp-footer-links">
+        <a href="#home">Home</a>
+        <a href="#method">AOF Method</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Apply Now</a>
+      </div>
+    </div>
+
+    {/* AOF */}
+<div>
+  <h3 className="cp-footer-title cp-footer-logo">
+    <span style={{ color: "#07b4ba" }}>A</span>
+    <span style={{ color: "#fff" }}>O</span>
+    <span style={{ color: "#07b4ba" }}>F</span>
+  </h3>
+
+  <div className="cp-footer-about">
+    <p>
+      Art of Fighting Academy — building champions through proven systems and disciplined training.
+    </p>
+  </div>
+</div>
+  </div>
+
+  <div className="cp-footer-bottom">
+    © 2026 AOF Academy. All rights reserved.
+  </div>
+</footer>
+      </div>
+    </>
+  );
+}
