@@ -881,7 +881,7 @@ body { background: #0a0a0a; }
 /* EACH MOBILE PAGE */
 .cp-feedback-page-mobile {
 
-  min-width: 100%;
+  min-width: 70%;
 
   display: flex;
 
@@ -895,7 +895,7 @@ body { background: #0a0a0a; }
 /* CARD */
 .cp-feedback-card-new {
 
-  width: 86% !important;
+  width: 56% !important;
 
 margin-left: auto;
 
@@ -909,7 +909,7 @@ margin-right: auto;
 
   padding: 16px;
 
-  min-height: 39px;
+  min-height: 19px;
 
   box-shadow:
     0 8px 24px rgba(0,0,0,0.28);
