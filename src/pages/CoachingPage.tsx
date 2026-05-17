@@ -1307,15 +1307,15 @@ body { background: #0a0a0a; }
 
   flex-direction: column;
 
-  gap: 14px;
+  gap: 12px;
 
-  padding: 0 4px;
+  padding: 0 18px;
 }
 
 /* FEEDBACK CARD */
 .cp-feedback-card-new {
 
-  width: 100% !important;
+  width: 92% !important;  margin: 0 auto;
 
   min-height: 110px;
 
