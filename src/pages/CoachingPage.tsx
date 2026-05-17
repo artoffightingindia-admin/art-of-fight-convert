@@ -1314,9 +1314,8 @@ body { background: #0a0a0a; }
 /* FEEDBACK CARD */
 .cp-feedback-card-new {
 
-  width: 50% !important;  margin: 0 auto;
-
-  min-height: 110px;
+  width: 100% !important;
+  min-height: 60px;
 
   border-radius: 14px;
 
