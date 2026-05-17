@@ -860,6 +860,8 @@ body { background: #0a0a0a; }
 
 /* ───────── MOBILE TESTIMONIAL UI ───────── */
 
+/* ───────── MOBILE TESTIMONIAL UI ───────── */
+
 .cp-feedback-slider-new {
 
   overflow: hidden;
