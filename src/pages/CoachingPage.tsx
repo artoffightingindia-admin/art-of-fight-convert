@@ -1290,12 +1290,15 @@ body { background: #0a0a0a; }
 
   line-height: 1 !important;
 }
-.cp-coach-stats p {
+.cp-coach-stats > div p:first-child {
+  font-size: 34px !important;
+  letter-spacing: 1px !important;
+  margin-bottom: 6px !important;
+}
 
+.cp-coach-stats > div p:last-child {
   font-size: 11px !important;
-
   letter-spacing: 2px !important;
-
   padding: 0 4px;
 }
   .cp-pain-grid { flex-direction: column; gap: 35px; }
