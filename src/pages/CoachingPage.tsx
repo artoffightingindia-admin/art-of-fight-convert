@@ -1881,7 +1881,7 @@ transform:
             className="cp-feedback-card-new"
 
             style={{
-              width: "100px",
+              width: "340px",
               flexShrink: 0,
             }}
           >
