@@ -481,7 +481,6 @@ body { background: #0a0a0a; }
   border: 2px solid #07b4ba; cursor: pointer; transition: all 0.2s;
 }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
-/* TRUST STRIP */
 .cp-trust {
   position: absolute; bottom: 0px; left: 0; width: 100%;
   background: #07b4ba; height: 50px;
