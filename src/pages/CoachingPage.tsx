@@ -856,6 +856,8 @@ body { background: #0a0a0a; }
 
 /* ── CHANGE 3: NEW FEEDBACK SLIDER — 3-card infinite horizontal scroll ── */
 .cp-feedback-slider-new {
+ position: relative;
+padding-bottom: 120px;
   overflow: hidden;
   width: 100%;
   position: relative;
@@ -1407,6 +1409,14 @@ body { background: #0a0a0a; }
 
 .cp-feedback-mobile-nav {
 
+  position: absolute;
+
+  bottom: -80px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
   display: flex;
 
   align-items: center;
@@ -1415,7 +1425,7 @@ body { background: #0a0a0a; }
 
   gap: 14px;
 
-  margin-top: 30px;
+  z-index: 5;
 }
 
 .cp-feedback-mobile-nav button {
@@ -1460,6 +1470,14 @@ body { background: #0a0a0a; }
 
   .cp-feedback-mobile-nav {
 
+    position: relative;
+
+    bottom: unset;
+
+    left: unset;
+
+    transform: unset;
+
     margin-top: 22px;
   }
 
@@ -1471,8 +1489,7 @@ body { background: #0a0a0a; }
 
     font-size: 18px;
   }
-}
-`;
+}`;
 
 /* ── CALENDAR COMPONENT ── */
 const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1616,12 +1633,9 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
       {selectedDay && selectedTime && (
         <button
   className="cp-submit"
-  disabled={isSubmitting}
   style={{
-    opacity: isSubmitting ? 0.7 : 1,
-    cursor: isSubmitting
-      ? "not-allowed"
-      : "pointer",
+    opacity: 1,
+    cursor: "pointer",
   }}
   onClick={() =>
     onConfirm(
@@ -1630,9 +1644,7 @@ function CalendarPicker({ onConfirm }: { onConfirm: (date: string, time: string)
     )
   }
 >
-  {isSubmitting
-    ? "Submitting..."
-    : "Confirm Booking"}
+  Confirm Booking
 </button>
       )}
     </div>
