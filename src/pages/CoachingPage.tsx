@@ -826,6 +826,34 @@ body { background: #0a0a0a; }
 
   color: rgba(255,255,255,0.3);
 }
+.cp-feedback-desktop-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+.cp-feedback-desktop-nav button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: #15181d;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cp-feedback-desktop-nav button:hover {
+  border-color: #07b4ba;
+  color: #07b4ba;
+  transform: translateY(-2px);
+}.cp-feedback-mobile-nav {
+  display: none;
+}
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -1323,62 +1351,36 @@ body { background: #0a0a0a; }
   /* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
 
 .cp-feedback-mobile-nav {
-
-  position: absolute;
-
-  bottom: 20px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
   display: flex;
-
+  position: relative;
+  bottom: unset;
+  left: unset;
+  transform: unset;
+  margin-top: 22px;
   align-items: center;
-
   justify-content: center;
-
   gap: 14px;
-
   z-index: 5;
 }
 
 .cp-feedback-mobile-nav button {
-
-  width: 54px;
-
-  height: 54px;
-
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-
   border: 1px solid rgba(255,255,255,0.12);
-
   background: #15181d;
-
   color: #ffffff;
-
-  font-size: 24px;
-
+  font-size: 18px;
   cursor: pointer;
-
   transition: 0.25s;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 }
 
-.cp-feedback-mobile-nav button:hover {
-
-  border-color: #07b4ba;
-
-  color: #07b4ba;
-
-  transform: translateY(-2px);
+.cp-feedback-desktop-nav {
+  display: none;
 }
-
 /* MOBILE */
 
   .cp-feedback-slider-new {
@@ -1921,6 +1923,11 @@ function InfiniteFeedbackSlider() {
     }
 
   </div>
+      {/* DESKTOP NAV */}
+      <div className="cp-feedback-desktop-nav">
+        <button onClick={() => { posRef.current = Math.max(0, posRef.current - 364); }}>‹</button>
+        <button onClick={() => { posRef.current += 364; }}>›</button>
+      </div>
   {/* MOBILE NAV */}
       <div className="cp-feedback-mobile-nav">
 
