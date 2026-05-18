@@ -748,7 +748,7 @@ body { background: #0a0a0a; }
 }
 .cp-wa-btn:hover { background: #1ebe57; }
 
-//* ── NEW FOOTER ── */
+/* ── NEW FOOTER ── */
 .cp-footer {
   background: #0f1115;
 
@@ -856,11 +856,14 @@ body { background: #0a0a0a; }
 
 /* ── CHANGE 3: NEW FEEDBACK SLIDER — 3-card infinite horizontal scroll ── */
 .cp-feedback-slider-new {
- position: relative;
-padding-bottom: 120px;
-  overflow: hidden;
-  width: 100%;
+
   position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+
+  padding-bottom: 120px;
 }
 .cp-feedback-track-new {
   display: flex;
@@ -1317,101 +1320,13 @@ padding-bottom: 120px;
   .cp-faq-question-text { font-size: 15px; }
   .cp-faq-answer p { font-size: 14px; }
 
-  /* New feedback slider mobile fallback */
-/* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
-@media (max-width: 768px) {
-
- /* ───────── MOBILE FEEDBACK STACKED ROWS ───────── */
-
-.cp-feedback-slider-new {
-
-  overflow: hidden;
-
-  width: 100%;
-
-  position: relative;
-
-  padding-bottom: 70px;
-}
-
-.cp-feedback-track-new {
-
-  display: flex;
-
-  transition: transform 0.45s ease;
-}
-
-/* EACH PAGE */.cp-feedback-page-mobile {
-
-  min-width: 100%;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-
-  padding: 0 4px;
-}
-
-/* FEEDBACK CARD */
-.cp-feedback-card-new {
-
-  width: 100% !important;
-  min-height: 60px;
-
-  border-radius: 14px;
-
-  background: #15181d;
-
-  border: 1px solid rgba(255,255,255,0.05);
-
-  padding: 16px 14px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: space-between;
-}
-
-.cp-feedback-card-new p {
-
-  font-size: 12px;
-
-  line-height: 1.6;
-
-  margin-bottom: 12px;
-}
-
-.cp-feedback-stars {
-
-  display: flex;
-
-  gap: 2px;
-
-  margin-bottom: 10px;
-
-  font-size: 11px;
-}
-
-.cp-feedback-card-new .author-name {
-
-  font-size: 12px;
-}
-
-.cp-feedback-card-new .author-role {
-
-  font-size: 10px;
-}
-
-/* ───────── FEEDBACK NAVIGATION ───────── */
+  /* ───────── MOBILE FEEDBACK ROW SLIDER ───────── */
 
 .cp-feedback-mobile-nav {
 
   position: absolute;
 
-  bottom: -80px;
+  bottom: 20px;
 
   left: 50%;
 
@@ -1466,7 +1381,87 @@ padding-bottom: 120px;
 
 /* MOBILE */
 
-@media (max-width: 768px) {
+  .cp-feedback-slider-new {
+
+    overflow: hidden;
+
+    width: 100%;
+
+    position: relative;
+
+    padding-bottom: 70px;
+  }
+
+  .cp-feedback-track-new {
+
+    display: flex;
+
+    transition: transform 0.45s ease;
+  }
+
+  .cp-feedback-page-mobile {
+
+    min-width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding: 0 4px;
+  }
+
+  .cp-feedback-card-new {
+
+    width: 100% !important;
+
+    min-height: 60px;
+
+    border-radius: 14px;
+
+    background: #15181d;
+
+    border: 1px solid rgba(255,255,255,0.05);
+
+    padding: 16px 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+  }
+
+  .cp-feedback-card-new p {
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 12px;
+  }
+
+  .cp-feedback-stars {
+
+    display: flex;
+
+    gap: 2px;
+
+    margin-bottom: 10px;
+
+    font-size: 11px;
+  }
+
+  .cp-feedback-card-new .author-name {
+
+    font-size: 12px;
+  }
+
+  .cp-feedback-card-new .author-role {
+
+    font-size: 10px;
+  }
 
   .cp-feedback-mobile-nav {
 
@@ -1488,8 +1483,7 @@ padding-bottom: 120px;
     height: 42px;
 
     font-size: 18px;
-  }
-}`;
+}}`;
 
 /* ── CALENDAR COMPONENT ── */
 const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -2071,12 +2065,18 @@ const handleBookingConfirm = async (
   }
 };
   const painPoints = [
-    "You train 4-5 days a week but your technique isn't improving",
-    "Your sparring partners are getting better — you feel stuck",
-    "You have no structured plan, just random gym sessions",
-    "Coaches at your gym don't give you personal attention",
-    "You don't know what to fix or where to even start",
-  ];
+  "You train 4-5 days a week but your technique isn't improving",
+
+  "Your sparring partners are getting better — you feel stuck",
+
+  "You have no structured plan, just random gym sessions",
+
+  "You feel lost without proper coaching guidance",
+
+  "Your conditioning fails before your skill does",
+
+  "You want to compete seriously but don't know the next step",
+];
 
   const trustItems = [
     { icon: <IconShield />, label: "Proven System" },
