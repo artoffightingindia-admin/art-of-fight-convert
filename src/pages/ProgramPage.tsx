@@ -850,99 +850,155 @@ export default function ProgramPage() {
           </div>
         </div>
 {/* ── AOF INTRO SECTION ── */}
-const IntroSection = () => (
-  <section
-    id="about"
-    className="pt-6 pb-6 md:pt-8 md:pb-8 bg-card/50"
-  >
-    <div className="container max-w-6xl">
 
-      <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-6">
-        AOF Intro Section
-      </p>
+<div
+  style={{
+    background: "#0b0b0b",
+    backgroundImage:
+      "repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px)",
+  }}
+>
+  <div className="pp-section">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 60,
+        alignItems: "center",
+      }}
+    >
 
-        {/* LEFT : VIDEO */}
-        <div className="relative aspect-video rounded-xl overflow-hidden bg-muted">
+      {/* LEFT VIDEO */}
+      <div
+        style={{
+          position: "relative",
+          aspectRatio: "16/9",
+          borderRadius: 20,
+          overflow: "hidden",
+          background:
+            "linear-gradient(135deg,#1c2230 0%, #202632 100%)",
+        }}
+      >
 
-          <div className="absolute inset-0 bg-gradient-to-br from-muted to-card" />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
 
-          <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div
+            style={{
+              width: 90,
+              height: 90,
+              borderRadius: "50%",
+              background: "#07b4ba",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
 
-            <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center cursor-pointer hover:bg-primary transition-colors">
-
-              <div
-                className="w-0 h-0 border-t-[8px] border-b-[8px] border-t-transparent border-b-transparent ml-1"
-                style={{
-                  borderLeftWidth: "14px",
-                  borderLeftColor:
-                    "hsl(var(--primary-foreground))",
-                }}
-              />
-
-            </div>
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderTop: "14px solid transparent",
+                borderBottom: "14px solid transparent",
+                borderLeft: "22px solid white",
+                marginLeft: 6,
+              }}
+            />
 
           </div>
 
         </div>
 
-        {/* RIGHT : TEXT */}
-        <div className="space-y-4">
+      </div>
 
-          <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-            Welcome to the{" "}
-            <span className="text-primary">
-              AOF Family
-            </span>
-          </h2>
+      {/* RIGHT TEXT */}
+      <div>
 
-          <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+        <p
+          style={{
+            color: "#07b4ba",
+            fontFamily: "'Barlow', sans-serif",
+            fontWeight: 700,
+            fontSize: 14,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            marginBottom: 20,
+          }}
+        >
+          AOF Intro Section
+        </p>
 
-            At Art of Fight, we're more than just a gym —
-            we're a family built on discipline, respect,
-            and relentless growth.
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(46px,5vw,72px)",
+            lineHeight: 0.95,
+            letterSpacing: 2,
+            color: "#fff",
+            marginBottom: 28,
+          }}
+        >
+          WELCOME TO THE{" "}
+          <span style={{ color: "#07b4ba" }}>
+            AOF FAMILY
+          </span>
+        </h2>
 
-            <br />
-            <br />
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            fontSize: 17,
+            lineHeight: 1.9,
+            color: "rgba(255,255,255,0.55)",
+            maxWidth: 620,
+          }}
+        >
+          At Art of Fight, we're more than just a gym —
+          we're a family built on discipline, respect,
+          and relentless growth.
 
-            Our coaches bring years of real fight experience
-            to every session, guiding you through proven
-            techniques that work inside and outside the ring.
+          <br /><br />
 
-            <br />
-            <br />
+          Our coaches bring years of real fight
+          experience to every session, guiding you
+          through proven techniques that work inside
+          and outside the ring.
 
-            Whether you're a complete beginner or training
-            for competition, you'll find a system designed
-            to push your limits safely.
+          <br /><br />
 
-            <br />
-            <br />
+          Whether you're a complete beginner or training
+          for competition, you'll find a system designed
+          to push your limits safely.
 
-            We focus on building strong fundamentals, sharp
-            technique, and the mental toughness that defines
-            a true fighter.
+          <br /><br />
 
-            <br />
-            <br />
+          We focus on building strong fundamentals,
+          sharp technique, and the mental toughness
+          that defines a true fighter.
 
-            Step in, train hard, and become part of a
-            community that wins together.
+          <br /><br />
 
-          </p>
-
-        </div>
+          Step in, train hard, and become part of a
+          community that wins together.
+        </p>
 
       </div>
 
     </div>
-  </section>
-);
 
-export default IntroSection;
-
-        {/* ── FEATURES ── */}
+  </div>
+</div>
+  {/* ── FEATURES ── */}
         <div className="pp-features">
           <div className="pp-section">
             <div className="pp-features-grid">
