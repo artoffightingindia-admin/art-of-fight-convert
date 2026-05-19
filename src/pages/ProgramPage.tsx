@@ -644,6 +644,21 @@ const css = `
 
     font-size: 52px !important;
   }
+  .roadmap-card {
+  min-width: 90% !important;
+}
+
+.roadmap-card > div:first-child {
+  grid-template-columns: 1fr !important;
+}
+
+.roadmap-card h3 {
+  font-size: 34px !important;
+}
+
+.roadmap-card p {
+  font-size: 13px !important;
+}
 }
 `;
 
@@ -702,7 +717,74 @@ export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
   const scrollToFooter = () => footerRef.current?.scrollIntoView({ behavior: "smooth" });
+const [roadmapIndex, setRoadmapIndex] = useState(0);
 
+const roadmapCards = [
+  {
+    title: "1ST WEEK",
+    days: "DAYS 1 - 6",
+    image:
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200",
+    points: [
+      "Fundamentals",
+      "Basic Techniques",
+      "Conditioning",
+      "Mindset Building",
+    ],
+  },
+
+  {
+    title: "2ND WEEK",
+    days: "DAYS 7 - 12",
+    image:
+      "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200",
+    points: [
+      "Skill Development",
+      "Strength & Power",
+      "Drills & Combos",
+      "Recovery Focus",
+    ],
+  },
+
+  {
+    title: "3RD WEEK",
+    days: "DAYS 13 - 18",
+    image:
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
+    points: [
+      "Advanced Techniques",
+      "Sparring Practice",
+      "Endurance Boost",
+      "Mental Toughness",
+    ],
+  },
+
+  {
+    title: "4TH WEEK",
+    days: "DAYS 19 - 24",
+    image:
+      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200",
+    points: [
+      "Fight IQ",
+      "Combination Chains",
+      "Counter Attacks",
+      "Explosive Training",
+    ],
+  },
+
+  {
+    title: "5TH WEEK",
+    days: "DAYS 25 - 30",
+    image:
+      "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200",
+    points: [
+      "Full Integration",
+      "Fight Simulation",
+      "Peak Conditioning",
+      "Program Completion",
+    ],
+  },
+];
   return (
     <>
       <style>{css}</style>
@@ -1182,278 +1264,350 @@ export default function ProgramPage() {
       </div>
     </div>
 
-    {/* CARDS */}
+    {/* ROADMAP SLIDER */}
+
+<div
+  style={{
+    position: "relative",
+    maxWidth: 1320,
+    margin: "0 auto",
+    overflow: "hidden",
+    padding: "0 70px",
+  }}
+>
+
+  {/* LEFT BUTTON */}
+
+  <button
+    onClick={() =>
+      setRoadmapIndex((prev) => Math.max(prev - 1, 0))
+    }
+    style={{
+      position: "absolute",
+      left: 0,
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 20,
+      width: 52,
+      height: 52,
+      borderRadius: 14,
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "#0d1117",
+      color: "#fff",
+      fontSize: 24,
+      cursor: "pointer",
+    }}
+  >
+    ‹
+  </button>
+
+  {/* RIGHT BUTTON */}
+
+  <button
+    onClick={() =>
+      setRoadmapIndex((prev) =>
+        Math.min(prev + 1, roadmapCards.length - 2)
+      )
+    }
+    style={{
+      position: "absolute",
+      right: 0,
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 20,
+      width: 52,
+      height: 52,
+      borderRadius: 14,
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "#0d1117",
+      color: "#fff",
+      fontSize: 24,
+      cursor: "pointer",
+    }}
+  >
+    ›
+  </button>
+
+  {/* TOP PROGRESS */}
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 42,
+      position: "relative",
+    }}
+  >
+
     <div
       style={{
-        overflowX: "auto",
-        overflowY: "hidden",
-        paddingLeft: 40,
-        paddingBottom: 10,
-        scrollSnapType: "x mandatory",
+        position: "absolute",
+        top: 14,
+        left: 0,
+        right: 0,
+        height: 2,
+        background: "rgba(255,255,255,0.1)",
       }}
-    >
+    />
+
+    {roadmapCards.map((week, i) => (
+
       <div
+        key={i}
         style={{
-          display: "flex",
-          gap: 28,
-          width: "max-content",
+          position: "relative",
+          zIndex: 2,
+          textAlign: "center",
         }}
       >
 
-        {[
-          {
-            title: "1ST WEEK",
-            days: "DAYS 1 - 6",
-            image:
-              "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200",
-            points: [
-              "Fundamentals",
-              "Basic Techniques",
-              "Conditioning",
-              "Mindset Building",
-            ],
-          },
+        <p
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 15,
+            letterSpacing: 1,
+            color:
+              i === roadmapIndex || i === roadmapIndex + 1
+                ? "#07b4ba"
+                : "rgba(255,255,255,0.45)",
+            marginBottom: 10,
+            transition: "0.3s",
+          }}
+        >
+          {week.title}
+        </p>
 
-          {
-            title: "2ND WEEK",
-            days: "DAYS 7 - 12",
-            image:
-              "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200",
-            points: [
-              "Skill Development",
-              "Strength & Power",
-              "Drills & Combos",
-              "Recovery Focus",
-            ],
-          },
+        <div
+          style={{
+            width: 26,
+            height: 26,
+            borderRadius: "50%",
+            border: "2px solid #07b4ba",
+            background:
+              i === roadmapIndex || i === roadmapIndex + 1
+                ? "#07b4ba"
+                : "#06080c",
 
-          {
-            title: "3RD WEEK",
-            days: "DAYS 13 - 18",
-            image:
-              "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200",
-            points: [
-              "Advanced Techniques",
-              "Sparring Practice",
-              "Endurance Boost",
-              "Mental Toughness",
-            ],
-          },
+            boxShadow:
+              i === roadmapIndex || i === roadmapIndex + 1
+                ? "0 0 18px rgba(7,180,186,0.95)"
+                : "none",
 
-          {
-            title: "4TH WEEK",
-            days: "DAYS 19 - 24",
-            image:
-              "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200",
-            points: [
-              "Fight IQ",
-              "Combination Chains",
-              "Counter Attacks",
-              "Explosive Training",
-            ],
-          },
+            transition: "0.3s",
+          }}
+        />
 
-          {
-            title: "5TH WEEK",
-            days: "DAYS 25 - 30",
-            image:
-              "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200",
-            points: [
-              "Full Integration",
-              "Fight Simulation",
-              "Peak Conditioning",
-              "Program Completion",
-            ],
-          },
-        ].map((card, i) => (
+      </div>
+
+    ))}
+
+  </div>
+
+  {/* SLIDER */}
+
+  <div
+    style={{
+      overflow: "hidden",
+    }}
+  >
+
+    <div
+      style={{
+        display: "flex",
+        gap: 20,
+
+        transform: `translateX(-${roadmapIndex * 47}%)`,
+
+        transition: "0.45s ease",
+      }}
+    >
+
+      {roadmapCards.map((card, i) => (
+
+        <div
+          key={i}
+          className="roadmap-card"
+          style={{
+            minWidth: "45%",
+
+            borderRadius: 22,
+
+            overflow: "hidden",
+
+            background:
+              "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)",
+
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+
           <div
-            key={i}
             style={{
-              minWidth: "44vw",
-              maxWidth: "44vw",
-              scrollSnapAlign: "start",
-              borderRadius: 26,
-              overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.08)",
-              background:
-                "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)",
-              boxShadow: "0 0 30px rgba(0,0,0,0.35)",
-              position: "relative",
+              display: "grid",
+
+              gridTemplateColumns: "1fr 1fr",
+
+              minHeight: 320,
             }}
-            className="roadmap-card"
           >
 
-            <div
+            {/* IMAGE */}
+
+            <img
+              src={card.image}
+              alt={card.title}
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                minHeight: 500,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
               }}
-            >
+            />
 
-              {/* IMAGE */}
-              <div
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
+            {/* CONTENT */}
 
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to right, transparent 20%, rgba(0,0,0,0.6))",
-                  }}
-                />
-              </div>
-
-              {/* CONTENT */}
-              <div
-                style={{
-                  padding: "60px 40px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-
-                {i === 0 && (
-                  <p
-                    style={{
-                      color: "#07b4ba",
-                      fontFamily: "'Bebas Neue', sans-serif",
-                      fontSize: 28,
-                      letterSpacing: 1,
-                      marginBottom: 10,
-                    }}
-                  >
-                    YOU ARE HERE
-                  </p>
-                )}
-
-                <h3
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 72,
-                    lineHeight: 0.9,
-                    letterSpacing: 2,
-                    color: "#fff",
-                    marginBottom: 26,
-                  }}
-                >
-                  {card.title}
-                </h3>
-
-                <div
-                  style={{
-                    width: 90,
-                    height: 4,
-                    borderRadius: 999,
-                    background: "#07b4ba",
-                    marginBottom: 34,
-                  }}
-                />
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 22,
-                  }}
-                >
-                  {card.points.map((point, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 14,
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 28,
-                          height: 28,
-                          borderRadius: "50%",
-                          border: "2px solid #07b4ba",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          color: "#07b4ba",
-                          fontSize: 14,
-                          flexShrink: 0,
-                        }}
-                      >
-                        ✓
-                      </div>
-
-                      <p
-                        style={{
-                          color: "rgba(255,255,255,0.82)",
-                          fontFamily: "'Barlow', sans-serif",
-                          fontSize: 22,
-                        }}
-                      >
-                        {point}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* FOOTER */}
             <div
               style={{
-                borderTop: "1px solid rgba(255,255,255,0.08)",
-                padding: "26px 34px",
+                padding: "32px 24px",
+
                 display: "flex",
-                alignItems: "center",
+
+                flexDirection: "column",
+
                 justifyContent: "center",
-                gap: 16,
               }}
             >
-              <span
-                style={{
-                  fontSize: 28,
-                }}
-              >
-                📅
-              </span>
 
-              <p
+              <h3
                 style={{
                   fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: 34,
-                  letterSpacing: 1,
-                  color: "#07b4ba",
+
+                  fontSize: 42,
+
+                  color: "#fff",
+
+                  marginBottom: 18,
                 }}
               >
-                {card.days}
-              </p>
+                {card.title}
+              </h3>
+
+              <div
+                style={{
+                  width: 60,
+
+                  height: 3,
+
+                  background: "#07b4ba",
+
+                  marginBottom: 20,
+                }}
+              />
+
+              <div
+                style={{
+                  display: "flex",
+
+                  flexDirection: "column",
+
+                  gap: 12,
+                }}
+              >
+
+                {card.points.map((point, idx) => (
+
+                  <div
+                    key={idx}
+                    style={{
+                      display: "flex",
+
+                      alignItems: "center",
+
+                      gap: 10,
+                    }}
+                  >
+
+                    <div
+                      style={{
+                        width: 20,
+
+                        height: 20,
+
+                        borderRadius: "50%",
+
+                        border: "2px solid #07b4ba",
+
+                        color: "#07b4ba",
+
+                        display: "flex",
+
+                        alignItems: "center",
+
+                        justifyContent: "center",
+
+                        fontSize: 10,
+                      }}
+                    >
+                      ✓
+                    </div>
+
+                    <p
+                      style={{
+                        fontSize: 14,
+
+                        color: "rgba(255,255,255,0.75)",
+
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {point}
+                    </p>
+
+                  </div>
+
+                ))}
+
+              </div>
+
             </div>
 
           </div>
-        ))}
-      </div>
+
+          {/* FOOTER */}
+
+          <div
+            style={{
+              padding: "16px",
+
+              borderTop:
+                "1px solid rgba(255,255,255,0.06)",
+
+              textAlign: "center",
+            }}
+          >
+
+            <p
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+
+                fontSize: 22,
+
+                color: "#07b4ba",
+              }}
+            >
+              {card.days}
+            </p>
+
+          </div>
+
+        </div>
+
+      ))}
+
     </div>
 
   </div>
-</div>
 
+</div>
         {/* ── COACH SECTION (image 2) ── */}
         <div className="pp-coach-bg">
           <div className="pp-book-strip">
