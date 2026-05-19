@@ -1586,27 +1586,28 @@ const roadmapCards = [
           >
 
             <p
-              style={{
-                fontFamily: "'Bebas Neue', sans-serif",
+  style={{
+    fontFamily: "'Bebas Neue', sans-serif",
+    fontSize: 22,
+    color: "#07b4ba",
+    letterSpacing: 1,
+  }}
+>
+  {card.days}
+</p>
 
-                fontSize: 22,
-
-                color: "#07b4ba",
-              }}
-            >
-              {card.days}
-            </p>
-
-          </div>
-
-        </div>
-
-      ))}
-
-    </div>
-
-  </div>
 </div>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</div>
+
 </div>
         {/* ── COACH SECTION (image 2) ── */}
         <div className="pp-coach-bg">
