@@ -1170,7 +1170,7 @@ const roadmapCards = [
       <h2
         style={{
           fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: "clamp(60px,8vw,120px)",
+          fontSize: "clamp(30px,4vw,60px)",
           lineHeight: 0.95,
           letterSpacing: 3,
           color: "#fff",
