@@ -874,7 +874,7 @@ export default function ProgramPage() {
         style={{
           position: "relative",
           aspectRatio: "16/9",
-          borderRadius: 20,
+          borderRadius: 10,
           overflow: "hidden",
           background:
             "linear-gradient(135deg,#1c2230 0%, #202632 100%)",
@@ -910,7 +910,7 @@ export default function ProgramPage() {
                 height: 0,
                 borderTop: "14px solid transparent",
                 borderBottom: "14px solid transparent",
-                borderLeft: "22px solid white",
+                borderLeft: "15px solid white",
                 marginLeft: 6,
               }}
             />
@@ -938,59 +938,18 @@ export default function ProgramPage() {
           AOF Intro Section
         </p>
 
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(46px,5vw,72px)",
-            lineHeight: 0.95,
-            letterSpacing: 2,
-            color: "#fff",
-            marginBottom: 28,
-          }}
-        >
-          WELCOME TO THE{" "}
-          <span style={{ color: "#07b4ba" }}>
-            AOF FAMILY
-          </span>
-        </h2>
+<h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
+            Welcome to the <span className="text-primary">AOF Family</span>
+          </h2>
 
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            fontSize: 17,
-            lineHeight: 1.9,
-            color: "rgba(255,255,255,0.55)",
-            maxWidth: 620,
-          }}
-        >
-          At Art of Fight, we're more than just a gym —
-          we're a family built on discipline, respect,
-          and relentless growth.
 
-          <br /><br />
-
-          Our coaches bring years of real fight
-          experience to every session, guiding you
-          through proven techniques that work inside
-          and outside the ring.
-
-          <br /><br />
-
-          Whether you're a complete beginner or training
-          for competition, you'll find a system designed
-          to push your limits safely.
-
-          <br /><br />
-
-          We focus on building strong fundamentals,
-          sharp technique, and the mental toughness
-          that defines a true fighter.
-
-          <br /><br />
-
-          Step in, train hard, and become part of a
-          community that wins together.
-        </p>
+         <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+            At Art of Fight, we're more than just a gym — we're a family built on discipline, respect, and relentless growth.
+            Our coaches bring years of real fight experience to every session, guiding you through proven techniques that work inside and outside the ring.
+            Whether you're a complete beginner or training for competition, you'll find a system designed to push your limits safely.
+            We focus on building strong fundamentals, sharp technique, and the mental toughness that defines a true fighter.
+            Step in, train hard, and become part of a community that wins together.
+          </p>
 
       </div>
 
