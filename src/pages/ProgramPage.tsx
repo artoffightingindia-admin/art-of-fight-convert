@@ -484,15 +484,9 @@ const css = `
     letter-spacing: 1px;
   }
 }
-  /* SECTION */
- <div
-  className="pp-section"
-  style={{
-   max-width: 1100px;
-  margin: 0 auto;
-  padding: 45px 24px;
-  }}
->
+.pp-section { max-width: 1100px; margin: 0 auto; padding: 52px 30px; }
+
+
 
   /* PAIN */
   .pp-problem { background: #0f1115; }
