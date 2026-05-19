@@ -498,8 +498,17 @@ body { background: #0a0a0a; }
 .trust-icon-box svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
 
 /* SECTION WRAPPER */
-.cp-section { max-width: 1100px; margin: 0 auto; padding: 45px 0px; }
-
+.cp-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 45px 24px;
+}
+@media (min-width: 769px) {
+  .cp-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
 /* PAIN SECTION */
 .cp-pain-grid { display: flex; gap: 100px; align-items: center; flex-wrap: wrap; }
 .cp-pain-media {
