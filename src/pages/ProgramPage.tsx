@@ -485,7 +485,14 @@ const css = `
   }
 }
   /* SECTION */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 72px 40px; }
+ <div
+  className="pp-section"
+  style={{
+    maxWidth: "1280px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+  }}
+>
 
   /* PAIN */
   .pp-problem { background: #0f1115; }
