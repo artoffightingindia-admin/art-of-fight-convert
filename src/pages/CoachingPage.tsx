@@ -2511,25 +2511,25 @@ const handleBookingConfirm = async (
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
-        padding: 14px !important;
+        padding: 10px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 120px !important;
+        min-height: 96px !important;
       }
 
       .cp-mobile-stars {
         color: #07b4ba;
-        font-size: 11px;
-        margin-bottom: 4px;
+        font-size: 10px;
+        margin-bottom: 2px;
       }
 
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 11px !important;
-        line-height: 1.4 !important;
-        margin: 0 0 8px 0;
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        margin: 0 0 6px 0;
         font-style: italic;
       }
 
@@ -2541,21 +2541,21 @@ const handleBookingConfirm = async (
       }
 
       .cp-mobile-avatar {
-        width: 26px;
-        height: 26px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         background: rgba(7, 180, 186, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
         color: #07b4ba;
-        font-size: 11px;
+        font-size: 10px;
       }
 
       .cp-mobile-info h4 {
         margin: 0;
         color: #fff;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 600;
         line-height: 1.1;
       }
