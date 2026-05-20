@@ -2444,302 +2444,111 @@ const handleBookingConfirm = async (
         </div>
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
-<div id="testimonials" className="cp-testi-bg" style={{ overflowX: "hidden" }}>
-  <div className="cp-section" style={{ paddingTop: 48, paddingBottom: 48 }}>
-
-    {/* SSR-safe mobile detection */}
-    {(() => {
-      const [isMobile, setIsMobile] = React.useState(false);
-      const [mounted, setMounted] = React.useState(false);
-
-      // FIX: missing ref (required for your buttons)
-      const containerRef = React.useRef(null);
-
-      React.useEffect(() => {
-        setMounted(true);
-
-        const check = () => {
-          setIsMobile(window.innerWidth < 768);
-        };
-
-        check();
-        window.addEventListener("resize", check);
-
-        return () => window.removeEventListener("resize", check);
-      }, []);
-
-      const mobile = mounted && isMobile;
-
-      return (
-        <>
-          {/* HEADER */}
-          <Reveal>
-            <div
-              style={{
-                textAlign: "center",
-                marginBottom: mobile ? 18 : 44,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "'Barlow', sans-serif",
-                  color: "#07b4ba",
-                  fontWeight: 700,
-                  fontSize: 12,
-                  letterSpacing: 3,
-                  textTransform: "uppercase",
-                }}
-              >
-                Real People, Real Results
-              </p>
-
-              <h2
-                style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "clamp(34px,5vw,56px)",
-                  letterSpacing: 2,
-                  color: "#fff",
-                  marginTop: 8,
-                  lineHeight: 1,
-                }}
-              >
-                Trusted By Fighters,{" "}
-                <span style={{ color: "#07b4ba" }}>
-                  Proven Results
-                </span>
-              </h2>
-
-              <p
-                style={{
-                  fontFamily: "'Barlow', sans-serif",
-                  color: "rgba(255,255,255,0.42)",
-                  marginTop: 8,
-                  fontSize: 14,
-                }}
-              >
-                Here's What Athletes Say About Their Transformation With AOF
-              </p>
-            </div>
-          </Reveal>
-
-          {/* MAIN TESTIMONIAL (KEPT FROM A BUT SIZED LIKE C) */}
-          <Reveal>
-            <div
-              style={{
-                display: "flex",
-                gap: 32,
-                alignItems: "center",
-                flexWrap: "wrap",
-                marginBottom: 20,
-                maxWidth: 1100,
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
-                alt="Athlete"
-                style={{
-                  width: mobile ? "100%" : "min(200px, 100%)",
-                  height: 160,
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  borderRadius: 10,
-                  flexShrink: 0,
-                }}
-              />
-
-              <div style={{ flex: 1, minWidth: 220 }}>
-                <h3
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "clamp(20px,2.5vw,34px)",
-                    letterSpacing: 1.5,
-                    lineHeight: 1.1,
-                    marginBottom: 10,
-                    color: "#fff",
-                  }}
-                >
-                  AOF Changed The Way{" "}
-                  <span style={{ color: "#07b4ba" }}>
-                    I Train And Perform.
-                  </span>
-                </h3>
-
-                <p
-                  style={{
-                    fontFamily: "'Barlow', sans-serif",
-                    color: "rgba(255,255,255,0.65)",
-                    fontSize: 14,
-                    lineHeight: 1.65,
-                  }}
-                >
-                  The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
-                </p>
-
-                <p
-                  style={{
-                    fontFamily: "'Barlow', sans-serif",
-                    marginTop: 10,
-                    color: "#07b4ba",
-                    fontWeight: 700,
-                    fontSize: 13,
-                  }}
-                >
-                  — Alex M., Amateur MMA Fighter
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* FEEDBACK SECTION — VERTICAL STACK CAROUSEL */}
-<Reveal>
-  {(() => {
-    const containerRef = React.useRef(null);
-
-    return (
-      <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
-
-        {/* LEFT / UP BUTTON */}
-        <button
-          onClick={() =>
-            containerRef.current?.scrollBy({ top: -180, behavior: "smooth" })
-          }
+<div id="testimonials" className="cp-testi-bg">
+  <div className="cp-section" style={{ paddingTop: 48 }}>
+    <Reveal>
+      <div style={{ textAlign: "center", marginBottom: 44 }}>
+        <p
           style={{
-            position: "absolute",
-            right: -45,
-            top: "40%",
-            width: 38,
-            height: 38,
-            borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.2)",
-            background: "#111",
+            fontFamily: "'Barlow', sans-serif",
+            color: "#07b4ba",
+            fontWeight: 700,
+            fontSize: 12,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+          }}
+        >
+          Real People, Real Results
+        </p>
+
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(34px,5vw,56px)",
+            letterSpacing: 2,
             color: "#fff",
-            cursor: "pointer",
+            marginTop: 8,
+            lineHeight: 1,
           }}
         >
-          ↑
-        </button>
+          Trusted By Fighters,{" "}
+          <span style={{ color: "#07b4ba" }}>
+            Proven Results
+          </span>
+        </h2>
 
-        {/* RIGHT / DOWN BUTTON */}
-        <button
-          onClick={() =>
-            containerRef.current?.scrollBy({ top: 180, behavior: "smooth" })
-          }
+        <p
           style={{
-            position: "absolute",
-            right: -45,
-            top: "55%",
-            width: 38,
-            height: 38,
-            borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.2)",
-            background: "#111",
-            color: "#fff",
-            cursor: "pointer",
+            fontFamily: "'Barlow', sans-serif",
+            color: "rgba(255,255,255,0.42)",
+            marginTop: 8,
+            fontSize: 14,
           }}
         >
-          ↓
-        </button>
-
-        {/* VERTICAL SCROLL AREA */}
-        <div
-          ref={containerRef}
-          style={{
-            maxHeight: 520,
-            overflowY: "auto",
-            scrollBehavior: "smooth",
-            display: "flex",
-            flexDirection: "column",
-            gap: 14,
-            paddingRight: 10,
-            scrollbarWidth: "none",
-          }}
-        >
-          {feedbackCards.slice(0, 3).map((t, i) => (
-            <div
-              key={i}
-              style={{
-                borderRadius: 12,
-                background: "#161616",
-                border: "1px solid rgba(255,255,255,0.08)",
-                padding: 18,
-                minHeight: 150,
-              }}
-            >
-              {/* STARS */}
-              <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
-                {[...Array(5)].map((_, s) => (
-                  <span key={s} style={{ color: "#07b4ba", fontSize: 12 }}>
-                    ★
-                  </span>
-                ))}
-              </div>
-
-              {/* TEXT */}
-              <p
-                style={{
-                  fontFamily: "'Barlow', sans-serif",
-                  color: "rgba(255,255,255,0.72)",
-                  fontSize: 13,
-                  lineHeight: 1.6,
-                  fontStyle: "italic",
-                  marginBottom: 12,
-                }}
-              >
-                "{t.text}"
-              </p>
-
-              {/* AUTHOR */}
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <div
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: "50%",
-                    background: "#202533",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  👤
-                </div>
-
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>
-                    {t.author}
-                  </p>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
-                    Member
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+          Here's What Athletes Say About Their Transformation With AOF
+        </p>
       </div>
-    );
-  })()}
-</Reveal>
-          {/* SLIDER (UNCHANGED LOGIC A) */}
-          <div
+    </Reveal>
+
+    <Reveal>
+      <div className="cp-testi-main">
+        <div className="cp-testi-img">
+          <img
+            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+            alt="Athlete"
+          />
+        </div>
+
+        <div style={{ flex: 1, minWidth: 260 }}>
+          <h3
             style={{
-              width: mobile ? "92%" : "100%",
-              maxWidth: mobile ? 340 : "unset",
-              margin: "0 auto",
-              maxHeight: mobile ? 340 : "unset",
-              overflow: "hidden",
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "clamp(28px,3vw,42px)",
+              letterSpacing: 1.5,
+              lineHeight: 1.1,
+              marginBottom: 16,
+              color: "#fff",
             }}
           >
-            <Reveal>
-              <InfiniteFeedbackSlider />
-            </Reveal>
-          </div>
-        </>
-      );
-    })()}
+            AOF Changed The Way{" "}
+            <span style={{ color: "#07b4ba" }}>
+              I Train And Perform.
+            </span>
+          </h3>
 
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif",
+              color: "rgba(255,255,255,0.65)",
+              fontSize: 15,
+              lineHeight: 1.75,
+            }}
+          >
+            The structure, the attention to detail,
+            and the accountability took me to a level
+            I never thought possible. I'm stronger,
+            faster, and fight with more confidence than ever.
+          </p>
+
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif",
+              marginTop: 14,
+              color: "#07b4ba",
+              fontWeight: 700,
+              fontSize: 14,
+            }}
+          >
+            — Alex M., Amateur MMA Fighter
+          </p>
+        </div>
+      </div>
+    </Reveal>
+
+    {/* CHANGE 3: Replaced old desktop/mobile split with new unified 3-card infinite horizontal scroll */}
+    <Reveal>
+      <InfiniteFeedbackSlider />
+    </Reveal>
   </div>
 </div>
         {/* ── SECTION 5: APPLY FORM ── */}
