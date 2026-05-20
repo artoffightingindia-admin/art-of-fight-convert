@@ -352,7 +352,6 @@ const css = `
     letter-spacing: 1px;
   }
 }
-
   /* HERO */
   .pp-hero { position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 140px 24px 90px; background: radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%), #06080c; }
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
