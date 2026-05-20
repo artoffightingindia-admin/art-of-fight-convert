@@ -2451,12 +2451,16 @@ const handleBookingConfirm = async (
     {(() => {
       const [isMobile, setIsMobile] = React.useState(false);
       const [mounted, setMounted] = React.useState(false);
+
+      // FIX: missing ref (required for your buttons)
       const containerRef = React.useRef(null);
 
       React.useEffect(() => {
         setMounted(true);
 
-        const check = () => setIsMobile(window.innerWidth < 768);
+        const check = () => {
+          setIsMobile(window.innerWidth < 768);
+        };
 
         check();
         window.addEventListener("resize", check);
@@ -2465,32 +2469,6 @@ const handleBookingConfirm = async (
       }, []);
 
       const mobile = mounted && isMobile;
-
-      // AUTO SCROLL
-      React.useEffect(() => {
-        if (!containerRef.current) return;
-
-        const el = containerRef.current;
-
-        const interval = setInterval(() => {
-          el.scrollBy({ left: 260, behavior: "smooth" });
-
-          // loop reset
-          if (el.scrollLeft + el.clientWidth >= el.scrollWidth) {
-            el.scrollTo({ left: 0, behavior: "smooth" });
-          }
-        }, 2500);
-
-        return () => clearInterval(interval);
-      }, [mounted]);
-
-      const scrollLeft = () => {
-        containerRef.current?.scrollBy({ left: -260, behavior: "smooth" });
-      };
-
-      const scrollRight = () => {
-        containerRef.current?.scrollBy({ left: 260, behavior: "smooth" });
-      };
 
       return (
         <>
@@ -2544,132 +2522,215 @@ const handleBookingConfirm = async (
             </div>
           </Reveal>
 
-          {/* CAROUSEL */}
-          <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
-
-            {/* LEFT BUTTON */}
-            <button
-              onClick={scrollLeft}
-              style={{
-                position: "absolute",
-                left: -10,
-                top: "50%",
-                transform: "translateY(-50%)",
-                zIndex: 10,
-                background: "#111",
-                color: "#fff",
-                border: "1px solid #333",
-                width: 38,
-                height: 38,
-                borderRadius: "50%",
-                cursor: "pointer",
-              }}
-            >
-              ‹
-            </button>
-
-            {/* RIGHT BUTTON */}
-            <button
-              onClick={scrollRight}
-              style={{
-                position: "absolute",
-                right: -10,
-                top: "50%",
-                transform: "translateY(-50%)",
-                zIndex: 10,
-                background: "#111",
-                color: "#fff",
-                border: "1px solid #333",
-                width: 38,
-                height: 38,
-                borderRadius: "50%",
-                cursor: "pointer",
-              }}
-            >
-              ›
-            </button>
-
-            {/* SCROLL AREA */}
+          {/* MAIN TESTIMONIAL (KEPT FROM A BUT SIZED LIKE C) */}
+          <Reveal>
             <div
-              ref={containerRef}
               style={{
                 display: "flex",
-                gap: 14,
-                overflowX: "auto",
-                scrollBehavior: "smooth",
-                paddingBottom: 10,
-                scrollbarWidth: "none",
+                gap: 32,
+                alignItems: "center",
+                flexWrap: "wrap",
+                marginBottom: 20,
+                maxWidth: 1100,
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
-              {/* 3 FEEDBACK CARDS ONLY */}
-              {feedbackCards.slice(0, 3).map((t, i) => (
-                <div
-                  key={i}
+              <img
+                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+                alt="Athlete"
+                style={{
+                  width: mobile ? "100%" : "min(200px, 100%)",
+                  height: 160,
+                  objectFit: "cover",
+                  objectPosition: "top",
+                  borderRadius: 10,
+                  flexShrink: 0,
+                }}
+              />
+
+              <div style={{ flex: 1, minWidth: 220 }}>
+                <h3
                   style={{
-                    minWidth: 240,
-                    flex: "0 0 auto",
-                    borderRadius: 12,
-                    background: "#161616",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    padding: 18,
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(20px,2.5vw,34px)",
+                    letterSpacing: 1.5,
+                    lineHeight: 1.1,
+                    marginBottom: 10,
+                    color: "#fff",
                   }}
                 >
-                  <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
-                    {[...Array(5)].map((_, s) => (
-                      <span key={s} style={{ color: "#07b4ba", fontSize: 12 }}>
-                        ★
-                      </span>
-                    ))}
-                  </div>
+                  AOF Changed The Way{" "}
+                  <span style={{ color: "#07b4ba" }}>
+                    I Train And Perform.
+                  </span>
+                </h3>
 
-                  <p
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.65)",
+                    fontSize: 14,
+                    lineHeight: 1.65,
+                  }}
+                >
+                  The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
+                </p>
+
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    marginTop: 10,
+                    color: "#07b4ba",
+                    fontWeight: 700,
+                    fontSize: 13,
+                  }}
+                >
+                  — Alex M., Amateur MMA Fighter
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* FEEDBACK SECTION — VERTICAL STACK CAROUSEL */}
+          <Reveal>
+            <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
+
+              <button
+                onClick={() =>
+                  containerRef.current?.scrollBy({ top: -180, behavior: "smooth" })
+                }
+                style={{
+                  position: "absolute",
+                  right: -45,
+                  top: "40%",
+                  width: 38,
+                  height: 38,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  background: "#111",
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                ↑
+              </button>
+
+              <button
+                onClick={() =>
+                  containerRef.current?.scrollBy({ top: 180, behavior: "smooth" })
+                }
+                style={{
+                  position: "absolute",
+                  right: -45,
+                  top: "55%",
+                  width: 38,
+                  height: 38,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  background: "#111",
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                ↓
+              </button>
+
+              <div
+                ref={containerRef}
+                style={{
+                  maxHeight: 520,
+                  overflowY: "auto",
+                  scrollBehavior: "smooth",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 14,
+                  paddingRight: 10,
+                  scrollbarWidth: "none",
+                }}
+              >
+                {feedbackCards.slice(0, 3).map((t, i) => (
+                  <div
+                    key={i}
                     style={{
-                      fontFamily: "'Barlow', sans-serif",
-                      color: "rgba(255,255,255,0.72)",
-                      fontSize: 13,
-                      lineHeight: 1.65,
-                      fontStyle: "italic",
-                      marginBottom: 12,
+                      borderRadius: 12,
+                      background: "#161616",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      padding: 18,
+                      minHeight: 150,
                     }}
                   >
-                    "{t.text}"
-                  </p>
+                    <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
+                      {[...Array(5)].map((_, s) => (
+                        <span key={s} style={{ color: "#07b4ba", fontSize: 12 }}>
+                          ★
+                        </span>
+                      ))}
+                    </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div
+                    <p
                       style={{
-                        width: 28,
-                        height: 28,
-                        borderRadius: "50%",
-                        background: "#202533",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        fontFamily: "'Barlow', sans-serif",
+                        color: "rgba(255,255,255,0.72)",
+                        fontSize: 13,
+                        lineHeight: 1.6,
+                        fontStyle: "italic",
+                        marginBottom: 12,
                       }}
                     >
-                      👤
-                    </div>
+                      "{t.text}"
+                    </p>
 
-                    <div>
-                      <p style={{ color: "#fff", fontSize: 13, fontWeight: 700 }}>
-                        {t.author}
-                      </p>
-                      <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
-                        Member
-                      </span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <div
+                        style={{
+                          width: 28,
+                          height: 28,
+                          borderRadius: "50%",
+                          background: "#202533",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        👤
+                      </div>
+
+                      <div>
+                        <p style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>
+                          {t.author}
+                        </p>
+                        <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
+                          Member
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
+          {/* SLIDER (UNCHANGED LOGIC A) */}
+          <div
+            style={{
+              width: mobile ? "92%" : "100%",
+              maxWidth: mobile ? 340 : "unset",
+              margin: "0 auto",
+              maxHeight: mobile ? 340 : "unset",
+              overflow: "hidden",
+            }}
+          >
+            <Reveal>
+              <InfiniteFeedbackSlider />
+            </Reveal>
+          </div>
         </>
       );
     })()}
 
   </div>
-</div> 
+</div>
         {/* ── SECTION 5: APPLY FORM ── */}
         <div id="contact" className="cp-apply-bg" ref={formRef}>
           <div className="cp-section">
