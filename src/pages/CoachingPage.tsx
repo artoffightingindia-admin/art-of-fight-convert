@@ -2445,7 +2445,7 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Forces horizontal slider layouts and cuts down padding strictly on mobile screens */}
+  {/* CSS INJECT: Forces horizontal slider layouts, cuts down padding, and relocates arrows to the bottom on mobile */}
   <style>{`
     @media (max-width: 768px) {
       .cp-section-mobile-fix {
@@ -2455,24 +2455,49 @@ const handleBookingConfirm = async (
       .cp-section-mobile-fix div[style*="marginBottom: 44"] {
         margin-bottom: 20px !important;
       }
-      /* Selects the slider element container automatically on mobile viewports */
-      .cp-section-mobile-fix .cp-mobile-scroll-container > div {
+
+      /* Container layout: Forces a column layout so slider stays on top and arrows go to the absolute bottom */
+      .cp-mobile-scroll-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 16px !important;
+      }
+
+      /* The actual slider track layout setup */
+      .cp-mobile-scroll-container > div:first-child {
         display: flex !important;
         flex-direction: row !important;
         overflow-x: auto !important;
         scroll-behavior: smooth !important;
         -webkit-overflow-scrolling: touch !important;
-        gap: 14px !important;
+        gap: 12px !important;
         padding: 8px 4px !important;
+        width: 100% !important;
       }
-      .cp-section-mobile-fix .cp-mobile-scroll-container > div::-webkit-scrollbar {
+      .cp-mobile-scroll-container > div:first-child::-webkit-scrollbar {
         display: none !important;
       }
-      /* Targets child cards inside your slider to make them fit mobile screen sizes perfectly */
+
+      /* Targets child feedback cards to reduce size so they look clean and compact */
       .cp-section-mobile-fix .cp-testi-card {
-        flex: 0 0 85% !important;
+        flex: 0 0 78% !important; /* Slightly reduced width to shrink card footprint nicely */
         box-sizing: border-box !important;
         margin-right: 0 !important;
+        padding: 16px !important; /* Reduced internal padding to keep them neat */
+      }
+
+      /* Forcefully grabs the arrow buttons block and drops it below the 3 feedbacks */
+      .cp-mobile-scroll-container div:has(> button), 
+      .cp-mobile-scroll-container div[style*="position"],
+      .cp-mobile-scroll-container .carousel-arrows {
+        position: static !important;
+        display: flex !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        margin-top: 4px !important;
+        width: 100% !important;
       }
     }
   `}</style>
@@ -2554,7 +2579,7 @@ const handleBookingConfirm = async (
               color: "rgba(255,255,255,0.65)",
               fontSize: 15,
               lineHeight: 1.75,
-          }}
+            }}
           >
             The structure, the attention to detail,
             and the accountability took me to a level
