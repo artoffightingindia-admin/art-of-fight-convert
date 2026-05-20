@@ -2475,6 +2475,7 @@ const handleBookingConfirm = async (
         gap: 12px !important;
         padding: 8px 4px !important;
         width: 100% !important;
+        order: 1 !important; /* Forces cards to come first */
       }
       .cp-mobile-scroll-container > div:first-child::-webkit-scrollbar {
         display: none !important;
@@ -2491,13 +2492,15 @@ const handleBookingConfirm = async (
       /* Forcefully grabs the arrow buttons block and drops it below the 3 feedbacks */
       .cp-mobile-scroll-container div:has(> button), 
       .cp-mobile-scroll-container div[style*="position"],
-      .cp-mobile-scroll-container .carousel-arrows {
+      .cp-mobile-scroll-container .carousel-arrows,
+      .cp-mobile-scroll-container > div:nth-child(2) {
         position: static !important;
         display: flex !important;
         justify-content: center !important;
         gap: 12px !important;
-        margin-top: 4px !important;
+        margin-top: 12px !important;
         width: 100% !important;
+        order: 2 !important; /* Forces arrows below the horizontal feedback line */
       }
     }
   `}</style>
