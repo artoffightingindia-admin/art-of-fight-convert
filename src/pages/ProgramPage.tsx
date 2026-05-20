@@ -189,23 +189,19 @@ const css = `
   body { background: #0a0a0a; overflow-x: hidden; }
   .pp { font-family: 'Barlow', sans-serif; color: #fff; background: #0a0a0a; overflow-x: hidden; }
 
-  /* ───────── NAVBAR ───────── */
+/* ───────── NAVBAR ───────── */
 
 .pp-nav {
 
   position: fixed;
-
   top: 0;
-
   left: 0;
-
   right: 0;
 
   z-index: 1000;
 
-  height: 92px;
-
-  padding: 0 56px;
+  height: 68px; /* reduced */
+  padding: 0 32px; /* reduced */
 
   background: rgba(0,0,0,0.92);
 
@@ -214,9 +210,7 @@ const css = `
   border-bottom: 1px solid rgba(255,255,255,0.06);
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 }
 
@@ -225,26 +219,22 @@ const css = `
 .pp-nav-left {
 
   display: flex;
-
   align-items: center;
 }
 
 .pp-nav-logo {
 
   display: flex;
-
   align-items: center;
 
-  gap: 10px;
+  gap: 6px;
 
   font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 52px;
-
-  letter-spacing: 6px;
+  font-size: 38px; /* reduced */
+  letter-spacing: 4px;
 
   line-height: 1;
-
   margin: 0;
 }
 
@@ -268,24 +258,21 @@ const css = `
 .pp-nav-right {
 
   display: flex;
-
   align-items: center;
 
-  gap: 30px;
+  gap: 18px; /* reduced */
 }
 
 .pp-nav-home {
 
   background: none;
-
   border: none;
 
   color: rgba(255,255,255,0.65);
 
   font-family: 'Barlow', sans-serif;
 
-  font-size: 15px;
-
+  font-size: 13px; /* reduced */
   font-weight: 700;
 
   cursor: pointer;
@@ -300,11 +287,10 @@ const css = `
 
 .pp-nav-call {
 
-  height: 68px;
+  height: 44px; /* reduced */
+  padding: 0 22px; /* reduced */
 
-  padding: 0 42px;
-
-  border-radius: 10px;
+  border-radius: 8px;
 
   border: none;
 
@@ -314,9 +300,8 @@ const css = `
 
   font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 28px;
-
-  letter-spacing: 3px;
+  font-size: 18px; /* reduced */
+  letter-spacing: 1.5px;
 
   cursor: pointer;
 
@@ -336,37 +321,35 @@ const css = `
 
   .pp-nav {
 
-    height: 78px;
-
-    padding: 0 18px;
+    height: 58px;
+    padding: 0 14px;
   }
 
   .pp-nav-logo {
 
-    font-size: 34px;
-
-    letter-spacing: 3px;
+    font-size: 26px;
+    letter-spacing: 2px;
   }
 
   .pp-nav-right {
 
-    gap: 12px;
+    gap: 8px;
   }
 
   .pp-nav-home {
 
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .pp-nav-call {
 
-    height: 46px;
+    height: 36px;
 
-    padding: 0 18px;
+    padding: 0 14px;
 
-    font-size: 18px;
+    font-size: 14px;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
   }
 }
 
