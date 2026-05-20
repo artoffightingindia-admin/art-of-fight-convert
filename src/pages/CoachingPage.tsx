@@ -415,126 +415,33 @@ body { background: #0a0a0a; }
 
 .cp { background: #0a0a0a; font-family: 'Barlow', sans-serif; color: #fff; overflow-x: hidden; }
 
+/* NAVBAR */
 .cp-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  z-index: 1000;
-
-  height: 62px;
-
-  padding: 0 32px;
-
-  background: rgba(17,20,25,0.80);
-
-  backdrop-filter: blur(10px);
-
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(10,10,10,0.96); backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
-
-/* LEFT */
-
-.cp-nav-left {
-  display: flex;
-  align-items: center;
-}
-
-/* LOGO */
-
 .cp-nav-logo {
-  display: flex;
-  align-items: center;
-
   font-family: 'Bebas Neue', sans-serif;
-
-  font-size: 30px;
-
-  line-height: 1;
-
-  margin: 0;
+  font-size: 32px; letter-spacing: 6px; color: #07b4ba;
 }
-
-.cp-nav-logo span:nth-child(1),
-.cp-nav-logo span:nth-child(3) {
-  color: #07b4ba;
+.cp-nav-right { display: flex; align-items: center; gap: 20px; }
+.cp-back {
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: none; color: rgba(255,255,255,0.65);
+  font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: color 0.2s;
 }
-
-.cp-nav-logo span:nth-child(2) {
-  color: #ffffff;
+.cp-back:hover { color: #fff; }
+.cp-book-nav {
+  padding: 10px 24px; border-radius: 6px;
+  background: #07b4ba; color: #fff;
+  font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 2px;
+  border: none; cursor: pointer; transition: background 0.2s;
 }
-
-/* RIGHT */
-
-.cp-nav-right {
-  display: flex;
-  align-items: center;
-
-  gap: 18px;
-}
-
-/* BACK BUTTON */
-
-.cp-nav-home {
-  background: none;
-  border: none;
-
-  color: rgba(255,255,255,0.65);
-
-  font-family: 'Barlow', sans-serif;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-  white-space: nowrap;
-}
-
-.cp-nav-home:hover {
-  color: #ffffff;
-}
-
-/* CTA BUTTON */
-
-.cp-nav-call {
-  height: 44px;
-
-  padding: 0 22px;
-
-  border-radius: 8px;
-
-  border: none;
-
-  background: #07b4ba;
-
-  color: #ffffff;
-
-  font-family: 'Bebas Neue', sans-serif;
-
-  font-size: 18px;
-
-  letter-spacing: 1.5px;
-
-  cursor: pointer;
-
-  transition: 0.25s;
-
-  white-space: nowrap;
-}
-
-.cp-nav-call:hover {
-  background: #059ca1;
-
-  transform: translateY(-2px);
-}
+.cp-book-nav:hover { background: #059a9f; }
 
 /* HERO */
 .cp-hero { position: relative; min-height: 25vh; padding-bottom: 48px; }
@@ -1267,34 +1174,7 @@ body { background: #0a0a0a; }
 }
 /* RESPONSIVE */
 @media (max-width: 768px) {
-.cp-nav {
-    height: 58px;
-    padding: 0 14px;
-  }
-
-  .cp-nav-logo {
-    font-size: 26px;
-    letter-spacing: 2px;
-  }
-
-  .cp-nav-right {
-    gap: 10px;
-  }
-
-  .cp-nav-home {
-    font-size: 11px;
-  }
-
-  .cp-nav-call {
-    height: 36px;
-
-    padding: 0 14px;
-
-    font-size: 14px;
-
-    letter-spacing: 1px;
-  }
-
+  .cp-nav { padding: 14px 20px; }
   .cp-hero-content { padding: 100px 20px 48px; }
   .cp-faq-grid {
   grid-template-columns: 1fr;
