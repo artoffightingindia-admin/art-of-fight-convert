@@ -460,8 +460,19 @@ font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
   }
 }
-.pp-section { max-width: 1100px; margin: 0 auto; padding: 45px 25px; }
+.pp-section {
+  max-width: 1100px;
+  margin: 0 auto;
 
+  padding: 45px 18px;
+}
+
+@media (min-width: 1200px) {
+  .pp-section {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
 
 
   /* PAIN */
