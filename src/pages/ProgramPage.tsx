@@ -201,7 +201,7 @@ const css = `
 
   height: 62px;
 
-  padding: 0 18px; /* reduced from 32px */
+  padding: 0 20px; /* reduced from 32px */
 
   background: rgba(17,20,25,0.80);
 
@@ -218,7 +218,7 @@ const css = `
   display: flex;
   align-items: center;
 
-  margin-left: -4px; /* pushes logo slightly more left */
+  margin-left: -2px; /* pushes logo slightly more left */
 }
 
 .pp-nav-logo {
@@ -227,7 +227,7 @@ const css = `
   align-items: center;
 font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 30px; /* reduced */
+  font-size: 33px; /* reduced */
  line-height: 1;
   margin: 0;
 }
