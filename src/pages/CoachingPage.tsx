@@ -2445,136 +2445,157 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  <div
-    className="cp-section"
-    style={{
-      paddingTop: isMobile ? 22 : 48,
-      paddingBottom: isMobile ? 16 : undefined,
-    }}
-  >
-    <Reveal>
-      <div
-        style={{
-          textAlign: "center",
-          marginBottom: isMobile ? 22 : 44,
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "#07b4ba",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-          }}
-        >
-          Real People, Real Results
-        </p>
+  <div className="cp-section" style={{ paddingTop: 48, paddingBottom: 48 }}>
 
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
-            letterSpacing: 2,
-            color: "#fff",
-            marginTop: 8,
-            lineHeight: 1,
-          }}
-        >
-          Trusted By Fighters,{" "}
-          <span style={{ color: "#07b4ba" }}>
-            Proven Results
-          </span>
-        </h2>
+    {/* Mobile detection (SSR safe) */}
+    {(() => {
+      const [isMobile, setIsMobile] = React.useState(false);
+      const [mounted, setMounted] = React.useState(false);
 
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.42)",
-            marginTop: 8,
-            fontSize: 14,
-          }}
-        >
-          Here's What Athletes Say About Their Transformation With AOF
-        </p>
-      </div>
-    </Reveal>
+      React.useEffect(() => {
+        setMounted(true);
 
-    <Reveal>
-      <div
-        className="cp-testi-main"
-        style={{
-          marginBottom: isMobile ? 18 : undefined,
-          gap: isMobile ? 16 : undefined,
-          padding: isMobile ? 16 : undefined,
-        }}
-      >
-        <div className="cp-testi-img">
-          <img
-            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
-            alt="Athlete"
-          />
-        </div>
+        const check = () => {
+          setIsMobile(window.innerWidth < 768);
+        };
 
-        <div style={{ flex: 1, minWidth: 260 }}>
-          <h3
+        check();
+        window.addEventListener("resize", check);
+
+        return () => window.removeEventListener("resize", check);
+      }, []);
+
+      const mobile = mounted && isMobile;
+
+      return (
+        <>
+          <Reveal>
+            <div
+              style={{
+                textAlign: "center",
+                marginBottom: mobile ? 22 : 44,
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'Barlow', sans-serif",
+                  color: "#07b4ba",
+                  fontWeight: 700,
+                  fontSize: 12,
+                  letterSpacing: 3,
+                  textTransform: "uppercase",
+                }}
+              >
+                Real People, Real Results
+              </p>
+
+              <h2
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: "clamp(34px,5vw,56px)",
+                  letterSpacing: 2,
+                  color: "#fff",
+                  marginTop: 8,
+                  lineHeight: 1,
+                }}
+              >
+                Trusted By Fighters,{" "}
+                <span style={{ color: "#07b4ba" }}>
+                  Proven Results
+                </span>
+              </h2>
+
+              <p
+                style={{
+                  fontFamily: "'Barlow', sans-serif",
+                  color: "rgba(255,255,255,0.42)",
+                  marginTop: 8,
+                  fontSize: 14,
+                }}
+              >
+                Here's What Athletes Say About Their Transformation With AOF
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div
+              className="cp-testi-main"
+              style={{
+                marginBottom: mobile ? 18 : undefined,
+                gap: mobile ? 16 : undefined,
+                padding: mobile ? 16 : undefined,
+              }}
+            >
+              <div className="cp-testi-img">
+                <img
+                  src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+                  alt="Athlete"
+                />
+              </div>
+
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <h3
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(28px,3vw,42px)",
+                    letterSpacing: 1.5,
+                    lineHeight: 1.1,
+                    marginBottom: 12,
+                    color: "#fff",
+                  }}
+                >
+                  AOF Changed The Way{" "}
+                  <span style={{ color: "#07b4ba" }}>
+                    I Train And Perform.
+                  </span>
+                </h3>
+
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.65)",
+                    fontSize: 15,
+                    lineHeight: mobile ? 1.55 : 1.75,
+                  }}
+                >
+                  The structure, the attention to detail,
+                  and the accountability took me to a level
+                  I never thought possible. I'm stronger,
+                  faster, and fight with more confidence than ever.
+                </p>
+
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    marginTop: 10,
+                    color: "#07b4ba",
+                    fontWeight: 700,
+                    fontSize: 14,
+                  }}
+                >
+                  — Alex M., Amateur MMA Fighter
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          <div
             style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(28px,3vw,42px)",
-              letterSpacing: 1.5,
-              lineHeight: 1.1,
-              marginBottom: 12,
-              color: "#fff",
+              width: mobile ? "88%" : "100%",
+              maxWidth: mobile ? 380 : "unset",
+              margin: "0 auto",
+              paddingTop: mobile ? 4 : 0,
             }}
           >
-            AOF Changed The Way{" "}
-            <span style={{ color: "#07b4ba" }}>
-              I Train And Perform.
-            </span>
-          </h3>
+            <Reveal>
+              <InfiniteFeedbackSlider />
+            </Reveal>
+          </div>
+        </>
+      );
+    })()}
 
-          <p
-            style={{
-              fontFamily: "'Barlow', sans-serif",
-              color: "rgba(255,255,255,0.65)",
-              fontSize: 15,
-              lineHeight: isMobile ? 1.55 : 1.75,
-            }}
-          >
-            The structure, the attention to detail,
-            and the accountability took me to a level
-            I never thought possible. I'm stronger,
-            faster, and fight with more confidence than ever.
-          </p>
-
-          <p
-            style={{
-              fontFamily: "'Barlow', sans-serif",
-              marginTop: 10,
-              color: "#07b4ba",
-              fontWeight: 700,
-              fontSize: 14,
-            }}
-          >
-            — Alex M., Amateur MMA Fighter
-          </p>
-        </div>
-      </div>
-    </Reveal>
-
-    <div
-      style={{
-        width: isMobile ? "88%" : "100%",
-        maxWidth: isMobile ? "380px" : "unset",
-        margin: "0 auto",
-        paddingTop: isMobile ? 4 : 0,
-      }}
-    >
-      <Reveal>
-        <InfiniteFeedbackSlider />
-      </Reveal>
-    </div>
   </div>
 </div>
         {/* ── SECTION 5: APPLY FORM ── */}
