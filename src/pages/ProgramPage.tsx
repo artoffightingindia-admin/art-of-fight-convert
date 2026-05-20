@@ -464,7 +464,7 @@ font-family: 'Bebas Neue', sans-serif;
   max-width: 1100px;
   margin: 0 auto;
 
-  padding: 45px 18px;
+  padding: 45px 10px;
 }
 
 @media (min-width: 1200px) {
