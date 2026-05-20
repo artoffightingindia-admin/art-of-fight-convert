@@ -227,7 +227,7 @@ const css = `
   align-items: center;
 font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 33px; /* reduced */
+  font-size: 31.5px; /* reduced */
  line-height: 1;
   margin: 0;
 }
