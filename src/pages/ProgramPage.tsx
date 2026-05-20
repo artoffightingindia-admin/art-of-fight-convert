@@ -220,6 +220,7 @@ const css = `
 
   display: flex;
   align-items: center;
+  margin-left: -2px;
 }
 
 .pp-nav-logo {
