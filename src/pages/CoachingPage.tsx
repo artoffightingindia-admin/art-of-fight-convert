@@ -2474,7 +2474,7 @@ const handleBookingConfirm = async (
             <div
               style={{
                 textAlign: "center",
-                marginBottom: mobile ? 20 : 44,
+                marginBottom: mobile ? 18 : 44,
               }}
             >
               <p
@@ -2527,10 +2527,13 @@ const handleBookingConfirm = async (
                 display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "center",
-                alignItems: "center",
-                gap: mobile ? 12 : 40,
-                marginBottom: mobile ? 12 : 30,
+                alignItems: "flex-start",
+                gap: mobile ? 10 : 40,
+                marginBottom: mobile ? 10 : 30,
                 textAlign: "center",
+                maxWidth: 1100,
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
               {/* IMAGE */}
@@ -2546,7 +2549,8 @@ const handleBookingConfirm = async (
                   src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
                   alt="Athlete"
                   style={{
-                    maxHeight: mobile ? 180 : "unset",
+                    width: "100%",
+                    maxHeight: mobile ? 170 : 260,
                     objectFit: "cover",
                   }}
                 />
@@ -2560,7 +2564,7 @@ const handleBookingConfirm = async (
                     fontSize: "clamp(28px,3vw,42px)",
                     letterSpacing: 1.5,
                     lineHeight: 1.1,
-                    marginBottom: 10,
+                    marginBottom: 8,
                     color: "#fff",
                   }}
                 >
@@ -2575,7 +2579,7 @@ const handleBookingConfirm = async (
                     fontFamily: "'Barlow', sans-serif",
                     color: "rgba(255,255,255,0.65)",
                     fontSize: 15,
-                    lineHeight: mobile ? 1.4 : 1.75,
+                    lineHeight: mobile ? 1.35 : 1.75,
                   }}
                 >
                   The structure, the attention to detail,
@@ -2587,7 +2591,7 @@ const handleBookingConfirm = async (
                 <p
                   style={{
                     fontFamily: "'Barlow', sans-serif",
-                    marginTop: 8,
+                    marginTop: 6,
                     color: "#07b4ba",
                     fontWeight: 700,
                     fontSize: 14,
@@ -2603,8 +2607,10 @@ const handleBookingConfirm = async (
           <div
             style={{
               width: mobile ? "92%" : "100%",
-              maxWidth: mobile ? 360 : "unset",
+              maxWidth: mobile ? 340 : "unset",
               margin: "0 auto",
+              maxHeight: mobile ? 340 : "unset",
+              overflow: "hidden",
             }}
           >
             <Reveal>
