@@ -203,7 +203,7 @@ const css = `
   height: 68px; /* reduced */
   padding: 0 32px; /* reduced */
 
-  background: rgba(0,0,0,0.92);
+  background: rgba(17,20,25,1);
 
   backdrop-filter: blur(10px);
 
@@ -232,7 +232,7 @@ const css = `
   font-family: 'Bebas Neue', sans-serif;
 
   font-size: 24px; /* reduced */
-  letter-spacing: 4px;
+  letter-spacing: 1px;
 
   line-height: 1;
   margin: 0;
