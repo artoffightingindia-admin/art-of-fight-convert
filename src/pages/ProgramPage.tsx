@@ -227,7 +227,7 @@ const css = `
   display: flex;
   align-items: center;
 
-  gap: 3px;
+  gap: 1px;
 
   font-family: 'Bebas Neue', sans-serif;
 
