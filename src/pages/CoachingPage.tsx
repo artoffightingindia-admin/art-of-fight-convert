@@ -2448,15 +2448,15 @@ const handleBookingConfirm = async (
   <div
     className="cp-section"
     style={{
-      paddingTop: window.innerWidth < 768 ? 22 : 48,
-      paddingBottom: window.innerWidth < 768 ? 16 : 48,
+      paddingTop: isMobile ? 22 : 48,
+      paddingBottom: isMobile ? 16 : undefined,
     }}
   >
     <Reveal>
       <div
         style={{
           textAlign: "center",
-          marginBottom: window.innerWidth < 768 ? 22 : 44,
+          marginBottom: isMobile ? 22 : 44,
         }}
       >
         <p
@@ -2505,9 +2505,9 @@ const handleBookingConfirm = async (
       <div
         className="cp-testi-main"
         style={{
-          marginBottom: window.innerWidth < 768 ? 18 : undefined,
-          gap: window.innerWidth < 768 ? 16 : undefined,
-          padding: window.innerWidth < 768 ? 16 : undefined,
+          marginBottom: isMobile ? 18 : undefined,
+          gap: isMobile ? 16 : undefined,
+          padding: isMobile ? 16 : undefined,
         }}
       >
         <div className="cp-testi-img">
@@ -2539,7 +2539,7 @@ const handleBookingConfirm = async (
               fontFamily: "'Barlow', sans-serif",
               color: "rgba(255,255,255,0.65)",
               fontSize: 15,
-              lineHeight: 1.6,
+              lineHeight: isMobile ? 1.55 : 1.75,
             }}
           >
             The structure, the attention to detail,
@@ -2565,10 +2565,10 @@ const handleBookingConfirm = async (
 
     <div
       style={{
-        width: window.innerWidth < 768 ? "88%" : "100%",
-        maxWidth: window.innerWidth < 768 ? 380 : "unset",
+        width: isMobile ? "88%" : "100%",
+        maxWidth: isMobile ? "380px" : "unset",
         margin: "0 auto",
-        paddingTop: window.innerWidth < 768 ? 4 : 0,
+        paddingTop: isMobile ? 4 : 0,
       }}
     >
       <Reveal>
