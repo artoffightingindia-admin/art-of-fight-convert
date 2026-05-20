@@ -2445,7 +2445,7 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Controls crisp layout sizing, visibility switching, and animations across breakpoints */}
+  {/* CSS INJECT: Forces all 3 cards to fit perfectly side-by-side inside the screen space with zero overflows */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2466,7 +2466,7 @@ const handleBookingConfirm = async (
         flex-direction: column !important;
         align-items: center !important;
         width: 100% !important;
-        gap: 16px !important;
+        gap: 12px !important;
       }
 
       .cp-section-mobile-fix {
@@ -2477,79 +2477,79 @@ const handleBookingConfirm = async (
         margin-bottom: 24px !important;
       }
 
-      /* Clean Horizontal Track lane for the 3 Feedbacks */
+      /* Clean Horizontal Track lane showing all 3 feedbacks simultaneously without cutting off */
       .cp-mobile-track {
         display: flex !important;
         flex-direction: row !important;
         width: 100% !important;
-        overflow-x: auto !important;
-        scroll-behavior: smooth !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 12px !important;
+        gap: 6px !important;
         padding: 4px 0 !important;
-      }
-      .cp-mobile-track::-webkit-scrollbar {
-        display: none !important;
+        box-sizing: border-box !important;
       }
 
-      /* Uniform, crisp, and beautifully small sized mobile feedback cards */
+      /* Shrinks each card down to roughly ~31% width so exactly 3 cards fit side-by-side cleanly */
       .cp-mobile-card {
-        flex: 0 0 82% !important;
+        flex: 1 1 31% !important;
+        max-width: 32% !important;
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        padding: 16px !important;
+        border-radius: 8px;
+        padding: 10px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 170px !important;
+        min-height: 190px !important;
       }
 
       .cp-mobile-stars {
         color: #07b4ba;
-        font-size: 13px;
-        margin-bottom: 8px;
+        font-size: 9px;
+        margin-bottom: 4px;
+        letter-spacing: -0.5px;
       }
 
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 13px !important;
-        line-height: 1.5 !important;
-        margin: 0 0 12px 0;
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        margin: 0 0 8px 0;
         font-style: italic;
       }
 
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
-        gap: 10px;
+        gap: 6px;
+        margin-top: auto;
       }
 
       .cp-mobile-avatar {
-        width: 32px;
-        height: 32px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         background: rgba(7, 180, 186, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
         color: #07b4ba;
+        font-size: 10px;
       }
 
       .cp-mobile-info h4 {
         margin: 0;
         color: #fff;
-        font-size: 13px;
+        font-size: 10px;
         font-weight: 600;
+        line-height: 1.1;
       }
       .cp-mobile-info span {
         color: rgba(255, 255, 255, 0.35);
-        font-size: 11px;
+        font-size: 8px;
       }
 
-      /* Native Arrow buttons placed perfectly below layout set, matching Desktop position */
+      /* Two centered buttons down below matching Desktop position layout */
       .cp-mobile-arrows-row {
         display: flex !important;
         justify-content: center !important;
@@ -2560,8 +2560,8 @@ const handleBookingConfirm = async (
       }
 
       .cp-mobile-btn {
-        width: 40px !important;
-        height: 40px !important;
+        width: 38px !important;
+        height: 38px !important;
         border-radius: 50% !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         background: #111317 !important;
@@ -2571,11 +2571,6 @@ const handleBookingConfirm = async (
         justify-content: center !important;
         cursor: pointer;
         font-size: 14px;
-        transition: all 0.2s ease;
-      }
-      .cp-mobile-btn:active {
-        background: #07b4ba !important;
-        border-color: #07b4ba !important;
       }
     }
   `}</style>
@@ -2687,40 +2682,10 @@ const handleBookingConfirm = async (
       </Reveal>
     </div>
 
-    {/* ── MOBILE VIEW CONTAINER: CLEANED, COMPACTED & AUTO-SCROLLING ── */}
+    {/* ── MOBILE VIEW CONTAINER: SHOWS ALL 3 SMALL CARDS AT A TIME ON ONE SCREEN ── */}
     <div className="cp-mobile-slider-wrapper">
       <Reveal>
-        <div 
-          className="cp-mobile-track" 
-          id="mobileTrack"
-          ref={(el) => {
-            if (!el) return;
-            // Setup simple, high-performance background auto-scrolling engine for mobile
-            if ((el as any).initialized) return;
-            (el as any).initialized = true;
-
-            let interval;
-            const runAutoScroll = () => {
-              interval = setInterval(() => {
-                const card = el.querySelector('.cp-mobile-card') as HTMLElement;
-                if (!card) return;
-                const step = card.offsetWidth + 12;
-                const max = el.scrollWidth - el.clientWidth;
-                if (el.scrollLeft >= max - 5) {
-                  el.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                  el.scrollBy({ left: step, behavior: 'smooth' });
-                }
-              }, 3500);
-            };
-
-            runAutoScroll();
-            el.addEventListener('touchstart', () => clearInterval(interval));
-            el.addEventListener('mousedown', () => clearInterval(interval));
-            el.addEventListener('touchend', () => setTimeout(runAutoScroll, 1500));
-            el.addEventListener('mouseup', () => setTimeout(runAutoScroll, 1500));
-          }}
-        >
+        <div className="cp-mobile-track">
           {/* Card 1 */}
           <div className="cp-mobile-card">
             <div className="cp-mobile-stars">★★★★★</div>
@@ -2762,32 +2727,10 @@ const handleBookingConfirm = async (
         </div>
       </Reveal>
 
-      {/* Two centered structural arrow navigation buttons down below matching desktop style */}
+      {/* Static layout buttons underneath matching the desktop look */}
       <div className="cp-mobile-arrows-row">
-        <button 
-          className="cp-mobile-btn"
-          onClick={(e) => {
-            const track = document.getElementById('mobileTrack');
-            if (track) {
-              const card = track.querySelector('.cp-mobile-card') as HTMLElement;
-              track.scrollBy({ left: -(card.offsetWidth + 12), behavior: 'smooth' });
-            }
-          }}
-        >
-          ‹
-        </button>
-        <button 
-          className="cp-mobile-btn"
-          onClick={(e) => {
-            const track = document.getElementById('mobileTrack');
-            if (track) {
-              const card = track.querySelector('.cp-mobile-card') as HTMLElement;
-              track.scrollBy({ left: card.offsetWidth + 12, behavior: 'smooth' });
-            }
-          }}
-        >
-          ›
-        </button>
+        <button className="cp-mobile-btn">‹</button>
+        <button className="cp-mobile-btn">›</button>
       </div>
     </div>
   </div>
