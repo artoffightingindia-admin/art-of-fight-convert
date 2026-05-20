@@ -200,10 +200,10 @@ const css = `
 
   z-index: 1000;
 
-  height: 63px; /* reduced */
+  height: 62px; /* reduced */
   padding: 0 32px; /* reduced */
 
-  background: rgba(17,20,25,0.87);
+  background: rgba(17,20,25,0.80);
 
   backdrop-filter: blur(10px);
 
@@ -227,14 +227,12 @@ const css = `
   display: flex;
   align-items: center;
 
-  gap: 6px;
+  gap: 3px;
 
   font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 24px; /* reduced */
-  letter-spacing: 1px;
-
-  line-height: 1;
+  font-size: 30px; /* reduced */
+ line-height: 1;
   margin: 0;
 }
 
