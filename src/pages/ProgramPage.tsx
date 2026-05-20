@@ -192,7 +192,6 @@ const css = `
 /* ───────── NAVBAR ───────── */
 
 .pp-nav {
-
   position: fixed;
   top: 0;
   left: 0;
@@ -200,8 +199,9 @@ const css = `
 
   z-index: 1000;
 
-  height: 62px; /* reduced */
-  padding: 0 32px; /* reduced */
+  height: 62px;
+
+  padding: 0 18px; /* reduced from 32px */
 
   background: rgba(17,20,25,0.80);
 
@@ -214,13 +214,11 @@ const css = `
   justify-content: space-between;
 }
 
-/* LEFT */
-
 .pp-nav-left {
-
   display: flex;
   align-items: center;
-  margin-left: -2px;
+
+  margin-left: -4px; /* pushes logo slightly more left */
 }
 
 .pp-nav-logo {
