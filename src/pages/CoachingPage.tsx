@@ -417,15 +417,30 @@ body { background: #0a0a0a; }
 
 /* NAVBAR */
 .cp-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 40px;
-  background: rgba(10,10,10,0.96); backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1000;
+
+  height: 62px;
+
+  padding: 0 20px; /* reduced from 32px */
+
+  background: rgba(17,20,25,0.80);
+
+  backdrop-filter: blur(10px);
+
   border-bottom: 1px solid rgba(255,255,255,0.06);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .cp-nav-logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px; letter-spacing: 6px; color: #07b4ba;
+  font-size: 29.8px; color: #07b4ba;
 }
 .cp-nav-right { display: flex; align-items: center; gap: 20px; }
 .cp-back {
@@ -436,7 +451,7 @@ body { background: #0a0a0a; }
 }
 .cp-back:hover { color: #fff; }
 .cp-book-nav {
-  padding: 10px 24px; border-radius: 6px;
+  padding: 8px 22px; border-radius: 6px;
   background: #07b4ba; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 2px;
   border: none; cursor: pointer; transition: background 0.2s;
