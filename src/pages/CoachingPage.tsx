@@ -2445,7 +2445,39 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  <div className="cp-section" style={{ paddingTop: 48 }}>
+  {/* CSS INJECT: Forces horizontal slider layouts and cuts down padding strictly on mobile screens */}
+  <style>{`
+    @media (max-width: 768px) {
+      .cp-section-mobile-fix {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+      }
+      .cp-section-mobile-fix div[style*="marginBottom: 44"] {
+        margin-bottom: 20px !important;
+      }
+      /* Selects the slider element container automatically on mobile viewports */
+      .cp-section-mobile-fix .cp-mobile-scroll-container > div {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 14px !important;
+        padding: 8px 4px !important;
+      }
+      .cp-section-mobile-fix .cp-mobile-scroll-container > div::-webkit-scrollbar {
+        display: none !important;
+      }
+      /* Targets child cards inside your slider to make them fit mobile screen sizes perfectly */
+      .cp-section-mobile-fix .cp-testi-card {
+        flex: 0 0 85% !important;
+        box-sizing: border-box !important;
+        margin-right: 0 !important;
+      }
+    }
+  `}</style>
+
+  <div className="cp-section cp-section-mobile-fix" style={{ paddingTop: 48 }}>
     <Reveal>
       <div style={{ textAlign: "center", marginBottom: 44 }}>
         <p
@@ -2522,7 +2554,7 @@ const handleBookingConfirm = async (
               color: "rgba(255,255,255,0.65)",
               fontSize: 15,
               lineHeight: 1.75,
-            }}
+          }}
           >
             The structure, the attention to detail,
             and the accountability took me to a level
@@ -2545,9 +2577,10 @@ const handleBookingConfirm = async (
       </div>
     </Reveal>
 
-    {/* CHANGE 3: Replaced old desktop/mobile split with new unified 3-card infinite horizontal scroll */}
     <Reveal>
-      <InfiniteFeedbackSlider />
+      <div className="cp-mobile-scroll-container">
+        <InfiniteFeedbackSlider />
+      </div>
     </Reveal>
   </div>
 </div>
