@@ -203,7 +203,7 @@ const css = `
   height: 68px; /* reduced */
   padding: 0 32px; /* reduced */
 
-  background: rgba(17,20,25,1);
+  background: rgba(17,20,25,0.92);
 
   backdrop-filter: blur(10px);
 
