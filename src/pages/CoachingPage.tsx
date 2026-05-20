@@ -2445,84 +2445,109 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  <div className="cp-section" style={{ paddingTop: 32, paddingBottom: 32 }}>
+  <div className="cp-section" style={{ paddingTop: 48 }}>
     <Reveal>
-      <div style={{ textAlign: "center", marginBottom: 28 }}>
-        <p style={{ fontFamily: "'Barlow', sans-serif", color: "
-#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>
+      <div style={{ textAlign: "center", marginBottom: 44 }}>
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            color: "#07b4ba",
+            fontWeight: 700,
+            fontSize: 12,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+          }}
+        >
           Real People, Real Results
         </p>
-        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,48px)", letterSpacing: 2, color: "#fff", marginTop: 6, lineHeight: 1 }}>
+
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(34px,5vw,56px)",
+            letterSpacing: 2,
+            color: "#fff",
+            marginTop: 8,
+            lineHeight: 1,
+          }}
+        >
           Trusted By Fighters,{" "}
-          <span style={{ color: "
-#07b4ba" }}>Proven Results</span>
+          <span style={{ color: "#07b4ba" }}>
+            Proven Results
+          </span>
         </h2>
-        <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 6, fontSize: 13 }}>
+
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            color: "rgba(255,255,255,0.42)",
+            marginTop: 8,
+            fontSize: 14,
+          }}
+        >
           Here's What Athletes Say About Their Transformation With AOF
         </p>
       </div>
     </Reveal>
-    {/* Featured — compact row */}
+
     <Reveal>
-      <div style={{ display: "flex", gap: 32, alignItems: "center", marginBottom: 20, flexWrap: "wrap" }}>
-        <img
-          src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
-          alt="Athlete"
-          style={{ width: 200, height: 160, objectFit: "cover", objectPosition: "top", borderRadius: 10, flexShrink: 0 }}
-        />
-        <div style={{ flex: 1, minWidth: 220 }}>
-          <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(22px,2.5vw,34px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 10, color: "#fff" }}>
+      <div className="cp-testi-main">
+        <div className="cp-testi-img">
+          <img
+            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+            alt="Athlete"
+          />
+        </div>
+
+        <div style={{ flex: 1, minWidth: 260 }}>
+          <h3
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "clamp(28px,3vw,42px)",
+              letterSpacing: 1.5,
+              lineHeight: 1.1,
+              marginBottom: 16,
+              color: "#fff",
+            }}
+          >
             AOF Changed The Way{" "}
-            <span style={{ color: "
-#07b4ba" }}>I Train And Perform.</span>
+            <span style={{ color: "#07b4ba" }}>
+              I Train And Perform.
+            </span>
           </h3>
-          <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 14, lineHeight: 1.65 }}>
-            The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
+
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif",
+              color: "rgba(255,255,255,0.65)",
+              fontSize: 15,
+              lineHeight: 1.75,
+            }}
+          >
+            The structure, the attention to detail,
+            and the accountability took me to a level
+            I never thought possible. I'm stronger,
+            faster, and fight with more confidence than ever.
           </p>
-          <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 10, color: "
-#07b4ba", fontWeight: 700, fontSize: 13 }}>
+
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif",
+              marginTop: 14,
+              color: "#07b4ba",
+              fontWeight: 700,
+              fontSize: 14,
+            }}
+          >
             — Alex M., Amateur MMA Fighter
           </p>
         </div>
       </div>
     </Reveal>
-    {/* 3 Cards */}
+
+    {/* CHANGE 3: Replaced old desktop/mobile split with new unified 3-card infinite horizontal scroll */}
     <Reveal>
-      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-        {feedbackCards.slice(0, 3).map((t, i) => (
-          <div key={i} style={{
-            flex: "1 1 0", minWidth: 0,
-            borderRadius: 12, background: "
-#161616",
-            border: "1px solid rgba(255,255,255,0.08)",
-            padding: "18px 18px",
-          }}>
-            <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
-              {[...Array(5)].map((_, s) => (
-                <span key={s} style={{ color: "
-#07b4ba", fontSize: 12 }}>★</span>
-              ))}
-            </div>
-            <p style={{
-              fontFamily: "'Barlow', sans-serif",
-              color: "rgba(255,255,255,0.72)",
-              fontSize: 13, lineHeight: 1.65,
-              fontWeight: 400, fontStyle: "italic",
-              marginBottom: 12,
-            }}>
-              "{t.text}"
-            </p>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ width: 28, height: 28, borderRadius: "50%", background: "
-#202533", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, flexShrink: 0 }}>👤</div>
-              <div>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 13 }}>{t.author}</p>
-                <span style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.4)", fontSize: 11 }}>Member</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <InfiniteFeedbackSlider />
     </Reveal>
   </div>
 </div>
