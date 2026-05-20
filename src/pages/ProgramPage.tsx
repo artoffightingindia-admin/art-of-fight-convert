@@ -200,10 +200,10 @@ const css = `
 
   z-index: 1000;
 
-  height: 68px; /* reduced */
+  height: 63px; /* reduced */
   padding: 0 32px; /* reduced */
 
-  background: rgba(17,20,25,0.92);
+  background: rgba(17,20,25,0.87);
 
   backdrop-filter: blur(10px);
 
