@@ -2669,7 +2669,7 @@ const handleBookingConfirm = async (
     })()}
 
   </div>
-</div>
+</div> 
         {/* ── SECTION 5: APPLY FORM ── */}
         <div id="contact" className="cp-apply-bg" ref={formRef}>
           <div className="cp-section">
