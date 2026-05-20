@@ -2445,7 +2445,7 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Fixes layout frames, cuts out sibling bleed-through, and guarantees seamless looping */}
+  {/* CSS INJECT: Final production build handling hardlocked viewports, custom 80% compressed sizing, 3px clean gutters, and true infinite cyclic looping */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2493,56 +2493,56 @@ const handleBookingConfirm = async (
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
       }
 
-      /* Forces each stacked combination group to occupy exactly 100% of the screen space alone */
+      /* Keeps container at 100% but forces a strict 3px internal side gutter mask */
       .cp-mobile-combo-column {
         flex: 0 0 100% !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 12px !important;
+        gap: 8px !important; /* Compressed to 80% size footprint */
         box-sizing: border-box !important;
-        padding: 0 4px !important;
+        padding: 0 3px !important; /* Exact 3px horizontal gap mask on each side */
       }
 
-      /* Rectangular feedback card box design structure with curved edges */
+      /* Rectangular feedback card box design structure with curved edges - 80% optimized height/padding footprint */
       .cp-mobile-card {
         width: 100% !important;
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
-        padding: 10px !important;
+        padding: 10px !important; /* Reduced from 14px to 10px (80% scale) */
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 96px !important;
+        min-height: 96px !important; /* Reduced from 120px to 96px (80% scale) */
       }
 
       .cp-mobile-stars {
         color: #07b4ba;
-        font-size: 10px;
-        margin-bottom: 2px;
+        font-size: 10px; /* Scaled down from 11px */
+        margin-bottom: 2px; /* Reduced from 4px to 2px */
       }
 
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 10px !important;
-        line-height: 1.3 !important;
-        margin: 0 0 6px 0;
+        font-size: 10px !important; /* Scaled down from 11px */
+        line-height: 1.3 !important; /* Tighter typography spacing window */
+        margin: 0 0 6px 0; /* Reduced margin from 8px to 6px */
         font-style: italic;
       }
 
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
-        gap: 8px;
+        gap: 6px;
         margin-top: auto;
       }
 
       .cp-mobile-avatar {
-        width: 22px;
-        height: 22px;
+        width: 22px; /* Scaled down from 26px */
+        height: 22px; /* Scaled down from 26px */
         border-radius: 50%;
         background: rgba(7, 180, 186, 0.1);
         display: flex;
@@ -2555,13 +2555,13 @@ const handleBookingConfirm = async (
       .cp-mobile-info h4 {
         margin: 0;
         color: #fff;
-        font-size: 10px;
+        font-size: 10px; /* Scaled down from 11px */
         font-weight: 600;
         line-height: 1.1;
       }
       .cp-mobile-info span {
         color: rgba(255, 255, 255, 0.35);
-        font-size: 9px;
+        font-size: 8px;
       }
 
       /* Control navigation arrow layer layout */
@@ -2718,7 +2718,7 @@ const handleBookingConfirm = async (
               let intervalId;
               const totalRealSlides = 3;
 
-              // Force-set starting slider coordinate view focus context onto the actual Slide 1 (index 1)
+              // Safe-lock starting layout calculation onto Slide Index 1 natively
               el.style.transform = `translateX(-100%)`;
 
               const updateTrackPosition = (smooth = true) => {
@@ -2730,7 +2730,6 @@ const handleBookingConfirm = async (
                 currentIndex++;
                 updateTrackPosition(true);
 
-                // Seamless cyclic checkpoint wrapper look-ahead link
                 if (currentIndex === totalRealSlides + 1) {
                   setTimeout(() => {
                     currentIndex = 1;
@@ -2743,7 +2742,6 @@ const handleBookingConfirm = async (
                 currentIndex--;
                 updateTrackPosition(true);
 
-                // Seamless backward cyclic wrap fallback checkpoint link
                 if (currentIndex === 0) {
                   setTimeout(() => {
                     currentIndex = totalRealSlides;
@@ -2752,18 +2750,15 @@ const handleBookingConfirm = async (
                 }
               };
 
-              // Attach logic securely into window/DOM elements properties for the native onClick triggers to access safely
               (el as any).slideNext = handleNext;
               (el as any).slidePrev = handlePrev;
 
-              // Automatic rotation runner matching default desktop view loop pacing speeds
               const startAutoPlay = () => {
                 intervalId = setInterval(handleNext, 3800);
               };
 
               startAutoPlay();
 
-              // Interactivity baseline event hooks clearing intervals to safe-lock against animation snapping clashing
               el.addEventListener('touchstart', () => clearInterval(intervalId));
               el.addEventListener('touchend', () => {
                 clearInterval(intervalId);
@@ -2915,7 +2910,7 @@ const handleBookingConfirm = async (
         </div>
       </Reveal>
 
-      {/* Centered navigation controls matching desktop axis layout precisely */}
+      {/* Centered navigation controls below matching desktop axis layout precisely */}
       <div className="cp-mobile-arrows-row">
         <button 
           className="cp-mobile-btn"
