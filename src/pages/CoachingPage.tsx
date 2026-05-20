@@ -2444,10 +2444,10 @@ const handleBookingConfirm = async (
         </div>
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
-<div id="testimonials" className="cp-testi-bg">
+<div id="testimonials" className="cp-testi-bg" style={{ overflowX: "hidden" }}>
   <div className="cp-section" style={{ paddingTop: 48, paddingBottom: 48 }}>
 
-    {/* Mobile detection (SSR safe) */}
+    {/* SSR-safe mobile detection */}
     {(() => {
       const [isMobile, setIsMobile] = React.useState(false);
       const [mounted, setMounted] = React.useState(false);
@@ -2469,11 +2469,12 @@ const handleBookingConfirm = async (
 
       return (
         <>
+          {/* HEADER */}
           <Reveal>
             <div
               style={{
                 textAlign: "center",
-                marginBottom: mobile ? 22 : 44,
+                marginBottom: mobile ? 20 : 44,
               }}
             >
               <p
@@ -2518,30 +2519,48 @@ const handleBookingConfirm = async (
             </div>
           </Reveal>
 
+          {/* MAIN TESTIMONIAL */}
           <Reveal>
             <div
               className="cp-testi-main"
               style={{
-                marginBottom: mobile ? 18 : undefined,
-                gap: mobile ? 16 : undefined,
-                padding: mobile ? 16 : undefined,
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: mobile ? 12 : 40,
+                marginBottom: mobile ? 12 : 30,
+                textAlign: "center",
               }}
             >
-              <div className="cp-testi-img">
+              {/* IMAGE */}
+              <div
+                className="cp-testi-img"
+                style={{
+                  flex: mobile ? "0 0 100%" : "0 0 40%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
                 <img
                   src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
                   alt="Athlete"
+                  style={{
+                    maxHeight: mobile ? 180 : "unset",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
 
-              <div style={{ flex: 1, minWidth: 260 }}>
+              {/* TEXT */}
+              <div style={{ flex: mobile ? "0 0 100%" : "1", minWidth: 0 }}>
                 <h3
                   style={{
                     fontFamily: "'Bebas Neue', sans-serif",
                     fontSize: "clamp(28px,3vw,42px)",
                     letterSpacing: 1.5,
                     lineHeight: 1.1,
-                    marginBottom: 12,
+                    marginBottom: 10,
                     color: "#fff",
                   }}
                 >
@@ -2556,7 +2575,7 @@ const handleBookingConfirm = async (
                     fontFamily: "'Barlow', sans-serif",
                     color: "rgba(255,255,255,0.65)",
                     fontSize: 15,
-                    lineHeight: mobile ? 1.55 : 1.75,
+                    lineHeight: mobile ? 1.4 : 1.75,
                   }}
                 >
                   The structure, the attention to detail,
@@ -2568,7 +2587,7 @@ const handleBookingConfirm = async (
                 <p
                   style={{
                     fontFamily: "'Barlow', sans-serif",
-                    marginTop: 10,
+                    marginTop: 8,
                     color: "#07b4ba",
                     fontWeight: 700,
                     fontSize: 14,
@@ -2580,12 +2599,12 @@ const handleBookingConfirm = async (
             </div>
           </Reveal>
 
+          {/* SLIDER */}
           <div
             style={{
-              width: mobile ? "88%" : "100%",
-              maxWidth: mobile ? 380 : "unset",
+              width: mobile ? "92%" : "100%",
+              maxWidth: mobile ? 360 : "unset",
               margin: "0 auto",
-              paddingTop: mobile ? 4 : 0,
             }}
           >
             <Reveal>
