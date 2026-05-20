@@ -2445,9 +2445,20 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  <div className="cp-section" style={{ paddingTop: 48 }}>
+  <div
+    className="cp-section"
+    style={{
+      paddingTop: window.innerWidth < 768 ? 22 : 48,
+      paddingBottom: window.innerWidth < 768 ? 16 : 48,
+    }}
+  >
     <Reveal>
-      <div style={{ textAlign: "center", marginBottom: 44 }}>
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: window.innerWidth < 768 ? 22 : 44,
+        }}
+      >
         <p
           style={{
             fontFamily: "'Barlow', sans-serif",
@@ -2491,7 +2502,14 @@ const handleBookingConfirm = async (
     </Reveal>
 
     <Reveal>
-      <div className="cp-testi-main">
+      <div
+        className="cp-testi-main"
+        style={{
+          marginBottom: window.innerWidth < 768 ? 18 : undefined,
+          gap: window.innerWidth < 768 ? 16 : undefined,
+          padding: window.innerWidth < 768 ? 16 : undefined,
+        }}
+      >
         <div className="cp-testi-img">
           <img
             src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
@@ -2506,7 +2524,7 @@ const handleBookingConfirm = async (
               fontSize: "clamp(28px,3vw,42px)",
               letterSpacing: 1.5,
               lineHeight: 1.1,
-              marginBottom: 16,
+              marginBottom: 12,
               color: "#fff",
             }}
           >
@@ -2521,7 +2539,7 @@ const handleBookingConfirm = async (
               fontFamily: "'Barlow', sans-serif",
               color: "rgba(255,255,255,0.65)",
               fontSize: 15,
-              lineHeight: 1.75,
+              lineHeight: 1.6,
             }}
           >
             The structure, the attention to detail,
@@ -2533,7 +2551,7 @@ const handleBookingConfirm = async (
           <p
             style={{
               fontFamily: "'Barlow', sans-serif",
-              marginTop: 14,
+              marginTop: 10,
               color: "#07b4ba",
               fontWeight: 700,
               fontSize: 14,
@@ -2545,10 +2563,18 @@ const handleBookingConfirm = async (
       </div>
     </Reveal>
 
-    {/* CHANGE 3: Replaced old desktop/mobile split with new unified 3-card infinite horizontal scroll */}
-    <Reveal>
-      <InfiniteFeedbackSlider />
-    </Reveal>
+    <div
+      style={{
+        width: window.innerWidth < 768 ? "88%" : "100%",
+        maxWidth: window.innerWidth < 768 ? 380 : "unset",
+        margin: "0 auto",
+        paddingTop: window.innerWidth < 768 ? 4 : 0,
+      }}
+    >
+      <Reveal>
+        <InfiniteFeedbackSlider />
+      </Reveal>
+    </div>
   </div>
 </div>
         {/* ── SECTION 5: APPLY FORM ── */}
