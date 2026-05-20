@@ -2445,7 +2445,7 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Forces horizontal slider layouts, cuts down padding, and relocates arrows to the bottom on mobile */}
+  {/* CSS INJECT: Forces single horizontal track, compacts card sizes, hides duplicate buttons, and centers remaining arrows at the absolute bottom */}
   <style>{`
     @media (max-width: 768px) {
       .cp-section-mobile-fix {
@@ -2456,7 +2456,7 @@ const handleBookingConfirm = async (
         margin-bottom: 20px !important;
       }
 
-      /* Container layout: Forces a column layout so slider stays on top and arrows go to the absolute bottom */
+      /* Base layout wrapper setup */
       .cp-mobile-scroll-container {
         display: flex !important;
         flex-direction: column !important;
@@ -2465,7 +2465,7 @@ const handleBookingConfirm = async (
         gap: 16px !important;
       }
 
-      /* The actual slider track layout setup */
+      /* Forces cards into a clean horizontal swiping lane */
       .cp-mobile-scroll-container > div:first-child {
         display: flex !important;
         flex-direction: row !important;
@@ -2475,32 +2475,41 @@ const handleBookingConfirm = async (
         gap: 12px !important;
         padding: 8px 4px !important;
         width: 100% !important;
-        order: 1 !important; /* Forces cards to come first */
+        order: 1 !important;
       }
       .cp-mobile-scroll-container > div:first-child::-webkit-scrollbar {
         display: none !important;
       }
 
-      /* Targets child feedback cards to reduce size so they look clean and compact */
+      /* Keeps cards beautifully proportioned and clean on narrow mobile displays */
       .cp-section-mobile-fix .cp-testi-card {
-        flex: 0 0 78% !important; /* Slightly reduced width to shrink card footprint nicely */
+        flex: 0 0 78% !important;
         box-sizing: border-box !important;
         margin-right: 0 !important;
-        padding: 16px !important; /* Reduced internal padding to keep them neat */
+        padding: 16px !important;
       }
 
-      /* Forcefully grabs the arrow buttons block and drops it below the 3 feedbacks */
+      /* TARGET THE ARROW ELEMENT WRAPPER: Pushes it below all three feedbacks */
       .cp-mobile-scroll-container div:has(> button), 
       .cp-mobile-scroll-container div[style*="position"],
       .cp-mobile-scroll-container .carousel-arrows,
-      .cp-mobile-scroll-container > div:nth-child(2) {
+      .cp-mobile-scroll-container > div:nth-child(2),
+      .cp-mobile-scroll-container > div:last-child {
         position: static !important;
         display: flex !important;
         justify-content: center !important;
+        align-items: center !important;
         gap: 12px !important;
         margin-top: 12px !important;
         width: 100% !important;
-        order: 2 !important; /* Forces arrows below the horizontal feedback line */
+        order: 2 !important;
+      }
+
+      /* CRITICAL BUG FIX: Detects and hides the duplicate set of buttons completely */
+      .cp-mobile-scroll-container div:has(> button) button:nth-child(gt(2)),
+      .cp-mobile-scroll-container button:nth-child(n+3),
+      .cp-mobile-scroll-container div:has(> button) + div:has(> button) {
+        display: none !important;
       }
     }
   `}</style>
