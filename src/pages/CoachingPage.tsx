@@ -2593,124 +2593,135 @@ const handleBookingConfirm = async (
           </Reveal>
 
           {/* FEEDBACK SECTION — VERTICAL STACK CAROUSEL */}
-          <Reveal>
-            <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
+<Reveal>
+  {(() => {
+    const containerRef = React.useRef(null);
 
-              <button
-                onClick={() =>
-                  containerRef.current?.scrollBy({ top: -180, behavior: "smooth" })
-                }
-                style={{
-                  position: "absolute",
-                  right: -45,
-                  top: "40%",
-                  width: 38,
-                  height: 38,
-                  borderRadius: "50%",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  background: "#111",
-                  color: "#fff",
-                  cursor: "pointer",
-                }}
-              >
-                ↑
-              </button>
+    return (
+      <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
 
-              <button
-                onClick={() =>
-                  containerRef.current?.scrollBy({ top: 180, behavior: "smooth" })
-                }
-                style={{
-                  position: "absolute",
-                  right: -45,
-                  top: "55%",
-                  width: 38,
-                  height: 38,
-                  borderRadius: "50%",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  background: "#111",
-                  color: "#fff",
-                  cursor: "pointer",
-                }}
-              >
-                ↓
-              </button>
+        {/* LEFT / UP BUTTON */}
+        <button
+          onClick={() =>
+            containerRef.current?.scrollBy({ top: -180, behavior: "smooth" })
+          }
+          style={{
+            position: "absolute",
+            right: -45,
+            top: "40%",
+            width: 38,
+            height: 38,
+            borderRadius: "50%",
+            border: "1px solid rgba(255,255,255,0.2)",
+            background: "#111",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          ↑
+        </button>
 
-              <div
-                ref={containerRef}
-                style={{
-                  maxHeight: 520,
-                  overflowY: "auto",
-                  scrollBehavior: "smooth",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 14,
-                  paddingRight: 10,
-                  scrollbarWidth: "none",
-                }}
-              >
-                {feedbackCards.slice(0, 3).map((t, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      borderRadius: 12,
-                      background: "#161616",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      padding: 18,
-                      minHeight: 150,
-                    }}
-                  >
-                    <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
-                      {[...Array(5)].map((_, s) => (
-                        <span key={s} style={{ color: "#07b4ba", fontSize: 12 }}>
-                          ★
-                        </span>
-                      ))}
-                    </div>
+        {/* RIGHT / DOWN BUTTON */}
+        <button
+          onClick={() =>
+            containerRef.current?.scrollBy({ top: 180, behavior: "smooth" })
+          }
+          style={{
+            position: "absolute",
+            right: -45,
+            top: "55%",
+            width: 38,
+            height: 38,
+            borderRadius: "50%",
+            border: "1px solid rgba(255,255,255,0.2)",
+            background: "#111",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          ↓
+        </button>
 
-                    <p
-                      style={{
-                        fontFamily: "'Barlow', sans-serif",
-                        color: "rgba(255,255,255,0.72)",
-                        fontSize: 13,
-                        lineHeight: 1.6,
-                        fontStyle: "italic",
-                        marginBottom: 12,
-                      }}
-                    >
-                      "{t.text}"
-                    </p>
-
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div
-                        style={{
-                          width: 28,
-                          height: 28,
-                          borderRadius: "50%",
-                          background: "#202533",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        👤
-                      </div>
-
-                      <div>
-                        <p style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>
-                          {t.author}
-                        </p>
-                        <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
-                          Member
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+        {/* VERTICAL SCROLL AREA */}
+        <div
+          ref={containerRef}
+          style={{
+            maxHeight: 520,
+            overflowY: "auto",
+            scrollBehavior: "smooth",
+            display: "flex",
+            flexDirection: "column",
+            gap: 14,
+            paddingRight: 10,
+            scrollbarWidth: "none",
+          }}
+        >
+          {feedbackCards.slice(0, 3).map((t, i) => (
+            <div
+              key={i}
+              style={{
+                borderRadius: 12,
+                background: "#161616",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: 18,
+                minHeight: 150,
+              }}
+            >
+              {/* STARS */}
+              <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
+                {[...Array(5)].map((_, s) => (
+                  <span key={s} style={{ color: "#07b4ba", fontSize: 12 }}>
+                    ★
+                  </span>
                 ))}
               </div>
-            </div>
-          </Reveal>
 
+              {/* TEXT */}
+              <p
+                style={{
+                  fontFamily: "'Barlow', sans-serif",
+                  color: "rgba(255,255,255,0.72)",
+                  fontSize: 13,
+                  lineHeight: 1.6,
+                  fontStyle: "italic",
+                  marginBottom: 12,
+                }}
+              >
+                "{t.text}"
+              </p>
+
+              {/* AUTHOR */}
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: "50%",
+                    background: "#202533",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  👤
+                </div>
+
+                <div>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>
+                    {t.author}
+                  </p>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
+                    Member
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  })()}
+</Reveal>
           {/* SLIDER (UNCHANGED LOGIC A) */}
           <div
             style={{
