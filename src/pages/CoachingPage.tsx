@@ -2446,72 +2446,61 @@ const handleBookingConfirm = async (
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
   <div className="cp-section" style={{ paddingTop: 32, paddingBottom: 32 }}>
-
     <Reveal>
       <div style={{ textAlign: "center", marginBottom: 28 }}>
-        <p style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>
+        <p style={{ fontFamily: "'Barlow', sans-serif", color: "
+#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>
           Real People, Real Results
         </p>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,48px)", letterSpacing: 2, color: "#fff", marginTop: 6, lineHeight: 1 }}>
           Trusted By Fighters,{" "}
-          <span style={{ color: "#07b4ba" }}>Proven Results</span>
+          <span style={{ color: "
+#07b4ba" }}>Proven Results</span>
         </h2>
         <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 6, fontSize: 13 }}>
           Here's What Athletes Say About Their Transformation With AOF
         </p>
       </div>
     </Reveal>
-
     {/* Featured — compact row */}
     <Reveal>
-      <div style={{
-        display: "flex", gap: 32, alignItems: "center",
-        marginBottom: 20, flexWrap: "wrap",
-      }}>
+      <div style={{ display: "flex", gap: 32, alignItems: "center", marginBottom: 20, flexWrap: "wrap" }}>
         <img
           src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
           alt="Athlete"
-          style={{
-            width: "min(200px, 100%)",
-            height: 160,
-            objectFit: "cover",
-            objectPosition: "top",
-            borderRadius: 10,
-            flexShrink: 0,
-          }}
+          style={{ width: 200, height: 160, objectFit: "cover", objectPosition: "top", borderRadius: 10, flexShrink: 0 }}
         />
         <div style={{ flex: 1, minWidth: 220 }}>
-          <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(20px,2.5vw,34px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 10, color: "#fff" }}>
+          <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(22px,2.5vw,34px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 10, color: "#fff" }}>
             AOF Changed The Way{" "}
-            <span style={{ color: "#07b4ba" }}>I Train And Perform.</span>
+            <span style={{ color: "
+#07b4ba" }}>I Train And Perform.</span>
           </h3>
           <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 14, lineHeight: 1.65 }}>
             The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
           </p>
-          <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 10, color: "#07b4ba", fontWeight: 700, fontSize: 13 }}>
+          <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 10, color: "
+#07b4ba", fontWeight: 700, fontSize: 13 }}>
             — Alex M., Amateur MMA Fighter
           </p>
         </div>
       </div>
     </Reveal>
-
-    {/* 3 Cards — stack on mobile, row on desktop */}
+    {/* 3 Cards */}
     <Reveal>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-        gap: 14,
-      }}>
+      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
         {feedbackCards.slice(0, 3).map((t, i) => (
           <div key={i} style={{
-            borderRadius: 12,
-            background: "#161616",
+            flex: "1 1 0", minWidth: 0,
+            borderRadius: 12, background: "
+#161616",
             border: "1px solid rgba(255,255,255,0.08)",
-            padding: "18px",
+            padding: "18px 18px",
           }}>
             <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
               {[...Array(5)].map((_, s) => (
-                <span key={s} style={{ color: "#07b4ba", fontSize: 12 }}>★</span>
+                <span key={s} style={{ color: "
+#07b4ba", fontSize: 12 }}>★</span>
               ))}
             </div>
             <p style={{
@@ -2524,29 +2513,19 @@ const handleBookingConfirm = async (
               "{t.text}"
             </p>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{
-                width: 28, height: 28, borderRadius: "50%",
-                background: "#202533", display: "flex",
-                alignItems: "center", justifyContent: "center",
-                fontSize: 13, flexShrink: 0,
-              }}>👤</div>
+              <div style={{ width: 28, height: 28, borderRadius: "50%", background: "
+#202533", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, flexShrink: 0 }}>👤</div>
               <div>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 13 }}>
-                  {t.author}
-                </p>
-                <span style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.4)", fontSize: 11 }}>
-                  Member
-                </span>
+                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 13 }}>{t.author}</p>
+                <span style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.4)", fontSize: 11 }}>Member</span>
               </div>
             </div>
           </div>
         ))}
       </div>
     </Reveal>
-
   </div>
 </div>
-
         {/* ── SECTION 5: APPLY FORM ── */}
         <div id="contact" className="cp-apply-bg" ref={formRef}>
           <div className="cp-section">
