@@ -415,8 +415,6 @@ body { background: #0a0a0a; }
 
 .cp { background: #0a0a0a; font-family: 'Barlow', sans-serif; color: #fff; overflow-x: hidden; }
 
-/* ───────── COACHING NAVBAR ───────── */
-
 .cp-nav {
   position: fixed;
   top: 0;
@@ -427,7 +425,7 @@ body { background: #0a0a0a; }
 
   height: 62px;
 
-  padding: 0 20px;
+  padding: 0 32px;
 
   background: rgba(17,20,25,0.80);
 
@@ -440,12 +438,14 @@ body { background: #0a0a0a; }
   justify-content: space-between;
 }
 
+/* LEFT */
+
 .cp-nav-left {
   display: flex;
   align-items: center;
-
-  margin-left: -2px;
 }
+
+/* LOGO */
 
 .cp-nav-logo {
   display: flex;
@@ -453,7 +453,7 @@ body { background: #0a0a0a; }
 
   font-family: 'Bebas Neue', sans-serif;
 
-  font-size: 29.8px;
+  font-size: 30px;
 
   line-height: 1;
 
@@ -469,12 +469,16 @@ body { background: #0a0a0a; }
   color: #ffffff;
 }
 
+/* RIGHT */
+
 .cp-nav-right {
   display: flex;
   align-items: center;
 
   gap: 18px;
 }
+
+/* BACK BUTTON */
 
 .cp-nav-home {
   background: none;
@@ -485,17 +489,20 @@ body { background: #0a0a0a; }
   font-family: 'Barlow', sans-serif;
 
   font-size: 13px;
-
   font-weight: 700;
 
   cursor: pointer;
 
   transition: 0.2s;
+
+  white-space: nowrap;
 }
 
 .cp-nav-home:hover {
   color: #ffffff;
 }
+
+/* CTA BUTTON */
 
 .cp-nav-call {
   height: 44px;
@@ -519,6 +526,8 @@ body { background: #0a0a0a; }
   cursor: pointer;
 
   transition: 0.25s;
+
+  white-space: nowrap;
 }
 
 .cp-nav-call:hover {
@@ -526,6 +535,7 @@ body { background: #0a0a0a; }
 
   transform: translateY(-2px);
 }
+
 /* HERO */
 .cp-hero { position: relative; min-height: 25vh; padding-bottom: 48px; }
 .cp-hero-bg { position: absolute; inset: 0; z-index: 0; }
@@ -1257,7 +1267,34 @@ body { background: #0a0a0a; }
 }
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .cp-nav { padding: 14px 20px; }
+.cp-nav {
+    height: 58px;
+    padding: 0 14px;
+  }
+
+  .cp-nav-logo {
+    font-size: 26px;
+    letter-spacing: 2px;
+  }
+
+  .cp-nav-right {
+    gap: 10px;
+  }
+
+  .cp-nav-home {
+    font-size: 11px;
+  }
+
+  .cp-nav-call {
+    height: 36px;
+
+    padding: 0 14px;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+  }
+
   .cp-hero-content { padding: 100px 20px 48px; }
   .cp-faq-grid {
   grid-template-columns: 1fr;
