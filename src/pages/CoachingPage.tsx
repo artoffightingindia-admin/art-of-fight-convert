@@ -2445,7 +2445,7 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Forces all 3 cards to fit perfectly side-by-side inside the screen space with zero overflows */}
+  {/* CSS INJECT: Renders a vertical stack of 3 clean cards that slides horizontally as a single group */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2466,7 +2466,8 @@ const handleBookingConfirm = async (
         flex-direction: column !important;
         align-items: center !important;
         width: 100% !important;
-        gap: 12px !important;
+        gap: 16px !important;
+        overflow-x: hidden !important;
       }
 
       .cp-section-mobile-fix {
@@ -2477,43 +2478,56 @@ const handleBookingConfirm = async (
         margin-bottom: 24px !important;
       }
 
-      /* Clean Horizontal Track lane showing all 3 feedbacks simultaneously without cutting off */
+      /* Infinite Loop Slide Track Lane for Mobile Viewports */
       .cp-mobile-track {
         display: flex !important;
         flex-direction: row !important;
         width: 100% !important;
-        gap: 6px !important;
-        padding: 4px 0 !important;
+        overflow-x: auto !important;
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 20px !important;
+        padding: 8px 4px !important;
+        box-sizing: border-box !important;
+      }
+      .cp-mobile-track::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      /* Combines 3 small feedbacks into 1 vertical column cluster frame block */
+      .cp-mobile-combo-column {
+        flex: 0 0 88% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
         box-sizing: border-box !important;
       }
 
-      /* Shrinks each card down to roughly ~31% width so exactly 3 cards fit side-by-side cleanly */
+      /* Rectangular feedback card box design structure with curved edges */
       .cp-mobile-card {
-        flex: 1 1 31% !important;
-        max-width: 32% !important;
+        width: 100% !important;
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
-        padding: 10px !important;
+        border-radius: 12px !important; /* Clean curved edges */
+        padding: 14px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 190px !important;
+        min-height: 120px !important;
       }
 
       .cp-mobile-stars {
         color: #07b4ba;
-        font-size: 9px;
+        font-size: 11px;
         margin-bottom: 4px;
-        letter-spacing: -0.5px;
       }
 
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 10px !important;
-        line-height: 1.3 !important;
+        font-size: 11px !important;
+        line-height: 1.4 !important;
         margin: 0 0 8px 0;
         font-style: italic;
       }
@@ -2521,35 +2535,35 @@ const handleBookingConfirm = async (
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
-        gap: 6px;
+        gap: 8px;
         margin-top: auto;
       }
 
       .cp-mobile-avatar {
-        width: 22px;
-        height: 22px;
+        width: 26px;
+        height: 26px;
         border-radius: 50%;
         background: rgba(7, 180, 186, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
         color: #07b4ba;
-        font-size: 10px;
+        font-size: 11px;
       }
 
       .cp-mobile-info h4 {
         margin: 0;
         color: #fff;
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 600;
         line-height: 1.1;
       }
       .cp-mobile-info span {
         color: rgba(255, 255, 255, 0.35);
-        font-size: 8px;
+        font-size: 9px;
       }
 
-      /* Two centered buttons down below matching Desktop position layout */
+      /* Two centered control arrow buttons matching desktop layout properties */
       .cp-mobile-arrows-row {
         display: flex !important;
         justify-content: center !important;
@@ -2560,8 +2574,8 @@ const handleBookingConfirm = async (
       }
 
       .cp-mobile-btn {
-        width: 38px !important;
-        height: 38px !important;
+        width: 40px !important;
+        height: 40px !important;
         border-radius: 50% !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         background: #111317 !important;
@@ -2571,6 +2585,11 @@ const handleBookingConfirm = async (
         justify-content: center !important;
         cursor: pointer;
         font-size: 14px;
+        transition: all 0.2s ease;
+      }
+      .cp-mobile-btn:active {
+        background: #07b4ba !important;
+        border-color: #07b4ba !important;
       }
     }
   `}</style>
@@ -2682,55 +2701,162 @@ const handleBookingConfirm = async (
       </Reveal>
     </div>
 
-    {/* ── MOBILE VIEW CONTAINER: SHOWS ALL 3 SMALL CARDS AT A TIME ON ONE SCREEN ── */}
+    {/* ── MOBILE VIEW CONTAINER: SHOWS COMBINATION COLUMNS SLIDING SIDEWAYS ── */}
     <div className="cp-mobile-slider-wrapper">
       <Reveal>
-        <div className="cp-mobile-track">
-          {/* Card 1 */}
-          <div className="cp-mobile-card">
-            <div className="cp-mobile-stars">★★★★★</div>
-            <p className="cp-mobile-text">"The coaches actually care. I've gained real skill in just a few months of training with AOF."</p>
-            <div className="cp-mobile-user">
-              <div className="cp-mobile-avatar">👤</div>
-              <div className="cp-mobile-info">
-                <h4>Seity M.</h4>
-                <span>Member</span>
+        <div 
+          className="cp-mobile-track" 
+          id="mobileComboTrack"
+          ref={(el) => {
+            if (!el) return;
+            if ((el as any).initialized) return;
+            (el as any).initialized = true;
+
+            let interval;
+            // High-performance background engine mimicking the desktop view slider timing rotation behavior
+            const runAutoScroll = () => {
+              interval = setInterval(() => {
+                const col = el.querySelector('.cp-mobile-combo-column') as HTMLElement;
+                if (!col) return;
+                const step = col.offsetWidth + 20; // column width + gap
+                const max = el.scrollWidth - el.clientWidth;
+                
+                if (el.scrollLeft >= max - 5) {
+                  el.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                  el.scrollBy({ left: step, behavior: 'smooth' });
+                }
+              }, 3500); // 3.5s smooth slide window intervals
+            };
+
+            runAutoScroll();
+            el.addEventListener('touchstart', () => clearInterval(interval));
+            el.addEventListener('mousedown', () => clearInterval(interval));
+            el.addEventListener('touchend', () => setTimeout(runAutoScroll, 1500));
+            el.addEventListener('mouseup', () => setTimeout(runAutoScroll, 1500));
+          }}
+        >
+          {/* ── COMBINATION COLUMN 1 (Stacked Vertically FB1, FB2, FB3) ── */}
+          <div className="cp-mobile-combo-column">
+            {/* FB 1 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"In 8 weeks my footwork completely changed. My coach saw things I missed and fixed them immediately."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Jordan K.</h4><span>Member</span></div>
+              </div>
+            </div>
+            {/* FB 2 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"I was plateaued for over a year. AOF broke that within the first month. The approach is unlike anything else."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Priya S.</h4><span>Member</span></div>
+              </div>
+            </div>
+            {/* FB 3 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"Best investment I've made in my fight career. The plan, the feedback, the accountability – it's all dialled in perfectly."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Carlos R.</h4><span>Member</span></div>
               </div>
             </div>
           </div>
 
-          {/* Card 2 */}
-          <div className="cp-mobile-card">
-            <div className="cp-mobile-stars">★★★★★</div>
-            <p className="cp-mobile-text">"Best decision I made this year. The structure and support is unlike any gym I've trained at before."</p>
-            <div className="cp-mobile-user">
-              <div className="cp-mobile-avatar">👤</div>
-              <div className="cp-mobile-info">
-                <h4>Rolen A.</h4>
-                <span>Member</span>
+          {/* ── COMBINATION COLUMN 2 (Stacked Vertically FB2, FB3, FB4) ── */}
+          <div className="cp-mobile-combo-column">
+            {/* FB 2 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"I was plateaued for over a year. AOF broke that within the first month. The approach is unlike anything else."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Priya S.</h4><span>Member</span></div>
+              </div>
+            </div>
+            {/* FB 3 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"Best investment I've made in my fight career. The plan, the feedback, the accountability – it's all dialled in perfectly."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Carlos R.</h4><span>Member</span></div>
+              </div>
+            </div>
+            {/* FB 4 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"The coaches actually care. I've gained real skill in just a few months of training with AOF."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Seity M.</h4><span>Member</span></div>
               </div>
             </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="cp-mobile-card">
-            <div className="cp-mobile-stars">★★★★★</div>
-            <p className="cp-mobile-text">"From complete beginner to ring-ready in just a few months. AOF's system truly works."</p>
-            <div className="cp-mobile-user">
-              <div className="cp-mobile-avatar">👤</div>
-              <div className="cp-mobile-info">
-                <h4>Karthik V.</h4>
-                <span>Member</span>
+          {/* ── COMBINATION COLUMN 3 (Stacked Vertically FB3, FB4, FB1) ── */}
+          <div className="cp-mobile-combo-column">
+            {/* FB 3 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"Best investment I've made in my fight career. The plan, the feedback, the accountability – it's all dialled in perfectly."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Carlos R.</h4><span>Member</span></div>
+              </div>
+            </div>
+            {/* FB 4 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"The coaches actually care. I've gained real skill in just a few months of training with AOF."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Seity M.</h4><span>Member</span></div>
+              </div>
+            </div>
+            {/* FB 1 */}
+            <div className="cp-mobile-card">
+              <div className="cp-mobile-stars">★★★★★</div>
+              <p className="cp-mobile-text">"In 8 weeks my footwork completely changed. My coach saw things I missed and fixed them immediately."</p>
+              <div className="cp-mobile-user">
+                <div className="cp-mobile-avatar">👤</div>
+                <div className="cp-mobile-info"><h4>Jordan K.</h4><span>Member</span></div>
               </div>
             </div>
           </div>
         </div>
       </Reveal>
 
-      {/* Static layout buttons underneath matching the desktop look */}
+      {/* Centered navigation buttons below matching desktop style axis positioning */}
       <div className="cp-mobile-arrows-row">
-        <button className="cp-mobile-btn">‹</button>
-        <button className="cp-mobile-btn">›</button>
+        <button 
+          className="cp-mobile-btn"
+          onClick={() => {
+            const track = document.getElementById('mobileComboTrack');
+            if (track) {
+              const col = track.querySelector('.cp-mobile-combo-column') as HTMLElement;
+              track.scrollBy({ left: -(col.offsetWidth + 20), behavior: 'smooth' });
+            }
+          }}
+        >
+          ‹
+        </button>
+        <button 
+          className="cp-mobile-btn"
+          onClick={() => {
+            const track = document.getElementById('mobileComboTrack');
+            if (track) {
+              const col = track.querySelector('.cp-mobile-combo-column') as HTMLElement;
+              track.scrollBy({ left: col.offsetWidth + 20, behavior: 'smooth' });
+            }
+          }}
+        >
+          ›
+        </button>
       </div>
     </div>
   </div>
