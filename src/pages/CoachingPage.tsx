@@ -2445,19 +2445,23 @@ const handleBookingConfirm = async (
 
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Forces single horizontal track, compacts card sizes, hides duplicate buttons, and centers remaining arrows at the absolute bottom */}
+  {/* CSS INJECT: Controls crisp layout sizing, visibility switching, and animations across breakpoints */}
   <style>{`
-    @media (max-width: 768px) {
-      .cp-section-mobile-fix {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
-      }
-      .cp-section-mobile-fix div[style*="marginBottom: 44"] {
-        margin-bottom: 20px !important;
-      }
+    /* DESKTOP/TABLET DEFAULT VIEW */
+    .cp-desktop-slider-wrapper {
+      display: block;
+    }
+    .cp-mobile-slider-wrapper {
+      display: none;
+    }
 
-      /* Base layout wrapper setup */
-      .cp-mobile-scroll-container {
+    /* MOBILE BREAKPOINT FORCE LOCK */
+    @media (max-width: 768px) {
+      .cp-desktop-slider-wrapper {
+        display: none !important;
+      }
+      
+      .cp-mobile-slider-wrapper {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -2465,51 +2469,113 @@ const handleBookingConfirm = async (
         gap: 16px !important;
       }
 
-      /* Forces cards into a clean horizontal swiping lane */
-      .cp-mobile-scroll-container > div:first-child {
+      .cp-section-mobile-fix {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+      .cp-section-mobile-fix div[style*="marginBottom: 44"] {
+        margin-bottom: 24px !important;
+      }
+
+      /* Clean Horizontal Track lane for the 3 Feedbacks */
+      .cp-mobile-track {
         display: flex !important;
         flex-direction: row !important;
+        width: 100% !important;
         overflow-x: auto !important;
         scroll-behavior: smooth !important;
         -webkit-overflow-scrolling: touch !important;
         gap: 12px !important;
-        padding: 8px 4px !important;
-        width: 100% !important;
-        order: 1 !important;
+        padding: 4px 0 !important;
       }
-      .cp-mobile-scroll-container > div:first-child::-webkit-scrollbar {
+      .cp-mobile-track::-webkit-scrollbar {
         display: none !important;
       }
 
-      /* Keeps cards beautifully proportioned and clean on narrow mobile displays */
-      .cp-section-mobile-fix .cp-testi-card {
-        flex: 0 0 78% !important;
+      /* Uniform, crisp, and beautifully small sized mobile feedback cards */
+      .cp-mobile-card {
+        flex: 0 0 82% !important;
         box-sizing: border-box !important;
-        margin-right: 0 !important;
+        background: #15171e;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
         padding: 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        min-height: 170px !important;
       }
 
-      /* TARGET THE ARROW ELEMENT WRAPPER: Pushes it below all three feedbacks */
-      .cp-mobile-scroll-container div:has(> button), 
-      .cp-mobile-scroll-container div[style*="position"],
-      .cp-mobile-scroll-container .carousel-arrows,
-      .cp-mobile-scroll-container > div:nth-child(2),
-      .cp-mobile-scroll-container > div:last-child {
-        position: static !important;
+      .cp-mobile-stars {
+        color: #07b4ba;
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+
+      .cp-mobile-text {
+        font-family: 'Barlow', sans-serif;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        margin: 0 0 12px 0;
+        font-style: italic;
+      }
+
+      .cp-mobile-user {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px;
+      }
+
+      .cp-mobile-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(7, 180, 186, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #07b4ba;
+      }
+
+      .cp-mobile-info h4 {
+        margin: 0;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .cp-mobile-info span {
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 11px;
+      }
+
+      /* Native Arrow buttons placed perfectly below layout set, matching Desktop position */
+      .cp-mobile-arrows-row {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
         gap: 12px !important;
-        margin-top: 12px !important;
         width: 100% !important;
-        order: 2 !important;
+        margin-top: 4px !important;
       }
 
-      /* CRITICAL BUG FIX: Detects and hides the duplicate set of buttons completely */
-      .cp-mobile-scroll-container div:has(> button) button:nth-child(gt(2)),
-      .cp-mobile-scroll-container button:nth-child(n+3),
-      .cp-mobile-scroll-container div:has(> button) + div:has(> button) {
-        display: none !important;
+      .cp-mobile-btn {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        background: #111317 !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s ease;
+      }
+      .cp-mobile-btn:active {
+        background: #07b4ba !important;
+        border-color: #07b4ba !important;
       }
     }
   `}</style>
@@ -2614,11 +2680,116 @@ const handleBookingConfirm = async (
       </div>
     </Reveal>
 
-    <Reveal>
-      <div className="cp-mobile-scroll-container">
+    {/* ── DESKTOP VIEW CONTAINER: UNTOUCHED ── */}
+    <div className="cp-desktop-slider-wrapper">
+      <Reveal>
         <InfiniteFeedbackSlider />
+      </Reveal>
+    </div>
+
+    {/* ── MOBILE VIEW CONTAINER: CLEANED, COMPACTED & AUTO-SCROLLING ── */}
+    <div className="cp-mobile-slider-wrapper">
+      <Reveal>
+        <div 
+          className="cp-mobile-track" 
+          id="mobileTrack"
+          ref={(el) => {
+            if (!el) return;
+            // Setup simple, high-performance background auto-scrolling engine for mobile
+            if ((el as any).initialized) return;
+            (el as any).initialized = true;
+
+            let interval;
+            const runAutoScroll = () => {
+              interval = setInterval(() => {
+                const card = el.querySelector('.cp-mobile-card') as HTMLElement;
+                if (!card) return;
+                const step = card.offsetWidth + 12;
+                const max = el.scrollWidth - el.clientWidth;
+                if (el.scrollLeft >= max - 5) {
+                  el.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                  el.scrollBy({ left: step, behavior: 'smooth' });
+                }
+              }, 3500);
+            };
+
+            runAutoScroll();
+            el.addEventListener('touchstart', () => clearInterval(interval));
+            el.addEventListener('mousedown', () => clearInterval(interval));
+            el.addEventListener('touchend', () => setTimeout(runAutoScroll, 1500));
+            el.addEventListener('mouseup', () => setTimeout(runAutoScroll, 1500));
+          }}
+        >
+          {/* Card 1 */}
+          <div className="cp-mobile-card">
+            <div className="cp-mobile-stars">★★★★★</div>
+            <p className="cp-mobile-text">"The coaches actually care. I've gained real skill in just a few months of training with AOF."</p>
+            <div className="cp-mobile-user">
+              <div className="cp-mobile-avatar">👤</div>
+              <div className="cp-mobile-info">
+                <h4>Seity M.</h4>
+                <span>Member</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="cp-mobile-card">
+            <div className="cp-mobile-stars">★★★★★</div>
+            <p className="cp-mobile-text">"Best decision I made this year. The structure and support is unlike any gym I've trained at before."</p>
+            <div className="cp-mobile-user">
+              <div className="cp-mobile-avatar">👤</div>
+              <div className="cp-mobile-info">
+                <h4>Rolen A.</h4>
+                <span>Member</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="cp-mobile-card">
+            <div className="cp-mobile-stars">★★★★★</div>
+            <p className="cp-mobile-text">"From complete beginner to ring-ready in just a few months. AOF's system truly works."</p>
+            <div className="cp-mobile-user">
+              <div className="cp-mobile-avatar">👤</div>
+              <div className="cp-mobile-info">
+                <h4>Karthik V.</h4>
+                <span>Member</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Two centered structural arrow navigation buttons down below matching desktop style */}
+      <div className="cp-mobile-arrows-row">
+        <button 
+          className="cp-mobile-btn"
+          onClick={(e) => {
+            const track = document.getElementById('mobileTrack');
+            if (track) {
+              const card = track.querySelector('.cp-mobile-card') as HTMLElement;
+              track.scrollBy({ left: -(card.offsetWidth + 12), behavior: 'smooth' });
+            }
+          }}
+        >
+          ‹
+        </button>
+        <button 
+          className="cp-mobile-btn"
+          onClick={(e) => {
+            const track = document.getElementById('mobileTrack');
+            if (track) {
+              const card = track.querySelector('.cp-mobile-card') as HTMLElement;
+              track.scrollBy({ left: card.offsetWidth + 12, behavior: 'smooth' });
+            }
+          }}
+        >
+          ›
+        </button>
       </div>
-    </Reveal>
+    </div>
   </div>
 </div>
         {/* ── SECTION 5: APPLY FORM ── */}
