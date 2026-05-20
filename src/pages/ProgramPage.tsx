@@ -226,10 +226,7 @@ const css = `
 
   display: flex;
   align-items: center;
-
-  gap: 1px;
-
-  font-family: 'Bebas Neue', sans-serif;
+font-family: 'Bebas Neue', sans-serif;
 
   font-size: 30px; /* reduced */
  line-height: 1;
