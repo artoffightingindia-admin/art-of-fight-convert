@@ -2108,7 +2108,7 @@ const roadmapCards = [
 >
 
   <img
-    src="https://pngimg.com/d/gift_PNG100275.png"
+    src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png"
     alt="Gift Box"
     style={{
       width: 42,
