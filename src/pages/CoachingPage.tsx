@@ -2757,69 +2757,117 @@ const handleBookingConfirm = async (
       </Reveal>
     </div>
 
-    {/* ── MOBILE VIEW CONTAINER ── */}
-    <div className="cp-mobile-slider-wrapper">
-      <Reveal>
-        <div className="cp-mobile-viewport">
-          <div 
-            className="cp-mobile-track" 
-            id="mobileSliderTrack"
-            ref={(el) => {
-              if (!el) return;
-              if ((el as any).initialized) return;
-              (el as any).initialized = true;
+   {/* ── MOBILE VIEW CONTAINER ── */}
+<div className="cp-mobile-slider-wrapper">
+  {/* CSS INJECT: Constrains the feedback rectangle box from overflowing the screen */}
+  <style>{`
+    @media (max-width: 768px) {
+      /* 1. Force the viewport to perfectly clip sliding content to the screen width */
+      .cp-mobile-viewport {
+        overflow: hidden !important;
+        width: 100% !important;
+      }
 
-              let currentIndex = 1; 
-              let intervalId;
-              const totalRealSlides = 3;
+      /* 2. Lock the track slide wrappers to the exact width of the screen viewport */
+      .cp-mobile-track {
+        display: flex !important;
+        width: 100% !important;
+      }
 
-              el.style.transform = `translateX(-100%)`;
+      /* 3. Force individual slide elements to match the screen view width and apply system margins */
+      .cp-mobile-track > div {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        flex-shrink: 0 !important;
+        box-sizing: border-box !important;
+        padding-left: 12px !important;   /* Matches system horizontal gutter limits */
+        padding-right: 12px !important;  /* Matches system horizontal gutter limits */
+      }
 
-              const updateTrackPosition = (smooth = true) => {
-                el.style.transition = smooth ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)" : "none";
-                el.style.transform = `translateX(-${currentIndex * 100}%)`;
-              };
+      /* 4. Constrain the actual rectangle feedback box so it sits cleanly inside the boundaries */
+      .cp-mobile-track .cp-form-box,
+      .cp-mobile-track .cp-feedback-box,
+      .cp-mobile-track [className*="card"],
+      .cp-mobile-track [className*="-box"] {
+        width: 100% !important;
+        max-width: calc(100vw - 24px) !important; /* Viewport minus the combined 12px + 12px side gutters */
+        box-sizing: border-box !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        
+        /* Balanced interior padding so text elements don't press up against the card borders */
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+    }
+  `}</style>
 
-              const handleNext = () => {
-                currentIndex++;
-                updateTrackPosition(true);
+  <Reveal>
+    <div className="cp-mobile-viewport">
+      <div 
+        className="cp-mobile-track" 
+        id="mobileSliderTrack"
+        ref={(el) => {
+          if (!el) return;
+          if ((el as any).initialized) return;
+          (el as any).initialized = true;
 
-                if (currentIndex === totalRealSlides + 1) {
-                  setTimeout(() => {
-                    currentIndex = 1;
-                    updateTrackPosition(false);
-                  }, 500);
-                }
-              };
+          let currentIndex = 1; 
+          let intervalId;
+          const totalRealSlides = 3;
 
-              const handlePrev = () => {
-                currentIndex--;
-                updateTrackPosition(true);
+          el.style.transform = `translateX(-100%)`;
 
-                if (currentIndex === 0) {
-                  setTimeout(() => {
-                    currentIndex = totalRealSlides;
-                    updateTrackPosition(false);
-                  }, 500);
-                }
-              };
+          const updateTrackPosition = (smooth = true) => {
+            el.style.transition = smooth ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)" : "none";
+            el.style.transform = `translateX(-${currentIndex * 100}%)`;
+          };
 
-              (el as any).slideNext = handleNext;
-              (el as any).slidePrev = handlePrev;
+          const handleNext = () => {
+            currentIndex++;
+            updateTrackPosition(true);
 
-              const startAutoPlay = () => {
-                intervalId = setInterval(handleNext, 3800);
-              };
+            if (currentIndex === totalRealSlides + 1) {
+              setTimeout(() => {
+                currentIndex = 1;
+                updateTrackPosition(false);
+              }, 500);
+            }
+          };
 
-              startAutoPlay();
+          const handlePrev = () => {
+            currentIndex--;
+            updateTrackPosition(true);
 
-              el.addEventListener('touchstart', () => clearInterval(intervalId));
-              el.addEventListener('touchend', () => {
-                clearInterval(intervalId);
-                startAutoPlay();
-              });
-            }}
-          >
+            if (currentIndex === 0) {
+              setTimeout(() => {
+                currentIndex = totalRealSlides;
+                updateTrackPosition(false);
+              }, 500);
+            }
+          };
+
+          (el as any).slideNext = handleNext;
+          (el as any).slidePrev = handlePrev;
+
+          const startAutoPlay = () => {
+            intervalId = setInterval(handleNext, 3800);
+          };
+
+          startAutoPlay();
+
+          el.addEventListener('touchstart', () => clearInterval(intervalId));
+          el.addEventListener('touchend', () => {
+            clearInterval(intervalId);
+            startAutoPlay();
+          });
+        }}
+      >
+        {/* Your mapped slide array components go directly here inside the track */}
+      </div>
+    </div>
+  </Reveal>
+</div>
             {/* [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 3 */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
