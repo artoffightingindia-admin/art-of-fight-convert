@@ -2098,19 +2098,38 @@ const roadmapCards = [
 
       <div>
 
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
+     <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 14,
+    marginBottom: 8,
+  }}
+>
 
-            color: "rgba(255,255,255,0.5)",
+  <img
+    src="https://pngimg.com/d/gift_PNG100275.png"
+    alt="Gift Box"
+    style={{
+      width: 42,
+      height: 42,
+      objectFit: "contain",
+      filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
+    }}
+  />
 
-            fontSize: 14,
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      color: "rgba(255,255,255,0.5)",
+      fontSize: 14,
+      letterSpacing: 1,
+    }}
+  >
+    TOTAL BONUS VALUE
+  </p>
 
-            marginBottom: 6,
-          }}
-        >
-          TOTAL BONUS VALUE
-        </p>
+</div>
 
         <h2
           style={{
