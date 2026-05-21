@@ -2493,9 +2493,9 @@ const handleBookingConfirm = async (
     </Reveal>
   </div>
 </div>
-       {/* ── SECTION 4: TESTIMONIALS ── */}
+      {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Matches the 12px horizontal side spacing framework used in previous sections */}
+  {/* CSS INJECT: Advanced mobile compression and left-alignment engine */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2549,7 +2549,7 @@ const handleBookingConfirm = async (
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
       }
 
-      /* Keeps container at 100% but forces layout containment alignment centering */
+      /* Keeps container at 100% and focuses child alignment strictly to the LEFT boundary */
       .cp-mobile-combo-column {
         flex: 0 0 100% !important;
         width: 100% !important;
@@ -2557,57 +2557,62 @@ const handleBookingConfirm = async (
         max-width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: center !important;
-        gap: 12px !important; 
+        align-items: flex-start !important; /* Aligns all inner cards to the LEFT edge, not center */
+        gap: 8px !important; 
         box-sizing: border-box !important;
         padding: 0 !important;
       }
 
-      /* Rectangular feedback card box design structure pulled tightly inward matching green lines */
+      /* COMPRESSION FIX: Rectangular card structure with 80% reduced top/bottom padding footprint (like Image 3) */
       .cp-mobile-card {
-        width: 86% !important; 
-        max-width: 300px !important; /* Locks width cleanly to match your green layout target bounds */
+        width: 100% !important; 
+        max-width: calc(100vw - 24px) !important; /* Viewport minus combined system gutters (24px) */
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
-        padding: 16px !important; 
+        
+        /* THE CRUCIAL PADDING COMPRESSION FIX: Reduced from 16px to 10px (matching Reference footprint) */
+        padding: 10px 14px !important; 
+        
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 110px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
+        min-height: 96px !important; /* 80% compressed scale footprint (down from 120px) */
+        margin: 0 !important;
         overflow: hidden !important;
       }
 
+      /* ALIGNMENT FIX: Aligns stars to the LEFT (matching Image 2 and Image 3) */
       .cp-mobile-stars {
         color: #07b4ba;
         font-size: 10px; /* Scaled down from 11px */
-        margin-bottom: 4px; 
-        text-align: center !important;
+        margin-bottom: 2px; /* Reduced from 4px to 2px */
+        text-align: left !important; /* Forces stars to the left wall */
       }
 
-      /* Custom Mobile Typography Engine: Forces long sentences to balance drop down into 2-3 lines */
+      /* Typography Engine: LEFT ALIGNS ALL TEXT with compressed margin/line windows */
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
         font-size: 10px !important; 
-        line-height: 1.4 !important; 
-        margin: 0 auto 8px auto !important; 
+        line-height: 1.3 !important; /* Tighter vertical spacing window */
+        margin: 0 0 6px 0; /* Reduced margin from 8px to 6px */
         font-style: italic;
         white-space: normal !important;
         word-break: break-word !important;
         display: block !important;
         width: 100% !important;
-        max-width: 230px !important; /* Constrains text width boundary forcing clean 3-line structural wrapping */
-        text-align: center !important;
+        
+        /* ALIGNMENT FIX: Strictly LEFT aligned content footprint */
+        text-align: left !important;
       }
 
+      /* User container anchored to the bottom LEFT wall */
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
-        justify-content: center !important;
+        justify-content: flex-start !important; /* Aligns avatar and name to the LEFT boundary */
         gap: 6px;
         margin-top: auto;
         width: 100% !important;
