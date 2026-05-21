@@ -792,28 +792,32 @@ const IconGlobe = () => (
 const whatCards = [
   {
     icon: <IconPlan />,
-    title: "Personalised Training Plan",
-    desc: "Custom program built around your goals, schedule, and current level",
+    title: "MADE EXCLUSIVELY FOR BEGINNERS",
+    desc: "Clear guidance from day one",
   },
+
   {
     icon: <IconChat />,
-    title: "Direct Coach Access",
-    desc: "WhatsApp access for questions, check-ins, and accountability between sessions",
+    title: "STRUCTURED PROGRESSION",
+    desc: "Stance → punches → kicks → combinations",
   },
+
   {
     icon: <IconLeaf />,
-    title: "Nutrition Guidance",
-    desc: "Simple, effective nutrition advice to support performance, recovery, and body composition",
+    title: "NO EQUIPMENT OR PARTNER NEEDED",
+    desc: "Train effectively from the comfort of your home.",
   },
+
   {
     icon: <IconChart />,
-    title: "Progress Tracking",
-    desc: "We track your progress, adjust the plan and keep you moving in the right direction",
+    title: "TAMIL-GUIDED INSTRUCTION",
+    desc: "For better understanding",
   },
+
   {
     icon: <IconGlobe />,
-    title: "Game Plan",
-    desc: "Opponent-based strategies tailored to your fight style",
+    title: "JUST 30-40 MINUTES A DAY",
+    desc: "Built for busy schedules",
   },
 ];
 
