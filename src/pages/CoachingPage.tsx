@@ -2759,7 +2759,7 @@ const handleBookingConfirm = async (
 
    {/* ── MOBILE VIEW CONTAINER ── */}
 <div className="cp-mobile-slider-wrapper">
-  {/* CSS INJECT: Constrains the feedback rectangle box from overflowing the screen */}
+  {/* CSS INJECT: Constrains and shapes the feedback boxes to match the green boundary line targets */}
   <style>{`
     @media (max-width: 768px) {
       /* 1. Force the viewport to perfectly clip sliding content to the screen width */
@@ -2774,30 +2774,43 @@ const handleBookingConfirm = async (
         width: 100% !important;
       }
 
-      /* 3. Force individual slide elements to match the screen view width and apply system margins */
+      /* 3. Force individual slide elements to match the screen view width */
       .cp-mobile-track > div {
         min-width: 100% !important;
         max-width: 100% !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
-        padding-left: 12px !important;   /* Matches system horizontal gutter limits */
-        padding-right: 12px !important;  /* Matches system horizontal gutter limits */
       }
 
-      /* 4. Constrain the actual rectangle feedback box so it sits cleanly inside the boundaries */
+      /* 4. Pull the box ends inward to match the green layout lines precisely */
       .cp-mobile-track .cp-form-box,
       .cp-mobile-track .cp-feedback-box,
       .cp-mobile-track [className*="card"],
       .cp-mobile-track [className*="-box"] {
-        width: 100% !important;
-        max-width: calc(100vw - 24px) !important; /* Viewport minus the combined 12px + 12px side gutters */
+        width: 86% !important;              /* Brings left and right ends inward */
+        max-width: 320px !important;         /* Hard limit setting the stable rectangle structure */
         box-sizing: border-box !important;
+        margin-left: auto !important;        /* Centers the box on screen */
+        margin-right: auto !important;       /* Centers the box on screen */
+        
+        /* Internal rectangle padding layout */
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+
+      /* 5. Force single lines of feedback text to wrap into 2-3 clean stacked lines */
+      .cp-mobile-track .cp-feedback-box p,
+      .cp-mobile-track [className*="card"] p,
+      .cp-mobile-track [className*="-box"] p {
+        white-space: normal !important;      /* Unlocks single line overflow restrictions */
+        word-break: break-word !important;   /* Prevents any clipping of long words */
+        max-width: 280px !important;         /* Confines text bounds so it drops down naturally */
         margin-left: auto !important;
         margin-right: auto !important;
-        
-        /* Balanced interior padding so text elements don't press up against the card borders */
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        text-align: center !important;       /* Balanced alignment within the box walls */
+        line-height: 1.5 !important;         /* Clean line row vertical spacing */
       }
     }
   `}</style>
