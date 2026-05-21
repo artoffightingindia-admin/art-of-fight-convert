@@ -2495,7 +2495,7 @@ const handleBookingConfirm = async (
 </div>
       {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Advanced mobile compression and left-alignment engine */}
+  {/* CSS INJECT: Advanced mobile compression and center-alignment engine */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2549,7 +2549,7 @@ const handleBookingConfirm = async (
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
       }
 
-      /* Keeps container at 100% and focuses child alignment strictly to the LEFT boundary */
+      /* Keeps container at 100% and focuses child alignment strictly to the CENTER boundary */
       .cp-mobile-combo-column {
         flex: 0 0 100% !important;
         width: 100% !important;
@@ -2557,13 +2557,13 @@ const handleBookingConfirm = async (
         max-width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important; /* Aligns all inner cards to the LEFT edge, not center */
+        align-items: center !important; /* BACK TO CENTER: Aligns all inner cards to the center edge */
         gap: 8px !important; 
         box-sizing: border-box !important;
         padding: 0 !important;
       }
 
-      /* COMPRESSION FIX: Rectangular card structure with 80% reduced top/bottom padding footprint (like Image 3) */
+      /* COMPRESSION FIX: Rectangular card structure with 80% reduced top/bottom padding footprint */
       .cp-mobile-card {
         width: 100% !important; 
         max-width: calc(100vw - 24px) !important; /* Viewport minus combined system gutters (24px) */
@@ -2572,7 +2572,7 @@ const handleBookingConfirm = async (
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
         
-        /* THE CRUCIAL PADDING COMPRESSION FIX: Reduced from 16px to 10px (matching Reference footprint) */
+        /* THE CRUCIAL PADDING COMPRESSION FIX: Reduced from 16px to 10px */
         padding: 10px 14px !important; 
         
         display: flex !important;
@@ -2583,36 +2583,36 @@ const handleBookingConfirm = async (
         overflow: hidden !important;
       }
 
-      /* ALIGNMENT FIX: Aligns stars to the LEFT (matching Image 2 and Image 3) */
+      /* ALIGNMENT FIX: Aligns stars to the CENTER */
       .cp-mobile-stars {
         color: #07b4ba;
         font-size: 10px; /* Scaled down from 11px */
         margin-bottom: 2px; /* Reduced from 4px to 2px */
-        text-align: left !important; /* Forces stars to the left wall */
+        text-align: center !important; /* BACK TO CENTER: Forces stars to the center */
       }
 
-      /* Typography Engine: LEFT ALIGNS ALL TEXT with compressed margin/line windows */
+      /* Typography Engine: CENTER ALIGNS ALL TEXT with compressed margin/line windows */
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
         font-size: 10px !important; 
         line-height: 1.3 !important; /* Tighter vertical spacing window */
-        margin: 0 0 6px 0; /* Reduced margin from 8px to 6px */
+        margin: 0 auto 6px auto !important; /* BACK TO CENTER: Centers the element block */
         font-style: italic;
         white-space: normal !important;
         word-break: break-word !important;
         display: block !important;
         width: 100% !important;
         
-        /* ALIGNMENT FIX: Strictly LEFT aligned content footprint */
-        text-align: left !important;
+        /* ALIGNMENT FIX: Strictly CENTER aligned content footprint */
+        text-align: center !important;
       }
 
-      /* User container anchored to the bottom LEFT wall */
+      /* User container anchored to the bottom CENTER wall */
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-start !important; /* Aligns avatar and name to the LEFT boundary */
+        justify-content: center !important; /* BACK TO CENTER: Aligns avatar and name in the center */
         gap: 6px;
         margin-top: auto;
         width: 100% !important;
@@ -2636,13 +2636,13 @@ const handleBookingConfirm = async (
         font-size: 10px; /* Scaled down from 11px */
         font-weight: 600;
         line-height: 1.1;
-        text-align: left !important;
+        text-align: center !important; /* BACK TO CENTER: Text line inside grid alignment */
       }
       .cp-mobile-info span {
         color: rgba(255, 255, 255, 0.35);
         font-size: 8px;
         display: block !important;
-        text-align: left !important;
+        text-align: center !important; /* BACK TO CENTER: Subtext line alignment */
       }
 
       /* Control navigation arrow layer layout */
