@@ -1656,7 +1656,129 @@ const roadmapCards = [
 
           </div>
 
-          {/* ───────── BONUSES SECTION ───────── */}
+
+          {/* FOOTER */}
+
+          <div
+            style={{
+              padding: "16px",
+
+              borderTop:
+                "1px solid rgba(255,255,255,0.06)",
+
+              textAlign: "center",
+            }}
+          >
+
+            <p
+  style={{
+    fontFamily: "'Bebas Neue', sans-serif",
+    fontSize: 22,
+    color: "#07b4ba",
+    letterSpacing: 1,
+  }}
+>
+  {card.days}
+</p>
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+        {/* ── COACH SECTION (image 2) ── */}
+        <div className="pp-coach-bg">
+          <div className="pp-book-strip">
+            <button onClick={scrollToFooter}>Join Now</button>
+          </div>
+          <div className="pp-section" style={{ paddingBottom: 40 }}>
+            <Reveal>
+              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba", fontWeight: 700, marginBottom: 24, letterSpacing: 2, textTransform: "uppercase" }}>
+                LED BY
+              </p>
+              <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
+                  alt="Head Coach"
+                  style={{ width: 240, height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}
+                />
+                <div style={{ flex: 1, minWidth: 280 }}>
+                  <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: 2, color: "#fff", marginBottom: 4 }}>Head Coach</h2>
+                  <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 20 }}>
+                    AOF Academy — Lead Trainer &amp; Founder
+                  </p>
+                  <div style={{ marginBottom: 24 }}>
+                    {coachCredentials.map((cred, i) => (
+                      <div key={i} className="pp-checklist-item">
+                        <span className="check">✓</span>
+                        <p>{cred}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="pp-coach-stats" style={{ display: "flex", gap: 22, flexWrap: "wrap", marginTop: 26 }}>
+                    {stats.map((stat, i) => (
+                      <div key={i} style={{ background: "linear-gradient(180deg,#181818 0%, #121212 100%)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, width: 160, height: 140, padding: "18px 16px", textAlign: "center", boxShadow: "0 0 14px rgba(0,0,0,0.18)" }}>
+                        <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#07b4ba", letterSpacing: 1, marginBottom: 10 }}>{stat.val}</p>
+                        <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 12, letterSpacing: 2, textTransform: "uppercase" }}>{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* ── TESTIMONIALS (image 3 & 4) ── */}
+        <div className="pp-testi-bg">
+          <div className="pp-section" style={{ paddingTop: 48 }}>
+            <Reveal>
+              <div style={{ textAlign: "center", marginBottom: 44 }}>
+                <p style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>
+                  Real People, Real Results
+                </p>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,56px)", letterSpacing: 2, color: "#fff", marginTop: 8, lineHeight: 1 }}>
+                  Trusted By Fighters,{" "}
+                  <span style={{ color: "#07b4ba" }}>Proven Results</span>
+                </h2>
+                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 8, fontSize: 14 }}>
+                  Here's What Athletes Say About Their Transformation With AOF
+                </p>
+              </div>
+            </Reveal>
+            <Reveal>
+              <div className="pp-testi-main">
+                <div className="pp-testi-img">
+                  <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete" />
+                </div>
+                <div style={{ flex: 1, minWidth: 260 }}>
+                  <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,3vw,42px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 16, color: "#fff" }}>
+                    AOF Changed The Way{" "}
+                    <span style={{ color: "#07b4ba" }}>I Train And Perform.</span>
+                  </h3>
+                  <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.75 }}>
+                    The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
+                  </p>
+                  <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 14, color: "#07b4ba", fontWeight: 700, fontSize: 14 }}>
+                    — Alex M., Amateur MMA Fighter
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal>
+              <InfiniteFeedbackSlider />
+            </Reveal>
+          </div>
+        </div>
+            {/* ───────── BONUSES SECTION ───────── */}
 
 <div
   style={{
@@ -2047,127 +2169,6 @@ const roadmapCards = [
   </div>
 </div>
 
-          {/* FOOTER */}
-
-          <div
-            style={{
-              padding: "16px",
-
-              borderTop:
-                "1px solid rgba(255,255,255,0.06)",
-
-              textAlign: "center",
-            }}
-          >
-
-            <p
-  style={{
-    fontFamily: "'Bebas Neue', sans-serif",
-    fontSize: 22,
-    color: "#07b4ba",
-    letterSpacing: 1,
-  }}
->
-  {card.days}
-</p>
-
-</div>
-
-</div>
-
-))}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-        {/* ── COACH SECTION (image 2) ── */}
-        <div className="pp-coach-bg">
-          <div className="pp-book-strip">
-            <button onClick={scrollToFooter}>Join Now</button>
-          </div>
-          <div className="pp-section" style={{ paddingBottom: 40 }}>
-            <Reveal>
-              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba", fontWeight: 700, marginBottom: 24, letterSpacing: 2, textTransform: "uppercase" }}>
-                LED BY
-              </p>
-              <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
-                  alt="Head Coach"
-                  style={{ width: 240, height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}
-                />
-                <div style={{ flex: 1, minWidth: 280 }}>
-                  <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: 2, color: "#fff", marginBottom: 4 }}>Head Coach</h2>
-                  <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 20 }}>
-                    AOF Academy — Lead Trainer &amp; Founder
-                  </p>
-                  <div style={{ marginBottom: 24 }}>
-                    {coachCredentials.map((cred, i) => (
-                      <div key={i} className="pp-checklist-item">
-                        <span className="check">✓</span>
-                        <p>{cred}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="pp-coach-stats" style={{ display: "flex", gap: 22, flexWrap: "wrap", marginTop: 26 }}>
-                    {stats.map((stat, i) => (
-                      <div key={i} style={{ background: "linear-gradient(180deg,#181818 0%, #121212 100%)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, width: 160, height: 140, padding: "18px 16px", textAlign: "center", boxShadow: "0 0 14px rgba(0,0,0,0.18)" }}>
-                        <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#07b4ba", letterSpacing: 1, marginBottom: 10 }}>{stat.val}</p>
-                        <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 12, letterSpacing: 2, textTransform: "uppercase" }}>{stat.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* ── TESTIMONIALS (image 3 & 4) ── */}
-        <div className="pp-testi-bg">
-          <div className="pp-section" style={{ paddingTop: 48 }}>
-            <Reveal>
-              <div style={{ textAlign: "center", marginBottom: 44 }}>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>
-                  Real People, Real Results
-                </p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,56px)", letterSpacing: 2, color: "#fff", marginTop: 8, lineHeight: 1 }}>
-                  Trusted By Fighters,{" "}
-                  <span style={{ color: "#07b4ba" }}>Proven Results</span>
-                </h2>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 8, fontSize: 14 }}>
-                  Here's What Athletes Say About Their Transformation With AOF
-                </p>
-              </div>
-            </Reveal>
-            <Reveal>
-              <div className="pp-testi-main">
-                <div className="pp-testi-img">
-                  <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete" />
-                </div>
-                <div style={{ flex: 1, minWidth: 260 }}>
-                  <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,3vw,42px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 16, color: "#fff" }}>
-                    AOF Changed The Way{" "}
-                    <span style={{ color: "#07b4ba" }}>I Train And Perform.</span>
-                  </h3>
-                  <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.75 }}>
-                    The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
-                  </p>
-                  <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 14, color: "#07b4ba", fontWeight: 700, fontSize: 14 }}>
-                    — Alex M., Amateur MMA Fighter
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal>
-              <InfiniteFeedbackSlider />
-            </Reveal>
-          </div>
-        </div>
 
         {/* ── FAQ (image 5) ── */}
         <FAQSection />
