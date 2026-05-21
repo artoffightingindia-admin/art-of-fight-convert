@@ -2863,11 +2863,6 @@ const handleBookingConfirm = async (
           });
         }}
       >
-        {/* Your mapped slide array components go directly here inside the track */}
-      </div>
-    </div>
-  </Reveal>
-</div>
             {/* [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 3 */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
