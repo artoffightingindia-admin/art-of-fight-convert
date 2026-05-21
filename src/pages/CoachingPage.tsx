@@ -2515,7 +2515,7 @@ const handleBookingConfirm = async (
       .cp-desktop-slider-wrapper {
         display: none !important;
       }
-       
+        
       .cp-mobile-slider-wrapper {
         display: flex !important;
         flex-direction: column !important;
@@ -2544,55 +2544,73 @@ const handleBookingConfirm = async (
       .cp-mobile-track {
         display: flex !important;
         flex-direction: row !important;
+        flex-wrap: nowrap !important;
         width: 100% !important;
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
       }
 
-      /* Keeps container at 100% but forces a strict 3px internal side gutter mask */
+      /* Keeps container at 100% but forces layout containment alignment centering */
       .cp-mobile-combo-column {
         flex: 0 0 100% !important;
         width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important; /* Compressed to 80% size footprint */
+        align-items: center !important;
+        gap: 12px !important; 
         box-sizing: border-box !important;
-        padding: 0 3px !important; /* Exact 3px horizontal gap mask on each side */
+        padding: 0 !important;
       }
 
-      /* Rectangular feedback card box design structure with curved edges - 80% optimized height/padding footprint */
+      /* Rectangular feedback card box design structure pulled tightly inward matching green lines */
       .cp-mobile-card {
-        width: 100% !important;
+        width: 86% !important; 
+        max-width: 300px !important; /* Locks width cleanly to match your green layout target bounds */
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
-        padding: 10px !important; /* Reduced from 14px to 10px (80% scale) */
+        padding: 16px !important; 
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 96px !important; /* Reduced from 120px to 96px (80% scale) */
+        min-height: 110px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        overflow: hidden !important;
       }
 
       .cp-mobile-stars {
         color: #07b4ba;
         font-size: 10px; /* Scaled down from 11px */
-        margin-bottom: 2px; /* Reduced from 4px to 2px */
+        margin-bottom: 4px; 
+        text-align: center !important;
       }
 
+      /* Custom Mobile Typography Engine: Forces long sentences to balance drop down into 2-3 lines */
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 10px !important; /* Scaled down from 11px */
-        line-height: 1.3 !important; /* Tighter typography spacing window */
-        margin: 0 0 6px 0; /* Reduced margin from 8px to 6px */
+        font-size: 10px !important; 
+        line-height: 1.4 !important; 
+        margin: 0 auto 8px auto !important; 
         font-style: italic;
+        white-space: normal !important;
+        word-break: break-word !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 230px !important; /* Constrains text width boundary forcing clean 3-line structural wrapping */
+        text-align: center !important;
       }
 
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
+        justify-content: center !important;
         gap: 6px;
         margin-top: auto;
+        width: 100% !important;
       }
 
       .cp-mobile-avatar {
@@ -2613,10 +2631,13 @@ const handleBookingConfirm = async (
         font-size: 10px; /* Scaled down from 11px */
         font-weight: 600;
         line-height: 1.1;
+        text-align: left !important;
       }
       .cp-mobile-info span {
         color: rgba(255, 255, 255, 0.35);
         font-size: 8px;
+        display: block !important;
+        text-align: left !important;
       }
 
       /* Control navigation arrow layer layout */
@@ -2757,125 +2778,69 @@ const handleBookingConfirm = async (
       </Reveal>
     </div>
 
-   {/* ── MOBILE VIEW CONTAINER ── */}
-<div className="cp-mobile-slider-wrapper">
-  {/* CSS INJECT: Constrains and shapes the feedback boxes to match the green boundary line targets */}
-  <style>{`
-    @media (max-width: 768px) {
-      /* 1. Force the viewport to perfectly clip sliding content to the screen width */
-      .cp-mobile-viewport {
-        overflow: hidden !important;
-        width: 100% !important;
-      }
+    {/* ── MOBILE VIEW CONTAINER ── */}
+    <div className="cp-mobile-slider-wrapper">
+      <Reveal>
+        <div className="cp-mobile-viewport">
+          <div 
+            className="cp-mobile-track" 
+            id="mobileSliderTrack"
+            ref={(el) => {
+              if (!el) return;
+              if ((el as any).initialized) return;
+              (el as any).initialized = true;
 
-      /* 2. Lock the track slide wrappers to the exact width of the screen viewport */
-      .cp-mobile-track {
-        display: flex !important;
-        width: 100% !important;
-      }
+              let currentIndex = 1; 
+              let intervalId;
+              const totalRealSlides = 3;
 
-      /* 3. Force individual slide elements to match the screen view width */
-      .cp-mobile-track > div {
-        min-width: 100% !important;
-        max-width: 100% !important;
-        flex-shrink: 0 !important;
-        box-sizing: border-box !important;
-      }
+              el.style.transform = `translateX(-100%)`;
 
-      /* 4. Pull the box ends inward to match the green layout lines precisely */
-      .cp-mobile-track .cp-form-box,
-      .cp-mobile-track .cp-feedback-box,
-      .cp-mobile-track [className*="card"],
-      .cp-mobile-track [className*="-box"] {
-        width: 86% !important;              /* Brings left and right ends inward */
-        max-width: 320px !important;         /* Hard limit setting the stable rectangle structure */
-        box-sizing: border-box !important;
-        margin-left: auto !important;        /* Centers the box on screen */
-        margin-right: auto !important;       /* Centers the box on screen */
-        
-        /* Internal rectangle padding layout */
-        padding-top: 24px !important;
-        padding-bottom: 24px !important;
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-      }
+              const updateTrackPosition = (smooth = true) => {
+                el.style.transition = smooth ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)" : "none";
+                el.style.transform = `translateX(-${currentIndex * 100}%)`;
+              };
 
-      /* 5. Force single lines of feedback text to wrap into 2-3 clean stacked lines */
-      .cp-mobile-track .cp-feedback-box p,
-      .cp-mobile-track [className*="card"] p,
-      .cp-mobile-track [className*="-box"] p {
-        white-space: normal !important;      /* Unlocks single line overflow restrictions */
-        word-break: break-word !important;   /* Prevents any clipping of long words */
-        max-width: 280px !important;         /* Confines text bounds so it drops down naturally */
-        margin-left: auto !important;
-        margin-right: auto !important;
-        text-align: center !important;       /* Balanced alignment within the box walls */
-        line-height: 1.5 !important;         /* Clean line row vertical spacing */
-      }
-    }
-  `}</style>
+              const handleNext = () => {
+                currentIndex++;
+                updateTrackPosition(true);
 
-  <Reveal>
-    <div className="cp-mobile-viewport">
-      <div 
-        className="cp-mobile-track" 
-        id="mobileSliderTrack"
-        ref={(el) => {
-          if (!el) return;
-          if ((el as any).initialized) return;
-          (el as any).initialized = true;
+                if (currentIndex === totalRealSlides + 1) {
+                  setTimeout(() => {
+                    currentIndex = 1;
+                    updateTrackPosition(false);
+                  }, 500);
+                }
+              };
 
-          let currentIndex = 1; 
-          let intervalId;
-          const totalRealSlides = 3;
+              const handlePrev = () => {
+                currentIndex--;
+                updateTrackPosition(true);
 
-          el.style.transform = `translateX(-100%)`;
+                if (currentIndex === 0) {
+                  setTimeout(() => {
+                    currentIndex = totalRealSlides;
+                    updateTrackPosition(false);
+                  }, 500);
+                }
+              };
 
-          const updateTrackPosition = (smooth = true) => {
-            el.style.transition = smooth ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)" : "none";
-            el.style.transform = `translateX(-${currentIndex * 100}%)`;
-          };
+              (el as any).slideNext = handleNext;
+              (el as any).slidePrev = handlePrev;
 
-          const handleNext = () => {
-            currentIndex++;
-            updateTrackPosition(true);
+              const startAutoPlay = () => {
+                intervalId = setInterval(handleNext, 3800);
+              };
 
-            if (currentIndex === totalRealSlides + 1) {
-              setTimeout(() => {
-                currentIndex = 1;
-                updateTrackPosition(false);
-              }, 500);
-            }
-          };
+              startAutoPlay();
 
-          const handlePrev = () => {
-            currentIndex--;
-            updateTrackPosition(true);
-
-            if (currentIndex === 0) {
-              setTimeout(() => {
-                currentIndex = totalRealSlides;
-                updateTrackPosition(false);
-              }, 500);
-            }
-          };
-
-          (el as any).slideNext = handleNext;
-          (el as any).slidePrev = handlePrev;
-
-          const startAutoPlay = () => {
-            intervalId = setInterval(handleNext, 3800);
-          };
-
-          startAutoPlay();
-
-          el.addEventListener('touchstart', () => clearInterval(intervalId));
-          el.addEventListener('touchend', () => {
-            clearInterval(intervalId);
-            startAutoPlay();
-          });
-        }}
-      >
+              el.addEventListener('touchstart', () => clearInterval(intervalId));
+              el.addEventListener('touchend', () => {
+                clearInterval(intervalId);
+                startAutoPlay();
+              });
+            }}
+          >
             {/* [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 3 */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
