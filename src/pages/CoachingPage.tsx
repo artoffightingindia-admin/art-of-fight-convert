@@ -2137,108 +2137,113 @@ const handleBookingConfirm = async (
           </div>
         </nav>
 
-       {/* ── SECTION 1: SYSTEM METRICS ── */}
-<div id="system" className="cp-system-bg">
-  {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
+      {/* ── SECTION 1: HERO ── */}
+<section id="home" className="cp-hero">
+  {/* CSS INJECT: Forces compressed left and right side padding gutters uniformly across the section elements */}
   <style>{`
-    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
-    .cp-sys-spacing-sync {
-      padding-top: 96px !important;    /* Sync with md:py-24 */
-      padding-bottom: 96px !important; /* Sync with md:py-24 */
-    }
-    .cp-sys-header-margin-sync {
-      margin-bottom: 48px !important;  /* Sync with mb-12 */
-    }
-
-    /* MOBILE BREAKPOINT FORCE LOCK */
     @media (max-width: 768px) {
-      .cp-sys-spacing-sync {
-        padding-top: 64px !important;    /* Sync with py-16 */
-        padding-bottom: 64px !important; /* Sync with py-16 */
-        padding-left: 12px !important;   /* System mobile horizontal gutter lock */
-        padding-right: 12px !important;  /* System mobile horizontal gutter lock */
+      .cp-hero-content {
+        padding-left: 12px !important;   /* Decreased left padding to push content closer to edges */
+        padding-right: 12px !important;  /* Decreased right padding to push content closer to edges */
       }
-      .cp-sys-header-margin-sync {
-        margin-bottom: 48px !important;  /* Stays synced with mb-12 */
+      .cp-trust {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+      .cp-pain-grid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
       }
     }
   `}</style>
 
-  <div className="cp-section cp-sys-spacing-sync">
+  <div
+    className="cp-hero-bg"
+    style={{
+      background: `
+        linear-gradient(to right, #0a0a0a 38%, rgba(10,10,10,0.65) 62%, transparent 100%),
+        url("https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80") center right / cover no-repeat
+      `,
+    }}
+  />
+  <div className="cp-hero-overlay" />
+  <div className="cp-hero-content">
     <Reveal>
-      {/* Centered title section synchronized to match reference margins exactly */}
-      <div className="cp-sys-header-margin-sync" style={{ textAlign: "center" }}>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "#07b4ba",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-          }}
-        >
-          The Blueprint of Performance
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
-            letterSpacing: 2,
-            color: "#fff",
-            marginTop: 8,
-            lineHeight: 1,
-          }}
-        >
-          Engineered to <span style={{ color: "#07b4ba" }}>Transform</span>
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.42)",
-            marginTop: 8,
-            fontSize: 14,
-          }}
-        >
-          Track your progress through objective metrics designed to elevate your game.
-        </p>
+      <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
+      <h1 className="cp-hero-h1">
+        Train Like A<br />
+        <span>Champion.</span><br />
+        Fight Like One
+      </h1>
+      <p className="cp-hero-desc">
+        Stop training in the crowd. Get a personalized coaching program built around your body, your goals,
+        and your timeline — guided by coaches who have been in the ring.
+      </p>
+      {/* CHANGE 1: Only "Book A Call" button remains; "See Results" button removed */}
+      <div className="cp-hero-btns">
+        <button className="cp-btn-primary" onClick={scrollToForm}>
+          Book A Call
+        </button>
       </div>
     </Reveal>
-
-    {/* Metric Blocks Content Grid */}
-    <div className="cp-system-grid" style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
-      <div style={{ flex: 1, minWidth: 280 }} className="cp-metric-card-wrapper">
-        <Reveal>
-          <div className="cp-metric-card">
-            <h3>01</h3>
-            <h4>Technique Analysis</h4>
-            <p>Every punch, kick, and transition broken down into actionable feedback to refine your execution frame-by-frame.</p>
-          </div>
-        </Reveal>
-      </div>
-
-      <div style={{ flex: 1, minWidth: 280 }} className="cp-metric-card-wrapper">
-        <Reveal>
-          <div className="cp-metric-card">
-            <h3>02</h3>
-            <h4>Conditioning Loops</h4>
-            <p>High-intensity physical parameters measured consistently to ensure your cardio and stamina match your ring ambition.</p>
-          </div>
-        </Reveal>
-      </div>
-
-      <div style={{ flex: 1, minWidth: 280 }} className="cp-metric-card-wrapper">
-        <Reveal>
-          <div className="cp-metric-card">
-            <h3>03</h3>
-            <h4>Strategic Planning</h4>
-            <p>Customized fighting strategy roadmaps built entirely around your individual strength dynamics and long-term milestones.</p>
-          </div>
-        </Reveal>
-      </div>
-    </div>
   </div>
-</div>
+
+  <div className="cp-trust">
+    {trustItems.map(({ icon, label }) => (
+      <div className="cp-trust-item" key={label}>
+        <div className="trust-icon-box">{icon}</div>
+        <span>{label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+{/* ── SOUNDS FAMILIAR ── */}
+<section className="cp-section">
+  <div className="cp-pain-grid">
+
+    {/* LEFT CONTENT */}
+    <div className="cp-pain-right">
+      <Reveal>
+        <p className="cp-pain-label">
+          Sounds Familiar?
+        </p>
+
+        <h2 className="cp-pain-heading">
+          You're Training Hard...
+          <br />
+          But Still Not Improving
+        </h2>
+
+        <div className="cp-red-divider" />
+      </Reveal>
+
+      {painPoints.map((p, i) => (
+        <Reveal
+          key={i}
+          style={{
+            transitionDelay: `${i * 70}ms`
+          }}
+        >
+          <div className="cp-pain-item">
+            <p>{p}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+
+    {/* RIGHT IMAGE / VIDEO */}
+    <div className="cp-pain-media">
+      <Reveal>
+        <img
+          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1400&auto=format&fit=crop"
+          alt="AOF Training"
+        />
+      </Reveal>
+    </div>
+
+  </div>
+</section>
         {/* ── SECTION 2: TRAINING MODULES ── */}
 <div id="modules" className="cp-modules-bg">
   {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
