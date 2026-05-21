@@ -2111,8 +2111,8 @@ const roadmapCards = [
     src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png"
     alt="Gift Box"
     style={{
-      width: 42,
-      height: 42,
+      width: ,90
+      height: 90,
       objectFit: "contain",
       filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
     }}
