@@ -756,13 +756,65 @@ font-family: 'Bebas Neue', sans-serif;
 }
 `;
 
-const features = [
-  { tag: "# Made exclusively for beginners", desc: "Clear guidance from day one" },
-  { tag: "# Structured progression", desc: "Stance → punches → kicks → combinations" },
-  { tag: "# No equipment or partner needed", desc: "Train effectively from the comfort of your home." },
-  { tag: "# Tamil-guided instruction", desc: "For better understanding" },
-  { tag: "# Just 30-40 minutes a day Pre-recorded sessions", desc: "Built for busy schedules" },
-  { tag: "# Organized in a Private Notion Dashboard", desc: "Easy to access using Email." },
+const IconPlan = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
+  </svg>
+);
+
+const IconChat = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+);
+
+const IconLeaf = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" />
+  </svg>
+);
+
+const IconChart = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </svg>
+);
+
+const IconGlobe = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
+const whatCards = [
+  {
+    icon: <IconPlan />,
+    title: "Personalised Training Plan",
+    desc: "Custom program built around your goals, schedule, and current level",
+  },
+  {
+    icon: <IconChat />,
+    title: "Direct Coach Access",
+    desc: "WhatsApp access for questions, check-ins, and accountability between sessions",
+  },
+  {
+    icon: <IconLeaf />,
+    title: "Nutrition Guidance",
+    desc: "Simple, effective nutrition advice to support performance, recovery, and body composition",
+  },
+  {
+    icon: <IconChart />,
+    title: "Progress Tracking",
+    desc: "We track your progress, adjust the plan and keep you moving in the right direction",
+  },
+  {
+    icon: <IconGlobe />,
+    title: "Game Plan",
+    desc: "Opponent-based strategies tailored to your fight style",
+  },
 ];
 
 const weeks = [
