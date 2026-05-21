@@ -1272,16 +1272,21 @@ const roadmapCards = [
                     </Reveal>
                   ))}
                 </Reveal>
-                <Reveal delay={100}>
-                  <p className="pp-bonuses-h">Added Bonuses</p>
-                  {bonuses.map((b, i) => (
-                    <div className="pp-bonus-item" key={i}>
-                      <span className="pp-bonus-tag">{b.name}</span>
-                      <span className="pp-bonus-price pp-bonus-strike">{b.price}</span>
-                      <span className="pp-bonus-free">[FREE]</span>
-                    </div>
-                  ))}
-                </Reveal>
+<Reveal delay={100}>
+  <p className="pp-bonuses-h">Added Bonuses</p>
+
+  {bonuses.map((b, i) => (
+    <div className="pp-bonus-item" key={i}>
+      <span className="pp-bonus-tag">{b.name}</span>
+
+      <span className="pp-bonus-price pp-bonus-strike">
+        {b.price}
+      </span>
+
+      <span className="pp-bonus-free">[FREE]</span>
+    </div>
+  ))}
+</Reveal>
               </div>
             </div>
           </div>
