@@ -2111,9 +2111,10 @@ const roadmapCards = [
     src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png"
     alt="Gift Box"
     style={{
-      width: 90,
-      height: 90,
+      width: 150,
+      height: 150,
       objectFit: "contain",
+        marginTop: 6, 
       filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
     }}
   />
@@ -2142,6 +2143,7 @@ const roadmapCards = [
             letterSpacing: 2,
 
             color: "#07b4ba",
+            marginLeft: 8, /* moves ₹7499 slightly right */
           }}
         >
           ₹7,499
