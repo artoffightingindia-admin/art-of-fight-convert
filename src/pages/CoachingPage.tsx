@@ -2138,57 +2138,72 @@ const handleBookingConfirm = async (
         </nav>
 
         {/* ── SECTION 1: HERO ── */}
-        <section id="home" className="cp-hero">
-          <div
-            className="cp-hero-bg"
-            style={{
-              background: `
-                linear-gradient(to right, #0a0a0a 38%, rgba(10,10,10,0.65) 62%, transparent 100%),
-                url("https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80") center right / cover no-repeat
-              `,
-            }}
-          />
-          <div className="cp-hero-overlay" />
-          <div className="cp-hero-content">
-            <Reveal>
-              <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
-              <h1 className="cp-hero-h1">
-                Train Like A<br />
-                <span>Champion.</span><br />
-                Fight Like One
-              </h1>
-              <p className="cp-hero-desc">
-                Stop training in the crowd. Get a personalized coaching program built around your body, your goals,
-                and your timeline — guided by coaches who have been in the ring.
-              </p>
-              {/* CHANGE 1: Only "Book A Call" button remains; "See Results" button removed */}
-              <div className="cp-hero-btns">
-                <button className="cp-btn-primary" onClick={scrollToForm}>
-                  Book A Call
-                </button>
-              </div>
-            </Reveal>
-          </div>
+<section id="home" className="cp-hero">
+  {/* CSS INJECT: Forces compressed left and right side padding gutters uniformly across the section elements */}
+  <style>{`
+    @media (max-width: 768px) {
+      .cp-hero-content {
+        padding-left: 12px !important;   /* Decreased left padding to push content closer to edges */
+        padding-right: 12px !important;  /* Decreased right padding to push content closer to edges */
+      }
+      .cp-trust {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+      .cp-pain-grid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+    }
+  `}</style>
 
+  <div
+    className="cp-hero-bg"
+    style={{
+      background: `
+        linear-gradient(to right, #0a0a0a 38%, rgba(10,10,10,0.65) 62%, transparent 100%),
+        url("https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80") center right / cover no-repeat
+      `,
+    }}
+  />
+  <div className="cp-hero-overlay" />
+  <div className="cp-hero-content">
+    <Reveal>
+      <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
+      <h1 className="cp-hero-h1">
+        Train Like A<br />
+        <span>Champion.</span><br />
+        Fight Like One
+      </h1>
+      <p className="cp-hero-desc">
+        Stop training in the crowd. Get a personalized coaching program built around your body, your goals,
+        and your timeline — guided by coaches who have been in the ring.
+      </p>
+      {/* CHANGE 1: Only "Book A Call" button remains; "See Results" button removed */}
+      <div className="cp-hero-btns">
+        <button className="cp-btn-primary" onClick={scrollToForm}>
+          Book A Call
+        </button>
+      </div>
+    </Reveal>
+  </div>
 
-          <div className="cp-trust">
-            {trustItems.map(({ icon, label }) => (
-              <div className="cp-trust-item" key={label}>
-                <div className="trust-icon-box">{icon}</div>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+  <div className="cp-trust">
+    {trustItems.map(({ icon, label }) => (
+      <div className="cp-trust-item" key={label}>
+        <div className="trust-icon-box">{icon}</div>
+        <span>{label}</span>
+      </div>
+    ))}
+  </div>
+</section>
 
-        {/* ── SOUNDS FAMILIAR ── */}
+{/* ── SOUNDS FAMILIAR ── */}
 <section className="cp-section">
-
   <div className="cp-pain-grid">
 
     {/* LEFT CONTENT */}
     <div className="cp-pain-right">
-
       <Reveal>
         <p className="cp-pain-label">
           Sounds Familiar?
@@ -2204,263 +2219,283 @@ const handleBookingConfirm = async (
       </Reveal>
 
       {painPoints.map((p, i) => (
-
         <Reveal
           key={i}
           style={{
             transitionDelay: `${i * 70}ms`
           }}
         >
-
           <div className="cp-pain-item">
             <p>{p}</p>
           </div>
-
         </Reveal>
-
       ))}
-
     </div>
 
     {/* RIGHT IMAGE / VIDEO */}
     <div className="cp-pain-media">
-
       <Reveal>
-
         <img
           src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1400&auto=format&fit=crop"
           alt="AOF Training"
         />
-
       </Reveal>
-
     </div>
 
   </div>
-
 </section>
-
         {/* ── SECTION 2: AOF METHOD ── */}
-        <div className="cp-method-bg">
-          <div id="method" className="cp-method-bg">
-            <Reveal>
-              <div style={{ textAlign: "center", marginBottom: 40 }}>
-                <p
-                  style={{
-                    color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700,
-                    fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6,
-                  }}
-                >
-                  The AOF Method
-                </p>
-                <h2
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
-                    letterSpacing: 2, color: "#fff", lineHeight: 1,
-                  }}
-                >
-                  A Proven System.
-                </h2>
-                <h2
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
-                    letterSpacing: 2, color: "#07b4ba", lineHeight: 1,
-                  }}
-                >
-                  Real Transformation.
-                </h2>
-                <p
-                  style={{
-                    color: "rgba(255,255,255,0.38)", fontFamily: "'Barlow', sans-serif",
-                    fontSize: 11, marginTop: 10, letterSpacing: 3, textTransform: "uppercase",
-                  }}
-                >
-                  Complete Support. Every Step.
-                </p>
-                <div style={{ width: 48, height: 2, background: "#07b4ba", margin: "14px auto 0" }} />
-              </div>
-            </Reveal>
+<div className="cp-method-bg">
+  <div id="method" className="cp-method-bg">
+    {/* CSS INJECT: Matches the exact horizontal side spacing framework used in Section 1 */}
+    <style>{`
+      @media (max-width: 768px) {
+        #method {
+          padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+          padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+        }
+        .cp-method-grid {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .cp-what-cards {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .cp-new-promise {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+      }
+    `}</style>
 
-            <div className="cp-method-grid">
-              {/* Text left on desktop */}
-              <div className="cp-method-text">
-                {methodItems.map((item, i) => (
-                  <Reveal key={i}>
-                    <div className="cp-method-item">
-                      <div className="cp-method-item-icon">{item.icon}</div>
-                      <div>
-                       <p className="cp-method-line">{item.desc}</p>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+    <Reveal>
+      <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <p
+          style={{
+            color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700,
+            fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6,
+          }}
+        >
+          The AOF Method
+        </p>
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+            letterSpacing: 2, color: "#fff", lineHeight: 1,
+          }}
+        >
+          A Proven System.
+        </h2>
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+            letterSpacing: 2, color: "#07b4ba", lineHeight: 1,
+          }}
+        >
+          Real Transformation.
+        </h2>
+        <p
+          style={{
+            color: "rgba(255,255,255,0.38)", fontFamily: "'Barlow', sans-serif",
+            fontSize: 11, marginTop: 10, letterSpacing: 3, textTransform: "uppercase",
+          }}
+        >
+          Complete Support. Every Step.
+        </p>
+        <div style={{ width: 48, height: 2, background: "#07b4ba", margin: "14px auto 0" }} />
+      </div>
+    </Reveal>
 
-              {/* Image right on desktop */}
-              <div className="cp-method-image">
-                <img
-                  src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80"
-                  alt="AOF Method Training"
-                  style={{ width: "100%", borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", display: "block" }}
-                />
+    <div className="cp-method-grid">
+      {/* Text left on desktop */}
+      <div className="cp-method-text">
+        {methodItems.map((item, i) => (
+          <Reveal key={i}>
+            <div className="cp-method-item">
+              <div className="cp-method-item-icon">{item.icon}</div>
+              <div>
+               <p className="cp-method-line">{item.desc}</p>
               </div>
             </div>
+          </Reveal>
+        ))}
+      </div>
 
-            {/* WHAT YOU GET */}
-            <Reveal style={{ marginTop: 52 }}>
-              <h3
-                style={{
-                  textAlign: "center", fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: 28, letterSpacing: 2, color: "#fff", marginBottom: 20,
-                }}
-              >
-                What You Get
-              </h3>
-              <div className="cp-what-cards">
-                {whatCards.map((card, i) => (
-                  <div key={i} className="cp-what-card">
-                    <div className="cp-what-card-icon">{card.icon}</div>
-                    <h4>{card.title}</h4>
-                    <p>{card.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-            {/* ── NEW PROMISE SECTION ── */}
-{/* ── NEW PROMISE SECTION ── */}
-<Reveal style={{ marginTop: 50 }}>
-  <div className="cp-new-promise">
+      {/* Image right on desktop */}
+      <div className="cp-method-image">
+        <img
+          src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80"
+          alt="AOF Method Training"
+          style={{ width: "100%", borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", display: "block" }}
+        />
+      </div>
+    </div>
 
-    <p className="cp-new-promise-title">
-      Our Promise
-    </p>
+    {/* WHAT YOU GET */}
+    <Reveal style={{ marginTop: 52 }}>
+      <h3
+        style={{
+          textAlign: "center", fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 28, letterSpacing: 2, color: "#fff", marginBottom: 20,
+        }}
+      >
+        What You Get
+      </h3>
+      <div className="cp-what-cards">
+        {whatCards.map((card, i) => (
+          <div key={i} className="cp-what-card">
+            <div className="cp-what-card-icon">{card.icon}</div>
+            <h4>{card.title}</h4>
+            <p>{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Reveal>
 
-    <div className="cp-new-promise-line" />
+    {/* ── NEW PROMISE SECTION ── */}
+    <Reveal style={{ marginTop: 50 }}>
+      <div className="cp-new-promise">
+        <p className="cp-new-promise-title">
+          Our Promise
+        </p>
 
-    <p className="cp-new-promise-text">
-      <span className="cp-quote-mark">“</span>
-      Most fighters train hard. Very few train correctly.
-      AOF exists to close that gap — with structure,
-      accountability, and coaching that actually evolves
-      with you.
-    </p>
+        <div className="cp-new-promise-line" />
 
+        <p className="cp-new-promise-text">
+          <span className="cp-quote-mark">“</span>
+          Most fighters train hard. Very few train correctly.
+          AOF exists to close that gap — with structure,
+          accountability, and coaching that actually evolves
+          with you.
+        </p>
+      </div>
+    </Reveal>
   </div>
-</Reveal>
-          </div>
-        </div>
+</div>
+       {/* ── SECTION 3: YOUR COACH ── */}
+<div className="cp-coach-bg">
+  {/* CSS INJECT: Matches the exact 12px horizontal side spacing framework used in previous sections */}
+  <style>{`
+    @media (max-width: 768px) {
+      .cp-coach-bg .cp-section {
+        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+      }
+      .cp-coach-stats {
+        justify-content: center !important;
+      }
+    }
+  `}</style>
 
-        {/* ── SECTION 3: YOUR COACH ── */}
-        <div className="cp-coach-bg">
-          <div className="cp-book-strip">
-            <button onClick={scrollToForm}>Book A Call</button>
+  <div className="cp-book-strip">
+    <button onClick={scrollToForm}>Book A Call</button>
+  </div>
+  <div className="cp-section" style={{ paddingBottom: 40 }}>
+    <Reveal>
+      {/* CHANGE 2: "Led By" → "LED BY", font-size increased by +1pt (17px → 18px is already 17, so +1pt = 18px) */}
+      <p
+        style={{
+          fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba",
+          fontWeight: 700, marginBottom: 24, letterSpacing: 2,
+          textTransform: "uppercase",
+        }}
+      >
+        LED BY
+      </p>
+      <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <img
+          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
+          alt="Head Coach"
+          style={{
+            width: 240, height: 300, objectFit: "cover", objectPosition: "top",
+            borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0,
+          }}
+        />
+        <div style={{ flex: 1, minWidth: 280 }}>
+          <h2
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif", fontSize: 48,
+              letterSpacing: 2, color: "#fff", marginBottom: 4,
+            }}
+          >
+            Head Coach
+          </h2>
+          <p
+            style={{
+              color: "#07b4ba", fontFamily: "'Barlow', sans-serif",
+              fontWeight: 700, fontSize: 14, marginBottom: 20,
+            }}
+          >
+            AOF Academy — Lead Trainer &amp; Founder
+          </p>
+          <div style={{ marginBottom: 24 }}>
+            {/* CHANGE 2: coachCredentials array no longer contains the "3 continents" entry */}
+            {coachCredentials.map((cred, i) => (
+              <div key={i} className="cp-checklist-item">
+                <span className="check">✓</span>
+                <p>{cred}</p>
+              </div>
+            ))}
           </div>
-          <div className="cp-section" style={{ paddingBottom: 40 }}>
-            <Reveal>
-              {/* CHANGE 2: "Led By" → "LED BY", font-size increased by +1pt (17px → 18px is already 17, so +1pt = 18px) */}
-              <p
+          {/* Stats */}
+          <div
+            className="cp-coach-stats"
+            style={{
+              display: "flex",
+              gap: 22,
+              flexWrap: "wrap",
+              marginTop: 26,
+            }}
+          >
+            {stats.map((stat, i) => (
+              <div
+                key={i}
                 style={{
-                  fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba",
-                  fontWeight: 700, marginBottom: 24, letterSpacing: 2,
-                  textTransform: "uppercase",
+                  background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: 14,
+                  width: 160,
+                  height: 140,
+                  padding: "18px 16px",
+                  textAlign: "center",
+                  boxShadow: "0 0 14px rgba(0,0,0,0.18)",
                 }}
               >
-                LED BY
-              </p>
-              <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
-                  alt="Head Coach"
+                <p
                   style={{
-                    width: 240, height: 300, objectFit: "cover", objectPosition: "top",
-                    borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0,
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 42,
+                    color: "#07b4ba",
+                    letterSpacing: 1,
+                    marginBottom: 10,
                   }}
-                />
-                <div style={{ flex: 1, minWidth: 280 }}>
-                  <h2
-                    style={{
-                      fontFamily: "'Bebas Neue', sans-serif", fontSize: 48,
-                      letterSpacing: 2, color: "#fff", marginBottom: 4,
-                    }}
-                  >
-                    Head Coach
-                  </h2>
-                  <p
-                    style={{
-                      color: "#07b4ba", fontFamily: "'Barlow', sans-serif",
-                      fontWeight: 700, fontSize: 14, marginBottom: 20,
-                    }}
-                  >
-                    AOF Academy — Lead Trainer &amp; Founder
-                  </p>
-                  <div style={{ marginBottom: 24 }}>
-                    {/* CHANGE 2: coachCredentials array no longer contains the "3 continents" entry */}
-                    {coachCredentials.map((cred, i) => (
-                      <div key={i} className="cp-checklist-item">
-                        <span className="check">✓</span>
-                        <p>{cred}</p>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Stats */}
-                  <div
-                    className="cp-coach-stats"
-                    style={{
-                      display: "flex",
-                      gap: 22,
-                      flexWrap: "wrap",
-                      marginTop: 26,
-                    }}
-                  >
-                    {stats.map((stat, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
-                          border: "1px solid rgba(255,255,255,0.08)",
-                          borderRadius: 14,
-                          width: 160,
-                          height: 140,
-                          padding: "18px 16px",
-                          textAlign: "center",
-                          boxShadow: "0 0 14px rgba(0,0,0,0.18)",
-                        }}
-                      >
-                        <p
-                          style={{
-                            fontFamily: "'Bebas Neue', sans-serif",
-                            fontSize: 42,
-                            color: "#07b4ba",
-                            letterSpacing: 1,
-                            marginBottom: 10,
-                          }}
-                        >
-                          {stat.val}
-                        </p>
+                >
+                  {stat.val}
+                </p>
 
-                        <p
-                          style={{
-                            fontFamily: "'Barlow', sans-serif",
-                            color: "rgba(255,255,255,0.45)",
-                            fontSize: 12,
-                            letterSpacing: 2,
-                            textTransform: "uppercase",
-                          }}
-                        >
-                          {stat.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.45)",
+                    fontSize: 12,
+                    letterSpacing: 2,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {stat.label}
+                </p>
               </div>
-            </Reveal>
+            ))}
           </div>
         </div>
-
+      </div>
+    </Reveal>
+  </div>
+</div>
 {/* ── SECTION 4: TESTIMONIALS ── */}
 <div id="testimonials" className="cp-testi-bg">
-  {/* CSS INJECT: Final production build handling hardlocked viewports, custom 80% compressed sizing, 3px clean gutters, and true infinite cyclic looping */}
+  {/* CSS INJECT: Matches the 12px horizontal side spacing framework used in previous sections */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2472,10 +2507,15 @@ const handleBookingConfirm = async (
 
     /* MOBILE BREAKPOINT FORCE LOCK */
     @media (max-width: 768px) {
+      .cp-section-mobile-fix {
+        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+      }
+
       .cp-desktop-slider-wrapper {
         display: none !important;
       }
-      
+       
       .cp-mobile-slider-wrapper {
         display: flex !important;
         flex-direction: column !important;
@@ -2710,14 +2750,14 @@ const handleBookingConfirm = async (
       </div>
     </Reveal>
 
-    {/* ── DESKTOP VIEW CONTAINER: UNTOUCHED ── */}
+    {/* ── DESKTOP VIEW CONTAINER ── */}
     <div className="cp-desktop-slider-wrapper">
       <Reveal>
         <InfiniteFeedbackSlider />
       </Reveal>
     </div>
 
-    {/* ── MOBILE VIEW CONTAINER: HARDLOCKED VIEWPORTS & TRUE SEAMLESS CYCLIC ROTATION ── */}
+    {/* ── MOBILE VIEW CONTAINER ── */}
     <div className="cp-mobile-slider-wrapper">
       <Reveal>
         <div className="cp-mobile-viewport">
@@ -2733,7 +2773,6 @@ const handleBookingConfirm = async (
               let intervalId;
               const totalRealSlides = 3;
 
-              // Safe-lock starting layout calculation onto Slide Index 1 natively
               el.style.transform = `translateX(-100%)`;
 
               const updateTrackPosition = (smooth = true) => {
@@ -2781,7 +2820,7 @@ const handleBookingConfirm = async (
               });
             }}
           >
-            {/* ── [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 3 ── */}
+            {/* [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 3 */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
                 <div className="cp-mobile-stars">★★★★★</div>
@@ -2809,7 +2848,7 @@ const handleBookingConfirm = async (
               </div>
             </div>
 
-            {/* ── COMBINATION COLUMN 1 (FB1, FB2, FB3) ── */}
+            {/* COMBINATION COLUMN 1 (FB1, FB2, FB3) */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
                 <div className="cp-mobile-stars">★★★★★</div>
@@ -2837,7 +2876,7 @@ const handleBookingConfirm = async (
               </div>
             </div>
 
-            {/* ── COMBINATION COLUMN 2 (FB2, FB3, FB4) ── */}
+            {/* COMBINATION COLUMN 2 (FB2, FB3, FB4) */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
                 <div className="cp-mobile-stars">★★★★★</div>
@@ -2865,7 +2904,7 @@ const handleBookingConfirm = async (
               </div>
             </div>
 
-            {/* ── COMBINATION COLUMN 3 (FB3, FB4, FB1) ── */}
+            {/* COMBINATION COLUMN 3 (FB3, FB4, FB1) */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
                 <div className="cp-mobile-stars">★★★★★</div>
@@ -2893,7 +2932,7 @@ const handleBookingConfirm = async (
               </div>
             </div>
 
-            {/* ── [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 1 ── */}
+            {/* [CYCLIC BUFFER]: CLONE OF COMBINATION COLUMN 1 */}
             <div className="cp-mobile-combo-column">
               <div className="cp-mobile-card">
                 <div className="cp-mobile-stars">★★★★★</div>
@@ -2954,130 +2993,139 @@ const handleBookingConfirm = async (
   </div>
 </div>
         {/* ── SECTION 5: APPLY FORM ── */}
-        <div id="contact" className="cp-apply-bg" ref={formRef}>
-          <div className="cp-section">
-            <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+<div id="contact" className="cp-apply-bg" ref={formRef}>
+  {/* CSS INJECT: Matches the 12px horizontal side spacing framework used in previous sections */}
+  <style>{`
+    @media (max-width: 768px) {
+      .cp-apply-bg .cp-section {
+        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+      }
+    }
+  `}</style>
 
-              {/* LEFT */}
-              <div style={{ flex: 1, minWidth: 260 }}>
-                <Reveal>
-                  <p
-                    style={{
-                      fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700,
-                      fontSize: 12, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
-                    }}
-                  >
-                    Ready To Start?
-                  </p>
-                  <h2
-                    style={{
-                      fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)",
-                      letterSpacing: 2, lineHeight: 1.0, marginBottom: 18, color: "#fff",
-                    }}
-                  >
-                    Apply For Your<br />
-                    <span style={{ color: "#07b4ba" }}>1-On-1 Coaching Spot</span>
-                  </h2>
-                  <p
-                    style={{
-                      fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)",
-                      fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380,
-                    }}
-                  >
-                    Spots are limited. We only take on a small number of students at a time to ensure
-                    every athlete gets the attention they deserve. Fill out the form and we'll reach
-                    out within 24 hours.
-                  </p>
-                  {checklistItems.map((item, i) => (
-                    <div className="cp-checklist-item" key={i}>
-                      <span className="check">✓</span>
-                      <p>{item}</p>
-                    </div>
-                  ))}
-                  <div style={{ marginTop: 32 }}>
-                    <p className="cp-wa-label">Any Queries?</p>
-                   <div className="cp-wa-wrapper">
-  <button className="cp-wa-btn">
-    <WhatsAppIcon />
-    Chat On WhatsApp
-  </button>
-</div>
-                  </div>
-                </Reveal>
-              </div>
+  <div className="cp-section">
+    <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
 
-              {/* RIGHT — 2-STAGE FORM */}
-              <div style={{ flex: 1, minWidth: 300 }}>
-                <Reveal>
-                  <div className="cp-form-box">
-                    {stage === 3 ? (
-                      /* DONE */
-                      <div style={{ textAlign: "center", padding: "48px 0" }}>
-                        <div style={{ fontSize: 52, marginBottom: 16 }}>✅</div>
-                        <h4
-                          style={{
-                            fontFamily: "'Bebas Neue', sans-serif", color: "#fff",
-                            fontSize: 28, letterSpacing: 2, marginBottom: 8,
-                          }}
-                        >
-                          Booking Confirmed!
-                        </h4>
-                        <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)", fontSize: 15 }}>
-                          We'll reach out within 24 hours to confirm your session.
-                        </p>
-                      </div>
-                    ) : stage === 2 ? (
-                      /* STAGE 2 — CALENDAR */
-                      <>
-                        <h3>Schedule Your Call</h3>
-                        <p className="cp-form-stage-label">STEP 2 OF 2 — PICK A DATE AND TIME</p>
-                        <CalendarPicker onConfirm={handleBookingConfirm} />
-                        <button className="cp-stage-back" onClick={() => setStage(1)}>
-                          Back to details
-                        </button>
-                      </>
-                    ) : (
-                      /* STAGE 1 — LEAD FORM */
-                      <>
-                        <h3>Start Your Journey With AOF</h3>
-                        <p className="cp-form-stage-label">STEP 1 OF 2 — YOUR DETAILS</p>
-                        <input
-                          className="cp-input"
-                          type="text"
-                          placeholder="Full Name"
-                          value={lead.name}
-                          onChange={(e) => setLead((f) => ({ ...f, name: e.target.value }))}
-                        />
-                        <input
-                          className="cp-input"
-                          type="tel"
-                          placeholder="Phone Number"
-                          value={lead.phone}
-                          onChange={(e) => setLead((f) => ({ ...f, phone: e.target.value }))}
-                        />
-                        <select
-                          className="cp-input"
-                          value={lead.goal}
-                          onChange={(e) => setLead((f) => ({ ...f, goal: e.target.value }))}
-                        >
-                          <option value="">Main Goal</option>
-                          <option value="technique">Improve Technique</option>
-                          <option value="competition">Competition Prep</option>
-                          <option value="fitness">Fitness and Conditioning</option>
-                          <option value="beginner">Learn MMA from Scratch</option>
-                        </select>
-                        <button className="cp-submit" onClick={handleLeadSubmit}>
-                          Next — Schedule a Time
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </Reveal>
-              </div>
+      {/* LEFT */}
+      <div style={{ flex: 1, minWidth: 260 }}>
+        <Reveal>
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700,
+              fontSize: 12, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
+            }}
+          >
+            Ready To Start?
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)",
+              letterSpacing: 2, lineHeight: 1.0, marginBottom: 18, color: "#fff",
+            }}
+          >
+            Apply For Your<br />
+            <span style={{ color: "#07b4ba" }}>1-On-1 Coaching Spot</span>
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)",
+              fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380,
+            }}
+          >
+            Spots are limited. We only take on a small number of students at a time to ensure
+            every athlete gets the attention they deserve. Fill out the form and we'll reach
+            out within 24 hours.
+          </p>
+          {checklistItems.map((item, i) => (
+            <div className="cp-checklist-item" key={i}>
+              <span className="check">✓</span>
+              <p>{item}</p>
+            </div>
+          ))}
+          <div style={{ marginTop: 32 }}>
+            <p className="cp-wa-label">Any Queries?</p>
+            <div className="cp-wa-wrapper">
+              <button className="cp-wa-btn">
+                <WhatsAppIcon />
+                Chat On WhatsApp
+              </button>
             </div>
           </div>
-        </div>
+        </Reveal>
+      </div>
 
+      {/* RIGHT — 2-STAGE FORM */}
+      <div style={{ flex: 1, minWidth: 300 }}>
+        <Reveal>
+          <div className="cp-form-box">
+            {stage === 3 ? (
+              /* DONE */
+              <div style={{ textAlign: "center", padding: "48px 0" }}>
+                <div style={{ fontSize: 52, marginBottom: 16 }}>✅</div>
+                <h4
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif", color: "#fff",
+                    fontSize: 28, letterSpacing: 2, marginBottom: 8,
+                  }}
+                >
+                  Booking Confirmed!
+                </h4>
+                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)", fontSize: 15 }}>
+                  We'll reach out within 24 hours to confirm your session.
+                </p>
+              </div>
+            ) : stage === 2 ? (
+              /* STAGE 2 — CALENDAR */
+              <>
+                <h3>Schedule Your Call</h3>
+                <p className="cp-form-stage-label">STEP 2 OF 2 — PICK A DATE AND TIME</p>
+                <CalendarPicker onConfirm={handleBookingConfirm} />
+                <button className="cp-stage-back" onClick={() => setStage(1)}>
+                  Back to details
+                </button>
+              </>
+            ) : (
+              /* STAGE 1 — LEAD FORM */
+              <>
+                <h3>Start Your Journey With AOF</h3>
+                <p className="cp-form-stage-label">STEP 1 OF 2 — YOUR DETAILS</p>
+                <input
+                  className="cp-input"
+                  type="text"
+                  placeholder="Full Name"
+                  value={lead.name}
+                  onChange={(e) => setLead((f) => ({ ...f, name: e.target.value }))}
+                />
+                <input
+                  className="cp-input"
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={lead.phone}
+                  onChange={(e) => setLead((f) => ({ ...f, phone: e.target.value }))}
+                />
+                <select
+                  className="cp-input"
+                  value={lead.goal}
+                  onChange={(e) => setLead((f) => ({ ...f, goal: e.target.value }))}
+                >
+                  <option value="">Main Goal</option>
+                  <option value="technique">Improve Technique</option>
+                  <option value="competition">Competition Prep</option>
+                  <option value="fitness">Fitness and Conditioning</option>
+                  <option value="beginner">Learn MMA from Scratch</option>
+                </select>
+                <button className="cp-submit" onClick={handleLeadSubmit}>
+                  Next — Schedule a Time
+                </button>
+              </>
+            )}
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </div>
+</div>
         {/* ── CHANGE 4: FAQ SECTION — inserted after Form section ── */}
         <FAQSection />
 
