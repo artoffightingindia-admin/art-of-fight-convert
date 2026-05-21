@@ -2137,7 +2137,7 @@ const handleBookingConfirm = async (
           </div>
         </nav>
 
-        {/* ── SECTION 1: SYSTEM METRICS ── */}
+       {/* ── SECTION 1: SYSTEM METRICS ── */}
 <div id="system" className="cp-system-bg">
   {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
   <style>{`
@@ -2440,7 +2440,111 @@ const handleBookingConfirm = async (
     </div>
   </div>
 </div>
-{/* ── SECTION 5: TESTIMONIALS ALTERNATE ── */}
+        {/* ── SECTION 4: FREQUENTLY ASKED QUESTIONS ── */}
+<div id="faq" className="cp-faq-bg">
+  {/* CSS INJECT: Matches the exact spacing rules from your other component modules */}
+  <style>{`
+    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
+    .cp-faq-spacing-sync {
+      padding-top: 96px !important;    /* Sync with md:py-24 */
+      padding-bottom: 96px !important; /* Sync with md:py-24 */
+    }
+    .cp-faq-header-margin-sync {
+      margin-bottom: 48px !important;  /* Sync with mb-12 */
+    }
+
+    /* MOBILE BREAKPOINT FORCE LOCK */
+    @media (max-width: 768px) {
+      .cp-faq-spacing-sync {
+        padding-top: 64px !important;    /* Sync with py-16 */
+        padding-bottom: 64px !important; /* Sync with py-16 */
+        padding-left: 12px !important;   /* System mobile horizontal gutter lock */
+        padding-right: 12px !important;  /* System mobile horizontal gutter lock */
+      }
+      .cp-faq-header-margin-sync {
+        margin-bottom: 48px !important;  /* Stays synced with mb-12 */
+      }
+    }
+  `}</style>
+
+  <div className="cp-section cp-faq-spacing-sync">
+    <Reveal>
+      {/* Centered title section synchronized to match reference margins exactly */}
+      <div className="cp-faq-header-margin-sync" style={{ textAlign: "center" }}>
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            color: "#07b4ba",
+            fontWeight: 700,
+            fontSize: 12,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+          }}
+        >
+          Have Questions?
+        </p>
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(34px,5vw,56px)",
+            letterSpacing: 2,
+            color: "#fff",
+            marginTop: 8,
+            lineHeight: 1,
+          }}
+        >
+          Frequently Asked <span style={{ color: "#07b4ba" }}>Questions</span>
+        </h2>
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            color: "rgba(255,255,255,0.42)",
+            marginTop: 8,
+            fontSize: 14,
+          }}
+        >
+          Everything you need to know about the training structure, schedule commitment, and setups.
+        </p>
+      </div>
+    </Reveal>
+
+    {/* FAQ Blocks Content Grid */}
+    <div className="cp-faq-grid" style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
+      
+      {/* FAQ Item 1 */}
+      <div style={{ flex: 1, minWidth: 280 }} className="cp-faq-card-wrapper">
+        <Reveal>
+          <div className="cp-metric-card">
+            <h3 style={{ fontSize: 20, color: "#07b4ba", marginBottom: 12 }}>Is this program beginner-friendly?</h3>
+            <p>Absolutely. We build your striking and grappling posture from absolute scratch, focusing heavily on baseline mechanics and control before accelerating execution layouts.</p>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* FAQ Item 2 */}
+      <div style={{ flex: 1, minWidth: 280 }} className="cp-faq-card-wrapper">
+        <Reveal>
+          <div className="cp-metric-card">
+            <h3 style={{ fontSize: 20, color: "#07b4ba", marginBottom: 12 }}>How does the 1-on-1 scheduling work?</h3>
+            <p>Once your entry lead details are approved in Step 1, Step 2 dynamically renders a custom live calendar window where you can lock in a session time slot that works best for you.</p>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* FAQ Item 3 */}
+      <div style={{ flex: 1, minWidth: 280 }} className="cp-faq-card-wrapper">
+        <Reveal>
+          <div className="cp-metric-card">
+            <h3 style={{ fontSize: 20, color: "#07b4ba", marginBottom: 12 }}>What gear do I need to get started?</h3>
+            <p>For your initial trial assessment layout, standard athletic wear is perfectly sufficient. If approved for full curriculum tracks, a custom equipment breakdown loop will be provided.</p>
+          </div>
+        </Reveal>
+      </div>
+
+    </div>
+  </div>
+</div>
+{/* ── SECTION 4: TESTIMONIALS ALTERNATE ── */}
 <div id="testimonials-alt" className="cp-testi-bg">
   {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
   <style>{`
@@ -2476,7 +2580,7 @@ const handleBookingConfirm = async (
       .cp-desktop-slider-wrapper {
         display: none !important;
       }
-       
+        
       .cp-mobile-slider-wrapper {
         display: flex !important;
         flex-direction: column !important;
@@ -2946,7 +3050,7 @@ const handleBookingConfirm = async (
     </div>
   </div>
 </div>
-       {/* ── SECTION 5: APPLY FORM ── */}
+      {/* ── SECTION 5: APPLY FORM ── */}
 <div id="contact" className="cp-apply-bg" ref={formRef}>
   {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
   <style>{`
