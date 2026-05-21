@@ -487,18 +487,157 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-problem-right { flex: 0 0 460px; max-width: 100%; }
   .pp-problem-right img { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); display: block; aspect-ratio: 16/9; object-fit: cover; }
 
-  /* FEATURES */
-  .pp-features { background: #0d0d0d; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
-  .pp-features-grid { position: relative; z-index: 2; display: flex; gap: 48px; align-items: stretch; flex-wrap: wrap; }
-  .pp-features-left { flex: 1; min-width: 260px; }
-  .pp-features-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,44px); letter-spacing: 2px; color: #fff; margin-bottom: 32px; }
-  .pp-feature-item { margin-bottom: 20px; }
-  .pp-feature-tag { display: inline-block; background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; margin-bottom: 4px; }
-  .pp-feature-item p { color: rgba(255,255,255,0.6); font-family: 'Barlow', sans-serif; font-size: 14px; line-height: 1.5; padding-left: 4px; }
-  .pp-features-right { flex: 0 0 340px; max-width: 100%; display: flex; align-items: center; justify-content: center; }
-  .pp-features-img-frame { width: 100%; border-radius: 14px; overflow: hidden; border: 2px solid rgba(7,180,186,0.3); box-shadow: 0 0 40px rgba(7,180,186,0.1); aspect-ratio: 3/4; background: #111; display: flex; align-items: center; justify-content: center; }
-  .pp-features-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+/* WHAT YOU GET SECTION */
 
+/* ───────── WHAT YOU GET ───────── */
+
+.pp-features {
+
+  background: #0b0b0b;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(7,180,186,0.05) 0px,
+      rgba(7,180,186,0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+.pp-features-heading {
+
+  text-align: center;
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: clamp(34px,5vw,58px);
+
+  letter-spacing: 3px;
+
+  color: #fff;
+
+  margin-bottom: 52px;
+
+  line-height: 1;
+}
+
+.pp-features-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+.pp-feature-card {
+
+  background: linear-gradient(180deg,#11161d 0%, #0d1117 100%);
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  border-radius: 22px;
+
+  padding: 34px 28px;
+
+  min-height: 230px;
+
+  transition: 0.3s;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.pp-feature-card:hover {
+
+  transform: translateY(-6px);
+
+  border-color: rgba(7,180,186,0.35);
+
+  box-shadow: 0 0 30px rgba(7,180,186,0.12);
+}
+
+.pp-feature-icon {
+
+  width: 58px;
+
+  height: 58px;
+
+  border-radius: 16px;
+
+  background: rgba(7,180,186,0.08);
+
+  border: 1px solid rgba(7,180,186,0.18);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 24px;
+}
+
+.pp-feature-icon svg {
+
+  width: 28px;
+
+  height: 28px;
+}
+
+.pp-feature-card h4 {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 26px;
+
+  letter-spacing: 1.5px;
+
+  color: #fff;
+
+  line-height: 1.1;
+
+  margin-bottom: 14px;
+}
+
+.pp-feature-card p {
+
+  font-family: 'Barlow', sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  color: rgba(255,255,255,0.58);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .pp-features-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .pp-feature-card {
+
+    min-height: auto;
+
+    padding: 28px 22px;
+  }
+
+  .pp-feature-card h4 {
+
+    font-size: 22px;
+  }
+}
   /* CURRICULUM */
   .pp-curriculum { background: #0a0a0a; }
   .pp-curriculum-grid { display: flex; gap: 56px; flex-wrap: wrap; }
@@ -649,13 +788,36 @@ font-family: 'Bebas Neue', sans-serif;
 }
 `;
 
-const features = [
-  { tag: "# Made exclusively for beginners", desc: "Clear guidance from day one" },
-  { tag: "# Structured progression", desc: "Stance → punches → kicks → combinations" },
-  { tag: "# No equipment or partner needed", desc: "Train effectively from the comfort of your home." },
-  { tag: "# Tamil-guided instruction", desc: "For better understanding" },
-  { tag: "# Just 30-40 minutes a day Pre-recorded sessions", desc: "Built for busy schedules" },
-  { tag: "# Organized in a Private Notion Dashboard", desc: "Easy to access using Email." },
+const whatCards = [
+  {
+    icon: <IconPlan />,
+    title: "MADE EXCLUSIVELY FOR BEGINNERS",
+    desc: "Clear guidance from day one",
+  },
+
+  {
+    icon: <IconChat />,
+    title: "STRUCTURED PROGRESSION",
+    desc: "Stance → punches → kicks → combinations",
+  },
+
+  {
+    icon: <IconLeaf />,
+    title: "NO EQUIPMENT OR PARTNER NEEDED",
+    desc: "Train effectively from the comfort of your home.",
+  },
+
+  {
+    icon: <IconChart />,
+    title: "TAMIL-GUIDED INSTRUCTION",
+    desc: "For better understanding",
+  },
+
+  {
+    icon: <IconGlobe />,
+    title: "JUST 30-40 MINUTES A DAY",
+    desc: "Built for busy schedules",
+  },
 ];
 
 const weeks = [
@@ -1046,33 +1208,38 @@ const roadmapCards = [
 
   </div>
 </div>
-  {/* ── FEATURES ── */}
-        <div className="pp-features">
-          <div className="pp-section">
-            <div className="pp-features-grid">
-              <div className="pp-features-left">
-                <Reveal>
-                  <h2 className="pp-features-h">Our Program Features</h2>
-                  {features.map((f, i) => (
-                    <Reveal key={i} delay={i * 70}>
-                      <div className="pp-feature-item">
-                        <span className="pp-feature-tag">{f.tag}</span>
-                        <p>— {f.desc}</p>
-                      </div>
-                    </Reveal>
-                  ))}
-                </Reveal>
-              </div>
-              <div className="pp-features-right">
-                <Reveal delay={150}>
-                  <div className="pp-features-img-frame">
-                    <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=600&q=80" alt="MMA Fighter" />
-                  </div>
-                </Reveal>
-              </div>
+ <section className="pp-features">
+  <div className="pp-section">
+
+    <Reveal>
+      <h2 className="pp-features-heading">
+        WHAT YOU GET
+      </h2>
+    </Reveal>
+
+    <div className="pp-features-grid">
+
+      {whatCards.map((item, i) => (
+        <Reveal key={i} delay={i * 80}>
+
+          <div className="pp-feature-card">
+
+            <div className="pp-feature-icon">
+              {item.icon}
             </div>
+
+            <h4>{item.title}</h4>
+
+            <p>{item.desc}</p>
+
           </div>
-        </div>
+
+        </Reveal>
+      ))}
+
+    </div>
+  </div>
+</section>
 
         {/* ── CURRICULUM ── */}
         <div className="pp-curriculum">
