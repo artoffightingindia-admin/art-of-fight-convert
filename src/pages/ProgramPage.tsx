@@ -1656,6 +1656,397 @@ const roadmapCards = [
 
           </div>
 
+          {/* ───────── BONUSES SECTION ───────── */}
+
+<div
+  style={{
+    background: "#06080c",
+    position: "relative",
+    overflow: "hidden",
+    backgroundImage:
+      "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)",
+    backgroundSize: "32px 32px",
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1280,
+      margin: "0 auto",
+      padding: "90px 20px",
+    }}
+  >
+
+    {/* TOP */}
+
+    <div
+      style={{
+        textAlign: "center",
+        marginBottom: 60,
+      }}
+    >
+
+      <p
+        style={{
+          color: "#07b4ba",
+          fontFamily: "'Barlow', sans-serif",
+          fontWeight: 700,
+          fontSize: 14,
+          letterSpacing: 4,
+          textTransform: "uppercase",
+          marginBottom: 14,
+        }}
+      >
+        EXCLUSIVE FOUNDERS BONUSES
+      </p>
+
+      <h2
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "clamp(42px,6vw,78px)",
+          lineHeight: 0.95,
+          letterSpacing: 2,
+          color: "#fff",
+          marginBottom: 18,
+        }}
+      >
+        5 PREMIUM BONUSES.
+        <span style={{ color: "#07b4ba" }}>
+          {" "}FREE WITH ENROLLMENT.
+        </span>
+      </h2>
+
+      <p
+        style={{
+          fontFamily: "'Barlow', sans-serif",
+          fontSize: 17,
+          color: "rgba(255,255,255,0.62)",
+          lineHeight: 1.7,
+        }}
+      >
+        Join the Founder’s Batch and unlock premium resources at no extra cost.
+      </p>
+
+    </div>
+
+    {/* BONUS GRID */}
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+        gap: 20,
+      }}
+    >
+
+      {[
+        {
+          title: "FIGHTER NUTRITION GUIDE",
+          desc: "Simple meal structure to improve recovery, energy and body composition.",
+          img: "🥗",
+          value: "₹1499 VALUE",
+        },
+
+        {
+          title: "DAILY MOBILITY ROUTINE",
+          desc: "Warm-up and recovery drills to move better and prevent injuries.",
+          img: "🧘",
+          value: "₹1299 VALUE",
+        },
+
+        {
+          title: "PRIVATE FIGHTERS COMMUNITY",
+          desc: "Get support, motivation and direct interaction with fellow members.",
+          img: "💬",
+          value: "₹1299 VALUE",
+        },
+
+        {
+          title: "ADVANCED SHADOWBOXING FLOWS",
+          desc: "Extra drills to improve timing, rhythm and striking creativity.",
+          img: "🥊",
+          value: "₹1299 VALUE",
+        },
+
+        {
+          title: "FIGHTER MINDSET AUDIO PACK",
+          desc: "Mental conditioning audios to improve focus, discipline and confidence.",
+          img: "🎧",
+          value: "₹1199 VALUE",
+        },
+
+      ].map((item, i) => (
+
+        <div
+          key={i}
+          style={{
+            background:
+              "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)",
+
+            border: "1px solid rgba(7,180,186,0.35)",
+
+            borderRadius: 18,
+
+            padding: "24px 20px",
+
+            position: "relative",
+
+            overflow: "hidden",
+
+            minHeight: 420,
+
+            display: "flex",
+
+            flexDirection: "column",
+
+            alignItems: "center",
+
+            textAlign: "center",
+          }}
+        >
+
+          {/* FREE TAG */}
+
+          <div
+            style={{
+              position: "absolute",
+              top: 14,
+              right: 14,
+
+              background: "#07b4ba",
+
+              color: "#000",
+
+              fontFamily: "'Bebas Neue', sans-serif",
+
+              fontSize: 13,
+
+              letterSpacing: 1,
+
+              padding: "5px 10px",
+
+              borderRadius: 5,
+            }}
+          >
+            FREE BONUS
+          </div>
+
+          {/* ICON */}
+
+          <div
+            style={{
+              width: 95,
+              height: 95,
+
+              borderRadius: "50%",
+
+              border: "2px solid rgba(7,180,186,0.5)",
+
+              display: "flex",
+
+              alignItems: "center",
+
+              justifyContent: "center",
+
+              fontSize: 42,
+
+              marginBottom: 24,
+
+              marginTop: 10,
+            }}
+          >
+            {item.img}
+          </div>
+
+          {/* BONUS NUMBER */}
+
+          <p
+            style={{
+              color: "#07b4ba",
+
+              fontFamily: "'Bebas Neue', sans-serif",
+
+              fontSize: 18,
+
+              letterSpacing: 1,
+
+              marginBottom: 12,
+            }}
+          >
+            BONUS #{i + 1}
+          </p>
+
+          {/* TITLE */}
+
+          <h3
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+
+              fontSize: 34,
+
+              lineHeight: 1,
+
+              letterSpacing: 1.5,
+
+              color: "#fff",
+
+              marginBottom: 18,
+            }}
+          >
+            {item.title}
+          </h3>
+
+          {/* DESC */}
+
+          <p
+            style={{
+              fontFamily: "'Barlow', sans-serif",
+
+              fontSize: 15,
+
+              color: "rgba(255,255,255,0.62)",
+
+              lineHeight: 1.7,
+
+              marginBottom: "auto",
+            }}
+          >
+            {item.desc}
+          </p>
+
+          {/* VALUE */}
+
+          <div
+            style={{
+              marginTop: 30,
+
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+
+              paddingTop: 20,
+
+              width: "100%",
+            }}
+          >
+            <p
+              style={{
+                color: "#07b4ba",
+
+                fontFamily: "'Bebas Neue', sans-serif",
+
+                fontSize: 28,
+
+                letterSpacing: 1,
+              }}
+            >
+              {item.value}
+            </p>
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+    {/* BOTTOM BAR */}
+
+    <div
+      style={{
+        marginTop: 40,
+
+        border: "1px solid rgba(7,180,186,0.35)",
+
+        borderRadius: 18,
+
+        padding: "28px 30px",
+
+        display: "flex",
+
+        flexWrap: "wrap",
+
+        alignItems: "center",
+
+        justifyContent: "space-between",
+
+        gap: 20,
+
+        background:
+          "linear-gradient(90deg,#0f141a 0%, #0a0f14 100%)",
+      }}
+    >
+
+      <div>
+
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+
+            color: "rgba(255,255,255,0.5)",
+
+            fontSize: 14,
+
+            marginBottom: 6,
+          }}
+        >
+          TOTAL BONUS VALUE
+        </p>
+
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+
+            fontSize: 60,
+
+            lineHeight: 1,
+
+            letterSpacing: 2,
+
+            color: "#07b4ba",
+          }}
+        >
+          ₹7,499
+        </h2>
+
+      </div>
+
+      <div>
+
+        <p
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+
+            fontSize: 34,
+
+            letterSpacing: 1.5,
+
+            color: "#fff",
+
+            lineHeight: 1,
+          }}
+        >
+          YOURS 100% FREE
+        </p>
+
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+
+            fontSize: 15,
+
+            color: "rgba(255,255,255,0.58)",
+
+            marginTop: 8,
+          }}
+        >
+          When you join the AOF 30-Day MMA Striking Program.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
           {/* FOOTER */}
 
           <div
