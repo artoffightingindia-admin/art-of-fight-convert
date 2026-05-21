@@ -2244,314 +2244,258 @@ const handleBookingConfirm = async (
 
   </div>
 </section>
-        {/* ── SECTION 2: TRAINING MODULES ── */}
-<div id="modules" className="cp-modules-bg">
-  {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
-  <style>{`
-    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
-    .cp-mod-spacing-sync {
-      padding-top: 96px !important;    /* Sync with md:py-24 */
-      padding-bottom: 96px !important; /* Sync with md:py-24 */
-    }
-    .cp-mod-header-margin-sync {
-      margin-bottom: 48px !important;  /* Sync with mb-12 */
-    }
-
-    /* MOBILE BREAKPOINT FORCE LOCK */
-    @media (max-width: 768px) {
-      .cp-mod-spacing-sync {
-        padding-top: 64px !important;    /* Sync with py-16 */
-        padding-bottom: 64px !important; /* Sync with py-16 */
-        padding-left: 12px !important;   /* System mobile horizontal gutter lock */
-        padding-right: 12px !important;  /* System mobile horizontal gutter lock */
+       {/* ── SECTION 2: AOF METHOD ── */}
+<div className="cp-method-bg">
+  <div id="method" className="cp-method-bg">
+    {/* CSS INJECT: Matches the exact horizontal side spacing framework used in Section 1 */}
+    <style>{`
+      @media (max-width: 768px) {
+        #method {
+          padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+          padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+        }
+        .cp-method-grid {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .cp-what-cards {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .cp-new-promise {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
       }
-      .cp-mod-header-margin-sync {
-        margin-bottom: 48px !important;  /* Stays synced with mb-12 */
+    `}</style>
+
+    <Reveal>
+      <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <p
+          style={{
+            color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700,
+            fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6,
+          }}
+        >
+          The AOF Method
+        </p>
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+            letterSpacing: 2, color: "#fff", lineHeight: 1,
+          }}
+        >
+          A Proven System.
+        </h2>
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+            letterSpacing: 2, color: "#07b4ba", lineHeight: 1,
+          }}
+        >
+          Real Transformation.
+        </h2>
+        <p
+          style={{
+            color: "rgba(255,255,255,0.38)", fontFamily: "'Barlow', sans-serif",
+            fontSize: 11, marginTop: 10, letterSpacing: 3, textTransform: "uppercase",
+          }}
+        >
+          Complete Support. Every Step.
+        </p>
+        <div style={{ width: 48, height: 2, background: "#07b4ba", margin: "14px auto 0" }} />
+      </div>
+    </Reveal>
+
+    <div className="cp-method-grid">
+      {/* Text left on desktop */}
+      <div className="cp-method-text">
+        {methodItems.map((item, i) => (
+          <Reveal key={i}>
+            <div className="cp-method-item">
+              <div className="cp-method-item-icon">{item.icon}</div>
+              <div>
+               <p className="cp-method-line">{item.desc}</p>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      {/* Image right on desktop */}
+      <div className="cp-method-image">
+        <img
+          src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80"
+          alt="AOF Method Training"
+          style={{ width: "100%", borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", display: "block" }}
+        />
+      </div>
+    </div>
+
+    {/* WHAT YOU GET */}
+    <Reveal style={{ marginTop: 52 }}>
+      <h3
+        style={{
+          textAlign: "center", fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 28, letterSpacing: 2, color: "#fff", marginBottom: 20,
+        }}
+      >
+        What You Get
+      </h3>
+      <div className="cp-what-cards">
+        {whatCards.map((card, i) => (
+          <div key={i} className="cp-what-card">
+            <div className="cp-what-card-icon">{card.icon}</div>
+            <h4>{card.title}</h4>
+            <p>{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Reveal>
+
+    {/* ── NEW PROMISE SECTION ── */}
+    <Reveal style={{ marginTop: 50 }}>
+      <div className="cp-new-promise">
+        <p className="cp-new-promise-title">
+          Our Promise
+        </p>
+
+        <div className="cp-new-promise-line" />
+
+        <p className="cp-new-promise-text">
+          <span className="cp-quote-mark">“</span>
+          Most fighters train hard. Very few train correctly.
+          AOF exists to close that gap — with structure,
+          accountability, and coaching that actually evolves
+          with you.
+        </p>
+      </div>
+    </Reveal>
+  </div>
+</div>
+      {/* ── SECTION 3: YOUR COACH ── */}
+<div className="cp-coach-bg">
+  {/* CSS INJECT: Matches the exact 12px horizontal side spacing framework used in previous sections */}
+  <style>{`
+    @media (max-width: 768px) {
+      .cp-coach-bg .cp-section {
+        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+      }
+      .cp-coach-stats {
+        justify-content: center !important;
       }
     }
   `}</style>
 
-  <div className="cp-section cp-mod-spacing-sync">
+  <div className="cp-book-strip">
+    <button onClick={scrollToForm}>Book A Call</button>
+  </div>
+  <div className="cp-section" style={{ paddingBottom: 40 }}>
     <Reveal>
-      {/* Centered title section synchronized to match reference margins exactly */}
-      <div className="cp-mod-header-margin-sync" style={{ textAlign: "center" }}>
-        <p
+      {/* CHANGE 2: "Led By" → "LED BY", font-size increased by +1pt (17px → 18px is already 17, so +1pt = 18px) */}
+      <p
+        style={{
+          fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba",
+          fontWeight: 700, marginBottom: 24, letterSpacing: 2,
+          textTransform: "uppercase",
+        }}
+      >
+        LED BY
+      </p>
+      <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+        <img
+          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
+          alt="Head Coach"
           style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "#07b4ba",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: "uppercase",
+            width: 240, height: 300, objectFit: "cover", objectPosition: "top",
+            borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0,
           }}
-        >
-          Curriculum Overview
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
-            letterSpacing: 2,
-            color: "#fff",
-            marginTop: 8,
-            lineHeight: 1,
-          }}
-        >
-           Elite <span style={{ color: "#07b4ba" }}>Training Systems</span>
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.42)",
-            marginTop: 8,
-            fontSize: 14,
-          }}
-        >
-          From absolute foundation layouts to progressive high-tier combat execution formulas.
-        </p>
-      </div>
-    </Reveal>
+        />
+        <div style={{ flex: 1, minWidth: 280 }}>
+          <h2
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif", fontSize: 48,
+              letterSpacing: 2, color: "#fff", marginBottom: 4,
+            }}
+          >
+            Head Coach
+          </h2>
+          <p
+            style={{
+              color: "#07b4ba", fontFamily: "'Barlow', sans-serif",
+              fontWeight: 700, fontSize: 14, marginBottom: 20,
+            }}
+          >
+            AOF Academy — Lead Trainer &amp; Founder
+          </p>
+          <div style={{ marginBottom: 24 }}>
+            {/* CHANGE 2: coachCredentials array no longer contains the "3 continents" entry */}
+            {coachCredentials.map((cred, i) => (
+              <div key={i} className="cp-checklist-item">
+                <span className="check">✓</span>
+                <p>{cred}</p>
+              </div>
+            ))}
+          </div>
+          {/* Stats */}
+          <div
+            className="cp-coach-stats"
+            style={{
+              display: "flex",
+              gap: 22,
+              flexWrap: "wrap",
+              marginTop: 26,
+            }}
+          >
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "linear-gradient(180deg,#181818 0%, #121212 100%)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: 14,
+                  width: 160,
+                  height: 140,
+                  padding: "18px 16px",
+                  textAlign: "center",
+                  boxShadow: "0 0 14px rgba(0,0,0,0.18)",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 42,
+                    color: "#07b4ba",
+                    letterSpacing: 1,
+                    marginBottom: 10,
+                  }}
+                >
+                  {stat.val}
+                </p>
 
-    {/* Modules Execution Row */}
-    <div className="cp-modules-list" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <Reveal>
-        <div className="cp-module-row">
-          <div className="cp-module-num">01</div>
-          <div className="cp-module-details">
-            <h3>Striking Foundations</h3>
-            <p>Master defensive mechanics, weight distribution, and basic combo frameworks built to land with absolute precision.</p>
+                <p
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    color: "rgba(255,255,255,0.45)",
+                    fontSize: 12,
+                    letterSpacing: 2,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="cp-module-row">
-          <div className="cp-module-num">02</div>
-          <div className="cp-module-details">
-            <h3>Clinch & Grappling Dynamics</h3>
-            <p>Control the centerline balance, manipulate posture levers, and execute highly structured takedown entries cleanly.</p>
-          </div>
-        </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="cp-module-row">
-          <div className="cp-module-num">03</div>
-          <div className="cp-module-details">
-            <h3>Cage Control Tactics</h3>
-            <p>Utilize boundaries systematically to cut off ring movement channels and enforce dominant fight spacing configurations.</p>
-          </div>
-        </div>
-      </Reveal>
-    </div>
-  </div>
-</div>
-      {/* ── SECTION 3: PRICING / MEMBERSHIP ── */}
-<div id="pricing" className="cp-pricing-bg">
-  {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
-  <style>{`
-    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
-    .cp-price-spacing-sync {
-      padding-top: 96px !important;    /* Sync with md:py-24 */
-      padding-bottom: 96px !important; /* Sync with md:py-24 */
-    }
-    .cp-price-header-margin-sync {
-      margin-bottom: 48px !important;  /* Sync with mb-12 */
-    }
-
-    /* MOBILE BREAKPOINT FORCE LOCK */
-    @media (max-width: 768px) {
-      .cp-price-spacing-sync {
-        padding-top: 64px !important;    /* Sync with py-16 */
-        padding-bottom: 64px !important; /* Sync with py-16 */
-        padding-left: 12px !important;   /* System mobile horizontal gutter lock */
-        padding-right: 12px !important;  /* System mobile horizontal gutter lock */
-      }
-      .cp-price-header-margin-sync {
-        margin-bottom: 48px !important;  /* Stays synced with mb-12 */
-      }
-    }
-  `}</style>
-
-  <div className="cp-section cp-price-spacing-sync">
-    <Reveal>
-      {/* Centered title section synchronized to match reference margins exactly */}
-      <div className="cp-price-header-margin-sync" style={{ textAlign: "center" }}>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "#07b4ba",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-          }}
-        >
-          Investment Options
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
-            letterSpacing: 2,
-            color: "#fff",
-            marginTop: 8,
-            lineHeight: 1,
-          }}
-        >
-          Choose Your <span style={{ color: "#07b4ba" }}>Commitment</span>
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.42)",
-            marginTop: 8,
-            fontSize: 14,
-          }}
-        >
-          Select the program track that scales with your training goals and ambition level.
-        </p>
       </div>
     </Reveal>
-
-    {/* Pricing Options Cards Grid */}
-    <div className="cp-pricing-grid" style={{ display: "flex", gap: 32, flexWrap: "wrap", justifyContent: "center" }}>
-      <div style={{ flex: 1, minWidth: 290, maxWidth: 380 }}>
-        <Reveal>
-          <div className="cp-price-card">
-            <h4>Standard Tier</h4>
-            <div className="cp-price-amount">$$</div>
-            <p className="cp-price-desc">Access to standard group curriculum blueprints and core structural technical development modules.</p>
-            <button className="cp-price-btn" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-              Select Plan
-            </button>
-          </div>
-        </Reveal>
-      </div>
-
-      <div style={{ flex: 1, minWidth: 290, maxWidth: 380 }}>
-        <Reveal>
-          <div className="cp-price-card cp-price-card-featured">
-            <div className="cp-card-badge">Most Popular</div>
-            <h4>Elite Track</h4>
-            <div className="cp-price-amount">$$$</div>
-            <p className="cp-price-desc">Complete personalized strategy maps, video breakdowns, and intensive 1-on-1 performance review loops.</p>
-            <button className="cp-price-btn cp-price-btn-featured" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-              Apply For Spot
-            </button>
-          </div>
-        </Reveal>
-      </div>
-    </div>
   </div>
 </div>
-        {/* ── SECTION 4: FREQUENTLY ASKED QUESTIONS ── */}
-<div id="faq" className="cp-faq-bg">
-  {/* CSS INJECT: Matches the exact spacing rules from your other component modules */}
-  <style>{`
-    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
-    .cp-faq-spacing-sync {
-      padding-top: 96px !important;    /* Sync with md:py-24 */
-      padding-bottom: 96px !important; /* Sync with md:py-24 */
-    }
-    .cp-faq-header-margin-sync {
-      margin-bottom: 48px !important;  /* Sync with mb-12 */
-    }
-
-    /* MOBILE BREAKPOINT FORCE LOCK */
-    @media (max-width: 768px) {
-      .cp-faq-spacing-sync {
-        padding-top: 64px !important;    /* Sync with py-16 */
-        padding-bottom: 64px !important; /* Sync with py-16 */
-        padding-left: 12px !important;   /* System mobile horizontal gutter lock */
-        padding-right: 12px !important;  /* System mobile horizontal gutter lock */
-      }
-      .cp-faq-header-margin-sync {
-        margin-bottom: 48px !important;  /* Stays synced with mb-12 */
-      }
-    }
-  `}</style>
-
-  <div className="cp-section cp-faq-spacing-sync">
-    <Reveal>
-      {/* Centered title section synchronized to match reference margins exactly */}
-      <div className="cp-faq-header-margin-sync" style={{ textAlign: "center" }}>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "#07b4ba",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-          }}
-        >
-          Have Questions?
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
-            letterSpacing: 2,
-            color: "#fff",
-            marginTop: 8,
-            lineHeight: 1,
-          }}
-        >
-          Frequently Asked <span style={{ color: "#07b4ba" }}>Questions</span>
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.42)",
-            marginTop: 8,
-            fontSize: 14,
-          }}
-        >
-          Everything you need to know about the training structure, schedule commitment, and setups.
-        </p>
-      </div>
-    </Reveal>
-
-    {/* FAQ Blocks Content Grid */}
-    <div className="cp-faq-grid" style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
-      
-      {/* FAQ Item 1 */}
-      <div style={{ flex: 1, minWidth: 280 }} className="cp-faq-card-wrapper">
-        <Reveal>
-          <div className="cp-metric-card">
-            <h3 style={{ fontSize: 20, color: "#07b4ba", marginBottom: 12 }}>Is this program beginner-friendly?</h3>
-            <p>Absolutely. We build your striking and grappling posture from absolute scratch, focusing heavily on baseline mechanics and control before accelerating execution layouts.</p>
-          </div>
-        </Reveal>
-      </div>
-
-      {/* FAQ Item 2 */}
-      <div style={{ flex: 1, minWidth: 280 }} className="cp-faq-card-wrapper">
-        <Reveal>
-          <div className="cp-metric-card">
-            <h3 style={{ fontSize: 20, color: "#07b4ba", marginBottom: 12 }}>How does the 1-on-1 scheduling work?</h3>
-            <p>Once your entry lead details are approved in Step 1, Step 2 dynamically renders a custom live calendar window where you can lock in a session time slot that works best for you.</p>
-          </div>
-        </Reveal>
-      </div>
-
-      {/* FAQ Item 3 */}
-      <div style={{ flex: 1, minWidth: 280 }} className="cp-faq-card-wrapper">
-        <Reveal>
-          <div className="cp-metric-card">
-            <h3 style={{ fontSize: 20, color: "#07b4ba", marginBottom: 12 }}>What gear do I need to get started?</h3>
-            <p>For your initial trial assessment layout, standard athletic wear is perfectly sufficient. If approved for full curriculum tracks, a custom equipment breakdown loop will be provided.</p>
-          </div>
-        </Reveal>
-      </div>
-
-    </div>
-  </div>
-</div>
-{/* ── SECTION 4: TESTIMONIALS ALTERNATE ── */}
-<div id="testimonials-alt" className="cp-testi-bg">
-  {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
+       {/* ── SECTION 4: TESTIMONIALS ── */}
+<div id="testimonials" className="cp-testi-bg">
+  {/* CSS INJECT: Matches the 12px horizontal side spacing framework used in previous sections */}
   <style>{`
     /* DESKTOP/TABLET DEFAULT VIEW */
     .cp-desktop-slider-wrapper {
@@ -2561,37 +2505,31 @@ const handleBookingConfirm = async (
       display: none;
     }
 
-    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
-    .cp-section-spacing-sync {
-      padding-top: 96px !important;    /* Sync with md:py-24 */
-      padding-bottom: 96px !important; /* Sync with md:py-24 */
-    }
-    .cp-header-margin-sync {
-      margin-bottom: 48px !important;  /* Sync with mb-12 */
-    }
-
     /* MOBILE BREAKPOINT FORCE LOCK */
     @media (max-width: 768px) {
-      .cp-section-spacing-sync {
-        padding-top: 64px !important;    /* Sync with py-16 */
-        padding-bottom: 64px !important; /* Sync with py-16 */
-        padding-left: 12px !important;   /* Balanced left side boundary matching system guidelines */
-        padding-right: 12px !important;  /* Balanced right side boundary matching system guidelines */
-      }
-      .cp-header-margin-sync {
-        margin-bottom: 48px !important;  /* Stays synced with mb-12 */
+      .cp-section-mobile-fix {
+        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
       }
 
       .cp-desktop-slider-wrapper {
         display: none !important;
       }
-        
+       
       .cp-mobile-slider-wrapper {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         width: 100% !important;
         gap: 16px !important;
+      }
+
+      .cp-section-mobile-fix {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+      .cp-section-mobile-fix div[style*="marginBottom: 44"] {
+        margin-bottom: 24px !important;
       }
 
       /* Infinite Loop Viewport Mask: Completely blocks adjacent columns from bleeding into view */
@@ -2616,37 +2554,37 @@ const handleBookingConfirm = async (
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important; 
+        gap: 8px !important; /* Compressed to 80% size footprint */
         box-sizing: border-box !important;
-        padding: 0 3px !important; 
+        padding: 0 3px !important; /* Exact 3px horizontal gap mask on each side */
       }
 
-      /* Rectangular feedback card box design structure with curved edges */
+      /* Rectangular feedback card box design structure with curved edges - 80% optimized height/padding footprint */
       .cp-mobile-card {
         width: 100% !important;
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
-        padding: 10px !important; 
+        padding: 10px !important; /* Reduced from 14px to 10px (80% scale) */
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 96px !important; 
+        min-height: 96px !important; /* Reduced from 120px to 96px (80% scale) */
       }
 
       .cp-mobile-stars {
         color: #07b4ba;
-        font-size: 10px; 
-        margin-bottom: 2px; 
+        font-size: 10px; /* Scaled down from 11px */
+        margin-bottom: 2px; /* Reduced from 4px to 2px */
       }
 
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 10px !important; 
-        line-height: 1.3 !important; 
-        margin: 0 0 6px 0; 
+        font-size: 10px !important; /* Scaled down from 11px */
+        line-height: 1.3 !important; /* Tighter typography spacing window */
+        margin: 0 0 6px 0; /* Reduced margin from 8px to 6px */
         font-style: italic;
       }
 
@@ -2658,8 +2596,8 @@ const handleBookingConfirm = async (
       }
 
       .cp-mobile-avatar {
-        width: 22px; 
-        height: 22px; 
+        width: 22px; /* Scaled down from 26px */
+        height: 22px; /* Scaled down from 26px */
         border-radius: 50%;
         background: rgba(7, 180, 186, 0.1);
         display: flex;
@@ -2672,7 +2610,7 @@ const handleBookingConfirm = async (
       .cp-mobile-info h4 {
         margin: 0;
         color: #fff;
-        font-size: 10px; 
+        font-size: 10px; /* Scaled down from 11px */
         font-weight: 600;
         line-height: 1.1;
       }
@@ -2712,10 +2650,9 @@ const handleBookingConfirm = async (
     }
   `}</style>
 
-  <div className="cp-section cp-section-spacing-sync">
+  <div className="cp-section cp-section-mobile-fix" style={{ paddingTop: 48 }}>
     <Reveal>
-      {/* Centered title section synchronized to match reference margins exactly */}
-      <div className="cp-header-margin-sync" style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", marginBottom: 44 }}>
         <p
           style={{
             fontFamily: "'Barlow', sans-serif",
@@ -2759,7 +2696,7 @@ const handleBookingConfirm = async (
     </Reveal>
 
     <Reveal>
-      <div className="cp-testi-main" style={{ marginBottom: 40 }}>
+      <div className="cp-testi-main">
         <div className="cp-testi-img">
           <img
             src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
@@ -2826,7 +2763,7 @@ const handleBookingConfirm = async (
         <div className="cp-mobile-viewport">
           <div 
             className="cp-mobile-track" 
-            id="mobileSliderTrackAlt"
+            id="mobileSliderTrack"
             ref={(el) => {
               if (!el) return;
               if ((el as any).initialized) return;
@@ -3032,7 +2969,7 @@ const handleBookingConfirm = async (
         <button 
           className="cp-mobile-btn"
           onClick={() => {
-            const track = document.getElementById('mobileSliderTrackAlt');
+            const track = document.getElementById('mobileSliderTrack');
             if (track && (track as any).slidePrev) {
               (track as any).slidePrev();
             }
@@ -3043,7 +2980,7 @@ const handleBookingConfirm = async (
         <button 
           className="cp-mobile-btn"
           onClick={() => {
-            const track = document.getElementById('mobileSliderTrackAlt');
+            const track = document.getElementById('mobileSliderTrack');
             if (track && (track as any).slideNext) {
               (track as any).slideNext();
             }
@@ -3057,26 +2994,17 @@ const handleBookingConfirm = async (
 </div>
       {/* ── SECTION 5: APPLY FORM ── */}
 <div id="contact" className="cp-apply-bg" ref={formRef}>
-  {/* CSS INJECT: Matches the exact spacing rules from the reference component */}
+  {/* CSS INJECT: Matches the 12px horizontal side spacing framework used in previous sections */}
   <style>{`
-    /* GLOBAL VERTICAL PADDING SYNC FROM REFERENCE */
-    .cp-form-spacing-sync {
-      padding-top: 96px !important;    /* Sync with md:py-24 */
-      padding-bottom: 96px !important; /* Sync with md:py-24 */
-    }
-
-    /* MOBILE BREAKPOINT FORCE LOCK */
     @media (max-width: 768px) {
-      .cp-form-spacing-sync {
-        padding-top: 64px !important;    /* Sync with py-16 */
-        padding-bottom: 64px !important; /* Sync with py-16 */
-        padding-left: 12px !important;   /* Balanced left side boundary matching system guidelines */
-        padding-right: 12px !important;  /* Balanced right side boundary matching system guidelines */
+      .cp-apply-bg .cp-section {
+        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
+        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
       }
     }
   `}</style>
 
-  <div className="cp-section cp-form-spacing-sync">
+  <div className="cp-section">
     <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
 
       {/* LEFT */}
