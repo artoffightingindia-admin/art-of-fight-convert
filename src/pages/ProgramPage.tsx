@@ -2042,7 +2042,7 @@ const roadmapCards = [
       fontFamily: "'Barlow', sans-serif",
       color: "rgba(255,255,255,0.5)",
       fontSize: 14,
-      letterSpacing: 1,marginTop: -105,     marginLeft: 26,
+      letterSpacing: 1,marginTop: -90,     marginLeft: 26,
     }}
   >
     TOTAL BONUS VALUE
@@ -2062,7 +2062,7 @@ const roadmapCards = [
 
             color: "#07b4ba",
             marginLeft: 160,
-            marginTop: -85,/* moves ₹7499 slightly right */
+            marginTop: -80,/* moves ₹7499 slightly right */
           }}
         >
           ₹7,499
