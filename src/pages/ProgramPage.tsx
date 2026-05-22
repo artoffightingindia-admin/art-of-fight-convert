@@ -2110,10 +2110,8 @@ const roadmapCards = [
 </div>
 
 
-        {/* ── FAQ (image 5) ── */}
-        <FAQSection />
-
-        {/* ── FOOTER CTA ── */}
+  
+ {/* ── FOOTER CTA ── */}
         <div className="pp-footer-cta" ref={footerRef}>
           <div className="pp-section">
             <div className="pp-footer-grid">
@@ -2147,6 +2145,11 @@ const roadmapCards = [
             </div>
           </div>
         </div>
+  
+        {/* ── FAQ (image 5) ── */}
+        <FAQSection />
+
+       
 
         {/* ── FOOTER (image 6) ── */}
         <footer className="pp-footer">
