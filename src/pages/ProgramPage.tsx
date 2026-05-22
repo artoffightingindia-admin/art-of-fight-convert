@@ -1531,7 +1531,7 @@ const roadmapCards = [
 
               gridTemplateColumns: "1fr 1fr",
 
-              minHeight: 100,
+              minHeight: 90,
             }}
           >
 
@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: 270,
+                height: 280,
                 objectFit: "cover",
               }}
             />
