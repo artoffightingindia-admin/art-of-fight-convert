@@ -498,16 +498,16 @@ body { background: #0a0a0a; }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 .cp-trust {
   position: absolute; bottom: 0px; left: 0; width: 100%;
-  background: #07b4ba; height: 50px;
+  background: #07b4ba; height: 60px;
   display: flex; align-items: center; justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
 }
 .cp-trust-item {
   display: flex; align-items: center; gap: 12px;
-  font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px;
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 22px; 
 }
 .trust-icon-box {
-  width: 42px; height: 42px;
+  width: 45px; height: 45px;
   display: flex; align-items: center; justify-content: center;
 }
 .trust-icon-box svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
