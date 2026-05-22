@@ -680,9 +680,9 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-checklist-item p { color: rgba(255,255,255,0.65); font-family: 'Barlow', sans-serif; font-size: 14px; line-height: 1.55; }
 
   /* BOTTOM BAR */
-  .pp-bottom-bar { background: #000; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .pp-bottom-bar { background: #000;   padding: 7px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
   .pp-bottom-bar span { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.25); }
-  .pp-bottom-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; }
+  .pp-bottom-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -1303,7 +1303,7 @@ const roadmapCards = [
     style={{
       maxWidth: 1400,
       margin: "0 auto",
-      padding: "55px 0",
+      padding: "30px 0",
     }}
   >
     {/* TOP */}
@@ -1531,7 +1531,7 @@ const roadmapCards = [
 
               gridTemplateColumns: "1fr 1fr",
 
-              minHeight: 250,
+              minHeight: 180,
             }}
           >
 
@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: 250,
+                height: 1700,
                 objectFit: "cover",
               }}
             />
@@ -2111,8 +2111,8 @@ const roadmapCards = [
     src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png"
     alt="Gift Box"
     style={{
-      width: 150,
-      height: 150,
+      width: 120,
+      height: 120,
       objectFit: "contain",
         marginTop: 6, 
       filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
@@ -2144,7 +2144,7 @@ const roadmapCards = [
 
             color: "#07b4ba",
             marginLeft: 160,
-            marginTop: -70,/* moves ₹7499 slightly right */
+            marginTop: -89,/* moves ₹7499 slightly right */
           }}
         >
           ₹7,499
