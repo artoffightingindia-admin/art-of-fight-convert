@@ -2033,6 +2033,7 @@ const roadmapCards = [
       height: 120,
       objectFit: "contain",
         marginTop: -21, 
+      marginBottom: -9
       filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
     }}
   />
