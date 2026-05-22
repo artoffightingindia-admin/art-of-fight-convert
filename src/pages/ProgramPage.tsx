@@ -359,13 +359,13 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-join-btn:hover { background: #059a9f; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
-/* ───────── TRUST STRIP ───────── */
+/* ───────── PROGRAM PAGE TRUST BAR ───────── */
 
 .pp-trust-strip {
 
   width: 100%;
 
-  min-height: 65px;
+  height: 60px;
 
   background: #07b4ba;
 
@@ -373,11 +373,13 @@ font-family: 'Bebas Neue', sans-serif;
 
   align-items: center;
 
-  justify-content: center;
-
-  gap: 140px;
+  justify-content: space-around;
 
   padding: 0 40px;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
 }
 
 .pp-trust-item {
@@ -386,14 +388,14 @@ font-family: 'Bebas Neue', sans-serif;
 
   align-items: center;
 
-  gap: 14px;
+  gap: 12px;
 }
 
 .pp-trust-icon {
 
-  width: 34px;
+  width: 45px;
 
-  height: 34px;
+  height: 45px;
 
   display: flex;
 
@@ -401,17 +403,20 @@ font-family: 'Bebas Neue', sans-serif;
 
   justify-content: center;
 
-  color: rgba(255,255,255,0.95);
-
   flex-shrink: 0;
 }
 
 .pp-trust-icon svg {
 
-  width: 100%;
+  width: 30px;
 
-  height: 100%;
-  gap: 30px;
+  height: 30px;
+
+  stroke: #fff;
+
+  fill: none;
+
+  stroke-width: 2;
 }
 
 .pp-trust-item p {
@@ -419,10 +424,12 @@ font-family: 'Bebas Neue', sans-serif;
   font-family: 'Bebas Neue', sans-serif;
 
   font-size: 22px;
- gap: 80px;
+
   letter-spacing: 2px;
 
   color: #ffffff;
+
+  line-height: 1;
 }
 
 /* MOBILE */
@@ -431,27 +438,13 @@ font-family: 'Bebas Neue', sans-serif;
 
   .pp-trust-strip {
 
-    min-height: auto;
+    height: auto;
 
-    gap: 24px;
+    padding: 14px;
 
-    padding: 16px 14px;
+    gap: 16px;
 
-    flex-wrap: wrap;
-
-    justify-content: space-between;
-  }
-
-  .pp-trust-item {
-
-    gap: 8px;
-  }
-
-  .pp-trust-icon {
-
-    width: 22px;
-
-    height: 22px;
+    justify-content: center;
   }
 
   .pp-trust-item p {
@@ -459,6 +452,20 @@ font-family: 'Bebas Neue', sans-serif;
     font-size: 13px;
 
     letter-spacing: 1px;
+  }
+
+  .pp-trust-icon {
+
+    width: 26px;
+
+    height: 26px;
+  }
+
+  .pp-trust-icon svg {
+
+    width: 20px;
+
+    height: 20px;
   }
 }
 .pp-section {
