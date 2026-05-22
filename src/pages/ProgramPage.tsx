@@ -2114,7 +2114,7 @@ const roadmapCards = [
       width: 120,
       height: 120,
       objectFit: "contain",
-        marginTop: 2, 
+        marginTop: -15, 
       filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
     }}
   />
@@ -2124,7 +2124,7 @@ const roadmapCards = [
       fontFamily: "'Barlow', sans-serif",
       color: "rgba(255,255,255,0.5)",
       fontSize: 14,
-      letterSpacing: 1,marginTop: -130,
+      letterSpacing: 1,marginTop: -115,     marginLeft: 160,
     }}
   >
     TOTAL BONUS VALUE
