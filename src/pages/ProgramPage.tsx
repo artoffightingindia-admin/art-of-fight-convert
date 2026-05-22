@@ -464,7 +464,7 @@ font-family: 'Bebas Neue', sans-serif;
   max-width: 1100px;
   margin: 0 auto;
 
-  padding: 45px 10px;
+ padding: 28px 10px;
 }
 
 @media (min-width: 1200px) {
@@ -1244,7 +1244,7 @@ const roadmapCards = [
 </section>
 
         {/* ── CURRICULUM ── */}
-        <div className="pp-curriculum">
+        <div   className="pp-curriculum"   style={{ padding: "10px 0" }} >
           <div className="pp-section">
             <div className="pp-curriculum-grid">
               <div className="pp-curriculum-left">
@@ -1303,11 +1303,11 @@ const roadmapCards = [
     style={{
       maxWidth: 1400,
       margin: "0 auto",
-      padding: "90px 0",
+      padding: "55px 0",
     }}
   >
     {/* TOP */}
-    <div style={{ textAlign: "center", marginBottom: 60 }}>
+    <div style={{ textAlign: "center", marginBottom: 35 }}>
 
       <p
         style={{
@@ -1531,7 +1531,7 @@ const roadmapCards = [
 
               gridTemplateColumns: "1fr 1fr",
 
-              minHeight: 320,
+              minHeight: 250,
             }}
           >
 
@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: "100%",
+                height: 250,
                 objectFit: "cover",
               }}
             />
