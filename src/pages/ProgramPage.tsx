@@ -1531,7 +1531,7 @@ const roadmapCards = [
 
               gridTemplateColumns: "1fr 1fr",
 
-              minHeight: 110,
+              minHeight: 100,
             }}
           >
 
