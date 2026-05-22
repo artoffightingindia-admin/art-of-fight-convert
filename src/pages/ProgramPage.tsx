@@ -365,7 +365,7 @@ font-family: 'Bebas Neue', sans-serif;
 
   width: 100%;
 
-  min-height: 50px;
+  min-height: 65px;
 
   background: #07b4ba;
 
@@ -386,7 +386,7 @@ font-family: 'Bebas Neue', sans-serif;
 
   align-items: center;
 
-  gap: 22px;
+  gap: 14px;
 }
 
 .pp-trust-icon {
@@ -411,6 +411,7 @@ font-family: 'Bebas Neue', sans-serif;
   width: 100%;
 
   height: 100%;
+  gap: 30px;
 }
 
 .pp-trust-item p {
