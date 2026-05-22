@@ -419,7 +419,7 @@ font-family: 'Bebas Neue', sans-serif;
   font-family: 'Bebas Neue', sans-serif;
 
   font-size: 22px;
- gap: 50px;
+ gap: 80px;
   letter-spacing: 2px;
 
   color: #ffffff;
