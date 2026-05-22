@@ -2144,7 +2144,7 @@ const roadmapCards = [
 
             color: "#07b4ba",
             marginLeft: 160,
-            marginTop: -65,/* moves ₹7499 slightly right */
+            marginTop: -70,/* moves ₹7499 slightly right */
           }}
         >
           ₹7,499
