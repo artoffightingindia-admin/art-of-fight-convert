@@ -1531,7 +1531,7 @@ const roadmapCards = [
 
               gridTemplateColumns: "1fr 1fr",
 
-              minHeight: 180,
+              minHeight: 130,
             }}
           >
 
@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: 170,
+                height: 130,
                 objectFit: "cover",
               }}
             />
@@ -2114,7 +2114,7 @@ const roadmapCards = [
       width: 120,
       height: 120,
       objectFit: "contain",
-        marginTop: -18, 
+        marginTop: -21, 
       filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))",
     }}
   />
@@ -2124,7 +2124,7 @@ const roadmapCards = [
       fontFamily: "'Barlow', sans-serif",
       color: "rgba(255,255,255,0.5)",
       fontSize: 14,
-      letterSpacing: 1,marginTop: -115,     marginLeft: 30,
+      letterSpacing: 1,marginTop: -115,     marginLeft: 27,
     }}
   >
     TOTAL BONUS VALUE
