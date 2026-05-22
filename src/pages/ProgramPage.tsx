@@ -2042,7 +2042,7 @@ const roadmapCards = [
       fontFamily: "'Barlow', sans-serif",
       color: "rgba(255,255,255,0.5)",
       fontSize: 14,
-      letterSpacing: 1,marginTop: -90,     marginLeft: 26,
+      letterSpacing: 1,marginTop: -70,     marginLeft: 26,
     }}
   >
     TOTAL BONUS VALUE
