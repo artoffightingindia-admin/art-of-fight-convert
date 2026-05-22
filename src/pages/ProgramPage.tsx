@@ -613,31 +613,6 @@ font-family: 'Bebas Neue', sans-serif;
     margin-bottom: 40px;
   }
 }
-
-  /* CURRICULUM */
-  .pp-curriculum { background: #0a0a0a; }
-  .pp-curriculum-grid { display: flex; gap: 56px; flex-wrap: wrap; }
-  .pp-curriculum-left { flex: 1; min-width: 260px; }
-  .pp-curriculum-right { flex: 1; min-width: 260px; }
-  .pp-section-label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px,3vw,32px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 28px; }
-  .pp-week { margin-bottom: 24px; border-left: 3px solid #07b4ba; padding-left: 18px; }
-  .pp-week h4 { font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 8px; }
-  .pp-week ul { list-style: none; }
-  .pp-week ul li { font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
-  .pp-week ul li::before { content: "— "; color: #07b4ba; }
-  .pp-founders-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px,3vw,30px); letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
-  .pp-founders-sub { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: #07b4ba; margin-bottom: 16px; }
-  .pp-founders-desc { font-family: 'Barlow', sans-serif; font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 20px; }
-  .pp-benefit-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; padding: 12px 14px; border-radius: 8px; background: rgba(7,180,186,0.05); border: 1px solid rgba(7,180,186,0.2); }
-  .pp-benefit-tag { background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 1px; padding: 2px 7px; border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
-  .pp-benefit-item p { font-family: 'Barlow', sans-serif; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
-  .pp-bonuses-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px,3vw,30px); letter-spacing: 2px; color: #07b4ba; margin: 32px 0 16px; }
-  .pp-bonus-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .pp-bonus-tag { background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 1px; padding: 3px 10px; border-radius: 3px; flex-shrink: 0; }
-  .pp-bonus-price { font-family: 'Barlow', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); }
-  .pp-bonus-free { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: #07b4ba; letter-spacing: 1px; margin-left: 4px; }
-  .pp-bonus-strike { text-decoration: line-through; color: rgba(255,255,255,0.35); }
-
   /* COACH */
   .pp-coach-bg { background: #0f1115; }
   .pp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
@@ -829,26 +804,6 @@ const whatCards = [
   },
 ];
 
-const weeks = [
-  { title: "Foundation & Striking Basics (Week 01)", items: ["Correct MMA stance and guard", "Basic movement and balance", "All 6 fundamental punches with proper mechanics"] },
-  { title: "Punch Defenses & Combinations (Week 02)", items: ["Slip, Dodge, Pull Back, Block & Parry", "Basic punch combinations and counters", "Roundhouse kick fundamentals"] },
-  { title: "Kicking & Integration (Week 03)", items: ["Switch kick and push kick mechanics", "Kick defenses: block, catch, miss, and sweep", "Punch-Kick Combinations"] },
-  { title: "Advanced Striking Tools (Week 04)", items: ["Punch-kick counters", "Knees and elbows fundamentals", "Combinations using knees and elbows"] },
-  { title: "Overall Strike Mix-ups (Last 2 Days)", items: ["Full combination drills", "Live flow practice", "Program completion assessment"] },
-];
-
-const benefits = [
-  "Weekly Live doubt-clearing sessions with the coach",
-  "Direct feedback on your progress and improvement",
-  "Progress Tracking Framework",
-  "A focused community of co-learners",
-  "Exclusive bonus modules and progress check-ins",
-];
-
-const bonuses = [
-  { name: "Movement Fundamentals", price: "₹999" },
-  { name: "White Belt Mentality", price: "₹999" },
-];
 
 const painPoints = [
   "You train 4-5 days a week but your technique isn't improving",
@@ -1251,51 +1206,6 @@ const roadmapCards = [
   </div>
 </section>
 
-        {/* ── CURRICULUM ── */}
-        <div   className="pp-curriculum"   style={{ padding: "10px 0" }} >
-          <div className="pp-section">
-            <div className="pp-curriculum-grid">
-              <div className="pp-curriculum-left">
-                <Reveal>
-                  <p className="pp-section-label">What You'll Learn</p>
-                  {weeks.map((w, i) => (
-                    <Reveal key={i} delay={i * 60}>
-                      <div className="pp-week">
-                        <h4>{w.title}</h4>
-                        <ul>{w.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
-                      </div>
-                    </Reveal>
-                  ))}
-                </Reveal>
-              </div>
-              <div className="pp-curriculum-right">
-                <Reveal>
-                  <p className="pp-founders-h">Founder's Batch Benefits</p>
-                  <p className="pp-founders-sub">(Jan 05 — Feb 03)</p>
-                  <p className="pp-founders-desc">Since this is the first-ever launch of the AOF 30-Day MMA Striking Program, we're opening a special Founder's Batch with added support and access.</p>
-                  {benefits.map((b, i) => (
-                    <Reveal key={i} delay={i * 60}>
-                      <div className="pp-benefit-item">
-                        <span className="pp-benefit-tag">#</span>
-                        <p>{b}</p>
-                      </div>
-                    </Reveal>
-                  ))}
-                </Reveal>
-                <Reveal delay={100}>
-                  <p className="pp-bonuses-h">Added Bonuses</p>
-                  {bonuses.map((b, i) => (
-                    <div className="pp-bonus-item" key={i}>
-                      <span className="pp-bonus-tag">{b.name}</span>
-                      <span className="pp-bonus-price pp-bonus-strike">{b.price}</span>
-                      <span className="pp-bonus-free">[FREE]</span>
-                    </div>
-                  ))}
-                </Reveal>
-              </div>
-            </div>
-          </div>
-        </div>
   {/* ───────── ROADMAP SECTION ───────── */}
 
 <div
