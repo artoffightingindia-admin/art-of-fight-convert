@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: 130,
+                height: 200,
                 objectFit: "cover",
               }}
             />
