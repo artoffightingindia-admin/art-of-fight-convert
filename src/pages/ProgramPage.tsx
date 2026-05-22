@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: 250,
+                height: 270,
                 objectFit: "cover",
               }}
             />
@@ -2124,7 +2124,7 @@ const roadmapCards = [
       fontFamily: "'Barlow', sans-serif",
       color: "rgba(255,255,255,0.5)",
       fontSize: 14,
-      letterSpacing: 1,marginTop: -115,     marginLeft: 27,
+      letterSpacing: 1,marginTop: -115,     marginLeft: 26,
     }}
   >
     TOTAL BONUS VALUE
