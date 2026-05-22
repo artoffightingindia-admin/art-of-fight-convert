@@ -365,7 +365,7 @@ font-family: 'Bebas Neue', sans-serif;
 
   width: 100%;
 
-  min-height: 84px;
+  min-height: 50px;
 
   background: #07b4ba;
 
@@ -386,7 +386,7 @@ font-family: 'Bebas Neue', sans-serif;
 
   align-items: center;
 
-  gap: 14px;
+  gap: 22px;
 }
 
 .pp-trust-icon {
@@ -1542,7 +1542,7 @@ const roadmapCards = [
               alt={card.title}
               style={{
                 width: "100%",
-                height: 280,
+                height: 285,
                 objectFit: "cover",
               }}
             />
