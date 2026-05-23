@@ -1755,6 +1755,7 @@ const roadmapCards = [
     backgroundImage:
       "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)",
     backgroundSize: "32px 32px",
+    borderBottom: "40px solid #0b0b0b",  // ← ADD THIS
   }}
 >
   <div
