@@ -2164,7 +2164,7 @@ const roadmapCards = [
         <h2
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(52px,6vw,92px)",
+            fontSize: "clamp(34px,5vw,54px)",
             lineHeight: 0.9,
             letterSpacing: 2,
             color: "#fff",
@@ -2179,12 +2179,8 @@ const roadmapCards = [
 
         <p
           style={{
-            fontFamily: "'Barlow', sans-serif",
-            color: "rgba(255,255,255,0.72)",
-            fontSize: 16,
-            lineHeight: 1.9,
-            maxWidth: 600,
-            marginBottom: 34,
+            fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)",
+              fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380,
           }}
         >
           Spots are limited. We only take a small number
@@ -2253,10 +2249,10 @@ const roadmapCards = [
             padding: "0 34px",
             borderRadius: 999,
             border: "none",
-            background: "#59e6d9",
+            background: "#1ebe57",
             color: "#fff",
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 24,
+            fontSize: 18,
             letterSpacing: 1,
             cursor: "pointer",
           }}
@@ -2271,7 +2267,7 @@ const roadmapCards = [
       <div
         style={{
           background:
-            "linear-gradient(180deg,#2a313d 0%, #262d39 100%)",
+            "#0f1115",
 
           borderRadius: 28,
 
@@ -2368,7 +2364,7 @@ const roadmapCards = [
               "0 0 30px rgba(46,220,224,0.35)",
           }}
         >
-          JOIN NOW
+          JOIN NOW-999₹
         </button>
 
         <p
