@@ -463,7 +463,24 @@ const css = `
     .pp-roadmap-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%); z-index: 1; }
     .pp-roadmap-card-body { position: relative; z-index: 2; min-height: 258px; padding: 30px 18px 18px; }
     .pp-roadmap-you { margin: 0 0 6px !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 12px !important; letter-spacing: 0.5px !important; }
-    .pp-roadmap-card h3 { margin: 0 0 14px !important; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 28px !important; line-height: 0.95 !important; letter-spacing: 0.5px; }
+    .pp-roadmap-card h3 {
+  margin: 0 0 14px !important;
+
+  color: #fff;
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 28px !important;
+
+  line-height: 1.05 !important;
+
+  letter-spacing: 2px;
+
+  min-height: 64px;
+
+  display: flex;
+  align-items: flex-start;
+}
     .pp-roadmap-rule { width: 54px; height: 2px; margin-bottom: 34px; background: #07e8ef; box-shadow: 0 0 10px rgba(7,232,239,0.55); }
     .pp-roadmap-points { display: flex; flex-direction: column; gap: 16px; }
     .pp-roadmap-point { display: flex; align-items: center; gap: 10px; }
