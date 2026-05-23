@@ -2375,7 +2375,136 @@ const roadmapCards = [
         >
           Limited slots available for this batch
         </p>
+<div
+  style={{
+    marginTop: 18,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 14,
+  }}
+>
 
+  {/* DAYS */}
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        width: 70,
+        height: 70,
+        borderRadius: 14,
+        background: "#151a22",
+        border: "1px solid rgba(7,180,186,0.18)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 42,
+        color: "#07b4ba",
+        letterSpacing: 2,
+      }}
+    >
+      02
+    </div>
+
+    <p
+      style={{
+        marginTop: 8,
+        fontSize: 11,
+        letterSpacing: 2,
+        color: "rgba(255,255,255,0.4)",
+      }}
+    >
+      DAYS
+    </p>
+  </div>
+
+  <div
+    style={{
+      fontSize: 30,
+      color: "rgba(255,255,255,0.3)",
+      marginTop: -18,
+    }}
+  >
+    :
+  </div>
+
+  {/* HOURS */}
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        width: 70,
+        height: 70,
+        borderRadius: 14,
+        background: "#151a22",
+        border: "1px solid rgba(7,180,186,0.18)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 42,
+        color: "#07b4ba",
+        letterSpacing: 2,
+      }}
+    >
+      18
+    </div>
+
+    <p
+      style={{
+        marginTop: 8,
+        fontSize: 11,
+        letterSpacing: 2,
+        color: "rgba(255,255,255,0.4)",
+      }}
+    >
+      HOURS
+    </p>
+  </div>
+
+  <div
+    style={{
+      fontSize: 30,
+      color: "rgba(255,255,255,0.3)",
+      marginTop: -18,
+    }}
+  >
+    :
+  </div>
+
+  {/* MINUTES */}
+  <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        width: 70,
+        height: 70,
+        borderRadius: 14,
+        background: "#151a22",
+        border: "1px solid rgba(7,180,186,0.18)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 42,
+        color: "#07b4ba",
+        letterSpacing: 2,
+      }}
+    >
+      43
+    </div>
+
+    <p
+      style={{
+        marginTop: 8,
+        fontSize: 11,
+        letterSpacing: 2,
+        color: "rgba(255,255,255,0.4)",
+      }}
+    >
+      MINUTES
+    </p>
+  </div>
+
+</div>
       </div>
 
     </div>
