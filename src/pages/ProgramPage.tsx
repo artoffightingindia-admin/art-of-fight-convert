@@ -631,7 +631,10 @@ font-family: 'Bebas Neue', sans-serif;
   border-top: none;
   background-image: none;
 
-  margin-top: -100px;
+  padding-top: 0px !important;
+  margin-top: -120px;
+  position: relative;
+  z-index: 5;
 }
 .pp-footer-cta::before {
   display: none;
@@ -1707,7 +1710,7 @@ const roadmapCards = [
         </div>
 
         {/* ── TESTIMONIALS (image 3 & 4) ── */}
-        <div className="pp-testi-bg">
+        <div   className="pp-testi-bg"   style={{     paddingBottom: "0px",     marginBottom: "-80px",   }} >
           <div className="pp-section" style={{ paddingTop: 48 }}>
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 44 }}>
