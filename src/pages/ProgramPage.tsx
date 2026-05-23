@@ -152,7 +152,7 @@ const faqItems = [
 function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
-    <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "40px 40px" }}>
+    <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b", backgroundSize: "40px 40px" }}>
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <Reveal>
           <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" as const, color: "#07b4ba", marginBottom: 10 }}>Got Questions?</p>
@@ -626,7 +626,14 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
 
   /* FOOTER CTA */
-  .pp-footer-cta { background: #080808; border-top: 1px solid rgba(255,255,255,0.06); }
+  .pp-footer-cta {
+  background: #080808;
+  border-top: none;
+  background-image: none;
+}
+.pp-footer-cta::before {
+  display: none;
+}
   .pp-footer-grid { display: flex; gap: 56px; align-items: center; flex-wrap: wrap; }
   .pp-footer-left { flex: 1; min-width: 260px; }
   .pp-footer-right { flex: 0 0 360px; max-width: 100%; text-align: center; }
