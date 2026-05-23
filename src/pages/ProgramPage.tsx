@@ -2170,8 +2170,8 @@ const roadmapCards = [
     background: "#0b0b0b",
     backgroundImage:
       "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)",
-    backgroundSize: "22px 22px",
-    position: "relative",
+    backgroundSize: "20px 20px",
+    position: "absolute",
     overflow: "hidden",
   }}
 >
@@ -2187,7 +2187,7 @@ const roadmapCards = [
       style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gap: 70,
+      
         alignItems: "center",
       }}
     >
