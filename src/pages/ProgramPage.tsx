@@ -2284,7 +2284,7 @@ const roadmapCards = [
 
           justifyContent: "center",
 
-          minHeight: 520,
+          minHeight: 420,
         }}
       >
 
