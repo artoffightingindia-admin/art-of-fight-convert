@@ -1267,7 +1267,7 @@ const roadmapCards = [
 >
   <div
     style={{
-      maxWidth: 1400,
+      maxWidth: 700,
       margin: "0 auto",
       padding: "30px 0",
     }}
