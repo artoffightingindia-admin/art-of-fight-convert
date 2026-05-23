@@ -397,19 +397,18 @@ const css = `
     .roadmap-card p { font-size: 13px !important; }
     .pp-apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
-/* ── NEW PROMISE SECTION ── */
+/* ── PROMISE SECTION WRAPPER ── */
 
-.cp-new-promise {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 34px 42px;
-  text-align: center;
+.cp-promise-section {
   position: relative;
   overflow: hidden;
+
+  background: #141414;
 }
 
-/* diagonal bg lines */
-.cp-new-promise::before {
+/* FULL WIDTH DIAGONAL LINES */
+
+.cp-promise-section::before {
   content: "";
 
   position: absolute;
@@ -427,6 +426,22 @@ const css = `
   pointer-events: none;
 
   z-index: 0;
+}
+
+/* ── NEW PROMISE SECTION ── */
+
+.cp-new-promise {
+  max-width: 820px;
+
+  margin: 0 auto;
+
+  padding: 34px 42px;
+
+  text-align: center;
+
+  position: relative;
+
+  z-index: 1;
 }
 
 .cp-new-promise-line {
@@ -455,6 +470,7 @@ const css = `
 
   margin: 0 auto;
 }
+
 .cp-new-promise-title {
   font-family: 'Bebas Neue', sans-serif;
 
@@ -481,23 +497,27 @@ const css = `
   font-family: serif;
 
   position: relative;
+
   top: 10px;
 }
 
 /* MOBILE */
+
 @media (max-width: 768px) {
 
   .cp-new-promise {
     padding: 26px 22px;
-    border-radius: 16px;
   }
-  
 
   .cp-new-promise-text {
     font-size: 15px;
     line-height: 1.8;
   }
-}  /* ─────────────────────────────
+
+  .cp-new-promise-title {
+    font-size: 26px;
+  }
+} /* ─────────────────────────────
    MOBILE OPTIMIZATION
 ───────────────────────────── */
 @media (max-width: 768px) {
