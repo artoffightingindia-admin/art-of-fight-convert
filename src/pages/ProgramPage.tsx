@@ -620,17 +620,10 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-book-strip button:hover { background: rgba(0,0,0,0.08); }
 
   /* TESTIMONIALS */
- .pp-testi-bg {
+  .pp-testi-bg {
   position: relative;
   overflow: hidden;
-  background-color: #0b0b0b;
-  background-image: repeating-linear-gradient(
-    -45deg,
-    rgba(7,180,186,0.05) 0px,
-    rgba(7,180,186,0.05) 1px,
-    transparent 1px,
-    transparent 5px
-  );
+  background: #0b0b0b;
 }
   .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
   .pp-testi-img { flex: 0 0 460px; max-width: 100%; }
@@ -1265,7 +1258,7 @@ const roadmapCards = [
   </div>
 </section>
 
-{/* ───────── ROADMAP SECTION ───────── */}
+  {/* ───────── ROADMAP SECTION ───────── */}
 
 <div
   style={{
@@ -1280,11 +1273,11 @@ const roadmapCards = [
     style={{
       maxWidth: 1400,
       margin: "0 auto",
-      padding: "70px 0 110px",
+      padding: "30px 0",
     }}
   >
     {/* TOP */}
-    <div style={{ textAlign: "center", marginBottom: 60 }}>
+    <div style={{ textAlign: "center", marginBottom: 35 }}>
 
       <p
         style={{
@@ -1327,364 +1320,348 @@ const roadmapCards = [
 
     {/* ROADMAP SLIDER */}
 
+<div
+  style={{
+    position: "relative",
+    maxWidth: 1320,
+    margin: "0 auto",
+    overflow: "hidden",
+    padding: "0 70px",
+  }}
+>
+
+  {/* LEFT BUTTON */}
+
+  <button
+    onClick={() =>
+      setRoadmapIndex((prev) => Math.max(prev - 1, 0))
+    }
+    style={{
+      position: "absolute",
+      left: 0,
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 20,
+      width: 52,
+      height: 52,
+      borderRadius: 14,
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "#0d1117",
+      color: "#fff",
+      fontSize: 24,
+      cursor: "pointer",
+    }}
+  >
+    ‹
+  </button>
+
+  {/* RIGHT BUTTON */}
+
+  <button
+    onClick={() =>
+      setRoadmapIndex((prev) =>
+        Math.min(prev + 1, roadmapCards.length - 2)
+      )
+    }
+    style={{
+      position: "absolute",
+      right: 0,
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 20,
+      width: 52,
+      height: 52,
+      borderRadius: 14,
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "#0d1117",
+      color: "#fff",
+      fontSize: 24,
+      cursor: "pointer",
+    }}
+  >
+    ›
+  </button>
+
+  {/* TOP PROGRESS */}
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 42,
+      position: "relative",
+    }}
+  >
+
     <div
       style={{
-        position: "relative",
-        maxWidth: 1320,
-        margin: "0 auto",
-        overflow: "hidden",
-        padding: "0 70px",
+        position: "absolute",
+        top: 14,
+        left: 0,
+        right: 0,
+        height: 2,
+        background: "rgba(255,255,255,0.1)",
       }}
-    >
+    />
 
-      {/* LEFT BUTTON */}
-
-      <button
-        onClick={() =>
-          setRoadmapIndex((prev) => Math.max(prev - 1, 0))
-        }
-        style={{
-          position: "absolute",
-          left: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 20,
-          width: 52,
-          height: 52,
-          borderRadius: 14,
-          border: "1px solid rgba(255,255,255,0.08)",
-          background: "#0d1117",
-          color: "#fff",
-          fontSize: 24,
-          cursor: "pointer",
-        }}
-      >
-        ‹
-      </button>
-
-      {/* RIGHT BUTTON */}
-
-      <button
-        onClick={() =>
-          setRoadmapIndex((prev) =>
-            Math.min(prev + 1, roadmapCards.length - 2)
-          )
-        }
-        style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 20,
-          width: 52,
-          height: 52,
-          borderRadius: 14,
-          border: "1px solid rgba(255,255,255,0.08)",
-          background: "#0d1117",
-          color: "#fff",
-          fontSize: 24,
-          cursor: "pointer",
-        }}
-      >
-        ›
-      </button>
-
-      {/* TOP PROGRESS */}
+    {roadmapCards.map((week, i) => (
 
       <div
+        key={i}
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 42,
           position: "relative",
+          zIndex: 2,
+          textAlign: "center",
         }}
       >
+
+        <p
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 15,
+            letterSpacing: 1,
+            color:
+              i === roadmapIndex || i === roadmapIndex + 1
+                ? "#07b4ba"
+                : "rgba(255,255,255,0.45)",
+            marginBottom: 10,
+            transition: "0.3s",
+          }}
+        >
+          {week.title}
+        </p>
 
         <div
           style={{
-            position: "absolute",
-            top: 14,
-            left: 0,
-            right: 0,
-            height: 2,
-            background: "rgba(255,255,255,0.1)",
+            width: 26,
+            height: 26,
+            borderRadius: "50%",
+            border: "2px solid #07b4ba",
+            background:
+              i === roadmapIndex || i === roadmapIndex + 1
+                ? "#07b4ba"
+                : "#06080c",
+
+            boxShadow:
+              i === roadmapIndex || i === roadmapIndex + 1
+                ? "0 0 18px rgba(7,180,186,0.95)"
+                : "none",
+
+            transition: "0.3s",
           }}
         />
 
-        {roadmapCards.map((week, i) => (
-
-          <div
-            key={i}
-            style={{
-              position: "relative",
-              zIndex: 2,
-              textAlign: "center",
-            }}
-          >
-
-            <p
-              style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 15,
-                letterSpacing: 1,
-                color:
-                  i === roadmapIndex || i === roadmapIndex + 1
-                    ? "#07b4ba"
-                    : "rgba(255,255,255,0.45)",
-                marginBottom: 10,
-                transition: "0.3s",
-              }}
-            >
-              {week.title}
-            </p>
-
-            <div
-              style={{
-                width: 26,
-                height: 26,
-                borderRadius: "50%",
-                border: "2px solid #07b4ba",
-                background:
-                  i === roadmapIndex || i === roadmapIndex + 1
-                    ? "#07b4ba"
-                    : "#06080c",
-
-                boxShadow:
-                  i === roadmapIndex || i === roadmapIndex + 1
-                    ? "0 0 18px rgba(7,180,186,0.95)"
-                    : "none",
-
-                transition: "0.3s",
-              }}
-            />
-
-          </div>
-
-        ))}
-
       </div>
 
-      {/* SLIDER */}
+    ))}
 
-      <div
-        style={{
-          overflow: "hidden",
-        }}
-      >
+  </div>
+
+  {/* SLIDER */}
+
+  <div
+    style={{
+      overflow: "hidden",
+    }}
+  >
+
+    <div
+      style={{
+        display: "flex",
+        gap: 20,
+
+        transform: `translateX(-${roadmapIndex * 47}%)`,
+
+        transition: "0.45s ease",
+      }}
+    >
+
+      {roadmapCards.map((card, i) => (
 
         <div
+          key={i}
+          className="roadmap-card"
           style={{
-            display: "flex",
-            gap: 20,
+            minWidth: "45%",
 
-            transform: `translateX(-${roadmapIndex * 47}%)`,
+            borderRadius: 22,
 
-            transition: "0.45s ease",
+            overflow: "hidden",
+
+            background:
+              "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)",
+
+            border: "1px solid rgba(255,255,255,0.06)",
           }}
         >
 
-          {roadmapCards.map((card, i) => (
+          <div
+            style={{
+              display: "grid",
+
+              gridTemplateColumns: "1fr 1fr",
+
+              minHeight: 90,
+            }}
+          >
+
+            {/* IMAGE */}
+
+            <img
+              src={card.image}
+              alt={card.title}
+              style={{
+                width: "100%",
+                height: 285,
+                objectFit: "cover",
+              }}
+            />
+
+            {/* CONTENT */}
 
             <div
-              key={i}
-              className="roadmap-card"
               style={{
-                minWidth: "45%",
+                padding: "32px 24px",
 
-                borderRadius: 22,
+                display: "flex",
 
-                overflow: "hidden",
+                flexDirection: "column",
 
-                background:
-                  "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)",
-
-                border: "1px solid rgba(255,255,255,0.06)",
+                justifyContent: "center",
               }}
             >
 
+              <h3
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+
+                  fontSize: 42,
+
+                  color: "#fff",
+
+                  marginBottom: 18,
+                }}
+              >
+                {card.title}
+              </h3>
+
               <div
                 style={{
-                  display: "grid",
+                  width: 60,
 
-                  gridTemplateColumns: "1fr 1fr",
+                  height: 3,
 
-                  minHeight: 260,
+                  background: "#07b4ba",
+
+                  marginBottom: 20,
+                }}
+              />
+
+              <div
+                style={{
+                  display: "flex",
+
+                  flexDirection: "column",
+
+                  gap: 12,
                 }}
               >
 
-                {/* IMAGE */}
-
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-
-                {/* CONTENT */}
-
-                <div
-                  style={{
-                    padding: "24px 22px",
-
-                    display: "flex",
-
-                    flexDirection: "column",
-
-                    justifyContent: "center",
-                  }}
-                >
-
-                  <h3
-                    style={{
-                      fontFamily: "'Bebas Neue', sans-serif",
-
-                      fontSize: 38,
-
-                      color: "#fff",
-
-                      marginBottom: 16,
-                    }}
-                  >
-                    {card.title}
-                  </h3>
+                {card.points.map((point, idx) => (
 
                   <div
-                    style={{
-                      width: 60,
-
-                      height: 3,
-
-                      background: "#07b4ba",
-
-                      marginBottom: 18,
-                    }}
-                  />
-
-                  <div
+                    key={idx}
                     style={{
                       display: "flex",
 
-                      flexDirection: "column",
+                      alignItems: "center",
 
                       gap: 10,
                     }}
                   >
 
-                    {card.points.map((point, idx) => (
+                    <div
+                      style={{
+                        width: 20,
 
-                      <div
-                        key={idx}
-                        style={{
-                          display: "flex",
+                        height: 20,
 
-                          alignItems: "center",
+                        borderRadius: "50%",
 
-                          gap: 10,
-                        }}
-                      >
+                        border: "2px solid #07b4ba",
 
-                        <div
-                          style={{
-                            width: 18,
+                        color: "#07b4ba",
 
-                            height: 18,
+                        display: "flex",
 
-                            borderRadius: "50%",
+                        alignItems: "center",
 
-                            border: "2px solid #07b4ba",
+                        justifyContent: "center",
 
-                            color: "#07b4ba",
+                        fontSize: 10,
+                      }}
+                    >
+                      ✓
+                    </div>
 
-                            display: "flex",
+                    <p
+                      style={{
+                        fontSize: 14,
 
-                            alignItems: "center",
+                        color: "rgba(255,255,255,0.75)",
 
-                            justifyContent: "center",
-
-                            fontSize: 9,
-                          }}
-                        >
-                          ✓
-                        </div>
-
-                        <p
-                          style={{
-                            fontSize: 13,
-
-                            color: "rgba(255,255,255,0.75)",
-
-                            lineHeight: 1.4,
-                          }}
-                        >
-                          {point}
-                        </p>
-
-                      </div>
-
-                    ))}
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {point}
+                    </p>
 
                   </div>
 
-                </div>
-
-              </div>
-
-              {/* FOOTER */}
-
-              <div
-                style={{
-                  padding: "10px",
-
-                  borderTop:
-                    "1px solid rgba(255,255,255,0.06)",
-
-                  textAlign: "center",
-                }}
-              >
-
-                <p
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 20,
-                    color: "#07b4ba",
-                    letterSpacing: 1,
-                  }}
-                >
-                  {card.days}
-                </p>
+                ))}
 
               </div>
 
             </div>
 
-          ))}
+          </div>
 
-        </div>
 
-      </div>
+          {/* FOOTER */}
 
-    </div>
+          <div
+            style={{
+              padding: "16px",
 
-  </div>
+              borderTop:
+                "1px solid rgba(255,255,255,0.06)",
 
-  {/* FADE OUT TO STOP LINES */}
-  <div
-    style={{
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      width: "100%",
-      height: 120,
-      background:
-        "linear-gradient(to bottom, rgba(6,8,12,0), #0b0b0b)",
-      pointerEvents: "none",
-      zIndex: 5,
-    }}
-  />
+              textAlign: "center",
+            }}
+          >
+
+            <p
+  style={{
+    fontFamily: "'Bebas Neue', sans-serif",
+    fontSize: 22,
+    color: "#07b4ba",
+    letterSpacing: 1,
+  }}
+>
+  {card.days}
+</p>
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</div>
 
 </div>
         {/* ── COACH SECTION (image 2) ── */}
@@ -2624,6 +2601,7 @@ const roadmapCards = [
         </footer>
 
       </div>
-   </>
+    </div>
+    </>
   );
 }
