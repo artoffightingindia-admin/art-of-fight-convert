@@ -92,9 +92,7 @@ function InfiniteFeedbackSlider() {
               <div className="pp-feedback-mobile-stars">
                 <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
-              <p className="pp-feedback-mobile-text">
-                "{card.text}"
-              </p>
+              <p className="pp-feedback-mobile-text">"{card.text}"</p>
               <div className="pp-feedback-mobile-author">
                 <div className="pp-feedback-avatar" />
                 <div>
@@ -150,7 +148,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b" }}>
-<div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <Reveal>
           <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" as const, color: "#07b4ba", marginBottom: 10 }}>Got Questions?</p>
           <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 5.5vw, 60px)", letterSpacing: 2, color: "#fff", lineHeight: 1, marginBottom: 10 }}>
@@ -218,32 +216,16 @@ const css = `
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
   .pp-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
-  .pp-hero-h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(42px, 5.5vw, 72px);
-  line-height: 0.95; letter-spacing: 2px; text-transform: uppercase;
-  color: #fff; margin-bottom: 20px;
-}
-
-  .pp-hero-h2 {
-  color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px;
-  font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;
-}
-  .pp-hero-desc {
-  color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif;
-  font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px;
-}
-.pp-hero-desc strong { color: #07b4ba; }
+  .pp-hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 5.5vw, 72px); line-height: 0.95; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  .pp-hero-h2 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
+  .pp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
+  .pp-hero-desc strong { color: #07b4ba; }
   .pp-join-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 52px; border-radius: 14px; background: #07b4ba; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.40s ease; box-shadow: 0 10px 35px rgba(7,180,186,0.28); }
   .pp-join-btn:hover { background: #057e82; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ───────── TRUST BAR ───────── */
-  .pp-trust-strip {
-    width: 100%; height: 60px; background: #07b4ba;
-    display: flex; align-items: center; justify-content: space-around;
-    padding: 0 40px; gap: 12px; flex-wrap: wrap;
-  }
+  .pp-trust-strip { width: 100%; height: 60px; background: #07b4ba; display: flex; align-items: center; justify-content: space-around; padding: 0 40px; gap: 12px; flex-wrap: wrap; }
   .pp-trust-item { display: flex; align-items: center; gap: 12px; }
   .pp-trust-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
@@ -292,14 +274,47 @@ const css = `
   .pp-coach-bg { background: #0b0b0b; }
   .pp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
   .pp-book-strip button { width: 100%; padding: 14px; background: none; border: none; cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; transition: background 0.2s; }
-  .pp-book-strip button:hover  { background: #075e61; transform: translateY(-2px); }
+  .pp-book-strip button:hover { background: #075e61; }
 
   /* TESTIMONIALS */
-  .pp-testi-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px); }
+  .pp-testi-bg { position: relative; overflow: hidden; background: #0b0b0b; }
   .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
-  .pp-testi-img { flex: 0 0 460px; max-width: 100%;aspect-ratio: 16/9;  }
+  .pp-testi-img { flex: 0 0 460px; max-width: 100%; aspect-ratio: 16/9; }
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
   .pp-feedback-mobile { display: none; }
+
+  /* PROMISE SECTION */
+  .cp-promise-section {
+    position: relative;
+    overflow: hidden;
+    background: #0b0b0b;
+  }
+  .cp-promise-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.08) 0px, rgba(7,180,186,0.08) 1px, transparent 1px, transparent 5px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cp-new-promise {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 34px 42px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .cp-new-promise-line { width: 70px; height: 2px; background: #07b4ba; margin: 0 auto 22px; border-radius: 999px; }
+  .cp-new-promise-text { font-family: 'Barlow', sans-serif; font-size: 19px; line-height: 1.9; color: rgba(255,255,255,0.76); font-style: italic; max-width: 720px; margin: 0 auto; }
+  .cp-new-promise-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: #fff; margin-bottom: 12px; text-align: center; }
+  .cp-quote-mark { color: #07b4ba; font-size: 42px; line-height: 0; margin-right: 6px; font-family: serif; position: relative; top: 10px; }
+
+  @media (max-width: 768px) {
+    .cp-new-promise { padding: 26px 22px; }
+    .cp-new-promise-text { font-size: 15px; line-height: 1.8; }
+    .cp-new-promise-title { font-size: 26px; }
+  }
 
   /* FOOTER CTA */
   .pp-footer-cta { background: #0b0b0b; border-top: none; position: relative; padding-top: 0 !important; margin-top: 0 !important; z-index: 10; }
@@ -324,27 +339,14 @@ const css = `
   .pp-cta-note { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 12px; }
 
   /* FOOTER */
-  .pp-footer {
-  background: #101318;
-  padding: 12px 40px 4px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
+  .pp-footer { background: #101318; padding: 12px 40px 4px; border-top: 1px solid rgba(255,255,255,0.06); }
   .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-.pp-footer-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 1px;
-  color: #fff;
-  padding-top: 8px;
-  margin-bottom: 10px;
-}  .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #fff; padding-top: 8px; margin-bottom: 10px; }
+  .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
   .pp-footer-links a, .pp-footer-contact p, .pp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
   .pp-footer-links a:hover { color: #075e61; }
-.pp-footer-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}  .pp-footer-about p { line-height: 1.8; max-width: 320px; }
+  .pp-footer-contact { display: flex; flex-direction: column; gap: 10px; }
+  .pp-footer-about p { line-height: 1.8; max-width: 320px; }
   .pp-footer-bottom { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
 
   /* CHECKLIST */
@@ -360,17 +362,10 @@ const css = `
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .pp-nav { padding: 12px 16px; }
-    .pp-nav-back { position: static; }
     .pp-section { padding: 48px 20px; }
-    .pp-stats { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 0; min-height: auto; }
-    .pp-stats-coach { margin: 16px 0 8px; }
-    .pp-stats-divider { display: none; }
-    .pp-stat { text-align: left; padding: 8px 0; }
     .pp-problem-grid { flex-direction: column; }
     .pp-problem-right { flex: unset; width: 100%; }
     .pp-features-grid { flex-direction: column; }
-    .pp-features-right { flex: unset; width: 100%; }
-    .pp-curriculum-grid { flex-direction: column; gap: 40px; }
     .pp-footer-grid { flex-direction: column; gap: 40px; }
     .pp-footer-right { flex: unset; width: 100%; }
     .pp-timer { justify-content: center; }
@@ -396,1172 +391,125 @@ const css = `
     .roadmap-card h3 { font-size: 34px !important; }
     .roadmap-card p { font-size: 13px !important; }
     .pp-apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .pp-nav-home { display: none; }
+    .pp-nav-call { height: 38px; padding: 0 16px; font-size: 14px; }
+  }
+
+  @media (max-width: 768px) {
+    .pp-section { padding: 56px 18px !important; }
+    .pp-hero { min-height: auto; padding: 110px 18px 72px; align-items: flex-start; }
+    .pp-hero-content { width: 100%; }
+    .pp-hero-h1 { font-size: 36px; line-height: 0.95; letter-spacing: 2px; max-width: 100%; }
+    .pp-hero-h2 { font-size: 14px; letter-spacing: 1.5px; margin-bottom: 16px; }
+    .pp-hero-desc { font-size: 14px; line-height: 1.7; margin-bottom: 26px; max-width: 100%; }
+    .pp-join-btn { width: 100%; height: 58px; font-size: 20px; border-radius: 12px; padding: 0 20px; }
+    .pp-scarcity { font-size: 11px; line-height: 1.5; }
+    .pp-trust-strip { padding: 11px; gap: 16px; height: auto; justify-content: center; }
+    .pp-trust-item { width: calc(50% - 8px); justify-content: center; }
+    .pp-trust-item p { font-size: 12px; letter-spacing: 0.5px; }
+    .pp-problem-grid { flex-direction: column; gap: 32px; }
+    .pp-problem-left, .pp-problem-right { width: 100%; flex: unset; }
+    .pp-features-heading { font-size: 38px; letter-spacing: 2px !important; margin-bottom: 36px; line-height: 1; }
+    .pp-features-grid { display: flex; flex-direction: column; gap: 16px; }
+    .pp-feature-card { width: 100%; min-height: auto; padding: 22px 18px; border-radius: 16px; display: flex; flex-direction: row; align-items: flex-start; text-align: left; gap: 18px; background: linear-gradient(180deg,#13171d 0%,#101318 100%); border: 1px solid rgba(255,255,255,0.06); }
+    .pp-feature-icon { width: 58px; height: 58px; flex-shrink: 0; }
+    .pp-feature-icon svg { width: 40px; height: 40px; }
+    .pp-feature-card h4 { font-size: 17px; margin-bottom: 6px; line-height: 1.3; }
+    .pp-feature-card p { font-size: 13px; line-height: 1.65; }
+    .roadmap-card { min-width: 100% !important; }
+    .roadmap-card > div:first-child { display: flex !important; flex-direction: column !important; }
+    .roadmap-card img { height: 220px !important; }
+    .pp-coach-stats { gap: 14px !important; }
+    .pp-coach-stats > div { width: calc(50% - 7px) !important; height: 120px !important; }
+    .pp-testi-main { flex-direction: column; gap: 28px; }
+    .pp-testi-img { width: 100%; flex: unset; }
+    .pp-bonus-grid { grid-template-columns: 1fr !important; }
+    .pp-apply-grid { grid-template-columns: 1fr !important; gap: 42px !important; }
+    .pp-apply-grid h2 br, .pp-apply-grid h3 br { display: none; }
+    .pp-apply-grid button { width: 100%; }
+    .pp-apply-grid > div:last-child { padding: 38px 24px !important; border-radius: 22px !important; min-height: auto !important; }
+    #faq > div { padding: 58px 18px !important; }
+    #faq h2 { font-size: 38px !important; }
+    #faq div[style*="gridTemplateColumns"] { grid-template-columns: 1fr !important; }
+    #faq button { padding: 18px !important; }
+    #faq button span:first-child { font-size: 15px !important; }
+    #faq p { font-size: 13px !important; line-height: 1.6 !important; }
+    .pp-footer-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+    img { max-width: 100%; height: auto; }
+    * { word-break: break-word; }
+    body, html { overflow-x: hidden; }
+  }
+
+  @media (max-width: 768px) {
+    .pp-roadmap-mobile { background: radial-gradient(circle at 50% 9%, rgba(7,180,186,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%) !important; border-top: 1px solid rgba(7,180,186,0.12); border-bottom: 1px solid rgba(7,180,186,0.16); }
+    .pp-roadmap-mobile > div { max-width: none !important; padding: 24px 0 26px !important; background-image: linear-gradient(rgba(7,180,186,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(7,180,186,0.035) 1px, transparent 1px) !important; background-size: 26px 26px !important; }
+    .pp-roadmap-mobile > div > div:first-child { margin-bottom: 22px !important; padding: 0 14px; }
+    .pp-roadmap-mobile > div > div:first-child p:first-child { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px !important; font-size: 10px !important; letter-spacing: 1px !important; }
+    .pp-roadmap-mobile > div > div:first-child h2 { font-size: 38px !important; line-height: 0.88 !important; letter-spacing: 1px !important; }
+    .pp-roadmap-mobile > div > div:first-child p:last-child { margin-top: 12px !important; font-size: 12px !important; color: rgba(255,255,255,0.68) !important; }
+    .pp-roadmap-mobile-shell { width: 100%; overflow: hidden; padding-bottom: 2px; }
+    .pp-roadmap-mobile-timeline { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; gap: 0; margin: 0 14px 28px; padding-top: 4px; }
+    .pp-roadmap-mobile-line { position: absolute; left: 9%; right: 9%; bottom: 7px; height: 1px; background: rgba(255,255,255,0.42); }
+    .pp-roadmap-mobile-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 11px; min-width: 0; border: 0; background: transparent; color: rgba(255,255,255,0.72); font-family: 'Bebas Neue', sans-serif; cursor: pointer; }
+    .pp-roadmap-mobile-step span { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; letter-spacing: 0; }
+    .pp-roadmap-mobile-step i { width: 15px; height: 15px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.66); background: #03070c; }
+    .pp-roadmap-mobile-step.active { color: #07e8ef; }
+    .pp-roadmap-mobile-step.active i { border: 2px solid #07e8ef; background: #061018; box-shadow: 0 0 0 4px rgba(7,180,186,0.18), 0 0 16px rgba(7,232,239,0.95); }
+    .pp-roadmap-mobile-stage { position: relative; }
+    .pp-roadmap-viewport { width: 100%; overflow: hidden; padding-left: 20px; }
+    .pp-roadmap-track { display: flex; gap: 16px; transition: transform 0.42s ease; will-change: transform; }
+    .pp-roadmap-card { position: relative; flex: 0 0 82vw; min-height: 308px; overflow: hidden; border: 1px solid rgba(116,225,232,0.28); border-radius: 10px; background: #061018; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 18px 38px rgba(0,0,0,0.34); }
+    .pp-roadmap-card-bg { position: absolute; inset: 0; background-position: 62% center; background-size: cover; opacity: 0.62; filter: saturate(1.04) contrast(1.08); }
+    .pp-roadmap-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%); z-index: 1; }
+    .pp-roadmap-card-body { position: relative; z-index: 2; min-height: 258px; padding: 30px 18px 18px; }
+    .pp-roadmap-you { margin: 0 0 6px !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 12px !important; letter-spacing: 0.5px !important; }
+    .pp-roadmap-card h3 { margin: 0 0 14px !important; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 28px !important; line-height: 0.95 !important; letter-spacing: 0.5px; }
+    .pp-roadmap-rule { width: 54px; height: 2px; margin-bottom: 34px; background: #07e8ef; box-shadow: 0 0 10px rgba(7,232,239,0.55); }
+    .pp-roadmap-points { display: flex; flex-direction: column; gap: 16px; }
+    .pp-roadmap-point { display: flex; align-items: center; gap: 10px; }
+    .pp-roadmap-point span { display: flex; width: 14px; height: 14px; flex-shrink: 0; align-items: center; justify-content: center; border: 1px solid #07e8ef; border-radius: 50%; color: #07e8ef; font-size: 8px; line-height: 1; }
+    .pp-roadmap-point p { margin: 0 !important; color: rgba(255,255,255,0.82) !important; font-size: 11px !important; line-height: 1.25 !important; }
+    .pp-roadmap-card-footer { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; border-top: 1px solid rgba(255,255,255,0.12); background: rgba(3,9,15,0.72); }
+    .pp-roadmap-card-footer span { width: 20px; height: 20px; color: #07e8ef; }
+    .pp-roadmap-card-footer svg { width: 100%; height: 100%; }
+    .pp-roadmap-card-footer p { margin: 0 !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 18px !important; letter-spacing: 1px; }
+    .pp-roadmap-arrow { position: absolute; top: 50%; z-index: 8; width: 34px; height: 34px; transform: translateY(-50%); border: 1px solid rgba(7,232,239,0.55); border-radius: 8px; background: rgba(3,11,18,0.92); color: #07e8ef; font-size: 19px; line-height: 1; cursor: pointer; box-shadow: 0 0 18px rgba(7,180,186,0.18); }
+    .pp-roadmap-arrow:disabled { opacity: 0.35; cursor: default; }
+    .pp-roadmap-arrow-left { left: 0; }
+    .pp-roadmap-arrow-right { right: 0; }
+    .pp-roadmap-dots { display: flex; justify-content: center; gap: 13px; margin-top: 18px; }
+    .pp-roadmap-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; }
+    .pp-roadmap-dots button.active { background: #07e8ef; box-shadow: 0 0 12px rgba(7,232,239,0.7); }
+    .pp-roadmap-note { display: flex; align-items: center; gap: 14px; margin: 20px 16px 0; padding: 17px 18px; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; background: linear-gradient(180deg, rgba(13,26,36,0.9), rgba(7,14,22,0.92)); }
+    .pp-roadmap-note-icon { display: flex; width: 38px; height: 38px; flex-shrink: 0; align-items: center; justify-content: center; border: 1px solid #07e8ef; border-radius: 50%; color: #07e8ef; }
+    .pp-roadmap-note-icon svg { width: 22px; height: 22px; }
+    .pp-roadmap-note h3 { margin: 0 0 5px; color: rgba(255,255,255,0.9); font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.8px; line-height: 1; }
+    .pp-roadmap-note p { margin: 0; color: #07e8ef; font-size: 11px; line-height: 1.3; }
+    .pp-nav-home-mobile { position: fixed; bottom: 18px; left: 18px; z-index: 999; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; background: linear-gradient(180deg, #13171d 0%, #0d1117 100%); color: #07b4ba; font-size: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); backdrop-filter: blur(10px); }
+    .pp-feedback-mobile { display: block; width: 100%; }
+    .pp-feedback-mobile-list { display: flex; flex-direction: column; gap: 36px; padding: 0 8px; }
+    .pp-feedback-mobile-card { width: 100%; min-height: 60px; padding: 32px 28px; border: 1px solid rgba(141,150,168,0.22); border-radius: 22px; background: #171a21; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 14px 34px rgba(0,0,0,0.25); }
+    .pp-feedback-mobile-stars { display: flex; gap: 10px; margin-bottom: 28px; color: #07b4ba; font-size: 30px; line-height: 1; }
+    .pp-feedback-mobile-text { margin: 0 0 28px !important; color: rgba(189,195,208,0.78) !important; font-family: 'Barlow', sans-serif !important; font-size: 25px !important; font-style: italic !important; font-weight: 400 !important; line-height: 1.72 !important; }
+    .pp-feedback-mobile-author { display: flex; align-items: center; gap: 22px; }
+    .pp-feedback-avatar { position: relative; width: 84px; height: 84px; flex-shrink: 0; border-radius: 50%; background: #262b35; }
+    .pp-feedback-avatar::before { content: ""; position: absolute; top: 24px; left: 50%; width: 14px; height: 14px; transform: translateX(-50%); border: 4px solid #929aaa; border-radius: 50%; }
+    .pp-feedback-avatar::after { content: ""; position: absolute; left: 50%; bottom: 21px; width: 26px; height: 18px; transform: translateX(-50%); border: 4px solid #929aaa; border-bottom: 0; border-radius: 14px 14px 0 0; }
+    .pp-feedback-mobile-author p { margin: 0 0 8px !important; color: #fff !important; font-family: 'Barlow', sans-serif !important; font-size: 27px !important; font-weight: 800 !important; line-height: 1 !important; }
+    .pp-feedback-mobile-author span { color: #9da5b6; font-family: 'Barlow', sans-serif; font-size: 22px; line-height: 1; }
+    .pp-feedback-mobile-nav { display: flex; justify-content: center; gap: 38px; margin-top: 82px; }
+    .pp-feedback-mobile-nav button { display: flex; align-items: center; justify-content: center; width: 82px; height: 82px; border: 2px solid rgba(141,150,168,0.28); border-radius: 50%; background: rgba(7,10,16,0.35); color: #a6adbd; font-size: 58px; line-height: 1; cursor: pointer; }
+  }
+
+  @media (max-width: 480px) {
+    .pp-hero-h1 { font-size: 31px; }
+    .pp-trust-item { width: 100%; }
+    .pp-feature-card { padding: 18px 16px; gap: 14px; }
+    .pp-feature-icon { width: 48px; height: 48px; }
+    .pp-feature-icon svg { width: 34px; height: 34px; }
+    .pp-coach-stats > div { width: 100% !important; }
+    .roadmap-card img { height: 190px !important; }
   }
-/* ── PROMISE SECTION WRAPPER ── */
-
-.cp-promise-section {
-  position: relative;
-  overflow: hidden;
-
-  background: #141414;
-}
-
-/* FULL WIDTH DIAGONAL LINES */
-
-.cp-promise-section::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background-image:
-  repeating-linear-gradient(
-    -45deg,
-    rgba(7,180,186,0.08) 0px,
-    rgba(7,180,186,0.08) 1px,
-    transparent 1px,
-    transparent 5px
-  );
-
-  pointer-events: none;
-
-  z-index: 0;
-}
-
-/* ── NEW PROMISE SECTION ── */
-
-.cp-new-promise {
-  max-width: 820px;
-
-  margin: 0 auto;
-
-  padding: 34px 42px;
-
-  text-align: center;
-
-  position: relative;
-
-  z-index: 1;
-}
-
-.cp-new-promise-line {
-  width: 70px;
-  height: 2px;
-
-  background: #07b4ba;
-
-  margin: 0 auto 22px;
-
-  border-radius: 999px;
-}
-
-.cp-new-promise-text {
-  font-family: 'Barlow', sans-serif;
-
-  font-size: 19px;
-
-  line-height: 1.9;
-
-  color: rgba(255,255,255,0.76);
-
-  font-style: italic;
-
-  max-width: 720px;
-
-  margin: 0 auto;
-}
-
-.cp-new-promise-title {
-  font-family: 'Bebas Neue', sans-serif;
-
-  font-size: 30px;
-
-  letter-spacing: 2px;
-
-  color: #fff;
-
-  margin-bottom: 12px;
-
-  text-align: center;
-}
-
-.cp-quote-mark {
-  color: #07b4ba;
-
-  font-size: 42px;
-
-  line-height: 0;
-
-  margin-right: 6px;
-
-  font-family: serif;
-
-  position: relative;
-
-  top: 10px;
-}
-
-/* MOBILE */
-
-@media (max-width: 768px) {
-
-  .cp-new-promise {
-    padding: 26px 22px;
-  }
-
-  .cp-new-promise-text {
-    font-size: 15px;
-    line-height: 1.8;
-  }
-
-  .cp-new-promise-title {
-    font-size: 26px;
-  }
-} /* ─────────────────────────────
-   MOBILE OPTIMIZATION
-───────────────────────────── */
-@media (max-width: 768px) {
-
-  .pp-section {
-    padding: 56px 18px !important;
-  }
-
-  /* NAV */
-  .pp-nav {
-    height: 58px;
-    padding: 0 14px;
-  }
-
-  .pp-nav-logo {
-    font-size: 24px;
-    letter-spacing: 1px;
-  }
-
-  .pp-nav-home {
-    display: none;
-  }
-
-  .pp-nav-call {
-    height: 38px;
-    padding: 0 16px;
-    font-size: 14px;
-  }
-
-  /* HERO */
-  .pp-hero {
-    min-height: auto;
-    padding: 110px 18px 72px;
-    align-items: flex-start;
-  }
-
-  .pp-hero-content {
-    width: 100%;
-  }
-
-  .pp-hero-h1 {
-    font-size: 36px;
-    line-height: 0.95;
-    letter-spacing: 2px;
-    max-width: 100%;
-  }
-
-  .pp-hero-h2 {
-    font-size: 14px;
-    letter-spacing: 1.5px;
-    margin-bottom: 16px;
-  }
-
-  .pp-hero-desc {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 26px;
-    max-width: 100%;
-  }
-
-  .pp-join-btn {
-    width: 100%;
-    height: 58px;
-    font-size: 20px;
-    border-radius: 12px;
-    padding: 0 20px;
-  }
-
-  .pp-scarcity {
-    font-size: 11px;
-    line-height: 1.5;
-  }
-
-  /* TRUST STRIP */
-  .pp-trust-strip {
-    padding: 11px;
-    gap: 16px;
-    height: auto;
-    justify-content: center;
-  }
-
-  .pp-trust-item {
-    width: calc(50% - 8px);
-    justify-content: center;
-  }
-
-  .pp-trust-item p {
-    font-size: 12px;
-    letter-spacing: 0.5px;
-  }
-
-  /* PROBLEM */
-  .pp-problem-grid {
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .pp-problem-left,
-  .pp-problem-right {
-    width: 100%;
-    flex: unset;
-  }
-
-  .pp-problem-h {
-    font-size: 38px;
-    line-height: 1;
-  }
-
-  .pp-problem-intro,
-  .pp-pain-item p {
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .pp-problem-right img {
-    border-radius: 14px;
-  }
-
-  /* WHAT YOU GET
-     SAME STYLE AS COACHING PAGE */
-  .pp-features-heading {
-    font-size: 38px;
-    letter-spacing: 2px !important;
-    margin-bottom: 36px;
-    line-height: 1;
-  }
-
-  .pp-features-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .pp-feature-card {
-    width: 100%;
-    min-height: auto;
-    padding: 22px 18px;
-    border-radius: 16px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-    gap: 18px;
-
-    background: linear-gradient(
-      180deg,
-      #13171d 0%,
-      #101318 100%
-    );
-
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .pp-feature-icon {
-    width: 58px;
-    height: 58px;
-    flex-shrink: 0;
-  }
-
-  .pp-feature-icon svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  .pp-feature-card h4 {
-    font-size: 17px;
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-
-  .pp-feature-card p {
-    font-size: 13px;
-    line-height: 1.65;
-  }
-
-  /* ROADMAP */
-  .roadmap-card {
-    min-width: 100% !important;
-  }
-
-  .roadmap-card > div:first-child {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  .roadmap-card img {
-    height: 220px !important;
-  }
-
-  /* COACH */
-  .pp-coach-stats {
-    gap: 14px !important;
-  }
-
-  .pp-coach-stats > div {
-    width: calc(50% - 7px) !important;
-    height: 120px !important;
-  }
-
-  /* TESTIMONIAL */
-  .pp-testi-main {
-    flex-direction: column;
-    gap: 28px;
-  }
-
-  .pp-testi-img {
-    width: 100%;
-    flex: unset;
-  }
-
-  /* BONUSES */
-  .pp-bonus-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* APPLY SECTION */
-  .pp-apply-grid {
-    grid-template-columns: 1fr !important;
-    gap: 42px !important;
-  }
-
-  .pp-apply-grid h2 br,
-  .pp-apply-grid h3 br {
-    display: none;
-  }
-
-  .pp-apply-grid button {
-    width: 100%;
-  }
-
-  /* CTA CARD */
-  .pp-apply-grid > div:last-child {
-    padding: 38px 24px !important;
-    border-radius: 22px !important;
-    min-height: auto !important;
-  }
-
-  /* FAQ */
-  #faq > div {
-    padding: 58px 18px !important;
-  }
-
-  #faq h2 {
-    font-size: 38px !important;
-  }
-
-  #faq div[style*="gridTemplateColumns"] {
-    grid-template-columns: 1fr !important;
-  }
-
-  #faq button {
-    padding: 18px !important;
-  }
-
-  #faq button span:first-child {
-    font-size: 15px !important;
-  }
-
-  /* FOOTER */
-  .pp-footer-inner {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
-  }
-
-  /* GLOBAL */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  * {
-    word-break: break-word;
-  }
-
-  body,
-  html {
-    overflow-x: hidden;
-  }
-}
-
-@media (max-width: 768px) {
-  .pp-roadmap-mobile {
-    background:
-      radial-gradient(circle at 50% 9%, rgba(7,180,186,0.12), transparent 28%),
-      linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%) !important;
-    border-top: 1px solid rgba(7,180,186,0.12);
-    border-bottom: 1px solid rgba(7,180,186,0.16);
-  }
-
-  .pp-roadmap-mobile > div {
-    max-width: none !important;
-    padding: 24px 0 26px !important;
-    background-image:
-      linear-gradient(rgba(7,180,186,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(7,180,186,0.035) 1px, transparent 1px) !important;
-    background-size: 26px 26px !important;
-  }
-
-  .pp-roadmap-mobile > div > div:first-child {
-    margin-bottom: 22px !important;
-    padding: 0 14px;
-  }
-
-  .pp-roadmap-mobile > div > div:first-child p:first-child {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px !important;
-    font-size: 10px !important;
-    letter-spacing: 1px !important;
-  }
-
-  .pp-roadmap-mobile > div > div:first-child p:first-child::before,
-  .pp-roadmap-mobile > div > div:first-child p:first-child::after {
-    content: "";
-    width: 26px;
-    height: 1px;
-    background: #07b4ba;
-    box-shadow: 0 0 8px rgba(7,180,186,0.85);
-  }
-
-  .pp-roadmap-mobile > div > div:first-child h2 {
-    font-size: 38px !important;
-    line-height: 0.88 !important;
-    letter-spacing: 1px !important;
-    text-shadow: 0 0 18px rgba(7,180,186,0.16);
-  }
-
-  .pp-roadmap-mobile > div > div:first-child p:last-child {
-    margin-top: 12px !important;
-    font-size: 12px !important;
-    color: rgba(255,255,255,0.68) !important;
-  }
-
-  .pp-roadmap-mobile-shell {
-    width: 100%;
-    overflow: hidden;
-    padding-bottom: 2px;
-  }
-
-  .pp-roadmap-mobile-timeline {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    align-items: end;
-    gap: 0;
-    margin: 0 14px 28px;
-    padding-top: 4px;
-  }
-
-  .pp-roadmap-mobile-line {
-    position: absolute;
-    left: 9%;
-    right: 9%;
-    bottom: 7px;
-    height: 1px;
-    background: rgba(255,255,255,0.42);
-  }
-
-  .pp-roadmap-mobile-step {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 11px;
-    min-width: 0;
-    border: 0;
-    background: transparent;
-    color: rgba(255,255,255,0.72);
-    font-family: 'Bebas Neue', sans-serif;
-    cursor: pointer;
-  }
-
-  .pp-roadmap-mobile-step span {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 12px;
-    letter-spacing: 0;
-  }
-
-  .pp-roadmap-mobile-step i {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.66);
-    background: #03070c;
-  }
-
-  .pp-roadmap-mobile-step.active {
-    color: #07e8ef;
-  }
-
-  .pp-roadmap-mobile-step.active i {
-    border: 2px solid #07e8ef;
-    background: #061018;
-    box-shadow: 0 0 0 4px rgba(7,180,186,0.18), 0 0 16px rgba(7,232,239,0.95);
-  }
-
-  .pp-roadmap-mobile-stage {
-    position: relative;
-  }
-
-  .pp-roadmap-viewport {
-    width: 100%;
-    overflow: hidden;
-    padding-left: 20px;
-  }
-
-  .pp-roadmap-track {
-    display: flex;
-    gap: 16px;
-    transition: transform 0.42s ease;
-    will-change: transform;
-  }
-
-  .pp-roadmap-card {
-    position: relative;
-    flex: 0 0 82vw;
-    min-height: 308px;
-    overflow: hidden;
-    border: 1px solid rgba(116,225,232,0.28);
-    border-radius: 10px;
-    background: #061018;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 18px 38px rgba(0,0,0,0.34);
-  }
-
-  .pp-roadmap-card-bg {
-    position: absolute;
-    inset: 0;
-    background-position: 62% center;
-    background-size: cover;
-    opacity: 0.62;
-    filter: saturate(1.04) contrast(1.08);
-  }
-
-  .pp-roadmap-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%),
-      linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%);
-    z-index: 1;
-  }
-
-  .pp-roadmap-card-body {
-    position: relative;
-    z-index: 2;
-    min-height: 258px;
-    padding: 30px 18px 18px;
-  }
-
-  .pp-roadmap-you {
-    margin: 0 0 6px !important;
-    color: #07e8ef !important;
-    font-family: 'Bebas Neue', sans-serif !important;
-    font-size: 12px !important;
-    letter-spacing: 0.5px !important;
-  }
-
-  .pp-roadmap-card h3 {
-    margin: 0 0 14px !important;
-    color: #fff;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px !important;
-    line-height: 0.95 !important;
-    letter-spacing: 0.5px;
-  }
-
-  .pp-roadmap-rule {
-    width: 54px;
-    height: 2px;
-    margin-bottom: 34px;
-    background: #07e8ef;
-    box-shadow: 0 0 10px rgba(7,232,239,0.55);
-  }
-
-  .pp-roadmap-points {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .pp-roadmap-point {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .pp-roadmap-point span {
-    display: flex;
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #07e8ef;
-    border-radius: 50%;
-    color: #07e8ef;
-    font-size: 8px;
-    line-height: 1;
-  }
-
-  .pp-roadmap-point p {
-    margin: 0 !important;
-    color: rgba(255,255,255,0.82) !important;
-    font-size: 11px !important;
-    line-height: 1.25 !important;
-  }
-
-  .pp-roadmap-card-footer {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 50px;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    background: rgba(3,9,15,0.72);
-  }
-
-  .pp-roadmap-card-footer span {
-    width: 20px;
-    height: 20px;
-    color: #07e8ef;
-  }
-
-  .pp-roadmap-card-footer svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .pp-roadmap-card-footer p {
-    margin: 0 !important;
-    color: #07e8ef !important;
-    font-family: 'Bebas Neue', sans-serif !important;
-    font-size: 18px !important;
-    letter-spacing: 1px;
-  }
-
-  .pp-roadmap-arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 8;
-    width: 34px;
-    height: 34px;
-    transform: translateY(-50%);
-    border: 1px solid rgba(7,232,239,0.55);
-    border-radius: 8px;
-    background: rgba(3,11,18,0.92);
-    color: #07e8ef;
-    font-size: 19px;
-    line-height: 1;
-    cursor: pointer;
-    box-shadow: 0 0 18px rgba(7,180,186,0.18);
-  }
-
-  .pp-roadmap-arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
-  }
-
-  .pp-roadmap-arrow-left {
-    left: 0;
-  }
-
-  .pp-roadmap-arrow-right {
-    right: 0;
-  }
-
-  .pp-roadmap-dots {
-    display: flex;
-    justify-content: center;
-    gap: 13px;
-    margin-top: 18px;
-  }
-
-  .pp-roadmap-dots button {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    cursor: pointer;
-  }
-
-  .pp-roadmap-dots button.active {
-    background: #07e8ef;
-    box-shadow: 0 0 12px rgba(7,232,239,0.7);
-  }
-
-  .pp-roadmap-note {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 20px 16px 0;
-    padding: 17px 18px;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(13,26,36,0.9), rgba(7,14,22,0.92));
-  }
-
-  .pp-roadmap-note-icon {
-    display: flex;
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #07e8ef;
-    border-radius: 50%;
-    color: #07e8ef;
-  }
-
-  .pp-roadmap-note-icon svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .pp-roadmap-note h3 {
-    margin: 0 0 5px;
-    color: rgba(255,255,255,0.9);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px;
-    letter-spacing: 0.8px;
-    line-height: 1;
-  }
-
-  .pp-roadmap-note p {
-    margin: 0;
-    color: #07e8ef;
-    font-size: 11px;
-    line-height: 1.3;
-  }
-
-  .pp-nav-home-mobile {
-    position: fixed;
-    bottom: 18px;
-    left: 18px;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 50%;
-    background: linear-gradient(180deg, #13171d 0%, #0d1117 100%);
-    color: #07b4ba;
-    font-size: 22px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    backdrop-filter: blur(10px);
-  }
-
-  .pp-feedback-mobile {
-    display: block;
-    width: 100%;
-  }
-
-  .pp-feedback-mobile-list {
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-    padding: 0 8px;
-  }
-
-  .pp-feedback-mobile-card {
-    width: 100%;
-    min-height: 60px;
-    padding: 32px 28px;
-    border: 1px solid rgba(141,150,168,0.22);
-    border-radius: 22px;
-    background: #171a21;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 14px 34px rgba(0,0,0,0.25);
-  }
-
-  .pp-feedback-mobile-stars {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 28px;
-    color: #07b4ba;
-    font-size: 30px;
-    line-height: 1;
-  }
-
-  .pp-feedback-mobile-text {
-    margin: 0 0 28px !important;
-    color: rgba(189,195,208,0.78) !important;
-    font-family: 'Barlow', sans-serif !important;
-    font-size: 25px !important;
-    font-style: italic !important;
-    font-weight: 400 !important;
-    line-height: 1.72 !important;
-  }
-
-  .pp-feedback-mobile-author {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-  }
-
-  .pp-feedback-avatar {
-    position: relative;
-    width: 84px;
-    height: 84px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #262b35;
-  }
-
-  .pp-feedback-avatar::before {
-    content: "";
-    position: absolute;
-    top: 24px;
-    left: 50%;
-    width: 14px;
-    height: 14px;
-    transform: translateX(-50%);
-    border: 4px solid #929aaa;
-    border-radius: 50%;
-  }
-
-  .pp-feedback-avatar::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 21px;
-    width: 26px;
-    height: 18px;
-    transform: translateX(-50%);
-    border: 4px solid #929aaa;
-    border-bottom: 0;
-    border-radius: 14px 14px 0 0;
-  }
-
-  .pp-feedback-mobile-author p {
-    margin: 0 0 8px !important;
-    color: #fff !important;
-    font-family: 'Barlow', sans-serif !important;
-    font-size: 27px !important;
-    font-weight: 800 !important;
-    line-height: 1 !important;
-  }
-
-  .pp-feedback-mobile-author span {
-    color: #9da5b6;
-    font-family: 'Barlow', sans-serif;
-    font-size: 22px;
-    line-height: 1;
-  }
-
-  .pp-feedback-mobile-nav {
-    display: flex;
-    justify-content: center;
-    gap: 38px;
-    margin-top: 82px;
-  }
-
-  .pp-feedback-mobile-nav button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 82px;
-    height: 82px;
-    border: 2px solid rgba(141,150,168,0.28);
-    border-radius: 50%;
-    background: rgba(7,10,16,0.35);
-    color: #a6adbd;
-    font-size: 58px;
-    line-height: 1;
-    cursor: pointer;
-  }
-}
-
-/* EXTRA SMALL DEVICES */
-@media (max-width: 480px) {
-
-  .pp-hero-h1 {
-    font-size: 31px;
-  }
-
-  .pp-problem-h,
-  .pp-features-heading,
-  #faq h2 {
-    font-size: 32px !important;
-  }
-
-  .pp-trust-item {
-    width: 100%;
-  }
-
-  .pp-feature-card {
-    padding: 18px 16px;
-    gap: 14px;
-  }
-
-  .pp-feature-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .pp-feature-icon svg {
-    width: 34px;
-    height: 34px;
-  }
-
-  .pp-coach-stats > div {
-    width: 100% !important;
-  }
-
-  .roadmap-card img {
-    height: 190px !important;
-  }/* ─────────────────────────────
-   MOBILE DESIGN IMPROVEMENTS
-───────────────────────────── */
-
-/* AOF INTRO SECTION
-   SAME STYLE AS HOME PAGE */
-.pp-problem {
-  background:
-    linear-gradient(
-      180deg,
-      #0b0b0b 0%,
-      #0d1117 100%
-    ) !important;
-
-  position: relative;
-  overflow: hidden;
-}
-
-.pp-problem::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background-image:
-    linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.5px),
-    linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.5px);
-
-  background-size: 24px 24px;
-  pointer-events: none;
-}
-
-/* ROADMAP SECTION */
-.pp-roadmap-mobile {
-  padding-top: 10px;
-}
-
-.pp-roadmap-mobile .roadmap-card {
-  border-radius: 20px !important;
-  overflow: hidden;
-  background:
-    linear-gradient(
-      180deg,
-      #11161d 0%,
-      #0a0d12 100%
-    ) !important;
-
-  border: 1px solid rgba(255,255,255,0.08) !important;
-
-  box-shadow:
-    0 0 0 1px rgba(7,180,186,0.05),
-    0 12px 40px rgba(0,0,0,0.38);
-}
-
-/* ROADMAP TIMELINE */
-.pp-roadmap-mobile .roadmap-timeline {
-  overflow-x: auto;
-  padding-bottom: 10px;
-  gap: 26px !important;
-
-  scrollbar-width: none;
-}
-
-.pp-roadmap-mobile .roadmap-timeline::-webkit-scrollbar {
-  display: none;
-}
-
-.pp-roadmap-mobile .roadmap-week-label {
-  white-space: nowrap;
-  font-size: 11px !important;
-  letter-spacing: 1px !important;
-}
-
-/* ROADMAP IMAGE */
-.roadmap-card img {
-  width: 100%;
-  height: 250px !important;
-  object-fit: cover;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-/* ROADMAP CONTENT */
-.roadmap-card h3 {
-  font-size: 42px !important;
-  line-height: 1 !important;
-}
-
-.roadmap-card p {
-  font-size: 13px !important;
-  line-height: 1.6 !important;
-}
-
-/* BONUS SECTION
-   SAME AS COACHING BULLET STYLE */
-.pp-bonus-grid {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
-}
-
-.pp-bonus-grid > div {
-  min-height: auto !important;
-
-  display: flex !important;
-  align-items: flex-start !important;
-  text-align: left !important;
-
-  gap: 12px !important;
-
-  padding: 16px 16px !important;
-
-  border-radius: 16px !important;
-
-  background:
-    linear-gradient(
-      180deg,
-      #12171e 0%,
-      #0d1117 100%
-    ) !important;
-}
-
-/* BONUS ICON */
-.pp-bonus-grid > div > div:nth-child(2) {
-  width: 58px !important;
-  height: 58px !important;
-  flex-shrink: 0 !important;
-
-  margin: 0 !important;
-  font-size: 28px !important;
-}
-
-/* BONUS TEXT */
-.pp-bonus-grid h3 {
-  font-size: 22px !important;
-  line-height: 1.1 !important;
-  margin-bottom: 4px !important;
-}
-
-.pp-bonus-grid p {
-  font-size: 13px !important;
-  line-height: 1.45 !important;
-}
-
-/* FAQ MINIMIZED */
-#faq > div {
-  padding-top: 40px !important;
-  padding-bottom: 40px !important;
-}
-
-#faq h2 {
-  font-size: 30px !important;
-  margin-bottom: 6px !important;
-}
-
-#faq button {
-  padding: 15px 16px !important;
-}
-
-#faq button span:first-child {
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-}
-
-#faq p {
-  font-size: 13px !important;
-  line-height: 1.6 !important;
-}
-
-#faq div[style*="maxHeight"] {
-  padding-bottom: 16px !important;
-}
-
-/* BACK TO HOME
-   SAME AS COACHING PAGE */
-.pp-nav-home-mobile {
-  position: fixed;
-  bottom: 18px;
-  left: 18px;
-  z-index: 999;
-
-  width: 52px;
-  height: 52px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  background:
-    linear-gradient(
-      180deg,
-      #13171d 0%,
-      #0d1117 100%
-    );
-
-  backdrop-filter: blur(10px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.35);
-
-  color: #07b4ba;
-  font-size: 22px;
-}
-
-/* EXTRA SMALL */
-@media (max-width: 480px) {
-
-  .roadmap-card img {
-    height: 210px !important;
-  }
-
-  .roadmap-card h3 {
-    font-size: 34px !important;
-  }
-
-  .pp-bonus-grid h3 {
-    font-size: 19px !important;
-  }
-
-  #faq h2 {
-    font-size: 26px !important;
-  }
-}}
-
 `;
 
 const IconPlan = () => (
@@ -1571,25 +519,21 @@ const IconPlan = () => (
     <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
   </svg>
 );
-
 const IconChat = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
-
 const IconLeaf = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" />
   </svg>
 );
-
 const IconChart = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
   </svg>
 );
-
 const IconGlobe = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
@@ -1677,9 +621,7 @@ export default function ProgramPage() {
         {/* ── NAVBAR ── */}
         <nav className="pp-nav">
           <div className="pp-nav-left">
-            <h1 className="pp-nav-logo">
-              <span>A</span><span>O</span><span>F</span>
-            </h1>
+            <h1 className="pp-nav-logo"><span>A</span><span>O</span><span>F</span></h1>
           </div>
           <div className="pp-nav-right">
             <button className="pp-nav-home" onClick={() => navigate("/")}>← Back To Home</button>
@@ -1694,15 +636,12 @@ export default function ProgramPage() {
           <div className="pp-hero-overlay" />
           <div className="pp-hero-content">
             <Reveal>
-              <p className="pp-hero-h2">
-  AOF 30-Day Online Program
-</p>
-             <h1 className="pp-hero-h1">
-  Build Real <br />
-  <span style={{ color: "#07b4ba" }}>MMA Striking</span> <br />
-  Fundamentals
-</h1>
-            
+              <p className="pp-hero-h2">AOF 30-Day Online Program</p>
+              <h1 className="pp-hero-h1">
+                Build Real <br />
+                <span style={{ color: "#07b4ba" }}>MMA Striking</span> <br />
+                Fundamentals
+              </h1>
               <p className="pp-hero-desc">
                 A structured system designed to create visible improvement in your first 30 days.
                 Built for absolute beginners.
@@ -1717,8 +656,7 @@ export default function ProgramPage() {
           <div className="pp-trust-item">
             <span className="pp-trust-icon">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="M9 12l2 2 4-4"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
               </svg>
             </span>
             <p>PROVEN SYSTEM</p>
@@ -1726,10 +664,8 @@ export default function ProgramPage() {
           <div className="pp-trust-item">
             <span className="pp-trust-icon">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </span>
             <p>TAMIL TEAM</p>
@@ -1737,11 +673,9 @@ export default function ProgramPage() {
           <div className="pp-trust-item">
             <span className="pp-trust-icon">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M8 21h8"/>
-                <path d="M12 17v4"/>
+                <path d="M8 21h8"/><path d="M12 17v4"/>
                 <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/>
-                <path d="M5 4H3v2a4 4 0 0 0 4 4"/>
-                <path d="M19 4h2v2a4 4 0 0 1-4 4"/>
+                <path d="M5 4H3v2a4 4 0 0 0 4 4"/><path d="M19 4h2v2a4 4 0 0 1-4 4"/>
               </svg>
             </span>
             <p>REAL RESULTS</p>
@@ -1780,7 +714,6 @@ export default function ProgramPage() {
         <div style={{ background: "#0b0b0b", backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px)" }}>
           <div className="pp-section">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
-              {/* LEFT VIDEO PLACEHOLDER */}
               <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden", background: "linear-gradient(135deg,#1c2230 0%, #202632 100%)" }}>
                 <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <div style={{ width: 90, height: 90, borderRadius: "50%", background: "#07b4ba", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
@@ -1788,43 +721,19 @@ export default function ProgramPage() {
                   </div>
                 </div>
               </div>
-              {/* RIGHT TEXT */}
               <div>
-                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20 }}>
-                  AOF Intro Section
-                </p>
+                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20 }}>AOF Intro Section</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(32px,4vw,52px)", letterSpacing: 2, color: "#fff", lineHeight: 1.1, marginBottom: 20 }}>
                   Welcome to the <span style={{ color: "#07b4ba" }}>AOF Family</span>
                 </h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-
-  <p
-    style={{
-      fontFamily: "'Barlow', sans-serif",
-      fontSize: 15,
-      color: "rgba(255,255,255,0.62)",
-      lineHeight: 1.8
-    }}
-  >
-    At Art of Fight, we're more than just a gym — we're a family built on
-    discipline, respect, and relentless growth. Our coaches bring years of
-    real fight experience to every session.
-  </p>
-
-  <p
-    style={{
-      fontFamily: "'Barlow', sans-serif",
-      fontSize: 15,
-      color: "rgba(255,255,255,0.62)",
-      lineHeight: 1.8
-    }}
-  >
-    Whether you're a complete beginner or training for competition, you'll
-    find a system designed to push your limits safely while building strong
-    fundamentals, sharp technique, and fighter mentality.
-  </p>
-
-</div>
+                  <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.8 }}>
+                    At Art of Fight, we're more than just a gym — we're a family built on discipline, respect, and relentless growth. Our coaches bring years of real fight experience to every session.
+                  </p>
+                  <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.8 }}>
+                    Whether you're a complete beginner or training for competition, you'll find a system designed to push your limits safely while building strong fundamentals, sharp technique, and fighter mentality.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1871,36 +780,15 @@ export default function ProgramPage() {
                 <div className="pp-roadmap-mobile-timeline">
                   <div className="pp-roadmap-mobile-line" />
                   {roadmapCards.map((week, i) => (
-                    <button
-                      key={week.title}
-                      className={`pp-roadmap-mobile-step ${i === roadmapIndex ? "active" : ""}`}
-                      onClick={() => setRoadmapIndex(i)}
-                      aria-label={`Show ${week.title}`}
-                    >
+                    <button key={week.title} className={`pp-roadmap-mobile-step ${i === roadmapIndex ? "active" : ""}`} onClick={() => setRoadmapIndex(i)} aria-label={`Show ${week.title}`}>
                       <span>{week.title}</span>
                       <i />
                     </button>
                   ))}
                 </div>
-
                 <div className="pp-roadmap-mobile-stage">
-                  <button
-                    className="pp-roadmap-arrow pp-roadmap-arrow-left"
-                    onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
-                    disabled={roadmapIndex === 0}
-                    aria-label="Previous week"
-                  >
-                    {"<"}
-                  </button>
-                  <button
-                    className="pp-roadmap-arrow pp-roadmap-arrow-right"
-                    onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))}
-                    disabled={roadmapIndex === roadmapCards.length - 1}
-                    aria-label="Next week"
-                  >
-                    {">"}
-                  </button>
-
+                  <button className="pp-roadmap-arrow pp-roadmap-arrow-left" onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} disabled={roadmapIndex === 0} aria-label="Previous week">{"<"}</button>
+                  <button className="pp-roadmap-arrow pp-roadmap-arrow-right" onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))} disabled={roadmapIndex === roadmapCards.length - 1} aria-label="Next week">{">"}</button>
                   <div className="pp-roadmap-viewport">
                     <div className="pp-roadmap-track" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
                       {roadmapCards.map((card, i) => (
@@ -1922,8 +810,7 @@ export default function ProgramPage() {
                           <div className="pp-roadmap-card-footer">
                             <span>
                               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" />
-                                <path d="M16 2v4M8 2v4M3 10h18" />
+                                <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
                               </svg>
                             </span>
                             <p>{card.days}</p>
@@ -1933,26 +820,17 @@ export default function ProgramPage() {
                     </div>
                   </div>
                 </div>
-
                 <div className="pp-roadmap-dots">
                   {roadmapCards.map((card, i) => (
-                    <button
-                      key={card.title}
-                      className={i === roadmapIndex ? "active" : ""}
-                      onClick={() => setRoadmapIndex(i)}
-                      aria-label={`Go to ${card.title}`}
-                    />
+                    <button key={card.title} className={i === roadmapIndex ? "active" : ""} onClick={() => setRoadmapIndex(i)} aria-label={`Go to ${card.title}`} />
                   ))}
                 </div>
-
                 <div className="pp-roadmap-note">
                   <div className="pp-roadmap-note-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M8 21h8" />
-                      <path d="M12 17v4" />
+                      <path d="M8 21h8" /><path d="M12 17v4" />
                       <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" />
-                      <path d="M5 4H3v2a4 4 0 0 0 4 4" />
-                      <path d="M19 4h2v2a4 4 0 0 1-4 4" />
+                      <path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" />
                     </svg>
                   </div>
                   <div>
@@ -1962,31 +840,18 @@ export default function ProgramPage() {
                 </div>
               </div>
             ) : (
-              /* ROADMAP SLIDER */
               <div style={{ position: "relative", maxWidth: 1320, margin: "0 auto", overflow: "hidden", padding: "0 70px" }}>
-                <button
-                  onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
-                  style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}
-                >‹</button>
-                <button
-                  onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))}
-                  style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}
-                >›</button>
-
-                {/* TOP PROGRESS */}
+                <button onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}>‹</button>
+                <button onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))} style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}>›</button>
                 <div className="roadmap-timeline" style={{ display: "flex", justifyContent: "space-between", marginBottom: 42, position: "relative" }}>
                   <div style={{ position: "absolute", top: 14, left: 0, right: 0, height: 2, background: "rgba(255,255,255,0.1)" }} />
                   {roadmapCards.map((week, i) => (
                     <div key={i} style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-                      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, color: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "rgba(255,255,255,0.45)", marginBottom: 10, transition: "0.3s" }}>
-                        {week.title}
-                      </p>
+                      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, color: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "rgba(255,255,255,0.45)", marginBottom: 10, transition: "0.3s" }}>{week.title}</p>
                       <div style={{ width: 26, height: 26, borderRadius: "50%", border: "2px solid #07b4ba", background: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "#0b0b0b", boxShadow: i === roadmapIndex || i === roadmapIndex + 1 ? "0 0 18px rgba(7,180,186,0.95)" : "none", transition: "0.3s" }} />
                     </div>
                   ))}
                 </div>
-
-                {/* CARDS */}
                 <div style={{ overflow: "hidden" }}>
                   <div style={{ display: "flex", gap: 20, transform: `translateX(-${roadmapIndex * 47}%)`, transition: "0.45s ease" }}>
                     {roadmapCards.map((card, i) => (
@@ -2015,45 +880,37 @@ export default function ProgramPage() {
                 </div>
               </div>
             )}
+
+            {/* ── PROMISE SECTION (inside roadmap) ── */}
+            <div className="cp-promise-section" style={{ marginTop: 60 }}>
+              <div className="cp-new-promise">
+                <p className="cp-new-promise-title">OUR PROMISE TO YOU</p>
+                <div className="cp-new-promise-line" />
+                <p className="cp-new-promise-text">
+                  <span className="cp-quote-mark">"</span>
+                  If you show up, follow the system, and trust the process — you will see real, measurable improvement in your striking within 30 days. That's not a slogan. That's our commitment.
+                </p>
+              </div>
+            </div>
+
+            {/* ── JOIN NOW STRIP (inside roadmap) ── */}
+            <div className="pp-book-strip" style={{ marginTop: 0 }}>
+              <button onClick={scrollToFooter}>Join Now</button>
+            </div>
+
           </div>
         </div>
-       {/* ── NEW PROMISE SECTION ── */}
-<Reveal style={{ marginTop: 50 }}>
-  <div className="cp-new-promise">
 
-    <p className="cp-new-promise-title">
-      Our Promise
-    </p>
-
-    <div className="cp-new-promise-line" />
-
-    <p className="cp-new-promise-text">
-      <span className="cp-quote-mark">“</span>
-      Most fighters train hard. Very few train correctly.
-      AOF exists to close that gap — with structure,
-      accountability, and coaching that actually evolves
-      with you.
-    </p>
-
-  </div>
-</Reveal>
         {/* ── COACH SECTION ── */}
         <div className="pp-coach-bg">
-          <div className="pp-book-strip">
-            <button onClick={scrollToFooter}>Join Now</button>
-          </div>
           <div className="pp-section" style={{ paddingBottom: 40 }}>
             <Reveal>
               <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba", fontWeight: 700, marginBottom: 24, letterSpacing: 2, textTransform: "uppercase" }}>LED BY</p>
               <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80"
-                  alt="Head Coach"
-                  style={{ width: 240, height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}
-                />
+                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" style={{ width: 240, height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }} />
                 <div style={{ flex: 1, minWidth: 280 }}>
                   <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: 2, color: "#fff", marginBottom: 4 }}>Head Coach</h2>
-                  <p style={{color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20}}>AOF Academy — Lead Trainer &amp; Founder</p>
+                  <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20 }}>AOF Academy — Lead Trainer &amp; Founder</p>
                   <div style={{ marginBottom: 24 }}>
                     {coachCredentials.map((cred, i) => (
                       <div key={i} className="pp-checklist-item">
@@ -2113,7 +970,6 @@ export default function ProgramPage() {
         {/* ── BONUSES SECTION ── */}
         <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 20px" }}>
-            {/* TOP */}
             <div style={{ textAlign: "center", marginBottom: 60 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>EXCLUSIVE FOUNDERS BONUSES</p>
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(42px,6vw,78px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
@@ -2121,8 +977,6 @@ export default function ProgramPage() {
               </h2>
               <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
-
-            {/* BONUS GRID */}
             <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
               {[
                 { title: "FIGHTER NUTRITION GUIDE", desc: "Simple meal structure to improve recovery, energy and body composition.", img: "🥗", value: "₹1499 VALUE" },
@@ -2143,8 +997,6 @@ export default function ProgramPage() {
                 </div>
               ))}
             </div>
-
-            {/* BOTTOM BAR */}
             <div style={{ marginTop: 40, border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "28px 30px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20, background: "linear-gradient(90deg,#0f141a 0%, #0a0f14 100%)" }}>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8 }}>
@@ -2165,7 +1017,6 @@ export default function ProgramPage() {
         <div ref={footerRef} style={{ background: "#0b0b0b", backgroundImage: "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px", position: "relative", overflow: "hidden" }}>
           <div className="pp-section">
             <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 90, alignItems: "center" }}>
-              {/* LEFT SIDE */}
               <div>
                 <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, color: "#07b4ba", marginBottom: 14, textTransform: "uppercase" }}>Ready To Start?</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)", lineHeight: 0.9, letterSpacing: 2, color: "#fff", marginBottom: 28 }}>
@@ -2186,8 +1037,6 @@ export default function ProgramPage() {
                   Chat On WhatsApp
                 </button>
               </div>
-
-              {/* RIGHT CTA CARD */}
               <div style={{ background: "#111417", borderRadius: 28, padding: "55px 42px", border: "1px solid rgba(255,255,255,0.12)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 350 }}>
                 <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 15, letterSpacing: 3, textTransform: "uppercase", marginBottom: 18 }}>Limited Founder Spots</p>
                 <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", textAlign: "center", marginBottom: 24 }}>
@@ -2200,8 +1049,6 @@ export default function ProgramPage() {
                   JOIN NOW-999₹
                 </button>
                 <p style={{ marginTop: 18, fontSize: 13, color: "rgba(255,255,255,0.38)", letterSpacing: 1, textAlign: "center" }}>Limited slots available for this batch</p>
-
-                {/* TIMER */}
                 <div style={{ marginTop: 18, display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
                   {[{ val: timeLeft.days, label: "DAYS" }, { val: timeLeft.hours, label: "HOURS" }, { val: timeLeft.minutes, label: "MIN" }].map((t, i) => (
                     <>
