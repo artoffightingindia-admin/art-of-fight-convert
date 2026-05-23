@@ -1261,8 +1261,7 @@ const roadmapCards = [
     background: "#06080c",
     position: "relative",
     overflow: "hidden",
-    backgroundImage:
-      "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)",
+    // removed backgroundImage from here
   }}
 >
   <div
@@ -1270,6 +1269,8 @@ const roadmapCards = [
       maxWidth: 1400,
       margin: "0 auto",
       padding: "30px 0",
+      backgroundImage:
+        "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)",
     }}
   >
     {/* TOP */}
