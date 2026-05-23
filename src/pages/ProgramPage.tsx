@@ -222,8 +222,8 @@ const css = `
   .pp-hero-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(17px,2vw,17px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 24px; }
   .pp-hero-desc { font-family: 'Barlow', sans-serif; font-size: clamp(15px,1.5vw,16px); color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 620px; margin: 0 0 34px; }
   .pp-hero-desc strong { color: #07b4ba; }
-  .pp-join-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 52px; border-radius: 14px; background: #07b4ba; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 10px 35px rgba(7,180,186,0.28); }
-  .pp-join-btn:hover { background: #059a9f; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
+  .pp-join-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 52px; border-radius: 14px; background: #07b4ba; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.40s ease; box-shadow: 0 10px 35px rgba(7,180,186,0.28); }
+  .pp-join-btn:hover { background: #057e82; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ───────── TRUST BAR ───────── */
@@ -285,7 +285,7 @@ const css = `
   /* TESTIMONIALS */
   .pp-testi-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px); }
   .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
-  .pp-testi-img { flex: 0 0 460px; max-width: 100%; }
+  .pp-testi-img { flex: 0 0 460px; max-width: 100%;aspect-ratio: 16/9;  }
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
   .pp-feedback-mobile { display: none; }
 
@@ -325,7 +325,7 @@ const css = `
   /* CHECKLIST */
   .pp-checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
   .pp-checklist-item .check { color: #07b4ba; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-  .pp-checklist-item p { color: rgba(255,255,255,0.65); font-family: 'Barlow', sans-serif; font-size: 14px; line-height: 1.55; }
+  .pp-checklist-item p { color: rgba(255,255,255,0.65); font-family: 'Barlow', sans-serif; font-size: 15px; line-height: 1.55; }
 
   /* BOTTOM BAR */
   .pp-bottom-bar { background: #000; padding: 7px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
@@ -448,7 +448,7 @@ const css = `
 
   /* TRUST STRIP */
   .pp-trust-strip {
-    padding: 14px;
+    padding: 11px;
     gap: 16px;
     height: auto;
     justify-content: center;
@@ -495,6 +495,7 @@ const css = `
      SAME STYLE AS COACHING PAGE */
   .pp-features-heading {
     font-size: 38px;
+    letter-spacing: 1px !important;
     margin-bottom: 36px;
     line-height: 1;
   }
@@ -1046,7 +1047,7 @@ const css = `
 
   .pp-feedback-mobile-card {
     width: 100%;
-    min-height: 250px;
+    min-height: 60px;
     padding: 32px 28px;
     border: 1px solid rgba(141,150,168,0.22);
     border-radius: 22px;
@@ -1504,11 +1505,11 @@ export default function ProgramPage() {
   const [isMobileRoadmap, setIsMobileRoadmap] = useState(false);
 
   const roadmapCards = [
-    { title: "1ST WEEK", days: "DAYS 1 - 6", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Fundamentals", "Basic Techniques", "Conditioning", "Mindset Building"] },
-    { title: "2ND WEEK", days: "DAYS 7 - 12", image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Skill Development", "Strength & Power", "Drills & Combos", "Recovery Focus"] },
-    { title: "3RD WEEK", days: "DAYS 13 - 18", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Advanced Techniques", "Sparring Practice", "Endurance Boost", "Mental Toughness"] },
-    { title: "4TH WEEK", days: "DAYS 19 - 24", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Fight IQ", "Combination Chains", "Counter Attacks", "Explosive Training"] },
-    { title: "5TH WEEK", days: "DAYS 25 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Full Integration", "Fight Simulation", "Peak Conditioning", "Program Completion"] },
+    { title: "1ST WEEK", days: "DAYS 1 - 7", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Fundamentals", "Basic Techniques", "Conditioning", "Mindset Building"] },
+    { title: "2ND WEEK", days: "DAYS 8 - 14", image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Skill Development", "Strength & Power", "Drills & Combos", "Recovery Focus"] },
+    { title: "3RD WEEK", days: "DAYS 15 - 21", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Advanced Techniques", "Sparring Practice", "Endurance Boost", "Mental Toughness"] },
+    { title: "4TH WEEK", days: "DAYS 22 - 28", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Fight IQ", "Combination Chains", "Counter Attacks", "Explosive Training"] },
+    { title: "5TH WEEK", days: "DAYS 29 - 35", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Full Integration", "Fight Simulation", "Peak Conditioning", "Program Completion"] },
   ];
 
   useEffect(() => {
@@ -1555,7 +1556,6 @@ export default function ProgramPage() {
                 Built for <strong>absolute beginners.</strong>
               </p>
               <button className="pp-join-btn" onClick={scrollToFooter}>Join Now</button>
-              <p className="pp-scarcity">— Only 20 Slots available —</p>
             </Reveal>
           </div>
         </section>
@@ -1860,7 +1860,7 @@ export default function ProgramPage() {
                 />
                 <div style={{ flex: 1, minWidth: 280 }}>
                   <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: 2, color: "#fff", marginBottom: 4 }}>Head Coach</h2>
-                  <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 20 }}>AOF Academy — Lead Trainer &amp; Founder</p>
+                  <p style={{color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20}}>AOF Academy — Lead Trainer &amp; Founder</p>
                   <div style={{ marginBottom: 24 }}>
                     {coachCredentials.map((cred, i) => (
                       <div key={i} className="pp-checklist-item">
