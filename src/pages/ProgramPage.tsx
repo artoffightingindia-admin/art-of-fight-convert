@@ -218,7 +218,13 @@ const css = `
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
   .pp-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
-  .pp-hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 5.5vw, 72px)); line-height: 0.92; letter-spacing: 3px; color: #fff; margin-bottom: 14px; max-width: 820px; }
+  .pp-hero-h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 5.5vw, 72px);
+  line-height: 0.95; letter-spacing: 2px; text-transform: uppercase;
+  color: #fff; margin-bottom: 20px;
+}
+
   .pp-hero-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(17px,2vw,17px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 24px; }
   .pp-hero-desc { font-family: 'Barlow', sans-serif; font-size: clamp(15px,1.5vw,16px); color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 620px; margin: 0 0 34px; }
   .pp-hero-desc strong { color: #07b4ba; }
