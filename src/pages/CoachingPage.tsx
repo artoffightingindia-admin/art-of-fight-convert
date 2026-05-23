@@ -1408,108 +1408,97 @@ body { background: #0a0a0a; }
 /* MOBILE */
 
   .cp-feedback-slider-new {
-
     overflow: hidden;
-
     width: 100%;
-
     position: relative;
-
-    padding-bottom: 70px;
+    padding-bottom: 0;
   }
 
   .cp-feedback-track-new {
-
-    display: flex;
-
+    display: block;
+    width: 100% !important;
     transition: transform 0.45s ease;
   }
 
   .cp-feedback-page-mobile {
-
-    min-width: 100%;
-
     display: flex;
-
     flex-direction: column;
-
-    gap: 14px;
-
-    padding: 0 4px;
+    gap: 36px;
+    width: 100%;
+    padding: 0 8px;
   }
 
   .cp-feedback-card-new {
-
     width: 100% !important;
-
-    min-height: 60px;
-
-    border-radius: 14px;
-
-    background: #15181d;
-
-    border: 1px solid rgba(255,255,255,0.05);
-
-    padding: 16px 14px;
-
+    min-height: 250px;
+    border-radius: 22px;
+    background: #171a21;
+    border: 1px solid rgba(141,150,168,0.22);
+    padding: 32px 28px;
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 14px 34px rgba(0,0,0,0.25);
   }
 
   .cp-feedback-card-new p {
-
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    margin-bottom: 12px;
+    color: rgba(189,195,208,0.78);
+    font-size: 25px;
+    line-height: 1.72;
+    margin-bottom: 28px;
   }
 
   .cp-feedback-stars {
-
     display: flex;
-
-    gap: 2px;
-
-    margin-bottom: 10px;
-
-    font-size: 11px;
+    gap: 10px;
+    margin-bottom: 28px;
+    font-size: 30px;
   }
 
   .cp-feedback-card-new .author-name {
-
-    font-size: 12px;
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 8px;
   }
 
   .cp-feedback-card-new .author-role {
+    color: #9da5b6;
+    font-size: 22px;
+  }
 
-    font-size: 10px;
+  .cp-feedback-card-new > div:last-child {
+    gap: 22px !important;
+  }
+
+  .cp-feedback-card-new > div:last-child > div:first-child {
+    width: 84px !important;
+    height: 84px !important;
+    flex-shrink: 0;
+    background: #262b35 !important;
+    color: #929aaa;
+    font-size: 34px !important;
   }
 
   .cp-feedback-mobile-nav {
-
     position: relative;
-
     bottom: unset;
-
     left: unset;
-
     transform: unset;
-
-    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    margin-top: 82px;
   }
 
   .cp-feedback-mobile-nav button {
-
-    width: 42px;
-
-    height: 42px;
-
-    font-size: 18px;
-}}`;
+    width: 82px;
+    height: 82px;
+    border: 2px solid rgba(141,150,168,0.28);
+    background: rgba(7,10,16,0.35);
+    color: #a6adbd;
+    font-size: 58px;
+  }
+}`;
 
 /* ── CALENDAR COMPONENT ── */
 const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1686,6 +1675,10 @@ function InfiniteFeedbackSlider() {
   const [mobileIndex, setMobileIndex] = useState(0);
 
   const allCards = [...feedbackCards, ...feedbackCards];
+  const mobileCards = Array.from(
+    { length: 3 },
+    (_, i) => feedbackCards[(mobileIndex + i) % feedbackCards.length]
+  );
 
   useEffect(() => {
 
@@ -1753,18 +1746,12 @@ function InfiniteFeedbackSlider() {
 
   const nextMobile = () => {
 
-    if (mobileIndex < feedbackCards.length - 3) {
-
-      setMobileIndex((prev) => prev + 1);
-    }
+    setMobileIndex((prev) => (prev + 1) % feedbackCards.length);
   };
 
   const prevMobile = () => {
 
-    if (mobileIndex > 0) {
-
-      setMobileIndex((prev) => prev - 1);
-    }
+    setMobileIndex((prev) => (prev - 1 + feedbackCards.length) % feedbackCards.length);
   };
 
   return (
@@ -1783,28 +1770,21 @@ function InfiniteFeedbackSlider() {
 
           transform:
             window.innerWidth <= 768
-              ? `translateX(-${mobileIndex * 34}%)`
+              ? undefined
               : undefined,
         }}
       >
 {
       window.innerWidth <= 768 ? (
 
-        <>
-
-          {[0, 3, 6].map((start, pageIndex) => (
-
             <div
-              key={pageIndex}
               className="cp-feedback-page-mobile"
             >
 
-              {feedbackCards
-                .slice(start, start + 3)
-                .map((card, i) => (
+              {mobileCards.map((card, i) => (
 
                   <div
-                    key={i}
+                    key={`${card.author}-${mobileIndex}-${i}`}
                     className="cp-feedback-card-new"
                   >
 
@@ -1866,10 +1846,6 @@ function InfiniteFeedbackSlider() {
               ))}
 
             </div>
-
-          ))}
-
-        </>
 
       ) : (
 

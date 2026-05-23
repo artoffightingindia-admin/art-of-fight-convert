@@ -42,7 +42,6 @@ function InfiniteFeedbackSlider() {
   const [isMobile, setIsMobile] = useState(false);
 
   const CARDS_PER_PAGE = 3;
-  const totalPages = Math.ceil(feedbackCards.length / CARDS_PER_PAGE);
   const allCards = [...feedbackCards, ...feedbackCards];
 
   useEffect(() => {
@@ -79,38 +78,36 @@ function InfiniteFeedbackSlider() {
     };
   }, [isMobile]);
 
-  const pageCards = feedbackCards.slice(mobilePage * CARDS_PER_PAGE, mobilePage * CARDS_PER_PAGE + CARDS_PER_PAGE);
+  const pageCards = Array.from(
+    { length: CARDS_PER_PAGE },
+    (_, i) => feedbackCards[(mobilePage + i) % feedbackCards.length]
+  );
 
   if (isMobile) {
     return (
-      <div style={{ width: "100%" }}>
-        <div style={{ display: "flex", gap: 10, width: "100%" }}>
+      <div className="pp-feedback-mobile">
+        <div className="pp-feedback-mobile-list">
           {pageCards.map((card, i) => (
-            <div key={i} style={{ flex: "1 1 0", minWidth: 0, borderRadius: 14, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "14px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
-              <div style={{ display: "flex", gap: 2, color: "#07b4ba", fontSize: 11 }}>
+            <div key={`${card.author}-${mobilePage}-${i}`} className="pp-feedback-mobile-card">
+              <div className="pp-feedback-mobile-stars">
                 <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
-              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 11, lineHeight: 1.55, color: "rgba(255,255,255,0.72)", fontStyle: "italic", flex: 1, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden", marginBottom: 10 }}>
+              <p className="pp-feedback-mobile-text">
                 "{card.text}"
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#202533", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, flexShrink: 0 }}>👤</div>
+              <div className="pp-feedback-mobile-author">
+                <div className="pp-feedback-avatar" />
                 <div>
-                  <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 11 }}>{card.author}</p>
-                  <span style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.4)", fontSize: 10 }}>Member</span>
+                  <p>{card.author}</p>
+                  <span>Member</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginTop: 20 }}>
-          <button onClick={() => setMobilePage(p => Math.max(0, p - 1))} disabled={mobilePage === 0} style={{ width: 40, height: 40, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.18)", background: mobilePage === 0 ? "transparent" : "#15181d", color: mobilePage === 0 ? "rgba(255,255,255,0.2)" : "#fff", fontSize: 20, cursor: mobilePage === 0 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}>‹</button>
-          <div style={{ display: "flex", gap: 6 }}>
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <div key={i} onClick={() => setMobilePage(i)} style={{ width: i === mobilePage ? 18 : 6, height: 6, borderRadius: 999, background: i === mobilePage ? "#07b4ba" : "rgba(255,255,255,0.2)", cursor: "pointer", transition: "all 0.3s" }} />
-            ))}
-          </div>
-          <button onClick={() => setMobilePage(p => Math.min(totalPages - 1, p + 1))} disabled={mobilePage === totalPages - 1} style={{ width: 40, height: 40, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.18)", background: mobilePage === totalPages - 1 ? "transparent" : "#15181d", color: mobilePage === totalPages - 1 ? "rgba(255,255,255,0.2)" : "#fff", fontSize: 20, cursor: mobilePage === totalPages - 1 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}>›</button>
+        <div className="pp-feedback-mobile-nav">
+          <button onClick={() => setMobilePage(p => (p - 1 + feedbackCards.length) % feedbackCards.length)} aria-label="Previous testimonial">‹</button>
+          <button onClick={() => setMobilePage(p => (p + 1) % feedbackCards.length)} aria-label="Next testimonial">›</button>
         </div>
       </div>
     );
@@ -204,6 +201,7 @@ const css = `
   .pp-nav-right { display: flex; align-items: center; gap: 18px; }
   .pp-nav-home { background: none; border: none; color: rgba(255,255,255,0.65); font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; }
   .pp-nav-home:hover { color: #ffffff; }
+  .pp-nav-home-mobile { display: none; }
   .pp-nav-call { height: 44px; padding: 0 22px; border-radius: 8px; border: none; background: #07b4ba; color: #ffffff; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; cursor: pointer; transition: 0.25s; }
   .pp-nav-call:hover { background: #059ca1; transform: translateY(-2px); }
 
@@ -289,6 +287,7 @@ const css = `
   .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
   .pp-testi-img { flex: 0 0 460px; max-width: 100%; }
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
+  .pp-feedback-mobile { display: none; }
 
   /* FOOTER CTA */
   .pp-footer-cta { background: #0b0b0b; border-top: none; position: relative; padding-top: 0 !important; margin-top: 0 !important; z-index: 10; }
@@ -1013,6 +1012,144 @@ const css = `
     font-size: 11px;
     line-height: 1.3;
   }
+
+  .pp-nav-home-mobile {
+    position: fixed;
+    bottom: 18px;
+    left: 18px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+    background: linear-gradient(180deg, #13171d 0%, #0d1117 100%);
+    color: #07b4ba;
+    font-size: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+  }
+
+  .pp-feedback-mobile {
+    display: block;
+    width: 100%;
+  }
+
+  .pp-feedback-mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 0 8px;
+  }
+
+  .pp-feedback-mobile-card {
+    width: 100%;
+    min-height: 250px;
+    padding: 32px 28px;
+    border: 1px solid rgba(141,150,168,0.22);
+    border-radius: 22px;
+    background: #171a21;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 14px 34px rgba(0,0,0,0.25);
+  }
+
+  .pp-feedback-mobile-stars {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    color: #07b4ba;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .pp-feedback-mobile-text {
+    margin: 0 0 28px !important;
+    color: rgba(189,195,208,0.78) !important;
+    font-family: 'Barlow', sans-serif !important;
+    font-size: 25px !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    line-height: 1.72 !important;
+  }
+
+  .pp-feedback-mobile-author {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .pp-feedback-avatar {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #262b35;
+  }
+
+  .pp-feedback-avatar::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    transform: translateX(-50%);
+    border: 4px solid #929aaa;
+    border-radius: 50%;
+  }
+
+  .pp-feedback-avatar::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 21px;
+    width: 26px;
+    height: 18px;
+    transform: translateX(-50%);
+    border: 4px solid #929aaa;
+    border-bottom: 0;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .pp-feedback-mobile-author p {
+    margin: 0 0 8px !important;
+    color: #fff !important;
+    font-family: 'Barlow', sans-serif !important;
+    font-size: 27px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+  }
+
+  .pp-feedback-mobile-author span {
+    color: #9da5b6;
+    font-family: 'Barlow', sans-serif;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .pp-feedback-mobile-nav {
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    margin-top: 82px;
+  }
+
+  .pp-feedback-mobile-nav button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 82px;
+    height: 82px;
+    border: 2px solid rgba(141,150,168,0.28);
+    border-radius: 50%;
+    background: rgba(7,10,16,0.35);
+    color: #a6adbd;
+    font-size: 58px;
+    line-height: 1;
+    cursor: pointer;
+  }
 }
 
 /* EXTRA SMALL DEVICES */
@@ -1403,6 +1540,7 @@ export default function ProgramPage() {
             <button className="pp-nav-call" onClick={scrollToFooter}>BOOK A CALL</button>
           </div>
         </nav>
+        <button className="pp-nav-home-mobile" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
         {/* ── HERO ── */}
         <section className="pp-hero">
