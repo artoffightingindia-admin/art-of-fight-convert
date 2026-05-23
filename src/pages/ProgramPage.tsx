@@ -300,7 +300,7 @@ const css = `
   .cp-new-promise {
     max-width: 820px;
     margin: 0 auto;
-    padding: 12px 42px;
+    padding: 1px 42px;
     text-align: center;
     position: relative;
     z-index: 1;
