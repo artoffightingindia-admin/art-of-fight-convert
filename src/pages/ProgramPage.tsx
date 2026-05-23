@@ -300,7 +300,7 @@ const css = `
   .cp-new-promise {
     max-width: 820px;
     margin: 0 auto;
-    padding: 34px 42px;
+    padding: 12px 42px;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -884,11 +884,11 @@ export default function ProgramPage() {
             {/* ── PROMISE SECTION (inside roadmap) ── */}
             <div className="cp-promise-section" style={{ marginTop: 60 }}>
               <div className="cp-new-promise">
-                <p className="cp-new-promise-title">OUR PROMISE TO YOU</p>
+                <p className="cp-new-promise-title">OUR PROMISE</p>
                 <div className="cp-new-promise-line" />
                 <p className="cp-new-promise-text">
                   <span className="cp-quote-mark">"</span>
-                  If you show up, follow the system, and trust the process — you will see real, measurable improvement in your striking within 30 days. That's not a slogan. That's our commitment.
+                  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
                 </p>
               </div>
             </div>
