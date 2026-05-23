@@ -203,7 +203,7 @@ const css = `
   .pp-nav-home:hover { color: #ffffff; }
   .pp-nav-home-mobile { display: none; }
   .pp-nav-call { height: 44px; padding: 0 22px; border-radius: 8px; border: none; background: #07b4ba; color: #ffffff; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; cursor: pointer; transition: 0.25s; }
-  .pp-nav-call:hover { background: #059ca1; transform: translateY(-2px); }
+  .pp-nav-call:hover { background: #075e61; transform: translateY(-2px); }
 
   @media (max-width: 768px) {
     .pp-nav { height: 58px; padding: 0 14px; }
@@ -280,7 +280,7 @@ const css = `
   .pp-coach-bg { background: #0b0b0b; }
   .pp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
   .pp-book-strip button { width: 100%; padding: 14px; background: none; border: none; cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; transition: background 0.2s; }
-  .pp-book-strip button:hover { background: rgba(0,0,0,0.08); }
+  .pp-book-strip button:hover  { background: #075e61; transform: translateY(-2px); }
 
   /* TESTIMONIALS */
   .pp-testi-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px); }
@@ -312,15 +312,28 @@ const css = `
   .pp-cta-note { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 12px; }
 
   /* FOOTER */
-  .pp-footer { background: #0b0b0b; padding: 26px 40px 8px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .pp-footer {
+  background: #0b0b0b;
+  padding: 12px 40px 4px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
   .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-  .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; padding-top: 20px; margin-bottom: 14px; }
-  .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.pp-footer-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: #fff;
+  padding-top: 8px;
+  margin-bottom: 10px;
+}  .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
   .pp-footer-links a, .pp-footer-contact p, .pp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
-  .pp-footer-links a:hover { color: #07b4ba; }
-  .pp-footer-contact { display: flex; flex-direction: column; gap: 18px; }
-  .pp-footer-about p { line-height: 1.8; max-width: 320px; }
-  .pp-footer-bottom { margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
+  .pp-footer-links a:hover { color: #075e61; }
+.pp-footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}  .pp-footer-about p { line-height: 1.8; max-width: 320px; }
+  .pp-footer-bottom { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
 
   /* CHECKLIST */
   .pp-checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
@@ -1297,9 +1310,9 @@ const css = `
   align-items: flex-start !important;
   text-align: left !important;
 
-  gap: 18px !important;
+  gap: 12px !important;
 
-  padding: 22px 18px !important;
+  padding: 16px 16px !important;
 
   border-radius: 16px !important;
 
@@ -1325,12 +1338,12 @@ const css = `
 .pp-bonus-grid h3 {
   font-size: 22px !important;
   line-height: 1.1 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 4px !important;
 }
 
 .pp-bonus-grid p {
   font-size: 13px !important;
-  line-height: 1.6 !important;
+  line-height: 1.45 !important;
 }
 
 /* FAQ MINIMIZED */
