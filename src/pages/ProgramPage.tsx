@@ -2179,8 +2179,12 @@ const roadmapCards = [
 
         <p
           style={{
-            fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)",
-              fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380,
+            fontFamily: "'Barlow', sans-serif",
+            color: "rgba(255,255,255,0.52)",
+            fontSize: 14,
+            lineHeight: 1.7,
+            marginBottom: 28,
+            maxWidth: 380,
           }}
         >
           Spots are limited. We only take a small number
@@ -2266,24 +2270,14 @@ const roadmapCards = [
 
       <div
         style={{
-          background:
-            "#0f1115",
-
+          background: "#0f1115",
           borderRadius: 28,
-
           padding: "55px 42px",
-
-          border:
-            "1px solid rgba(255,255,255,0.12)",
-
+          border: "1px solid rgba(255,255,255,0.12)",
           display: "flex",
-
           flexDirection: "column",
-
           alignItems: "center",
-
           justifyContent: "center",
-
           minHeight: 350,
         }}
       >
@@ -2339,25 +2333,15 @@ const roadmapCards = [
           onClick={scrollToFooter}
           style={{
             width: "100%",
-
             maxWidth: 420,
-
             height: 82,
-
             borderRadius: 16,
-
             border: "none",
-
             background: "#07b4ba",
-
             color: "#fff",
-
             fontFamily: "'Bebas Neue', sans-serif",
-
             fontSize: 25,
-
             letterSpacing: 2,
-
             cursor: "pointer",
           }}
         >
@@ -2375,136 +2359,149 @@ const roadmapCards = [
         >
           Limited slots available for this batch
         </p>
-<div
-  style={{
-    marginTop: 18,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 14,
-  }}
->
 
-  {/* DAYS */}
-  <div style={{ textAlign: "center" }}>
-    <div
-      style={{
-        width: 70,
-        height: 70,
-        borderRadius: 14,
-        background: "#151a22",
-        border: "1px solid rgba(7,180,186,0.18)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: 42,
-        color: "#07b4ba",
-        letterSpacing: 2,
-      }}
-    >
-      02
-    </div>
+        {/* TIMER */}
 
-    <p
-      style={{
-        marginTop: 8,
-        fontSize: 11,
-        letterSpacing: 2,
-        color: "rgba(255,255,255,0.4)",
-      }}
-    >
-      DAYS
-    </p>
-  </div>
+        <div
+          style={{
+            marginTop: 18,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 14,
+          }}
+        >
 
-  <div
-    style={{
-      fontSize: 30,
-      color: "rgba(255,255,255,0.3)",
-      marginTop: -18,
-    }}
-  >
-    :
-  </div>
+          {/* DAYS */}
 
-  {/* HOURS */}
-  <div style={{ textAlign: "center" }}>
-    <div
-      style={{
-        width: 70,
-        height: 70,
-        borderRadius: 14,
-        background: "#151a22",
-        border: "1px solid rgba(7,180,186,0.18)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: 42,
-        color: "#07b4ba",
-        letterSpacing: 2,
-      }}
-    >
-      18
-    </div>
+          <div style={{ textAlign: "center" }}>
 
-    <p
-      style={{
-        marginTop: 8,
-        fontSize: 11,
-        letterSpacing: 2,
-        color: "rgba(255,255,255,0.4)",
-      }}
-    >
-      HOURS
-    </p>
-  </div>
+            <div
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 14,
+                background: "#151a22",
+                border: "1px solid rgba(7,180,186,0.18)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 42,
+                color: "#07b4ba",
+                letterSpacing: 2,
+              }}
+            >
+              02
+            </div>
 
-  <div
-    style={{
-      fontSize: 30,
-      color: "rgba(255,255,255,0.3)",
-      marginTop: -18,
-    }}
-  >
-    :
-  </div>
+            <p
+              style={{
+                marginTop: 8,
+                fontSize: 11,
+                letterSpacing: 2,
+                color: "rgba(255,255,255,0.4)",
+              }}
+            >
+              DAYS
+            </p>
 
-  {/* MINUTES */}
-  <div style={{ textAlign: "center" }}>
-    <div
-      style={{
-        width: 70,
-        height: 70,
-        borderRadius: 14,
-        background: "#151a22",
-        border: "1px solid rgba(7,180,186,0.18)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: 42,
-        color: "#07b4ba",
-        letterSpacing: 2,
-      }}
-    >
-      43
-    </div>
+          </div>
 
-    <p
-      style={{
-        marginTop: 8,
-        fontSize: 11,
-        letterSpacing: 2,
-        color: "rgba(255,255,255,0.4)",
-      }}
-    >
-      MINUTES
-    </p>
-  </div>
+          <div
+            style={{
+              fontSize: 30,
+              color: "rgba(255,255,255,0.3)",
+              marginTop: -18,
+            }}
+          >
+            :
+          </div>
 
-</div>
+          {/* HOURS */}
+
+          <div style={{ textAlign: "center" }}>
+
+            <div
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 14,
+                background: "#151a22",
+                border: "1px solid rgba(7,180,186,0.18)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 42,
+                color: "#07b4ba",
+                letterSpacing: 2,
+              }}
+            >
+              18
+            </div>
+
+            <p
+              style={{
+                marginTop: 8,
+                fontSize: 11,
+                letterSpacing: 2,
+                color: "rgba(255,255,255,0.4)",
+              }}
+            >
+              HOURS
+            </p>
+
+          </div>
+
+          <div
+            style={{
+              fontSize: 30,
+              color: "rgba(255,255,255,0.3)",
+              marginTop: -18,
+            }}
+          >
+            :
+          </div>
+
+          {/* MINUTES */}
+
+          <div style={{ textAlign: "center" }}>
+
+            <div
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 14,
+                background: "#151a22",
+                border: "1px solid rgba(7,180,186,0.18)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 42,
+                color: "#07b4ba",
+                letterSpacing: 2,
+              }}
+            >
+              43
+            </div>
+
+            <p
+              style={{
+                marginTop: 8,
+                fontSize: 11,
+                letterSpacing: 2,
+                color: "rgba(255,255,255,0.4)",
+              }}
+            >
+              MINUTES
+            </p>
+
+          </div>
+
+        </div>
+
       </div>
 
     </div>
