@@ -2624,7 +2624,6 @@ const roadmapCards = [
         </footer>
 
       </div>
-    </div>
-    </>
+   </>
   );
 }
