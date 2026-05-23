@@ -829,6 +829,47 @@ const stats = [
 export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
+  const [timeLeft, setTimeLeft] = useState({
+  days: "02",
+  hours: "18",
+  minutes: "43",
+});
+
+useEffect(() => {
+
+  const target = new Date();
+
+  target.setDate(target.getDate() + 2);
+
+  const interval = setInterval(() => {
+
+    const now = new Date().getTime();
+
+    const distance = target.getTime() - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) /
+      (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+      (distance % (1000 * 60 * 60)) /
+      (1000 * 60)
+    );
+
+    setTimeLeft({
+      days: String(days).padStart(2, "0"),
+      hours: String(hours).padStart(2, "0"),
+      minutes: String(minutes).padStart(2, "0"),
+    });
+
+  }, 1000);
+
+  return () => clearInterval(interval);
+
+}, []);
   const scrollToFooter = () => footerRef.current?.scrollIntoView({ behavior: "smooth" });
 const [roadmapIndex, setRoadmapIndex] = useState(0);
 
@@ -2362,146 +2403,145 @@ const roadmapCards = [
 
         {/* TIMER */}
 
-        <div
-          style={{
-            marginTop: 18,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 14,
-          }}
-        >
+<div
+  style={{
+    marginTop: 18,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  }}
+>
 
-          {/* DAYS */}
+  {/* DAYS */}
 
-          <div style={{ textAlign: "center" }}>
+  <div style={{ textAlign: "center" }}>
 
-            <div
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 14,
-                background: "#151a22",
-                border: "1px solid rgba(7,180,186,0.18)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 42,
-                color: "#07b4ba",
-                letterSpacing: 2,
-              }}
-            >
-              02
-            </div>
+    <div
+      style={{
+        width: 30,
+        height: 30,
+        borderRadius: 8,
+        background: "#151a22",
+        border: "1px solid rgba(7,180,186,0.18)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 18,
+        color: "#07b4ba",
+        letterSpacing: 1,
+      }}
+    >
+      {timeLeft.days}
+    </div>
 
-            <p
-              style={{
-                marginTop: 8,
-                fontSize: 11,
-                letterSpacing: 2,
-                color: "rgba(255,255,255,0.4)",
-              }}
-            >
-              DAYS
-            </p>
+    <p
+      style={{
+        marginTop: 5,
+        fontSize: 8,
+        letterSpacing: 1,
+        color: "rgba(255,255,255,0.4)",
+      }}
+    >
+      DAYS
+    </p>
 
-          </div>
+  </div>
 
-          <div
-            style={{
-              fontSize: 30,
-              color: "rgba(255,255,255,0.3)",
-              marginTop: -18,
-            }}
-          >
-            :
-          </div>
+  <div
+    style={{
+      fontSize: 14,
+      color: "rgba(255,255,255,0.3)",
+      marginTop: -12,
+    }}
+  >
+    :
+  </div>
 
-          {/* HOURS */}
+  {/* HOURS */}
 
-          <div style={{ textAlign: "center" }}>
+  <div style={{ textAlign: "center" }}>
 
-            <div
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 14,
-                background: "#151a22",
-                border: "1px solid rgba(7,180,186,0.18)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 42,
-                color: "#07b4ba",
-                letterSpacing: 2,
-              }}
-            >
-              18
-            </div>
+    <div
+      style={{
+        width: 30,
+        height: 30,
+        borderRadius: 8,
+        background: "#151a22",
+        border: "1px solid rgba(7,180,186,0.18)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 18,
+        color: "#07b4ba",
+        letterSpacing: 1,
+      }}
+    >
+      {timeLeft.hours}
+    </div>
 
-            <p
-              style={{
-                marginTop: 8,
-                fontSize: 11,
-                letterSpacing: 2,
-                color: "rgba(255,255,255,0.4)",
-              }}
-            >
-              HOURS
-            </p>
+    <p
+      style={{
+        marginTop: 5,
+        fontSize: 8,
+        letterSpacing: 1,
+        color: "rgba(255,255,255,0.4)",
+      }}
+    >
+      HOURS
+    </p>
 
-          </div>
+  </div>
 
-          <div
-            style={{
-              fontSize: 30,
-              color: "rgba(255,255,255,0.3)",
-              marginTop: -18,
-            }}
-          >
-            :
-          </div>
+  <div
+    style={{
+      fontSize: 14,
+      color: "rgba(255,255,255,0.3)",
+      marginTop: -12,
+    }}
+  >
+    :
+  </div>
 
-          {/* MINUTES */}
+  {/* MINUTES */}
 
-          <div style={{ textAlign: "center" }}>
+  <div style={{ textAlign: "center" }}>
 
-            <div
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 14,
-                background: "#151a22",
-                border: "1px solid rgba(7,180,186,0.18)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 42,
-                color: "#07b4ba",
-                letterSpacing: 2,
-              }}
-            >
-              43
-            </div>
+    <div
+      style={{
+        width: 30,
+        height: 30,
+        borderRadius: 8,
+        background: "#151a22",
+        border: "1px solid rgba(7,180,186,0.18)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 18,
+        color: "#07b4ba",
+        letterSpacing: 1,
+      }}
+    >
+      {timeLeft.minutes}
+    </div>
 
-            <p
-              style={{
-                marginTop: 8,
-                fontSize: 11,
-                letterSpacing: 2,
-                color: "rgba(255,255,255,0.4)",
-              }}
-            >
-              MINUTES
-            </p>
+    <p
+      style={{
+        marginTop: 5,
+        fontSize: 8,
+        letterSpacing: 1,
+        color: "rgba(255,255,255,0.4)",
+      }}
+    >
+      MIN
+    </p>
 
-          </div>
+  </div>
 
-        </div>
-
+</div>
       </div>
 
     </div>
