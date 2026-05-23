@@ -508,7 +508,7 @@ const css = `
      SAME STYLE AS COACHING PAGE */
   .pp-features-heading {
     font-size: 38px;
-    letter-spacing: 1px !important;
+    letter-spacing: 2px !important;
     margin-bottom: 36px;
     line-height: 1;
   }
@@ -1657,13 +1657,35 @@ export default function ProgramPage() {
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(32px,4vw,52px)", letterSpacing: 2, color: "#fff", lineHeight: 1.1, marginBottom: 20 }}>
                   Welcome to the <span style={{ color: "#07b4ba" }}>AOF Family</span>
                 </h2>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.8 }}>
-                  At Art of Fight, we're more than just a gym — we're a family built on discipline, respect, and relentless growth.
-                  Our coaches bring years of real fight experience to every session, guiding you through proven techniques that work inside and outside the ring.
-                  Whether you're a complete beginner or training for competition, you'll find a system designed to push your limits safely.
-                  We focus on building strong fundamentals, sharp technique, and the mental toughness that defines a true fighter.
-                  Step in, train hard, and become part of a community that wins together.
-                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontSize: 15,
+      color: "rgba(255,255,255,0.62)",
+      lineHeight: 1.8
+    }}
+  >
+    At Art of Fight, we're more than just a gym — we're a family built on
+    discipline, respect, and relentless growth. Our coaches bring years of
+    real fight experience to every session.
+  </p>
+
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontSize: 15,
+      color: "rgba(255,255,255,0.62)",
+      lineHeight: 1.8
+    }}
+  >
+    Whether you're a complete beginner or training for competition, you'll
+    find a system designed to push your limits safely while building strong
+    fundamentals, sharp technique, and fighter mentality.
+  </p>
+
+</div>
               </div>
             </div>
           </div>
