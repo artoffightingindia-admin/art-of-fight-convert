@@ -635,7 +635,7 @@ font-family: 'Bebas Neue', sans-serif;
   display: none;
 }
   .pp-footer-grid { display: flex; gap: 56px; align-items: center; flex-wrap: wrap; }
-  .pp-footer-left { flex: 1; min-width: 260px; }
+  .pp-footer-left { flex: 1; min-width: 300px; }
   .pp-footer-right { flex: 0 0 360px; max-width: 100%; text-align: center; }
   .pp-offer-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; color: #07b4ba; margin-bottom: 8px; }
   .pp-offer-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,42px); letter-spacing: 2px; color: #fff; line-height: 1.1; margin-bottom: 24px; }
