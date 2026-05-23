@@ -313,7 +313,7 @@ const css = `
 
   /* FOOTER */
   .pp-footer {
-  background: #0b0b0b;
+  background: #1c212b;
   padding: 12px 40px 4px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -341,7 +341,7 @@ const css = `
   .pp-checklist-item p { color: rgba(255,255,255,0.65); font-family: 'Barlow', sans-serif; font-size: 15px; line-height: 1.55; }
 
   /* BOTTOM BAR */
-  .pp-bottom-bar { background: #000; padding: 7px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .pp-bottom-bar { background: #1c212b; padding: 7px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
   .pp-bottom-bar span { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.25); }
   .pp-bottom-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; }
 
