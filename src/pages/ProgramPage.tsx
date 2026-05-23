@@ -398,6 +398,173 @@ const css = `
     .pp-apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
   /* ─────────────────────────────
+   PROMISE SECTION
+───────────────────────────── */
+
+.pp-promise-section {
+  background:
+    linear-gradient(
+      180deg,
+      #0b0f14 0%,
+      #06080c 100%
+    );
+
+  position: relative;
+  overflow: hidden;
+}
+
+.pp-promise-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(7,180,186,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7,180,186,0.04) 1px, transparent 1px);
+
+  background-size: 24px 24px;
+
+  pointer-events: none;
+}
+
+.pp-promise-box {
+  position: relative;
+  z-index: 1;
+
+  border-radius: 24px;
+
+  padding: 54px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,24,30,0.95) 0%,
+      rgba(9,11,15,0.96) 100%
+    );
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 0 0 1px rgba(7,180,186,0.04),
+    0 24px 60px rgba(0,0,0,0.42);
+}
+
+.pp-promise-tag {
+  color: #07b4ba;
+
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  margin-bottom: 18px;
+}
+
+.pp-promise-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 5vw, 72px);
+
+  line-height: 0.95;
+  letter-spacing: 2px;
+
+  color: #fff;
+
+  margin-bottom: 22px;
+}
+
+.pp-promise-text {
+  max-width: 760px;
+
+  font-family: 'Barlow', sans-serif;
+  font-size: 17px;
+
+  line-height: 1.8;
+
+  color: rgba(255,255,255,0.68);
+
+  margin-bottom: 34px;
+}
+
+.pp-promise-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 18px;
+}
+
+.pp-promise-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  padding: 20px 22px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.03) 0%,
+      rgba(255,255,255,0.015) 100%
+    );
+
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.pp-promise-item span {
+  color: #07b4ba;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  margin-top: 2px;
+}
+
+.pp-promise-item p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: rgba(255,255,255,0.78);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .pp-promise-box {
+    padding: 32px 22px;
+    border-radius: 18px;
+  }
+
+  .pp-promise-title {
+    font-size: 44px;
+    line-height: 0.95;
+  }
+
+  .pp-promise-text {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .pp-promise-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .pp-promise-item {
+    padding: 16px;
+  }
+
+  .pp-promise-item p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+  /* ─────────────────────────────
    MOBILE OPTIMIZATION
 ───────────────────────────── */
 @media (max-width: 768px) {
@@ -1897,6 +2064,56 @@ export default function ProgramPage() {
             )}
           </div>
         </div>
+        {/* ── PROMISE SECTION ── */}
+<div className="pp-promise-section">
+  <div className="pp-section">
+
+    <div className="pp-promise-box">
+
+      <p className="pp-promise-tag">
+        OUR PROMISE
+      </p>
+
+      <h2 className="pp-promise-title">
+        Train With Structure.
+        <br />
+        Improve With Confidence.
+      </h2>
+
+      <p className="pp-promise-text">
+        This isn’t random online training.
+        Every week is structured to progressively build your striking,
+        movement, conditioning and fighter mindset step-by-step.
+      </p>
+
+      <div className="pp-promise-grid">
+
+        <div className="pp-promise-item">
+          <span>✓</span>
+          <p>30 days of structured MMA striking training</p>
+        </div>
+
+        <div className="pp-promise-item">
+          <span>✓</span>
+          <p>Beginner friendly progression system</p>
+        </div>
+
+        <div className="pp-promise-item">
+          <span>✓</span>
+          <p>Real techniques used in competitive fighting</p>
+        </div>
+
+        <div className="pp-promise-item">
+          <span>✓</span>
+          <p>Build discipline, confidence and fight IQ</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
         {/* ── COACH SECTION ── */}
         <div className="pp-coach-bg">
