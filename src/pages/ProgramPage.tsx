@@ -398,173 +398,122 @@ const css = `
     .pp-apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
   /* ─────────────────────────────
-   PROMISE SECTION
+   PROMISE SECTION MINIMAL
 ───────────────────────────── */
 
-.pp-promise-section {
+.pp-promise-wrap {
+  position: relative;
+  overflow: hidden;
+
   background:
     linear-gradient(
       180deg,
-      #0b0f14 0%,
-      #06080c 100%
+      #141414 0%,
+      #101010 100%
     );
-
-  position: relative;
-  overflow: hidden;
 }
 
-.pp-promise-section::before {
+/* GRID BACKGROUND */
+
+.pp-promise-wrap::before {
   content: "";
+
   position: absolute;
   inset: 0;
 
   background-image:
-    linear-gradient(rgba(7,180,186,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7,180,186,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(7,180,186,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7,180,186,0.10) 1px, transparent 1px);
 
-  background-size: 24px 24px;
+  background-size: 40px 40px;
 
   pointer-events: none;
 }
 
-.pp-promise-box {
+.pp-promise-minimal {
   position: relative;
   z-index: 1;
 
-  border-radius: 24px;
+  text-align: center;
 
-  padding: 54px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(20,24,30,0.95) 0%,
-      rgba(9,11,15,0.96) 100%
-    );
-
-  border: 1px solid rgba(255,255,255,0.06);
-
-  box-shadow:
-    0 0 0 1px rgba(7,180,186,0.04),
-    0 24px 60px rgba(0,0,0,0.42);
+  padding: 30px 0;
 }
 
-.pp-promise-tag {
-  color: #07b4ba;
+.pp-promise-mini-tag {
+  font-family: 'Bebas Neue', sans-serif;
 
-  font-family: 'Barlow', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-
+  font-size: 42px;
   letter-spacing: 3px;
-  text-transform: uppercase;
+
+  color: #fff;
 
   margin-bottom: 18px;
 }
 
-.pp-promise-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(42px, 5vw, 72px);
+.pp-promise-line {
+  width: 90px;
+  height: 3px;
 
-  line-height: 0.95;
-  letter-spacing: 2px;
+  margin: 0 auto 34px;
+
+  border-radius: 999px;
+
+  background: #07b4ba;
+}
+
+.pp-promise-quote {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  font-family: 'Barlow', sans-serif;
+
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+
+  line-height: 2;
 
   color: #fff;
-
-  margin-bottom: 22px;
 }
 
-.pp-promise-text {
-  max-width: 760px;
-
-  font-family: 'Barlow', sans-serif;
-  font-size: 17px;
-
-  line-height: 1.8;
-
-  color: rgba(255,255,255,0.68);
-
-  margin-bottom: 34px;
-}
-
-.pp-promise-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 18px;
-}
-
-.pp-promise-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-
-  padding: 20px 22px;
-
-  border-radius: 16px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.03) 0%,
-      rgba(255,255,255,0.015) 100%
-    );
-
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.pp-promise-item span {
+.pp-promise-quote span {
   color: #07b4ba;
 
-  font-size: 20px;
+  font-size: 42px;
   font-weight: 700;
 
-  line-height: 1;
-
-  margin-top: 2px;
-}
-
-.pp-promise-item p {
-  font-family: 'Barlow', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-
-  color: rgba(255,255,255,0.78);
+  margin-right: 8px;
 }
 
 /* MOBILE */
 
 @media (max-width: 768px) {
 
-  .pp-promise-box {
-    padding: 32px 22px;
-    border-radius: 18px;
+  .pp-promise-minimal {
+    padding: 70px 0;
   }
 
-  .pp-promise-title {
-    font-size: 44px;
-    line-height: 0.95;
+  .pp-promise-mini-tag {
+    font-size: 30px;
   }
 
-  .pp-promise-text {
-    font-size: 14px;
-    line-height: 1.7;
+  .pp-promise-line {
+    width: 70px;
+    margin-bottom: 26px;
   }
 
-  .pp-promise-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
+  .pp-promise-quote {
+    font-size: 18px;
+    line-height: 1.9;
+
+    padding: 0 10px;
   }
 
-  .pp-promise-item {
-    padding: 16px;
+  .pp-promise-quote span {
+    font-size: 34px;
   }
-
-  .pp-promise-item p {
-    font-size: 13px;
-    line-height: 1.6;
-  }
-}
-  /* ─────────────────────────────
+}  /* ─────────────────────────────
    MOBILE OPTIMIZATION
 ───────────────────────────── */
 @media (max-width: 768px) {
@@ -2064,57 +2013,31 @@ export default function ProgramPage() {
             )}
           </div>
         </div>
-        {/* ── PROMISE SECTION ── */}
-<div className="pp-promise-section">
+       {/* ── PROMISE SECTION ── */}
+<div className="pp-promise-wrap">
+
   <div className="pp-section">
 
-    <div className="pp-promise-box">
+    <div className="pp-promise-minimal">
 
-      <p className="pp-promise-tag">
+      <p className="pp-promise-mini-tag">
         OUR PROMISE
       </p>
 
-      <h2 className="pp-promise-title">
-        Train With Structure.
-        <br />
-        Improve With Confidence.
-      </h2>
+      <div className="pp-promise-line" />
 
-      <p className="pp-promise-text">
-        This isn’t random online training.
-        Every week is structured to progressively build your striking,
-        movement, conditioning and fighter mindset step-by-step.
+      <p className="pp-promise-quote">
+        <span>“</span>
+        Most fighters train hard. Very few train correctly.
+        AOF exists to close that gap — with structure,
+        accountability, and coaching that actually evolves with you.
       </p>
-
-      <div className="pp-promise-grid">
-
-        <div className="pp-promise-item">
-          <span>✓</span>
-          <p>30 days of structured MMA striking training</p>
-        </div>
-
-        <div className="pp-promise-item">
-          <span>✓</span>
-          <p>Beginner friendly progression system</p>
-        </div>
-
-        <div className="pp-promise-item">
-          <span>✓</span>
-          <p>Real techniques used in competitive fighting</p>
-        </div>
-
-        <div className="pp-promise-item">
-          <span>✓</span>
-          <p>Build discipline, confidence and fight IQ</p>
-        </div>
-
-      </div>
 
     </div>
 
   </div>
-</div>
 
+</div>
         {/* ── COACH SECTION ── */}
         <div className="pp-coach-bg">
           <div className="pp-book-strip">
