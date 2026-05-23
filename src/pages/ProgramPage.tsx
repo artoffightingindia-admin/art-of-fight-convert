@@ -654,6 +654,367 @@ const css = `
   }
 }
 
+@media (max-width: 768px) {
+  .pp-roadmap-mobile {
+    background:
+      radial-gradient(circle at 50% 9%, rgba(7,180,186,0.12), transparent 28%),
+      linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%) !important;
+    border-top: 1px solid rgba(7,180,186,0.12);
+    border-bottom: 1px solid rgba(7,180,186,0.16);
+  }
+
+  .pp-roadmap-mobile > div {
+    max-width: none !important;
+    padding: 24px 0 26px !important;
+    background-image:
+      linear-gradient(rgba(7,180,186,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,180,186,0.035) 1px, transparent 1px) !important;
+    background-size: 26px 26px !important;
+  }
+
+  .pp-roadmap-mobile > div > div:first-child {
+    margin-bottom: 22px !important;
+    padding: 0 14px;
+  }
+
+  .pp-roadmap-mobile > div > div:first-child p:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .pp-roadmap-mobile > div > div:first-child p:first-child::before,
+  .pp-roadmap-mobile > div > div:first-child p:first-child::after {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: #07b4ba;
+    box-shadow: 0 0 8px rgba(7,180,186,0.85);
+  }
+
+  .pp-roadmap-mobile > div > div:first-child h2 {
+    font-size: 38px !important;
+    line-height: 0.88 !important;
+    letter-spacing: 1px !important;
+    text-shadow: 0 0 18px rgba(7,180,186,0.16);
+  }
+
+  .pp-roadmap-mobile > div > div:first-child p:last-child {
+    margin-top: 12px !important;
+    font-size: 12px !important;
+    color: rgba(255,255,255,0.68) !important;
+  }
+
+  .pp-roadmap-mobile-shell {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 2px;
+  }
+
+  .pp-roadmap-mobile-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: end;
+    gap: 0;
+    margin: 0 14px 28px;
+    padding-top: 4px;
+  }
+
+  .pp-roadmap-mobile-line {
+    position: absolute;
+    left: 9%;
+    right: 9%;
+    bottom: 7px;
+    height: 1px;
+    background: rgba(255,255,255,0.42);
+  }
+
+  .pp-roadmap-mobile-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,0.72);
+    font-family: 'Bebas Neue', sans-serif;
+    cursor: pointer;
+  }
+
+  .pp-roadmap-mobile-step span {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .pp-roadmap-mobile-step i {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.66);
+    background: #03070c;
+  }
+
+  .pp-roadmap-mobile-step.active {
+    color: #07e8ef;
+  }
+
+  .pp-roadmap-mobile-step.active i {
+    border: 2px solid #07e8ef;
+    background: #061018;
+    box-shadow: 0 0 0 4px rgba(7,180,186,0.18), 0 0 16px rgba(7,232,239,0.95);
+  }
+
+  .pp-roadmap-mobile-stage {
+    position: relative;
+  }
+
+  .pp-roadmap-viewport {
+    width: 100%;
+    overflow: hidden;
+    padding-left: 20px;
+  }
+
+  .pp-roadmap-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.42s ease;
+    will-change: transform;
+  }
+
+  .pp-roadmap-card {
+    position: relative;
+    flex: 0 0 82vw;
+    min-height: 308px;
+    overflow: hidden;
+    border: 1px solid rgba(116,225,232,0.28);
+    border-radius: 10px;
+    background: #061018;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 18px 38px rgba(0,0,0,0.34);
+  }
+
+  .pp-roadmap-card-bg {
+    position: absolute;
+    inset: 0;
+    background-position: 62% center;
+    background-size: cover;
+    opacity: 0.62;
+    filter: saturate(1.04) contrast(1.08);
+  }
+
+  .pp-roadmap-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%),
+      linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%);
+    z-index: 1;
+  }
+
+  .pp-roadmap-card-body {
+    position: relative;
+    z-index: 2;
+    min-height: 258px;
+    padding: 30px 18px 18px;
+  }
+
+  .pp-roadmap-you {
+    margin: 0 0 6px !important;
+    color: #07e8ef !important;
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .pp-roadmap-card h3 {
+    margin: 0 0 14px !important;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px !important;
+    line-height: 0.95 !important;
+    letter-spacing: 0.5px;
+  }
+
+  .pp-roadmap-rule {
+    width: 54px;
+    height: 2px;
+    margin-bottom: 34px;
+    background: #07e8ef;
+    box-shadow: 0 0 10px rgba(7,232,239,0.55);
+  }
+
+  .pp-roadmap-points {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pp-roadmap-point {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pp-roadmap-point span {
+    display: flex;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #07e8ef;
+    border-radius: 50%;
+    color: #07e8ef;
+    font-size: 8px;
+    line-height: 1;
+  }
+
+  .pp-roadmap-point p {
+    margin: 0 !important;
+    color: rgba(255,255,255,0.82) !important;
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+
+  .pp-roadmap-card-footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 50px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    background: rgba(3,9,15,0.72);
+  }
+
+  .pp-roadmap-card-footer span {
+    width: 20px;
+    height: 20px;
+    color: #07e8ef;
+  }
+
+  .pp-roadmap-card-footer svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pp-roadmap-card-footer p {
+    margin: 0 !important;
+    color: #07e8ef !important;
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: 18px !important;
+    letter-spacing: 1px;
+  }
+
+  .pp-roadmap-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 8;
+    width: 34px;
+    height: 34px;
+    transform: translateY(-50%);
+    border: 1px solid rgba(7,232,239,0.55);
+    border-radius: 8px;
+    background: rgba(3,11,18,0.92);
+    color: #07e8ef;
+    font-size: 19px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 18px rgba(7,180,186,0.18);
+  }
+
+  .pp-roadmap-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .pp-roadmap-arrow-left {
+    left: 0;
+  }
+
+  .pp-roadmap-arrow-right {
+    right: 0;
+  }
+
+  .pp-roadmap-dots {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    margin-top: 18px;
+  }
+
+  .pp-roadmap-dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+  }
+
+  .pp-roadmap-dots button.active {
+    background: #07e8ef;
+    box-shadow: 0 0 12px rgba(7,232,239,0.7);
+  }
+
+  .pp-roadmap-note {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 20px 16px 0;
+    padding: 17px 18px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(13,26,36,0.9), rgba(7,14,22,0.92));
+  }
+
+  .pp-roadmap-note-icon {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #07e8ef;
+    border-radius: 50%;
+    color: #07e8ef;
+  }
+
+  .pp-roadmap-note-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .pp-roadmap-note h3 {
+    margin: 0 0 5px;
+    color: rgba(255,255,255,0.9);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 0.8px;
+    line-height: 1;
+  }
+
+  .pp-roadmap-note p {
+    margin: 0;
+    color: #07e8ef;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+}
+
 /* EXTRA SMALL DEVICES */
 @media (max-width: 480px) {
 
@@ -1003,6 +1364,7 @@ export default function ProgramPage() {
 
   const scrollToFooter = () => footerRef.current?.scrollIntoView({ behavior: "smooth" });
   const [roadmapIndex, setRoadmapIndex] = useState(0);
+  const [isMobileRoadmap, setIsMobileRoadmap] = useState(false);
 
   const roadmapCards = [
     { title: "1ST WEEK", days: "DAYS 1 - 6", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Fundamentals", "Basic Techniques", "Conditioning", "Mindset Building"] },
@@ -1011,6 +1373,18 @@ export default function ProgramPage() {
     { title: "4TH WEEK", days: "DAYS 19 - 24", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Fight IQ", "Combination Chains", "Counter Attacks", "Explosive Training"] },
     { title: "5TH WEEK", days: "DAYS 25 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Full Integration", "Fight Simulation", "Peak Conditioning", "Program Completion"] },
   ];
+
+  useEffect(() => {
+    const checkRoadmapLayout = () => setIsMobileRoadmap(window.innerWidth <= 768);
+    checkRoadmapLayout();
+    window.addEventListener("resize", checkRoadmapLayout);
+    return () => window.removeEventListener("resize", checkRoadmapLayout);
+  }, []);
+
+  useEffect(() => {
+    const maxIndex = isMobileRoadmap ? roadmapCards.length - 1 : roadmapCards.length - 2;
+    setRoadmapIndex((prev) => Math.min(prev, maxIndex));
+  }, [isMobileRoadmap, roadmapCards.length]);
 
   return (
     <>
@@ -1165,7 +1539,7 @@ export default function ProgramPage() {
         </section>
 
         {/* ── ROADMAP SECTION ── */}
-        <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden" }}>
+        <div className={isMobileRoadmap ? "pp-roadmap pp-roadmap-mobile" : "pp-roadmap"} style={{ background: "#0b0b0b", position: "relative", overflow: "hidden" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", padding: "30px 0", backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)" }}>
             {/* TOP */}
             <div style={{ textAlign: "center", marginBottom: 35 }}>
@@ -1180,58 +1554,155 @@ export default function ProgramPage() {
               </p>
             </div>
 
-            {/* ROADMAP SLIDER */}
-            <div style={{ position: "relative", maxWidth: 1320, margin: "0 auto", overflow: "hidden", padding: "0 70px" }}>
-              <button
-                onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
-                style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}
-              >‹</button>
-              <button
-                onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))}
-                style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}
-              >›</button>
+            {isMobileRoadmap ? (
+              <div className="pp-roadmap-mobile-shell">
+                <div className="pp-roadmap-mobile-timeline">
+                  <div className="pp-roadmap-mobile-line" />
+                  {roadmapCards.map((week, i) => (
+                    <button
+                      key={week.title}
+                      className={`pp-roadmap-mobile-step ${i === roadmapIndex ? "active" : ""}`}
+                      onClick={() => setRoadmapIndex(i)}
+                      aria-label={`Show ${week.title}`}
+                    >
+                      <span>{week.title}</span>
+                      <i />
+                    </button>
+                  ))}
+                </div>
 
-              {/* TOP PROGRESS */}
-              <div className="roadmap-timeline" style={{ display: "flex", justifyContent: "space-between", marginBottom: 42, position: "relative" }}>
-                <div style={{ position: "absolute", top: 14, left: 0, right: 0, height: 2, background: "rgba(255,255,255,0.1)" }} />
-                {roadmapCards.map((week, i) => (
-                  <div key={i} style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-                    <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, color: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "rgba(255,255,255,0.45)", marginBottom: 10, transition: "0.3s" }}>
-                      {week.title}
-                    </p>
-                    <div style={{ width: 26, height: 26, borderRadius: "50%", border: "2px solid #07b4ba", background: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "#0b0b0b", boxShadow: i === roadmapIndex || i === roadmapIndex + 1 ? "0 0 18px rgba(7,180,186,0.95)" : "none", transition: "0.3s" }} />
-                  </div>
-                ))}
-              </div>
+                <div className="pp-roadmap-mobile-stage">
+                  <button
+                    className="pp-roadmap-arrow pp-roadmap-arrow-left"
+                    onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
+                    disabled={roadmapIndex === 0}
+                    aria-label="Previous week"
+                  >
+                    {"<"}
+                  </button>
+                  <button
+                    className="pp-roadmap-arrow pp-roadmap-arrow-right"
+                    onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))}
+                    disabled={roadmapIndex === roadmapCards.length - 1}
+                    aria-label="Next week"
+                  >
+                    {">"}
+                  </button>
 
-              {/* CARDS */}
-              <div style={{ overflow: "hidden" }}>
-                <div style={{ display: "flex", gap: 20, transform: `translateX(-${roadmapIndex * 47}%)`, transition: "0.45s ease" }}>
-                  {roadmapCards.map((card, i) => (
-                    <div key={i} className="roadmap-card" style={{ minWidth: "45%", borderRadius: 22, overflow: "hidden", background: "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 90 }}>
-                        <img src={card.image} alt={card.title} style={{ width: "100%", height: 285, objectFit: "cover" }} />
-                        <div style={{ padding: "32px 24px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                          <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#fff", marginBottom: 18 }}>{card.title}</h3>
-                          <div style={{ width: 60, height: 3, background: "#07b4ba", marginBottom: 20 }} />
-                          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                            {card.points.map((point, idx) => (
-                              <div key={idx} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                                <div style={{ width: 20, height: 20, borderRadius: "50%", border: "2px solid #07b4ba", color: "#07b4ba", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>✓</div>
-                                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.4 }}>{point}</p>
-                              </div>
-                            ))}
+                  <div className="pp-roadmap-viewport">
+                    <div className="pp-roadmap-track" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
+                      {roadmapCards.map((card, i) => (
+                        <div key={card.title} className="pp-roadmap-card">
+                          <div className="pp-roadmap-card-bg" style={{ backgroundImage: `url(${card.image})` }} />
+                          <div className="pp-roadmap-card-body">
+                            {i === roadmapIndex && <p className="pp-roadmap-you">YOU ARE HERE</p>}
+                            <h3>{card.title}</h3>
+                            <div className="pp-roadmap-rule" />
+                            <div className="pp-roadmap-points">
+                              {card.points.map((point) => (
+                                <div key={point} className="pp-roadmap-point">
+                                  <span>✓</span>
+                                  <p>{point}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="pp-roadmap-card-footer">
+                            <span>
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <path d="M16 2v4M8 2v4M3 10h18" />
+                              </svg>
+                            </span>
+                            <p>{card.days}</p>
                           </div>
                         </div>
-                      </div>
-                      <div style={{ padding: "16px", borderTop: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
-                        <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: "#07b4ba", letterSpacing: 1 }}>{card.days}</p>
-                      </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pp-roadmap-dots">
+                  {roadmapCards.map((card, i) => (
+                    <button
+                      key={card.title}
+                      className={i === roadmapIndex ? "active" : ""}
+                      onClick={() => setRoadmapIndex(i)}
+                      aria-label={`Go to ${card.title}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="pp-roadmap-note">
+                  <div className="pp-roadmap-note-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M8 21h8" />
+                      <path d="M12 17v4" />
+                      <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" />
+                      <path d="M5 4H3v2a4 4 0 0 0 4 4" />
+                      <path d="M19 4h2v2a4 4 0 0 1-4 4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3>STAY CONSISTENT. TRUST THE PROCESS.</h3>
+                    <p>Become the best version of yourself.</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* ROADMAP SLIDER */
+              <div style={{ position: "relative", maxWidth: 1320, margin: "0 auto", overflow: "hidden", padding: "0 70px" }}>
+                <button
+                  onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
+                  style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}
+                >‹</button>
+                <button
+                  onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))}
+                  style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer" }}
+                >›</button>
+
+                {/* TOP PROGRESS */}
+                <div className="roadmap-timeline" style={{ display: "flex", justifyContent: "space-between", marginBottom: 42, position: "relative" }}>
+                  <div style={{ position: "absolute", top: 14, left: 0, right: 0, height: 2, background: "rgba(255,255,255,0.1)" }} />
+                  {roadmapCards.map((week, i) => (
+                    <div key={i} style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+                      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, color: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "rgba(255,255,255,0.45)", marginBottom: 10, transition: "0.3s" }}>
+                        {week.title}
+                      </p>
+                      <div style={{ width: 26, height: 26, borderRadius: "50%", border: "2px solid #07b4ba", background: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "#0b0b0b", boxShadow: i === roadmapIndex || i === roadmapIndex + 1 ? "0 0 18px rgba(7,180,186,0.95)" : "none", transition: "0.3s" }} />
                     </div>
                   ))}
                 </div>
+
+                {/* CARDS */}
+                <div style={{ overflow: "hidden" }}>
+                  <div style={{ display: "flex", gap: 20, transform: `translateX(-${roadmapIndex * 47}%)`, transition: "0.45s ease" }}>
+                    {roadmapCards.map((card, i) => (
+                      <div key={i} className="roadmap-card" style={{ minWidth: "45%", borderRadius: 22, overflow: "hidden", background: "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 90 }}>
+                          <img src={card.image} alt={card.title} style={{ width: "100%", height: 285, objectFit: "cover" }} />
+                          <div style={{ padding: "32px 24px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#fff", marginBottom: 18 }}>{card.title}</h3>
+                            <div style={{ width: 60, height: 3, background: "#07b4ba", marginBottom: 20 }} />
+                            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                              {card.points.map((point, idx) => (
+                                <div key={idx} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                                  <div style={{ width: 20, height: 20, borderRadius: "50%", border: "2px solid #07b4ba", color: "#07b4ba", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>✓</div>
+                                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.4 }}>{point}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{ padding: "16px", borderTop: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
+                          <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: "#07b4ba", letterSpacing: 1 }}>{card.days}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
