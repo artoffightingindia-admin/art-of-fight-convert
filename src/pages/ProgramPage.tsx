@@ -2562,8 +2562,8 @@ const roadmapCards = [
        
 
         {/* ── FOOTER (image 6) ── */}
-<footer className="pp-footer" style={{ paddingBottom: "60px" }}>          <div className="pp-footer-inner">
-            <div>
+<footer className="pp-footer">
+  <div className="pp-footer-inner"> <div>
               <h3 className="pp-footer-title">CONTACT</h3>
               <div className="pp-footer-contact">
                 <p>+91 00000 00000</p>
