@@ -2169,11 +2169,10 @@ const roadmapCards = [
   style={{
     background: "#0b0b0b",
     backgroundImage:
-      "radial-gradient(rgba(7,180,186,0.08) 1px, transparent 1px)",  // ← reduce 0.22 to 0.08
+      "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)",
     backgroundSize: "22px 22px",
     position: "relative",
     overflow: "hidden",
-    paddingBottom: "40px",  // ← add this
   }}
 >
   <div
