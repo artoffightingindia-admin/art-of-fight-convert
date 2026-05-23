@@ -373,6 +373,327 @@ const css = `
     .roadmap-card p { font-size: 13px !important; }
     .pp-apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
+  /* ─────────────────────────────
+   MOBILE OPTIMIZATION
+───────────────────────────── */
+@media (max-width: 768px) {
+
+  .pp-section {
+    padding: 56px 18px !important;
+  }
+
+  /* NAV */
+  .pp-nav {
+    height: 58px;
+    padding: 0 14px;
+  }
+
+  .pp-nav-logo {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+
+  .pp-nav-home {
+    display: none;
+  }
+
+  .pp-nav-call {
+    height: 38px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  /* HERO */
+  .pp-hero {
+    min-height: auto;
+    padding: 110px 18px 72px;
+    align-items: flex-start;
+  }
+
+  .pp-hero-content {
+    width: 100%;
+  }
+
+  .pp-hero-h1 {
+    font-size: 36px;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    max-width: 100%;
+  }
+
+  .pp-hero-h2 {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  .pp-hero-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 26px;
+    max-width: 100%;
+  }
+
+  .pp-join-btn {
+    width: 100%;
+    height: 58px;
+    font-size: 20px;
+    border-radius: 12px;
+    padding: 0 20px;
+  }
+
+  .pp-scarcity {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* TRUST STRIP */
+  .pp-trust-strip {
+    padding: 14px;
+    gap: 16px;
+    height: auto;
+    justify-content: center;
+  }
+
+  .pp-trust-item {
+    width: calc(50% - 8px);
+    justify-content: center;
+  }
+
+  .pp-trust-item p {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* PROBLEM */
+  .pp-problem-grid {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .pp-problem-left,
+  .pp-problem-right {
+    width: 100%;
+    flex: unset;
+  }
+
+  .pp-problem-h {
+    font-size: 38px;
+    line-height: 1;
+  }
+
+  .pp-problem-intro,
+  .pp-pain-item p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .pp-problem-right img {
+    border-radius: 14px;
+  }
+
+  /* WHAT YOU GET
+     SAME STYLE AS COACHING PAGE */
+  .pp-features-heading {
+    font-size: 38px;
+    margin-bottom: 36px;
+    line-height: 1;
+  }
+
+  .pp-features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pp-feature-card {
+    width: 100%;
+    min-height: auto;
+    padding: 22px 18px;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 18px;
+
+    background: linear-gradient(
+      180deg,
+      #13171d 0%,
+      #101318 100%
+    );
+
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .pp-feature-icon {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+  }
+
+  .pp-feature-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .pp-feature-card h4 {
+    font-size: 17px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .pp-feature-card p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* ROADMAP */
+  .roadmap-card {
+    min-width: 100% !important;
+  }
+
+  .roadmap-card > div:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .roadmap-card img {
+    height: 220px !important;
+  }
+
+  /* COACH */
+  .pp-coach-stats {
+    gap: 14px !important;
+  }
+
+  .pp-coach-stats > div {
+    width: calc(50% - 7px) !important;
+    height: 120px !important;
+  }
+
+  /* TESTIMONIAL */
+  .pp-testi-main {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .pp-testi-img {
+    width: 100%;
+    flex: unset;
+  }
+
+  /* BONUSES */
+  .pp-bonus-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* APPLY SECTION */
+  .pp-apply-grid {
+    grid-template-columns: 1fr !important;
+    gap: 42px !important;
+  }
+
+  .pp-apply-grid h2 br,
+  .pp-apply-grid h3 br {
+    display: none;
+  }
+
+  .pp-apply-grid button {
+    width: 100%;
+  }
+
+  /* CTA CARD */
+  .pp-apply-grid > div:last-child {
+    padding: 38px 24px !important;
+    border-radius: 22px !important;
+    min-height: auto !important;
+  }
+
+  /* FAQ */
+  #faq > div {
+    padding: 58px 18px !important;
+  }
+
+  #faq h2 {
+    font-size: 38px !important;
+  }
+
+  #faq div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  #faq button {
+    padding: 18px !important;
+  }
+
+  #faq button span:first-child {
+    font-size: 15px !important;
+  }
+
+  /* FOOTER */
+  .pp-footer-inner {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* GLOBAL */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  * {
+    word-break: break-word;
+  }
+
+  body,
+  html {
+    overflow-x: hidden;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+
+  .pp-hero-h1 {
+    font-size: 31px;
+  }
+
+  .pp-problem-h,
+  .pp-features-heading,
+  #faq h2 {
+    font-size: 32px !important;
+  }
+
+  .pp-trust-item {
+    width: 100%;
+  }
+
+  .pp-feature-card {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .pp-feature-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .pp-feature-icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .pp-coach-stats > div {
+    width: 100% !important;
+  }
+
+  .roadmap-card img {
+    height: 190px !important;
+  }
+}
 `;
 
 const IconPlan = () => (
