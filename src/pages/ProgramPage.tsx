@@ -2305,7 +2305,7 @@ const roadmapCards = [
         <h3
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(44px,5vw,72px)",
+            fontSize: "clamp(34px,5vw,54px)",
             lineHeight: 0.95,
             letterSpacing: 2,
             color: "#fff",
@@ -2322,7 +2322,7 @@ const roadmapCards = [
         <p
           style={{
             fontFamily: "'Barlow', sans-serif",
-            fontSize: 16,
+            fontSize: 14,
             lineHeight: 1.8,
             color: "rgba(255,255,255,0.68)",
             textAlign: "center",
@@ -2348,20 +2348,17 @@ const roadmapCards = [
 
             border: "none",
 
-            background: "#2edce0",
+            background: "#07b4ba",
 
             color: "#fff",
 
             fontFamily: "'Bebas Neue', sans-serif",
 
-            fontSize: 34,
+            fontSize: 25,
 
             letterSpacing: 2,
 
             cursor: "pointer",
-
-            boxShadow:
-              "0 0 30px rgba(46,220,224,0.35)",
           }}
         >
           JOIN NOW-999₹
