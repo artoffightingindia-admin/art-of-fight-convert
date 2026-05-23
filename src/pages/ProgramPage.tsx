@@ -620,7 +620,11 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-book-strip button:hover { background: rgba(0,0,0,0.08); }
 
   /* TESTIMONIALS */
-  .pp-testi-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px); }
+  .pp-testi-bg {
+  position: relative;
+  overflow: hidden;
+  background: #0b0b0b;
+}
   .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
   .pp-testi-img { flex: 0 0 460px; max-width: 100%; }
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
@@ -1267,7 +1271,7 @@ const roadmapCards = [
 >
   <div
     style={{
-      maxWidth: 700,
+      maxWidth: 1400,
       margin: "0 auto",
       padding: "30px 0",
     }}
