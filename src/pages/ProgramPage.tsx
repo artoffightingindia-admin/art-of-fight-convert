@@ -293,7 +293,7 @@ const css = `
     content: "";
     position: absolute;
     inset: 0;
-    background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.08) 0px, rgba(7,180,186,0.08) 1px, transparent 1px, transparent 5px);
+    background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px);
     pointer-events: none;
     z-index: 0;
   }
