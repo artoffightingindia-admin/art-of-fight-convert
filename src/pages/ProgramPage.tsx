@@ -153,7 +153,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b" }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
+<div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <Reveal>
           <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" as const, color: "#07b4ba", marginBottom: 10 }}>Got Questions?</p>
           <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 5.5vw, 60px)", letterSpacing: 2, color: "#fff", lineHeight: 1, marginBottom: 10 }}>
@@ -692,8 +692,232 @@ const css = `
 
   .roadmap-card img {
     height: 190px !important;
-  }
+  }/* ─────────────────────────────
+   MOBILE DESIGN IMPROVEMENTS
+───────────────────────────── */
+
+/* AOF INTRO SECTION
+   SAME STYLE AS HOME PAGE */
+.pp-problem {
+  background:
+    linear-gradient(
+      180deg,
+      #0b0b0b 0%,
+      #0d1117 100%
+    ) !important;
+
+  position: relative;
+  overflow: hidden;
 }
+
+.pp-problem::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.5px),
+    linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.5px);
+
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+/* ROADMAP SECTION */
+.pp-roadmap-mobile {
+  padding-top: 10px;
+}
+
+.pp-roadmap-mobile .roadmap-card {
+  border-radius: 20px !important;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      #11161d 0%,
+      #0a0d12 100%
+    ) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  box-shadow:
+    0 0 0 1px rgba(7,180,186,0.05),
+    0 12px 40px rgba(0,0,0,0.38);
+}
+
+/* ROADMAP TIMELINE */
+.pp-roadmap-mobile .roadmap-timeline {
+  overflow-x: auto;
+  padding-bottom: 10px;
+  gap: 26px !important;
+
+  scrollbar-width: none;
+}
+
+.pp-roadmap-mobile .roadmap-timeline::-webkit-scrollbar {
+  display: none;
+}
+
+.pp-roadmap-mobile .roadmap-week-label {
+  white-space: nowrap;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+}
+
+/* ROADMAP IMAGE */
+.roadmap-card img {
+  width: 100%;
+  height: 250px !important;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ROADMAP CONTENT */
+.roadmap-card h3 {
+  font-size: 42px !important;
+  line-height: 1 !important;
+}
+
+.roadmap-card p {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+/* BONUS SECTION
+   SAME AS COACHING BULLET STYLE */
+.pp-bonus-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.pp-bonus-grid > div {
+  min-height: auto !important;
+
+  display: flex !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+
+  gap: 18px !important;
+
+  padding: 22px 18px !important;
+
+  border-radius: 16px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #12171e 0%,
+      #0d1117 100%
+    ) !important;
+}
+
+/* BONUS ICON */
+.pp-bonus-grid > div > div:nth-child(2) {
+  width: 58px !important;
+  height: 58px !important;
+  flex-shrink: 0 !important;
+
+  margin: 0 !important;
+  font-size: 28px !important;
+}
+
+/* BONUS TEXT */
+.pp-bonus-grid h3 {
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+  margin-bottom: 8px !important;
+}
+
+.pp-bonus-grid p {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+/* FAQ MINIMIZED */
+#faq > div {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}
+
+#faq h2 {
+  font-size: 30px !important;
+  margin-bottom: 6px !important;
+}
+
+#faq button {
+  padding: 15px 16px !important;
+}
+
+#faq button span:first-child {
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+#faq p {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+#faq div[style*="maxHeight"] {
+  padding-bottom: 16px !important;
+}
+
+/* BACK TO HOME
+   SAME AS COACHING PAGE */
+.pp-nav-home-mobile {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 999;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background:
+    linear-gradient(
+      180deg,
+      #13171d 0%,
+      #0d1117 100%
+    );
+
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+
+  color: #07b4ba;
+  font-size: 22px;
+}
+
+/* EXTRA SMALL */
+@media (max-width: 480px) {
+
+  .roadmap-card img {
+    height: 210px !important;
+  }
+
+  .roadmap-card h3 {
+    font-size: 34px !important;
+  }
+
+  .pp-bonus-grid h3 {
+    font-size: 19px !important;
+  }
+
+  #faq h2 {
+    font-size: 26px !important;
+  }
+}}
+
 `;
 
 const IconPlan = () => (
@@ -968,7 +1192,7 @@ export default function ProgramPage() {
               >›</button>
 
               {/* TOP PROGRESS */}
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 42, position: "relative" }}>
+              <div className="roadmap-timeline" style={{ display: "flex", justifyContent: "space-between", marginBottom: 42, position: "relative" }}>
                 <div style={{ position: "absolute", top: 14, left: 0, right: 0, height: 2, background: "rgba(255,255,255,0.1)" }} />
                 {roadmapCards.map((week, i) => (
                   <div key={i} style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
@@ -1097,7 +1321,7 @@ export default function ProgramPage() {
             </div>
 
             {/* BONUS GRID */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
+            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
               {[
                 { title: "FIGHTER NUTRITION GUIDE", desc: "Simple meal structure to improve recovery, energy and body composition.", img: "🥗", value: "₹1499 VALUE" },
                 { title: "DAILY MOBILITY ROUTINE", desc: "Warm-up and recovery drills to move better and prevent injuries.", img: "🧘", value: "₹1299 VALUE" },
