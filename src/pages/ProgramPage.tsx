@@ -2178,8 +2178,7 @@ const roadmapCards = [
   <div
     className="pp-section"
     style={{
-      paddingTop: 70,
-      paddingBottom: 70,
+  
     }}
   >
 
