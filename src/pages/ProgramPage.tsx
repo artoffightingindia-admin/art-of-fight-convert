@@ -630,6 +630,8 @@ font-family: 'Bebas Neue', sans-serif;
   background: #080808;
   border-top: none;
   background-image: none;
+
+  margin-top: -60px;
 }
 .pp-footer-cta::before {
   display: none;
