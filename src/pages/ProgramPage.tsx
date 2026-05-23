@@ -152,7 +152,7 @@ const faqItems = [
 function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
-    <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b", backgroundSize: "40px 40px" }}>
+    <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b", backgroundImage: "none" }}>
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <Reveal>
           <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" as const, color: "#07b4ba", marginBottom: 10 }}>Got Questions?</p>
