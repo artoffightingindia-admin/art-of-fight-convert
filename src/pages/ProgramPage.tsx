@@ -2112,40 +2112,283 @@ const roadmapCards = [
 
 
   
- {/* ── FOOTER CTA ── */}
-        <div className="pp-footer-cta" ref={footerRef}>
-          <div className="pp-section">
-            <div className="pp-footer-grid">
-              <div className="pp-footer-left">
-                <Reveal>
-                  <p className="pp-offer-label">New Year Extended Offer</p>
-                  <h2 className="pp-offer-h">Last Day<br />To Join</h2>
-                  <div className="pp-timer">
-                    <div className="pp-timer-block"><h3>02</h3><p>Days</p></div>
-                    <span className="pp-timer-sep">:</span>
-                    <div className="pp-timer-block"><h3>14</h3><p>Hours</p></div>
-                    <span className="pp-timer-sep">:</span>
-                    <div className="pp-timer-block"><h3>37</h3><p>Mins</p></div>
-                    <span className="pp-timer-sep">:</span>
-                    <div className="pp-timer-block"><h3>59</h3><p>Secs</p></div>
-                  </div>
-                  <p className="pp-last-day">— Offer ends at midnight —</p>
-                </Reveal>
-              </div>
-              <div className="pp-footer-right">
-                <Reveal delay={100}>
-                  <div className="pp-price-box">
-                    <p className="pp-price-old">₹2,999</p>
-                    <p className="pp-price-new">₹999</p>
-                    <p className="pp-price-tag">One-time payment · Lifetime access</p>
-                    <button className="pp-cta-btn" onClick={scrollToFooter}>Join Now — ₹999</button>
-                    <p className="pp-cta-note">Only 20 spots available · Secure checkout</p>
-                  </div>
-                </Reveal>
-              </div>
+{/* ── APPLY / CTA SECTION ── */}
+
+<div
+  ref={footerRef}
+  style={{
+    background: "#0b0b0b",
+    backgroundImage:
+      "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)",
+    backgroundSize: "22px 22px",
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+  <div
+    className="pp-section"
+    style={{
+      paddingTop: 70,
+      paddingBottom: 70,
+    }}
+  >
+
+    <div
+      className="pp-apply-grid"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 70,
+        alignItems: "center",
+      }}
+    >
+
+      {/* LEFT SIDE */}
+
+      <div>
+
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            fontWeight: 700,
+            fontSize: 14,
+            letterSpacing: 3,
+            color: "#07b4ba",
+            marginBottom: 14,
+            textTransform: "uppercase",
+          }}
+        >
+          Ready To Start?
+        </p>
+
+        <h2
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(52px,6vw,92px)",
+            lineHeight: 0.9,
+            letterSpacing: 2,
+            color: "#fff",
+            marginBottom: 28,
+          }}
+        >
+          APPLY FOR YOUR <br />
+          <span style={{ color: "#07b4ba" }}>
+            30-DAY PROGRAM
+          </span>
+        </h2>
+
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            color: "rgba(255,255,255,0.72)",
+            fontSize: 16,
+            lineHeight: 1.9,
+            maxWidth: 600,
+            marginBottom: 34,
+          }}
+        >
+          Spots are limited. We only take a small number
+          of students at a time to ensure every athlete
+          gets the attention they deserve.
+        </p>
+
+        {/* CHECKLIST */}
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 22,
+            marginBottom: 40,
+          }}
+        >
+
+          {[
+            "Structured step-by-step training system",
+            "Beginner friendly progression",
+            "Train anytime from your home",
+            "Tamil-guided instructions",
+          ].map((item, i) => (
+
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+              }}
+            >
+
+              <span
+                style={{
+                  color: "#07b4ba",
+                  fontSize: 24,
+                  lineHeight: 1,
+                }}
+              >
+                ✓
+              </span>
+
+              <p
+                style={{
+                  fontFamily: "'Barlow', sans-serif",
+                  fontSize: 18,
+                  color: "#fff",
+                }}
+              >
+                {item}
+              </p>
+
             </div>
-          </div>
+
+          ))}
+
         </div>
+
+        {/* WHATSAPP BUTTON */}
+
+        <button
+          style={{
+            height: 68,
+            padding: "0 34px",
+            borderRadius: 999,
+            border: "none",
+            background: "#59e6d9",
+            color: "#fff",
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 24,
+            letterSpacing: 1,
+            cursor: "pointer",
+          }}
+        >
+          Chat On WhatsApp
+        </button>
+
+      </div>
+
+      {/* RIGHT CTA CARD */}
+
+      <div
+        style={{
+          background:
+            "linear-gradient(180deg,#2a313d 0%, #262d39 100%)",
+
+          borderRadius: 28,
+
+          padding: "55px 42px",
+
+          border:
+            "1px solid rgba(255,255,255,0.12)",
+
+          display: "flex",
+
+          flexDirection: "column",
+
+          alignItems: "center",
+
+          justifyContent: "center",
+
+          minHeight: 520,
+        }}
+      >
+
+        <p
+          style={{
+            color: "#07b4ba",
+            fontFamily: "'Barlow', sans-serif",
+            fontWeight: 700,
+            fontSize: 15,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            marginBottom: 18,
+          }}
+        >
+          Limited Founder Spots
+        </p>
+
+        <h3
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(44px,5vw,72px)",
+            lineHeight: 0.95,
+            letterSpacing: 2,
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: 24,
+          }}
+        >
+          START YOUR <br />
+          <span style={{ color: "#07b4ba" }}>
+            TRANSFORMATION
+          </span>
+        </h3>
+
+        <p
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            fontSize: 16,
+            lineHeight: 1.8,
+            color: "rgba(255,255,255,0.68)",
+            textAlign: "center",
+            maxWidth: 420,
+            marginBottom: 40,
+          }}
+        >
+          Join the AOF 30-Day Program and build real
+          striking fundamentals with a structured
+          beginner-friendly system.
+        </p>
+
+        <button
+          onClick={scrollToFooter}
+          style={{
+            width: "100%",
+
+            maxWidth: 420,
+
+            height: 82,
+
+            borderRadius: 16,
+
+            border: "none",
+
+            background: "#2edce0",
+
+            color: "#fff",
+
+            fontFamily: "'Bebas Neue', sans-serif",
+
+            fontSize: 34,
+
+            letterSpacing: 2,
+
+            cursor: "pointer",
+
+            boxShadow:
+              "0 0 30px rgba(46,220,224,0.35)",
+          }}
+        >
+          JOIN NOW
+        </button>
+
+        <p
+          style={{
+            marginTop: 18,
+            fontSize: 13,
+            color: "rgba(255,255,255,0.38)",
+            letterSpacing: 1,
+            textAlign: "center",
+          }}
+        >
+          Limited slots available for this batch
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
   
         {/* ── FAQ (image 5) ── */}
         <FAQSection />
