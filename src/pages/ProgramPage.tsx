@@ -225,7 +225,10 @@ const css = `
   color: #fff; margin-bottom: 20px;
 }
 
-  .pp-hero-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(17px,2vw,17px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 24px; }
+  .pp-hero-h2 {
+  color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;
+}
   .pp-hero-desc { font-family: 'Barlow', sans-serif; font-size: clamp(15px,1.5vw,16px); color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 620px; margin: 0 0 34px; }
   .pp-hero-desc strong { color: #07b4ba; }
   .pp-join-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 52px; border-radius: 14px; background: #07b4ba; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.40s ease; box-shadow: 0 10px 35px rgba(7,180,186,0.28); }
@@ -1568,12 +1571,15 @@ export default function ProgramPage() {
           <div className="pp-hero-overlay" />
           <div className="pp-hero-content">
             <Reveal>
+              <<p className="pp-hero-h2">
+  AOF 30-Day Online Program
+</p>
              <h1 className="pp-hero-h1">
   Build Real <br />
   <span style={{ color: "#07b4ba" }}>MMA Striking</span> <br />
   Fundamentals
 </h1>
-              <h2 className="pp-hero-h2">AOF 30-Day Online Program</h2>
+            
               <p className="pp-hero-desc">
                 A <strong>structured system</strong> designed to create visible improvement in your first 30 days.
                 Built for <strong>absolute beginners.</strong>
