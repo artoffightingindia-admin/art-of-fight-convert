@@ -261,27 +261,39 @@ const css = `
   .pp-feature-card { width: 175px; min-height: 255px; padding: 11px 6px; border-radius: 18px; background: #111417; border: 2px solid #111417; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
   .pp-feature-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
   .pp-feature-icon svg { width: 52px; height: 52px; stroke: #07b4ba; }
-  .pp-feature-card h4 {
+ .pp-feature-card h4 {
   font-family: 'Bebas Neue', sans-serif;
 
   color: #07b4ba;
 
   font-size: 16px;
 
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
 
   line-height: 1.35;
 
-  min-height: 72px;
+  min-height: 76px;
+
+  margin: 0 0 12px;
+
+  text-align: center;
 
   display: flex;
 
   align-items: flex-start;
 
   justify-content: center;
+}  .pp-feature-card p {
+  margin-top: 0;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  color: rgba(255,255,255,0.62);
 
   text-align: center;
-}  .pp-feature-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
+}
 
   @media (max-width: 768px) {
     .pp-features-grid { gap: 18px; }
