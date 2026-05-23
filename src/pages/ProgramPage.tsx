@@ -397,121 +397,86 @@ const css = `
     .roadmap-card p { font-size: 13px !important; }
     .pp-apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
-  /* ─────────────────────────────
-   PROMISE SECTION MINIMAL
-───────────────────────────── */
+/* ── NEW PROMISE SECTION ── */
 
-.pp-promise-wrap {
-  position: relative;
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      180deg,
-      #141414 0%,
-      #101010 100%
-    );
-}
-
-/* GRID BACKGROUND */
-
-.pp-promise-wrap::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background-image:
-    linear-gradient(rgba(7,180,186,0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(7,180,186,0.10) 1px, transparent 1px);
-
-  background-size: 40px 40px;
-
-  pointer-events: none;
-}
-
-.pp-promise-minimal {
-  position: relative;
-  z-index: 1;
-
-  text-align: center;
-
-  padding: 30px 0;
-}
-
-.pp-promise-mini-tag {
-  font-family: 'Bebas Neue', sans-serif;
-
-  font-size: 42px;
-  letter-spacing: 3px;
-
-  color: #fff;
-
-  margin-bottom: 18px;
-}
-
-.pp-promise-line {
-  width: 90px;
-  height: 3px;
-
-  margin: 0 auto 34px;
-
-  border-radius: 999px;
-
-  background: #07b4ba;
-}
-
-.pp-promise-quote {
-  max-width: 1100px;
+.cp-new-promise {
+  max-width: 820px;
 
   margin: 0 auto;
 
-  font-family: 'Barlow', sans-serif;
+  padding: 34px 42px;
 
-  font-size: 24px;
-  font-style: italic;
-  font-weight: 500;
+  text-align: center;
 
-  line-height: 2;
+  position: relative;
+}
+.cp-new-promise-line {
+  width: 70px;
+  height: 2px;
 
-  color: #fff;
+  background: #07b4ba;
+
+  margin: 0 auto 22px;
+
+  border-radius: 999px;
 }
 
-.pp-promise-quote span {
+.cp-new-promise-text {
+  font-family: 'Barlow', sans-serif;
+
+  font-size: 19px;
+
+  line-height: 1.9;
+
+  color: rgba(255,255,255,0.76);
+
+  font-style: italic;
+
+  max-width: 720px;
+
+  margin: 0 auto;
+}
+.cp-new-promise-title {
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: 30px;
+
+  letter-spacing: 2px;
+
+  color: #fff;
+
+  margin-bottom: 12px;
+
+  text-align: center;
+}
+
+.cp-quote-mark {
   color: #07b4ba;
 
   font-size: 42px;
-  font-weight: 700;
 
-  margin-right: 8px;
+  line-height: 0;
+
+  margin-right: 6px;
+
+  font-family: serif;
+
+  position: relative;
+  top: 10px;
 }
 
 /* MOBILE */
-
 @media (max-width: 768px) {
 
-  .pp-promise-minimal {
-    padding: 70px 0;
+  .cp-new-promise {
+    padding: 26px 22px;
+    border-radius: 16px;
   }
+  
 
-  .pp-promise-mini-tag {
-    font-size: 30px;
-  }
-
-  .pp-promise-line {
-    width: 70px;
-    margin-bottom: 26px;
-  }
-
-  .pp-promise-quote {
-    font-size: 18px;
-    line-height: 1.9;
-
-    padding: 0 10px;
-  }
-
-  .pp-promise-quote span {
-    font-size: 34px;
+  .cp-new-promise-text {
+    font-size: 15px;
+    line-height: 1.8;
   }
 }  /* ─────────────────────────────
    MOBILE OPTIMIZATION
@@ -2013,31 +1978,26 @@ export default function ProgramPage() {
             )}
           </div>
         </div>
-       {/* ── PROMISE SECTION ── */}
-<div className="pp-promise-wrap">
+       {/* ── NEW PROMISE SECTION ── */}
+<Reveal style={{ marginTop: 50 }}>
+  <div className="cp-new-promise">
 
-  <div className="pp-section">
+    <p className="cp-new-promise-title">
+      Our Promise
+    </p>
 
-    <div className="pp-promise-minimal">
+    <div className="cp-new-promise-line" />
 
-      <p className="pp-promise-mini-tag">
-        OUR PROMISE
-      </p>
-
-      <div className="pp-promise-line" />
-
-      <p className="pp-promise-quote">
-        <span>“</span>
-        Most fighters train hard. Very few train correctly.
-        AOF exists to close that gap — with structure,
-        accountability, and coaching that actually evolves with you.
-      </p>
-
-    </div>
+    <p className="cp-new-promise-text">
+      <span className="cp-quote-mark">“</span>
+      Most fighters train hard. Very few train correctly.
+      AOF exists to close that gap — with structure,
+      accountability, and coaching that actually evolves
+      with you.
+    </p>
 
   </div>
-
-</div>
+</Reveal>
         {/* ── COACH SECTION ── */}
         <div className="pp-coach-bg">
           <div className="pp-book-strip">
