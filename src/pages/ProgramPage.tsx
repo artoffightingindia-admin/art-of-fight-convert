@@ -626,15 +626,18 @@ font-family: 'Bebas Neue', sans-serif;
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
 
   /* FOOTER CTA */
-  .pp-footer-cta {
+.pp-footer-cta {
   background: #080808;
   border-top: none;
   background-image: none;
 
-  padding-top: 0px !important;
-  margin-top: -120px;
   position: relative;
-  z-index: 5;
+  top: -90px; /* moves ONLY this section upward */
+
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+
+  z-index: 10;
 }
 .pp-footer-cta::before {
   display: none;
@@ -1710,7 +1713,7 @@ const roadmapCards = [
         </div>
 
         {/* ── TESTIMONIALS (image 3 & 4) ── */}
-        <div   className="pp-testi-bg"   style={{     paddingBottom: "0px",     marginBottom: "-80px",   }} >
+        <div className="pp-testi-bg">
           <div className="pp-section" style={{ paddingTop: 48 }}>
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 44 }}>
