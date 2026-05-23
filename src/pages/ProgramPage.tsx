@@ -655,7 +655,7 @@ font-family: 'Bebas Neue', sans-serif;
 
   /* FOOTER */
   .pp-footer { background: #0f1115; padding: 26px 40px 8px; margin-top: 20px; }
-  .pp-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+  .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
   .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; padding-top: 20px; margin-bottom: 14px; }
   .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
   .pp-footer-links a, .pp-footer-contact p, .pp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
