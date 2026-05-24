@@ -1466,8 +1466,6 @@ export default function ProgramPage() {
           </div>
           <div className="pp-footer-bottom">© 2026 AOF Academy. All rights reserved.</div>
         </footer>
-
-      </div>
     </>
   );
 }
