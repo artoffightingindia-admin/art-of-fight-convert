@@ -360,9 +360,9 @@ const css = `
 
   /* COACH */
   .pp-coach-bg { background: #0b0b0b; }
-  .pp-book-strip {
+.pp-book-strip {
   background: #07b4ba;
-  padding: 18px 0 0 0;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1073,7 +1073,7 @@ export default function ProgramPage() {
             </div>
 
             {/* ── JOIN NOW STRIP (inside roadmap) ── */}
-            <div className="pp-book-strip" style={{ marginTop: 0 }}>
+            <div className="pp-book-strip" style={{ marginTop: 24 }}>
               <button onClick={scrollToFooter}>Join Now</button>
             </div>
 
