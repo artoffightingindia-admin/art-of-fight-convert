@@ -548,19 +548,9 @@ body { background: #0a0a0a; }
   margin-bottom: 8px;
 }
 .cp-pain-heading {
-  color: #fff;
-
-  font-family: 'Bebas Neue', sans-serif;
-
-  font-size: clamp(34px, 5vw, 56px);
-
-  letter-spacing: 2px;
-
-  margin-top: 8px;
-
-  margin-bottom: 16px;
-
-  line-height: 1;
+  color: #fff; font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 3vw, 32px); letter-spacing: 1px;
+  margin-bottom: 16px; line-height: 1.1;
 }
 .cp-red-divider {
   width: 80px; height: 3px; margin-bottom: 24px;
@@ -570,7 +560,7 @@ body { background: #0a0a0a; }
 .cp-pain-item {
   display: flex;
 
-  align-items: stretch;
+  align-items: flex-start;
 
   gap: 35px;
 
@@ -581,9 +571,9 @@ body { background: #0a0a0a; }
 
   width: 3px;
 
-  align-self: stretch;
+  height: 22px;
 
-  min-height: 100%;
+  margin-top: 4px;
 
   background: #ff2d2d;
 
@@ -2455,12 +2445,25 @@ const handleBookingConfirm = async (
 
     {/* WHAT YOU GET */}
     <Reveal style={{ marginTop: 52 }}>
-      <h3
-        style={{
-          textAlign: "center", fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 28, letterSpacing: 2, color: "#fff", marginBottom: 20,
-        }}
-      >
+     <h3
+  style={{
+    textAlign: "center",
+
+    fontFamily: "'Bebas Neue', sans-serif",
+
+    fontSize: "clamp(34px,5vw,56px)",
+
+    letterSpacing: 2,
+
+    color: "#fff",
+
+    marginTop: 8,
+
+    marginBottom: 20,
+
+    lineHeight: 1,
+  }}
+>
         What You Get
       </h3>
       <div className="cp-what-cards">
