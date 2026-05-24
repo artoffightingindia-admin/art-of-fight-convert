@@ -1182,7 +1182,7 @@ export default function ProgramPage() {
                   <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" style={{ width: 95, height: 95, objectFit: "contain", marginTop: -21, marginBottom: -9, filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))" }} />
                   <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)", fontSize: 14, letterSpacing: 1, marginTop: -70, marginLeft: 26 }}>TOTAL BONUS VALUE</p>
                 </div>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 46, lineHeight: 1, letterSpacing: 2, color: "#07b4ba", marginLeft: 160, marginTop: -80 }}>₹7,499</h2>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 46, lineHeight: 1, letterSpacing: 2, color: "#07b4ba", marginLeft: 160, marginTop: -60 }}>₹7,499</h2>
               </div><div
   style={{
     paddingLeft: 25,
