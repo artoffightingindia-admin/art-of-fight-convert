@@ -111,113 +111,63 @@ function InfiniteFeedbackSlider() {
     );
   }
 
-return (
-  <div
-    ref={sliderRef}
-
-    style={{
-      overflow: "hidden",
-      width: "100%",
-      position: "relative",
-    }}
-  >
-
-    {/* NAV BUTTONS */}
-    <button
-      className="pp-feedback-nav pp-feedback-nav-left"
-
-      onClick={() => {
-        isPausedRef.current = true;
-
-        posRef.current -= 364;
-
-        if (posRef.current < 0) {
-          posRef.current = 0;
-        }
-
-        if (trackRef.current) {
-
-  trackRef.current.style.transition =
-    "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
-
-  trackRef.current.style.transform =
-    `translateX(-${posRef.current}px)`;
-
-  setTimeout(() => {
-
-    if (trackRef.current) {
-      trackRef.current.style.transition = "";
-    }
-
-  }, 700);
-}
-
-        setTimeout(() => {
-          isPausedRef.current = false;
-        }, 700);
-      }}
-    >
-      ‹
-    </button>
-
-    <button
-      className="pp-feedback-nav pp-feedback-nav-right"
-
-      onClick={() => {
-        isPausedRef.current = true;
-
-        posRef.current += 364;
-
-if (trackRef.current) {
-
-  trackRef.current.style.transition =
-    "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
-
-  trackRef.current.style.transform =
-    `translateX(-${posRef.current}px)`;
-
-  setTimeout(() => {
-
-    if (trackRef.current) {
-      trackRef.current.style.transition = "";
-    }
-
-  }, 700);
-}
-
-        setTimeout(() => {
-          isPausedRef.current = false;
-        }, 700);
-      }}
-    >
-      ›
-    </button>
-      <div ref={trackRef} style={{ display: "flex", gap: 24, width: "max-content", willChange: "transform" }}>
-        {allCards.map((card, i) => (
-          <div key={i} style={{ width: 340, flexShrink: 0, borderRadius: 18, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "28px 24px" }}>
-            <div style={{ display: "flex", gap: 4, marginBottom: 16, color: "#07b4ba", fontSize: 16 }}>
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 400, color: "rgba(255,255,255,0.72)", fontSize: 15, lineHeight: 1.65, fontStyle: "italic", marginBottom: 20 }}>"{card.text}"</p>
-            <div
-  style={{
-    display: "flex",
-    alignItems: "center",
-    gap: 12,
-
-    marginTop: "auto",
-
-    minHeight: 52,
-  }}
->
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#202533", display: "flex", alignItems: "center", justifyContent: "center", color: "#8d96a8", fontSize: 20, flexShrink: 0 }}>👤</div>
-              <div>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 15, marginBottom: 2 }}>{card.author}</p>
-                <span style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 400, color: "rgba(255,255,255,0.4)", fontSize: 13 }}>Member</span>
+  return (
+    <div style={{ width: "100%" }}>
+      <div
+        ref={sliderRef}
+        style={{ overflow: "hidden", width: "100%", position: "relative" }}
+      >
+        <div ref={trackRef} style={{ display: "flex", gap: 24, width: "max-content", willChange: "transform" }}>
+          {allCards.map((card, i) => (
+            <div key={i} style={{ width: 340, flexShrink: 0, borderRadius: 18, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "28px 24px" }}>
+              <div style={{ display: "flex", gap: 4, marginBottom: 16, color: "#07b4ba", fontSize: 16 }}>
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 400, color: "rgba(255,255,255,0.72)", fontSize: 15, lineHeight: 1.65, fontStyle: "italic", marginBottom: 20 }}>"{card.text}"</p>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: "auto", minHeight: 52 }}>
+                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#202533", display: "flex", alignItems: "center", justifyContent: "center", color: "#8d96a8", fontSize: 20, flexShrink: 0 }}>👤</div>
+                <div>
+                  <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 15, marginBottom: 2 }}>{card.author}</p>
+                  <span style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 400, color: "rgba(255,255,255,0.4)", fontSize: 13 }}>Member</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      {/* NAV BUTTONS — centered below cards, matching screenshot */}
+      <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 32 }}>
+        <button
+          onClick={() => {
+            isPausedRef.current = true;
+            posRef.current = Math.max(posRef.current - 364, 0);
+            if (trackRef.current) {
+              trackRef.current.style.transition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
+              trackRef.current.style.transform = `translateX(-${posRef.current}px)`;
+              setTimeout(() => { if (trackRef.current) trackRef.current.style.transition = ""; }, 700);
+            }
+            setTimeout(() => { isPausedRef.current = false; }, 700);
+          }}
+          style={{ width: 52, height: 52, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", background: "rgba(15,18,24,0.92)", color: "#fff", fontSize: 24, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", backdropFilter: "blur(10px)" }}
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => {
+            isPausedRef.current = true;
+            posRef.current += 364;
+            if (trackRef.current) {
+              trackRef.current.style.transition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
+              trackRef.current.style.transform = `translateX(-${posRef.current}px)`;
+              setTimeout(() => { if (trackRef.current) trackRef.current.style.transition = ""; }, 700);
+            }
+            setTimeout(() => { isPausedRef.current = false; }, 700);
+          }}
+          style={{ width: 52, height: 52, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", background: "rgba(15,18,24,0.92)", color: "#fff", fontSize: 24, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", backdropFilter: "blur(10px)" }}
+        >
+          ›
+        </button>
       </div>
     </div>
   );
@@ -633,6 +583,17 @@ const css = `
   .pp-bottom-bar span { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.25); }
   .pp-bottom-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; }
 
+  /* FOOTER */
+  .pp-footer { background: #101318; padding: 12px 40px 4px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+  .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #fff; padding-top: 8px; margin-bottom: 10px; }
+  .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .pp-footer-links a, .pp-footer-contact p, .pp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
+  .pp-footer-links a:hover { color: #075e61; }
+  .pp-footer-contact { display: flex; flex-direction: column; gap: 10px; }
+  .pp-footer-about p { line-height: 1.8; max-width: 320px; }
+  .pp-footer-bottom { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .pp-nav { padding: 12px 16px; }
@@ -737,24 +698,7 @@ const css = `
     .pp-roadmap-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%); z-index: 1; }
     .pp-roadmap-card-body { position: relative; z-index: 2; min-height: 258px; padding: 30px 18px 18px; }
     .pp-roadmap-you { margin: 0 0 6px !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 12px !important; letter-spacing: 0.5px !important; }
-    .pp-roadmap-card h3 {
-  margin: 0 0 14px !important;
-
-  color: #fff;
-
-  font-family: 'Bebas Neue', sans-serif;
-
-  font-size: 28px !important;
-
-  line-height: 1.05 !important;
-
-  letter-spacing: 2px;
-
-  min-height: 64px;
-
-  display: flex;
-  align-items: flex-start;
-}
+    .pp-roadmap-card h3 { margin: 0 0 14px !important; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 28px !important; line-height: 1.05 !important; letter-spacing: 2px; min-height: 64px; display: flex; align-items: flex-start; }
     .pp-roadmap-rule { width: 54px; height: 2px; margin-bottom: 34px; background: #07e8ef; box-shadow: 0 0 10px rgba(7,232,239,0.55); }
     .pp-roadmap-points { display: flex; flex-direction: column; gap: 16px; }
     .pp-roadmap-point { display: flex; align-items: center; gap: 10px; }
@@ -789,74 +733,6 @@ const css = `
     .pp-feedback-mobile-author p { margin: 0 0 8px !important; color: #fff !important; font-family: 'Barlow', sans-serif !important; font-size: 27px !important; font-weight: 800 !important; line-height: 1 !important; }
     .pp-feedback-mobile-author span { color: #9da5b6; font-family: 'Barlow', sans-serif; font-size: 22px; line-height: 1; }
     .pp-feedback-mobile-nav { display: flex; justify-content: center; gap: 38px; margin-top: 82px; }
-    .pp-feedback-nav {
-  position: absolute;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  z-index: 20;
-
-  width: 54px;
-
-  height: 54px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  background: rgba(15,18,24,0.92);
-
-  color: #07b4ba;
-
-  font-size: 34px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-
-  backdrop-filter: blur(10px);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.28),
-    0 0 18px rgba(7,180,186,0.08);
-}
-
-.pp-feedback-nav:hover {
-  transform: translateY(-50%) scale(1.08);
-
-  background: #07b4ba;
-
-  color: #fff;
-
-  box-shadow:
-    0 12px 34px rgba(7,180,186,0.28),
-    0 0 24px rgba(7,180,186,0.38);
-}
-
-.pp-feedback-nav-left {
-  left: 10px;
-}
-
-.pp-feedback-nav-right {
-  right: 10px;
-}
-
-@media (max-width: 768px) {
-  .pp-feedback-nav {
-    display: none;
-  }
-}
     .pp-feedback-mobile-nav button { display: flex; align-items: center; justify-content: center; width: 82px; height: 82px; border: 2px solid rgba(141,150,168,0.28); border-radius: 50%; background: rgba(7,10,16,0.35); color: #a6adbd; font-size: 58px; line-height: 1; cursor: pointer; }
   }
 
@@ -1121,7 +997,6 @@ export default function ProgramPage() {
         {/* ── ROADMAP SECTION ── */}
         <div className={isMobileRoadmap ? "pp-roadmap pp-roadmap-mobile" : "pp-roadmap"} style={{ background: "#0b0b0b", position: "relative", overflow: "hidden" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", padding: "30px 0", backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)" }}>
-            {/* TOP */}
             <div style={{ textAlign: "center", marginBottom: 35 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>
                 30 DAYS TRANSFORMATION JOURNEY
@@ -1240,7 +1115,7 @@ export default function ProgramPage() {
               </div>
             )}
 
-            {/* ── PROMISE SECTION (inside roadmap) ── */}
+            {/* ── PROMISE SECTION ── */}
             <div className="cp-promise-section" style={{ marginTop: 60 }}>
               <div className="cp-new-promise">
                 <p className="cp-new-promise-title">OUR PROMISE</p>
@@ -1252,7 +1127,7 @@ export default function ProgramPage() {
               </div>
             </div>
 
-            {/* ── JOIN NOW STRIP (inside roadmap) ── */}
+            {/* ── JOIN NOW STRIP ── */}
             <div className="pp-book-strip" style={{ marginTop: 24 }}>
               <button onClick={scrollToFooter}>Join Now</button>
             </div>
@@ -1363,54 +1238,16 @@ export default function ProgramPage() {
                   <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)", fontSize: 14, letterSpacing: 1, marginTop: -70, marginLeft: 26 }}>TOTAL BONUS VALUE</p>
                 </div>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 46, lineHeight: 1, letterSpacing: 2, color: "#07b4ba", marginLeft: 160, marginTop: -60 }}>₹7,499</h2>
-              </div><div
-  style={{
-    paddingLeft: 25,
-
-    borderLeft: "1px solid rgba(255,255,255,0.14)",
-
-    display: "flex",
-
-    flexDirection: "column",
-
-    justifyContent: "center",
-  }}
->
-  <p
-    style={{
-      fontFamily: "'Bebas Neue', sans-serif",
-
-      fontSize: 40,
-
-      letterSpacing: 2,
-
-      color: "#fff",
-
-      lineHeight: 1,
-    }}
-  >
-    YOURS 100% FREE
-  </p>
-
-  <p
-    style={{
-      fontFamily: "'Barlow', sans-serif",
-
-      fontSize: 16,
-
-      color: "rgba(255,255,255,0.68)",
-
-      marginTop: 12,
-    }}
-  >
-    When you join the AOF 30-Day MMA Striking Program.
-  </p>
-</div>
+              </div>
+              <div style={{ paddingLeft: 25, borderLeft: "1px solid rgba(255,255,255,0.14)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, letterSpacing: 2, color: "#fff", lineHeight: 1 }}>YOURS 100% FREE</p>
+                <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.68)", marginTop: 12 }}>When you join the AOF 30-Day MMA Striking Program.</p>
+              </div>
             </div>
           </div>
         </div>
 
-       {/* ── APPLY / CTA SECTION ── */}
+        {/* ── APPLY / CTA SECTION ── */}
         <div ref={footerRef} style={{ background: "#0b0b0b", backgroundImage: "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px", position: "relative", overflow: "hidden" }}>
           <div className="pp-section">
             <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
