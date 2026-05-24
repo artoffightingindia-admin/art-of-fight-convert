@@ -586,18 +586,30 @@ body { background: #0a0a0a; }
 
 /* WHAT YOU GET */
 .cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
-.cp-what-card p {
-  font-family: 'Barlow', sans-serif;
+.cp-what-card {
+  width: 175px;
 
-  color: rgba(255,255,255,0.5);
+  min-height: 255px;
 
-  font-size: 14px;
+  padding: 22px 16px;
 
-  line-height: 1.55;
+  border-radius: 18px;
 
-  margin: 0;
+  background: #0f1115;
+
+  border: 1px solid rgba(255,255,255,0.06);
 
   text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 14px;
 }
 .cp-what-card-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 .cp-what-card-icon svg { width: 52px; height: 52px; }
