@@ -415,7 +415,7 @@ const css = `
   .pp-footer-cta::before { display: none; }
   .pp-footer-grid { display: flex; gap: 56px; align-items: center; flex-wrap: wrap; }
   .pp-footer-left { flex: 1; min-width: 300px; }
-  .pp-footer-right { flex: 0 0 300px; max-width: 100%; text-align: center; }
+  .pp-footer-right { flex: 0 0 200px; max-width: 100%; text-align: center; }
   .pp-offer-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; color: #07b4ba; margin-bottom: 8px; }
   .pp-offer-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,42px); letter-spacing: 2px; color: #fff; line-height: 1.1; margin-bottom: 24px; }
   .pp-timer { display: flex; gap: 12px; margin-bottom: 8px; }
@@ -433,7 +433,7 @@ const css = `
   margin: 0 auto;
 }
   .pp-price-old { font-family: 'Barlow', sans-serif; font-size: 22px; color: rgba(255,255,255,0.35); text-decoration: line-through; margin-bottom: 4px; }
-  .pp-price-new { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,42px); letter-spacing: 2px; color: #07b4ba; line-height: 1; margin-bottom: 4px; }
+  .pp-price-new { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px,4vw,32px); letter-spacing: 2px; color: #07b4ba; line-height: 1; margin-bottom: 4px; }
   .pp-price-tag { font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
   .pp-cta-btn { width: 100%; padding: 14px; border-radius: 10px; background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 24px rgba(7,180,186,0.35); }
   .pp-cta-btn:hover { background: #059a9f; box-shadow: 0 0 40px rgba(7,180,186,0.5); transform: translateY(-2px); }
