@@ -439,16 +439,165 @@ const css = `
   .pp-cta-btn:hover { background: #059a9f; box-shadow: 0 0 40px rgba(7,180,186,0.5); transform: translateY(-2px); }
   .pp-cta-note { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 12px; }
 
-  /* FOOTER */
-  .pp-footer { background: #101318; padding: 12px 40px 4px; border-top: 1px solid rgba(255,255,255,0.06); }
-  .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-  .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #fff; padding-top: 8px; margin-bottom: 10px; }
-  .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
-  .pp-footer-links a, .pp-footer-contact p, .pp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
-  .pp-footer-links a:hover { color: #075e61; }
-  .pp-footer-contact { display: flex; flex-direction: column; gap: 10px; }
-  .pp-footer-about p { line-height: 1.8; max-width: 320px; }
-  .pp-footer-bottom { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
+ /* FOOTER CTA */
+.pp-footer-cta {
+  background: #0b0b0b;
+  border-top: none;
+  position: relative;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  z-index: 10;
+}
+
+.pp-footer-cta::before {
+  display: none;
+}
+
+.pp-footer-grid {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.pp-footer-left {
+  flex: 1;
+  min-width: 0;
+  max-width: 620px;
+}
+
+.pp-footer-right {
+  flex: 0 0 170px;
+  width: 170px;
+  max-width: 170px;
+  text-align: center;
+}
+
+.pp-offer-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #07b4ba;
+  margin-bottom: 6px;
+}
+
+.pp-offer-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px,3vw,34px);
+  letter-spacing: 1px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.pp-timer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pp-timer-block {
+  text-align: center;
+}
+
+.pp-timer-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px,3vw,34px);
+  letter-spacing: 1px;
+  color: #07b4ba;
+  line-height: 1;
+  background: #111;
+  border: 1px solid rgba(7,180,186,0.2);
+  border-radius: 6px;
+  padding: 6px 10px;
+  min-width: 50px;
+}
+
+.pp-timer-block p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.pp-timer-sep {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  color: rgba(255,255,255,0.3);
+  align-self: flex-start;
+  padding-top: 4px;
+}
+
+.pp-last-day {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+.pp-price-box {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px 14px;
+  max-width: 170px;
+  margin: 0 auto;
+}
+
+.pp-price-old {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: line-through;
+  margin-bottom: 2px;
+}
+
+.pp-price-new {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: #07b4ba;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.pp-price-tag {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+
+.pp-cta-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: #07b4ba;
+  color: #000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 16px rgba(7,180,186,0.25);
+}
+
+.pp-cta-btn:hover {
+  background: #059a9f;
+  transform: translateY(-2px);
+}
+
+.pp-cta-note {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 10px;
+}
 
   /* CHECKLIST */
   .pp-checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
