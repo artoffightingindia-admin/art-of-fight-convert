@@ -1202,7 +1202,7 @@ export default function ProgramPage() {
 
       fontSize: 52,
 
-      letterSpacing: 2,marginright: 70,
+      letterSpacing: 2,marginright: 140,
 
       color: "#fff",
 
