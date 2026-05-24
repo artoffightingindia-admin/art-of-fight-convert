@@ -539,7 +539,7 @@ body { background: #0a0a0a; }
 
   font-weight: 700;
 
-  font-size: 12px;
+  font-size: 14px;
 
   letter-spacing: 3px;
 
@@ -2280,7 +2280,7 @@ const handleBookingConfirm = async (
   <div className="cp-hero-overlay" />
   <div className="cp-hero-content">
     <Reveal>
-      <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
+      <p className="cp-hero-tag">cp-hero-tagdemy — 1 On 1 Coaching</p>
       <h1 className="cp-hero-h1">
         Train Like A<br />
         <span>Champion.</span><br />
@@ -2385,7 +2385,7 @@ const handleBookingConfirm = async (
         <p
           style={{
             color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700,
-            fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6,
+            fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6,
           }}
         >
           The AOF Method
@@ -2548,7 +2548,7 @@ const handleBookingConfirm = async (
           <p
             style={{
               color: "#07b4ba", fontFamily: "'Barlow', sans-serif",
-              fontWeight: 700, fontSize: 14, marginBottom: 20,
+              fontWeight: 700, fontSize: 14,letterSpacing: 3, textTransform: "uppercase", marginBottom: 20,
             }}
           >
             AOF Academy — Lead Trainer &amp; Founder
@@ -3163,7 +3163,7 @@ const handleBookingConfirm = async (
           <p
             style={{
               fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700,
-              fontSize: 12, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
+              fontSize: 14, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
             }}
           >
             Ready To Start?
