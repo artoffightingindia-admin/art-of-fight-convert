@@ -315,7 +315,7 @@ const css = `
   .pp-problem-intro { color: rgba(255,255,255,0.6); font-family: 'Barlow', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
   .pp-pain-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
   .pp-pain-bar { width: 3px; height: 18px; background: #ff2d2d; border-radius: 2px; flex-shrink: 0; margin-top: 3px; box-shadow: 0 0 6px rgba(255,45,45,0.9), 0 0 16px rgba(255,45,45,0.6); }
-  .pp-pain-item p  { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
+  .pp-pain-item p  { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5; }
   .pp-problem-right { flex: 0 0 460px; max-width: 100%; }
   .pp-problem-right img { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); display: block; aspect-ratio: 16/9; object-fit: cover; }
 
