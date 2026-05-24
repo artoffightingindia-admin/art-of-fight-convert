@@ -1508,10 +1508,16 @@ body { background: #0a0a0a; }
   }
 
   .cp-feedback-card-new .author-name {
-    font-size: 27px;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
+  font-size: 27px;
+  font-weight: 800;
+
+  min-height: 34px;
+
+  display: flex;
+  align-items: flex-start;
+
+  margin-bottom: 8px;
+}
 
   .cp-feedback-card-new .author-role {
     color: #9da5b6;
@@ -1977,8 +1983,34 @@ function InfiniteFeedbackSlider() {
   </div>
       {/* DESKTOP NAV */}
       <div className="cp-feedback-desktop-nav">
-        <button onClick={() => { posRef.current = Math.max(0, posRef.current - 364); }}>‹</button>
-        <button onClick={() => { posRef.current += 364; }}>›</button>
+       <button
+  onClick={() => {
+    isPausedRef.current = true;
+
+    posRef.current =
+      Math.max(0, posRef.current - 364);
+
+    setTimeout(() => {
+      isPausedRef.current = false;
+    }, 800);
+  }}
+>
+  ‹
+</button>
+
+<button
+  onClick={() => {
+    isPausedRef.current = true;
+
+    posRef.current += 364;
+
+    setTimeout(() => {
+      isPausedRef.current = false;
+    }, 800);
+  }}
+>
+  ›
+</button>
       </div>
   {/* MOBILE NAV */}
       <div className="cp-feedback-mobile-nav">
