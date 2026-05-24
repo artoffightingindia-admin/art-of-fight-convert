@@ -971,9 +971,12 @@ body { background: #0a0a0a; }
 }
 .cp-feedback-track-new {
   display: flex;
+
   gap: 24px;
-  /* width is set inline to fit duplicated cards */
+
   will-change: transform;
+
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 /* Each card occupies exactly 1/3 of the slider width minus gap compensation */
 .cp-feedback-card-new {
@@ -1983,16 +1986,24 @@ function InfiniteFeedbackSlider() {
   </div>
       {/* DESKTOP NAV */}
       <div className="cp-feedback-desktop-nav">
-       <button
+<button
   onClick={() => {
     isPausedRef.current = true;
 
-    posRef.current =
-      Math.max(0, posRef.current - 364);
+    posRef.current -= 364;
+
+    if (posRef.current < 0) {
+      posRef.current = 0;
+    }
+
+    if (trackRef.current) {
+      trackRef.current.style.transform =
+        `translateX(-${posRef.current}px)`;
+    }
 
     setTimeout(() => {
       isPausedRef.current = false;
-    }, 800);
+    }, 700);
   }}
 >
   ‹
@@ -2004,9 +2015,14 @@ function InfiniteFeedbackSlider() {
 
     posRef.current += 364;
 
+    if (trackRef.current) {
+      trackRef.current.style.transform =
+        `translateX(-${posRef.current}px)`;
+    }
+
     setTimeout(() => {
       isPausedRef.current = false;
-    }, 800);
+    }, 700);
   }}
 >
   ›
