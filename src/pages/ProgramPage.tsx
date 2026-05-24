@@ -1254,29 +1254,176 @@ export default function ProgramPage() {
                   Chat On WhatsApp
                 </button>
               </div>
-              <div style={{ background: "#111417", borderRadius: 28, padding: "55px 42px", border: "1px solid rgba(255,255,255,0.12)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 350 }}>
-                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 15, letterSpacing: 3, textTransform: "uppercase", marginBottom: 18 }}>Limited Founder Spots</p>
-                <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", textAlign: "center", marginBottom: 24 }}>
-                  START YOUR <br /><span style={{ color: "#07b4ba" }}>TRANSFORMATION</span>
-                </h3>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 14, lineHeight: 1.8, color: "rgba(255,255,255,0.68)", textAlign: "center", maxWidth: 420, marginBottom: 40 }}>
-                  Join the AOF 30-Day Program and build real striking fundamentals with a structured beginner-friendly system.
-                </p>
-                <button onClick={scrollToFooter} style={{ width: "100%", maxWidth: 420, height: 82, borderRadius: 16, border: "none", background: "#07b4ba", color: "#fff", fontFamily: "'Bebas Neue', sans-serif", fontSize: 25, letterSpacing: 2, cursor: "pointer" }}>
-                  JOIN NOW-999₹
-                </button>
-                <p style={{ marginTop: 18, fontSize: 13, color: "rgba(255,255,255,0.38)", letterSpacing: 1, textAlign: "center" }}>Limited slots available for this batch</p>
-                <div style={{ marginTop: 18, display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                  {[{ val: timeLeft.days, label: "DAYS" }, { val: timeLeft.hours, label: "HOURS" }, { val: timeLeft.minutes, label: "MIN" }].map((t, i) => (
-                    <>
-                      {i > 0 && <div key={`sep-${i}`} style={{ fontSize: 14, color: "rgba(255,255,255,0.3)", marginTop: -12 }}>:</div>}
-                      <div key={i} style={{ textAlign: "center" }}>
-                        <div style={{ width: 30, height: 30, borderRadius: 8, background: "#151a22", border: "1px solid rgba(7,180,186,0.18)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, color: "#07b4ba", letterSpacing: 1 }}>{t.val}</div>
-                        <p style={{ marginTop: 5, fontSize: 8, letterSpacing: 1, color: "rgba(255,255,255,0.4)" }}>{t.label}</p>
-                      </div>
-                    </>
-                  ))}
-                </div>
+              {/* CTA CARD */}
+<div
+  style={{
+    maxWidth: 640,
+    margin: "0 auto",
+    background: "#05070b",
+    borderRadius: 28,
+    border: "1px solid rgba(255,255,255,0.08)",
+    padding: "48px 34px 42px",
+    textAlign: "center",
+    position: "relative",
+    overflow: "hidden",
+    boxShadow: "0 0 40px rgba(0,0,0,0.45)",
+  }}
+>
+
+  {/* TOP LABEL */}
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontWeight: 700,
+      fontSize: 13,
+      letterSpacing: 5,
+      textTransform: "uppercase",
+      color: "#07b4ba",
+      marginBottom: 22,
+    }}
+  >
+    LIMITED FOUNDER SPOTS
+  </p>
+
+  {/* MAIN HEADING */}
+  <h2
+    style={{
+      fontFamily: "'Bebas Neue', sans-serif",
+      fontSize: "clamp(62px,8vw,110px)",
+      lineHeight: 0.9,
+      letterSpacing: 2,
+      marginBottom: 34,
+      color: "#fff",
+    }}
+  >
+    START YOUR
+    <br />
+    <span style={{ color: "#07b4ba" }}>
+      TRANSFORMATION
+    </span>
+  </h2>
+
+  {/* PRICE */}
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 28,
+      marginBottom: 34,
+    }}
+  >
+    <span
+      style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 56,
+        color: "rgba(255,255,255,0.35)",
+        textDecoration: "line-through",
+        transform: "rotate(-4deg)",
+      }}
+    >
+      ₹1999
+    </span>
+
+    <span
+      style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 72,
+        letterSpacing: 2,
+        color: "#fff",
+        lineHeight: 1,
+      }}
+    >
+      ₹999
+    </span>
+  </div>
+
+  {/* BUTTON */}
+<button
+  onClick={scrollToFooter}
+  style={{
+      width: "100%",
+      height: 92,
+      border: "none",
+      borderRadius: 18,
+      background: "#16c7d0",
+      color: "#fff",
+      fontFamily: "'Bebas Neue', sans-serif",
+      fontSize: 42,
+      letterSpacing: 3,
+      cursor: "pointer",
+      transition: "0.3s ease",
+      boxShadow: "0 0 35px rgba(7,180,186,0.28)",
+    }}
+  >
+    JOIN NOW
+  </button>
+
+  {/* DESCRIPTION */}
+  <p
+    style={{
+      marginTop: 34,
+      fontFamily: "'Barlow', sans-serif",
+      fontSize: 20,
+      lineHeight: 1.8,
+      color: "rgba(255,255,255,0.68)",
+      maxWidth: 500,
+      marginInline: "auto",
+    }}
+  >
+    Join the AOF 30-Day Program and build real
+    striking fundamentals with a structured
+    beginner-friendly system.
+  </p>
+
+  {/* TIMER */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      gap: 18,
+      marginTop: 34,
+    }}
+  >
+    {[
+      ["01", "DAYS"],
+      ["23", "HOURS"],
+      ["49", "MIN"],
+    ].map(([num, label]) => (
+      <div key={label} style={{ textAlign: "center" }}>
+        <div
+          style={{
+            width: 88,
+            height: 88,
+            borderRadius: 18,
+            border: "1px solid rgba(7,180,186,0.25)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 44,
+            color: "#07b4ba",
+            background: "#0b1016",
+          }}
+        >
+          {num}
+        </div>
+
+        <p
+          style={{
+            marginTop: 10,
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 16,
+            letterSpacing: 2,
+            color: "rgba(255,255,255,0.5)",
+          }}
+        >
+          {label}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
               </div>
             </div>
           </div>
