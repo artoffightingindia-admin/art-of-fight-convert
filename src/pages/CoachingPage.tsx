@@ -594,31 +594,49 @@ body { background: #0a0a0a; }
 }
 .cp-what-card-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 .cp-what-card-icon svg { width: 52px; height: 52px; }
-.pp-feature-card h4 {
+.cp-what-card h4 {
   font-family: 'Bebas Neue', sans-serif;
+
   color: #07b4ba;
+
   font-size: 16px;
+
   letter-spacing: 2px;
-  line-height: 1.3;
-  min-height: 58px;
-  margin: 0 0 4px;
+
+  line-height: 1.35;
+
+  min-height: 74px;
+
+  margin: 0 0 6px;
+
   text-align: center;
+
   display: flex;
+
   align-items: flex-start;
+
   justify-content: center;
 }
+.cp-what-card p {
+  font-family: 'Barlow', sans-serif;
 
-.pp-feature-card p {
+  color: rgba(255,255,255,0.5);
+
   font-size: 14px;
-  line-height: 1.55;
-  color: rgba(255,255,255,0.62);
-  text-align: center;
+
+  line-height: 1.5;
+
   margin: 0;
-  min-height: 44px;
+
+  min-height: 64px;
 
   display: flex;
+
   align-items: flex-start;
+
   justify-content: center;
+
+  text-align: center;
 }
 /* ── NEW PROMISE SECTION ── */
 
@@ -1288,17 +1306,17 @@ body { background: #0a0a0a; }
   height: 28px;
 }
 
-.pp-feature-card h4 {
+.cp-what-card h4 {
   font-size: 13px;
   margin-bottom: 4px;
 }
 
-.pp-feature-card p {
+.cp-what-card p {
   font-size: 11px;
   line-height: 1.4;
 }
-  .pp-feature-card h4 { font-size: 14px; }
-  .pp-feature-card p { font-size: 12px; }
+  .cp-what-card h4 { font-size: 14px; }
+  .cp-what-card p { font-size: 12px; }
 
   .cp-trust {
     position: relative; height: auto;
