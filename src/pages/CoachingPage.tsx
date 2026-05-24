@@ -543,11 +543,34 @@ body { background: #0a0a0a; }
   background: #e53e3e; border-radius: 2px;
   box-shadow: 0 0 10px rgba(229,62,62,0.7), 0 0 24px rgba(229,62,62,0.35);
 }
-.cp-pain-item { display: flex; align-items: center; gap: 35px; margin-bottom: 14px; }
+.cp-pain-item {
+  display: flex;
+
+  align-items: stretch;
+
+  gap: 35px;
+
+  margin-bottom: 14px;
+}
 .cp-pain-item::before {
-  content: ""; width: 3px; height: 18px;
-  background: #ff2d2d; border-radius: 2px;
-  box-shadow: 0 0 6px rgba(255,45,45,0.9), 0 0 16px rgba(255,45,45,0.6), 0 0 28px rgba(255,45,45,0.3);
+  content: "";
+
+  width: 3px;
+
+  align-self: stretch;
+
+  min-height: 100%;
+
+  background: #ff2d2d;
+
+  border-radius: 2px;
+
+  box-shadow:
+    0 0 6px rgba(255,45,45,0.9),
+    0 0 16px rgba(255,45,45,0.6),
+    0 0 28px rgba(255,45,45,0.3);
+
+  flex-shrink: 0;
 }
 .cp-pain-item p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.5; }
 
