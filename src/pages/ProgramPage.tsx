@@ -1185,7 +1185,7 @@ export default function ProgramPage() {
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 60, lineHeight: 1, letterSpacing: 2, color: "#07b4ba", marginLeft: 160, marginTop: -80 }}>₹7,499</h2>
               </div><div
   style={{
-    paddingLeft: 60,
+    paddingLeft: 45,
 
     borderLeft: "1px solid rgba(255,255,255,0.14)",
 
@@ -1202,7 +1202,7 @@ export default function ProgramPage() {
 
       fontSize: 52,
 
-      letterSpacing: 2,marginright: 140,
+      letterSpacing: 2,
 
       color: "#fff",
 
