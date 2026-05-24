@@ -603,11 +603,11 @@ body { background: #0a0a0a; }
 
   letter-spacing: 2px;
 
-  line-height: 1.35;
+  line-height: 1.3;
 
-  min-height: 74px;
+  height: 58px;
 
-  margin: 0 0 6px;
+  margin: 0 0 4px;
 
   text-align: center;
 
@@ -616,24 +616,20 @@ body { background: #0a0a0a; }
   align-items: flex-start;
 
   justify-content: center;
+
+  width: 100%;
 }
 .cp-what-card p {
   font-family: 'Barlow', sans-serif;
-
   color: rgba(255,255,255,0.5);
-
   font-size: 14px;
-
-  line-height: 1.5;
+  line-height: 1.55;
 
   margin: 0;
-
-  min-height: 64px;
+  min-height: 46px;
 
   display: flex;
-
   align-items: flex-start;
-
   justify-content: center;
 
   text-align: center;
