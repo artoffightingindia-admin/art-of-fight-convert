@@ -867,7 +867,7 @@ export default function ProgramPage() {
             <Reveal>
               <div className="pp-problem-grid">
                 <div className="pp-problem-left">
-                  <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 8 }}>Sounds Familiar?</p>
+                  <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 8 }}>Sounds Familiar?</p>
                   <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", letterSpacing: 2, color: "#fff", marginBottom: 16, lineHeight: 1.1 }}>
                     You're Training Hard...<br />But Still Not Improving
                   </h2>
