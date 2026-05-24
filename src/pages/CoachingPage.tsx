@@ -980,7 +980,6 @@ body { background: #0a0a0a; }
 }
 /* Each card occupies exactly 1/3 of the slider width minus gap compensation */
 .cp-feedback-card-new {
-  /* calc: (100% / 3) - gap proportional. Done via flex: 0 0 calc(33.333% - 16px) in inline style */
   border-radius: 18px;
   background: #1a1d23;
   border: 1px solid rgba(255,255,255,0.05);
@@ -988,6 +987,9 @@ body { background: #0a0a0a; }
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 
 /* CHANGE 3: Inherit font family and weight from Home Page Feedback form */
@@ -1516,22 +1518,6 @@ body { background: #0a0a0a; }
   margin-bottom: 8px;
 }
 
-@media (min-width: 769px) {
-
-  .cp-feedback-card-new .author-name {
-    min-height: 38px;
-
-    display: flex;
-
-    align-items: flex-start;
-
-    justify-content: center;
-
-    text-align: center;
-  }
-
-}
-
   .cp-feedback-card-new .author-role {
     color: #9da5b6;
     font-size: 22px;
@@ -1945,12 +1931,14 @@ function InfiniteFeedbackSlider() {
             <p>"{card.text}"</p>
 
             <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+
+    marginTop: "auto",
+  }}
+>
 
               <div
                 style={{
