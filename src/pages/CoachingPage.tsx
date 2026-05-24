@@ -549,7 +549,7 @@ body { background: #0a0a0a; }
 }
 .cp-pain-heading {
   color: #fff; font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(24px, 3vw, 32px); letter-spacing: 1px;
+  font-size: clamp(28px,4vw,42px); letter-spacing: 2px;
   margin-bottom: 16px; line-height: 1.1;
 }
 .cp-red-divider {
@@ -2451,7 +2451,7 @@ const handleBookingConfirm = async (
 
     fontFamily: "'Bebas Neue', sans-serif",
 
-    fontSize: "clamp(34px,5vw,56px)",
+    fontSize: 52,
 
     letterSpacing: 2,
 
