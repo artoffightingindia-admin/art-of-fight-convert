@@ -1151,7 +1151,7 @@ export default function ProgramPage() {
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 20px" }}>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>EXCLUSIVE FOUNDERS BONUSES</p>
-              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(42px,6vw,78px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
+              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
                 5 PREMIUM BONUSES.<span style={{ color: "#07b4ba" }}> FREE WITH ENROLLMENT.</span>
               </h2>
               <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
