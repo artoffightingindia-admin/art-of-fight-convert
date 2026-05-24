@@ -111,8 +111,63 @@ function InfiniteFeedbackSlider() {
     );
   }
 
-  return (
-    <div ref={sliderRef} style={{ overflow: "hidden", width: "100%", position: "relative" }}>
+return (
+  <div
+    ref={sliderRef}
+
+    style={{
+      overflow: "hidden",
+      width: "100%",
+      position: "relative",
+    }}
+  >
+
+    {/* NAV BUTTONS */}
+    <button
+      className="pp-feedback-nav pp-feedback-nav-left"
+
+      onClick={() => {
+        isPausedRef.current = true;
+
+        posRef.current -= 364;
+
+        if (posRef.current < 0) {
+          posRef.current = 0;
+        }
+
+        if (trackRef.current) {
+          trackRef.current.style.transform =
+            `translateX(-${posRef.current}px)`;
+        }
+
+        setTimeout(() => {
+          isPausedRef.current = false;
+        }, 700);
+      }}
+    >
+      ‹
+    </button>
+
+    <button
+      className="pp-feedback-nav pp-feedback-nav-right"
+
+      onClick={() => {
+        isPausedRef.current = true;
+
+        posRef.current += 364;
+
+        if (trackRef.current) {
+          trackRef.current.style.transform =
+            `translateX(-${posRef.current}px)`;
+        }
+
+        setTimeout(() => {
+          isPausedRef.current = false;
+        }, 700);
+      }}
+    >
+      ›
+    </button>
       <div ref={trackRef} style={{ display: "flex", gap: 24, width: "max-content", willChange: "transform" }}>
         {allCards.map((card, i) => (
           <div key={i} style={{ width: 340, flexShrink: 0, borderRadius: 18, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "28px 24px" }}>
@@ -120,7 +175,17 @@ function InfiniteFeedbackSlider() {
               <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
             <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 400, color: "rgba(255,255,255,0.72)", fontSize: 15, lineHeight: 1.65, fontStyle: "italic", marginBottom: 20 }}>"{card.text}"</p>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+
+    marginTop: "auto",
+
+    minHeight: 52,
+  }}
+>
               <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#202533", display: "flex", alignItems: "center", justifyContent: "center", color: "#8d96a8", fontSize: 20, flexShrink: 0 }}>👤</div>
               <div>
                 <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, color: "#fff", fontSize: 15, marginBottom: 2 }}>{card.author}</p>
@@ -295,7 +360,13 @@ const css = `
 
   /* COACH */
   .pp-coach-bg { background: #0b0b0b; }
-  .pp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
+  .pp-book-strip {
+  background: #07b4ba;
+  padding: 18px 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   .pp-book-strip button { width: 100%; padding: 14px; background: none; border: none; cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; transition: background 0.2s; }
   .pp-book-strip button:hover { background: #075e61; }
 
@@ -538,6 +609,74 @@ const css = `
     .pp-feedback-mobile-author p { margin: 0 0 8px !important; color: #fff !important; font-family: 'Barlow', sans-serif !important; font-size: 27px !important; font-weight: 800 !important; line-height: 1 !important; }
     .pp-feedback-mobile-author span { color: #9da5b6; font-family: 'Barlow', sans-serif; font-size: 22px; line-height: 1; }
     .pp-feedback-mobile-nav { display: flex; justify-content: center; gap: 38px; margin-top: 82px; }
+    .pp-feedback-nav {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 20;
+
+  width: 54px;
+
+  height: 54px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(15,18,24,0.92);
+
+  color: #07b4ba;
+
+  font-size: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.28),
+    0 0 18px rgba(7,180,186,0.08);
+}
+
+.pp-feedback-nav:hover {
+  transform: translateY(-50%) scale(1.08);
+
+  background: #07b4ba;
+
+  color: #fff;
+
+  box-shadow:
+    0 12px 34px rgba(7,180,186,0.28),
+    0 0 24px rgba(7,180,186,0.38);
+}
+
+.pp-feedback-nav-left {
+  left: 10px;
+}
+
+.pp-feedback-nav-right {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .pp-feedback-nav {
+    display: none;
+  }
+}
     .pp-feedback-mobile-nav button { display: flex; align-items: center; justify-content: center; width: 82px; height: 82px; border: 2px solid rgba(141,150,168,0.28); border-radius: 50%; background: rgba(7,10,16,0.35); color: #a6adbd; font-size: 58px; line-height: 1; cursor: pointer; }
   }
 
