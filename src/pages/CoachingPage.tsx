@@ -586,7 +586,7 @@ body { background: #0a0a0a; }
 
   flex-shrink: 0;
 }
-.cp-pain-item p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.5; }
+.cp-pain-item p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
 
 /* METHOD SECTION */
 .cp-method-bg { background: #0d0d0d; }
