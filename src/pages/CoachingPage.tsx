@@ -1510,16 +1510,26 @@ body { background: #0a0a0a; }
     font-size: 30px;
   }
 
-  .cp-feedback-card-new .author-name {
+ .cp-feedback-card-new .author-name {
   font-size: 27px;
   font-weight: 800;
-
-  min-height: 34px;
-
-  display: flex;
-  align-items: flex-start;
-
   margin-bottom: 8px;
+}
+
+@media (min-width: 769px) {
+
+  .cp-feedback-card-new .author-name {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    text-align: center;
+  }
+
 }
 
   .cp-feedback-card-new .author-role {
