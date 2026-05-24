@@ -1176,13 +1176,13 @@ export default function ProgramPage() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 40, border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "28px 30px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: 20, background: "linear-gradient(90deg,#0f141a 0%, #0a0f14 100%)" }}>
+            <div style={{ marginTop: 40, border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "16px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: 20, background: "linear-gradient(90deg,#0f141a 0%, #0a0f14 100%)" }}>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8 }}>
-                  <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" style={{ width: 120, height: 120, objectFit: "contain", marginTop: -21, marginBottom: -9, filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))" }} />
+                  <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" style={{ width: 95, height: 95, objectFit: "contain", marginTop: -21, marginBottom: -9, filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))" }} />
                   <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)", fontSize: 14, letterSpacing: 1, marginTop: -70, marginLeft: 26 }}>TOTAL BONUS VALUE</p>
                 </div>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 60, lineHeight: 1, letterSpacing: 2, color: "#07b4ba", marginLeft: 160, marginTop: -80 }}>₹7,499</h2>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 46, lineHeight: 1, letterSpacing: 2, color: "#07b4ba", marginLeft: 160, marginTop: -80 }}>₹7,499</h2>
               </div><div
   style={{
     paddingLeft: 25,
@@ -1200,7 +1200,7 @@ export default function ProgramPage() {
     style={{
       fontFamily: "'Bebas Neue', sans-serif",
 
-      fontSize: 52,
+      fontSize: 40,
 
       letterSpacing: 2,
 
