@@ -586,11 +586,18 @@ body { background: #0a0a0a; }
 
 /* WHAT YOU GET */
 .cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
-.cp-what-card {
-  width: 175px; min-height: 255px; padding: 11px 6px;
-  border-radius: 18px; background: #0f1115; border: 2px solid #0f1115;
-  text-align: center; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 18px;
+.cp-what-card p {
+  font-family: 'Barlow', sans-serif;
+
+  color: rgba(255,255,255,0.5);
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  margin: 0;
+
+  text-align: center;
 }
 .cp-what-card-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 .cp-what-card-icon svg { width: 52px; height: 52px; }
@@ -605,32 +612,30 @@ body { background: #0a0a0a; }
 
   line-height: 1.3;
 
-  height: 58px;
+  margin: 0 0 6px;
 
-  margin: 0 0 4px;
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: center;
 
   text-align: center;
 
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: center;
-
-  width: 100%;
+  transform: translateY(2px);
 }
 .cp-what-card p {
   font-family: 'Barlow', sans-serif;
+
   color: rgba(255,255,255,0.5);
+
   font-size: 14px;
+
   line-height: 1.55;
 
   margin: 0;
-  min-height: 46px;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
 
   text-align: center;
 }
