@@ -1386,200 +1386,55 @@ export default function ProgramPage() {
           </div>
         </div>
 
-        {/* ── APPLY / CTA SECTION ── */}
+       {/* ── APPLY / CTA SECTION ── */}
         <div ref={footerRef} style={{ background: "#0b0b0b", backgroundImage: "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px", position: "relative", overflow: "hidden" }}>
           <div className="pp-section">
-            <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 90, alignItems: "center" }}>
+            <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
               <div>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, color: "#07b4ba", marginBottom: 14, textTransform: "uppercase" }}>Ready To Start?</p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)", lineHeight: 0.9, letterSpacing: 2, color: "#fff", marginBottom: 28 }}>
+                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: "#07b4ba", marginBottom: 12, textTransform: "uppercase" }}>Ready To Start?</p>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,44px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 20 }}>
                   APPLY FOR YOUR <br /><span style={{ color: "#07b4ba" }}>30-DAY PROGRAM</span>
                 </h2>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 14, lineHeight: 1.7, marginBottom: 28, maxWidth: 380 }}>
+                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.7, marginBottom: 20, maxWidth: 340 }}>
                   Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 22, marginBottom: 40 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 28 }}>
                   {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
-                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                      <span style={{ color: "#07b4ba", fontSize: 24, lineHeight: 1 }}>✓</span>
-                      <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 18, color: "#fff" }}>{item}</p>
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ color: "#07b4ba", fontSize: 18, lineHeight: 1 }}>✓</span>
+                      <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "#fff" }}>{item}</p>
                     </div>
                   ))}
                 </div>
-                <button style={{ height: 68, padding: "0 34px", borderRadius: 999, border: "none", background: "#1ebe57", color: "#fff", fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 1, cursor: "pointer" }}>
+                <button style={{ height: 52, padding: "0 28px", borderRadius: 999, border: "none", background: "#1ebe57", color: "#fff", fontFamily: "'Bebas Neue', sans-serif", fontSize: 16, letterSpacing: 1, cursor: "pointer" }}>
                   Chat On WhatsApp
                 </button>
               </div>
+
               {/* CTA CARD */}
-<div
-  style={{
-    maxWidth: 640,
-    margin: "0 auto",
-    background: "#05070b",
-    borderRadius: 28,
-    border: "1px solid rgba(255,255,255,0.08)",
-    padding: "48px 34px 42px",
-    textAlign: "center",
-    position: "relative",
-    overflow: "hidden",
-    boxShadow: "0 0 40px rgba(0,0,0,0.45)",
-  }}
->
-
-  {/* TOP LABEL */}
-  <p
-    style={{
-      fontFamily: "'Barlow', sans-serif",
-      fontWeight: 700,
-      fontSize: 13,
-      letterSpacing: 5,
-      textTransform: "uppercase",
-      color: "#07b4ba",
-      marginBottom: 22,
-    }}
-  >
-    LIMITED FOUNDER SPOTS
-  </p>
-
-  {/* MAIN HEADING */}
-  <h2
-    style={{
-      fontFamily: "'Bebas Neue', sans-serif",
-      fontSize: "clamp(62px,8vw,110px)",
-      lineHeight: 0.9,
-      letterSpacing: 2,
-      marginBottom: 34,
-      color: "#fff",
-    }}
-  >
-    START YOUR
-    <br />
-    <span style={{ color: "#07b4ba" }}>
-      TRANSFORMATION
-    </span>
-  </h2>
-
-  {/* PRICE */}
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 28,
-      marginBottom: 34,
-    }}
-  >
-    <span
-      style={{
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: 56,
-        color: "rgba(255,255,255,0.35)",
-        textDecoration: "line-through",
-        transform: "rotate(-4deg)",
-      }}
-    >
-      ₹1999
-    </span>
-
-    <span
-      style={{
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: 72,
-        letterSpacing: 2,
-        color: "#fff",
-        lineHeight: 1,
-      }}
-    >
-      ₹999
-    </span>
-  </div>
-
-  {/* BUTTON */}
-<button
-  onClick={scrollToFooter}
-  style={{
-      width: "100%",
-      height: 92,
-      border: "none",
-      borderRadius: 18,
-      background: "#16c7d0",
-      color: "#fff",
-      fontFamily: "'Bebas Neue', sans-serif",
-      fontSize: 42,
-      letterSpacing: 3,
-      cursor: "pointer",
-      transition: "0.3s ease",
-      boxShadow: "0 0 35px rgba(7,180,186,0.28)",
-    }}
-  >
-    JOIN NOW
-  </button>
-
-  {/* DESCRIPTION */}
-  <p
-    style={{
-      marginTop: 34,
-      fontFamily: "'Barlow', sans-serif",
-      fontSize: 20,
-      lineHeight: 1.8,
-      color: "rgba(255,255,255,0.68)",
-      maxWidth: 500,
-      marginInline: "auto",
-    }}
-  >
-    Join the AOF 30-Day Program and build real
-    striking fundamentals with a structured
-    beginner-friendly system.
-  </p>
-
-  {/* TIMER */}
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      gap: 18,
-      marginTop: 34,
-    }}
-  >
-    {[
-      ["01", "DAYS"],
-      ["23", "HOURS"],
-      ["49", "MIN"],
-    ].map(([num, label]) => (
-      <div key={label} style={{ textAlign: "center" }}>
-        <div
-          style={{
-            width: 88,
-            height: 88,
-            borderRadius: 18,
-            border: "1px solid rgba(7,180,186,0.25)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 44,
-            color: "#07b4ba",
-            background: "#0b1016",
-          }}
-        >
-          {num}
-        </div>
-
-        <p
-          style={{
-            marginTop: 10,
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 16,
-            letterSpacing: 2,
-            color: "rgba(255,255,255,0.5)",
-          }}
-        >
-          {label}
-        </p>
-      </div>
-    ))}
-  </div>
-</div>
+              <div style={{ background: "#05070b", borderRadius: 20, border: "1px solid rgba(255,255,255,0.08)", padding: "32px 28px", textAlign: "center", boxShadow: "0 0 30px rgba(0,0,0,0.4)" }}>
+                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 4, textTransform: "uppercase", color: "#07b4ba", marginBottom: 14 }}>LIMITED FOUNDER SPOTS</p>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,60px)", lineHeight: 0.95, letterSpacing: 2, marginBottom: 20, color: "#fff" }}>
+                  START YOUR<br /><span style={{ color: "#07b4ba" }}>TRANSFORMATION</span>
+                </h2>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginBottom: 20 }}>
+                  <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: "rgba(255,255,255,0.3)", textDecoration: "line-through" }}>₹1999</span>
+                  <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 52, letterSpacing: 2, color: "#fff", lineHeight: 1 }}>₹999</span>
+                </div>
+                <button style={{ width: "100%", height: 60, border: "none", borderRadius: 12, background: "#16c7d0", color: "#fff", fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 2, cursor: "pointer", boxShadow: "0 0 24px rgba(7,180,186,0.28)" }}>
+                  JOIN NOW
+                </button>
+                <p style={{ marginTop: 18, fontFamily: "'Barlow', sans-serif", fontSize: 13, lineHeight: 1.7, color: "rgba(255,255,255,0.55)" }}>
+                  Build real striking fundamentals with a structured beginner-friendly system.
+                </p>
+                <div style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 20 }}>
+                  {[["01","DAYS"],["23","HOURS"],["49","MIN"]].map(([num, label]) => (
+                    <div key={label} style={{ textAlign: "center" }}>
+                      <div style={{ width: 64, height: 64, borderRadius: 12, border: "1px solid rgba(7,180,186,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: "#07b4ba", background: "#0b1016" }}>{num}</div>
+                      <p style={{ marginTop: 6, fontFamily: "'Bebas Neue', sans-serif", fontSize: 12, letterSpacing: 2, color: "rgba(255,255,255,0.4)" }}>{label}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -1622,6 +1477,8 @@ export default function ProgramPage() {
           </div>
           <div className="pp-footer-bottom">© 2026 AOF Academy. All rights reserved.</div>
         </footer>
+
+      </div>
     </>
   );
 }
