@@ -532,11 +532,35 @@ body { background: #0a0a0a; }
 }
 .cp-pain-media img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
 .cp-pain-right { flex: 1; min-width: 260px; padding-top: 8px; padding-left: 8px; }
-.cp-pain-label { color: #07b4ba; font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 8px; }
+.cp-pain-label {
+  font-family: 'Barlow', sans-serif;
+
+  color: #07b4ba;
+
+  font-weight: 700;
+
+  font-size: 12px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 8px;
+}
 .cp-pain-heading {
-  color: #fff; font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(24px, 3vw, 32px); letter-spacing: 1px;
-  margin-bottom: 16px; line-height: 1.1;
+  color: #fff;
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: clamp(34px, 5vw, 56px);
+
+  letter-spacing: 2px;
+
+  margin-top: 8px;
+
+  margin-bottom: 16px;
+
+  line-height: 1;
 }
 .cp-red-divider {
   width: 80px; height: 3px; margin-bottom: 24px;
