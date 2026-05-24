@@ -595,10 +595,49 @@ body { background: #0a0a0a; }
 .cp-what-card-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 .cp-what-card-icon svg { width: 52px; height: 52px; }
 .cp-what-card h4 {
-  font-family: 'Bebas Neue', sans-serif; color: #07b4ba;
-  font-size: 16px; letter-spacing: 1px; line-height: 1.3;
+  font-family: 'Bebas Neue', sans-serif;
+
+  color: #07b4ba;
+
+  font-size: 16px;
+
+  letter-spacing: 2px;
+
+  line-height: 1.35;
+
+  min-height: 74px;
+
+  margin: 0 0 6px;
+
+  text-align: center;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: center;
 }
-.cp-what-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
+.cp-what-card p {
+  font-family: 'Barlow', sans-serif;
+
+  color: rgba(255,255,255,0.5);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  margin: 0;
+
+  min-height: 64px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: center;
+
+  text-align: center;
+}
 /* ── NEW PROMISE SECTION ── */
 
 .cp-new-promise {
