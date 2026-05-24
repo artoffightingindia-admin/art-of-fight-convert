@@ -136,9 +136,21 @@ return (
         }
 
         if (trackRef.current) {
-          trackRef.current.style.transform =
-            `translateX(-${posRef.current}px)`;
-        }
+
+  trackRef.current.style.transition =
+    "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
+
+  trackRef.current.style.transform =
+    `translateX(-${posRef.current}px)`;
+
+  setTimeout(() => {
+
+    if (trackRef.current) {
+      trackRef.current.style.transition = "";
+    }
+
+  }, 700);
+}
 
         setTimeout(() => {
           isPausedRef.current = false;
@@ -156,10 +168,22 @@ return (
 
         posRef.current += 364;
 
-        if (trackRef.current) {
-          trackRef.current.style.transform =
-            `translateX(-${posRef.current}px)`;
-        }
+if (trackRef.current) {
+
+  trackRef.current.style.transition =
+    "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
+
+  trackRef.current.style.transform =
+    `translateX(-${posRef.current}px)`;
+
+  setTimeout(() => {
+
+    if (trackRef.current) {
+      trackRef.current.style.transition = "";
+    }
+
+  }, 700);
+}
 
         setTimeout(() => {
           isPausedRef.current = false;
