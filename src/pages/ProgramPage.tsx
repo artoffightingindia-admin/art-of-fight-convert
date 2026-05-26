@@ -264,11 +264,11 @@ const css = `
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ───────── TRUST BAR ───────── */
-  .pp-trust-strip { width: 100%; height: 60px; background: #07b4ba; display: flex; align-items: center; justify-content: space-around; padding: 0 40px; gap: 12px; flex-wrap: wrap; }
+  .pp-trust-strip { width: 100%; height: 2cm; background: #07b4ba; display: flex; align-items: center; justify-content: space-around; padding: 0 40px; gap: 12px; flex-wrap: wrap; }
   .pp-trust-item { display: flex; align-items: center; gap: 12px; }
-  .pp-trust-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
-  .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
+  .pp-trust-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pp-trust-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
+  .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: clamp(14px,2vw,18px); letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
   @media (max-width: 768px) {
     .pp-trust-strip { height: auto; padding: 14px; gap: 16px; justify-content: center; }
