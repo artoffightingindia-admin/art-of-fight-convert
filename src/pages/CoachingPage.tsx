@@ -497,7 +497,7 @@ body { background: #0a0a0a; }
 }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 .cp-trust {
-  position: absolute; bottom: 0px; left: 0; width: 100%;
+  position: relative; left: 0; width: 100%;
   background: #07b4ba; height: 2cm;
   display: flex; align-items: center; justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
@@ -508,7 +508,7 @@ body { background: #0a0a0a; }
 }
 .trust-icon-box {
   width: 30px; height: 30px;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: space-around;
 }
 .trust-icon-box svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
 
