@@ -539,6 +539,7 @@ const css = `
   margin-bottom: 2px;
 }
 
+
 .pp-price-tag {
   font-family: 'Barlow', sans-serif;
   font-size: 11px;
@@ -860,7 +861,7 @@ export default function ProgramPage() {
           </div>
           <div className="pp-nav-right">
             <button className="pp-nav-home" onClick={() => navigate("/")}>← Back To Home</button>
-            <button className="pp-nav-call" onClick={scrollToFooter}>BOOK A CALL</button>
+            <button className="pp-nav-call" onClick={scrollToFooter}>JOIN NOW</button>
           </div>
         </nav>
         <button className="pp-nav-home-mobile" onClick={() => navigate("/")} aria-label="Back to home">←</button>
