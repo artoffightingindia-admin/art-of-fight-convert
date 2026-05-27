@@ -299,7 +299,7 @@ const css = `
   line-height: 0.95;
 
   letter-spacing: 2px;
-
+ padding-left: -90px;
   text-transform: uppercase;
 
   color: #fff;
