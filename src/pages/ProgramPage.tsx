@@ -402,9 +402,21 @@ const css = `
   .pp-problem-right img { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); display: block; aspect-ratio: 16/9; object-fit: cover; }
 
   /* WHAT YOU GET */
+  /* WHAT YOU GET SECTION ONLY */
+.pp-features .pp-section {
+  max-width: 100%;
+  padding-left: 5px;
+  padding-right: 5
+  px;
+}
   .pp-features { background: #0b0b0b; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
   .pp-features-heading { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; color: #fff; text-align: center; margin-bottom: 60px; }
-  .pp-features-grid { display: flex; gap: 68px; flex-wrap: wrap; justify-content: center; }
+.pp-features-grid {
+  display: flex;
+  gap: 68px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
   .pp-feature-card { width: 175px; min-height: 255px; padding: 11px 6px; border-radius: 18px; background: #111417; border: 2px solid #111417; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
   .pp-feature-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
   .pp-feature-icon svg { width: 52px; height: 52px; stroke: #07b4ba; }
