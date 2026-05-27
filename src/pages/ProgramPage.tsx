@@ -272,7 +272,24 @@ const css = `
 }
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
-  .pp-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
+  .pp-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1180px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  text-align: left;
+
+  padding-left: 10px;   /* moves content left */
+  margin-top: -70px;    /* moves whole hero content upward */
+}
  .pp-hero-h1 {
 
   font-family: 'Bebas Neue', sans-serif;
@@ -352,14 +369,14 @@ const css = `
 
   position: relative;
 
-  margin-top: -35px; /* moves strip upward */
+  margin-top: -5px; /* moves strip upward */
 
   z-index: 20;
 }
-  .pp-trust-item { display: flex; align-items: center; gap: 12px; }
-  .pp-trust-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .pp-trust-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
-  .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: clamp(14px,2vw,18px); letter-spacing: 2px; color: #ffffff; line-height: 1; }
+ .pp-trust-item { display: flex; align-items: center; gap: 12px; }
+  .pp-trust-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
+  .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
   @media (max-width: 768px) {
     .pp-trust-strip { height: auto; padding: 14px; gap: 16px; justify-content: center; }
