@@ -251,7 +251,25 @@ const css = `
   }
 
   /* HERO */
-  .pp-hero { position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 140px 24px 90px; background: radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%), #06080c; }
+  .pp-hero {
+  position: relative;
+
+  min-height: 78vh; /* reduced height */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 110px 24px 40px; /* reduced bottom spacing */
+
+  background:
+    radial-gradient(circle at top,
+    rgba(7,180,186,0.12),
+    transparent 45%),
+    #06080c;
+}
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
   .pp-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
@@ -264,7 +282,32 @@ const css = `
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ───────── TRUST BAR ───────── */
-  .pp-trust-strip { width: 100%; height: 2cm; background: #07b4ba; display: flex; align-items: center; justify-content: space-around; padding: 0 40px; gap: 12px; flex-wrap: wrap; }
+  .pp-trust-strip {
+
+  width: 100%;
+
+  height: 60px;
+
+  background: #07b4ba;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  padding: 0 40px;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  position: relative;
+
+  margin-top: -35px; /* moves strip upward */
+
+  z-index: 20;
+}
   .pp-trust-item { display: flex; align-items: center; gap: 12px; }
   .pp-trust-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .pp-trust-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
