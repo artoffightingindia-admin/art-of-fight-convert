@@ -273,11 +273,59 @@ const css = `
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
   .pp-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; }
-  .pp-hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 5.5vw, 72px); line-height: 0.95; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+ .pp-hero-h1 {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: clamp(40px, 6vw, 60px);
+
+  line-height: 0.95;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  color: #fff;
+
+  margin-bottom: 20px;
+}
   .pp-hero-h2 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
   .pp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
   .pp-hero-desc strong { color: #07b4ba; }
-  .pp-join-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 52px; border-radius: 14px; background: #07b4ba; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.40s ease; box-shadow: 0 10px 35px rgba(7,180,186,0.28); }
+ .pp-join-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 44px;
+
+  padding: 0 26px;
+
+  border-radius: 10px;
+
+  background: #07b4ba;
+
+  color: #fff;
+
+  font-family: 'Barlow', sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  border: 1px solid #07b4ba;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
   .pp-join-btn:hover { background: #057e82; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
