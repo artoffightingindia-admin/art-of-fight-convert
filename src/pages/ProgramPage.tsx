@@ -262,7 +262,7 @@ const css = `
 
   overflow: hidden;
 
-  padding: 110px 24px 40px; /* reduced bottom spacing */
+  padding: 110px 7px 40px; /* reduced bottom spacing */
 
   background:
     radial-gradient(circle at top,
@@ -369,7 +369,7 @@ const css = `
 
   position: relative;
 
-  margin-top: 15px; /* moves strip upward */
+  margin-top: 17px; /* moves strip upward */
 
   z-index: 20;
 }
