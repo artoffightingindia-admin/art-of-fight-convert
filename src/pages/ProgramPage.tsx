@@ -386,7 +386,7 @@ const css = `
   }
 
   /* SECTION WRAPPER */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 28px 10px; }
+  .pp-section { max-width: 1100px; margin: 0 auto; padding: 28px 4px; }
   @media (min-width: 1200px) { .pp-section { padding-left: 8px; padding-right: 8px; } }
 
   /* PAIN */
