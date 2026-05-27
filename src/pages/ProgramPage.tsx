@@ -1095,7 +1095,7 @@ export default function ProgramPage() {
     letterSpacing: 3,
     textTransform: "uppercase",
     color: "#07b4ba",
-    marginBottom: 12,
+    marginBottom: 7,
     textAlign: "center",
   }}
 >
