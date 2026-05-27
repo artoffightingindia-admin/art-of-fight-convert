@@ -1071,7 +1071,7 @@ export default function ProgramPage() {
                   Welcome to the <span style={{ color: "#07b4ba" }}>AOF Family</span>
                 </h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-                  <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.8 }}>
+                  <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.8 }}>
                     At Art of Fight, we're more than just a gym — we're a family built on discipline, respect, and relentless growth. Our coaches bring years of real fight experience to every session.
                   </p>
                   <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.8 }}>
