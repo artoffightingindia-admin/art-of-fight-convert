@@ -1087,6 +1087,20 @@ export default function ProgramPage() {
         <section className="pp-features">
           <div className="pp-section">
             <Reveal>
+              <p
+  style={{
+    fontFamily: "'Barlow', sans-serif",
+    fontWeight: 700,
+    fontSize: 14,
+    letterSpacing: 3,
+    textTransform: "uppercase",
+    color: "#07b4ba",
+    marginBottom: 12,
+    textAlign: "center",
+  }}
+>
+  WHAT'S INCLUDED
+</p>
               <h2 className="pp-features-heading">WHAT YOU GET</h2>
             </Reveal>
             <div className="pp-features-grid">
