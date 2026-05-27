@@ -1066,7 +1066,7 @@ export default function ProgramPage() {
                 </div>
               </div>
               <div>
-                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase",margintop: 30, marginBottom: 20 }}>AOF Intro Section</p>
+                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase",marginBottom: 10 }}>AOF Intro Section</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", letterSpacing: 2, color: "#fff", lineHeight: 1.1, marginBottom: 20 }}>
                   Welcome to the <span style={{ color: "#07b4ba" }}>AOF Family</span>
                 </h2>
