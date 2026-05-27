@@ -287,8 +287,8 @@ const css = `
 
   text-align: left;
 
-  padding-left: -40px;   /* moves content left */
-  margin-top: -50px;    /* moves whole hero content upward */
+  padding-left: -90px;   /* moves content left */
+  margin-top: 15px;    /* moves whole hero content upward */
 }
  .pp-hero-h1 {
 
@@ -369,7 +369,7 @@ const css = `
 
   position: relative;
 
-  margin-top: -5px; /* moves strip upward */
+  margin-top: 15px; /* moves strip upward */
 
   z-index: 20;
 }
