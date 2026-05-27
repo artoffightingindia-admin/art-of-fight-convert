@@ -287,8 +287,8 @@ const css = `
 
   text-align: left;
 
-  padding-left: 10px;   /* moves content left */
-  margin-top: -70px;    /* moves whole hero content upward */
+  padding-left: -40px;   /* moves content left */
+  margin-top: -50px;    /* moves whole hero content upward */
 }
  .pp-hero-h1 {
 
