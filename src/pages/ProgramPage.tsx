@@ -299,15 +299,15 @@ const css = `
   line-height: 0.95;
 
   letter-spacing: 2px;
- margin-left: -90px;
+ margin-left: -50px;
   text-transform: uppercase;
 
   color: #fff;
 
   margin-bottom: 20px;
 }
-  .pp-hero-h2 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
-  .pp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
+  .pp-hero-h2 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px;  margin-left: -50px; margin-bottom: 16px; }
+  .pp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px;  margin-left: -50px;}
   .pp-hero-desc strong { color: #07b4ba; }
  .pp-join-btn {
 
@@ -337,7 +337,7 @@ const css = `
 
   letter-spacing: 1px;
 
-  border: 1px solid #07b4ba;
+  border: 1px solid #07b4ba; margin-left: -50px;
 
   cursor: pointer;
 
