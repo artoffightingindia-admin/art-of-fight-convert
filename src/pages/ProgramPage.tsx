@@ -1139,7 +1139,7 @@ export default function ProgramPage() {
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 3, color: "#fff" }}>
                 YOUR <span style={{ color: "#07b4ba" }}>5 WEEK</span> ROADMAP
               </h2>
-              <p style={{ marginTop: 18, color: "rgba(255,255,255,0.6)", fontFamily: "'Barlow', sans-serif", fontSize: 18 }}>
+              <p style={{ marginTop: 18, color: "rgba(255,255,255,0.6)", fontFamily: "'Barlow', sans-serif", fontSize: 15 }}>
                 A structured path. Weekly focus. Real results.
               </p>
             </div>
@@ -1308,10 +1308,10 @@ export default function ProgramPage() {
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 44 }}>
                 <p style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>Real People, Real Results</p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,56px)", letterSpacing: 2, color: "#fff", marginTop: 8, lineHeight: 1 }}>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 3, color: "#fff", marginTop: 8, lineHeight: 1 }}>
                   Trusted By Fighters, <span style={{ color: "#07b4ba" }}>Proven Results</span>
                 </h2>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 8, fontSize: 14 }}>Here's What Athletes Say About Their Transformation With AOF</p>
+                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 8, fontSize: 15 }}>Here's What Athletes Say About Their Transformation With AOF</p>
               </div>
             </Reveal>
             <Reveal>
@@ -1341,18 +1341,18 @@ export default function ProgramPage() {
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 20px" }}>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>EXCLUSIVE FOUNDERS BONUSES</p>
-              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
+              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
                 5 PREMIUM BONUSES.<span style={{ color: "#07b4ba" }}> FREE WITH ENROLLMENT.</span>
               </h2>
-              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
+              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
             <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
               {[
-                { title: "FIGHTER NUTRITION GUIDE", desc: "Simple meal structure to improve recovery, energy and body composition.", img: "🥗", value: "₹1499 VALUE" },
-                { title: "DAILY MOBILITY ROUTINE", desc: "Warm-up and recovery drills to move better and prevent injuries.", img: "🧘", value: "₹1299 VALUE" },
-                { title: "PRIVATE FIGHTERS COMMUNITY", desc: "Get support, motivation and direct interaction with fellow members.", img: "💬", value: "₹1299 VALUE" },
-                { title: "ADVANCED SHADOWBOXING FLOWS", desc: "Extra drills to improve timing, rhythm and striking creativity.", img: "🥊", value: "₹1299 VALUE" },
-                { title: "FIGHTER MINDSET AUDIO PACK", desc: "Mental conditioning audios to improve focus, discipline and confidence.", img: "🎧", value: "₹1199 VALUE" },
+                { title: "FIGHTER NUTRITION GUIDE", img: "🥗", value: "₹1499 VALUE" },
+                { title: "DAILY MOBILITY ROUTINE",img: "🧘", value: "₹1299 VALUE" },
+                { title: "PRIVATE FIGHTERS COMMUNITY",  img: "💬", value: "₹1299 VALUE" },
+                { title: "ADVANCED SHADOWBOXING FLOWS",  img: "🥊", value: "₹1299 VALUE" },
+                { title: "FIGHTER MINDSET AUDIO PACK",  img: "🎧", value: "₹1199 VALUE" },
               ].map((item, i) => (
                 <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "24px 20px", position: "relative", overflow: "hidden", minHeight: 420, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div style={{ position: "absolute", top: 14, right: 14, background: "#07b4ba", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 13, letterSpacing: 1, padding: "5px 10px", borderRadius: 5 }}>FREE BONUS</div>
