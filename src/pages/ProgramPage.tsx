@@ -1354,12 +1354,24 @@ export default function ProgramPage() {
                 { title: "ADVANCED SHADOWBOXING FLOWS",  img: "🥊", value: "₹1299 VALUE" },
                 { title: "FIGHTER MINDSET AUDIO PACK",  img: "🎧", value: "₹1199 VALUE" },
               ].map((item, i) => (
-                <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "18px 16px", position: "relative", overflow: "hidden", minHeight: 420, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "16px 16px", position: "relative", overflow: "hidden", minHeight: 320, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div style={{ position: "absolute", top: 14, left: 14, background: "#07b4ba", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, padding: "5px 10px", borderRadius: 5 }}>#{i + 1}</div>
                   <div style={{ width: 95, height: 95, borderRadius: "50%", border: "2px solid rgba(7,180,186,0.5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 42, marginBottom: 14, marginTop: 10 }}>{item.img}</div>
                   
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 34, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 18 }}>{item.title}</h3>
-                
+                <div style={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontSize: 15,
+      color: "rgba(255,255,255,0.62)",
+      lineHeight: 1.7,
+      marginBottom: 0,
+    }}
+  >
+    {item.desc}
+  </p>
+
                   <div style={{ marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 5, width: "100%" }}>
                     <p style={{ color: "#07b4ba", fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 1 }}>{item.value}</p>
                   </div>
