@@ -1349,7 +1349,7 @@ export default function ProgramPage() {
   fontSize: 15,
   color: "rgba(255,255,255,0.62)",
   lineHeight: 1.7,
-  marginBottom: 10
+  marginBottom: 5
 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
             <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 7 }}>
