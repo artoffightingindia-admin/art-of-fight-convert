@@ -850,7 +850,7 @@ body { background: #0a0a0a; }
 .cp-wa-label { color: rgba(255,255,255,0.45); font-family: 'Barlow', sans-serif; font-size: 13px; margin-bottom: 8px; letter-spacing: 0.5px; }
 .cp-wa-btn {
   display: flex; align-items: center; gap: 10px;
-  background: #25D366; color: #fff; padding: 14px 28px; border-radius: 40px;
+  background: #25D366; color: #fff; padding: 14px 28px; marginLeft: 80px,border-radius: 40px;
   font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 15px;
   border: none; cursor: pointer; transition: background 0.2s;
 }
