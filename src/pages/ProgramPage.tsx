@@ -1344,7 +1344,13 @@ export default function ProgramPage() {
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
                 5 PREMIUM BONUSES.<span style={{ color: "#07b4ba" }}> FREE WITH ENROLLMENT.</span>
               </h2>
-              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
+              <p style={{ 
+  fontFamily: "'Barlow', sans-serif",
+  fontSize: 15,
+  color: "rgba(255,255,255,0.62)",
+  lineHeight: 1.7,
+  marginBottom: 10
+}}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
             <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 7 }}>
               {[
