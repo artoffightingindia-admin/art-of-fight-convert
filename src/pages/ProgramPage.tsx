@@ -1338,7 +1338,7 @@ export default function ProgramPage() {
 
         {/* ── BONUSES SECTION ── */}
         <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 20px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "90px 20px" }}>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>EXCLUSIVE FOUNDERS BONUSES</p>
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
@@ -1346,7 +1346,7 @@ export default function ProgramPage() {
               </h2>
               <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.7 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
-            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
+            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 7 }}>
               {[
                 { title: "FIGHTER NUTRITION GUIDE", img: "🥗", value: "₹1499 VALUE" },
                 { title: "DAILY MOBILITY ROUTINE",img: "🧘", value: "₹1299 VALUE" },
@@ -1359,8 +1359,8 @@ export default function ProgramPage() {
                   <div style={{ width: 95, height: 95, borderRadius: "50%", border: "2px solid rgba(7,180,186,0.5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 42, marginBottom: 14, marginTop: 10 }}>{item.img}</div>
                   
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 34, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 18 }}>{item.title}</h3>
-                  <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.7, marginBottom: "auto" }}>{item.desc}</p>
-                  <div style={{ marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 20, width: "100%" }}>
+                
+                  <div style={{ marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 5, width: "100%" }}>
                     <p style={{ color: "#07b4ba", fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 1 }}>{item.value}</p>
                   </div>
                 </div>
