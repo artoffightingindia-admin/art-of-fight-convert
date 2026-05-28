@@ -119,7 +119,7 @@ function InfiniteFeedbackSlider() {
       >
         <div ref={trackRef} style={{ display: "flex", gap: 24, width: "max-content", willChange: "transform" }}>
           {allCards.map((card, i) => (
-            <div key={i} style={{ width: 340, flexShrink: 0, borderRadius: 18, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "28px 24px" }}>
+            <div key={i} style={{ width: 340, flexShrink: 0, borderRadius: 18, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "28px 24px", display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", gap: 4, marginBottom: 16, color: "#07b4ba", fontSize: 16 }}>
                 <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
