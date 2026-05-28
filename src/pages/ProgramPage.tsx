@@ -1338,7 +1338,7 @@ export default function ProgramPage() {
 
         {/* ── BONUSES SECTION ── */}
         <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "90px 20px" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 20px" }}>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>EXCLUSIVE FOUNDERS BONUSES</p>
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
