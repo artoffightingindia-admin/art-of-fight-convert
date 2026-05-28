@@ -1338,10 +1338,10 @@ export default function ProgramPage() {
 
         {/* ── BONUSES SECTION ── */}
         <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "70px 20px" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 20px" }}>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 10 }}>EXCLUSIVE FOUNDERS BONUSES</p>
-              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 10 }}>
+              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
                 5 PREMIUM BONUSES.<span style={{ color: "#07b4ba" }}> FREE WITH ENROLLMENT.</span>
               </h2>
               <p style={{ 
@@ -1349,10 +1349,10 @@ export default function ProgramPage() {
   fontSize: 15,
   color: "rgba(255,255,255,0.62)",
   lineHeight: 1.7,
-  marginBottom: 0
+  marginBottom: 5
 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
-            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 0 }}>
+            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 8 }}>
               {[
                 { title: "FIGHTER NUTRITION GUIDE", img: "🥗", value: "₹1499 VALUE" },
                 { title: "DAILY MOBILITY ROUTINE",img: "🧘", value: "₹1299 VALUE" },
