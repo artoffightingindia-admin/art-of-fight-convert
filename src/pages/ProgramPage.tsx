@@ -1349,7 +1349,7 @@ export default function ProgramPage() {
   fontSize: 15,
   color: "rgba(255,255,255,0.62)",
   lineHeight: 1.7,
-  marginBottom: 5
+  marginBottom: 0
 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
             <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 7 }}>
@@ -1360,11 +1360,11 @@ export default function ProgramPage() {
                 { title: "ADVANCED SHADOWBOXING FLOWS",  img: "🥊", value: "₹1299 VALUE" },
                 { title: "FIGHTER MINDSET AUDIO PACK",  img: "🎧", value: "₹1199 VALUE" },
               ].map((item, i) => (
-                <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "16px 16px", position: "relative", overflow: "hidden", minHeight: 320, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "10px 12px", position: "relative", overflow: "hidden", minHeight: 320, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div style={{ position: "absolute", top: 14, left: 14, background: "#07b4ba", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, padding: "5px 10px", borderRadius: 5 }}>#{i + 1}</div>
                   <div style={{ width: 95, height: 95, borderRadius: "50%", border: "2px solid rgba(7,180,186,0.5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 42, marginBottom: 14, marginTop: 10 }}>{item.img}</div>
                   
-                  <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 34, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 18 }}>{item.title}</h3>
+                  <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 34, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 10 }}>{item.title}</h3>
                <div style={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
   <p
     style={{
@@ -1385,7 +1385,7 @@ export default function ProgramPage() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 40, border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "16px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: 20, background: "linear-gradient(90deg,#0f141a 0%, #0a0f14 100%)" }}>
+            <div style={{ marginTop: 12, border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "16px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: 20, background: "linear-gradient(90deg,#0f141a 0%, #0a0f14 100%)" }}>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8 }}>
                   <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" style={{ width: 95, height: 95, objectFit: "contain", marginTop: 2, marginBottom: 4, filter: "drop-shadow(0 0 10px rgba(255,215,0,0.35))" }} />
