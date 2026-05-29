@@ -802,7 +802,7 @@ body { background: #0a0a0a; }
 .cp-apply-bg { background: #0a0a0a; }
 .cp-form-box { background: #05070B; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; }
 .cp-form-box h3 { font-family: 'Barlow', sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 13px;
   letter-spacing: 3px;
   color: #07b4ba;
