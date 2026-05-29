@@ -1,4 +1,4 @@
-cat > /mnt/user-data/outputs/ProgramPage.tsx << 'ENDOFFILE'
+
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -1177,8 +1177,3 @@ export default function ProgramPage() {
     </>
   );
 }
-ENDOFFILE
-echo "Done"
-Output
-
-Done
