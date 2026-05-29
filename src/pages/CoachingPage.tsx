@@ -3214,7 +3214,7 @@ const handleBookingConfirm = async (
             </div>
           ))}
           <div style={{ marginTop: 32 }}>
-            <p className="cp-wa-label" style={{ paddingLeft: 300 }}>Any Queries?</p>
+            <p className="cp-wa-label" style={{ paddingLeft: 400 }}>Any Queries?</p>
            <div style={{ display: "flex", justifyContent: "flex-start", marginTop: 18, paddingLeft: 400 }}>
   <button className="cp-wa-btn">
                 <WhatsAppIcon />
