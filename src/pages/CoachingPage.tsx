@@ -2417,7 +2417,7 @@ const handleBookingConfirm = async (
         </p>
         <h2
           style={{
-            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)",
             letterSpacing: 2, color: "#fff", lineHeight: 1,
           }}
         >
@@ -2425,7 +2425,7 @@ const handleBookingConfirm = async (
         </h2>
         <h2
           style={{
-            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,54px)",
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)",
             letterSpacing: 2, color: "#07b4ba", lineHeight: 1,
           }}
         >
@@ -2433,8 +2433,10 @@ const handleBookingConfirm = async (
         </h2>
         <p
           style={{
-            color: "rgba(255,255,255,0.38)", fontFamily: "'Barlow', sans-serif",
-            fontSize: 11, marginTop: 10, letterSpacing: 3, textTransform: "uppercase",
+            fontFamily: "'Barlow', sans-serif",
+            color: "rgba(255,255,255,0.42)",
+            marginTop: 8,
+            fontSize: 15,
           }}
         >
           Complete Support. Every Step.
@@ -2470,13 +2472,26 @@ const handleBookingConfirm = async (
 
     {/* WHAT YOU GET */}
     <Reveal style={{ marginTop: 52 }}>
-     <h3
+     <p
+  style={{
+    fontFamily: "'Barlow', sans-serif",
+    fontWeight: 700,
+    fontSize: 13,
+    letterSpacing: 3,
+    color: "#07b4ba",
+    marginBottom: 12,
+    textTransform: "uppercase"
+  }}
+>
+  WHAT'S INCLUDED
+</p>
+      <h3
   style={{
     textAlign: "center",
 
     fontFamily: "'Bebas Neue', sans-serif",
 
-    fontSize: 52,
+    fontSize: "clamp(30px,4vw,60px)",
 
     letterSpacing: 2,
 
@@ -2833,7 +2848,7 @@ const handleBookingConfirm = async (
             fontFamily: "'Barlow', sans-serif",
             color: "#07b4ba",
             fontWeight: 700,
-            fontSize: 12,
+            fontSize: 13,
             letterSpacing: 3,
             textTransform: "uppercase",
           }}
@@ -2844,7 +2859,7 @@ const handleBookingConfirm = async (
         <h2
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(34px,5vw,56px)",
+            fontSize: "clamp(30px,4vw,60px)",
             letterSpacing: 2,
             color: "#fff",
             marginTop: 8,
@@ -2862,7 +2877,7 @@ const handleBookingConfirm = async (
             fontFamily: "'Barlow', sans-serif",
             color: "rgba(255,255,255,0.42)",
             marginTop: 8,
-            fontSize: 14,
+            fontSize: 15,
           }}
         >
           Here's What Athletes Say About Their Transformation With AOF
@@ -3188,7 +3203,7 @@ const handleBookingConfirm = async (
           <p
             style={{
               fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700,
-              fontSize: 14, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
+              fontSize: 13, letterSpacing: 2.5, marginBottom: 12, textTransform: "uppercase",
             }}
           >
             Ready To Start?
