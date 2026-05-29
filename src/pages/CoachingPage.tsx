@@ -802,17 +802,14 @@ body { background: #0a0a0a; }
 .cp-apply-bg { background: #0a0a0a; }
 .cp-form-box { background: #05070B; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; }
 .cp-form-box h3 { font-family: 'Barlow', sans-serif;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 13px;
   letter-spacing: 3px;
   color: #07b4ba;
   margin-bottom: 6px;
   text-transform: uppercase; }
-.cp-form-stage-label {color: rgba(255,255,255,0.35);
-font-family: 'Barlow', sans-serif;
-font-size: clamp(28px, 4vw, 44px);
-margin-bottom: 20px;
-letter-spacing: 1px;
+.cp-form-stage-label {  color: rgba(255,255,255,0.35); font-family: 'Barlow', sans-serif;
+  font-size: 12px; margin-bottom: 20px; letter-spacing: 1px;
 }
 .cp-input {
   width: 100%; padding: 14px 16px; border-radius: 8px;
