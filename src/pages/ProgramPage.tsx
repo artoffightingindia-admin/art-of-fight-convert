@@ -1307,7 +1307,7 @@ export default function ProgramPage() {
           <div className="pp-section" style={{ paddingTop: 48 }}>
             <Reveal>
               <div style={{ textAlign: "center", marginBottom: 44 }}>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>Real People, Real Results</p>
+                <p style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase" }}>Real People, Real Results</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 3, color: "#fff", marginTop: 8, lineHeight: 1 }}>
                   Trusted By Fighters, <span style={{ color: "#07b4ba" }}>Proven Results</span>
                 </h2>
