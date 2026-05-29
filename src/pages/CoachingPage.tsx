@@ -850,7 +850,7 @@ body { background: #0a0a0a; }
 .cp-wa-wrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: 18px;
+  margin-top: 18px;padding-left: 40px;
 }
 
 .cp-wa-btn {
