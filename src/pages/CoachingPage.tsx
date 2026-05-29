@@ -800,7 +800,7 @@ body { background: #0a0a0a; }
 
 /* APPLY */
 .cp-apply-bg { background: #0a0a0a; }
-.cp-form-box { background: #0b0b0b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; }
+.cp-form-box { background: #05070B; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; }
 .cp-form-box h3 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
 .cp-form-stage-label {
   color: rgba(255,255,255,0.35); font-family: 'Barlow', sans-serif;
