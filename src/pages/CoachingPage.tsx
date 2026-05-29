@@ -1118,7 +1118,7 @@ body { background: #0a0a0a; }
 }
 .cp-faq-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp30px,4vw,60px);
+  font-size: clamp(30px,4vw,60px);
   letter-spacing: 3px;
   color: #fff;
   line-height: 1;
@@ -2482,7 +2482,7 @@ const handleBookingConfirm = async (
     style={{
       fontFamily: "'Barlow', sans-serif",
       fontWeight: 700,
-      fontSize: 13,
+      fontSize: 14,
       letterSpacing: 3,
       color: "#07b4ba",
       marginBottom: 12,
