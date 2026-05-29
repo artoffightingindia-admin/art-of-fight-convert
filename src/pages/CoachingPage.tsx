@@ -873,7 +873,7 @@ body { background: #0a0a0a; }
 
 .cp-wa-label {
   text-align: right;
-  margin-bottom: 8px;
+  margin-bottom: 8px; margin-left: 40px;
   color: rgba(255,255,255,0.45);
   font-family: 'Barlow', sans-serif;
   font-size: 13px;
