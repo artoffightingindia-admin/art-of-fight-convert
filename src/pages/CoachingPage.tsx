@@ -498,7 +498,7 @@ body { background: #0a0a0a; }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 .cp-trust {
   position: relative; left: 0; width: 100%;
-  background: #07b4ba; height: 2cm;
+  background: #07b4ba; height: 1.5cm;
   display: flex; align-items: center; justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
 }
