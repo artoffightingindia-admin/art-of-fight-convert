@@ -847,17 +847,37 @@ body { background: #0a0a0a; }
 .cp-checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
 .cp-checklist-item .check { color: #07b4ba; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
 .cp-checklist-item p { color: rgba(255,255,255,0.65); font-family: 'Barlow', sans-serif; font-size: 14px; line-height: 1.55; }
-.cp-wa-label { color: rgba(255,255,255,0.45); font-family: 'Barlow', sans-serif; font-size: 13px; margin-bottom: 8px; margin-left: 400px;letter-spacing: 0.5px; }
-.cp-wa-btn {
-  display: flex; align-items: center; gap: 10px;
-  background: #25D366; color: #fff; padding: 14px 28px; margin-left: 400px; border-radius: 40px;
-  font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 15px;
-  border: none; cursor: pointer; transition: background 0.2s;
-}
 .cp-wa-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 18px;
+}
+
+.cp-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 40px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cp-wa-label {
+  text-align: right;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
 }
 .cp-wa-btn:hover { background: #1ebe57; }
 
