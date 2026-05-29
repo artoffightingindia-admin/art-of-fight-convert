@@ -190,7 +190,7 @@ function FAQSection() {
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <Reveal>
           <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" as const, color: "#07b4ba", marginBottom: 10 }}>Got Questions?</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 5.5vw, 60px)", letterSpacing: 2, color: "#fff", lineHeight: 1, marginBottom: 10 }}>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 2, color: "#fff", lineHeight: 1, marginBottom: 10 }}>
             Frequently Asked <span style={{ color: "#07b4ba" }}>Questions</span>
           </h2>
           <div style={{ width: 56, height: 2, background: "#07b4ba", margin: "16px auto 48px", borderRadius: 2 }} />
@@ -707,7 +707,7 @@ const css = `
   /* FOOTER */
   .pp-footer { background: #101318; padding: 12px 40px 4px; border-top: 1px solid rgba(255,255,255,0.06); }
   .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-  .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #fff; padding-top: 8px; margin-bottom: 10px; }
+  .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 25px; letter-spacing: 1px; color: #fff; padding-top: 8px; margin-bottom: 10px; }
   .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
   .pp-footer-links a, .pp-footer-contact p, .pp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
   .pp-footer-links a:hover { color: #075e61; }
@@ -1407,7 +1407,7 @@ export default function ProgramPage() {
             <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
               <div>
                 <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: "#07b4ba", marginBottom: 12, textTransform: "uppercase" }}>Ready To Start?</p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,44px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 20 }}>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 20 }}>
                   APPLY FOR YOUR <br /><span style={{ color: "#07b4ba" }}>30-DAY PROGRAM</span>
                 </h2>
                 <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.7, marginBottom: 20, maxWidth: 340 }}>
@@ -1433,7 +1433,7 @@ export default function ProgramPage() {
 
               {/* CTA CARD */}
               <div style={{ background: "#05070b", borderRadius: 20, border: "1px solid rgba(255,255,255,0.08)", padding: "32px 28px", textAlign: "center", boxShadow: "0 0 30px rgba(0,0,0,0.4)" }}>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 4, textTransform: "uppercase", color: "#07b4ba", marginBottom: 14 }}>LIMITED FOUNDER SPOTS</p>
+                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, textTransform: "uppercase", color: "#07b4ba", marginBottom: 14 }}>LIMITED FOUNDER SPOTS</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,60px)", lineHeight: 0.95, letterSpacing: 2, marginBottom: 20, color: "#fff" }}>
                   START YOUR<br /><span style={{ color: "#07b4ba" }}>TRANSFORMATION</span>
                 </h2>
