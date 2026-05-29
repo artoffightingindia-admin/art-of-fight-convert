@@ -1118,8 +1118,8 @@ body { background: #0a0a0a; }
 }
 .cp-faq-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 5.5vw, 60px);
-  letter-spacing: 2px;
+  font-size: clamp30px,4vw,60px);
+  letter-spacing: 3px;
   color: #fff;
   line-height: 1;
   margin-bottom: 10px;
@@ -2472,40 +2472,38 @@ const handleBookingConfirm = async (
 
     {/* WHAT YOU GET */}
     <Reveal style={{ marginTop: 52 }}>
-     <p
-  style={{
-    fontFamily: "'Barlow', sans-serif",
-    fontWeight: 700,
-    fontSize: 13,
-    letterSpacing: 3,
-    color: "#07b4ba",
-    marginBottom: 12,
-    textTransform: "uppercase"
-  }}
->
-  WHAT'S INCLUDED
-</p>
-      <h3
+    <div
   style={{
     textAlign: "center",
-
-    fontFamily: "'Bebas Neue', sans-serif",
-
-    fontSize: "clamp(30px,4vw,60px)",
-
-    letterSpacing: 2,
-
-    color: "#fff",
-
-    marginTop: 8,
-
-    marginBottom: 20,
-
-    lineHeight: 1,
+    marginBottom: 50,
   }}
 >
-        What You Get
-      </h3>
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontWeight: 700,
+      fontSize: 13,
+      letterSpacing: 3,
+      color: "#07b4ba",
+      marginBottom: 12,
+      textTransform: "uppercase",
+    }}
+  >
+    WHAT'S INCLUDED
+  </p>
+
+  <h2
+    style={{
+      fontFamily: "'Bebas Neue', sans-serif",
+      fontSize: "clamp(30px,4vw,60px)",
+      color: "#fff",
+      letterSpacing: 2,
+      margin: 0,
+    }}
+  >
+    WHAT YOU GET
+  </h2>
+</div>
       <div className="cp-what-cards">
         {whatCards.map((card, i) => (
           <div key={i} className="cp-what-card">
@@ -2860,7 +2858,7 @@ const handleBookingConfirm = async (
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(30px,4vw,60px)",
-            letterSpacing: 2,
+            letterSpacing: 3,
             color: "#fff",
             marginTop: 8,
             lineHeight: 1,
