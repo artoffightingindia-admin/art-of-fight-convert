@@ -3214,7 +3214,7 @@ const handleBookingConfirm = async (
             </div>
           ))}
           <div style={{ marginTop: 32 }}>
-           <p style={{ paddingLeft: 450, marginBottom: 8, color: "rgba(255,255,255,0.45)", fontFamily: "'Barlow', sans-serif", fontSize: 13, letterSpacing: "0.5px", whiteSpace: "nowrap" }}>Any Queries?</p>
+           <p style={{ paddingLeft: 500, marginBottom: 8, color: "rgba(255,255,255,0.45)", fontFamily: "'Barlow', sans-serif", fontSize: 13, letterSpacing: "0.5px", whiteSpace: "nowrap" }}>Any Queries?</p>
            <div style={{ display: "flex", justifyContent: "flex-start", marginTop: 18, paddingLeft: 400 }}>
   <button className="cp-wa-btn">
                 <WhatsAppIcon />
