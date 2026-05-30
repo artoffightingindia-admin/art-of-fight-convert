@@ -896,6 +896,25 @@ const IconGlobe = () => (
     <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
   </svg>
 );
+const IconNutrition = () => (
+  <div style={{ fontSize: 48 }}>🥗</div>
+);
+
+const IconMobility = () => (
+  <div style={{ fontSize: 48 }}>🧘</div>
+);
+
+const IconCommunity = () => (
+  <div style={{ fontSize: 48 }}>💬</div>
+);
+
+const IconShadowboxing = () => (
+  <div style={{ fontSize: 48 }}>🥊</div>
+);
+
+const IconAudio = () => (
+  <div style={{ fontSize: 48 }}>🎧</div>
+);
 
 
 const whatCards = [
@@ -1374,11 +1393,11 @@ export default function ProgramPage() {
     marginTop: 15,
   }}
 >{
-  i === 0 ? <IconPlan /> :
-  i === 1 ? <IconChat /> :
-  i === 2 ? <IconLeaf /> :
-  i === 3 ? <IconChart /> :
-  <IconGlobe />
+  i === 0 ? <IconNutrition /> :
+  i === 1 ? <IconMobility /> :
+  i === 2 ? <IconCommunity /> :
+  i === 3 ? <IconShadowboxing /> :
+  <IconAudio />
 }</div>
                   
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 20, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 10 }}>{item.title}</h3>
