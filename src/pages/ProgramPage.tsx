@@ -178,7 +178,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b" }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 5vw", textAlign: "center", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <Reveal>
           <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" as const, color: "#07b4ba", marginBottom: 10 }}>Got Questions?</p>
           <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 2, color: "#fff", lineHeight: 1, marginBottom: 10 }}>
@@ -254,13 +254,12 @@ const css = `
   /* ── HERO ── */
   .pp-hero {
     position: relative;
+    min-height: 78vh;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-start;   /* left-anchor the content */
     overflow: hidden;
-    /* padding-top = navbar height + breathing room; bottom just enough for content.
-       No min-height so no dark gap shows below content on tall screens. */
-    padding: 130px 5vw 80px;
+    padding: 110px 5vw 60px;       /* 5vw side padding scales with screen — same on every laptop */
     background:
       radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
       #06080c;
@@ -320,7 +319,7 @@ const css = `
     width: 100%; min-height: 60px;
     background: #07b4ba;
     display: flex; align-items: center; justify-content: space-around;
-    padding: 12px 5vw; gap: 12px; flex-wrap: wrap;
+    padding: 12px 40px; gap: 12px; flex-wrap: wrap;
     position: relative; z-index: 20;
   }
   .pp-trust-item { display: flex; align-items: center; gap: 12px; }
@@ -328,11 +327,8 @@ const css = `
   .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
   .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
-  /* ── SECTION WRAPPER ──
-     5vw matches hero side padding so every section's content
-     starts at the same horizontal position on every screen size.
-  */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 5vw; }
+  /* ── SECTION WRAPPER ── */
+  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
 
   /* ── PAIN ── */
   .pp-problem { background: #0b0b0b; }
@@ -410,7 +406,7 @@ const css = `
   .pp-coach-stats > div p:last-child { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.45); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
 
   /* ── FOOTER ── */
-  .pp-footer { background: #101318; padding: 32px 5vw 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .pp-footer { background: #101318; padding: 32px 40px 16px; border-top: 1px solid rgba(255,255,255,0.06); }
   .pp-footer-inner { max-width: 1220px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
   .pp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 25px; letter-spacing: 1px; color: #fff; padding-top: 8px; margin-bottom: 10px; }
   .pp-footer-links { display: flex; flex-direction: column; gap: 10px; }
@@ -890,7 +886,7 @@ export default function ProgramPage() {
         {/* ── ROADMAP SECTION ── */}
         <div className={isMobileRoadmap ? "pp-roadmap pp-roadmap-mobile" : "pp-roadmap"} style={{ background: "#0b0b0b", position: "relative", overflow: "hidden" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto", padding: "30px 0", backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)" }}>
-            <div style={{ textAlign: "center", marginBottom: 35, padding: "0 5vw" }}>
+            <div style={{ textAlign: "center", marginBottom: 35, padding: "0 24px" }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>
                 30 DAYS TRANSFORMATION JOURNEY
               </p>
@@ -1095,7 +1091,7 @@ export default function ProgramPage() {
 
         {/* ── BONUSES SECTION ── */}
         <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 5vw" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 24px" }}>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 10 }}>EXCLUSIVE FOUNDERS BONUSES</p>
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
