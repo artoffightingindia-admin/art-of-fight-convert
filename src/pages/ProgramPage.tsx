@@ -1447,7 +1447,7 @@ export default function ProgramPage() {
                 { title: "ADVANCED SHADOWBOXING FLOWS",  img: "🥊", value: "₹1299 VALUE" },
                 { title: "FIGHTER MINDSET AUDIO PACK",  img: "🎧", value: "₹1199 VALUE" },
               ].map((item, i) => (
-                <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "10px 12px", position: "relative", overflow: "hidden", minHeight: 320, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "10px 12px", position: "relative", overflow: "hidden", minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div style={{ position: "absolute", top: 14, left: 14, background: "#07b4ba", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, padding: "5px 10px", borderRadius: 5 }}>#{i + 1}</div>
                   <div
   style={{
@@ -1456,7 +1456,7 @@ export default function ProgramPage() {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: 7,
     marginTop: 15,
   }}
 >{
