@@ -897,23 +897,90 @@ const IconGlobe = () => (
   </svg>
 );
 const IconNutrition = () => (
-  <div style={{ fontSize: 48 }}>🥗</div>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="52"
+    height="52"
+  >
+    <path d="M12 22V12" />
+    <path d="M12 12C12 7 17 3 21 2c0 5-2 9-9 10z" />
+    <path d="M12 12C12 7 7 3 3 2c0 5 2 9 9 10z" />
+  </svg>
 );
 
 const IconMobility = () => (
-  <div style={{ fontSize: 48 }}>🧘</div>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="52"
+    height="52"
+  >
+    <circle cx="12" cy="5" r="2" />
+    <path d="M12 7v5" />
+    <path d="M12 12l-4 4" />
+    <path d="M12 12l4 4" />
+    <path d="M12 10l5-2" />
+  </svg>
 );
 
 const IconCommunity = () => (
-  <div style={{ fontSize: 48 }}>💬</div>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="52"
+    height="52"
+  >
+    <circle cx="8" cy="8" r="3" />
+    <circle cx="16" cy="8" r="3" />
+    <path d="M3 20c0-3 3-5 5-5s5 2 5 5" />
+    <path d="M11 20c0-3 3-5 5-5s5 2 5 5" />
+  </svg>
 );
 
 const IconShadowboxing = () => (
-  <div style={{ fontSize: 48 }}>🥊</div>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="52"
+    height="52"
+  >
+    <circle cx="12" cy="12" r="8" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
 );
 
 const IconAudio = () => (
-  <div style={{ fontSize: 48 }}>🎧</div>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#07b4ba"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="52"
+    height="52"
+  >
+    <path d="M4 12a8 8 0 0 1 16 0" />
+    <rect x="2" y="12" width="4" height="8" rx="2" />
+    <rect x="18" y="12" width="4" height="8" rx="2" />
+  </svg>
 );
 
 
