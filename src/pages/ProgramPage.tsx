@@ -325,7 +325,7 @@ const css = `
   align-items: center;
   justify-content: center;
 
-  padding: 14px 60px;
+  padding: 16px 60px;
   border-radius: 7px;
 
   background: #07b4ba;
