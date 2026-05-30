@@ -422,7 +422,7 @@ const css = `
  .pp-feature-card h4 {
   font-family: 'Bebas Neue', sans-serif;
   color: #07b4ba;
-  font-size: 16px;
+  font-size: 17.5px;
   letter-spacing: 2px;
   line-height: 1.3;
   min-height: 58px;
@@ -1509,10 +1509,11 @@ export default function ProgramPage() {
             <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
               <div>
                 <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: "#07b4ba", marginBottom: 12, textTransform: "uppercase" }}>Ready To Start?</p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 20 }}>
+                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(34px,5vw,54px)", lineHeight: 1, letterSpacing: 2, color: "#fff", marginBottom: 20 }}>
                   APPLY FOR YOUR <br /><span style={{ color: "#07b4ba" }}>30-DAY PROGRAM</span>
                 </h2>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.7, marginBottom: 20, maxWidth: 340 }}>
+                <p style={{  fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)",
+              fontSize: 14, lineHeight: 1.7, marginBottom: 20, maxWidth: 380,}}>
                   Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
                <div style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 28, flexWrap: "wrap" }}>
