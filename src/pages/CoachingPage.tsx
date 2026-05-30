@@ -319,7 +319,6 @@ const whatCards = [
   },
 ];
 
-// CHANGE 2: Removed "Coaches remotely across 3 continents with proven results" entry
 const coachCredentials = [
   "Former Professional MMA Fighter — 12+ Years Ring Experience",
   "Trained athletes who compete at national and international level",
@@ -333,7 +332,6 @@ const stats = [
   { val: "3", label: "Continents" },
 ];
 
-// CHANGE 3: 7 feedback cards for the new infinite scroll
 const feedbackCards = [
   {
     text: "In 8 weeks my footwork completely changed. My coach saw things I couldn't see myself and fixed them immediately.",
@@ -372,7 +370,6 @@ const checklistItems = [
   "Start within 48 hours of approval",
 ];
 
-// CHANGE 4: FAQ data
 const faqItems = [
   {
     question: "Who is AOF 1-on-1 coaching for?",
@@ -426,7 +423,7 @@ body { background: #0a0a0a; }
 
   height: 62px;
 
-  padding: 0 20px; /* reduced from 32px */
+  padding: 0 20px;
 
   background: rgba(17,20,25,0.80);
 
@@ -458,9 +455,22 @@ body { background: #0a0a0a; }
 }
 .cp-book-nav:hover { background: #059a9f; }
 
-/* HERO */
-.cp-hero { position: relative; min-height: 25vh; padding-bottom: 48px; }
-.cp-hero-bg { position: absolute; inset: 0; z-index: 0; }
+/* HERO — FIX: position relative + overflow hidden so bg image is clipped to hero bounds (including trust strip) */
+.cp-hero {
+  position: relative;
+  min-height: 25vh;
+  padding-bottom: 48px;
+  overflow: hidden;
+}
+.cp-hero-bg {
+  position: absolute;
+  /* FIX: top/left/right as before but bottom aligned to 0 so it stops at trust strip bottom edge */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
 .cp-hero-overlay {
   background: linear-gradient(to right, #0a0a0a 35%, rgba(10,10,10,0.55) 60%, transparent 100%);
 }
@@ -482,14 +492,12 @@ body { background: #0a0a0a; }
 }
 .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-/* CHANGE 1: Button text color changed to #fff, dimensions match Home Page Hero */
 .cp-btn-primary {
   padding: 14px 34px; border-radius: 7px; background: #07b4ba; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px;
   border: none; cursor: pointer; transition: background 0.2s;
 }
 .cp-btn-primary:hover { background: #059a9f; }
-/* CHANGE 1: "See Results" / outline button removed from JSX; keeping class for safety */
 .cp-btn-outline {
   padding: 14px 34px; border-radius: 7px; background: transparent; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px;
@@ -892,7 +900,7 @@ body { background: #0a0a0a; }
 
   padding: 26px 40px 8px;
 
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .cp-footer-inner {
@@ -1091,6 +1099,9 @@ body { background: #0a0a0a; }
     linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px),
     linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px);
   background-size: 40px 40px;
+  /* FIX: Remove margin-bottom to eliminate the background bleed gap before footer */
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 .cp-faq-bg::before {
   content: "";
@@ -2279,8 +2290,8 @@ const handleBookingConfirm = async (
   <style>{`
     @media (max-width: 768px) {
       .cp-hero-content {
-        padding-left: 12px !important;   /* Decreased left padding to push content closer to edges */
-        padding-right: 12px !important;  /* Decreased right padding to push content closer to edges */
+        padding-left: 12px !important;
+        padding-right: 12px !important;
       }
       .cp-trust {
         padding-left: 12px !important;
@@ -2293,6 +2304,9 @@ const handleBookingConfirm = async (
     }
   `}</style>
 
+  {/* FIX: Hero background is now a div absolutely positioned inside the section.
+      The section has overflow:hidden so the bg image is clipped exactly at the
+      trust strip bottom edge — it will never bleed below it. */}
   <div
     className="cp-hero-bg"
     style={{
@@ -2315,7 +2329,6 @@ const handleBookingConfirm = async (
         Stop training in the crowd. Get a personalized coaching program built around your body, your goals,
         and your timeline — guided by coaches who have been in the ring.
       </p>
-      {/* CHANGE 1: Only "Book A Call" button remains; "See Results" button removed */}
       <div className="cp-hero-btns">
         <button className="cp-btn-primary" onClick={scrollToForm}>
           Book A Call
@@ -2387,8 +2400,8 @@ const handleBookingConfirm = async (
     <style>{`
       @media (max-width: 768px) {
         #method {
-          padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
-          padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+          padding-left: 12px !important;
+          padding-right: 12px !important;
         }
         .cp-method-grid {
           padding-left: 0 !important;
@@ -2525,7 +2538,7 @@ const handleBookingConfirm = async (
         <div className="cp-new-promise-line" />
 
         <p className="cp-new-promise-text">
-          <span className="cp-quote-mark">“</span>
+          <span className="cp-quote-mark">"</span>
           Most fighters train hard. Very few train correctly.
           AOF exists to close that gap — with structure,
           accountability, and coaching that actually evolves
@@ -2541,8 +2554,8 @@ const handleBookingConfirm = async (
   <style>{`
     @media (max-width: 768px) {
       .cp-coach-bg .cp-section {
-        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
-        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+        padding-left: 12px !important;
+        padding-right: 12px !important;
       }
       .cp-coach-stats {
         justify-content: center !important;
@@ -2555,7 +2568,6 @@ const handleBookingConfirm = async (
   </div>
   <div className="cp-section" style={{ paddingBottom: 40 }}>
     <Reveal>
-      {/* CHANGE 2: "Led By" → "LED BY", font-size increased by +1pt (17px → 18px is already 17, so +1pt = 18px) */}
       <p
         style={{
           fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba",
@@ -2592,7 +2604,6 @@ const handleBookingConfirm = async (
             AOF Academy — Lead Trainer &amp; Founder
           </p>
           <div style={{ marginBottom: 24 }}>
-            {/* CHANGE 2: coachCredentials array no longer contains the "3 continents" entry */}
             {coachCredentials.map((cred, i) => (
               <div key={i} className="cp-checklist-item">
                 <span className="check">✓</span>
@@ -2670,8 +2681,8 @@ const handleBookingConfirm = async (
     /* MOBILE BREAKPOINT FORCE LOCK */
     @media (max-width: 768px) {
       .cp-section-mobile-fix {
-        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
-        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+        padding-left: 12px !important;
+        padding-right: 12px !important;
       }
 
       .cp-desktop-slider-wrapper {
@@ -2694,7 +2705,6 @@ const handleBookingConfirm = async (
         margin-bottom: 24px !important;
       }
 
-      /* Infinite Loop Viewport Mask: Completely blocks adjacent columns from bleeding into view */
       .cp-mobile-viewport {
         width: 100% !important;
         overflow: hidden !important;
@@ -2702,7 +2712,6 @@ const handleBookingConfirm = async (
         padding: 4px 0 !important;
       }
 
-      /* Linear track container using flex for flawless 100% width page alignment transitions */
       .cp-mobile-track {
         display: flex !important;
         flex-direction: row !important;
@@ -2711,7 +2720,6 @@ const handleBookingConfirm = async (
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
       }
 
-      /* Keeps container at 100% and focuses child alignment strictly to the CENTER boundary */
       .cp-mobile-combo-column {
         flex: 0 0 100% !important;
         width: 100% !important;
@@ -2719,70 +2727,61 @@ const handleBookingConfirm = async (
         max-width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: center !important; /* BACK TO CENTER: Aligns all inner cards to the center edge */
+        align-items: center !important;
         gap: 8px !important; 
         box-sizing: border-box !important;
         padding: 0 !important;
       }
 
-      /* COMPRESSION FIX: Rectangular card structure with 80% reduced top/bottom padding footprint */
       .cp-mobile-card {
         width: 100% !important; 
-        max-width: calc(100vw - 24px) !important; /* Viewport minus combined system gutters (24px) */
+        max-width: calc(100vw - 24px) !important;
         box-sizing: border-box !important;
         background: #15171e;
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 12px !important;
-        
-        /* THE CRUCIAL PADDING COMPRESSION FIX: Reduced from 16px to 10px */
         padding: 10px 14px !important; 
-        
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        min-height: 96px !important; /* 80% compressed scale footprint (down from 120px) */
+        min-height: 96px !important;
         margin: 0 !important;
         overflow: hidden !important;
       }
 
-      /* ALIGNMENT FIX: Aligns stars to the CENTER */
       .cp-mobile-stars {
         color: #07b4ba;
-        font-size: 10px; /* Scaled down from 11px */
-        margin-bottom: 2px; /* Reduced from 4px to 2px */
-        text-align: center !important; /* BACK TO CENTER: Forces stars to the center */
+        font-size: 10px;
+        margin-bottom: 2px;
+        text-align: center !important;
       }
 
-      /* Typography Engine: CENTER ALIGNS ALL TEXT with compressed margin/line windows */
       .cp-mobile-text {
         font-family: 'Barlow', sans-serif;
         color: rgba(255, 255, 255, 0.7);
         font-size: 10px !important; 
-        line-height: 1.3 !important; /* Tighter vertical spacing window */
-        margin: 0 auto 6px auto !important; /* BACK TO CENTER: Centers the element block */
+        line-height: 1.3 !important;
+        margin: 0 auto 6px auto !important;
         font-style: italic;
         white-space: normal !important;
         word-break: break-word !important;
         display: block !important;
         width: 100% !important;
-        
-        /* ALIGNMENT FIX: Strictly CENTER aligned content footprint */
         text-align: center !important;
       }
 
-      /* User container anchored to the bottom CENTER wall */
       .cp-mobile-user {
         display: flex !important;
         align-items: center !important;
-        justify-content: center !important; /* BACK TO CENTER: Aligns avatar and name in the center */
+        justify-content: center !important;
         gap: 6px;
         margin-top: auto;
         width: 100% !important;
       }
 
       .cp-mobile-avatar {
-        width: 22px; /* Scaled down from 26px */
-        height: 22px; /* Scaled down from 26px */
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         background: rgba(7, 180, 186, 0.1);
         display: flex;
@@ -2795,19 +2794,18 @@ const handleBookingConfirm = async (
       .cp-mobile-info h4 {
         margin: 0;
         color: #fff;
-        font-size: 10px; /* Scaled down from 11px */
+        font-size: 10px;
         font-weight: 600;
         line-height: 1.1;
-        text-align: center !important; /* BACK TO CENTER: Text line inside grid alignment */
+        text-align: center !important;
       }
       .cp-mobile-info span {
         color: rgba(255, 255, 255, 0.35);
         font-size: 8px;
         display: block !important;
-        text-align: center !important; /* BACK TO CENTER: Subtext line alignment */
+        text-align: center !important;
       }
 
-      /* Control navigation arrow layer layout */
       .cp-mobile-arrows-row {
         display: flex !important;
         justify-content: center !important;
@@ -3186,8 +3184,8 @@ const handleBookingConfirm = async (
   <style>{`
     @media (max-width: 768px) {
       .cp-apply-bg .cp-section {
-        padding-left: 12px !important;  /* Balanced left side boundary matching system guidelines */
-        padding-right: 12px !important; /* Balanced right side boundary matching system guidelines */
+        padding-left: 12px !important;
+        padding-right: 12px !important;
       }
     }
   `}</style>
