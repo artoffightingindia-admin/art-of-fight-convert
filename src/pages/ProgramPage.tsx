@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -114,7 +113,10 @@ function InfiniteFeedbackSlider() {
 
   return (
     <div style={{ width: "100%" }}>
-      <div ref={sliderRef} style={{ overflow: "hidden", width: "100%", position: "relative" }}>
+      <div
+        ref={sliderRef}
+        style={{ overflow: "hidden", width: "100%", position: "relative" }}
+      >
         <div ref={trackRef} style={{ display: "flex", gap: 24, width: "max-content", willChange: "transform" }}>
           {allCards.map((card, i) => (
             <div key={i} style={{ width: 340, flexShrink: 0, borderRadius: 18, background: "#1a1d23", border: "1px solid rgba(255,255,255,0.05)", padding: "28px 24px", display: "flex", flexDirection: "column" }}>
@@ -133,7 +135,8 @@ function InfiniteFeedbackSlider() {
           ))}
         </div>
       </div>
-      {/* NAV BUTTONS — centered below cards */}
+
+      {/* NAV BUTTONS — centered below cards, matching screenshot */}
       <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 32 }}>
         <button
           onClick={() => {
@@ -147,7 +150,9 @@ function InfiniteFeedbackSlider() {
             setTimeout(() => { isPausedRef.current = false; }, 700);
           }}
           style={{ width: 52, height: 52, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", background: "rgba(15,18,24,0.92)", color: "#fff", fontSize: 24, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", backdropFilter: "blur(10px)" }}
-        >‹</button>
+        >
+          ‹
+        </button>
         <button
           onClick={() => {
             isPausedRef.current = true;
@@ -160,7 +165,9 @@ function InfiniteFeedbackSlider() {
             setTimeout(() => { isPausedRef.current = false; }, 700);
           }}
           style={{ width: 52, height: 52, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", background: "rgba(15,18,24,0.92)", color: "#fff", fontSize: 24, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", backdropFilter: "blur(10px)" }}
-        >›</button>
+        >
+          ›
+        </button>
       </div>
     </div>
   );
@@ -188,7 +195,7 @@ function FAQSection() {
           </h2>
           <div style={{ width: 56, height: 2, background: "#07b4ba", margin: "16px auto 48px", borderRadius: 2 }} />
         </Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(480px, 100%), 1fr))", gap: 18, textAlign: "left" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 18, textAlign: "left" }}>
           {faqItems.map((item, i) => (
             <Reveal key={i}>
               <div style={{ border: `1px solid ${openIndex === i ? "rgba(7,180,186,0.45)" : "rgba(255,255,255,0.08)"}`, borderRadius: 12, background: "#141414", overflow: "hidden", transition: "border-color 0.25s" }}>
@@ -234,6 +241,7 @@ const css = `
   .pp-nav-home-mobile { display: none; }
   .pp-nav-call { height: 44px; padding: 0 22px; border-radius: 8px; border: none; background: #07b4ba; color: #ffffff; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; cursor: pointer; transition: 0.25s; }
   .pp-nav-call:hover { background: #075e61; transform: translateY(-2px); }
+
   @media (max-width: 768px) {
     .pp-nav { height: 58px; padding: 0 14px; }
     .pp-nav-logo { font-size: 26px; letter-spacing: 2px; }
@@ -242,96 +250,134 @@ const css = `
     .pp-nav-call { height: 36px; padding: 0 14px; font-size: 14px; letter-spacing: 1px; }
   }
 
-  /* ── HERO ── */
+  /* HERO */
   .pp-hero {
-    position: relative;
-    min-height: 78vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 110px 24px 60px;
-    background: radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%), #06080c;
-  }
+  position: relative;
+
+  min-height: 78vh; /* reduced height */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 110px 7px 40px; /* reduced bottom spacing */
+
+  background:
+    radial-gradient(circle at top,
+    rgba(7,180,186,0.12),
+    transparent 45%),
+    #06080c;
+}
   .pp-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)), url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat; opacity: 0.42; }
   .pp-hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%); }
   .pp-hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-  }
-  .pp-hero-h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 5vw, 60px);
-    line-height: 0.95;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-  .pp-hero-h2 {
-    color: #07b4ba;
-    font-family: 'Barlow', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-  }
-  .pp-hero-desc {
-    color: rgba(255,255,255,0.62);
-    font-family: 'Barlow', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    max-width: 480px;
-    margin-bottom: 32px;
-  }
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1180px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  text-align: left;
+
+  padding-left: -90px;   /* moves content left */
+  margin-top: 15px;    /* moves whole hero content upward */
+}
+ .pp-hero-h1 {
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  font-size: clamp(40px, 6vw, 60px);
+
+  line-height: 0.95;
+
+  letter-spacing: 2px;
+ margin-left: -66px;
+  text-transform: uppercase;
+
+  color: #fff;
+
+  margin-bottom: 20px;
+}
+  .pp-hero-h2 { color: #07b4ba; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px;  margin-left: -66px; margin-bottom: 16px; }
+  .pp-hero-desc { color: rgba(255,255,255,0.62); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; max-width: 480px; margin-bottom: 32px;  margin-left: -66px;}
   .pp-hero-desc strong { color: #07b4ba; }
-  .pp-join-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    padding: 0 26px;
-    border-radius: 10px;
-    background: #07b4ba;
-    color: #fff;
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 1px solid #07b4ba;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
+ .pp-join-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 44px;
+
+  padding: 0 26px;
+
+  border-radius: 10px;
+
+  background: #07b4ba;
+
+  color: #fff;
+
+  font-family: 'Barlow', sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  border: 1px solid #07b4ba; margin-left: -66px;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
   .pp-join-btn:hover { background: #057e82; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ───────── TRUST BAR ───────── */
   .pp-trust-strip {
-    width: 100%;
-    height: 60px;
-    background: #07b4ba;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0 40px;
-    gap: 12px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 20;
-  }
-  .pp-trust-item { display: flex; align-items: center; gap: 12px; }
+
+  width: 100%;
+
+  height: 60px;
+
+  background: #07b4ba;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  padding: 0 40px;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  position: relative;
+
+  margin-top: 17px; /* moves strip upward */
+
+  z-index: 20;
+}
+ .pp-trust-item { display: flex; align-items: center; gap: 12px; }
   .pp-trust-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
   .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
+
   @media (max-width: 768px) {
     .pp-trust-strip { height: auto; padding: 14px; gap: 16px; justify-content: center; }
     .pp-trust-item p { font-size: 13px; letter-spacing: 1px; }
@@ -340,29 +386,66 @@ const css = `
   }
 
   /* SECTION WRAPPER */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .pp-section { max-width: 1100px; margin: 0 auto; padding: 28px 4px; }
+  @media (min-width: 1200px) { .pp-section { padding-left: 8px; padding-right: 8px; } }
 
   /* PAIN */
   .pp-problem { background: #0b0b0b; }
-  .pp-problem-grid { display: flex; gap: clamp(24px, 4vw, 56px); align-items: center; flex-wrap: wrap; }
+  .pp-problem-grid { display: flex; gap: 56px; align-items: center; flex-wrap: wrap; }
   .pp-problem-left { flex: 1; min-width: 260px; }
   .pp-problem-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px,4vw,48px); letter-spacing: 2px; color: #07b4ba; margin-bottom: 16px; }
   .pp-problem-intro { color: rgba(255,255,255,0.6); font-family: 'Barlow', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
   .pp-pain-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
   .pp-pain-bar { width: 3px; height: 18px; background: #ff2d2d; border-radius: 2px; flex-shrink: 0; margin-top: 3px; box-shadow: 0 0 6px rgba(255,45,45,0.9), 0 0 16px rgba(255,45,45,0.6); }
-  .pp-pain-item p { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5; }
-  .pp-problem-right { flex: 0 0 min(460px, 45%); max-width: 100%; }
+  .pp-pain-item p  { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.5; }
+  .pp-problem-right { flex: 0 0 460px; max-width: 100%; }
   .pp-problem-right img { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); display: block; aspect-ratio: 16/9; object-fit: cover; }
 
   /* WHAT YOU GET */
+  /* WHAT YOU GET SECTION ONLY */
+.pp-features .pp-section {
+  max-width: 100%;
+  padding-left: 5px;
+  padding-right: 5
+  px;
+}
   .pp-features { background: #0b0b0b; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
   .pp-features-heading { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; color: #fff; text-align: center; margin-bottom: 60px; }
-  .pp-features-grid { display: flex; gap: clamp(18px, 3.5vw, 68px); flex-wrap: wrap; justify-content: center; }
+.pp-features-grid {
+  display: flex;
+  gap: 68px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
   .pp-feature-card { width: 175px; min-height: 255px; padding: 11px 6px; border-radius: 18px; background: #111417; border: 2px solid #111417; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
   .pp-feature-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
   .pp-feature-icon svg { width: 52px; height: 52px; stroke: #07b4ba; }
-  .pp-feature-card h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 16px; letter-spacing: 2px; line-height: 1.3; min-height: 58px; margin: 0 0 4px; text-align: center; display: flex; align-items: flex-start; justify-content: center; }
-  .pp-feature-card p { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.62); text-align: center; margin: 0; min-height: 44px; display: flex; align-items: flex-start; justify-content: center; }
+ .pp-feature-card h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #07b4ba;
+  font-size: 16px;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  min-height: 58px;
+  margin: 0 0 4px;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.pp-feature-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.62);
+  text-align: center;
+  margin: 0;
+  min-height: 44px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
   @media (max-width: 768px) {
     .pp-features-grid { gap: 18px; }
     .pp-feature-card { width: calc(50% - 10px); min-height: 230px; }
@@ -371,49 +454,255 @@ const css = `
 
   /* COACH */
   .pp-coach-bg { background: #0b0b0b; }
-  .pp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
+.pp-book-strip {
+  background: #07b4ba;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   .pp-book-strip button { width: 100%; padding: 14px; background: none; border: none; cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; transition: background 0.2s; }
   .pp-book-strip button:hover { background: #075e61; }
 
   /* TESTIMONIALS */
   .pp-testi-bg { position: relative; overflow: hidden; background: #0b0b0b; }
-  .pp-testi-main { display: flex; gap: clamp(24px, 3vw, 48px); align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
-  .pp-testi-img { flex: 0 0 min(460px, 45%); max-width: 100%; aspect-ratio: 16/9; }
+  .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
+  .pp-testi-img { flex: 0 0 460px; max-width: 100%; aspect-ratio: 16/9; }
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
   .pp-feedback-mobile { display: none; }
 
   /* PROMISE SECTION */
-  .cp-promise-section { position: relative; overflow: hidden; background: #0b0b0b; }
-  .cp-promise-section::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px); pointer-events: none; z-index: 0; }
-  .cp-new-promise { max-width: 820px; margin: 0 auto; padding: 1px 42px; text-align: center; position: relative; z-index: 1; }
+  .cp-promise-section {
+    position: relative;
+    overflow: hidden;
+    background: #0b0b0b;
+  }
+  .cp-promise-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cp-new-promise {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1px 42px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
   .cp-new-promise-line { width: 70px; height: 2px; background: #07b4ba; margin: 0 auto 22px; border-radius: 999px; }
   .cp-new-promise-text { font-family: 'Barlow', sans-serif; font-size: 19px; line-height: 1.9; color: rgba(255,255,255,0.76); font-style: italic; max-width: 720px; margin: 0 auto; }
   .cp-new-promise-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: #fff; margin-bottom: 12px; text-align: center; }
   .cp-quote-mark { color: #07b4ba; font-size: 42px; line-height: 0; margin-right: 6px; font-family: serif; position: relative; top: 10px; }
+
   @media (max-width: 768px) {
     .cp-new-promise { padding: 26px 22px; }
     .cp-new-promise-text { font-size: 15px; line-height: 1.8; }
     .cp-new-promise-title { font-size: 26px; }
   }
 
-  /* FOOTER / PRICE BOX */
+  /* FOOTER CTA */
   .pp-footer-cta { background: #0b0b0b; border-top: none; position: relative; padding-top: 0 !important; margin-top: 0 !important; z-index: 10; }
   .pp-footer-cta::before { display: none; }
-  .pp-footer-grid { display: flex; gap: 28px; align-items: center; justify-content: space-between; flex-wrap: nowrap; }
-  .pp-footer-left { flex: 1; min-width: 0; max-width: 620px; }
-  .pp-footer-right { flex: 0 0 170px; width: 170px; max-width: 170px; text-align: center; }
-  .pp-price-box { background: #111; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 14px; max-width: 170px; margin: 0 auto; }
-  .pp-price-old { font-family: 'Barlow', sans-serif; font-size: 16px; color: rgba(255,255,255,0.35); text-decoration: line-through; margin-bottom: 2px; }
-  .pp-price-new { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: #07b4ba; line-height: 1; margin-bottom: 2px; }
-  .pp-price-tag { font-family: 'Barlow', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
-  .pp-cta-btn { width: 100%; padding: 10px; border-radius: 8px; background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 16px rgba(7,180,186,0.25); }
-  .pp-cta-btn:hover { background: #059a9f; transform: translateY(-2px); }
-  .pp-cta-note { font-family: 'Barlow', sans-serif; font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+  .pp-footer-grid { display: flex; gap: 56px; align-items: center; flex-wrap: wrap; }
+  .pp-footer-left { flex: 1; min-width: 300px; }
+  .pp-footer-right { flex: 0 0 200px; max-width: 100%; text-align: center; }
+  .pp-offer-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; color: #07b4ba; margin-bottom: 8px; }
+  .pp-offer-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,42px); letter-spacing: 2px; color: #fff; line-height: 1.1; margin-bottom: 24px; }
+  .pp-timer { display: flex; gap: 12px; margin-bottom: 8px; }
+  .pp-timer-block { text-align: center; }
+  .pp-timer-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,56px); letter-spacing: 2px; color: #07b4ba; line-height: 1; background: #111; border: 1px solid rgba(7,180,186,0.2); border-radius: 8px; padding: 10px 18px; min-width: 72px; }
+  .pp-timer-block p { font-family: 'Barlow', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+  .pp-timer-sep { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: rgba(255,255,255,0.3); align-self: flex-start; padding-top: 10px; }
+  .pp-last-day { font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.35); letter-spacing: 1px; font-style: italic; }
+ .pp-price-box {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 22px 20px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+  .pp-price-old { font-family: 'Barlow', sans-serif; font-size: 22px; color: rgba(255,255,255,0.35); text-decoration: line-through; margin-bottom: 4px; }
+  .pp-price-new { font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px,4vw,32px); letter-spacing: 2px; color: #07b4ba; line-height: 1; margin-bottom: 4px; }
+  .pp-price-tag { font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+  .pp-cta-btn { width: 100%; padding: 14px; border-radius: 10px; background: #07b4ba; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 24px rgba(7,180,186,0.35); }
+  .pp-cta-btn:hover { background: #059a9f; box-shadow: 0 0 40px rgba(7,180,186,0.5); transform: translateY(-2px); }
+  .pp-cta-note { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 12px; }
+
+ /* FOOTER CTA */
+.pp-footer-cta {
+  background: #0b0b0b;
+  border-top: none;
+  position: relative;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  z-index: 10;
+}
+
+.pp-footer-cta::before {
+  display: none;
+}
+
+.pp-footer-grid {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.pp-footer-left {
+  flex: 1;
+  min-width: 0;
+  max-width: 620px;
+}
+
+.pp-footer-right {
+  flex: 0 0 170px;
+  width: 170px;
+  max-width: 170px;
+  text-align: center;
+}
+
+.pp-offer-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #07b4ba;
+  margin-bottom: 6px;
+}
+
+.pp-offer-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px,3vw,34px);
+  letter-spacing: 1px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.pp-timer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pp-timer-block {
+  text-align: center;
+}
+
+.pp-timer-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px,3vw,34px);
+  letter-spacing: 1px;
+  color: #07b4ba;
+  line-height: 1;
+  background: #111;
+  border: 1px solid rgba(7,180,186,0.2);
+  border-radius: 6px;
+  padding: 6px 10px;
+  min-width: 50px;
+}
+
+.pp-timer-block p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.pp-timer-sep {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  color: rgba(255,255,255,0.3);
+  align-self: flex-start;
+  padding-top: 4px;
+}
+
+.pp-last-day {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+.pp-price-box {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px 14px;
+  max-width: 170px;
+  margin: 0 auto;
+}
+
+.pp-price-old {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: line-through;
+  margin-bottom: 2px;
+}
+
+.pp-price-new {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: #07b4ba;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+
+.pp-price-tag {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+
+.pp-cta-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: #07b4ba;
+  color: #000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 16px rgba(7,180,186,0.25);
+}
+
+.pp-cta-btn:hover {
+  background: #059a9f;
+  transform: translateY(-2px);
+}
+
+.pp-cta-note {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 10px;
+}
 
   /* CHECKLIST */
   .pp-checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
   .pp-checklist-item .check { color: #07b4ba; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-  .pp-checklist-item p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
+  .pp-checklist-item p  { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
+
+  /* BOTTOM BAR */
+  .pp-bottom-bar { background: #101318; padding: 7px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .pp-bottom-bar span { font-family: 'Barlow', sans-serif; font-size: 12px; color: rgba(255,255,255,0.25); }
+  .pp-bottom-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; }
 
   /* FOOTER */
   .pp-footer { background: #101318; padding: 12px 40px 4px; border-top: 1px solid rgba(255,255,255,0.06); }
@@ -426,12 +715,7 @@ const css = `
   .pp-footer-about p { line-height: 1.8; max-width: 320px; }
   .pp-footer-bottom { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1100px) {
-    .pp-hero-content { max-width: 100%; padding-left: 0; }
-    .pp-problem-right { flex: 0 0 100%; }
-  }
-
+  /* RESPONSIVE */
   @media (max-width: 768px) {
     .pp-nav { padding: 12px 16px; }
     .pp-section { padding: 48px 20px; }
@@ -440,6 +724,8 @@ const css = `
     .pp-features-grid { flex-direction: column; }
     .pp-footer-grid { flex-direction: column; gap: 40px; }
     .pp-footer-right { flex: unset; width: 100%; }
+    .pp-timer { justify-content: center; }
+    .pp-bottom-bar { flex-direction: column; text-align: center; }
     .pp-hero { min-height: 82vh; padding: 120px 20px 70px; }
     .pp-hero-content { align-items: flex-start; text-align: left; }
     .pp-hero-h1 { font-size: 64px; line-height: 0.95; }
@@ -513,6 +799,10 @@ const css = `
   @media (max-width: 768px) {
     .pp-roadmap-mobile { background: radial-gradient(circle at 50% 9%, rgba(7,180,186,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%) !important; border-top: 1px solid rgba(7,180,186,0.12); border-bottom: 1px solid rgba(7,180,186,0.16); }
     .pp-roadmap-mobile > div { max-width: none !important; padding: 24px 0 26px !important; background-image: linear-gradient(rgba(7,180,186,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(7,180,186,0.035) 1px, transparent 1px) !important; background-size: 26px 26px !important; }
+    .pp-roadmap-mobile > div > div:first-child { margin-bottom: 22px !important; padding: 0 14px; }
+    .pp-roadmap-mobile > div > div:first-child p:first-child { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px !important; font-size: 10px !important; letter-spacing: 1px !important; }
+    .pp-roadmap-mobile > div > div:first-child h2 { font-size: 38px !important; line-height: 0.88 !important; letter-spacing: 1px !important; }
+    .pp-roadmap-mobile > div > div:first-child p:last-child { margin-top: 12px !important; font-size: 12px !important; color: rgba(255,255,255,0.68) !important; }
     .pp-roadmap-mobile-shell { width: 100%; overflow: hidden; padding-bottom: 2px; }
     .pp-roadmap-mobile-timeline { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; gap: 0; margin: 0 14px 28px; padding-top: 4px; }
     .pp-roadmap-mobile-line { position: absolute; left: 9%; right: 9%; bottom: 7px; height: 1px; background: rgba(255,255,255,0.42); }
@@ -779,7 +1069,7 @@ export default function ProgramPage() {
         {/* ── AOF INTRO SECTION ── */}
         <div style={{ background: "#0b0b0b", backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px)" }}>
           <div className="pp-section">
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))", gap: "clamp(24px, 4vw, 60px)", alignItems: "center" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
               <div style={{ position: "relative", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden", background: "linear-gradient(135deg,#1c2230 0%, #202632 100%)" }}>
                 <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <div style={{ width: 90, height: 90, borderRadius: "50%", background: "#07b4ba", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
@@ -788,7 +1078,7 @@ export default function ProgramPage() {
                 </div>
               </div>
               <div>
-                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 10 }}>AOF Intro Section</p>
+                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase",marginBottom: 10 }}>AOF Intro Section</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", letterSpacing: 2, color: "#fff", lineHeight: 1.1, marginBottom: 20 }}>
                   Welcome to the <span style={{ color: "#07b4ba" }}>AOF Family</span>
                 </h2>
@@ -809,7 +1099,20 @@ export default function ProgramPage() {
         <section className="pp-features">
           <div className="pp-section">
             <Reveal>
-              <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", color: "#07b4ba", marginBottom: 0, textAlign: "center" }}>WHAT'S INCLUDED</p>
+              <p
+  style={{
+    fontFamily: "'Barlow', sans-serif",
+    fontWeight: 700,
+    fontSize: 14,
+    letterSpacing: 3,
+    textTransform: "uppercase",
+    color: "#07b4ba",
+    marginBottom: 0,
+    textAlign: "center",
+  }}
+>
+  WHAT'S INCLUDED
+</p>
               <h2 className="pp-features-heading">WHAT YOU GET</h2>
             </Reveal>
             <div className="pp-features-grid">
@@ -963,6 +1266,7 @@ export default function ProgramPage() {
             <div className="pp-book-strip" style={{ marginTop: 24 }}>
               <button onClick={scrollToFooter}>Join Now</button>
             </div>
+
           </div>
         </div>
 
@@ -971,9 +1275,9 @@ export default function ProgramPage() {
           <div className="pp-section" style={{ paddingBottom: 40 }}>
             <Reveal>
               <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba", fontWeight: 700, marginBottom: 24, letterSpacing: 2, textTransform: "uppercase" }}>LED BY</p>
-              <div style={{ display: "flex", gap: "clamp(24px, 4vw, 56px)", alignItems: "flex-start", flexWrap: "wrap" }}>
-                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" style={{ width: "min(240px, 100%)", height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }} />
-                <div style={{ flex: 1, minWidth: 260 }}>
+              <div style={{ display: "flex", gap: 56, alignItems: "flex-start", flexWrap: "wrap" }}>
+                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" style={{ width: 240, height: 300, objectFit: "cover", objectPosition: "top", borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 280 }}>
                   <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: 2, color: "#fff", marginBottom: 4 }}>Head Coach</h2>
                   <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20 }}>AOF Academy — Lead Trainer &amp; Founder</p>
                   <div style={{ marginBottom: 24 }}>
@@ -984,9 +1288,9 @@ export default function ProgramPage() {
                       </div>
                     ))}
                   </div>
-                  <div className="pp-coach-stats" style={{ display: "flex", gap: "clamp(12px, 1.5vw, 22px)", flexWrap: "wrap", marginTop: 26 }}>
+                  <div className="pp-coach-stats" style={{ display: "flex", gap: 22, flexWrap: "wrap", marginTop: 26 }}>
                     {stats.map((stat, i) => (
-                      <div key={i} style={{ background: "linear-gradient(180deg,#181818 0%, #121212 100%)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, width: "min(160px, calc(50% - 8px))", minHeight: 120, padding: "18px 16px", textAlign: "center", boxShadow: "0 0 14px rgba(0,0,0,0.18)" }}>
+                      <div key={i} style={{ background: "linear-gradient(180deg,#181818 0%, #121212 100%)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, width: 160, height: 140, padding: "18px 16px", textAlign: "center", boxShadow: "0 0 14px rgba(0,0,0,0.18)" }}>
                         <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#07b4ba", letterSpacing: 1, marginBottom: 10 }}>{stat.val}</p>
                         <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 12, letterSpacing: 2, textTransform: "uppercase" }}>{stat.label}</p>
                       </div>
@@ -1034,26 +1338,47 @@ export default function ProgramPage() {
 
         {/* ── BONUSES SECTION ── */}
         <div style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 24px" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 20px" }}>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 10 }}>EXCLUSIVE FOUNDERS BONUSES</p>
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 18 }}>
                 5 PREMIUM BONUSES.<span style={{ color: "#07b4ba" }}> FREE WITH ENROLLMENT.</span>
               </h2>
-              <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.62)", lineHeight: 1.7, marginBottom: 5 }}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
+              <p style={{ 
+  fontFamily: "'Barlow', sans-serif",
+  fontSize: 15,
+  color: "rgba(255,255,255,0.62)",
+  lineHeight: 1.7,
+  marginBottom: 5
+}}>Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
-            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(150px, 100%), 1fr))", gap: 8 }}>
+            <div className="pp-bonus-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 8 }}>
               {[
                 { title: "FIGHTER NUTRITION GUIDE", img: "🥗", value: "₹1499 VALUE" },
-                { title: "DAILY MOBILITY ROUTINE", img: "🧘", value: "₹1299 VALUE" },
-                { title: "PRIVATE FIGHTERS COMMUNITY", img: "💬", value: "₹1299 VALUE" },
-                { title: "ADVANCED SHADOWBOXING FLOWS", img: "🥊", value: "₹1299 VALUE" },
-                { title: "FIGHTER MINDSET AUDIO PACK", img: "🎧", value: "₹1199 VALUE" },
+                { title: "DAILY MOBILITY ROUTINE",img: "🧘", value: "₹1299 VALUE" },
+                { title: "PRIVATE FIGHTERS COMMUNITY",  img: "💬", value: "₹1299 VALUE" },
+                { title: "ADVANCED SHADOWBOXING FLOWS",  img: "🥊", value: "₹1299 VALUE" },
+                { title: "FIGHTER MINDSET AUDIO PACK",  img: "🎧", value: "₹1199 VALUE" },
               ].map((item, i) => (
                 <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "10px 12px", position: "relative", overflow: "hidden", minHeight: 320, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div style={{ position: "absolute", top: 14, left: 14, background: "#07b4ba", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, padding: "5px 10px", borderRadius: 5 }}>#{i + 1}</div>
                   <div style={{ width: 95, height: 95, borderRadius: "50%", border: "2px solid rgba(7,180,186,0.5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 42, marginBottom: 14, marginTop: 10 }}>{item.img}</div>
+                  
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 34, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 10 }}>{item.title}</h3>
+               <div style={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
+  <p
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontSize: 15,
+      color: "rgba(255,255,255,0.62)",
+      lineHeight: 1.7,
+      marginBottom: 0,
+    }}
+  >
+    {item.desc}
+  </p>
+</div>
+
                   <div style={{ marginTop: 18, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 5, width: "100%" }}>
                     <p style={{ color: "#07b4ba", fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 1 }}>{item.value}</p>
                   </div>
@@ -1079,7 +1404,7 @@ export default function ProgramPage() {
         {/* ── APPLY / CTA SECTION ── */}
         <div ref={footerRef} style={{ background: "#0b0b0b", backgroundImage: "radial-gradient(rgba(7,180,186,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px", position: "relative", overflow: "hidden" }}>
           <div className="pp-section">
-            <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))", gap: "clamp(32px, 4vw, 60px)", alignItems: "center" }}>
+            <div className="pp-apply-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
               <div>
                 <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: "#07b4ba", marginBottom: 12, textTransform: "uppercase" }}>Ready To Start?</p>
                 <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,4vw,42px)", lineHeight: 0.95, letterSpacing: 2, color: "#fff", marginBottom: 20 }}>
@@ -1088,22 +1413,22 @@ export default function ProgramPage() {
                 <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.7, marginBottom: 20, maxWidth: 340 }}>
                   Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "clamp(20px, 3vw, 32px)", marginBottom: 28, flexWrap: "wrap" }}>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
-                      <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <span style={{ color: "#07b4ba", fontSize: 18, lineHeight: 1 }}>✓</span>
-                        <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 16, color: "#fff" }}>{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <button style={{ display: "flex", alignItems: "center", gap: 10, height: 52, padding: "0 24px", borderRadius: 999, border: "none", background: "#25D366", color: "#fff", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 15, cursor: "pointer", flexShrink: 0, boxShadow: "0 4px 18px rgba(37,211,102,0.35)" }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-                    </svg>
-                    Chat On WhatsApp
-                  </button>
-                </div>
+               <div style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 28, flexWrap: "wrap" }}>
+  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+    {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
+      <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{ color: "#07b4ba", fontSize: 18, lineHeight: 1 }}>✓</span>
+        <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 16, color: "#fff" }}>{item}</p>
+      </div>
+    ))}
+  </div>
+  <button style={{ display: "flex", alignItems: "center", gap: 10, height: 52, padding: "0 24px", borderRadius: 999, border: "none", background: "#25D366", color: "#fff", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 15,marginLeft: "40px", cursor: "pointer", flexShrink: 0, boxShadow: "0 4px 18px rgba(37,211,102,0.35)" }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+    Chat On WhatsApp
+  </button>
+</div>
               </div>
 
               {/* CTA CARD */}
