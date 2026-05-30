@@ -1374,11 +1374,11 @@ export default function ProgramPage() {
     marginTop: 15,
   }}
 >{
-  i === 0 ? <IconNutrition /> :
-  i === 1 ? <IconMobility /> :
-  i === 2 ? <IconCommunity /> :
-  i === 3 ? <IconShadowboxing /> :
-  <IconAudio />
+  i === 0 ? <IconPlan /> :
+  i === 1 ? <IconChat /> :
+  i === 2 ? <IconLeaf /> :
+  i === 3 ? <IconChart /> :
+  <IconGlobe />
 }</div>
                   
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 20, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 10 }}>{item.title}</h3>
