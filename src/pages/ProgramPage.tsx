@@ -897,6 +897,7 @@ const IconGlobe = () => (
   </svg>
 );
 
+
 const whatCards = [
   { icon: <IconPlan />, title: "MADE EXCLUSIVELY FOR BEGINNERS", desc: "Clear guidance from day one" },
   { icon: <IconChat />, title: "STRUCTURED PROGRESSION", desc: "Stance → punches → kicks → combinations" },
@@ -1362,12 +1363,22 @@ export default function ProgramPage() {
               ].map((item, i) => (
                 <div key={i} style={{ background: "linear-gradient(180deg,#0e141c 0%, #0a0f14 100%)", border: "1px solid rgba(7,180,186,0.35)", borderRadius: 18, padding: "10px 12px", position: "relative", overflow: "hidden", minHeight: 320, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div style={{ position: "absolute", top: 14, left: 14, background: "#07b4ba", color: "#000", fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, padding: "5px 10px", borderRadius: 5 }}>#{i + 1}</div>
-                  <div style={{ width: 95, height: 95, borderRadius: "50%", border: "2px solid rgba(7,180,186,0.5)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14, marginTop: 10 }}>{
-  i === 0 ? <IconPlan /> :
-  i === 1 ? <IconChat /> :
-  i === 2 ? <IconLeaf /> :
-  i === 3 ? <IconChart /> :
-  <IconGlobe />
+                  <div
+  style={{
+    width: 70,
+    height: 70,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    marginTop: 15,
+  }}
+>{
+  i === 0 ? <IconNutrition /> :
+  i === 1 ? <IconMobility /> :
+  i === 2 ? <IconCommunity /> :
+  i === 3 ? <IconShadowboxing /> :
+  <IconAudio />
 }</div>
                   
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 20, lineHeight: 1, letterSpacing: 1.5, color: "#fff", marginBottom: 10 }}>{item.title}</h3>
