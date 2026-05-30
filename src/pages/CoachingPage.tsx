@@ -493,7 +493,7 @@ body { background: #0a0a0a; }
 .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
 .cp-btn-primary {
-  padding: 14px 34px; border-radius: 7px; background: #07b4ba; color: #fff;
+  padding: 14px 60px; border-radius: 7px; background: #07b4ba; color: #fff;
   font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px;
   border: none; cursor: pointer; transition: background 0.2s;
 }
