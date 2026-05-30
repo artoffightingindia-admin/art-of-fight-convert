@@ -345,9 +345,16 @@ const css = `
   /* ── WHAT YOU GET ── */
   .pp-features { background: #0b0b0b; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
   .pp-features-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 52px); letter-spacing: 2px; color: #fff; text-align: center; margin-bottom: 48px; margin-top: 4px; }
-  .pp-features-grid { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+ .pp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
   .pp-feature-card {
-    width: clamp(160px, 18vw, 210px);
+    width: 100%;
+  min-width: 0;
+  min-height: 255px;
+  padding: 16px 10px;  width: clamp(160px, 18vw, 210px);
     min-height: 255px; padding: 16px 10px;
     border-radius: 18px; background: #111417; border: 2px solid #111417;
     text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
