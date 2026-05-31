@@ -321,7 +321,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* SECTION WRAPPER */
-.cp-section { max-width: 1100px; margin: 0 auto; padding: 45px 5vw; }
+.cp-section { max-width: 1100px; margin: 0 auto; padding: 45px 3vw; }
 
 /* PAIN SECTION */
 .cp-pain-grid { display: flex; gap: 100px; align-items: center; flex-wrap: wrap; }
@@ -424,7 +424,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* FAQ */
 .cp-faq-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px); background-size: 40px 40px; margin-bottom: 0; padding-bottom: 0; }
 .cp-faq-bg::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(7,180,186,0.05), transparent 60%); pointer-events: none; }
-.cp-faq-inner { max-width: 1180px; margin: 0 auto; padding: 32px 5vw; text-align: center; position: relative; z-index: 1; }
+.cp-faq-inner { max-width: 1180px; margin: 0 auto; padding: 32px 4vw; text-align: center; position: relative; z-index: 1; }
 .cp-faq-label { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #07b4ba; margin-bottom: 10px; }
 .cp-faq-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px,4vw,60px); letter-spacing: 3px; color: #fff; line-height: 1; margin-bottom: 10px; }
 .cp-faq-title span { color: #07b4ba; }
