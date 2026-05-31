@@ -457,11 +457,17 @@ body { background: #0a0a0a; }
 
 /* HERO — FIX: position relative + overflow hidden so bg image is clipped to hero bounds (including trust strip) */
 .cp-hero {
-  position: relative;
-  min-height: 25vh;
-  padding-bottom: 48px;
-  overflow: hidden;
-}
+ position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;   /* left-anchor the content */
+    overflow: hidden;
+    padding: 110px 1vw 60px;       /* 5vw side padding scales with screen — same on every laptop */
+    background:
+      radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
+      #06080c;
+  }
 .cp-hero-bg {
   position: absolute;
   /* FIX: top/left/right as before but bottom aligned to 0 so it stops at trust strip bottom edge */
@@ -505,7 +511,7 @@ body { background: #0a0a0a; }
 }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 .cp-trust {
-  position: relative; left: 0; width: 100%;
+  position: relative; left: 0; width: 100%;  margin-top: 35px; 
   background: #07b4ba; height: 1.5cm;
   display: flex; align-items: center; justify-content: space-around;
   padding: 0 40px; gap: 12px; flex-wrap: wrap;
