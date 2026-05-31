@@ -316,7 +316,7 @@ const css = `
 
   /* ── TRUST BAR ── */
   .pp-trust-strip {
-    width: 100%; min-height: 60px;
+    width: 100%; min-height: 45px;
     background: #07b4ba;
     display: flex; align-items: center; justify-content: space-around;
     padding: 12px 40px; gap: 12px; flex-wrap: wrap;
@@ -460,7 +460,7 @@ const css = `
     }
 
     /* Hero */
-    .pp-hero { min-height: auto; padding: 100px 5vw 60px; align-items: flex-start; }
+    .pp-hero { min-height: auto; padding: 100px 5vw 90px; align-items: flex-start; }
     .pp-hero-content { max-width: 100%; }
     .pp-hero-h1 { font-size: clamp(34px, 9vw, 48px); line-height: 0.95; }
     .pp-hero-h2 { font-size: 12px; letter-spacing: 2px; }
