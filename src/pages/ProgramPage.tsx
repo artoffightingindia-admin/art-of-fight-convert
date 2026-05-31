@@ -1226,6 +1226,7 @@ export default function ProgramPage() {
     </button>
   </div>
 </div>
+</div>
               
 
               {/* CTA CARD */}
