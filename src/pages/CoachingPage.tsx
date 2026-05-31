@@ -7,18 +7,9 @@ interface RevealProps {
   style?: CSSProperties;
 }
 
-interface LeadForm {
-  name: string;
-  phone: string;
-  goal: string;
-  date: string;
-  time: string;
-}
-
 /* ── REVEAL COMPONENT ── */
 function Reveal({ children, style = {} }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -34,17 +25,8 @@ function Reveal({ children, style = {} }: RevealProps) {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
-
   return (
-    <div
-      ref={ref}
-      style={{
-        opacity: 0,
-        transform: "translateY(24px)",
-        transition: "opacity 0.65s ease, transform 0.65s ease",
-        ...style,
-      }}
-    >
+    <div ref={ref} style={{ opacity: 0, transform: "translateY(24px)", transition: "opacity 0.65s ease, transform 0.65s ease", ...style }}>
       {children}
     </div>
   );
@@ -119,14 +101,20 @@ const IconTrophy = () => (
   </svg>
 );
 const IconShield = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4"/>
   </svg>
 );
 const IconUsers = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
     <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+const IconTrophyWhite = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+    <path d="M4 22h16M12 17v5M7 4v6a5 5 0 0 0 10 0V4H7z" />
   </svg>
 );
 
@@ -198,7 +186,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .cp { background: #0a0a0a; font-family: 'Barlow', sans-serif; color: #fff; overflow-x: hidden; }
 
-/* NAVBAR */
+/* ── NAVBAR ── */
 .cp-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   height: 62px; padding: 0 20px;
@@ -223,17 +211,22 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .cp-book-nav:hover { background: #059a9f; }
 
-/* ══════════════════════════════════
-   HERO — exact Program Page design
-   ══════════════════════════════════ */
+/* ══════════════════════════════════════════
+   HERO — exactly matching ProgramPage
+   KEY FIX: hero is a normal block, trust strip
+   is a SIBLING element below it (not inside)
+   ══════════════════════════════════════════ */
 .cp-hero {
   position: relative;
+  /* min-height fills screen minus navbar, trust strip sits below */
+  min-height: calc(100vh - 60px);
   display: flex;
   align-items: center;
+  /* left-aligned, same as ProgramPage */
   justify-content: flex-start;
   overflow: hidden;
-  /* padding-top clears navbar; 5vw sides are proportional on every screen */
-  padding: 130px 5vw 80px;
+  /* 5vw sides = proportional on every screen width */
+  padding: 110px 5vw 60px;
   background:
     radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
     #06080c;
@@ -249,6 +242,7 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%);
 }
+/* Content block — left-aligned, capped width so text stays readable */
 .cp-hero-content {
   position: relative; z-index: 2;
   display: flex; flex-direction: column;
@@ -263,7 +257,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .cp-hero-h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(40px, 5.5vw, 72px);
   line-height: 0.95; letter-spacing: 2px;
   text-transform: uppercase; color: #fff;
   margin-bottom: 20px;
@@ -272,7 +266,7 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-hero-desc {
   color: rgba(255,255,255,0.62);
   font-family: 'Barlow', sans-serif;
-  font-size: clamp(14px, 1.5vw, 16px);
+  font-size: 16px;
   line-height: 1.7; max-width: 480px; margin-bottom: 32px;
 }
 .cp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -293,19 +287,38 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 
-/* TRUST STRIP — exact Program Page design */
+/* ══════════════════════════════════════════
+   TRUST STRIP — SIBLING of hero, full-width
+   Exactly matching ProgramPage trust bar
+   ══════════════════════════════════════════ */
 .cp-trust {
+  /* Full bleed — sits directly below the hero section */
   width: 100%;
-  min-height: 60px;
   background: #07b4ba;
-  display: flex; align-items: center; justify-content: space-around;
-  padding: 12px 5vw; gap: 12px; flex-wrap: wrap;
-  position: relative; z-index: 20;
+  display: flex;
+  align-items: center;
+  /* space-evenly distributes 3 items perfectly across any screen width */
+  justify-content: space-evenly;
+  /* Vertical padding only — no horizontal padding that creates gaps */
+  padding: 14px 0;
+  gap: 0;
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 20;
 }
-.cp-trust-item { display: flex; align-items: center; gap: 12px; }
-.trust-icon-box { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.trust-icon-box svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
-.cp-trust-item span { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
+.cp-trust-item {
+  display: flex; align-items: center; gap: 12px;
+  flex: 1; justify-content: center;
+}
+.trust-icon-box {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.trust-icon-box svg { width: 28px; height: 28px; }
+.cp-trust-item span {
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px;
+  color: #ffffff; line-height: 1; white-space: nowrap;
+}
 
 /* SECTION WRAPPER */
 .cp-section { max-width: 1100px; margin: 0 auto; padding: 45px 5vw; }
@@ -365,10 +378,6 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
 .cp-testi-img { flex: 0 0 460px; max-width: 100%; }
 .cp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
-.cp-feedback-s { display: flex; gap: 16px; flex-wrap: wrap; }
-.cp-feedback-card { flex: 1; min-width: 240px; border-radius: 14px; background: #0f1115; border: 1px solid rgba(255,255,255,0.08); padding: 24px; }
-.cp-feedback-card p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
-.cp-feedback-card .author { font-family: 'Barlow', sans-serif; color: #07b4ba; font-weight: 700; font-size: 13px; }
 
 /* APPLY */
 .cp-apply-bg { position: relative; overflow: hidden; background-color: #0a0a0a; background-image: radial-gradient(rgba(7,180,186,0.18) 0.75px, transparent 0.75px); background-size: 20px 20px; }
@@ -396,29 +405,14 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-checklist-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
 .cp-checklist-item .check { color: #07b4ba; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
 .cp-checklist-item p { font-family: 'Barlow', sans-serif; font-size: 16px; color: #fff; line-height: 1.55; }
-.cp-wa-wrapper { display: flex; justify-content: flex-end; margin-top: 18px; padding-left: 40px; }
 .cp-wa-btn { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 14px 28px; border-radius: 40px; font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 15px; border: none; cursor: pointer; transition: background 0.2s; white-space: nowrap; flex-shrink: 0; }
-.cp-wa-label { text-align: right; margin-bottom: 8px; margin-left: 40px; color: rgba(255,255,255,0.45); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 0.5px; }
 .cp-wa-btn:hover { background: #1ebe57; }
-
-/* FOOTER */
-.cp-footer { background: #0f1115; padding: 26px 5vw 8px; margin-top: 0; }
-.cp-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
-.cp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; padding-top: 20px; margin-bottom: 14px; }
-.cp-footer-logo { color: #07b4ba; }
-.cp-footer-links { display: flex; flex-direction: column; gap: 10px; }
-.cp-footer-links a, .cp-footer-contact p, .cp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
-.cp-footer-links a:hover { color: #07b4ba; }
-.cp-footer-contact { display: flex; flex-direction: column; gap: 18px; }
-.cp-footer-about p { line-height: 1.8; max-width: 320px; }
-.cp-footer-bottom { margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
 
 /* FEEDBACK SLIDER */
 .cp-feedback-desktop-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 28px; }
 .cp-feedback-desktop-nav button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background: #15181d; color: #fff; font-size: 24px; cursor: pointer; transition: 0.25s; display: flex; align-items: center; justify-content: center; }
 .cp-feedback-desktop-nav button:hover { border-color: #07b4ba; color: #07b4ba; transform: translateY(-2px); }
 .cp-feedback-mobile-nav { display: none; }
-
 .cp-feedback-slider-new { position: relative; overflow: hidden; width: 100%; padding-bottom: 120px; }
 .cp-feedback-track-new { display: flex; gap: 24px; will-change: transform; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
 .cp-feedback-card-new { border-radius: 18px; background: #1a1d23; border: 1px solid rgba(255,255,255,0.05); padding: 28px 24px; flex-shrink: 0; position: relative; overflow: hidden; display: flex; flex-direction: column; }
@@ -448,46 +442,50 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-faq-answer p { font-family: 'Barlow', sans-serif; font-weight: 400; font-size: 15px; color: rgba(255,255,255,0.58); line-height: 1.75; }
 .cp-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
 
-/* RESPONSIVE */
+/* FOOTER */
+.cp-footer { background: #0f1115; padding: 26px 5vw 8px; margin-top: 0; }
+.cp-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.cp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; padding-top: 20px; margin-bottom: 14px; }
+.cp-footer-logo { color: #07b4ba; }
+.cp-footer-links { display: flex; flex-direction: column; gap: 10px; }
+.cp-footer-links a, .cp-footer-contact p, .cp-footer-about p { font-family: 'Barlow', sans-serif; font-size: 17px; color: rgba(255,255,255,0.52); text-decoration: none; transition: 0.2s; }
+.cp-footer-links a:hover { color: #07b4ba; }
+.cp-footer-contact { display: flex; flex-direction: column; gap: 18px; }
+.cp-footer-about p { line-height: 1.8; max-width: 320px; }
+.cp-footer-bottom { margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); }
+
+/* DESKTOP/MOBILE slider toggle */
+.cp-desktop-slider-wrapper { display: block; }
+.cp-mobile-slider-wrapper { display: none; }
+
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .cp-nav { padding: 14px 20px; }
 
-  /* Hero mobile — exact Program Page mobile rules */
-  .cp-hero { padding: 100px 5vw 60px; align-items: flex-start; }
+  /* Hero mobile */
+  .cp-hero { padding: 100px 5vw 60px; min-height: auto; align-items: flex-start; }
   .cp-hero-content { max-width: 100%; }
   .cp-hero-tag { font-size: 11px; letter-spacing: 2px; }
   .cp-hero-h1 { font-size: clamp(34px, 9vw, 48px); line-height: 0.95; }
   .cp-hero-desc { font-size: 14px; max-width: 100%; }
   .cp-hero-btns { flex-direction: column; width: 100%; gap: 12px; }
   .cp-btn-primary { width: 100%; padding: 16px 24px; font-size: 18px; border-radius: 10px; justify-content: center; }
-  .cp-btn-outline { width: 100%; border-radius: 4px; padding: 14px 0; font-size: 16px; letter-spacing: 1.5px; }
 
-  /* Trust mobile — exact Program Page mobile rules */
-  .cp-trust { padding: 12px 16px; gap: 12px; justify-content: center; min-height: auto; flex-wrap: wrap; }
-  .cp-trust-item { width: calc(50% - 6px); justify-content: center; }
-  .cp-trust-item span { font-size: 13px; letter-spacing: 0.5px; }
-  .trust-icon-box { width: 28px; height: 28px; }
-  .trust-icon-box svg { width: 20px; height: 20px; }
+  /* Trust mobile — wraps to 2 cols, still flush */
+  .cp-trust { flex-wrap: wrap; padding: 12px 0; gap: 0; }
+  .cp-trust-item { width: 50%; flex: unset; justify-content: center; padding: 6px 0; }
+  .cp-trust-item span { font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
+  .trust-icon-box { width: 24px; height: 24px; }
+  .trust-icon-box svg { width: 18px; height: 18px; }
 
   .cp-faq-grid { grid-template-columns: 1fr; }
   .cp-what-cards { display: flex; flex-direction: column; gap: 14px; padding: 0 8px; }
-  .cp-feedback-wrapper { overflow: hidden; }
-  .cp-feedback-pages { display: flex; transition: transform 0.5s ease; }
-  .cp-feedback-page { min-width: 100%; display: flex; flex-direction: column; gap: 14px; padding: 0 6px; }
-  .cp-feedback-card { width: 100%; min-width: unset; max-width: 100%; min-height: 90px; margin-bottom: 10px; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; justify-content: center; }
-  .cp-feedback-card p { font-size: 13px; line-height: 1.5; }
-  .cp-feedback-card .author { font-size: 12px; margin-top: 8px; }
-  .cp-feedback-nav { display: flex; justify-content: center; gap: 16px; margin-top: 16px; }
-  .cp-feedback-nav button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: #fff; font-size: 18px; }
   .cp-what-card { width: 100%; min-height: 90px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; text-align: left; padding: 14px 16px; gap: 14px; border-radius: 12px; }
   .cp-what-card-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .cp-what-card-icon svg { width: 28px; height: 28px; }
   .cp-what-card h4 { font-size: 13px; margin-bottom: 4px; }
   .cp-what-card p { font-size: 11px; line-height: 1.4; }
-  .cp-trust { padding: 0 20px; }
   .cp-section { padding: 48px 5vw; }
-  .cp-feedback-slider { overflow: hidden; height: 300px; }
-  .cp-feedback-track { display: flex; flex-direction: column; }
   .cp-pain-grid { flex-direction: column; gap: 35px; }
   .cp-pain-media { flex: unset; width: 100%; }
   .cp-method-grid { flex-direction: column; gap: 35px; }
@@ -511,49 +509,32 @@ img { max-width: 100%; height: auto; display: block; }
   .cp-coach-stats > div { width: 100% !important; min-height: 120px !important; height: auto !important; padding: 18px 10px !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: hidden; }
   .cp-coach-stats > div p:first-child { font-size: 34px !important; letter-spacing: 1px !important; margin-bottom: 6px !important; }
   .cp-coach-stats > div p:last-child { font-size: 11px !important; letter-spacing: 2px !important; padding: 0 4px; }
-
-  .cp-feedback-mobile-nav { display: flex; position: relative; bottom: unset; left: unset; transform: unset; margin-top: 22px; align-items: center; justify-content: center; gap: 14px; z-index: 5; }
-  .cp-feedback-mobile-nav button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12); background: #15181d; color: #ffffff; font-size: 18px; cursor: pointer; transition: 0.25s; display: flex; align-items: center; justify-content: center; }
+  .cp-feedback-mobile-nav { display: flex; justify-content: center; gap: 38px; margin-top: 40px; }
+  .cp-feedback-mobile-nav button { width: 56px; height: 56px; border: 2px solid rgba(141,150,168,0.28); background: rgba(7,10,16,0.35); color: #a6adbd; font-size: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .cp-feedback-desktop-nav { display: none; }
   .cp-feedback-slider-new { overflow: hidden; width: 100%; position: relative; padding-bottom: 0; }
-  .cp-feedback-track-new { display: block; width: 100% !important; transition: transform 0.45s ease; }
-  .cp-feedback-page-mobile { display: flex; flex-direction: column; gap: 36px; width: 100%; padding: 0 8px; }
-  .cp-feedback-card-new { width: 100% !important; min-height: 250px; border-radius: 22px; background: #171a21; border: 1px solid rgba(141,150,168,0.22); padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 14px 34px rgba(0,0,0,0.25); }
-  .cp-feedback-card-new p { color: rgba(189,195,208,0.78); font-size: 25px; line-height: 1.72; margin-bottom: 28px; }
-  .cp-feedback-stars { display: flex; gap: 10px; margin-bottom: 28px; font-size: 30px; }
-  .cp-feedback-card-new .author-name { font-size: 27px; font-weight: 800; margin-bottom: 8px; }
-  .cp-feedback-card-new .author-role { color: #9da5b6; font-size: 22px; }
-  .cp-feedback-card-new > div:last-child { gap: 22px !important; }
-  .cp-feedback-card-new > div:last-child > div:first-child { width: 84px !important; height: 84px !important; flex-shrink: 0; background: #262b35 !important; color: #929aaa; font-size: 34px !important; }
-  .cp-feedback-mobile-nav { position: relative; bottom: unset; left: unset; transform: unset; display: flex; justify-content: center; gap: 38px; margin-top: 82px; }
-  .cp-feedback-mobile-nav button { width: 82px; height: 82px; border: 2px solid rgba(141,150,168,0.28); background: rgba(7,10,16,0.35); color: #a6adbd; font-size: 58px; }
-
-  /* mobile slider wrappers */
+  .cp-feedback-track-new { display: block; width: 100% !important; }
+  .cp-feedback-card-new { width: 100% !important; min-height: 200px; padding: 24px; }
   .cp-desktop-slider-wrapper { display: none !important; }
   .cp-mobile-slider-wrapper { display: flex !important; flex-direction: column !important; align-items: center !important; width: 100% !important; gap: 16px !important; }
-  .cp-mobile-viewport { width: 100% !important; overflow: hidden !important; box-sizing: border-box !important; padding: 4px 0 !important; }
+  .cp-mobile-viewport { width: 100% !important; overflow: hidden !important; box-sizing: border-box !important; }
   .cp-mobile-track { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; width: 100% !important; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important; }
   .cp-mobile-combo-column { flex: 0 0 100% !important; width: 100% !important; min-width: 100% !important; max-width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 8px !important; box-sizing: border-box !important; padding: 0 !important; }
   .cp-mobile-card { width: 100% !important; max-width: calc(100vw - 24px) !important; box-sizing: border-box !important; background: #15171e; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px !important; padding: 10px 14px !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 96px !important; margin: 0 !important; overflow: hidden !important; }
   .cp-mobile-stars { color: #07b4ba; font-size: 10px; margin-bottom: 2px; text-align: center !important; }
-  .cp-mobile-text { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.7); font-size: 10px !important; line-height: 1.3 !important; margin: 0 auto 6px auto !important; font-style: italic; white-space: normal !important; word-break: break-word !important; display: block !important; width: 100% !important; text-align: center !important; }
+  .cp-mobile-text { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.7); font-size: 10px !important; line-height: 1.3 !important; margin: 0 auto 6px auto !important; font-style: italic; display: block !important; width: 100% !important; text-align: center !important; }
   .cp-mobile-user { display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px; margin-top: auto; width: 100% !important; }
   .cp-mobile-avatar { width: 22px; height: 22px; border-radius: 50%; background: rgba(7,180,186,0.1); display: flex; align-items: center; justify-content: center; color: #07b4ba; font-size: 10px; }
   .cp-mobile-info h4 { margin: 0; color: #fff; font-size: 10px; font-weight: 600; line-height: 1.1; text-align: center !important; }
   .cp-mobile-info span { color: rgba(255,255,255,0.35); font-size: 8px; display: block !important; text-align: center !important; }
   .cp-mobile-arrows-row { display: flex !important; justify-content: center !important; align-items: center !important; gap: 12px !important; width: 100% !important; margin-top: 4px !important; }
-  .cp-mobile-btn { width: 40px !important; height: 40px !important; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.15) !important; background: #111317 !important; color: #fff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer; font-size: 14px; transition: all 0.2s ease; }
-  .cp-mobile-btn:active { background: #07b4ba !important; border-color: #07b4ba !important; }
+  .cp-mobile-btn { width: 40px !important; height: 40px !important; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.15) !important; background: #111317 !important; color: #fff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer; font-size: 14px; }
 }
 
 @media (max-width: 480px) {
   .cp-hero-h1 { font-size: clamp(30px, 8vw, 38px); }
   .cp-trust-item { width: 100%; }
 }
-
-/* DESKTOP slider wrapper visibility */
-.cp-desktop-slider-wrapper { display: block; }
-.cp-mobile-slider-wrapper { display: none; }
 `;
 
 /* ── CALENDAR COMPONENT ── */
@@ -642,10 +623,10 @@ function InfiniteFeedbackSlider() {
     <div ref={sliderRef} className="cp-feedback-slider-new">
       <div ref={trackRef} className="cp-feedback-track-new" style={{ width: "max-content" }}>
         {window.innerWidth <= 768 ? (
-          <div className="cp-feedback-page-mobile">
+          <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%" }}>
             {mobileCards.map((card, i) => (
               <div key={`${card.author}-${mobileIndex}-${i}`} className="cp-feedback-card-new">
-                <div className="cp-feedback-stars"><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span></div>
+                <div className="cp-feedback-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 <p>"{card.text}"</p>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#202533", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>👤</div>
@@ -657,7 +638,7 @@ function InfiniteFeedbackSlider() {
         ) : (
           allCards.map((card, i) => (
             <div key={i} className="cp-feedback-card-new" style={{ width: "340px", flexShrink: 0 }}>
-              <div className="cp-feedback-stars"><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span><span style={{ color: "#07b4ba" }}>★</span></div>
+              <div className="cp-feedback-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p>"{card.text}"</p>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: "auto" }}>
                 <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#202533", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>👤</div>
@@ -741,12 +722,6 @@ export default function CoachingPage() {
     "You want to compete seriously but don't know the next step",
   ];
 
-  const trustItems = [
-    { icon: <IconShield />, label: "Proven System" },
-    { icon: <IconUsers />, label: "Tamil Team" },
-    { icon: <IconTrophy />, label: "Real Results" },
-  ];
-
   return (
     <>
       <style>{css}</style>
@@ -768,15 +743,12 @@ export default function CoachingPage() {
         </nav>
 
         {/* ══════════════════════════════════════════
-            HERO — exact Program Page layout & design
-            Only the text content is coaching-specific
+            HERO — full viewport height, left-aligned
+            Trust strip is a SIBLING below, NOT inside
             ══════════════════════════════════════════ */}
         <section id="home" className="cp-hero">
-          {/* Background layer — same as Program Page */}
           <div className="cp-hero-bg" />
           <div className="cp-hero-overlay" />
-
-          {/* Content — same structure & classes as Program Page */}
           <div className="cp-hero-content">
             <Reveal>
               <p className="cp-hero-tag">AOF Academy — 1 On 1 Coaching</p>
@@ -794,22 +766,27 @@ export default function CoachingPage() {
               </div>
             </Reveal>
           </div>
-
-          {/* Trust strip — same structure & classes as Program Page */}
-          <div className="cp-trust">
-            {trustItems.map(({ icon, label }) => (
-              <div className="cp-trust-item" key={label}>
-                <div className="trust-icon-box">{icon}</div>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
         </section>
 
         {/* ══════════════════════════════════════════
-            ALL SECTIONS BELOW ARE UNTOUCHED —
-            identical to the original CoachingPage
+            TRUST STRIP — OUTSIDE the hero section
+            This is the key fix: it's a sibling <div>
+            directly after </section>, not inside it
             ══════════════════════════════════════════ */}
+        <div className="cp-trust">
+          <div className="cp-trust-item">
+            <div className="trust-icon-box"><IconShield /></div>
+            <span>Proven System</span>
+          </div>
+          <div className="cp-trust-item">
+            <div className="trust-icon-box"><IconUsers /></div>
+            <span>Tamil Team</span>
+          </div>
+          <div className="cp-trust-item">
+            <div className="trust-icon-box"><IconTrophyWhite /></div>
+            <span>Real Results</span>
+          </div>
+        </div>
 
         {/* ── SOUNDS FAMILIAR ── */}
         <section className="cp-section">
@@ -1018,10 +995,8 @@ export default function CoachingPage() {
                     <div className="cp-checklist-item" key={i}><span className="check">✓</span><p>{item}</p></div>
                   ))}
                   <div style={{ marginTop: 32 }}>
-                    <p style={{ paddingLeft: 475, marginBottom: 8, color: "rgba(255,255,255,0.45)", fontFamily: "'Barlow', sans-serif", fontSize: 13, letterSpacing: "0.5px", whiteSpace: "nowrap" }}>Any Queries?</p>
-                    <div style={{ display: "flex", justifyContent: "flex-start", marginTop: 18, paddingLeft: 400 }}>
-                      <button className="cp-wa-btn"><WhatsAppIcon />Chat On WhatsApp</button>
-                    </div>
+                    <p style={{ marginBottom: 8, color: "rgba(255,255,255,0.45)", fontFamily: "'Barlow', sans-serif", fontSize: 13, letterSpacing: "0.5px" }}>Any Queries?</p>
+                    <button className="cp-wa-btn"><WhatsAppIcon />Chat On WhatsApp</button>
                   </div>
                 </Reveal>
               </div>
