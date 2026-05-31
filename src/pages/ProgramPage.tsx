@@ -1188,7 +1188,7 @@ export default function ProgramPage() {
         fontSize: 15,
         fontWeight: 700,
         color: "#fff",
-        marginBottom: 12
+        marginBottom: 12,marginLeft: "2px"
       }}
     >
       Any Queries?
