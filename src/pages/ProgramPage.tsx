@@ -259,7 +259,7 @@ const css = `
     align-items: center;
     justify-content: flex-start;   /* left-anchor the content */
     overflow: hidden;
-    padding: 110px 2vw 60px;       /* 5vw side padding scales with screen — same on every laptop */
+    padding: 110px 1vw 60px;       /* 5vw side padding scales with screen — same on every laptop */
     background:
       radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
       #06080c;
