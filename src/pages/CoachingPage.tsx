@@ -459,10 +459,10 @@ body { background: #0a0a0a; }
 .cp-hero {
   position: relative;
   min-height: 25vh;
-  padding-top: 110px;
+  padding-top: 50px;
   padding-right: 5vw;
-  padding-bottom: 60px;
-  padding-left: 1vw;
+  padding-bottom: 50px;
+  padding-left: 0vw;
   
   overflow: hidden;
 }
