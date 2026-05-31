@@ -315,20 +315,27 @@ const css = `
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ── TRUST BAR ── */
-  .pp-trust-strip {
-    width: 100%; min-height: 45px;
-    background: #07b4ba;
-    display: flex; align-items: center; justify-content: space-around;
-    padding: 12px 40px; gap: 12px; flex-wrap: wrap;
-    position: relative; z-index: 20;
-  }
+.pp-trust-strip {
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  background: #07b4ba;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 40px;
+  gap: 8px;
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 20;
+}
   .pp-trust-item { display: flex; align-items: center; gap: 12px; }
   .pp-trust-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
   .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
   /* ── SECTION WRAPPER ── */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 0px; }
 
   /* ── PAIN ── */
   .pp-problem { background: #0b0b0b; }
@@ -343,7 +350,12 @@ const css = `
   /* ── WHAT YOU GET ── */
   .pp-features { background: #0b0b0b; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
   .pp-features-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 52px); letter-spacing: 2px; color: #fff; text-align: center; margin-bottom: 48px; margin-top: 4px; }
-  .pp-features-grid { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+ .pp-features-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
   .pp-feature-card {
     width: clamp(160px, 18vw, 210px);
     min-height: 255px; padding: 16px 10px;
@@ -460,7 +472,7 @@ const css = `
     }
 
     /* Hero */
-    .pp-hero { min-height: auto; padding: 100px 5vw 90px; align-items: flex-start; }
+    .pp-hero { min-height: auto; padding: 100px 5vw 110px; align-items: flex-start; }
     .pp-hero-content { max-width: 100%; }
     .pp-hero-h1 { font-size: clamp(34px, 9vw, 48px); line-height: 0.95; }
     .pp-hero-h2 { font-size: 12px; letter-spacing: 2px; }
