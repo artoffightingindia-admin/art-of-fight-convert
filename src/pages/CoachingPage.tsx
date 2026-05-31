@@ -997,16 +997,16 @@ export default function CoachingPage() {
 <div
   style={{
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    gap: "30px",
-    marginLeft: "80px"
+    marginTop: 30,
+    transform: "translateX(120px)"
   }}
 >
   <p>Any Queries?</p>
 
   <button className="cp-wa-btn">
-    WhatsApp Us
+    Chat On WhatsApp
   </button>
 </div>
                 </Reveal>
