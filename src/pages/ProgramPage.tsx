@@ -316,9 +316,9 @@ const css = `
 
   /* ── TRUST BAR ── */
 .pp-trust-strip {
-  width: 100%; margin-top: 25px; 
-  height: 50px;
-  min-height: 50px;
+  width: 100%; margin-top: 31px; 
+  height: 60px;
+  min-height: 60px;
   background: #07b4ba;
   display: flex;
   align-items: center;
