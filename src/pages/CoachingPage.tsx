@@ -1000,7 +1000,7 @@ export default function CoachingPage() {
     flexDirection: "column",
     alignItems: "center",
     marginTop: 30,
-    transform: "translateX(200px)"
+    transform: "translateX(270px)"
   }}
 >
   <p>Any Queries?</p>
