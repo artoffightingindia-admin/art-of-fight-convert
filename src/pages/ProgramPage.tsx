@@ -267,8 +267,8 @@ const css = `
   .pp-hero-bg {
     position: absolute; inset: 0; z-index: 0;
     background: linear-gradient(to bottom, rgba(6,8,12,0.65), rgba(6,8,12,0.92)),
-      url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat;
-    opacity: 0.8;
+      url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png') center/cover no-repeat;
+    opacity: 1;
   }
   .pp-hero-overlay {
     position: absolute; inset: 0; z-index: 1;
