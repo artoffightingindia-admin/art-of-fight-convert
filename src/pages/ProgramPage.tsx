@@ -1179,13 +1179,13 @@ export default function ProgramPage() {
   <p
     style={{
       fontFamily: "'Bebas Neue', sans-serif",
-      fontSize: "22px",
-      letterSpacing: "2px",
+      fontSize: "15px",
+      letterSpacing: "1px",
       color: "#fff",
       marginBottom: "12px"
     }}
   >
-    ANY QUERIES?
+    Any Queries?
   </p>
 
   <button
@@ -1194,7 +1194,7 @@ export default function ProgramPage() {
       alignItems: "center",
       gap: 10,
       height: 52,
-      padding: "0 24px",
+      padding: "0 7px",
       borderRadius: 999,
       border: "none",
       background: "#25D366",
