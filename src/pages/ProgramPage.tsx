@@ -246,7 +246,7 @@ const css = `
   .pp-nav-call {
     padding: 8px 22px; border-radius: 6px; border: none;
     background: #07b4ba; color: #fff;
-    font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 2px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 3px;
     cursor: pointer; transition: background 0.2s, transform 0.2s;
   }
   .pp-nav-call:hover { background: #075e61; transform: translateY(-2px); }
