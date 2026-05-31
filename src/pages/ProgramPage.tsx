@@ -1177,16 +1177,20 @@ export default function ProgramPage() {
   }}
 >
   <p
-    style={{
-      fontFamily: "'Bebas Neue', sans-serif",
-      fontSize: "15px",
-      letterSpacing: "1px",
-      color: "#fff",
-      marginBottom: "12px"
-    }}
-  >
-    Any Queries?
-  </p>
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    fontFamily: "'Barlow', sans-serif",
+    fontSize: 15,
+    fontWeight: 700,
+    color: "#fff",
+    marginBottom: 12
+  }}
+>
+  <span style={{ color: "#07b4ba", fontSize: 18 }}>?</span>
+  Any Queries?
+</p>
 
   <button
     style={{
@@ -1194,7 +1198,7 @@ export default function ProgramPage() {
       alignItems: "center",
       gap: 10,
       height: 52,
-      padding: "0 7px",
+      padding: "0 24px",
       borderRadius: 999,
       border: "none",
       background: "#25D366",
