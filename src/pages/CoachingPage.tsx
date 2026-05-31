@@ -321,7 +321,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* SECTION WRAPPER */
-.cp-section { max-width: 1100px; margin: 0 auto; padding: 45px 0.2vw; }
+.cp-section { max-width: 1100px; margin: 0 auto; padding: 45px 0vw; }
 
 /* PAIN SECTION */
 .cp-pain-grid { display: flex; gap: 100px; align-items: center; flex-wrap: wrap; }
