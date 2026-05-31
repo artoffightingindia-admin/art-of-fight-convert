@@ -457,17 +457,15 @@ body { background: #0a0a0a; }
 
 /* HERO — FIX: position relative + overflow hidden so bg image is clipped to hero bounds (including trust strip) */
 .cp-hero {
- position: relative;
-    min-height: 78vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;   /* left-anchor the content */
-    overflow: hidden;
-    padding: 110px 1vw 60px;       /* 5vw side padding scales with screen — same on every laptop */
-    background:
-      radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
-      #06080c;
-  }
+  position: relative;
+  min-height: 25vh;
+  padding-top: 110px;
+  padding-right: 5vw;
+  padding-bottom: 60px;
+  padding-left: 1vw;
+  
+  overflow: hidden;
+}
 .cp-hero-bg {
   position: absolute;
   /* FIX: top/left/right as before but bottom aligned to 0 so it stops at trust strip bottom edge */
