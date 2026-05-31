@@ -335,7 +335,7 @@ const css = `
   .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
   /* ── SECTION WRAPPER ── */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 45px 1.1vw;  }
+  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 0.2vw;  }
 
   /* ── PAIN ── */
   .pp-problem { background: #0b0b0b; }
