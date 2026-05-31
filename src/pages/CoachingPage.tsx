@@ -994,10 +994,21 @@ export default function CoachingPage() {
                   {checklistItems.map((item, i) => (
                     <div className="cp-checklist-item" key={i}><span className="check">✓</span><p>{item}</p></div>
                   ))}
-                  <div style={{ marginTop: 32 }}>
-                    <p style={{ marginBottom: 8, color: "rgba(255,255,255,0.45)", fontFamily: "'Barlow', sans-serif", fontSize: 13, letterSpacing: "0.5px" }}>Any Queries?</p>
-                    <button className="cp-wa-btn"><WhatsAppIcon />Chat On WhatsApp</button>
-                  </div>
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "30px",
+    marginLeft: "80px"
+  }}
+>
+  <p>Any Queries?</p>
+
+  <button className="cp-wa-btn">
+    WhatsApp Us
+  </button>
+</div>
                 </Reveal>
               </div>
               <div style={{ flex: 1, minWidth: 300 }}>
