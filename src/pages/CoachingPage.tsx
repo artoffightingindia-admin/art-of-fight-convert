@@ -226,7 +226,7 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: flex-start;
   overflow: hidden;
   /* 5vw sides = proportional on every screen width */
-  padding: 110px 5vw 60px;
+  padding: 110px 1vw 60px;
   background:
     radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
     #06080c;
