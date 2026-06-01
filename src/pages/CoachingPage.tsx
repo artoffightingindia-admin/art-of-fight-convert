@@ -1134,7 +1134,8 @@ export default function CoachingPage() {
                 </div>
                 <div style={{ flex: 1, minWidth: 260 }}>
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,3vw,42px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 16, color: "#fff" }}>
-                    AOF Changed The Way <span style={{ color: "#07b4ba" }}>I Train And Perform.</span>
+                      <span className="cp-quote-mark">"</span>
+                    AOF Changed The Way <span style={{ color: "#07b4ba" }}>I Train And Perform.</span>  <span className="cp-quote-mark">"</span>
                   </h3>
                   <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.75 }}>The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.</p>
                   <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 14, color: "#07b4ba", fontWeight: 700, fontSize: 14 }}>— Alex M., Amateur MMA Fighter</p>
