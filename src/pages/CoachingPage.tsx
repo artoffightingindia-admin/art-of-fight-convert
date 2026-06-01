@@ -171,12 +171,27 @@ const css = `
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800;900&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 body { background: #0a0a0a; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
 * { word-break: break-word; }
 
-.cp { background: #0a0a0a; font-family: 'Barlow', sans-serif; color: #fff; overflow-x: hidden; }
+.cp {
+  background: #0a0a0a;
+  font-family: 'Barlow', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
 
 /* ── NAVBAR ── */
 .cp-nav {
@@ -211,7 +226,7 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
-  padding: 110px 5vw 60px;
+padding: 110px 10px 60px;
   background:
     radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
     #06080c;
@@ -271,7 +286,8 @@ img { max-width: 100%; height: auto; display: block; }
   background: #07b4ba;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 60px;
   padding: 14px 0;
   gap: 0;
   flex-wrap: nowrap;
@@ -287,8 +303,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* SECTION WRAPPER */
-.cp-section { max-width: 1100px; margin: 0 auto; padding: 48px 5vw; }
-
+.cp-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 10px;
+}
 /* PAIN SECTION */
 .cp-pain-grid { display: flex; gap: 100px; align-items: center; flex-wrap: wrap; }
 .cp-pain-media { flex: 0 0 500px; max-width: 100%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
@@ -318,7 +337,7 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-method-inner {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 56px 5vw 64px;
+  padding: 56px 10px 64px;
 }
 
 /* — heading row — */
@@ -448,9 +467,16 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100%;
 }
 
-/* WHAT YOU GET */
-.cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
-.cp-what-card { width: 175px; min-height: 255px; padding: 22px 16px; border-radius: 18px; background: #0f1115; border: 1px solid rgba(255,255,255,0.06); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 14px; }
+/* WHAT YOU GET */.cp-what-cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+.cp-what-card { flex: 1;
+  min-width: 0;
+  max-width: none; min-height: 255px; padding: 22px 16px; border-radius: 18px; background: #0f1115; border: 1px solid rgba(255,255,255,0.06); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 14px; }
 .cp-what-card-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 .cp-what-card-icon svg { width: 52px; height: 52px; }
 .cp-what-card h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 16px; letter-spacing: 2px; line-height: 1.3; margin: 0 0 6px; width: 100%; display: flex; align-items: flex-start; justify-content: center; text-align: center; transform: translateY(2px); }
@@ -465,7 +491,13 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* COACH */
 .cp-coach-bg { background: #0f1115; }
-.cp-book-strip { background: #07b4ba; padding: 0; display: flex; align-items: center; justify-content: center; }
+.cp-book-strip {
+  background: #07b4ba;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;
+}
 .cp-book-strip button { width: 100%; padding: 14px; background: none; border: none; cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; transition: background 0.2s; }
 .cp-book-strip button:hover { background: rgba(0,0,0,0.08); }
 
@@ -521,7 +553,8 @@ img { max-width: 100%; height: auto; display: block; }
 /* FAQ */
 .cp-faq-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px); background-size: 40px 40px; margin-bottom: 0; padding-bottom: 0; }
 .cp-faq-bg::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(7,180,186,0.05), transparent 60%); pointer-events: none; }
-.cp-faq-inner { max-width: 1180px; margin: 0 auto; padding: 32px 4vw; text-align: center; position: relative; z-index: 1; }
+.cp-faq-inner { max-width: 1180px; margin: 0 auto;  padding: 32px 10px;
+ text-align: center; position: relative; z-index: 1; }
 .cp-faq-label { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #07b4ba; margin-bottom: 10px; }
 .cp-faq-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px,4vw,60px); letter-spacing: 3px; color: #fff; line-height: 1; margin-bottom: 10px; }
 .cp-faq-title span { color: #07b4ba; }
@@ -540,7 +573,7 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
 
 /* FOOTER */
-.cp-footer { background: #0f1115; padding: 26px 5vw 8px; margin-top: 0; }
+.cp-footer { background: #0f1115; padding: 26px 10px 8px; margin-top: 0; }
 .cp-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
 .cp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; padding-top: 20px; margin-bottom: 14px; }
 .cp-footer-logo { color: #07b4ba; }
@@ -558,7 +591,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .cp-nav { padding: 14px 20px; }
-  .cp-hero { padding: 100px 5vw 60px; min-height: auto; align-items: flex-start; }
+  .cp-hero { padding: 100px 24px 60px; min-height: auto; align-items: flex-start; }
   .cp-hero-content { max-width: 100%; }
   .cp-hero-tag { font-size: 11px; letter-spacing: 2px; }
   .cp-hero-h1 { font-size: clamp(34px, 9vw, 48px); line-height: 0.95; }
