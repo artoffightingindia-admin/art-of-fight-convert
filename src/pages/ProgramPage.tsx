@@ -176,6 +176,14 @@ const faqItems = [
 
 function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // FIX Step 6: Use fixed 2-col layout instead of auto-fit minmax
+  const [isWide, setIsWide] = useState(typeof window !== "undefined" ? window.innerWidth > 1000 : true);
+  useEffect(() => {
+    const handler = () => setIsWide(window.innerWidth > 1000);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
   return (
     <div id="faq" style={{ position: "relative", overflow: "hidden", backgroundColor: "#0b0b0b" }}>
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 40px", textAlign: "center", position: "relative", zIndex: 1 }}>
@@ -186,7 +194,8 @@ function FAQSection() {
           </h2>
           <div style={{ width: 56, height: 2, background: "#07b4ba", margin: "16px auto 48px", borderRadius: 2 }} />
         </Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 18, textAlign: "left" }}>
+        {/* FIX Step 6: fixed 2-col instead of auto-fit */}
+        <div style={{ display: "grid", gridTemplateColumns: isWide ? "1fr 1fr" : "1fr", gap: 18, textAlign: "left" }}>
           {faqItems.map((item, i) => (
             <Reveal key={i}>
               <div style={{ border: `1px solid ${openIndex === i ? "rgba(7,180,186,0.45)" : "rgba(255,255,255,0.08)"}`, borderRadius: 12, background: "#141414", overflow: "hidden", transition: "border-color 0.25s" }}>
@@ -212,12 +221,28 @@ const css = `
 
   /* ── RESET & BASE ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  /* FIX Step 10: Add browser consistency / font smoothing */
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   body { background: #0a0a0a; overflow-x: hidden; }
   img { max-width: 100%; height: auto; display: block; }
   * { word-break: break-word; }
 
-  .pp { font-family: 'Barlow', sans-serif; color: #fff; background: #0a0a0a; overflow-x: hidden; }
+  /* FIX Step 9: Cap max-width at 1440px so 4K screens don't stretch */
+  .pp {
+    font-family: 'Barlow', sans-serif;
+    color: #fff;
+    background: #0a0a0a;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
 
   /* ── NAVBAR ── */
   .pp-nav {
@@ -257,9 +282,9 @@ const css = `
     min-height: 78vh;
     display: flex;
     align-items: center;
-    justify-content: flex-start;   /* left-anchor the content */
+    justify-content: flex-start;
     overflow: hidden;
-    padding: 110px 24px 60px;     /* 5vw side padding scales with screen — same on every laptop */
+    padding: 110px 24px 60px;
     background:
       radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
       #06080c;
@@ -276,12 +301,10 @@ const css = `
   }
   .pp-hero-content {
     position: relative; z-index: 2;
-    /* No max-width cap here — padding on .pp-hero already provides the inset.
-       This keeps the left edge at the same proportional distance on every screen. */
     display: flex; flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    max-width: 640px;   /* cap content width so text doesn't stretch too wide on 4K */
+    max-width: 640px;
   }
   .pp-hero-h2 {
     color: #07b4ba;
@@ -289,16 +312,18 @@ const css = `
     text-transform: uppercase; letter-spacing: 3px;
     margin-bottom: 16px;
   }
+  /* FIX Step 7: Less aggressive vw scaling for hero heading */
   .pp-hero-h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(48px, 5vw, 72px);
     line-height: 0.95; letter-spacing: 2px;
     text-transform: uppercase; color: #fff;
     margin-bottom: 20px;
   }
+  /* FIX Step 8: Fixed body text size — no vw scaling */
   .pp-hero-desc {
     color: rgba(255,255,255,0.62);
-    font-family: 'Barlow', sans-serif; font-size: clamp(14px, 1.5vw, 16px);
+    font-family: 'Barlow', sans-serif; font-size: 16px;
     line-height: 1.7; max-width: 480px; margin-bottom: 32px;
   }
   .pp-hero-desc strong { color: #07b4ba; }
@@ -315,27 +340,28 @@ const css = `
   .pp-scarcity { margin-top: 18px; color: rgba(255,255,255,0.4); font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 1px; font-style: italic; }
 
   /* ── TRUST BAR ── */
-.pp-trust-strip {
-  width: 100%; margin-top: 33px; 
-  height: 60px;
-  min-height: 60px;
-  background: #07b4ba;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 40px;
-  gap: 8px;
-  flex-wrap: nowrap;
-  position: relative;
-  z-index: 20;
-}
+  /* FIX Step 1: Use center + fixed gap instead of space-around */
+  .pp-trust-strip {
+    width: 100%; margin-top: 33px;
+    height: 60px;
+    min-height: 60px;
+    background: #07b4ba;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    gap: 60px;
+    flex-wrap: nowrap;
+    position: relative;
+    z-index: 20;
+  }
   .pp-trust-item { display: flex; align-items: center; gap: 12px; }
   .pp-trust-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .pp-trust-icon svg { width: 30px; height: 30px; stroke: #fff; fill: none; stroke-width: 2; }
   .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
   /* ── SECTION WRAPPER ── */
-  .pp-section { max-width: 1100px; margin: 0 auto;   padding: 48px 10px;  }
+  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 10px; }
 
   /* ── PAIN ── */
   .pp-problem { background: #0b0b0b; }
@@ -350,13 +376,14 @@ const css = `
   /* ── WHAT YOU GET ── */
   .pp-features { background: #0b0b0b; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
   .pp-features-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 52px); letter-spacing: 2px; color: #fff; text-align: center; margin-bottom: 48px; margin-top: 4px; }
-.pp-features-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
+  .pp-features-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  /* FIX Step 2: width: 100% — let the grid column decide the width */
   .pp-feature-card {
-    width: clamp(160px, 18vw, 210px);
+    width: 100%;
     min-height: 255px; padding: 16px 10px;
     border-radius: 18px; background: #111417; border: 2px solid #111417;
     text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
@@ -384,7 +411,6 @@ const css = `
   /* ── TESTIMONIALS ── */
   .pp-testi-bg { position: relative; overflow: hidden; background: #0b0b0b; }
   .pp-testi-main { display: flex; gap: 48px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
-  /* KEY FIX: use flex:1 min-width instead of fixed pixel flex-basis */
   .pp-testi-img { flex: 1; min-width: 280px; max-width: 500px; aspect-ratio: 16/9; }
   .pp-testi-img img { width: 100%; border-radius: 10px; object-fit: cover; }
   .pp-feedback-mobile { display: none; }
@@ -405,11 +431,18 @@ const css = `
   .pp-checklist-item p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
 
   /* ── COACH STATS ── */
-  .pp-coach-stats { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 26px; }
+  /* FIX Step 4 & 5: Use grid instead of flex-wrap, width: 100% on cards */
+  .pp-coach-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 26px;
+  }
   .pp-coach-stats > div {
     background: linear-gradient(180deg,#181818 0%, #121212 100%);
     border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
-    width: clamp(120px, 14vw, 160px); height: 140px;
+    width: 100%;
+    height: 140px;
     padding: 18px 16px; text-align: center;
     box-shadow: 0 0 14px rgba(0,0,0,0.18);
   }
@@ -434,14 +467,12 @@ const css = `
 
   /* ══════════════════════════════════════
      RESPONSIVE BREAKPOINTS
-     All width-based overrides live here —
-     no negative margins anywhere.
   ══════════════════════════════════════ */
 
   @media (max-width: 1100px) {
     .pp-bonus-grid { grid-template-columns: repeat(3, 1fr); }
     .pp-features-grid { gap: 10px; }
-    .pp-feature-card { width: clamp(140px, 20vw, 200px); }
+    /* FIX Step 3: Remove the vw-based width override at tablet — grid handles it */
   }
 
   @media (max-width: 900px) {
@@ -470,8 +501,8 @@ const css = `
       box-shadow: 0 10px 30px rgba(0,0,0,0.35); backdrop-filter: blur(10px);
     }
 
-    /* Hero */
- .pp-hero { min-height: auto; padding: 100px 5vw 110px; align-items: flex-start; }
+    /* Hero — FIX Step 11: Use fixed px padding not 5vw */
+    .pp-hero { min-height: auto; padding: 100px 24px 110px; align-items: flex-start; }
 
     .pp-hero-content { max-width: 100%; }
     .pp-hero-h1 { font-size: clamp(34px, 9vw, 48px); line-height: 0.95; }
@@ -504,7 +535,7 @@ const css = `
     .pp-feature-card p { font-size: 13px; min-height: auto; justify-content: flex-start; text-align: left; }
 
     /* Coach */
-    .pp-coach-stats { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pp-coach-stats { grid-template-columns: 1fr 1fr !important; gap: 12px; }
     .pp-coach-stats > div { width: 100% !important; min-height: 110px; height: auto !important; padding: 16px 10px; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
 
     /* Roadmap */
@@ -1160,73 +1191,39 @@ export default function ProgramPage() {
                   Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 28 }}>
-  {[
-    "Structured step-by-step training system",
-    "Beginner friendly progression",
-    "Train anytime from your home",
-    "Tamil-guided instructions"
-  ].map((item, i) => (
-    <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      <span style={{ color: "#07b4ba", fontSize: 18, lineHeight: 1 }}>✓</span>
-      <p
-        style={{
-          fontFamily: "'Barlow', sans-serif",
-          fontSize: 15,
-          color: "#fff"
-        }}
-      >
-        {item}
-      </p>
-    </div>
-  ))}
+                  {[
+                    "Structured step-by-step training system",
+                    "Beginner friendly progression",
+                    "Train anytime from your home",
+                    "Tamil-guided instructions"
+                  ].map((item, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ color: "#07b4ba", fontSize: 18, lineHeight: 1 }}>✓</span>
+                      <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, color: "#fff" }}>{item}</p>
+                    </div>
+                  ))}
 
-  <div style={{ marginTop: 12 }}>
-    <p
-      style={{
-        fontFamily: "'Barlow', sans-serif",
-        fontSize: 15,
-        fontWeight: 700,
-        color: "#fff",
-        marginBottom: 12,marginLeft: 12
-      }}
-    >
-      Any Queries?
-    </p>
-
-    <button
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 10,
-        height: 52,
-        padding: "0 24px",
-        borderRadius: 999,
-        border: "none",
-        background: "#25D366",
-        color: "#fff",
-        fontFamily: "'Barlow', sans-serif",
-        fontWeight: 700,
-        fontSize: 15,
-        cursor: "pointer",
-        boxShadow: "0 4px 18px rgba(37,211,102,0.35)"
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="#fff"
-      >
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
-      </svg>
-
-      Chat On WhatsApp
-    </button>
-  </div>
-</div>
-</div>
-              
+                  <div style={{ marginTop: 12 }}>
+                    <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 12, marginLeft: 12 }}>
+                      Any Queries?
+                    </p>
+                    <button
+                      style={{
+                        display: "inline-flex", alignItems: "center", gap: 10,
+                        height: 52, padding: "0 24px", borderRadius: 999, border: "none",
+                        background: "#25D366", color: "#fff",
+                        fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 15,
+                        cursor: "pointer", boxShadow: "0 4px 18px rgba(37,211,102,0.35)"
+                      }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                      </svg>
+                      Chat On WhatsApp
+                    </button>
+                  </div>
+                </div>
+              </div>
 
               {/* CTA CARD */}
               <div style={{ background: "#05070b", borderRadius: 20, border: "1px solid rgba(255,255,255,0.08)", padding: "32px 28px", textAlign: "center", boxShadow: "0 0 30px rgba(0,0,0,0.4)" }}>
