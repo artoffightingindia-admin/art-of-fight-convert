@@ -118,6 +118,13 @@ const IconTrophyWhite = () => (
   </svg>
 );
 
+const roadmapCards = [
+  { title: "1ST WEEK", days: "DAYS 1 - 7", image: "...", points: [...] },
+  { title: "2ND WEEK", days: "DAYS 8 - 14", image: "...", points: [...] },
+  { title: "3RD WEEK", days: "DAYS 15 - 21", image: "...", points: [...] },
+  { title: "4TH WEEK", days: "DAYS 22 - 28", image: "...", points: [...] },
+  { title: "5TH WEEK", days: "DAYS 29 - 30", image: "...", points: [...] },
+];
 /* ── DATA ── */
 const whatCards = [
   { icon: <IconPlan />, title: "Personalised Training Plan", desc: "Custom program built around your goals, schedule, and current level" },
@@ -976,6 +983,8 @@ export default function CoachingPage() {
   const [lead, setLead] = useState({ name: "", phone: "", goal: "" });
   const [stage, setStage] = useState<1 | 2 | 3>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [roadmapIndex, setRoadmapIndex] = useState(0);
+const [isMobileRoadmap, setIsMobileRoadmap] = useState(false);
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z8wTj9FLPdZuzOzSRhJ8-1JvlPxYk1210TelUjKuaSyYvVl/exec";
@@ -998,7 +1007,7 @@ export default function CoachingPage() {
     "You have no structured plan, just random gym sessions",
     "You feel lost without proper coaching guidance",
     "Your conditioning fails before your skill does",
-    "You want to compete seriously but don't know the next step",
+
   ];
 
   return (
