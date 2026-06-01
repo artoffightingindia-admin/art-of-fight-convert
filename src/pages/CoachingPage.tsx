@@ -119,14 +119,6 @@ const IconTrophyWhite = () => (
 );
 
 /* ── DATA ── */
-const methodItems = [
-  { icon: <IconTarget />, title: "Personalised Fight Plan", desc: "A roadmap built entirely around your body type, skill level, and competition goals." },
-  { icon: <IconZap />, title: "High-Intensity Drilling", desc: "Focused repetition drills that embed proper technique into muscle memory fast." },
-  { icon: <IconTrend />, title: "Progressive Overload", desc: "Structured intensity cycles to keep your body adapting and improving every week." },
-  { icon: <IconUser />, title: "1-on-1 Accountability", desc: "Your coach tracks every session, reviews footage, and adjusts the plan in real time." },
-  { icon: <IconTrophy />, title: "Competition Preparation", desc: "Full camp-style peaking for tournaments — physically and mentally ready to win." },
-];
-
 const whatCards = [
   { icon: <IconPlan />, title: "Personalised Training Plan", desc: "Custom program built around your goals, schedule, and current level" },
   { icon: <IconChat />, title: "Direct Coach Access", desc: "WhatsApp access for questions, check-ins, and accountability between sessions" },
@@ -211,22 +203,15 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .cp-book-nav:hover { background: #059a9f; }
 
-/* ══════════════════════════════════════════
-   HERO — exactly matching ProgramPage
-   KEY FIX: hero is a normal block, trust strip
-   is a SIBLING element below it (not inside)
-   ══════════════════════════════════════════ */
+/* HERO */
 .cp-hero {
   position: relative;
-  /* min-height fills screen minus navbar, trust strip sits below */
   min-height: calc(100vh - 60px);
   display: flex;
   align-items: center;
-  /* left-aligned, same as ProgramPage */
   justify-content: flex-start;
   overflow: hidden;
-  /* 5vw sides = proportional on every screen width */
-  padding: 110px 1vw 60px;
+  padding: 110px 5vw 60px;
   background:
     radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
     #06080c;
@@ -242,7 +227,6 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(6,8,12,0.55) 0%, rgba(6,8,12,0.78) 55%, #06080c 100%);
 }
-/* Content block — left-aligned, capped width so text stays readable */
 .cp-hero-content {
   position: relative; z-index: 2;
   display: flex; flex-direction: column;
@@ -280,40 +264,22 @@ img { max-width: 100%; height: auto; display: block; }
   cursor: pointer; transition: all 0.25s ease;
 }
 .cp-btn-primary:hover { background: #057e82; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
-.cp-btn-outline {
-  padding: 14px 34px; border-radius: 7px; background: transparent; color: #fff;
-  font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 2px;
-  border: 2px solid #07b4ba; cursor: pointer; transition: all 0.2s;
-}
-.cp-btn-outline:hover { background: rgba(7,180,186,0.1); }
 
-/* ══════════════════════════════════════════
-   TRUST STRIP — SIBLING of hero, full-width
-   Exactly matching ProgramPage trust bar
-   ══════════════════════════════════════════ */
+/* TRUST STRIP */
 .cp-trust {
-  /* Full bleed — sits directly below the hero section */
   width: 100%;
   background: #07b4ba;
   display: flex;
   align-items: center;
-  /* space-evenly distributes 3 items perfectly across any screen width */
   justify-content: space-evenly;
-  /* Vertical padding only — no horizontal padding that creates gaps */
   padding: 14px 0;
   gap: 0;
   flex-wrap: nowrap;
   position: relative;
   z-index: 20;
 }
-.cp-trust-item {
-  display: flex; align-items: center; gap: 12px;
-  flex: 1; justify-content: center;
-}
-.trust-icon-box {
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
+.cp-trust-item { display: flex; align-items: center; gap: 12px; flex: 1; justify-content: center; }
+.trust-icon-box { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .trust-icon-box svg { width: 28px; height: 28px; }
 .cp-trust-item span {
   font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px;
@@ -321,7 +287,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* SECTION WRAPPER */
-.cp-section { max-width: 1100px; margin: 0 auto; padding: 48px 0vw; }
+.cp-section { max-width: 1100px; margin: 0 auto; padding: 48px 5vw; }
 
 /* PAIN SECTION */
 .cp-pain-grid { display: flex; gap: 100px; align-items: center; flex-wrap: wrap; }
@@ -335,21 +301,152 @@ img { max-width: 100%; height: auto; display: block; }
 .cp-pain-item::before { content: ""; width: 3px; height: 22px; margin-top: 4px; background: #ff2d2d; border-radius: 2px; box-shadow: 0 0 6px rgba(255,45,45,0.9), 0 0 16px rgba(255,45,45,0.6), 0 0 28px rgba(255,45,45,0.3); flex-shrink: 0; }
 .cp-pain-item p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
 
-/* METHOD SECTION */
+/* ══════════════════════════════════════════
+   AOF METHOD SECTION — rebuilt to match image
+   ══════════════════════════════════════════ */
 .cp-method-bg {
   position: relative; overflow: hidden; background-color: #0b0b0b;
   background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px);
   background-size: 30px 30px;
 }
-.cp-method-bg::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(7,180,186,0.08), transparent 7%); pointer-events: none; }
-.cp-method-grid { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; padding: 0; }
-.cp-method-text { flex: 1; min-width: 260px; order: 1; }
-.cp-method-image { flex: 0 0 500px; max-width: 100%; order: 2; }
-.cp-method-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; padding: 16px 10px; border-radius: 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
-.cp-method-line { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.75); font-size: 13.5px; line-height: 1.45; margin: 0; }
-.cp-method-item-icon { margin-top: 3px; flex-shrink: 0; }
-.cp-method-item-icon svg { width: 45px; height: 45px; }
-.cp-method-item p { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.52); font-size: 15px; line-height: 1.55; }
+.cp-method-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at top right, rgba(7,180,186,0.08), transparent 7%);
+  pointer-events: none;
+}
+/* inner wrapper so padding is consistent */
+.cp-method-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 5vw 64px;
+}
+
+/* — heading row — */
+.cp-method-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+/* — VS comparison panels — */
+.cp-vs-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+/* left = bad, red border */
+.cp-vs-panel {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+.cp-vs-panel-img {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+/* dark overlay on each panel */
+.cp-vs-panel::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%);
+  z-index: 1;
+}
+.cp-vs-panel-bad { border: 2px solid rgba(229,62,62,0.75); border-radius: 12px 0 0 12px; }
+.cp-vs-panel-good { border: 2px solid rgba(7,180,186,0.75); border-radius: 0 12px 12px 0; }
+.cp-vs-panel-label {
+  position: absolute;
+  top: 18px; left: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cp-vs-badge {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 900;
+  flex-shrink: 0;
+}
+.cp-vs-badge-bad { background: rgba(229,62,62,0.18); border: 2px solid #e53e3e; color: #e53e3e; }
+.cp-vs-badge-good { background: rgba(7,180,186,0.18); border: 2px solid #07b4ba; color: #07b4ba; }
+.cp-vs-panel-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #fff;
+  text-transform: uppercase;
+}
+/* VS circle in the middle */
+.cp-vs-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: #1a1d23;
+  border: 2px solid rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.75);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* — feature cards grid (2×2 + 1 centered) — */
+.cp-method-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.cp-method-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: border-color 0.2s;
+}
+.cp-method-card:hover { border-color: rgba(7,180,186,0.3); }
+.cp-method-card-icon {
+  width: 45px; height: 45px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.cp-method-card-icon svg { width: 45px; height: 45px; }
+.cp-method-card-body h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.cp-method-card-body p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.52);
+  line-height: 1.55;
+  margin: 0;
+}
+/* bottom centered card */
+.cp-method-card-center-row {
+  display: flex;
+  justify-content: center;
+}
+.cp-method-card-center {
+  max-width: 560px;
+  width: 100%;
+}
 
 /* WHAT YOU GET */
 .cp-what-cards { display: flex; gap: 45px; flex-wrap: wrap; justify-content: center; }
@@ -461,8 +558,6 @@ img { max-width: 100%; height: auto; display: block; }
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .cp-nav { padding: 14px 20px; }
-
-  /* Hero mobile */
   .cp-hero { padding: 100px 5vw 60px; min-height: auto; align-items: flex-start; }
   .cp-hero-content { max-width: 100%; }
   .cp-hero-tag { font-size: 11px; letter-spacing: 2px; }
@@ -470,14 +565,11 @@ img { max-width: 100%; height: auto; display: block; }
   .cp-hero-desc { font-size: 14px; max-width: 100%; }
   .cp-hero-btns { flex-direction: column; width: 100%; gap: 12px; }
   .cp-btn-primary { width: 100%; padding: 16px 24px; font-size: 18px; border-radius: 10px; justify-content: center; }
-
-  /* Trust mobile — wraps to 2 cols, still flush */
   .cp-trust { flex-wrap: wrap; padding: 12px 0; gap: 0; }
   .cp-trust-item { width: 50%; flex: unset; justify-content: center; padding: 6px 0; }
   .cp-trust-item span { font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
   .trust-icon-box { width: 24px; height: 24px; }
   .trust-icon-box svg { width: 18px; height: 18px; }
-
   .cp-faq-grid { grid-template-columns: 1fr; }
   .cp-what-cards { display: flex; flex-direction: column; gap: 14px; padding: 0 8px; }
   .cp-what-card { width: 100%; min-height: 90px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; text-align: left; padding: 14px 16px; gap: 14px; border-radius: 12px; }
@@ -488,9 +580,15 @@ img { max-width: 100%; height: auto; display: block; }
   .cp-section { padding: 48px 5vw; }
   .cp-pain-grid { flex-direction: column; gap: 35px; }
   .cp-pain-media { flex: unset; width: 100%; }
-  .cp-method-grid { flex-direction: column; gap: 35px; }
-  .cp-method-image { order: 1; width: 120%; flex: unset; }
-  .cp-method-text { order: 2; }
+  /* method mobile */
+  .cp-method-inner { padding: 40px 5vw 48px; }
+  .cp-vs-wrapper { grid-template-columns: 1fr; }
+  .cp-vs-panel { height: 200px; }
+  .cp-vs-panel-bad { border-radius: 12px 12px 0 0; }
+  .cp-vs-panel-good { border-radius: 0 0 12px 12px; }
+  .cp-vs-circle { top: unset; left: 50%; transform: translateX(-50%); position: relative; margin: -26px auto; z-index: 10; }
+  .cp-method-cards-grid { grid-template-columns: 1fr; }
+  .cp-method-card-center { max-width: 100%; }
   .cp-testi-main { flex-direction: column; }
   .cp-testi-img { flex: unset; width: 100%; }
   .cp-form-box { padding: 24px 18px; }
@@ -690,6 +788,147 @@ function FAQSection() {
   );
 }
 
+/* ══════════════════════════════════════════
+   AOF METHOD SECTION — matches the image exactly
+   ══════════════════════════════════════════ */
+function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
+  const methodCards = [
+    {
+      icon: <IconTarget />,
+      title: "CUSTOMISED & GOAL-DRIVEN",
+      desc: "A roadmap built entirely around your body type, skill level, and competition goals.",
+    },
+    {
+      icon: <IconZap />,
+      title: "TECHNICAL MASTERY",
+      desc: "Focused drills that embed proper technique into muscle memory.",
+    },
+    {
+      icon: <IconTrend />,
+      title: "STRUCTURED PROGRESSION",
+      desc: "Step-by-step intensity cycles to keep your body adapting and improving every week.",
+    },
+    {
+      icon: <IconUser />,
+      title: "REAL-TIME COACHING",
+      desc: "Your coach tracks every session, reviews footage, and adjusts the plan in real time.",
+    },
+  ];
+
+  return (
+    <div id="method" className="cp-method-bg">
+      <div className="cp-method-inner">
+
+        {/* Header */}
+        <Reveal>
+          <div className="cp-method-header">
+            <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 10 }}>
+              THE AOF METHOD
+            </p>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 2, color: "#fff", lineHeight: 1 }}>
+              A PROVEN SYSTEM.{" "}
+              <span style={{ color: "#07b4ba" }}>REAL TRANSFORMATION.</span>
+            </h2>
+          </div>
+        </Reveal>
+
+        {/* VS Comparison panels */}
+        <Reveal>
+          <div style={{ position: "relative" }}>
+            <div className="cp-vs-wrapper">
+              {/* LEFT — bad */}
+              <div className="cp-vs-panel cp-vs-panel-bad">
+                <div
+                  className="cp-vs-panel-img"
+                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')" }}
+                />
+                <div className="cp-vs-panel-label">
+                  <div className="cp-vs-badge cp-vs-badge-bad">✕</div>
+                  <span className="cp-vs-panel-title">Training Without Direction</span>
+                </div>
+              </div>
+              {/* RIGHT — good */}
+              <div className="cp-vs-panel cp-vs-panel-good">
+                <div
+                  className="cp-vs-panel-img"
+                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')" }}
+                />
+                <div className="cp-vs-panel-label">
+                  <div className="cp-vs-badge cp-vs-badge-good">✓</div>
+                  <span className="cp-vs-panel-title">Training The Right Way</span>
+                </div>
+              </div>
+            </div>
+            {/* VS circle — absolutely centred on the seam */}
+            <div className="cp-vs-circle">VS</div>
+          </div>
+        </Reveal>
+
+        {/* 2×2 feature cards */}
+        <Reveal style={{ marginTop: 24 }}>
+          <div className="cp-method-cards-grid">
+            {methodCards.map((card, i) => (
+              <div key={i} className="cp-method-card">
+                <div className="cp-method-card-icon">{card.icon}</div>
+                <div className="cp-method-card-body">
+                  <h4>{card.title}</h4>
+                  <p>{card.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom centred card */}
+          <div className="cp-method-card-center-row">
+            <div className="cp-method-card cp-method-card-center">
+              <div className="cp-method-card-icon"><IconTrophy /></div>
+              <div className="cp-method-card-body">
+                <h4>PERFORMANCE-FIRST</h4>
+                <p>Peak your body and mind for real fights — physically, mentally, and strategically.</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* What you get */}
+        <Reveal style={{ marginTop: 64 }}>
+          <div style={{ textAlign: "center", marginBottom: 50 }}>
+            <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, color: "#07b4ba", marginBottom: 12, textTransform: "uppercase" }}>WHAT'S INCLUDED</p>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", color: "#fff", letterSpacing: 2, margin: 0 }}>WHAT YOU GET</h2>
+          </div>
+          <div className="cp-what-cards">
+            {whatCards.map((card, i) => (
+              <div key={i} className="cp-what-card">
+                <div className="cp-what-card-icon">{card.icon}</div>
+                <h4>{card.title}</h4>
+                <p>{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Promise */}
+        <Reveal style={{ marginTop: 50 }}>
+          <div className="cp-new-promise">
+            <p className="cp-new-promise-title">Our Promise</p>
+            <div className="cp-new-promise-line" />
+            <p className="cp-new-promise-text">
+              <span className="cp-quote-mark">"</span>
+              Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Book strip */}
+        <div className="cp-book-strip" style={{ marginTop: 32, borderRadius: 8 }}>
+          <button onClick={scrollToForm}>Book A Call</button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
 /* ── MAIN PAGE ── */
 export default function CoachingPage() {
   const navigate = useNavigate();
@@ -742,10 +981,7 @@ export default function CoachingPage() {
           </div>
         </nav>
 
-        {/* ══════════════════════════════════════════
-            HERO — full viewport height, left-aligned
-            Trust strip is a SIBLING below, NOT inside
-            ══════════════════════════════════════════ */}
+        {/* ── HERO ── */}
         <section id="home" className="cp-hero">
           <div className="cp-hero-bg" />
           <div className="cp-hero-overlay" />
@@ -768,11 +1004,7 @@ export default function CoachingPage() {
           </div>
         </section>
 
-        {/* ══════════════════════════════════════════
-            TRUST STRIP — OUTSIDE the hero section
-            This is the key fix: it's a sibling <div>
-            directly after </section>, not inside it
-            ══════════════════════════════════════════ */}
+        {/* ── TRUST STRIP ── */}
         <div className="cp-trust">
           <div className="cp-trust-item">
             <div className="trust-icon-box"><IconShield /></div>
@@ -811,66 +1043,11 @@ export default function CoachingPage() {
           </div>
         </section>
 
-        {/* ── AOF METHOD ── */}
-        <div className="cp-method-bg">
-          <div id="method" className="cp-method-bg">
-            <Reveal>
-              <div style={{ textAlign: "center", marginBottom: 40 }}>
-                <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: "uppercase", marginBottom: 6 }}>The AOF Method</p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 2, color: "#fff", lineHeight: 1 }}>A Proven System.</h2>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", letterSpacing: 2, color: "#07b4ba", lineHeight: 1 }}>Real Transformation.</h2>
-                <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.42)", marginTop: 8, fontSize: 15 }}>Complete Support. Every Step.</p>
-                <div style={{ width: 48, height: 2, background: "#07b4ba", margin: "14px auto 0" }} />
-              </div>
-            </Reveal>
-            <div className="cp-method-grid">
-              <div className="cp-method-text">
-                {methodItems.map((item, i) => (
-                  <Reveal key={i}>
-                    <div className="cp-method-item">
-                      <div className="cp-method-item-icon">{item.icon}</div>
-                      <div><p className="cp-method-line">{item.desc}</p></div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-              <div className="cp-method-image">
-                <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=900&q=80" alt="AOF Method Training" style={{ width: "100%", borderRadius: 14, border: "1px solid rgba(255,255,255,0.1)", display: "block" }} />
-              </div>
-            </div>
-            <Reveal style={{ marginTop: 52 }}>
-              <div style={{ textAlign: "center", marginBottom: 50 }}>
-                <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 3, color: "#07b4ba", marginBottom: 12, textTransform: "uppercase" }}>WHAT'S INCLUDED</p>
-                <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", color: "#fff", letterSpacing: 2, margin: 0 }}>WHAT YOU GET</h2>
-              </div>
-              <div className="cp-what-cards">
-                {whatCards.map((card, i) => (
-                  <div key={i} className="cp-what-card">
-                    <div className="cp-what-card-icon">{card.icon}</div>
-                    <h4>{card.title}</h4>
-                    <p>{card.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal style={{ marginTop: 50 }}>
-              <div className="cp-new-promise">
-                <p className="cp-new-promise-title">Our Promise</p>
-                <div className="cp-new-promise-line" />
-                <p className="cp-new-promise-text">
-                  <span className="cp-quote-mark">"</span>
-                  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+        {/* ── AOF METHOD — rebuilt to match image ── */}
+        <MethodSection scrollToForm={scrollToForm} />
 
         {/* ── COACH ── */}
         <div className="cp-coach-bg">
-          <div className="cp-book-strip">
-            <button onClick={scrollToForm}>Book A Call</button>
-          </div>
           <div className="cp-section" style={{ paddingBottom: 40 }}>
             <Reveal>
               <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 17, color: "#07b4ba", fontWeight: 700, marginBottom: 24, letterSpacing: 2, textTransform: "uppercase" }}>LED BY</p>
@@ -994,21 +1171,10 @@ export default function CoachingPage() {
                   {checklistItems.map((item, i) => (
                     <div className="cp-checklist-item" key={i}><span className="check">✓</span><p>{item}</p></div>
                   ))}
-<div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: 30,
-    transform: "translateX(270px)"
-  }}
->
-  <p>Any Queries?</p>
-
-  <button className="cp-wa-btn">
-    Chat On WhatsApp
-  </button>
-</div>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 30, transform: "translateX(270px)" }}>
+                    <p>Any Queries?</p>
+                    <button className="cp-wa-btn"><WhatsAppIcon />Chat On WhatsApp</button>
+                  </div>
                 </Reveal>
               </div>
               <div style={{ flex: 1, minWidth: 300 }}>
