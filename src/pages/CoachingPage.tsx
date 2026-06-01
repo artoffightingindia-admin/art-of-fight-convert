@@ -983,8 +983,6 @@ export default function CoachingPage() {
   const [lead, setLead] = useState({ name: "", phone: "", goal: "" });
   const [stage, setStage] = useState<1 | 2 | 3>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [roadmapIndex, setRoadmapIndex] = useState(0);
-const [isMobileRoadmap, setIsMobileRoadmap] = useState(false);
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z8wTj9FLPdZuzOzSRhJ8-1JvlPxYk1210TelUjKuaSyYvVl/exec";
