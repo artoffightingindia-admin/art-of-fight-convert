@@ -351,7 +351,7 @@ padding: 110px 10px 60px;
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
+  gap: 5px;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 24px;
@@ -374,8 +374,15 @@ padding: 110px 10px 60px;
   background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%);
   z-index: 1;
 }
-.cp-vs-panel-bad { border: 2px solid rgba(229,62,62,0.75); border-radius: 12px 0 0 12px; }
-.cp-vs-panel-good { border: 2px solid rgba(7,180,186,0.75); border-radius: 0 12px 12px 0; }
+.cp-vs-panel-bad {
+  border: 2px solid rgba(229,62,62,0.75);
+  border-radius: 12px;
+}
+
+.cp-vs-panel-good {
+  border: 2px solid rgba(7,180,186,0.75);
+  border-radius: 12px;
+}
 .cp-vs-panel-label {
   position: absolute;
   top: 18px; left: 18px;
