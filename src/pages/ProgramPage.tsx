@@ -259,7 +259,7 @@ const css = `
     align-items: center;
     justify-content: flex-start;   /* left-anchor the content */
     overflow: hidden;
-    padding: 110px 1vw 60px;       /* 5vw side padding scales with screen — same on every laptop */
+    padding: 110px 24px 60px;     /* 5vw side padding scales with screen — same on every laptop */
     background:
       radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
       #06080c;
@@ -335,7 +335,7 @@ const css = `
   .pp-trust-item p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #ffffff; line-height: 1; }
 
   /* ── SECTION WRAPPER ── */
-  .pp-section { max-width: 1100px; margin: 0 auto; padding: 48px 0.2vw;  }
+  .pp-section { max-width: 1100px; margin: 0 auto;   padding: 48px 10px;  }
 
   /* ── PAIN ── */
   .pp-problem { background: #0b0b0b; }
@@ -350,11 +350,10 @@ const css = `
   /* ── WHAT YOU GET ── */
   .pp-features { background: #0b0b0b; position: relative; overflow: hidden; background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px); background-size: 30px 30px; }
   .pp-features-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 52px); letter-spacing: 2px; color: #fff; text-align: center; margin-bottom: 48px; margin-top: 4px; }
- .pp-features-grid {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
-  justify-content: center;
+.pp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
 }
   .pp-feature-card {
     width: clamp(160px, 18vw, 210px);
