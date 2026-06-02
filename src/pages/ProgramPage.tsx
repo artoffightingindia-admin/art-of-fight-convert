@@ -176,7 +176,6 @@ const faqItems = [
 
 function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]">
       <div className="w-full max-w-[1200px] mx-auto py-[80px] px-[40px] md:px-[40px] relative z-10">
@@ -187,13 +186,12 @@ function FAQSection() {
           </h2>
           <div className="w-[56px] h-[2px] bg-[#00F0FF] mx-auto mt-[16px] mb-[48px] rounded-sm" />
         </Reveal>
-        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[18px] text-left">
           {faqItems.map((item, i) => (
             <Reveal key={i}>
               <div className={`border rounded-[12px] bg-[#141414] overflow-hidden transition-colors duration-250 ${openIndex === i ? "border-[#00F0FF]/45" : "border-white/10"}`}>
-                <button 
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)} 
+                <button
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full bg-transparent border-none flex items-center justify-between py-[22px] px-[26px] cursor-pointer text-left gap-[16px]"
                 >
                   <span className={`font-['Barlow'] font-bold text-[16px] md:text-[18px] leading-[1.3] flex-1 ${openIndex === i ? "text-[#00F0FF]" : "text-white"}`}>
@@ -203,8 +201,8 @@ function FAQSection() {
                     +
                   </span>
                 </button>
-                <div 
-                  className="overflow-hidden transition-all duration-400 ease-in-out" 
+                <div
+                  className="overflow-hidden transition-all duration-400 ease-in-out"
                   style={{ maxHeight: openIndex === i ? 400 : 0, padding: openIndex === i ? "0 26px 24px" : "0 26px" }}
                 >
                   <p className="font-['Barlow'] font-normal text-[14px] md:text-[15px] text-white/60 leading-[1.75]">{item.answer}</p>
@@ -333,7 +331,7 @@ export default function ProgramPage() {
 
   return (
     <div className="font-['Barlow'] text-white bg-[#111318] overflow-x-hidden w-full antialiased">
-      
+
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[75px] bg-[#22252b] border-b border-white/5 flex items-center justify-center">
         <div className="w-full max-w-[1200px] px-[40px] flex items-center justify-between">
@@ -343,13 +341,13 @@ export default function ProgramPage() {
             </h1>
           </div>
           <div className="flex items-center gap-[30px]">
-            <button 
-              className="hidden md:flex bg-transparent border-none text-white font-['Barlow'] text-[14px] font-bold cursor-pointer hover:text-[#00F0FF] transition-colors items-center gap-2" 
+            <button
+              className="hidden md:flex bg-transparent border-none text-white font-['Barlow'] text-[14px] font-bold cursor-pointer hover:text-[#00F0FF] transition-colors items-center gap-2"
               onClick={() => navigate("/")}
             >
               ← Back To Home
             </button>
-            <button 
+            <button
               className="h-[42px] px-[28px] rounded-[4px] bg-[#00F0FF] text-[#111] font-['Bebas_Neue'] text-[18px] tracking-[2px] border-none cursor-pointer hover:bg-white transition-colors"
               onClick={scrollToFooter}
             >
@@ -358,99 +356,123 @@ export default function ProgramPage() {
           </div>
         </div>
       </nav>
-      
-      {/* Mobile Back Button */}
-      <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-gradient-to-b from-[#13171d] to-[#0d1117] text-[#00F0FF] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
-      {/* ── HERO SECTION ──
-          KEY FIX: Hero is completely independent from the trust bar.
-          It uses padding-top to clear the navbar and a fixed min-height
-          that does NOT depend on viewport height at all.
-          This means bookmarks bar appearing/disappearing has zero effect.
-      ── */}
-      <section
-        className="relative w-full flex items-center overflow-hidden bg-[#111318]"
+      {/* Mobile Back Button */}
+      <button
+        className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-gradient-to-b from-[#13171d] to-[#0d1117] text-[#00F0FF] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md"
+        onClick={() => navigate("/")}
+        aria-label="Back to home"
+      >←</button>
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          HERO + TRUST BAR WRAPPER
+          ─────────────────────────────────────────────────────────────────────
+          KEY: `100dvh` (dynamic viewport height) is the unit that auto-adjusts
+          when browser chrome (bookmark bar, address bar, etc.) appears or
+          disappears. Unlike `100vh` which is computed once and never updates,
+          `100dvh` always equals the current visible viewport height.
+
+          The wrapper is a flex column:
+            • padding-top: 75px  →  clears the fixed navbar
+            • <section flex:1>   →  hero fills all remaining space
+            • <div h-[70px]>     →  trust bar is always pinned at the bottom
+
+          Nothing inside can overflow or be pushed offscreen by any external
+          factor — resolution, zoom level, bookmark bar, address bar, etc.
+      ══════════════════════════════════════════════════════════════════════ */}
+      <div
         style={{
-          paddingTop: "75px",       /* exactly navbar height — content starts right below navbar */
-          minHeight: "600px",       /* absolute minimum so it never collapses */
-          height: "calc(100vh - 70px)", /* fills viewport minus trust bar; not affected by bookmarks */
+          /* dvh = dynamic viewport height: live-tracks actual visible screen */
+          height: "100dvh",
+          /* Fallback for very old browsers that don't support dvh */
+          /* (modern browsers ignore the vh line once dvh is parsed)  */
+          paddingTop: "75px",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+          position: "relative",
+          backgroundColor: "#111318",
         }}
       >
-        {/* Background image */}
-        <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
-        {/* Scanline overlay */}
-        <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-        {/* Left-to-right fade */}
-        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
-        {/* Top-to-bottom fade */}
-        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
+        {/* ── HERO — fills all space between navbar-pad and trust bar ── */}
+        <section
+          className="relative w-full flex items-center overflow-hidden"
+          style={{ flex: "1 1 0", minHeight: 0 }}
+        >
+          {/* Background image */}
+          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
+          {/* Scanline overlay */}
+          <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
+          {/* Left-to-right fade */}
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
+          {/* Top-to-bottom fade */}
+          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
 
-        <div className="w-full max-w-[1200px] mx-auto px-[40px] relative z-[10] flex flex-col items-start text-left">
-          <Reveal>
-            <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
-              AOF 30-Day Online Program
-            </p>
-            <h1 className="font-['Bebas_Neue'] text-[clamp(40px,6vw,80px)] leading-[0.95] tracking-[2px] uppercase text-white mb-[20px] drop-shadow-lg">
-              BUILD REAL <br />
-              <span className="text-[#00F0FF]">MMA STRIKING</span> <br />
-              FUNDAMENTALS
-            </h1>
-            <p className="text-white/80 font-['Barlow'] text-[clamp(13px,1.2vw,16px)] leading-[1.6] max-w-[480px] mb-[28px]">
-              A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
-            </p>
-            <button
-              className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#00F0FF] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
-              onClick={scrollToFooter}
-            >
-              JOIN NOW
-            </button>
-          </Reveal>
-        </div>
-      </section>
+          <div className="w-full max-w-[1200px] mx-auto px-[40px] relative z-[10] flex flex-col items-start text-left">
+            <Reveal>
+              <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
+                AOF 30-Day Online Program
+              </p>
+              <h1 className="font-['Bebas_Neue'] text-[clamp(40px,6vw,80px)] leading-[0.95] tracking-[2px] uppercase text-white mb-[20px] drop-shadow-lg">
+                BUILD REAL <br />
+                <span className="text-[#00F0FF]">MMA STRIKING</span> <br />
+                FUNDAMENTALS
+              </h1>
+              <p className="text-white/80 font-['Barlow'] text-[clamp(13px,1.2vw,16px)] leading-[1.6] max-w-[480px] mb-[28px]">
+                A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
+              </p>
+              <button
+                className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#00F0FF] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
+                onClick={scrollToFooter}
+              >
+                JOIN NOW
+              </button>
+            </Reveal>
+          </div>
+        </section>
 
-      {/* ── TRUST BAR ──
-          Completely separate from hero. Just flows naturally below it.
-          Fixed height so it never shifts anything.
-      ── */}
-      <div
-        className="w-full bg-[#00F0FF] relative z-20 border-b-[6px] border-[#111318] flex justify-center"
-        style={{ height: "70px" }}
-      >
-        <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px] h-full">
-          <div className="flex items-center gap-[14px]">
-            <span className="flex items-center justify-center text-white">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="M9 12l2 2 4-4"></path>
-              </svg>
-            </span>
-            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
-          </div>
-          <div className="flex items-center gap-[14px]">
-            <span className="flex items-center justify-center text-white">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </span>
-            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
-          </div>
-          <div className="flex items-center gap-[14px]">
-            <span className="flex items-center justify-center text-white">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8 21h8"></path>
-                <path d="M12 17v4"></path>
-                <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
-                <path d="M5 4H3v2a4 4 0 0 0 4 4"></path>
-                <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
-              </svg>
-            </span>
-            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
+        {/* ── TRUST BAR — pinned to bottom via flex, never displaced ── */}
+        <div
+          className="w-full bg-[#00F0FF] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0"
+          style={{ height: "70px" }}
+        >
+          <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px] h-full">
+            <div className="flex items-center gap-[14px]">
+              <span className="flex items-center justify-center text-white">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              </span>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
+            </div>
+            <div className="flex items-center gap-[14px]">
+              <span className="flex items-center justify-center text-white">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </span>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
+            </div>
+            <div className="flex items-center gap-[14px]">
+              <span className="flex items-center justify-center text-white">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 21h8"></path>
+                  <path d="M12 17v4"></path>
+                  <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
+                  <path d="M5 4H3v2a4 4 0 0 0 4 4"></path>
+                  <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
+                </svg>
+              </span>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
+            </div>
           </div>
         </div>
       </div>
+      {/* ══════════════════════════ END HERO + TRUST BAR WRAPPER ══════════════ */}
 
 
       {/* ── PAIN SECTION ── */}
@@ -544,7 +566,7 @@ export default function ProgramPage() {
       {/* ── ROADMAP SECTION ── */}
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#00F0FF]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%, rgba(0,240,255,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%)" } : {}}>
         <div className="w-full max-w-[1200px] mx-auto py-[40px] px-[40px]" style={isMobileRoadmap ? { backgroundImage: "linear-gradient(rgba(0,240,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.035) 1px, transparent 1px)", backgroundSize: "26px 26px" } : { backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.04) 0px, rgba(0,240,255,0.04) 1px, transparent 1px, transparent 6px)" }}>
-          
+
           <div className="text-center mb-[40px]">
             <p className="text-[#00F0FF] font-['Barlow'] font-bold text-[10px] md:text-[14px] tracking-[1px] md:tracking-[4px] uppercase mb-[14px] inline-flex items-center gap-2">
               30 DAYS TRANSFORMATION JOURNEY
@@ -558,130 +580,130 @@ export default function ProgramPage() {
           </div>
 
           {isMobileRoadmap ? (
-             <div className="w-full overflow-hidden pb-[2px]">
-               <div className="relative grid grid-cols-5 items-end gap-0 mx-[14px] mb-[28px] pt-[4px]">
-                 <div className="absolute left-[9%] right-[9%] bottom-[7px] h-[1px] bg-white/40" />
-                 {roadmapCards.map((week, i) => (
-                   <button key={week.title} className={`relative z-10 flex flex-col items-center gap-[11px] min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i === roadmapIndex ? "text-[#00F0FF]" : "text-white/70"}`} onClick={() => setRoadmapIndex(i)}>
-                     <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px]">{week.title}</span>
-                     <i className={`w-[15px] h-[15px] rounded-full border ${i === roadmapIndex ? "border-2 border-[#00F0FF] bg-[#061018] shadow-[0_0_0_4px_rgba(0,240,255,0.18),0_0_16px_rgba(0,240,255,0.95)]" : "border-white/65 bg-[#03070c]"}`} />
-                   </button>
-                 ))}
-               </div>
-               <div className="relative">
-                 <button className="absolute top-1/2 left-0 z-[8] w-[34px] h-[34px] -translate-y-1/2 border border-[#00F0FF]/55 rounded-[8px] bg-[#030b12]/90 text-[#00F0FF] text-[19px] cursor-pointer disabled:opacity-35 disabled:cursor-default" onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} disabled={roadmapIndex === 0}>{"<"}</button>
-                 <button className="absolute top-1/2 right-0 z-[8] w-[34px] h-[34px] -translate-y-1/2 border border-[#00F0FF]/55 rounded-[8px] bg-[#030b12]/90 text-[#00F0FF] text-[19px] cursor-pointer disabled:opacity-35 disabled:cursor-default" onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))} disabled={roadmapIndex === roadmapCards.length - 1}>{">"}</button>
-                 <div className="w-full overflow-hidden pl-[20px]">
-                   <div className="flex gap-[16px] transition-transform duration-[420ms] ease-out will-change-transform" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
-                     {roadmapCards.map((card, i) => (
-                       <div key={card.title} className="relative flex-none w-[82vw] min-h-[308px] overflow-hidden border border-[#74e1e8]/30 rounded-[10px] bg-[#061018] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),0_18px_38px_rgba(0,0,0,0.34)]">
-                         <div className="absolute inset-0 bg-cover bg-[62%_center] opacity-[0.62]" style={{ backgroundImage: `url(${card.image})` }} />
-                         <div className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%)" }} />
-                         <div className="relative z-[2] min-h-[258px] p-[28px_16px_16px]">
-                           {i === roadmapIndex && <p className="m-0 mb-[6px] text-[#00F0FF] font-['Bebas_Neue'] text-[12px]">YOU ARE HERE</p>}
-                           <h3 className="m-0 mb-[14px] text-white font-['Bebas_Neue'] text-[28px] leading-[1.05] tracking-[2px] min-h-[64px] flex items-start">{card.title}</h3>
-                           <div className="w-[54px] h-[2px] mb-[28px] bg-[#00F0FF] shadow-[0_0_10px_rgba(0,240,255,0.55)]" />
-                           <div className="flex flex-col gap-[14px]">
-                             {card.points.map((point) => (
-                               <div key={point} className="flex items-center gap-[10px]">
-                                 <span className="flex w-[14px] h-[14px] shrink-0 items-center justify-center border border-[#00F0FF] rounded-full text-[#00F0FF] text-[8px]">✓</span>
-                                 <p className="m-0 text-white/80 text-[11px] leading-[1.25]">{point}</p>
-                               </div>
-                             ))}
-                           </div>
-                         </div>
-                         <div className="relative z-[2] flex items-center justify-center gap-[12px] min-h-[50px] border-t border-white/10 bg-[#03090f]/72">
-                           <span className="w-[20px] h-[20px] text-[#00F0FF]">
-                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-                               <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
-                             </svg>
-                           </span>
-                           <p className="m-0 text-[#00F0FF] font-['Bebas_Neue'] text-[18px] tracking-[1px]">{card.days}</p>
-                         </div>
-                       </div>
-                     ))}
-                   </div>
-                 </div>
-               </div>
-               <div className="flex justify-center gap-[12px] mt-[18px]">
-                 {roadmapCards.map((card, i) => (
-                   <button key={card.title} className={`w-[8px] h-[8px] p-0 border-0 rounded-full cursor-pointer transition ${i === roadmapIndex ? "bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.7)]" : "bg-white/30"}`} onClick={() => setRoadmapIndex(i)} aria-label={`Go to ${card.title}`} />
-                 ))}
-               </div>
-               <div className="flex items-center gap-[14px] m-[20px_16px_0] p-[16px_18px] border border-white/5 rounded-[8px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
-                 <div className="flex w-[38px] h-[38px] shrink-0 items-center justify-center border border-[#00F0FF] rounded-full text-[#00F0FF]">
-                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-[22px] h-[22px]">
-                     <path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" />
-                   </svg>
-                 </div>
-                 <div>
-                   <h3 className="m-0 mb-[5px] text-white/90 font-['Bebas_Neue'] text-[16px] tracking-[0.8px] leading-none">STAY CONSISTENT. TRUST THE PROCESS.</h3>
-                   <p className="m-0 text-[#00F0FF] text-[11px] leading-[1.3]">Become the best version of yourself.</p>
-                 </div>
-               </div>
-             </div>
-            ) : (
-              <div className="relative w-full overflow-hidden">
-                <button onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer">‹</button>
-                <button onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer">›</button>
-                
-                <div className="flex justify-between mb-[42px] relative px-[70px]">
-                  <div className="absolute top-[14px] left-[70px] right-[70px] h-[2px] bg-white/10" />
-                  {roadmapCards.map((week, i) => (
-                    <div key={i} className="relative z-10 text-center">
-                      <p className={`font-['Bebas_Neue'] text-[15px] tracking-[1px] mb-[10px] transition-colors duration-300 ${i === roadmapIndex || i === roadmapIndex + 1 ? "text-[#00F0FF]" : "text-white/45"}`}>{week.title}</p>
-                      <div className={`w-[26px] h-[26px] mx-auto rounded-full border-2 border-[#00F0FF] transition-all duration-300 ${i === roadmapIndex || i === roadmapIndex + 1 ? "bg-[#00F0FF] shadow-[0_0_18px_rgba(0,240,255,0.95)]" : "bg-[#0b0b0b]"}`} />
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="overflow-hidden px-[70px]">
-                  <div className="flex gap-[20px] transition-transform duration-[450ms] ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
+            <div className="w-full overflow-hidden pb-[2px]">
+              <div className="relative grid grid-cols-5 items-end gap-0 mx-[14px] mb-[28px] pt-[4px]">
+                <div className="absolute left-[9%] right-[9%] bottom-[7px] h-[1px] bg-white/40" />
+                {roadmapCards.map((week, i) => (
+                  <button key={week.title} className={`relative z-10 flex flex-col items-center gap-[11px] min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i === roadmapIndex ? "text-[#00F0FF]" : "text-white/70"}`} onClick={() => setRoadmapIndex(i)}>
+                    <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px]">{week.title}</span>
+                    <i className={`w-[15px] h-[15px] rounded-full border ${i === roadmapIndex ? "border-2 border-[#00F0FF] bg-[#061018] shadow-[0_0_0_4px_rgba(0,240,255,0.18),0_0_16px_rgba(0,240,255,0.95)]" : "border-white/65 bg-[#03070c]"}`} />
+                  </button>
+                ))}
+              </div>
+              <div className="relative">
+                <button className="absolute top-1/2 left-0 z-[8] w-[34px] h-[34px] -translate-y-1/2 border border-[#00F0FF]/55 rounded-[8px] bg-[#030b12]/90 text-[#00F0FF] text-[19px] cursor-pointer disabled:opacity-35 disabled:cursor-default" onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} disabled={roadmapIndex === 0}>{"<"}</button>
+                <button className="absolute top-1/2 right-0 z-[8] w-[34px] h-[34px] -translate-y-1/2 border border-[#00F0FF]/55 rounded-[8px] bg-[#030b12]/90 text-[#00F0FF] text-[19px] cursor-pointer disabled:opacity-35 disabled:cursor-default" onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))} disabled={roadmapIndex === roadmapCards.length - 1}>{">"}</button>
+                <div className="w-full overflow-hidden pl-[20px]">
+                  <div className="flex gap-[16px] transition-transform duration-[420ms] ease-out will-change-transform" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
                     {roadmapCards.map((card, i) => (
-                      <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
-                        <div className="grid grid-cols-2 min-h-[90px]">
-                          <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover" />
-                          <div className="p-[32px_24px] flex flex-col justify-center">
-                            <h3 className="font-['Bebas_Neue'] text-[42px] text-white mb-[18px] leading-none">{card.title}</h3>
-                            <div className="w-[60px] h-[3px] bg-[#00F0FF] mb-[20px]" />
-                            <div className="flex flex-col gap-[12px]">
-                              {card.points.map((point, idx) => (
-                                <div key={idx} className="flex items-center gap-[10px]">
-                                  <div className="w-[20px] h-[20px] rounded-full border-2 border-[#00F0FF] text-[#00F0FF] flex items-center justify-center text-[10px] shrink-0">✓</div>
-                                  <p className="text-[14px] text-white/75 leading-[1.4] m-0">{point}</p>
-                                </div>
-                              ))}
-                            </div>
+                      <div key={card.title} className="relative flex-none w-[82vw] min-h-[308px] overflow-hidden border border-[#74e1e8]/30 rounded-[10px] bg-[#061018] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),0_18px_38px_rgba(0,0,0,0.34)]">
+                        <div className="absolute inset-0 bg-cover bg-[62%_center] opacity-[0.62]" style={{ backgroundImage: `url(${card.image})` }} />
+                        <div className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%)" }} />
+                        <div className="relative z-[2] min-h-[258px] p-[28px_16px_16px]">
+                          {i === roadmapIndex && <p className="m-0 mb-[6px] text-[#00F0FF] font-['Bebas_Neue'] text-[12px]">YOU ARE HERE</p>}
+                          <h3 className="m-0 mb-[14px] text-white font-['Bebas_Neue'] text-[28px] leading-[1.05] tracking-[2px] min-h-[64px] flex items-start">{card.title}</h3>
+                          <div className="w-[54px] h-[2px] mb-[28px] bg-[#00F0FF] shadow-[0_0_10px_rgba(0,240,255,0.55)]" />
+                          <div className="flex flex-col gap-[14px]">
+                            {card.points.map((point) => (
+                              <div key={point} className="flex items-center gap-[10px]">
+                                <span className="flex w-[14px] h-[14px] shrink-0 items-center justify-center border border-[#00F0FF] rounded-full text-[#00F0FF] text-[8px]">✓</span>
+                                <p className="m-0 text-white/80 text-[11px] leading-[1.25]">{point}</p>
+                              </div>
+                            ))}
                           </div>
                         </div>
-                        <div className="p-[16px] border-t border-white/5 text-center">
-                          <p className="font-['Bebas_Neue'] text-[22px] text-[#00F0FF] tracking-[1px] m-0">{card.days}</p>
+                        <div className="relative z-[2] flex items-center justify-center gap-[12px] min-h-[50px] border-t border-white/10 bg-[#03090f]/72">
+                          <span className="w-[20px] h-[20px] text-[#00F0FF]">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+                              <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+                            </svg>
+                          </span>
+                          <p className="m-0 text-[#00F0FF] font-['Bebas_Neue'] text-[18px] tracking-[1px]">{card.days}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-            )}
-
-            {/* ── PROMISE ── */}
-            <div className="relative overflow-hidden bg-transparent mt-[60px]">
-              <div className="w-full max-w-[820px] mx-auto text-center relative z-10 px-[40px]">
-                <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
-                <div className="w-[70px] h-[2px] bg-[#00F0FF] mx-auto mb-[22px] rounded-full" />
-                <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
-                  <span className="text-[#00F0FF] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">"</span>
-                  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-                </p>
+              <div className="flex justify-center gap-[12px] mt-[18px]">
+                {roadmapCards.map((card, i) => (
+                  <button key={card.title} className={`w-[8px] h-[8px] p-0 border-0 rounded-full cursor-pointer transition ${i === roadmapIndex ? "bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.7)]" : "bg-white/30"}`} onClick={() => setRoadmapIndex(i)} aria-label={`Go to ${card.title}`} />
+                ))}
+              </div>
+              <div className="flex items-center gap-[14px] m-[20px_16px_0] p-[16px_18px] border border-white/5 rounded-[8px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
+                <div className="flex w-[38px] h-[38px] shrink-0 items-center justify-center border border-[#00F0FF] rounded-full text-[#00F0FF]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-[22px] h-[22px]">
+                    <path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="m-0 mb-[5px] text-white/90 font-['Bebas_Neue'] text-[16px] tracking-[0.8px] leading-none">STAY CONSISTENT. TRUST THE PROCESS.</h3>
+                  <p className="m-0 text-[#00F0FF] text-[11px] leading-[1.3]">Become the best version of yourself.</p>
+                </div>
               </div>
             </div>
+          ) : (
+            <div className="relative w-full overflow-hidden">
+              <button onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer">‹</button>
+              <button onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer">›</button>
 
-            {/* ── JOIN NOW STRIP ── */}
-            <div className="mt-[24px] flex items-center justify-center bg-[#00F0FF] rounded-[8px] overflow-hidden">
-              <button className="w-full p-[14px] bg-transparent border-none cursor-pointer text-[#111] font-['Bebas_Neue'] text-[20px] tracking-[3px] transition hover:bg-white" onClick={scrollToFooter}>Join Now</button>
+              <div className="flex justify-between mb-[42px] relative px-[70px]">
+                <div className="absolute top-[14px] left-[70px] right-[70px] h-[2px] bg-white/10" />
+                {roadmapCards.map((week, i) => (
+                  <div key={i} className="relative z-10 text-center">
+                    <p className={`font-['Bebas_Neue'] text-[15px] tracking-[1px] mb-[10px] transition-colors duration-300 ${i === roadmapIndex || i === roadmapIndex + 1 ? "text-[#00F0FF]" : "text-white/45"}`}>{week.title}</p>
+                    <div className={`w-[26px] h-[26px] mx-auto rounded-full border-2 border-[#00F0FF] transition-all duration-300 ${i === roadmapIndex || i === roadmapIndex + 1 ? "bg-[#00F0FF] shadow-[0_0_18px_rgba(0,240,255,0.95)]" : "bg-[#0b0b0b]"}`} />
+                  </div>
+                ))}
+              </div>
+
+              <div className="overflow-hidden px-[70px]">
+                <div className="flex gap-[20px] transition-transform duration-[450ms] ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
+                  {roadmapCards.map((card, i) => (
+                    <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
+                      <div className="grid grid-cols-2 min-h-[90px]">
+                        <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover" />
+                        <div className="p-[32px_24px] flex flex-col justify-center">
+                          <h3 className="font-['Bebas_Neue'] text-[42px] text-white mb-[18px] leading-none">{card.title}</h3>
+                          <div className="w-[60px] h-[3px] bg-[#00F0FF] mb-[20px]" />
+                          <div className="flex flex-col gap-[12px]">
+                            {card.points.map((point, idx) => (
+                              <div key={idx} className="flex items-center gap-[10px]">
+                                <div className="w-[20px] h-[20px] rounded-full border-2 border-[#00F0FF] text-[#00F0FF] flex items-center justify-center text-[10px] shrink-0">✓</div>
+                                <p className="text-[14px] text-white/75 leading-[1.4] m-0">{point}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-[16px] border-t border-white/5 text-center">
+                        <p className="font-['Bebas_Neue'] text-[22px] text-[#00F0FF] tracking-[1px] m-0">{card.days}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ── PROMISE ── */}
+          <div className="relative overflow-hidden bg-transparent mt-[60px]">
+            <div className="w-full max-w-[820px] mx-auto text-center relative z-10 px-[40px]">
+              <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
+              <div className="w-[70px] h-[2px] bg-[#00F0FF] mx-auto mb-[22px] rounded-full" />
+              <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
+                <span className="text-[#00F0FF] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">"</span>
+                Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+              </p>
             </div>
           </div>
+
+          {/* ── JOIN NOW STRIP ── */}
+          <div className="mt-[24px] flex items-center justify-center bg-[#00F0FF] rounded-[8px] overflow-hidden">
+            <button className="w-full p-[14px] bg-transparent border-none cursor-pointer text-[#111] font-['Bebas_Neue'] text-[20px] tracking-[3px] transition hover:bg-white" onClick={scrollToFooter}>Join Now</button>
+          </div>
         </div>
+      </div>
 
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0b0b0b]">
