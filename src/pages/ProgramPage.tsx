@@ -379,75 +379,76 @@ export default function ProgramPage() {
       {/* Mobile Back Button */}
       <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-gradient-to-b from-[#13171d] to-[#0d1117] text-[#00F0FF] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
-      {/* ── HERO (FIXED PADDING, NO VH UNITS) ── */}
-      <section className="relative w-full pt-[200px] pb-[140px] flex items-center justify-center overflow-hidden bg-[#111318]">
-        <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
-        <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
-        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
-        
-        {/* Strict 1200px container */}
-        <div className="w-full max-w-[1200px] px-[40px] relative z-[10] flex flex-col items-start text-left">
-          <Reveal>
-            <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[20px]">
-              AOF 30-Day Online Program
-            </p>
-            <h1 className="font-['Bebas_Neue'] text-[50px] md:text-[85px] leading-[0.95] tracking-[2px] uppercase text-white mb-[30px] drop-shadow-lg">
-              BUILD REAL <br />
-              <span className="text-[#00F0FF]">MMA STRIKING</span> <br />
-              FUNDAMENTALS
-            </h1>
-            <p className="text-white/80 font-['Barlow'] text-[15px] md:text-[17px] leading-[1.7] max-w-[480px] mb-[45px]">
-              A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
-            </p>
-            <button 
-              className="flex items-center justify-center w-[220px] h-[56px] rounded-[8px] bg-[#00F0FF] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
-              onClick={scrollToFooter}
-            >
-              JOIN NOW
-            </button>
-          </Reveal>
-        </div>
-      </section>
+      {/* ── HERO + TRUST BAR (single viewport) ── */}
+      <div className="relative w-full h-screen flex flex-col overflow-hidden">
+        <section className="relative flex-1 flex items-center overflow-hidden bg-[#111318]">
+          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
+          <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
 
-      {/* ── TRUST BAR ── */}
-      <div className="w-full min-h-[75px] bg-[#00F0FF] relative z-20 flex justify-center border-b-[6px] border-[#111318] py-[15px] md:py-0">
-        {/* Strict 1200px container */}
-        <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px]">
-          <div className="flex items-center gap-[14px]">
-            <span className="flex items-center justify-center text-white">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="M9 12l2 2 4-4"></path>
-              </svg>
-            </span>
-            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
+          <div className="w-full max-w-[1200px] mx-auto px-[40px] pt-[80px] relative z-[10] flex flex-col items-start text-left">
+            <Reveal>
+              <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
+                AOF 30-Day Online Program
+              </p>
+              <h1 className="font-['Bebas_Neue'] text-[clamp(40px,6vw,80px)] leading-[0.95] tracking-[2px] uppercase text-white mb-[20px] drop-shadow-lg">
+                BUILD REAL <br />
+                <span className="text-[#00F0FF]">MMA STRIKING</span> <br />
+                FUNDAMENTALS
+              </h1>
+              <p className="text-white/80 font-['Barlow'] text-[clamp(13px,1.2vw,16px)] leading-[1.6] max-w-[480px] mb-[28px]">
+                A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
+              </p>
+              <button
+                className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#00F0FF] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
+                onClick={scrollToFooter}
+              >
+                JOIN NOW
+              </button>
+            </Reveal>
           </div>
-          <div className="flex items-center gap-[14px]">
-            <span className="flex items-center justify-center text-white">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </span>
-            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
-          </div>
-          <div className="flex items-center gap-[14px]">
-            <span className="flex items-center justify-center text-white">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8 21h8"></path>
-                <path d="M12 17v4"></path>
-                <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
-                <path d="M5 4H3v2a4 4 0 0 0 4 4"></path>
-                <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
-              </svg>
-            </span>
-            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
+        </section>
+
+        {/* ── TRUST BAR ── */}
+        <div className="w-full shrink-0 min-h-[70px] bg-[#00F0FF] relative z-20 flex justify-center border-b-[6px] border-[#111318] py-[12px] md:py-0">
+          <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px]">
+            <div className="flex items-center gap-[14px]">
+              <span className="flex items-center justify-center text-white">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              </span>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
+            </div>
+            <div className="flex items-center gap-[14px]">
+              <span className="flex items-center justify-center text-white">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </span>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
+            </div>
+            <div className="flex items-center gap-[14px]">
+              <span className="flex items-center justify-center text-white">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 21h8"></path>
+                  <path d="M12 17v4"></path>
+                  <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
+                  <path d="M5 4H3v2a4 4 0 0 0 4 4"></path>
+                  <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
+                </svg>
+              </span>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
+            </div>
           </div>
         </div>
       </div>
+
 
       {/* ── PAIN SECTION ── */}
       <div className="bg-[#0b0b0b]">
