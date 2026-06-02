@@ -187,7 +187,6 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: 'Barlow', sans-serif;
   color: #fff;
   overflow-x: hidden;
-
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -226,7 +225,7 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
-padding: 110px 10px 60px;
+  padding: 110px 24px 60px;
   background:
     radial-gradient(circle at top, rgba(7,180,186,0.12), transparent 45%),
     #06080c;
@@ -254,14 +253,16 @@ padding: 110px 10px 60px;
   text-transform: uppercase; letter-spacing: 3px;
   margin-bottom: 16px;
 }
+/* FIXED: no vw scaling on hero h1 — use tighter clamp */
 .cp-hero-h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 5.5vw, 72px);
+  font-size: clamp(48px, 5vw, 72px);
   line-height: 0.95; letter-spacing: 2px;
   text-transform: uppercase; color: #fff;
   margin-bottom: 20px;
 }
 .cp-hero-h1 span { color: #07b4ba; }
+/* FIXED: fixed body text — no vw */
 .cp-hero-desc {
   color: rgba(255,255,255,0.62);
   font-family: 'Barlow', sans-serif;
@@ -280,14 +281,13 @@ padding: 110px 10px 60px;
 }
 .cp-btn-primary:hover { background: #057e82; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(7,180,186,0.38); }
 
-/* TRUST STRIP */
+/* TRUST STRIP — FIXED: center + equal flex so gaps never drift */
 .cp-trust {
   width: 100%;
   background: #07b4ba;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
   padding: 14px 0;
   gap: 0;
   flex-wrap: nowrap;
@@ -306,23 +306,22 @@ padding: 110px 10px 60px;
 .cp-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 10px;
+  padding: 48px 24px;
 }
+
 /* PAIN SECTION */
 .cp-pain-grid { display: flex; gap: 100px; align-items: center; flex-wrap: wrap; }
 .cp-pain-media { flex: 0 0 500px; max-width: 100%; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
 .cp-pain-media img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
 .cp-pain-right { flex: 1; min-width: 260px; padding-top: 8px; padding-left: 8px; }
 .cp-pain-label { font-family: 'Barlow', sans-serif; color: #07b4ba; font-weight: 700; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
-.cp-pain-heading { color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px,4vw,42px); letter-spacing: 2px; margin-bottom: 16px; line-height: 1.1; }
+.cp-pain-heading { color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 2px; margin-bottom: 16px; line-height: 1.1; }
 .cp-red-divider { width: 80px; height: 3px; margin-bottom: 24px; background: #e53e3e; border-radius: 2px; box-shadow: 0 0 10px rgba(229,62,62,0.7), 0 0 24px rgba(229,62,62,0.35); }
 .cp-pain-item { display: flex; align-items: flex-start; gap: 35px; margin-bottom: 14px; }
 .cp-pain-item::before { content: ""; width: 3px; height: 22px; margin-top: 4px; background: #ff2d2d; border-radius: 2px; box-shadow: 0 0 6px rgba(255,45,45,0.9), 0 0 16px rgba(255,45,45,0.6), 0 0 28px rgba(255,45,45,0.3); flex-shrink: 0; }
 .cp-pain-item p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; }
 
-/* ══════════════════════════════════════════
-   AOF METHOD SECTION
-   ══════════════════════════════════════════ */
+/* AOF METHOD SECTION */
 .cp-method-bg {
   position: relative; overflow: hidden; background-color: #0b0b0b;
   background-image: linear-gradient(rgba(7,180,186,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.07) 1px, transparent 0.4px);
@@ -336,16 +335,12 @@ padding: 110px 10px 60px;
 .cp-method-inner {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 56px 10px 64px;
+  padding: 56px 24px 64px;
 }
-
-/* — heading row — */
 .cp-method-header {
   text-align: center;
   margin-bottom: 36px;
 }
-
-/* — VS comparison panels — */
 .cp-vs-wrapper {
   position: relative;
   display: grid;
@@ -371,115 +366,100 @@ padding: 110px 10px 60px;
   background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%);
   z-index: 1;
 }
-.cp-vs-panel-bad {
-  border: 2px solid rgba(229,62,62,0.75);
-  border-radius: 12px;
-}
-
-.cp-vs-panel-good {
-  border: 2px solid rgba(7,180,186,0.75);
-  border-radius: 12px;
-}
+.cp-vs-panel-bad { border: 2px solid rgba(229,62,62,0.75); border-radius: 12px; }
+.cp-vs-panel-good { border: 2px solid rgba(7,180,186,0.75); border-radius: 12px; }
 .cp-vs-panel-label {
-  position: absolute;
-  top: 18px; left: 18px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  position: absolute; top: 18px; left: 18px; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
 }
 .cp-vs-badge {
-  width: 32px; height: 32px;
-  border-radius: 50%;
+  width: 32px; height: 32px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 900;
-  flex-shrink: 0;
+  font-size: 18px; font-weight: 900; flex-shrink: 0;
 }
 .cp-vs-badge-bad { background: rgba(229,62,62,0.18); border: 2px solid #e53e3e; color: #e53e3e; }
 .cp-vs-badge-good { background: rgba(7,180,186,0.18); border: 2px solid #07b4ba; color: #07b4ba; }
-.cp-vs-panel-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  color: #fff;
-  text-transform: uppercase;
-}
+.cp-vs-panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
 .cp-vs-circle {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: #1a1d23;
-  border: 2px solid rgba(255,255,255,0.18);
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); z-index: 10;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #1a1d23; border: 2px solid rgba(255,255,255,0.18);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.75);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px;
+  color: rgba(255,255,255,0.75); box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
-
-/* — feature cards grid (2×2 + 1 centered) — */
 .cp-method-cards-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 14px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
 }
 .cp-method-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px 22px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  transition: border-color 0.2s;
+  display: flex; align-items: flex-start; gap: 16px; padding: 20px 22px;
+  border-radius: 10px; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07); transition: border-color 0.2s;
 }
 .cp-method-card:hover { border-color: rgba(7,180,186,0.3); }
-.cp-method-card-icon {
-  width: 45px; height: 45px;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-}
+.cp-method-card-icon { width: 45px; height: 45px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .cp-method-card-icon svg { width: 45px; height: 45px; }
-.cp-method-card-body h4 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  color: #fff;
-  margin-bottom: 6px;
-  line-height: 1.2;
-}
-.cp-method-card-body p {
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  color: rgba(255,255,255,0.52);
-  line-height: 1.55;
-  margin: 0;
-}
-.cp-method-card-center-row {
-  display: flex;
-  justify-content: center;
-}
-.cp-method-card-center {
-  max-width: 560px;
-  width: 100%;
-}
+.cp-method-card-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+.cp-method-card-body p { font-family: 'Barlow', sans-serif; font-size: 14px; color: rgba(255,255,255,0.52); line-height: 1.55; margin: 0; }
+.cp-method-card-center-row { display: flex; justify-content: center; }
+.cp-method-card-center { max-width: 560px; width: 100%; }
+
+/* ── ROADMAP (inside method section) ── */
+.cp-roadmap-wrap { position: relative; overflow: hidden; background: #0b0b0b; }
+.cp-roadmap-inner { max-width: 1400px; margin: 0 auto; padding: 48px 0; backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)"; }
+
+/* roadmap mobile CSS — all scoped under .cp-roadmap-wrap */
+.cp-roadmap-mobile { background: radial-gradient(circle at 50% 9%, rgba(7,180,186,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%) !important; border-top: 1px solid rgba(7,180,186,0.12); border-bottom: 1px solid rgba(7,180,186,0.16); }
+.cp-roadmap-mobile-shell { width: 100%; overflow: hidden; padding-bottom: 2px; }
+.cp-roadmap-mobile-timeline { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; gap: 0; margin: 0 14px 28px; padding-top: 4px; }
+.cp-roadmap-mobile-line { position: absolute; left: 9%; right: 9%; bottom: 7px; height: 1px; background: rgba(255,255,255,0.42); }
+.cp-roadmap-mobile-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 11px; min-width: 0; border: 0; background: transparent; color: rgba(255,255,255,0.72); font-family: 'Bebas Neue', sans-serif; cursor: pointer; }
+.cp-roadmap-mobile-step span { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; letter-spacing: 0; }
+.cp-roadmap-mobile-step i { width: 15px; height: 15px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.66); background: #03070c; }
+.cp-roadmap-mobile-step.active { color: #07e8ef; }
+.cp-roadmap-mobile-step.active i { border: 2px solid #07e8ef; background: #061018; box-shadow: 0 0 0 4px rgba(7,180,186,0.18), 0 0 16px rgba(7,232,239,0.95); }
+.cp-roadmap-mobile-stage { position: relative; }
+.cp-roadmap-viewport { width: 100%; overflow: hidden; padding-left: 20px; }
+.cp-roadmap-track { display: flex; gap: 16px; transition: transform 0.42s ease; will-change: transform; }
+.cp-roadmap-card { position: relative; flex: 0 0 82vw; min-height: 308px; overflow: hidden; border: 1px solid rgba(116,225,232,0.28); border-radius: 10px; background: #061018; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 18px 38px rgba(0,0,0,0.34); }
+.cp-roadmap-card-bg { position: absolute; inset: 0; background-position: 62% center; background-size: cover; opacity: 0.62; }
+.cp-roadmap-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%); z-index: 1; }
+.cp-roadmap-card-body { position: relative; z-index: 2; min-height: 258px; padding: 28px 16px 16px; }
+.cp-roadmap-you { margin: 0 0 6px !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 12px !important; }
+.cp-roadmap-card h3 { margin: 0 0 14px !important; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 28px !important; line-height: 1.05 !important; letter-spacing: 2px; min-height: 64px; display: flex; align-items: flex-start; }
+.cp-roadmap-rule { width: 54px; height: 2px; margin-bottom: 28px; background: #07e8ef; box-shadow: 0 0 10px rgba(7,232,239,0.55); }
+.cp-roadmap-points { display: flex; flex-direction: column; gap: 14px; }
+.cp-roadmap-point { display: flex; align-items: center; gap: 10px; }
+.cp-roadmap-point span { display: flex; width: 14px; height: 14px; flex-shrink: 0; align-items: center; justify-content: center; border: 1px solid #07e8ef; border-radius: 50%; color: #07e8ef; font-size: 8px; }
+.cp-roadmap-point p { margin: 0 !important; color: rgba(255,255,255,0.82) !important; font-size: 11px !important; line-height: 1.25 !important; }
+.cp-roadmap-card-footer { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; border-top: 1px solid rgba(255,255,255,0.12); background: rgba(3,9,15,0.72); }
+.cp-roadmap-card-footer span { width: 20px; height: 20px; color: #07e8ef; }
+.cp-roadmap-card-footer svg { width: 100%; height: 100%; }
+.cp-roadmap-card-footer p { margin: 0 !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 18px !important; letter-spacing: 1px; }
+.cp-roadmap-arrow { position: absolute; top: 50%; z-index: 8; width: 34px; height: 34px; transform: translateY(-50%); border: 1px solid rgba(7,232,239,0.55); border-radius: 8px; background: rgba(3,11,18,0.92); color: #07e8ef; font-size: 19px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.cp-roadmap-arrow:disabled { opacity: 0.35; cursor: default; }
+.cp-roadmap-arrow-left { left: 0; }
+.cp-roadmap-arrow-right { right: 0; }
+.cp-roadmap-dots { display: flex; justify-content: center; gap: 12px; margin-top: 18px; }
+.cp-roadmap-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; }
+.cp-roadmap-dots button.active { background: #07e8ef; box-shadow: 0 0 12px rgba(7,232,239,0.7); }
+.cp-roadmap-note { display: flex; align-items: center; gap: 14px; margin: 20px 16px 0; padding: 16px 18px; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; background: linear-gradient(180deg, rgba(13,26,36,0.9), rgba(7,14,22,0.92)); }
+.cp-roadmap-note-icon { display: flex; width: 38px; height: 38px; flex-shrink: 0; align-items: center; justify-content: center; border: 1px solid #07e8ef; border-radius: 50%; color: #07e8ef; }
+.cp-roadmap-note-icon svg { width: 22px; height: 22px; }
+.cp-roadmap-note h3 { margin: 0 0 5px; color: rgba(255,255,255,0.9); font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.8px; line-height: 1; }
+.cp-roadmap-note p { margin: 0; color: #07e8ef; font-size: 11px; line-height: 1.3; }
 
 /* WHAT YOU GET */
 .cp-what-cards {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 16px;
-  flex-wrap: nowrap;
+  display: flex; justify-content: space-between; align-items: stretch;
+  gap: 16px; flex-wrap: nowrap;
 }
-.cp-what-card { flex: 1;
-  min-width: 0;
-  max-width: none; min-height: 255px; padding: 22px 16px; border-radius: 18px; background: #0f1115; border: 1px solid rgba(255,255,255,0.06); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 14px; }
+.cp-what-card {
+  flex: 1; min-width: 0; max-width: none; min-height: 255px; padding: 22px 16px;
+  border-radius: 18px; background: #0f1115; border: 1px solid rgba(255,255,255,0.06);
+  text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 14px;
+}
 .cp-what-card-icon { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
 .cp-what-card-icon svg { width: 52px; height: 52px; }
 .cp-what-card h4 { font-family: 'Bebas Neue', sans-serif; color: #07b4ba; font-size: 16px; letter-spacing: 2px; line-height: 1.3; margin: 0 0 6px; width: 100%; display: flex; align-items: flex-start; justify-content: center; text-align: center; transform: translateY(2px); }
@@ -503,6 +483,24 @@ padding: 110px 10px 60px;
 }
 .cp-book-strip button { width: 100%; padding: 14px; background: none; border: none; cursor: pointer; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; transition: background 0.2s; }
 .cp-book-strip button:hover { background: rgba(0,0,0,0.08); }
+
+/* COACH STATS — FIXED: grid not flex */
+.cp-coach-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 26px;
+}
+.cp-coach-stats > div {
+  background: linear-gradient(180deg,#181818 0%, #121212 100%);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
+  width: 100%;
+  height: 140px;
+  padding: 18px 16px; text-align: center;
+  box-shadow: 0 0 14px rgba(0,0,0,0.18);
+}
+.cp-coach-stats > div p:first-child { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #07b4ba; letter-spacing: 1px; margin-bottom: 10px; }
+.cp-coach-stats > div p:last-child { font-family: 'Barlow', sans-serif; color: rgba(255,255,255,0.45); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
 
 /* TESTIMONIALS */
 .cp-testi-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.05) 0px, rgba(7,180,186,0.05) 1px, transparent 1px, transparent 5px); }
@@ -554,12 +552,11 @@ padding: 110px 10px 60px;
 .cp-feedback-stars { display: flex; gap: 4px; margin-bottom: 16px; color: #07b4ba; font-size: 16px; }
 
 /* FAQ */
-.cp-faq-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px); background-size: 40px 40px; margin-bottom: 0; padding-bottom: 0; }
+.cp-faq-bg { position: relative; overflow: hidden; background-color: #0b0b0b; background-image: linear-gradient(rgba(7,180,186,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(7,180,186,0.05) 1px, transparent 0.4px); background-size: 40px 40px; }
 .cp-faq-bg::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(7,180,186,0.05), transparent 60%); pointer-events: none; }
-.cp-faq-inner { max-width: 1180px; margin: 0 auto;  padding: 32px 10px;
- text-align: center; position: relative; z-index: 1; }
+.cp-faq-inner { max-width: 1180px; margin: 0 auto; padding: 32px 24px; text-align: center; position: relative; z-index: 1; }
 .cp-faq-label { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #07b4ba; margin-bottom: 10px; }
-.cp-faq-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px,4vw,60px); letter-spacing: 3px; color: #fff; line-height: 1; margin-bottom: 10px; }
+.cp-faq-title { font-family: 'Bebas Neue', sans-serif; font-size: 60px; letter-spacing: 3px; color: #fff; line-height: 1; margin-bottom: 10px; }
 .cp-faq-title span { color: #07b4ba; }
 .cp-faq-divider { width: 56px; height: 2px; background: #07b4ba; margin: 16px auto 48px; border-radius: 2px; }
 .cp-faq-list { text-align: left; }
@@ -573,10 +570,11 @@ padding: 110px 10px 60px;
 .cp-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 26px; }
 .cp-faq-item.open .cp-faq-answer { max-height: 400px; padding: 0 26px 24px; }
 .cp-faq-answer p { font-family: 'Barlow', sans-serif; font-weight: 400; font-size: 15px; color: rgba(255,255,255,0.58); line-height: 1.75; }
+/* FIXED: static 2-col not auto-fit */
 .cp-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
 
 /* FOOTER */
-.cp-footer { background: #0f1115; padding: 26px 10px 8px; margin-top: 0; }
+.cp-footer { background: #0f1115; padding: 26px 24px 8px; margin-top: 0; }
 .cp-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
 .cp-footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; padding-top: 20px; margin-bottom: 14px; }
 .cp-footer-logo { color: #07b4ba; }
@@ -590,77 +588,6 @@ padding: 110px 10px 60px;
 /* DESKTOP/MOBILE slider toggle */
 .cp-desktop-slider-wrapper { display: block; }
 .cp-mobile-slider-wrapper { display: none; }
-
-/* ══════════════════════════════════════════
-   ROADMAP SECTION STYLES (from ProgramPage)
-   ══════════════════════════════════════════ */
-.cp-roadmap-section { background: #0b0b0b; position: relative; overflow: hidden; }
-.cp-roadmap-inner { max-width: 1400px; margin: 0 auto; padding: 30px 0; background-image: repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px); }
-.cp-roadmap-header { text-align: center; margin-bottom: 35px; padding: 0 24px; }
-
-/* Desktop roadmap */
-.cp-roadmap-desktop { position: relative; max-width: 1320px; margin: 0 auto; overflow: hidden; padding: 0 70px; }
-.cp-roadmap-desktop-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; width: 52px; height: 52px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: #0d1117; color: #fff; font-size: 24px; cursor: pointer; }
-.cp-roadmap-desktop-nav:disabled { opacity: 0.35; cursor: default; }
-.cp-roadmap-desktop-nav-left { left: 0; }
-.cp-roadmap-desktop-nav-right { right: 0; }
-.cp-roadmap-timeline-row { display: flex; justify-content: space-between; margin-bottom: 42px; position: relative; }
-.cp-roadmap-timeline-line { position: absolute; top: 14px; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.1); }
-.cp-roadmap-timeline-step { position: relative; z-index: 2; text-align: center; }
-.cp-roadmap-timeline-label { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; margin-bottom: 10px; transition: color 0.3s; }
-.cp-roadmap-timeline-dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #07b4ba; transition: background 0.3s, box-shadow 0.3s; margin: 0 auto; }
-.cp-roadmap-cards-track-wrapper { overflow: hidden; }
-.cp-roadmap-cards-track { display: flex; gap: 20px; transition: transform 0.45s ease; }
-.roadmap-card { min-width: 45%; border-radius: 22px; overflow: hidden; background: linear-gradient(180deg,#10151d 0%, #0b0f14 100%); border: 1px solid rgba(255,255,255,0.06); }
-.roadmap-card-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 90px; }
-.roadmap-card img { width: 100%; height: 285px; object-fit: cover; }
-.roadmap-card-body { padding: 32px 24px; display: flex; flex-direction: column; justify-content: center; }
-.roadmap-card-body h3 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #fff; margin-bottom: 18px; }
-.roadmap-card-divider { width: 60px; height: 3px; background: #07b4ba; margin-bottom: 20px; }
-.roadmap-card-points { display: flex; flex-direction: column; gap: 12px; }
-.roadmap-card-point { display: flex; align-items: center; gap: 10px; }
-.roadmap-card-point-dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #07b4ba; color: #07b4ba; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
-.roadmap-card-point p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.4; margin: 0; }
-.roadmap-card-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
-.roadmap-card-footer p { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #07b4ba; letter-spacing: 1px; margin: 0; }
-
-/* Mobile roadmap */
-.cp-roadmap-mobile-shell { width: 100%; overflow: hidden; padding-bottom: 2px; }
-.cp-roadmap-mobile-timeline { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; gap: 0; margin: 0 14px 28px; padding-top: 4px; }
-.cp-roadmap-mobile-line { position: absolute; left: 9%; right: 9%; bottom: 7px; height: 1px; background: rgba(255,255,255,0.42); }
-.cp-roadmap-mobile-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 11px; min-width: 0; border: 0; background: transparent; color: rgba(255,255,255,0.72); font-family: 'Bebas Neue', sans-serif; cursor: pointer; }
-.cp-roadmap-mobile-step span { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; letter-spacing: 0; }
-.cp-roadmap-mobile-step i { width: 15px; height: 15px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.66); background: #03070c; display: block; }
-.cp-roadmap-mobile-step.active { color: #07e8ef; }
-.cp-roadmap-mobile-step.active i { border: 2px solid #07e8ef; background: #061018; box-shadow: 0 0 0 4px rgba(7,180,186,0.18), 0 0 16px rgba(7,232,239,0.95); }
-.cp-roadmap-mobile-stage { position: relative; }
-.cp-roadmap-mobile-arrow { position: absolute; top: 50%; z-index: 8; width: 34px; height: 34px; transform: translateY(-50%); border: 1px solid rgba(7,232,239,0.55); border-radius: 8px; background: rgba(3,11,18,0.92); color: #07e8ef; font-size: 19px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.cp-roadmap-mobile-arrow:disabled { opacity: 0.35; cursor: default; }
-.cp-roadmap-mobile-arrow-left { left: 0; }
-.cp-roadmap-mobile-arrow-right { right: 0; }
-.cp-roadmap-mobile-viewport { width: 100%; overflow: hidden; padding-left: 20px; }
-.cp-roadmap-mobile-track { display: flex; gap: 16px; transition: transform 0.42s ease; will-change: transform; }
-.cp-roadmap-mobile-card { position: relative; flex: 0 0 82vw; min-height: 308px; overflow: hidden; border: 1px solid rgba(116,225,232,0.28); border-radius: 10px; background: #061018; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 18px 38px rgba(0,0,0,0.34); }
-.cp-roadmap-mobile-card-bg { position: absolute; inset: 0; background-position: 62% center; background-size: cover; opacity: 0.62; }
-.cp-roadmap-mobile-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(2,7,12,0.98) 0%, rgba(2,7,12,0.78) 42%, rgba(2,7,12,0.34) 76%), linear-gradient(180deg, rgba(2,7,12,0.1) 0%, rgba(2,7,12,0.9) 100%); z-index: 1; }
-.cp-roadmap-mobile-card-body { position: relative; z-index: 2; min-height: 258px; padding: 28px 16px 16px; }
-.cp-roadmap-mobile-you { margin: 0 0 6px !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 12px !important; }
-.cp-roadmap-mobile-card h3 { margin: 0 0 14px !important; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 28px !important; line-height: 1.05 !important; letter-spacing: 2px; min-height: 64px; display: flex; align-items: flex-start; }
-.cp-roadmap-mobile-rule { width: 54px; height: 2px; margin-bottom: 28px; background: #07e8ef; box-shadow: 0 0 10px rgba(7,232,239,0.55); }
-.cp-roadmap-mobile-points { display: flex; flex-direction: column; gap: 14px; }
-.cp-roadmap-mobile-point { display: flex; align-items: center; gap: 10px; }
-.cp-roadmap-mobile-point span { display: flex; width: 14px; height: 14px; flex-shrink: 0; align-items: center; justify-content: center; border: 1px solid #07e8ef; border-radius: 50%; color: #07e8ef; font-size: 8px; }
-.cp-roadmap-mobile-point p { margin: 0 !important; color: rgba(255,255,255,0.82) !important; font-size: 11px !important; line-height: 1.25 !important; }
-.cp-roadmap-mobile-card-footer { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; border-top: 1px solid rgba(255,255,255,0.12); background: rgba(3,9,15,0.72); }
-.cp-roadmap-mobile-card-footer p { margin: 0 !important; color: #07e8ef !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 18px !important; letter-spacing: 1px; }
-.cp-roadmap-dots { display: flex; justify-content: center; gap: 12px; margin-top: 18px; }
-.cp-roadmap-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; }
-.cp-roadmap-dots button.active { background: #07e8ef; box-shadow: 0 0 12px rgba(7,232,239,0.7); }
-.cp-roadmap-note { display: flex; align-items: center; gap: 14px; margin: 20px 16px 0; padding: 16px 18px; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; background: linear-gradient(180deg, rgba(13,26,36,0.9), rgba(7,14,22,0.92)); }
-.cp-roadmap-note-icon { display: flex; width: 38px; height: 38px; flex-shrink: 0; align-items: center; justify-content: center; border: 1px solid #07e8ef; border-radius: 50%; color: #07e8ef; }
-.cp-roadmap-note-icon svg { width: 22px; height: 22px; }
-.cp-roadmap-note h3 { margin: 0 0 5px; color: rgba(255,255,255,0.9); font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.8px; line-height: 1; }
-.cp-roadmap-note p { margin: 0; color: #07e8ef; font-size: 11px; line-height: 1.3; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
@@ -678,17 +605,18 @@ padding: 110px 10px 60px;
   .trust-icon-box { width: 24px; height: 24px; }
   .trust-icon-box svg { width: 18px; height: 18px; }
   .cp-faq-grid { grid-template-columns: 1fr; }
+  .cp-faq-title { font-size: 36px; }
   .cp-what-cards { display: flex; flex-direction: column; gap: 14px; padding: 0 8px; }
   .cp-what-card { width: 100%; min-height: 90px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; text-align: left; padding: 14px 16px; gap: 14px; border-radius: 12px; }
-  .cp-what-card-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cp-what-card-icon { width: 48px; height: 48px; flex-shrink: 0; }
   .cp-what-card-icon svg { width: 28px; height: 28px; }
   .cp-what-card h4 { font-size: 13px; margin-bottom: 4px; }
   .cp-what-card p { font-size: 11px; line-height: 1.4; }
-  .cp-section { padding: 48px 5vw; }
+  .cp-section { padding: 48px 20px; }
   .cp-pain-grid { flex-direction: column; gap: 35px; }
   .cp-pain-media { flex: unset; width: 100%; }
-  /* method mobile */
-  .cp-method-inner { padding: 40px 5vw 48px; }
+  .cp-pain-heading { font-size: 32px; }
+  .cp-method-inner { padding: 40px 20px 48px; }
   .cp-vs-wrapper { grid-template-columns: 1fr; }
   .cp-vs-panel { height: 200px; }
   .cp-vs-panel-bad { border-radius: 12px 12px 0 0; }
@@ -696,21 +624,23 @@ padding: 110px 10px 60px;
   .cp-vs-circle { top: unset; left: 50%; transform: translateX(-50%); position: relative; margin: -26px auto; z-index: 10; }
   .cp-method-cards-grid { grid-template-columns: 1fr; }
   .cp-method-card-center { max-width: 100%; }
+  /* roadmap mobile */
+  .cp-roadmap-mobile { background: radial-gradient(circle at 50% 9%, rgba(7,180,186,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%) !important; }
   .cp-testi-main { flex-direction: column; }
   .cp-testi-img { flex: unset; width: 100%; }
   .cp-form-box { padding: 24px 18px; }
   .cp-cal-grid { grid-template-columns: 1fr; }
-  .cp-footer { flex-direction: column; text-align: center; padding: 50px 5vw 24px; }
+  .cp-footer { flex-direction: column; text-align: center; padding: 50px 20px 24px; }
   .cp-footer-inner { grid-template-columns: 1fr; gap: 40px; }
   .cp-footer-title { margin-bottom: 16px; }
   .cp-footer-links a, .cp-footer-contact p, .cp-footer-about p { font-size: 15px; }
   .cp-footer-bottom { margin-top: 40px; }
-  .cp-faq-inner { padding: 32px 5vw; }
+  .cp-faq-inner { padding: 32px 20px; }
   .cp-faq-question-text { font-size: 15px; }
   .cp-faq-answer p { font-size: 14px; }
   .cp-new-promise { padding: 26px 22px; border-radius: 16px; }
   .cp-new-promise-text { font-size: 15px; line-height: 1.8; }
-  .cp-coach-stats { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px; justify-content: center !important; }
+  .cp-coach-stats { grid-template-columns: 1fr 1fr !important; gap: 12px; }
   .cp-coach-stats > div { width: 100% !important; min-height: 120px !important; height: auto !important; padding: 18px 10px !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: hidden; }
   .cp-coach-stats > div p:first-child { font-size: 34px !important; letter-spacing: 1px !important; margin-bottom: 6px !important; }
   .cp-coach-stats > div p:last-child { font-size: 11px !important; letter-spacing: 2px !important; padding: 0 4px; }
@@ -734,22 +664,12 @@ padding: 110px 10px 60px;
   .cp-mobile-info span { color: rgba(255,255,255,0.35); font-size: 8px; display: block !important; text-align: center !important; }
   .cp-mobile-arrows-row { display: flex !important; justify-content: center !important; align-items: center !important; gap: 12px !important; width: 100% !important; margin-top: 4px !important; }
   .cp-mobile-btn { width: 40px !important; height: 40px !important; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.15) !important; background: #111317 !important; color: #fff !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer; font-size: 14px; }
-
-  /* Roadmap mobile responsive */
-  .cp-roadmap-desktop { display: none; }
-  .cp-roadmap-mobile-shell { display: block; }
-  .cp-roadmap-inner { padding: 24px 0 26px; }
-  .cp-roadmap-header { padding: 0 14px; margin-bottom: 22px; }
-}
-
-@media (min-width: 769px) {
-  .cp-roadmap-desktop { display: block; }
-  .cp-roadmap-mobile-shell { display: none; }
 }
 
 @media (max-width: 480px) {
   .cp-hero-h1 { font-size: clamp(30px, 8vw, 38px); }
   .cp-trust-item { width: 100%; }
+  .cp-faq-title { font-size: 30px; }
 }
 `;
 
@@ -906,16 +826,16 @@ function FAQSection() {
   );
 }
 
-/* ── ROADMAP SECTION (from ProgramPage) ── */
-const roadmapCards = [
-  { title: "1ST PHASE", days: "DAYS 1 - 7", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Fundamentals", "Basic Techniques", "Conditioning", "Mindset Building"] },
-  { title: "2ND PHASE", days: "DAYS 8 - 14", image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Skill Development", "Strength & Power", "Drills & Combos", "Recovery Focus"] },
-  { title: "3RD PHASE", days: "DAYS 15 - 21", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Advanced Techniques", "Sparring Practice", "Endurance Boost", "Mental Toughness"] },
-  { title: "4TH PHASE", days: "DAYS 22 - 28", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Fight IQ", "Combination Chains", "Counter Attacks", "Explosive Training"] },
-  { title: "5TH PHASE", days: "DAYS 29 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Full Integration", "Fight Simulation", "Peak Conditioning", "Program Completion"] },
-];
+/* ── ROADMAP COMPONENT (extracted for reuse inside MethodSection) ── */
+function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
+  const roadmapCards = [
+    { title: "1ST WEEK", days: "DAYS 1 - 7", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Fundamentals", "Basic Techniques", "Conditioning", "Mindset Building"] },
+    { title: "2ND WEEK", days: "DAYS 8 - 14", image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Skill Development", "Strength & Power", "Drills & Combos", "Recovery Focus"] },
+    { title: "3RD WEEK", days: "DAYS 15 - 21", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Advanced Techniques", "Sparring Practice", "Endurance Boost", "Mental Toughness"] },
+    { title: "4TH WEEK", days: "DAYS 22 - 28", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Fight IQ", "Combination Chains", "Counter Attacks", "Explosive Training"] },
+    { title: "5TH WEEK", days: "DAYS 29 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Full Integration", "Fight Simulation", "Peak Conditioning", "Program Completion"] },
+  ];
 
-function RoadmapSection() {
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -929,190 +849,141 @@ function RoadmapSection() {
   useEffect(() => {
     const maxIndex = isMobile ? roadmapCards.length - 1 : roadmapCards.length - 2;
     setRoadmapIndex((prev) => Math.min(prev, maxIndex));
-  }, [isMobile]);
+  }, [isMobile, roadmapCards.length]);
 
   return (
-    <div className="cp-roadmap-section">
-      <div className="cp-roadmap-inner">
+    <div className={isMobile ? "cp-roadmap-wrap cp-roadmap-mobile" : "cp-roadmap-wrap"} style={{ background: "#0b0b0b", position: "relative", overflow: "hidden", marginTop: 48 }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "30px 0", backgroundImage: "repeating-linear-gradient(-45deg, rgba(7,180,186,0.04) 0px, rgba(7,180,186,0.04) 1px, transparent 1px, transparent 6px)" }}>
         {/* Header */}
-        <div className="cp-roadmap-header">
+        <div style={{ textAlign: "center", marginBottom: 35, padding: "0 24px" }}>
           <p style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 4, textTransform: "uppercase", marginBottom: 14 }}>
-            COACHING JOURNEY
+            YOUR TRAINING JOURNEY
           </p>
           <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(30px,4vw,60px)", lineHeight: 0.95, letterSpacing: 3, color: "#fff" }}>
-            YOUR <span style={{ color: "#07b4ba" }}>5 WEEK</span> ROADMAP
+            THE <span style={{ color: "#07b4ba" }}>5 WEEK</span> ROADMAP
           </h2>
           <p style={{ marginTop: 18, color: "rgba(255,255,255,0.6)", fontFamily: "'Barlow', sans-serif", fontSize: 15 }}>
             A structured path. Weekly focus. Real results.
           </p>
         </div>
 
-        {/* Desktop layout */}
-        <div className="cp-roadmap-desktop">
-          <button
-            className="cp-roadmap-desktop-nav cp-roadmap-desktop-nav-left"
-            onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
-            disabled={roadmapIndex === 0}
-          >‹</button>
-          <button
-            className="cp-roadmap-desktop-nav cp-roadmap-desktop-nav-right"
-            onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))}
-            disabled={roadmapIndex >= roadmapCards.length - 2}
-          >›</button>
-
-          {/* Timeline */}
-          <div className="cp-roadmap-timeline-row">
-            <div className="cp-roadmap-timeline-line" />
-            {roadmapCards.map((week, i) => (
-              <div key={i} className="cp-roadmap-timeline-step">
-                <p className="cp-roadmap-timeline-label" style={{ color: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "rgba(255,255,255,0.45)" }}>{week.title}</p>
-                <div className="cp-roadmap-timeline-dot" style={{ background: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "#0b0b0b", boxShadow: i === roadmapIndex || i === roadmapIndex + 1 ? "0 0 18px rgba(7,180,186,0.95)" : "none" }} />
-              </div>
-            ))}
-          </div>
-
-          {/* Cards */}
-          <div className="cp-roadmap-cards-track-wrapper">
-            <div className="cp-roadmap-cards-track" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
-              {roadmapCards.map((card, i) => (
-                <div key={i} className="roadmap-card">
-                  <div className="roadmap-card-inner">
-                    <img src={card.image} alt={card.title} />
-                    <div className="roadmap-card-body">
-                      <h3>{card.title}</h3>
-                      <div className="roadmap-card-divider" />
-                      <div className="roadmap-card-points">
-                        {card.points.map((point, idx) => (
-                          <div key={idx} className="roadmap-card-point">
-                            <div className="roadmap-card-point-dot">✓</div>
-                            <p>{point}</p>
-                          </div>
-                        ))}
+        {isMobile ? (
+          <div className="cp-roadmap-mobile-shell">
+            <div className="cp-roadmap-mobile-timeline">
+              <div className="cp-roadmap-mobile-line" />
+              {roadmapCards.map((week, i) => (
+                <button key={week.title} className={`cp-roadmap-mobile-step ${i === roadmapIndex ? "active" : ""}`} onClick={() => setRoadmapIndex(i)} aria-label={`Show ${week.title}`}>
+                  <span>{week.title}</span>
+                  <i />
+                </button>
+              ))}
+            </div>
+            <div className="cp-roadmap-mobile-stage">
+              <button className="cp-roadmap-arrow cp-roadmap-arrow-left" onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} disabled={roadmapIndex === 0} aria-label="Previous week">{"<"}</button>
+              <button className="cp-roadmap-arrow cp-roadmap-arrow-right" onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))} disabled={roadmapIndex === roadmapCards.length - 1} aria-label="Next week">{">"}</button>
+              <div className="cp-roadmap-viewport">
+                <div className="cp-roadmap-track" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
+                  {roadmapCards.map((card, i) => (
+                    <div key={card.title} className="cp-roadmap-card">
+                      <div className="cp-roadmap-card-bg" style={{ backgroundImage: `url(${card.image})` }} />
+                      <div className="cp-roadmap-card-body">
+                        {i === roadmapIndex && <p className="cp-roadmap-you">YOU ARE HERE</p>}
+                        <h3>{card.title}</h3>
+                        <div className="cp-roadmap-rule" />
+                        <div className="cp-roadmap-points">
+                          {card.points.map((point) => (
+                            <div key={point} className="cp-roadmap-point">
+                              <span>✓</span>
+                              <p>{point}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="cp-roadmap-card-footer">
+                        <span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+                          </svg>
+                        </span>
+                        <p>{card.days}</p>
                       </div>
                     </div>
-                  </div>
-                  <div className="roadmap-card-footer">
-                    <p>{card.days}</p>
-                  </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="cp-roadmap-dots">
+              {roadmapCards.map((card, i) => (
+                <button key={card.title} className={i === roadmapIndex ? "active" : ""} onClick={() => setRoadmapIndex(i)} aria-label={`Go to ${card.title}`} />
+              ))}
+            </div>
+            <div className="cp-roadmap-note">
+              <div className="cp-roadmap-note-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 21h8" /><path d="M12 17v4" />
+                  <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" />
+                  <path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" />
+                </svg>
+              </div>
+              <div>
+                <h3>STAY CONSISTENT. TRUST THE PROCESS.</h3>
+                <p>Become the best version of yourself.</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div style={{ position: "relative", maxWidth: 1320, margin: "0 auto", overflow: "hidden", padding: "0 70px" }}>
+            <button onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
+            <button onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))} style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: 14, border: "1px solid rgba(255,255,255,0.08)", background: "#0d1117", color: "#fff", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 42, position: "relative" }}>
+              <div style={{ position: "absolute", top: 14, left: 0, right: 0, height: 2, background: "rgba(255,255,255,0.1)" }} />
+              {roadmapCards.map((week, i) => (
+                <div key={i} style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+                  <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: 1, color: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "rgba(255,255,255,0.45)", marginBottom: 10, transition: "0.3s" }}>{week.title}</p>
+                  <div style={{ width: 26, height: 26, borderRadius: "50%", border: "2px solid #07b4ba", background: i === roadmapIndex || i === roadmapIndex + 1 ? "#07b4ba" : "#0b0b0b", boxShadow: i === roadmapIndex || i === roadmapIndex + 1 ? "0 0 18px rgba(7,180,186,0.95)" : "none", transition: "0.3s" }} />
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Mobile layout */}
-        <div className="cp-roadmap-mobile-shell">
-          <div className="cp-roadmap-mobile-timeline">
-            <div className="cp-roadmap-mobile-line" />
-            {roadmapCards.map((week, i) => (
-              <button
-                key={week.title}
-                className={`cp-roadmap-mobile-step${i === roadmapIndex ? " active" : ""}`}
-                onClick={() => setRoadmapIndex(i)}
-                aria-label={`Show ${week.title}`}
-              >
-                <span>{week.title}</span>
-                <i />
-              </button>
-            ))}
-          </div>
-
-          <div className="cp-roadmap-mobile-stage">
-            <button
-              className="cp-roadmap-mobile-arrow cp-roadmap-mobile-arrow-left"
-              onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))}
-              disabled={roadmapIndex === 0}
-              aria-label="Previous week"
-            >{"<"}</button>
-            <button
-              className="cp-roadmap-mobile-arrow cp-roadmap-mobile-arrow-right"
-              onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 1))}
-              disabled={roadmapIndex === roadmapCards.length - 1}
-              aria-label="Next week"
-            >{">"}</button>
-            <div className="cp-roadmap-mobile-viewport">
-              <div className="cp-roadmap-mobile-track" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
+            <div style={{ overflow: "hidden" }}>
+              <div style={{ display: "flex", gap: 20, transform: `translateX(-${roadmapIndex * 47}%)`, transition: "0.45s ease" }}>
                 {roadmapCards.map((card, i) => (
-                  <div key={card.title} className="cp-roadmap-mobile-card">
-                    <div className="cp-roadmap-mobile-card-bg" style={{ backgroundImage: `url(${card.image})` }} />
-                    <div className="cp-roadmap-mobile-card-body">
-                      {i === roadmapIndex && <p className="cp-roadmap-mobile-you">YOU ARE HERE</p>}
-                      <h3>{card.title}</h3>
-                      <div className="cp-roadmap-mobile-rule" />
-                      <div className="cp-roadmap-mobile-points">
-                        {card.points.map((point) => (
-                          <div key={point} className="cp-roadmap-mobile-point">
-                            <span>✓</span>
-                            <p>{point}</p>
-                          </div>
-                        ))}
+                  <div key={i} style={{ minWidth: "45%", borderRadius: 22, overflow: "hidden", background: "linear-gradient(180deg,#10151d 0%, #0b0f14 100%)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 90 }}>
+                      <img src={card.image} alt={card.title} style={{ width: "100%", height: 285, objectFit: "cover" }} />
+                      <div style={{ padding: "32px 24px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                        <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#fff", marginBottom: 18 }}>{card.title}</h3>
+                        <div style={{ width: 60, height: 3, background: "#07b4ba", marginBottom: 20 }} />
+                        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                          {card.points.map((point, idx) => (
+                            <div key={idx} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                              <div style={{ width: 20, height: 20, borderRadius: "50%", border: "2px solid #07b4ba", color: "#07b4ba", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>✓</div>
+                              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.4 }}>{point}</p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                    <div className="cp-roadmap-mobile-card-footer">
-                      <p>{card.days}</p>
+                    <div style={{ padding: "16px", borderTop: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
+                      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: "#07b4ba", letterSpacing: 1 }}>{card.days}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
-          <div className="cp-roadmap-dots">
-            {roadmapCards.map((card, i) => (
-              <button
-                key={card.title}
-                className={i === roadmapIndex ? "active" : ""}
-                onClick={() => setRoadmapIndex(i)}
-                aria-label={`Go to ${card.title}`}
-              />
-            ))}
-          </div>
-
-          <div className="cp-roadmap-note">
-            <div className="cp-roadmap-note-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8 21h8" /><path d="M12 17v4" />
-                <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" />
-                <path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" />
-              </svg>
-            </div>
-            <div>
-              <h3>STAY CONSISTENT. TRUST THE PROCESS.</h3>
-              <p>Become the best version of yourself.</p>
-            </div>
-          </div>
-        </div>
-
+        )}
       </div>
     </div>
   );
 }
 
-/* ══════════════════════════════════════════
-   AOF METHOD SECTION
-   ══════════════════════════════════════════ */
+/* ── AOF METHOD SECTION ── */
 function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   const methodCards = [
-    {
-      icon: <IconTarget />,
-      title: "CUSTOMISED & GOAL-DRIVEN",
-      desc: "A roadmap built entirely around your body type, skill level, and competition goals.",
-    },
-    {
-      icon: <IconZap />,
-      title: "TECHNICAL MASTERY",
-      desc: "Focused drills that embed proper technique into muscle memory.",
-    },
-    {
-      icon: <IconTrend />,
-      title: "STRUCTURED PROGRESSION",
-      desc: "Step-by-step intensity cycles to keep your body adapting and improving every week.",
-    },
-    {
-      icon: <IconUser />,
-      title: "REAL-TIME COACHING",
-      desc: "Your coach tracks every session, reviews footage, and adjusts the plan in real time.",
-    },
+    { icon: <IconTarget />, title: "CUSTOMISED & GOAL-DRIVEN", desc: "A roadmap built entirely around your body type, skill level, and competition goals." },
+    { icon: <IconZap />, title: "TECHNICAL MASTERY", desc: "Focused drills that embed proper technique into muscle memory." },
+    { icon: <IconTrend />, title: "STRUCTURED PROGRESSION", desc: "Step-by-step intensity cycles to keep your body adapting and improving every week." },
+    { icon: <IconUser />, title: "REAL-TIME COACHING", desc: "Your coach tracks every session, reviews footage, and adjusts the plan in real time." },
   ];
 
   return (
@@ -1136,30 +1007,21 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
         <Reveal>
           <div style={{ position: "relative" }}>
             <div className="cp-vs-wrapper">
-              {/* LEFT — bad */}
               <div className="cp-vs-panel cp-vs-panel-bad">
-                <div
-                  className="cp-vs-panel-img"
-                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')" }}
-                />
+                <div className="cp-vs-panel-img" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')" }} />
                 <div className="cp-vs-panel-label">
                   <div className="cp-vs-badge cp-vs-badge-bad">✕</div>
                   <span className="cp-vs-panel-title">Training Without Direction</span>
                 </div>
               </div>
-              {/* RIGHT — good */}
               <div className="cp-vs-panel cp-vs-panel-good">
-                <div
-                  className="cp-vs-panel-img"
-                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')" }}
-                />
+                <div className="cp-vs-panel-img" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')" }} />
                 <div className="cp-vs-panel-label">
                   <div className="cp-vs-badge cp-vs-badge-good">✓</div>
                   <span className="cp-vs-panel-title">Training The Right Way</span>
                 </div>
               </div>
             </div>
-            {/* VS circle — absolutely centred on the seam */}
             <div className="cp-vs-circle">VS</div>
           </div>
         </Reveal>
@@ -1177,8 +1039,6 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
               </div>
             ))}
           </div>
-
-          {/* Bottom centred card */}
           <div className="cp-method-card-center-row">
             <div className="cp-method-card cp-method-card-center">
               <div className="cp-method-card-icon"><IconTrophy /></div>
@@ -1190,10 +1050,8 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
           </div>
         </Reveal>
 
-        {/* ── ROADMAP SECTION inserted here ── */}
-        <Reveal style={{ marginTop: 64 }}>
-          <RoadmapSection />
-        </Reveal>
+        {/* ── ROADMAP — inserted between Method cards and What You Get ── */}
+        <RoadmapSection scrollToForm={scrollToForm} />
 
         {/* What you get */}
         <Reveal style={{ marginTop: 64 }}>
@@ -1263,7 +1121,7 @@ export default function CoachingPage() {
     "You have no structured plan, just random gym sessions",
     "You feel lost without proper coaching guidance",
     "Your conditioning fails before your skill does",
-  
+    "You want to compete seriously but don't know the next step",
   ];
 
   return (
@@ -1348,7 +1206,7 @@ export default function CoachingPage() {
           </div>
         </section>
 
-        {/* ── AOF METHOD (includes Roadmap + What You Get inside) ── */}
+        {/* ── AOF METHOD (contains roadmap + what you get) ── */}
         <MethodSection scrollToForm={scrollToForm} />
 
         {/* ── COACH ── */}
@@ -1366,11 +1224,11 @@ export default function CoachingPage() {
                       <div key={i} className="cp-checklist-item"><span className="check">✓</span><p>{cred}</p></div>
                     ))}
                   </div>
-                  <div className="cp-coach-stats" style={{ display: "flex", gap: 22, flexWrap: "wrap", marginTop: 26 }}>
+                  <div className="cp-coach-stats">
                     {stats.map((stat, i) => (
-                      <div key={i} style={{ background: "linear-gradient(180deg,#181818 0%, #121212 100%)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, width: 160, height: 140, padding: "18px 16px", textAlign: "center", boxShadow: "0 0 14px rgba(0,0,0,0.18)" }}>
-                        <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: "#07b4ba", letterSpacing: 1, marginBottom: 10 }}>{stat.val}</p>
-                        <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 12, letterSpacing: 2, textTransform: "uppercase" }}>{stat.label}</p>
+                      <div key={i}>
+                        <p>{stat.val}</p>
+                        <p>{stat.label}</p>
                       </div>
                     ))}
                   </div>
@@ -1399,8 +1257,8 @@ export default function CoachingPage() {
                 </div>
                 <div style={{ flex: 1, minWidth: 260 }}>
                   <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(28px,3vw,42px)", letterSpacing: 1.5, lineHeight: 1.1, marginBottom: 16, color: "#fff" }}>
-                      <span className="cp-quote-mark">"</span>
-                    AOF Changed The Way <span style={{ color: "#07b4ba" }}>I Train And Perform.</span>  <span className="cp-quote-mark">"</span>
+                    <span className="cp-quote-mark">"</span>
+                    AOF Changed The Way <span style={{ color: "#07b4ba" }}>I Train And Perform.</span> <span className="cp-quote-mark">"</span>
                   </h3>
                   <p style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.75 }}>The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.</p>
                   <p style={{ fontFamily: "'Barlow', sans-serif", marginTop: 14, color: "#07b4ba", fontWeight: 700, fontSize: 14 }}>— Alex M., Amateur MMA Fighter</p>
