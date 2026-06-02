@@ -179,7 +179,6 @@ function FAQSection() {
   
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]">
-      {/* Strict Container */}
       <div className="w-full max-w-[1200px] mx-auto py-[80px] px-[40px] md:px-[40px] relative z-10">
         <Reveal>
           <p className="text-center font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase text-[#00F0FF] mb-[10px]">Got Questions?</p>
@@ -307,21 +306,6 @@ const stats = [
 export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
-  const [timeLeft, setTimeLeft] = useState({ days: "02", hours: "18", minutes: "43" });
-
-  useEffect(() => {
-    const target = new Date();
-    target.setDate(target.getDate() + 2);
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = target.getTime() - now;
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      setTimeLeft({ days: String(days).padStart(2, "0"), hours: String(hours).padStart(2, "0"), minutes: String(minutes).padStart(2, "0") });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const scrollToFooter = () => footerRef.current?.scrollIntoView({ behavior: "smooth" });
   const [roadmapIndex, setRoadmapIndex] = useState(0);
@@ -350,9 +334,8 @@ export default function ProgramPage() {
   return (
     <div className="font-['Barlow'] text-white bg-[#111318] overflow-x-hidden w-full antialiased">
       
-      {/* ── NAVBAR (LOCKED HEIGHT & ALIGNMENT) ── */}
+      {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[75px] bg-[#22252b] border-b border-white/5 flex items-center justify-center">
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] px-[40px] flex items-center justify-between">
           <div className="flex items-center">
             <h1 className="font-['Bebas_Neue'] text-[32px] leading-none m-0 flex tracking-[1px]">
@@ -379,72 +362,92 @@ export default function ProgramPage() {
       {/* Mobile Back Button */}
       <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-gradient-to-b from-[#13171d] to-[#0d1117] text-[#00F0FF] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
-      {/* ── HERO + TRUST BAR (single viewport) ── */}
-      <div className="relative w-full h-screen flex flex-col overflow-hidden">
-        <section className="relative flex-1 flex items-center overflow-hidden bg-[#111318]">
-          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
-          <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
+      {/* ── HERO SECTION ──
+          KEY FIX: Hero is completely independent from the trust bar.
+          It uses padding-top to clear the navbar and a fixed min-height
+          that does NOT depend on viewport height at all.
+          This means bookmarks bar appearing/disappearing has zero effect.
+      ── */}
+      <section
+        className="relative w-full flex items-center overflow-hidden bg-[#111318]"
+        style={{
+          paddingTop: "75px",       /* exactly navbar height — content starts right below navbar */
+          minHeight: "600px",       /* absolute minimum so it never collapses */
+          height: "calc(100vh - 70px)", /* fills viewport minus trust bar; not affected by bookmarks */
+        }}
+      >
+        {/* Background image */}
+        <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
+        {/* Scanline overlay */}
+        <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
+        {/* Left-to-right fade */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
+        {/* Top-to-bottom fade */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
 
-          <div className="w-full max-w-[1200px] mx-auto px-[40px] pt-[80px] relative z-[10] flex flex-col items-start text-left">
-            <Reveal>
-              <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
-                AOF 30-Day Online Program
-              </p>
-              <h1 className="font-['Bebas_Neue'] text-[clamp(40px,6vw,80px)] leading-[0.95] tracking-[2px] uppercase text-white mb-[20px] drop-shadow-lg">
-                BUILD REAL <br />
-                <span className="text-[#00F0FF]">MMA STRIKING</span> <br />
-                FUNDAMENTALS
-              </h1>
-              <p className="text-white/80 font-['Barlow'] text-[clamp(13px,1.2vw,16px)] leading-[1.6] max-w-[480px] mb-[28px]">
-                A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
-              </p>
-              <button
-                className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#00F0FF] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
-                onClick={scrollToFooter}
-              >
-                JOIN NOW
-              </button>
-            </Reveal>
+        <div className="w-full max-w-[1200px] mx-auto px-[40px] relative z-[10] flex flex-col items-start text-left">
+          <Reveal>
+            <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
+              AOF 30-Day Online Program
+            </p>
+            <h1 className="font-['Bebas_Neue'] text-[clamp(40px,6vw,80px)] leading-[0.95] tracking-[2px] uppercase text-white mb-[20px] drop-shadow-lg">
+              BUILD REAL <br />
+              <span className="text-[#00F0FF]">MMA STRIKING</span> <br />
+              FUNDAMENTALS
+            </h1>
+            <p className="text-white/80 font-['Barlow'] text-[clamp(13px,1.2vw,16px)] leading-[1.6] max-w-[480px] mb-[28px]">
+              A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
+            </p>
+            <button
+              className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#00F0FF] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
+              onClick={scrollToFooter}
+            >
+              JOIN NOW
+            </button>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── TRUST BAR ──
+          Completely separate from hero. Just flows naturally below it.
+          Fixed height so it never shifts anything.
+      ── */}
+      <div
+        className="w-full bg-[#00F0FF] relative z-20 border-b-[6px] border-[#111318] flex justify-center"
+        style={{ height: "70px" }}
+      >
+        <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px] h-full">
+          <div className="flex items-center gap-[14px]">
+            <span className="flex items-center justify-center text-white">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </span>
+            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
           </div>
-        </section>
-
-        {/* ── TRUST BAR ── */}
-        <div className="w-full shrink-0 min-h-[70px] bg-[#00F0FF] relative z-20 flex justify-center border-b-[6px] border-[#111318] py-[12px] md:py-0">
-          <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px]">
-            <div className="flex items-center gap-[14px]">
-              <span className="flex items-center justify-center text-white">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  <path d="M9 12l2 2 4-4"></path>
-                </svg>
-              </span>
-              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
-            </div>
-            <div className="flex items-center gap-[14px]">
-              <span className="flex items-center justify-center text-white">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </span>
-              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
-            </div>
-            <div className="flex items-center gap-[14px]">
-              <span className="flex items-center justify-center text-white">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M8 21h8"></path>
-                  <path d="M12 17v4"></path>
-                  <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
-                  <path d="M5 4H3v2a4 4 0 0 0 4 4"></path>
-                  <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
-                </svg>
-              </span>
-              <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
-            </div>
+          <div className="flex items-center gap-[14px]">
+            <span className="flex items-center justify-center text-white">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
+          </div>
+          <div className="flex items-center gap-[14px]">
+            <span className="flex items-center justify-center text-white">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 21h8"></path>
+                <path d="M12 17v4"></path>
+                <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
+                <path d="M5 4H3v2a4 4 0 0 0 4 4"></path>
+                <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
+              </svg>
+            </span>
+            <p className="font-['Bebas_Neue'] text-[24px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
           </div>
         </div>
       </div>
@@ -452,7 +455,6 @@ export default function ProgramPage() {
 
       {/* ── PAIN SECTION ── */}
       <div className="bg-[#0b0b0b]">
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[60px] px-[40px]">
           <Reveal>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-center flex-wrap">
@@ -481,7 +483,6 @@ export default function ProgramPage() {
 
       {/* ── AOF INTRO SECTION ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 5px)" }}>
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[60px] px-[40px]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div className="relative aspect-video rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
@@ -511,7 +512,6 @@ export default function ProgramPage() {
 
       {/* ── FEATURES ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 0.4px)", backgroundSize: "30px 30px" }}>
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[60px] px-[40px]">
           <Reveal>
             <p className="font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase text-[#00F0FF] mb-0 text-center">
@@ -543,7 +543,6 @@ export default function ProgramPage() {
 
       {/* ── ROADMAP SECTION ── */}
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#00F0FF]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%, rgba(0,240,255,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%)" } : {}}>
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[40px] px-[40px]" style={isMobileRoadmap ? { backgroundImage: "linear-gradient(rgba(0,240,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.035) 1px, transparent 1px)", backgroundSize: "26px 26px" } : { backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.04) 0px, rgba(0,240,255,0.04) 1px, transparent 1px, transparent 6px)" }}>
           
           <div className="text-center mb-[40px]">
@@ -560,7 +559,6 @@ export default function ProgramPage() {
 
           {isMobileRoadmap ? (
              <div className="w-full overflow-hidden pb-[2px]">
-               {/* Mobile Roadmap Code (Kept intact) */}
                <div className="relative grid grid-cols-5 items-end gap-0 mx-[14px] mb-[28px] pt-[4px]">
                  <div className="absolute left-[9%] right-[9%] bottom-[7px] h-[1px] bg-white/40" />
                  {roadmapCards.map((week, i) => (
@@ -687,7 +685,6 @@ export default function ProgramPage() {
 
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0b0b0b]">
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[48px] px-[40px] pb-[40px]">
           <Reveal>
             <p className="font-['Barlow'] text-[17px] text-[#00F0FF] font-bold mb-[24px] tracking-[2px] uppercase">LED BY</p>
@@ -720,7 +717,6 @@ export default function ProgramPage() {
 
       {/* ── TESTIMONIALS ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]">
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[48px] px-[40px] pt-[48px]">
           <Reveal>
             <div className="text-center mb-[44px]">
@@ -755,7 +751,6 @@ export default function ProgramPage() {
 
       {/* ── BONUSES SECTION ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[40px] px-[40px]">
           <div className="text-center mb-[40px]">
             <p className="text-[#00F0FF] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-[10px]">EXCLUSIVE FOUNDERS BONUSES</p>
@@ -802,7 +797,6 @@ export default function ProgramPage() {
 
       {/* ── APPLY / CTA SECTION ── */}
       <div ref={footerRef} className="bg-[#0b0b0b] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(0,240,255,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto py-[48px] px-[40px]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div>
@@ -876,7 +870,6 @@ export default function ProgramPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#101318] pt-[32px] pb-[16px] border-t border-white/5">
-        {/* Strict 1200px container */}
         <div className="w-full max-w-[1200px] mx-auto px-[40px] grid grid-cols-1 md:grid-cols-3 gap-[40px]">
           <div>
             <h3 className="font-['Bebas_Neue'] text-[25px] tracking-[1px] text-white pt-[8px] mb-[10px]">CONTACT</h3>
