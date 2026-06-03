@@ -7,9 +7,17 @@ import { useNavigate } from "react-router-dom";
    Wrapper height = 100dvh (dynamic — immune to bookmarks bar, iOS toolbar, etc.)
    Hero flex-1 fills all space between navbar padding and trust bar.
    dvh applied via ref callback so it cascades: dvh → svh → vh fallback.
+
+   LAYOUT NOTE:
+   All horizontal padding is fixed at exactly 1cm (px-[1cm]) on every container.
+   max-w-* constraints are removed so the layout always fills the full viewport
+   with exactly 1cm gutters on left and right — unaffected by resolution/zoom.
 ───────────────────────────────────────────────────────────────────────────── */
 const NAVBAR_H = 62;
 const TRUST_H  = 68;
+
+/* shared inline style for the fixed 1cm side padding wrapper */
+const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
 
 /* ── REVEAL ── */
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
@@ -255,7 +263,7 @@ function FAQSection() {
   const [open, setOpen] = useState<number|null>(null);
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]" style={{backgroundImage:"linear-gradient(rgba(7,180,186,0.05) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,0.05) 1px,transparent .4px)",backgroundSize:"40px 40px"}}>
-      <div className="max-w-[1180px] mx-auto px-6 py-16 relative z-10">
+      <div className="w-full py-16 relative z-10" style={GUTTER}>
         <Reveal>
           <p className="text-center text-[#07b4ba] font-bold text-[12px] tracking-[3px] uppercase mb-2">Got Questions?</p>
           <h2 className="text-center font-['Bebas_Neue'] text-[36px] md:text-[60px] tracking-[3px] text-white leading-none mb-2">
@@ -300,10 +308,10 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   return (
     <div className={`relative overflow-hidden mt-12 ${isMobile ? "border-y border-[#07b4ba]/15" : "bg-[#0b0b0b]"}`}
       style={isMobile ? {background:"radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)"} : {}}>
-      <div className="max-w-[1400px] mx-auto py-8 px-0"
+      <div className="w-full py-8 px-0"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)"}}>
         {/* Header */}
-        <div className="text-center mb-9 px-6">
+        <div className="text-center mb-9" style={GUTTER}>
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">YOUR TRAINING JOURNEY</p>
           <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
             THE <span className="text-[#07b4ba]">5 WEEK</span> ROADMAP
@@ -381,7 +389,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
             </div>
           </div>
         ) : (
-          <div className="relative overflow-hidden px-[70px]">
+          <div className="relative overflow-hidden" style={{ paddingLeft: "calc(1cm + 18px)", paddingRight: "calc(1cm + 18px)" }}>
             <button onClick={()=>setIdx(p=>Math.max(p-1,0))}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/8 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">‹</button>
             <button onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-2))}
@@ -441,7 +449,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   return (
     <div id="method" className="relative overflow-hidden bg-[#0b0b0b]"
       style={{backgroundImage:"linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)",backgroundSize:"30px 30px"}}>
-      <div className="max-w-[1180px] mx-auto px-6 py-14">
+      <div className="w-full py-14" style={GUTTER}>
         {/* Header */}
         <Reveal>
           <div className="text-center mb-9">
@@ -538,7 +546,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
 
         {/* Promise */}
         <Reveal style={{marginTop:50}}>
-          <div className="max-w-[820px] mx-auto text-center px-10 py-8">
+          <div className="w-full mx-auto text-center px-10 py-8">
             <p className="font-['Bebas_Neue'] text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
             <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
             <p className="font-['Barlow'] text-[16px] md:text-[19px] leading-[1.9] text-white/76 italic">
@@ -593,7 +601,7 @@ export default function CoachingPage() {
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
 
       {/* ── NAVBAR ── fixed 62px */}
-      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] px-5 bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/6 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/6 flex items-center justify-between" style={GUTTER}>
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
         </span>
@@ -611,27 +619,18 @@ export default function CoachingPage() {
         ══════════════════════════════════════════════════════════════════════
         VIEWPORT-PROOF WRAPPER
         ══════════════════════════════════════════════════════════════════════
-        • Total height = 100dvh  (dynamic viewport height — unaffected by
-          bookmarks bar, iOS toolbar, address bar resizing, any browser chrome)
-        • padding-top = NAVBAR_H (62px) pushes content below fixed nav
-        • Inside: flex column splits the remaining space into:
-            [hero]      → flex-1  (grows to fill everything above trust bar)
-            [trust bar] → shrink-0, fixed TRUST_H (68px), always at bottom
-        • dvh assigned via ref callback so the cascade works:
-            dvh (best) → svh (fallback) → vh (last resort)
-        ══════════════════════════════════════════════════════════════════════
       */}
       <div
         className="relative flex flex-col w-full overflow-hidden"
         ref={(el) => {
           if (!el) return;
           el.style.paddingTop = `${NAVBAR_H}px`;
-          el.style.height = `calc(100vh - 0px)`;          // vh fallback
-          el.style.height = `calc(100svh - 0px)`;         // svh if supported
-          el.style.height = `100dvh`;                     // dvh takes over
+          el.style.height = `calc(100vh - 0px)`;
+          el.style.height = `calc(100svh - 0px)`;
+          el.style.height = `100dvh`;
         }}
       >
-        {/* ── HERO ── flex-1 fills all space between nav padding + trust bar */}
+        {/* ── HERO ── */}
         <section
           id="home"
           className="relative w-full flex items-center overflow-hidden flex-1 min-h-0"
@@ -646,7 +645,7 @@ export default function CoachingPage() {
           <div className="absolute inset-0 z-[1]"
             style={{background:"linear-gradient(180deg,rgba(6,8,12,.55) 0%,rgba(6,8,12,.78) 55%,#06080c 100%)"}} />
 
-          <div className="w-full max-w-[1100px] mx-auto px-6 relative z-10">
+          <div className="w-full relative z-10" style={GUTTER}>
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase mb-4">
                 AOF Academy — 1 On 1 Coaching
@@ -668,12 +667,12 @@ export default function CoachingPage() {
           </div>
         </section>
 
-        {/* ── TRUST BAR ── fixed 68px, always anchored at bottom of dvh wrapper */}
+        {/* ── TRUST BAR ── fixed 68px */}
         <div
-          className="w-full bg-[#07b4ba] relative z-20 flex items-center justify-center shrink-0"
-          style={{ height: `${TRUST_H}px` }}
+          className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0"
+          style={{ height: `${TRUST_H}px`, ...GUTTER }}
         >
-          <div className="w-full max-w-[1100px] px-6 flex items-center justify-center md:justify-start gap-0">
+          <div className="w-full flex items-center justify-center md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-3">
               <div className="w-10 h-10 flex items-center justify-center shrink-0"><IconShield /></div>
               <span className="font-['Bebas_Neue'] text-[22px] tracking-[2px] text-white leading-none whitespace-nowrap">Proven System</span>
@@ -691,12 +690,8 @@ export default function CoachingPage() {
 
       </div>{/* end viewport-proof wrapper */}
 
-      {/* ══════════════════════════════════════════════════════════════════ */}
-      {/* ALL REMAINING SECTIONS — unchanged from original logic            */}
-      {/* ══════════════════════════════════════════════════════════════════ */}
-
       {/* ── PAIN SECTION ── */}
-      <section className="max-w-[1100px] mx-auto py-12 px-6">
+      <section className="w-full py-12" style={GUTTER}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           {/* text left */}
           <div className="flex-1 min-w-[260px]">
@@ -731,7 +726,7 @@ export default function CoachingPage() {
 
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0f1115]">
-        <div className="max-w-[1100px] mx-auto py-12 px-6 pb-10">
+        <div className="w-full py-12 pb-10" style={GUTTER}>
           <Reveal>
             <p className="text-[#07b4ba] font-bold text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
             <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
@@ -765,7 +760,7 @@ export default function CoachingPage() {
       {/* ── TESTIMONIALS ── */}
       <div id="testimonials" className="relative overflow-hidden bg-[#0b0b0b]"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)"}}>
-        <div className="max-w-[1100px] mx-auto py-12 px-6">
+        <div className="w-full py-12" style={GUTTER}>
           <Reveal>
             <div className="text-center mb-11">
               <p className="text-[#07b4ba] font-bold text-[13px] tracking-[3px] uppercase">Real People, Real Results</p>
@@ -799,7 +794,7 @@ export default function CoachingPage() {
       {/* ── APPLY FORM ── */}
       <div id="contact" ref={formRef} className="relative overflow-hidden bg-[#0a0a0a]"
         style={{backgroundImage:"radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)",backgroundSize:"20px 20px"}}>
-        <div className="max-w-[1100px] mx-auto py-12 px-6">
+        <div className="w-full py-12" style={GUTTER}>
           <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
             {/* left */}
             <div className="flex-1 min-w-[260px]">
@@ -880,7 +875,7 @@ export default function CoachingPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#0f1115] pt-8 pb-2 border-t border-white/6">
-        <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10" style={GUTTER}>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] text-white pt-5 mb-3.5">CONTACT</h3>
             <div className="flex flex-col gap-4">
@@ -906,7 +901,7 @@ export default function CoachingPage() {
             </p>
           </div>
         </div>
-        <div className="max-w-[1180px] mx-auto mt-6 pt-3 border-t border-white/6 text-center text-[13px] text-white/30 px-6">
+        <div className="w-full mt-6 pt-3 border-t border-white/6 text-center text-[13px] text-white/30" style={GUTTER}>
           © 2026 AOF Academy. All rights reserved.
         </div>
       </footer>
