@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -178,7 +179,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]">
-      <div className="w-full max-w-[1200px] mx-auto py-[80px] px-[40px] md:px-[40px] relative z-10">
+      <div style={{ width: "100%", padding: "80px 10px", position: "relative", zIndex: 10 }}>
         <Reveal>
           <p className="text-center font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase text-[#00F0FF] mb-[10px]">Got Questions?</p>
           <h2 className="text-center font-['Bebas_Neue'] text-[36px] md:text-[60px] tracking-[2px] text-white leading-none mb-[10px]">
@@ -301,6 +302,15 @@ const stats = [
   { val: "3", label: "Continents" },
 ];
 
+/* ── FIXED VIEWPORT WRAPPER STYLE ── */
+/* Always exactly 10px (≈1cm) on left and right, never changes */
+const PAGE_PADDING: CSSProperties = {
+  width: "100%",
+  paddingLeft: "10px",
+  paddingRight: "10px",
+  boxSizing: "border-box",
+};
+
 export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
@@ -334,7 +344,7 @@ export default function ProgramPage() {
 
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[75px] bg-[#22252b] border-b border-white/5 flex items-center justify-center">
-        <div className="w-full max-w-[1200px] px-[40px] flex items-center justify-between">
+        <div style={{ ...PAGE_PADDING, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div className="flex items-center">
             <h1 className="font-['Bebas_Neue'] text-[32px] leading-none m-0 flex tracking-[1px]">
               <span className="text-[#00F0FF]">A</span><span className="text-white">O</span><span className="text-[#00F0FF]">F</span>
@@ -364,28 +374,10 @@ export default function ProgramPage() {
         aria-label="Back to home"
       >←</button>
 
-      {/* ══════════════════════════════════════════════════════════════════════
-          HERO + TRUST BAR WRAPPER
-          ─────────────────────────────────────────────────────────────────────
-          KEY: `100dvh` (dynamic viewport height) is the unit that auto-adjusts
-          when browser chrome (bookmark bar, address bar, etc.) appears or
-          disappears. Unlike `100vh` which is computed once and never updates,
-          `100dvh` always equals the current visible viewport height.
-
-          The wrapper is a flex column:
-            • padding-top: 75px  →  clears the fixed navbar
-            • <section flex:1>   →  hero fills all remaining space
-            • <div h-[70px]>     →  trust bar is always pinned at the bottom
-
-          Nothing inside can overflow or be pushed offscreen by any external
-          factor — resolution, zoom level, bookmark bar, address bar, etc.
-      ══════════════════════════════════════════════════════════════════════ */}
+      {/* ── HERO + TRUST BAR WRAPPER ── */}
       <div
         style={{
-          /* dvh = dynamic viewport height: live-tracks actual visible screen */
           height: "100dvh",
-          /* Fallback for very old browsers that don't support dvh */
-          /* (modern browsers ignore the vh line once dvh is parsed)  */
           paddingTop: "75px",
           display: "flex",
           flexDirection: "column",
@@ -394,21 +386,17 @@ export default function ProgramPage() {
           backgroundColor: "#111318",
         }}
       >
-        {/* ── HERO — fills all space between navbar-pad and trust bar ── */}
+        {/* ── HERO ── */}
         <section
           className="relative w-full flex items-center overflow-hidden"
           style={{ flex: "1 1 0", minHeight: 0 }}
         >
-          {/* Background image */}
           <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
-          {/* Scanline overlay */}
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-          {/* Left-to-right fade */}
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
-          {/* Top-to-bottom fade */}
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
 
-          <div className="w-full max-w-[1200px] mx-auto px-[40px] relative z-[10] flex flex-col items-start text-left">
+          <div style={{ ...PAGE_PADDING, position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left" }}>
             <Reveal>
               <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
                 AOF 30-Day Online Program
@@ -431,12 +419,13 @@ export default function ProgramPage() {
           </div>
         </section>
 
-        {/* ── TRUST BAR — pinned to bottom via flex, never displaced ── */}
+        {/* ── TRUST BAR ── */}
         <div
           className="w-full bg-[#00F0FF] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0"
           style={{ height: "70px" }}
         >
-          <div className="w-full max-w-[1200px] px-[40px] flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-[20px] md:gap-[100px] h-full">
+          <div style={{ ...PAGE_PADDING, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "flex-start", gap: "20px", height: "100%" }}
+            className="md:flex-nowrap md:justify-start md:gap-[100px]">
             <div className="flex items-center gap-[14px]">
               <span className="flex items-center justify-center text-white">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -472,12 +461,10 @@ export default function ProgramPage() {
           </div>
         </div>
       </div>
-      {/* ══════════════════════════ END HERO + TRUST BAR WRAPPER ══════════════ */}
-
 
       {/* ── PAIN SECTION ── */}
       <div className="bg-[#0b0b0b]">
-        <div className="w-full max-w-[1200px] mx-auto py-[60px] px-[40px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
           <Reveal>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-center flex-wrap">
               <div className="flex-1 min-w-[260px]">
@@ -505,7 +492,7 @@ export default function ProgramPage() {
 
       {/* ── AOF INTRO SECTION ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 5px)" }}>
-        <div className="w-full max-w-[1200px] mx-auto py-[60px] px-[40px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div className="relative aspect-video rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -534,7 +521,7 @@ export default function ProgramPage() {
 
       {/* ── FEATURES ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 0.4px)", backgroundSize: "30px 30px" }}>
-        <div className="w-full max-w-[1200px] mx-auto py-[60px] px-[40px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
           <Reveal>
             <p className="font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase text-[#00F0FF] mb-0 text-center">
               WHAT'S INCLUDED
@@ -565,7 +552,14 @@ export default function ProgramPage() {
 
       {/* ── ROADMAP SECTION ── */}
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#00F0FF]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%, rgba(0,240,255,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%)" } : {}}>
-        <div className="w-full max-w-[1200px] mx-auto py-[40px] px-[40px]" style={isMobileRoadmap ? { backgroundImage: "linear-gradient(rgba(0,240,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.035) 1px, transparent 1px)", backgroundSize: "26px 26px" } : { backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.04) 0px, rgba(0,240,255,0.04) 1px, transparent 1px, transparent 6px)" }}>
+        <div style={{
+          ...PAGE_PADDING,
+          paddingTop: "40px",
+          paddingBottom: "40px",
+          ...(isMobileRoadmap
+            ? { backgroundImage: "linear-gradient(rgba(0,240,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.035) 1px, transparent 1px)", backgroundSize: "26px 26px" }
+            : { backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.04) 0px, rgba(0,240,255,0.04) 1px, transparent 1px, transparent 6px)" })
+        }}>
 
           <div className="text-center mb-[40px]">
             <p className="text-[#00F0FF] font-['Barlow'] font-bold text-[10px] md:text-[14px] tracking-[1px] md:tracking-[4px] uppercase mb-[14px] inline-flex items-center gap-2">
@@ -688,7 +682,7 @@ export default function ProgramPage() {
 
           {/* ── PROMISE ── */}
           <div className="relative overflow-hidden bg-transparent mt-[60px]">
-            <div className="w-full max-w-[820px] mx-auto text-center relative z-10 px-[40px]">
+            <div className="w-full max-w-[820px] mx-auto text-center relative z-10">
               <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
               <div className="w-[70px] h-[2px] bg-[#00F0FF] mx-auto mb-[22px] rounded-full" />
               <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
@@ -707,7 +701,7 @@ export default function ProgramPage() {
 
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0b0b0b]">
-        <div className="w-full max-w-[1200px] mx-auto py-[48px] px-[40px] pb-[40px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "40px" }}>
           <Reveal>
             <p className="font-['Barlow'] text-[17px] text-[#00F0FF] font-bold mb-[24px] tracking-[2px] uppercase">LED BY</p>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-start flex-wrap">
@@ -739,7 +733,7 @@ export default function ProgramPage() {
 
       {/* ── TESTIMONIALS ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]">
-        <div className="w-full max-w-[1200px] mx-auto py-[48px] px-[40px] pt-[48px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "48px" }}>
           <Reveal>
             <div className="text-center mb-[44px]">
               <p className="font-['Barlow'] text-[#00F0FF] font-bold text-[14px] tracking-[3px] uppercase m-0">Real People, Real Results</p>
@@ -773,7 +767,7 @@ export default function ProgramPage() {
 
       {/* ── BONUSES SECTION ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-        <div className="w-full max-w-[1200px] mx-auto py-[40px] px-[40px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "40px", paddingBottom: "40px" }}>
           <div className="text-center mb-[40px]">
             <p className="text-[#00F0FF] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-[10px]">EXCLUSIVE FOUNDERS BONUSES</p>
             <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[60px] leading-[0.95] tracking-[2px] text-white mb-[18px]">
@@ -819,7 +813,7 @@ export default function ProgramPage() {
 
       {/* ── APPLY / CTA SECTION ── */}
       <div ref={footerRef} className="bg-[#0b0b0b] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(0,240,255,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
-        <div className="w-full max-w-[1200px] mx-auto py-[48px] px-[40px]">
+        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "48px" }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div>
               <p className="font-['Barlow'] font-bold text-[13px] tracking-[3px] text-[#00F0FF] mb-[12px] uppercase">Ready To Start?</p>
@@ -892,7 +886,7 @@ export default function ProgramPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#101318] pt-[32px] pb-[16px] border-t border-white/5">
-        <div className="w-full max-w-[1200px] mx-auto px-[40px] grid grid-cols-1 md:grid-cols-3 gap-[40px]">
+        <div style={{ ...PAGE_PADDING }} className="grid grid-cols-1 md:grid-cols-3 gap-[40px]">
           <div>
             <h3 className="font-['Bebas_Neue'] text-[25px] tracking-[1px] text-white pt-[8px] mb-[10px]">CONTACT</h3>
             <div className="flex flex-col gap-[10px]">
@@ -922,7 +916,7 @@ export default function ProgramPage() {
             </div>
           </div>
         </div>
-        <div className="w-full max-w-[1200px] mx-auto mt-[24px] pt-[16px] border-t border-white/5 text-center font-['Barlow'] text-[13px] text-white/30">
+        <div style={{ ...PAGE_PADDING }} className="mt-[24px] pt-[16px] border-t border-white/5 text-center font-['Barlow'] text-[13px] text-white/30">
           © 2026 AOF Academy. All rights reserved.
         </div>
       </footer>
