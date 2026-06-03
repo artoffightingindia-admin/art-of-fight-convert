@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -179,7 +178,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]">
-      <div style={{ width: "100%", padding: "80px 10px", position: "relative", zIndex: 10 }}>
+      <div style={{ width: "100%", paddingLeft: "1cm", paddingRight: "1cm", paddingTop: "80px", paddingBottom: "80px", position: "relative", zIndex: 10, boxSizing: "border-box" }}>
         <Reveal>
           <p className="text-center font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase text-[#00F0FF] mb-[10px]">Got Questions?</p>
           <h2 className="text-center font-['Bebas_Neue'] text-[36px] md:text-[60px] tracking-[2px] text-white leading-none mb-[10px]">
@@ -302,12 +301,10 @@ const stats = [
   { val: "3", label: "Continents" },
 ];
 
-/* ── FIXED VIEWPORT WRAPPER STYLE ── */
-/* Always exactly 10px (≈1cm) on left and right, never changes */
-const PAGE_PADDING: CSSProperties = {
-  width: "100%",
-  paddingLeft: "10px",
-  paddingRight: "10px",
+/* ── FIXED 1cm GUTTER — matches CoachingPage exactly ── */
+const GUTTER: CSSProperties = {
+  paddingLeft: "1cm",
+  paddingRight: "1cm",
   boxSizing: "border-box",
 };
 
@@ -343,8 +340,9 @@ export default function ProgramPage() {
     <div className="font-['Barlow'] text-white bg-[#111318] overflow-x-hidden w-full antialiased">
 
       {/* ── NAVBAR ── */}
-      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[75px] bg-[#22252b] border-b border-white/5 flex items-center justify-center">
-        <div style={{ ...PAGE_PADDING, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[75px] bg-[#22252b] border-b border-white/5 flex items-center"
+        style={GUTTER}>
+        <div className="w-full flex items-center justify-between">
           <div className="flex items-center">
             <h1 className="font-['Bebas_Neue'] text-[32px] leading-none m-0 flex tracking-[1px]">
               <span className="text-[#00F0FF]">A</span><span className="text-white">O</span><span className="text-[#00F0FF]">F</span>
@@ -396,7 +394,7 @@ export default function ProgramPage() {
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#111318] via-[#111318]/80 to-transparent" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#111318]/50 to-[#111318]" />
 
-          <div style={{ ...PAGE_PADDING, position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left" }}>
+          <div style={{ ...GUTTER, position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left" }}>
             <Reveal>
               <p className="text-[#00F0FF] font-['Barlow'] text-[13px] font-bold uppercase tracking-[4px] mb-[16px]">
                 AOF 30-Day Online Program
@@ -421,11 +419,10 @@ export default function ProgramPage() {
 
         {/* ── TRUST BAR ── */}
         <div
-          className="w-full bg-[#00F0FF] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0"
-          style={{ height: "70px" }}
+          className="w-full bg-[#00F0FF] relative z-20 border-b-[6px] border-[#111318] flex items-center flex-shrink-0"
+          style={{ height: "70px", ...GUTTER }}
         >
-          <div style={{ ...PAGE_PADDING, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "flex-start", gap: "20px", height: "100%" }}
-            className="md:flex-nowrap md:justify-start md:gap-[100px]">
+          <div className="w-full flex flex-wrap items-center justify-start gap-[20px] md:flex-nowrap md:gap-[100px]">
             <div className="flex items-center gap-[14px]">
               <span className="flex items-center justify-center text-white">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -464,7 +461,7 @@ export default function ProgramPage() {
 
       {/* ── PAIN SECTION ── */}
       <div className="bg-[#0b0b0b]">
-        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
+        <div style={{ ...GUTTER, paddingTop: "60px", paddingBottom: "60px" }}>
           <Reveal>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-center flex-wrap">
               <div className="flex-1 min-w-[260px]">
@@ -492,7 +489,7 @@ export default function ProgramPage() {
 
       {/* ── AOF INTRO SECTION ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 5px)" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
+        <div style={{ ...GUTTER, paddingTop: "60px", paddingBottom: "60px" }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div className="relative aspect-video rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -521,7 +518,7 @@ export default function ProgramPage() {
 
       {/* ── FEATURES ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 0.4px)", backgroundSize: "30px 30px" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
+        <div style={{ ...GUTTER, paddingTop: "60px", paddingBottom: "60px" }}>
           <Reveal>
             <p className="font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase text-[#00F0FF] mb-0 text-center">
               WHAT'S INCLUDED
@@ -553,7 +550,7 @@ export default function ProgramPage() {
       {/* ── ROADMAP SECTION ── */}
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#00F0FF]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%, rgba(0,240,255,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%)" } : {}}>
         <div style={{
-          ...PAGE_PADDING,
+          ...GUTTER,
           paddingTop: "40px",
           paddingBottom: "40px",
           ...(isMobileRoadmap
@@ -638,10 +635,10 @@ export default function ProgramPage() {
             </div>
           ) : (
             <div className="relative w-full overflow-hidden">
-              <button onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer">‹</button>
-              <button onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer">›</button>
+              <button onClick={() => setRoadmapIndex((prev) => Math.max(prev - 1, 0))} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer flex items-center justify-center">‹</button>
+              <button onClick={() => setRoadmapIndex((prev) => Math.min(prev + 1, roadmapCards.length - 2))} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-[24px] cursor-pointer flex items-center justify-center">›</button>
 
-              <div className="flex justify-between mb-[42px] relative px-[70px]">
+              <div className="flex justify-between mb-[42px] relative" style={{ paddingLeft: "70px", paddingRight: "70px" }}>
                 <div className="absolute top-[14px] left-[70px] right-[70px] h-[2px] bg-white/10" />
                 {roadmapCards.map((week, i) => (
                   <div key={i} className="relative z-10 text-center">
@@ -651,7 +648,7 @@ export default function ProgramPage() {
                 ))}
               </div>
 
-              <div className="overflow-hidden px-[70px]">
+              <div className="overflow-hidden" style={{ paddingLeft: "70px", paddingRight: "70px" }}>
                 <div className="flex gap-[20px] transition-transform duration-[450ms] ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
                   {roadmapCards.map((card, i) => (
                     <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
@@ -682,10 +679,10 @@ export default function ProgramPage() {
 
           {/* ── PROMISE ── */}
           <div className="relative overflow-hidden bg-transparent mt-[60px]">
-            <div className="w-full max-w-[820px] mx-auto text-center relative z-10">
+            <div className="w-full text-center relative z-10">
               <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
               <div className="w-[70px] h-[2px] bg-[#00F0FF] mx-auto mb-[22px] rounded-full" />
-              <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
+              <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic m-0">
                 <span className="text-[#00F0FF] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">"</span>
                 Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
               </p>
@@ -701,7 +698,7 @@ export default function ProgramPage() {
 
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0b0b0b]">
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "40px" }}>
+        <div style={{ ...GUTTER, paddingTop: "48px", paddingBottom: "40px" }}>
           <Reveal>
             <p className="font-['Barlow'] text-[17px] text-[#00F0FF] font-bold mb-[24px] tracking-[2px] uppercase">LED BY</p>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-start flex-wrap">
@@ -733,7 +730,7 @@ export default function ProgramPage() {
 
       {/* ── TESTIMONIALS ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]">
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "48px" }}>
+        <div style={{ ...GUTTER, paddingTop: "48px", paddingBottom: "48px" }}>
           <Reveal>
             <div className="text-center mb-[44px]">
               <p className="font-['Barlow'] text-[#00F0FF] font-bold text-[14px] tracking-[3px] uppercase m-0">Real People, Real Results</p>
@@ -767,7 +764,7 @@ export default function ProgramPage() {
 
       {/* ── BONUSES SECTION ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "40px", paddingBottom: "40px" }}>
+        <div style={{ ...GUTTER, paddingTop: "40px", paddingBottom: "40px" }}>
           <div className="text-center mb-[40px]">
             <p className="text-[#00F0FF] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-[10px]">EXCLUSIVE FOUNDERS BONUSES</p>
             <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[60px] leading-[0.95] tracking-[2px] text-white mb-[18px]">
@@ -813,7 +810,7 @@ export default function ProgramPage() {
 
       {/* ── APPLY / CTA SECTION ── */}
       <div ref={footerRef} className="bg-[#0b0b0b] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(0,240,255,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "48px" }}>
+        <div style={{ ...GUTTER, paddingTop: "48px", paddingBottom: "48px" }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div>
               <p className="font-['Barlow'] font-bold text-[13px] tracking-[3px] text-[#00F0FF] mb-[12px] uppercase">Ready To Start?</p>
@@ -886,7 +883,7 @@ export default function ProgramPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#101318] pt-[32px] pb-[16px] border-t border-white/5">
-        <div style={{ ...PAGE_PADDING }} className="grid grid-cols-1 md:grid-cols-3 gap-[40px]">
+        <div style={GUTTER} className="grid grid-cols-1 md:grid-cols-3 gap-[40px]">
           <div>
             <h3 className="font-['Bebas_Neue'] text-[25px] tracking-[1px] text-white pt-[8px] mb-[10px]">CONTACT</h3>
             <div className="flex flex-col gap-[10px]">
@@ -916,7 +913,7 @@ export default function ProgramPage() {
             </div>
           </div>
         </div>
-        <div style={{ ...PAGE_PADDING }} className="mt-[24px] pt-[16px] border-t border-white/5 text-center font-['Barlow'] text-[13px] text-white/30">
+        <div style={GUTTER} className="mt-[24px] pt-[16px] border-t border-white/5 text-center font-['Barlow'] text-[13px] text-white/30">
           © 2026 AOF Academy. All rights reserved.
         </div>
       </footer>
