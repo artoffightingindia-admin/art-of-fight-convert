@@ -26,6 +26,11 @@ const faqItems = [
     answer:
       "We're based in Chennai, Tamil Nadu. Full address shared on enquiry.",
   },
+  {
+  question: "How many days per week should I train?",
+  answer:
+    "For the best results, we recommend training 3–5 times per week. However, our programs can be adapted to fit your schedule and fitness level."
+},
 ];
 
 const ContactSection = () => {
