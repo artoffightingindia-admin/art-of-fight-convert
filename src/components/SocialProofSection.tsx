@@ -19,9 +19,9 @@ const SocialProofSection = () => {
     <section className="py-12 md:py-16 bg-card/50 w-full">
       <div className="w-[92%] md:w-[60%] mx-auto px-4">
         <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-          <h2 className="font-display text-2xl md:text-4xl text-foreground">
-            See Us in <span className="text-primary">Action</span>
-          </h2>
+          <h2 className="font-display text-[clamp(30px,4vw,60px)] text-foreground leading-none">
+  See Us in <span className="text-primary">Action</span>
+</h2>
           <p className="text-muted-foreground text-xs md:text-sm">
             Subscribe on YouTube and join 5,000+ MMA enthusiasts on Instagram for weekly tips, training, and pad work.
           </p>
