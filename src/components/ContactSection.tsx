@@ -49,7 +49,7 @@ const ContactSection = () => {
       <div className="w-[92%] max-w-[1400px] mx-auto">
         
         {/* Header */}
-        <p className="text-center text-[#07b4ba] font-bold text-[12px] tracking-[3px] uppercase mb-2">
+        <p className="text-center text-[#07b4ba] font-bold text-[14px] tracking-[4px] uppercase mb-3">
           Got Questions?
         </p>
 
