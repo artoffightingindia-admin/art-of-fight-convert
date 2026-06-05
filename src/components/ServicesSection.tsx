@@ -29,9 +29,9 @@ const services = [
 const ServicesSection = () => (
   <section id="programs" className="pt-4 pb-16 md:pt-6 md:pb-24 bg-card/50 texture-grid">
     <div className="container">
-     <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">
-            Service Selection
-  </p>
+   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3 text-center">
+  Service Selection
+</p>
       <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-10">
         Choose Your Path
       </h2>
