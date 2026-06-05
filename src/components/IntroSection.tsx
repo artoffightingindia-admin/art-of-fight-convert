@@ -3,7 +3,10 @@ const IntroSection = () => (
     <div className="container max-w-6xl">
 
       {/* Section Caption */}
-      <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mt-8 mb-3">
+      <p
+        className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3"
+        style={{ transform: "translateY(12px)" }}
+      >
         AOF Intro Section
       </p>
 
