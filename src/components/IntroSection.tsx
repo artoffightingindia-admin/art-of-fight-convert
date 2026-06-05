@@ -3,9 +3,9 @@ const IntroSection = () => (
     <div className="container max-w-6xl">
       
       {/* Section Caption */}
-      <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">
-        Art Of Fighting Academy
-      </p>
+<p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mt-4 mb-3">
+  AOF Intro Section
+</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         
