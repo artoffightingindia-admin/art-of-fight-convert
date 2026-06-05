@@ -5,7 +5,7 @@ const IntroSection = () => (
       {/* Section Caption */}
       <p
         className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3"
-        style={{ transform: "translateY(12px)" }}
+        style={{ transform: "translateY(17px)" }}
       >
         AOF Intro Section
       </p>
@@ -14,10 +14,9 @@ const IntroSection = () => (
 
         {/* Left: intro wordings */}
         <div className="space-y-4">
-          <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-            Welcome to the <span className="text-primary">AOF Family</span>
-          </h2>
-
+          <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+  Welcome to the <span className="text-primary">AOF Family</span>
+</h2>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
             At Art of Fight, we're more than just a gym — we're a family built
             on discipline, respect, and relentless growth. Our coaches bring
