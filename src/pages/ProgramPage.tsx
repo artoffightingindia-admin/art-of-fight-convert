@@ -178,7 +178,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]">
-      <div style={{ width: "100%", padding: "80px 10px", position: "relative", zIndex: 10 }}>
+      <div style={{ width: "100%", paddingLeft: "1cm", paddingRight: "1cm", paddingTop: "80px", paddingBottom: "80px", boxSizing: "border-box", position: "relative", zIndex: 10 }}>
         <Reveal>
           <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Got Questions?</p>
           <h2 className="text-center font-['Bebas_Neue'] text-[36px] md:text-[60px] tracking-[2px] text-white leading-none mb-[10px]">
@@ -305,8 +305,8 @@ const stats = [
 /* Always exactly 10px (≈1cm) on left and right, never changes */
 const PAGE_PADDING: CSSProperties = {
   width: "100%",
-  paddingLeft: "10px",
-  paddingRight: "10px",
+  paddingLeft: "1cm",
+  paddingRight: "1cm",
   boxSizing: "border-box",
 };
 
