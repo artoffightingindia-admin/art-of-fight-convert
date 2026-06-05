@@ -12,7 +12,6 @@ const testimonials = [
 
 const VISIBLE = 3;
 
-/* Tilt card — tracks cursor position within the card */
 const TiltCard = ({ t, animClass, delay }) => {
   const ref = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0, scale: 1 });
@@ -21,8 +20,8 @@ const TiltCard = ({ t, animClass, delay }) => {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const cx = (e.clientX - rect.left) / rect.width  - 0.5;   // -0.5 → 0.5
-    const cy = (e.clientY - rect.top)  / rect.height - 0.5;
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
     setTilt({ x: cy * 10, y: cx * -10, scale: 1.03 });
   };
   const onLeave = () => setTilt({ x: 0, y: 0, scale: 1 });
@@ -30,57 +29,54 @@ const TiltCard = ({ t, animClass, delay }) => {
   return (
     <div
       ref={ref}
-      className={animClass}
+      className={`rounded-xl border border-white/[0.07] p-[18px_22px] transition-[transform,box-shadow] duration-[180ms] ease-in-out cursor-default ${animClass}`}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{
         animationDelay: `${delay}ms`,
         backgroundColor: "#131c27",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: 12,
-        padding: "18px 22px",
-        /* base slope — matches image */
         transform: `rotate(-2deg) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${tilt.scale})`,
-        transition: "transform 0.18s ease, box-shadow 0.18s ease",
         transformStyle: "preserve-3d",
         willChange: "transform",
         boxShadow: tilt.scale > 1
           ? "0 16px 40px rgba(7,180,186,0.15), 0 4px 16px rgba(0,0,0,0.5)"
           : "0 2px 12px rgba(0,0,0,0.4)",
-        cursor: "default",
       }}
     >
       {/* Stars */}
-      <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
+      <div className="flex gap-[3px] mb-[10px]">
         {[...Array(5)].map((_, s) => (
-          <Star key={s} style={{ width: 15, height: 15, color: "#07b4ba", fill: "#07b4ba" }} />
+          <Star key={s} className="w-[15px] h-[15px]" style={{ color: "#07b4ba", fill: "#07b4ba" }} />
         ))}
       </div>
+
       {/* Quote */}
-      <p style={{
-        fontFamily: "'Barlow', sans-serif",
-        color: "rgba(255,255,255,0.75)",
-        fontSize: 14,
-        lineHeight: 1.65,
-        fontStyle: "italic",
-        marginBottom: 14,
-      }}>
+      <p
+        className="text-sm leading-[1.65] italic mb-[14px]"
+        style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.75)" }}
+      >
         "{t.text}"
       </p>
+
       {/* Author */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{
-          width: 34, height: 34, borderRadius: "50%",
-          backgroundColor: "rgba(255,255,255,0.07)",
-          display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-        }}>
-          <User style={{ width: 16, height: 16, color: "rgba(255,255,255,0.4)" }} />
+      <div className="flex items-center gap-[10px]">
+        <div
+          className="w-[34px] h-[34px] rounded-full flex items-center justify-center shrink-0"
+          style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
+        >
+          <User className="w-4 h-4" style={{ color: "rgba(255,255,255,0.4)" }} />
         </div>
         <div>
-          <p style={{ fontFamily: "'Barlow', sans-serif", fontWeight: 700, fontSize: 14, color: "#fff", margin: 0 }}>
+          <p
+            className="text-sm font-bold text-white m-0"
+            style={{ fontFamily: "'Barlow', sans-serif" }}
+          >
             {t.name}
           </p>
-          <p style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", margin: 0 }}>
+          <p
+            className="text-[12px] m-0"
+            style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.4)" }}
+          >
             {t.role}
           </p>
         </div>
@@ -90,9 +86,9 @@ const TiltCard = ({ t, animClass, delay }) => {
 };
 
 const TestimonialsSection = () => {
-  const [start, setStart]     = useState(0);
-  const [paused, setPaused]   = useState(false);
-  const [animDir, setAnimDir] = useState(null);
+  const [start, setStart]         = useState(0);
+  const [paused, setPaused]       = useState(false);
+  const [animDir, setAnimDir]     = useState(null);
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
@@ -119,11 +115,11 @@ const TestimonialsSection = () => {
   return (
     <section
       id="testimonials"
+      className="py-16 md:py-[72px]"
       style={{
         backgroundColor: "#0a0f14",
-        backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px)`,
+        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px)",
         backgroundSize: "22px 22px",
-        padding: "64px 0 72px",
       }}
     >
       <style>{`
@@ -139,89 +135,74 @@ const TestimonialsSection = () => {
         .card-prev { animation: slideInTop    0.32s ease both; }
       `}</style>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <div className="max-w-[1100px] mx-auto px-6">
 
-        {/* ── Section heading ── */}
-        <div style={{ textAlign: "center", marginBottom: 52 }}>
-          <p style={{
-            fontFamily: "'Barlow', sans-serif",
-            fontWeight: 700,
-            fontSize: 11,
-            letterSpacing: 4,
-            textTransform: "uppercase",
-            color: "#07b4ba",
-            marginBottom: 8,
-          }}>
+        {/* Section heading */}
+        <div className="text-center mb-[52px]">
+          <p
+            className="text-sm font-bold uppercase tracking-[4px] mb-2"
+            style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba" }}
+          >
             Testimonials
           </p>
-          <h2 style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(32px, 4vw, 52px)",
-            letterSpacing: 2,
-            lineHeight: 1.05,
-            color: "#fff",
-            margin: 0,
-            textTransform: "uppercase",
-          }}>
+          <h2
+            className="uppercase m-0 leading-[1.05]"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "clamp(32px, 4vw, 52px)",
+              letterSpacing: 2,
+              color: "#fff",
+            }}
+          >
             What People Say
           </h2>
         </div>
 
-        {/* ── 2-col layout ── */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 48,
-          alignItems: "center",
-        }}>
+        {/* 2-col layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
           {/* LEFT: video */}
-          <div style={{
-            position: "relative",
-            aspectRatio: "16/9",
-            borderRadius: 14,
-            overflow: "hidden",
-            background: "linear-gradient(135deg, #131c27 0%, #0d1117 100%)",
-            border: "1px solid rgba(255,255,255,0.06)",
-          }}>
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "radial-gradient(ellipse 55% 55% at 50% 55%, rgba(7,180,186,0.13) 0%, transparent 70%)",
-            }} />
-            <div style={{
-              position: "absolute", inset: 0, zIndex: 10,
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
+          <div
+            className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
+            style={{
+              aspectRatio: "16/9",
+              background: "linear-gradient(135deg, #131c27 0%, #0d1117 100%)",
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "radial-gradient(ellipse 55% 55% at 50% 55%, rgba(7,180,186,0.13) 0%, transparent 70%)",
+              }}
+            />
+            <div className="absolute inset-0 z-10 flex items-center justify-center">
               <div
+                className="w-[62px] h-[62px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
                 style={{
-                  width: 62, height: 62, borderRadius: "50%",
                   backgroundColor: "#07b4ba",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  cursor: "pointer",
                   boxShadow: "0 0 28px 6px rgba(7,180,186,0.28)",
-                  transition: "transform 0.2s",
                 }}
-                onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
-                onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
               >
-                <div style={{
-                  width: 0, height: 0,
-                  borderTop: "10px solid transparent",
-                  borderBottom: "10px solid transparent",
-                  borderLeft: "18px solid #0a0f14",
-                  marginLeft: 5,
-                }} />
+                <div
+                  className="ml-[5px]"
+                  style={{
+                    width: 0, height: 0,
+                    borderTop: "10px solid transparent",
+                    borderBottom: "10px solid transparent",
+                    borderLeft: "18px solid #0a0f14",
+                  }}
+                />
               </div>
             </div>
           </div>
 
-          {/* RIGHT: sloped cards + nav */}
+          {/* RIGHT: cards + nav */}
           <div
+            className="[perspective:800px]"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            style={{ perspective: "800px" }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div className="flex flex-col gap-[14px]">
               {visible.map((t, i) => (
                 <TiltCard
                   key={`${t.name}-${start}-${i}`}
@@ -233,25 +214,20 @@ const TestimonialsSection = () => {
             </div>
 
             {/* Nav arrows */}
-            <div style={{ display: "flex", gap: 10, marginTop: 20, justifyContent: "flex-end" }}>
-              {[{ label: "Previous", icon: <ChevronLeft size={17} />, fn: triggerPrev },
-                { label: "Next",     icon: <ChevronRight size={17} />, fn: triggerNext }]
-                .map(({ label, icon, fn }) => (
+            <div className="flex gap-[10px] mt-5 justify-end">
+              {[
+                { label: "Previous", icon: <ChevronLeft size={17} />, fn: triggerPrev },
+                { label: "Next",     icon: <ChevronRight size={17} />, fn: triggerNext },
+              ].map(({ label, icon, fn }) => (
                 <button
                   key={label}
                   onClick={fn}
                   aria-label={label}
+                  className="w-10 h-10 rounded-full border flex items-center justify-center cursor-pointer bg-transparent transition-[border-color,color] duration-200 hover:border-[#07b4ba] hover:text-[#07b4ba]"
                   style={{
-                    width: 40, height: 40, borderRadius: "50%",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    backgroundColor: "transparent",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    cursor: "pointer",
+                    borderColor: "rgba(255,255,255,0.18)",
                     color: "rgba(255,255,255,0.6)",
-                    transition: "border-color 0.2s, color 0.2s",
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#07b4ba"; e.currentTarget.style.color = "#07b4ba"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
                 >
                   {icon}
                 </button>
