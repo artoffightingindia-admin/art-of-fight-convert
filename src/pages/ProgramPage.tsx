@@ -409,7 +409,7 @@ export default function ProgramPage() {
                 A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
               </p>
               <button
-                className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#07b4ba] text-[#111] font-['Barlow'] text-[15px] font-bold uppercase tracking-[1px] border-none cursor-pointer hover:bg-white transition-colors"
+                className="flex items-center justify-center w-[200px] h-[50px] rounded-[8px] bg-[#07b4ba] text-white font-['Barlow'] text-[16px] font-bold uppercase tracking-[1px] border-none cursor-pointer transition-all duration-300 hover:bg-white hover:text-black hover:text-[16px]"
                 onClick={scrollToFooter}
               >
                 JOIN NOW
@@ -493,7 +493,7 @@ export default function ProgramPage() {
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 5px)" }}>
         <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
-            <div className="relative aspect-video rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
+           <div className="relative aspect-video w-[80%] mx-auto rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-[90px] h-[90px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer">
                   <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[15px] border-l-black ml-1.5" />
