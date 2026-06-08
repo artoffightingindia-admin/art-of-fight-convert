@@ -436,7 +436,7 @@ export default function ProgramPage() {
 >
             <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
@@ -445,7 +445,7 @@ export default function ProgramPage() {
             </div>
             <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -456,7 +456,7 @@ export default function ProgramPage() {
             </div>
             <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M8 21h8"></path>
                   <path d="M12 17v4"></path>
                   <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path>
