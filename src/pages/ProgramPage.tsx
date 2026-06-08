@@ -861,7 +861,7 @@ export default function ProgramPage() {
                   </div>
                 ))}
 
-<div className="absolute left-1/2 top-[80%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
+<div className="absolute left-1/2 top-[110%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
                 <p className="font-['Barlow'] text-[15px] font-bold text-white mb-[12px] m-0 text-center">
                     Any Queries?
                   </p>
