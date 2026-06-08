@@ -693,10 +693,17 @@ export default function ProgramPage() {
             <div className="w-full max-w-[820px] mx-auto text-center relative z-10">
               <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
               <div className="w-[70px] h-[2px] bg-[#07b4ba] mx-auto mb-[22px] rounded-full" />
-              <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
-                <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">"</span>
-                Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-              </p>
+             <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
+  <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">
+    "
+  </span>
+
+  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+
+  <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[10px]">
+    "
+  </span>
+</p>
             </div>
           </div>
 
@@ -758,8 +765,16 @@ export default function ProgramPage() {
               </div>
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[42px] tracking-[1.5px] leading-[1.1] mb-[16px] text-white">
-                  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
-                </h3>
+  <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top mr-2">
+    "
+  </span>
+
+  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
+
+  <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top ml-2">
+    "
+  </span>
+</h3>
                 <p className="font-['Barlow'] text-white/65 text-[15px] leading-[1.75] m-0">
                   The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
                 </p>
