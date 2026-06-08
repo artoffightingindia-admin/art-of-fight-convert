@@ -421,20 +421,29 @@ export default function ProgramPage() {
         {/* ── TRUST BAR ── */}
         <div
           className="w-full bg-[#07b4ba] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0"
-          style={{ height: "55px" }}
+          style={{ height: "1.5cm" }}
         >
-          <div style={{ ...PAGE_PADDING, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "flex-start", gap: "20px", height: "100%" }}
-            className="md:flex-nowrap md:justify-center md:gap-[60px]">
-            <div className="flex items-center gap-[10px]">
+         <div
+  className="
+    w-full
+    h-full
+    flex
+    items-center
+    justify-evenly
+    px-8
+    md:px-16
+  "
+>
+            <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <p className="font-['Bebas_Neue'] text-[20px] tracking-[2px] text-white leading-none m-0 pt-[4px]">PROVEN SYSTEM</p>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[3px] text-white leading-none m-0">PROVEN SYSTEM</p>
             </div>
-            <div className="flex items-center gap-[10px]">
+            <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -443,9 +452,9 @@ export default function ProgramPage() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
               </span>
-              <p className="font-['Bebas_Neue'] text-[20px] tracking-[2px] text-white leading-none m-0 pt-[4px]">TAMIL TEAM</p>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[3px] text-white leading-none m-0">TAMIL TEAM</p>
             </div>
-            <div className="flex items-center gap-[10px]">
+            <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M8 21h8"></path>
@@ -455,7 +464,7 @@ export default function ProgramPage() {
                   <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
                 </svg>
               </span>
-              <p className="font-['Bebas_Neue'] text-[20px] tracking-[2px] text-white leading-none m-0 pt-[4px]">REAL RESULTS</p>
+              <p className="font-['Bebas_Neue'] text-[24px] tracking-[3px] text-white leading-none m-0">REAL RESULTS</p>
             </div>
           </div>
         </div>
