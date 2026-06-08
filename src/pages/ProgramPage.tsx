@@ -838,7 +838,7 @@ export default function ProgramPage() {
 
       {/* ── APPLY / CTA SECTION ── */}
       <div ref={footerRef} className="bg-[#0b0b0b] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(0,240,255,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "55px" }}>
+        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "63px" }}>
          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
             <div>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Ready To Start?</p>
@@ -861,7 +861,7 @@ export default function ProgramPage() {
                   </div>
                 ))}
 
-<div className="absolute left-1/2 top-[98%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
+<div className="absolute left-1/2 top-[110%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
                 <p className="font-['Barlow'] text-[15px] font-bold text-white mb-[12px] m-0 text-center">
                     Any Queries?
                   </p>
