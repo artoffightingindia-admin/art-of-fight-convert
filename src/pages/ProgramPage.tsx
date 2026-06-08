@@ -827,7 +827,9 @@ export default function ProgramPage() {
               </div>
             </div>
             <div className="pl-[24px] border-l border-white/15 flex flex-col justify-center">
-              <p className="font-['Bebas_Neue'] text-[28px] md:text-[40px] tracking-[2px] text-white leading-none m-0">YOURS 100% FREE</p>
+              <p className="font-['Bebas_Neue'] text-[28px] md:text-[40px] tracking-[2px] text-[#FFD700] leading-none m-0 drop-shadow-[0_0_10px_rgba(255,215,0,0.45)]">
+  YOURS 100% FREE
+</p>
               <p className="font-['Barlow'] text-[15px] text-white/70 mt-[10px] m-0">When you join the AOF 30-Day MMA Striking Program.</p>
             </div>
           </div>
