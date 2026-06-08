@@ -441,7 +441,7 @@ export default function ProgramPage() {
                   <path d="M9 12l2 2 4-4"></path>
                 </svg>
               </span>
-              <p className="font-['Bebas_Neue'] text-[24px] tracking-[3px] text-white leading-none m-0">PROVEN SYSTEM</p>
+              <p className="font-['Bebas_Neue'] text-[20px] tracking-[3px] text-white leading-none m-0">PROVEN SYSTEM</p>
             </div>
             <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
@@ -452,7 +452,7 @@ export default function ProgramPage() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
               </span>
-              <p className="font-['Bebas_Neue'] text-[24px] tracking-[3px] text-white leading-none m-0">TAMIL TEAM</p>
+              <p className="font-['Bebas_Neue'] text-[20px] tracking-[3px] text-white leading-none m-0">TAMIL TEAM</p>
             </div>
             <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
@@ -464,7 +464,7 @@ export default function ProgramPage() {
                   <path d="M19 4h2v2a4 4 0 0 1-4 4"></path>
                 </svg>
               </span>
-              <p className="font-['Bebas_Neue'] text-[24px] tracking-[3px] text-white leading-none m-0">REAL RESULTS</p>
+              <p className="font-['Bebas_Neue'] text-[20px] tracking-[3px] text-white leading-none m-0">REAL RESULTS</p>
             </div>
           </div>
         </div>
