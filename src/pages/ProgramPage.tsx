@@ -419,10 +419,10 @@ export default function ProgramPage() {
         </section>
 
         {/* ── TRUST BAR ── */}
-        <div
-          className="w-full bg-[#07b4ba] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0"
-          style={{ height: "1.5cm" }}
-        >
+<div
+  className="w-full bg-[#07b4ba] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0 translate-y-[6px]"
+  style={{ height: "1.5cm" }}
+>
          <div
   className="
     w-full
