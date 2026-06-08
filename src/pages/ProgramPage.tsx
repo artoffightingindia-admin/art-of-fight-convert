@@ -861,8 +861,8 @@ export default function ProgramPage() {
                   </div>
                 ))}
 
-                <div className="mt-[12px]">
-                  <p className="font-['Barlow'] text-[15px] font-bold text-white mb-[12px] ml-[12px] m-0">
+                <div className="mt-[12px] translate-y-[40px] flex flex-col items-center">
+                  <p className="font-['Barlow'] text-[15px] font-bold text-white mb-[12px] m-0 text-center">
                     Any Queries?
                   </p>
                   <button
