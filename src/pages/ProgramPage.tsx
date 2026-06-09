@@ -311,7 +311,7 @@ const PAGE_PADDING: CSSProperties = {
 };
 const SECTION_INSET: CSSProperties = {
   paddingLeft: "80px",
-  paddingRight: "80px
+  paddingRight: "80px",
 };
 
 export default function ProgramPage() {
