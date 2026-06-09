@@ -309,6 +309,10 @@ const PAGE_PADDING: CSSProperties = {
   paddingRight: "1cm",
   boxSizing: "border-box",
 };
+const SECTION_INSET: CSSProperties = {
+  paddingLeft: "clamp(20px, 3vw, 60px)",
+  paddingRight: "clamp(20px, 3vw, 60px)",
+};
 
 export default function ProgramPage() {
   const navigate = useNavigate();
@@ -473,6 +477,7 @@ export default function ProgramPage() {
       {/* ── PAIN SECTION ── */}
       <div className="bg-[#0b0b0b]">
         <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
+          <div style={SECTION_INSET}>
           <Reveal>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-center flex-wrap">
               <div className="flex-1 min-w-[260px]">
@@ -496,11 +501,12 @@ export default function ProgramPage() {
             </div>
           </Reveal>
         </div>
-      </div>
+      </div>  </div>
 
       {/* ── AOF INTRO SECTION ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 5px)" }}>
         <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
+          <div style={SECTION_INSET}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
            <div className="relative aspect-video w-[80%] mx-auto rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -525,7 +531,7 @@ export default function ProgramPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div>  </div>
 
       {/* ── FEATURES ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 0.4px)", backgroundSize: "30px 30px" }}>
@@ -717,6 +723,7 @@ export default function ProgramPage() {
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0b0b0b]">
         <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "40px" }}>
+          <div style={SECTION_INSET}>
           <Reveal>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">LED BY</p>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-start flex-wrap">
@@ -744,11 +751,12 @@ export default function ProgramPage() {
             </div>
           </Reveal>
         </div>
-      </div>
+      </div>  </div>
 
       {/* ── TESTIMONIALS ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]">
         <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "48px" }}>
+          <div style={SECTION_INSET}>
           <Reveal>
             <div className="text-center mb-[44px]">
               <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Real People, Real Results</p>
@@ -786,7 +794,7 @@ export default function ProgramPage() {
             <InfiniteFeedbackSlider />
           </Reveal>
         </div>
-      </div>
+      </div>  </div>
 
       {/* ── BONUSES SECTION ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
@@ -839,6 +847,7 @@ export default function ProgramPage() {
       {/* ── APPLY / CTA SECTION ── */}
       <div ref={footerRef} className="bg-[#0b0b0b] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(0,240,255,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
         <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "80px" }}>
+          <div style={SECTION_INSET}>
          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center pb-[80px]">
             <div>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Ready To Start?</p>
@@ -904,7 +913,7 @@ export default function ProgramPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div>  </div>
 
       {/* ── FAQ ── */}
       <FAQSection />
