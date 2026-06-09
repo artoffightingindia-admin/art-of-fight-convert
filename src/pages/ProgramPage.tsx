@@ -310,8 +310,8 @@ const PAGE_PADDING: CSSProperties = {
   boxSizing: "border-box",
 };
 const SECTION_INSET: CSSProperties = {
-  paddingLeft: "80px",
-  paddingRight: "80px",
+  paddingLeft: "120px",
+  paddingRight: "120px",
 };
 
 export default function ProgramPage() {
