@@ -465,7 +465,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-1 rounded-xl overflow-hidden mb-6">
               {/* bad */}
-              <div className="relative h-[300px] border-2 border-[#e53e3e]/75 rounded-xl overflow-hidden">
+              <div className="relative aspect-video border-2 border-[#e53e3e]/75 rounded-xl overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')"}} />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 to-black/65" />
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
@@ -474,7 +474,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
                 </div>
               </div>
               {/* good */}
-              <div className="relative h-[300px] border-2 border-[#07b4ba]/75 rounded-xl overflow-hidden">
+              <div className="relative aspect-video border-2 border-[#07b4ba]/75 rounded-xl overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')"}} />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 to-black/65" />
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
@@ -660,7 +660,7 @@ export default function CoachingPage() {
                 and your timeline — guided by coaches who have been in the ring.
               </p>
               <button onClick={scrollToForm}
-                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[13px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer hover:bg-[#057e82] hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(7,180,186,.38)] transition-all duration-250">
+                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer hover:bg-[#057e82] hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(7,180,186,.38)] transition-all duration-250">
                 Book A Call
               </button>
             </Reveal>
