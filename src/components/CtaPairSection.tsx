@@ -42,89 +42,93 @@ const CtaPairSection = () => {
           Results Don't Wait.
         </p>
 
-        {/* Button row */}
-        <div className="flex items-start justify-center w-full max-w-[680px]">
+       {/* Button row */}
+<div className="flex items-start justify-center w-full max-w-[680px]">
 
-          {/* Left CTA */}
-          <div className="flex flex-1 flex-col items-center gap-2">
-            <button
-              onClick={() => { window.location.href = "/coaching"; }}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
-              style={{
-                backgroundColor: "#07b4ba",
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 18,
-                letterSpacing: 3,
-              }}
-            >
-              <span className="flex items-center gap-[9px]">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                Explore Coaching
-              </span>
-              <span className="text-base">→</span>
-            </button>
-            <p
-              className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
-              style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
-            >
-              Personalized 1-on-1 coaching<br />with direct coach attention.
-            </p>
-          </div>
+  {/* Left CTA */}
+  <div className="flex flex-1 flex-col items-center gap-2">
+    <button
+      onClick={() => { window.location.href = "/coaching"; }}
+      className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
+      style={{
+        backgroundColor: "#07b4ba",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 18,
+        letterSpacing: 3,
+      }}
+    >
+      <span className="flex items-center gap-[9px]">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        Explore Coaching
+      </span>
+      <span className="text-base">→</span>
+    </button>
 
-          {/* OR divider */}
-         {/* Vertical divider */}
-<div className="flex items-center justify-center w-12 shrink-0">
-  <div
-    className="w-px h-[80px]"
-    style={{ backgroundColor: "rgba(255,255,255,0.18)" }}
-  />
+    <p
+      className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
+      style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
+    >
+      Personalized 1-on-1 coaching
+      <br />
+      with direct coach attention.
+    </p>
+  </div>
+
+  {/* Vertical divider */}
+  <div className="flex items-center justify-center w-12 shrink-0">
+    <div
+      className="w-px h-[80px]"
+      style={{ backgroundColor: "rgba(255,255,255,0.18)" }}
+    />
+  </div>
+
+  {/* Right CTA */}
+  <div className="flex flex-1 flex-col items-center gap-2">
+    <button
+      onClick={() => { window.location.href = "/program"; }}
+      className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
+      style={{
+        backgroundColor: "#07b4ba",
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 18,
+        letterSpacing: 3,
+      }}
+    >
+      <span className="flex items-center gap-[9px]">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        30-Day Program
+      </span>
+      <span className="text-base">→</span>
+    </button>
+
+    <p
+      className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
+      style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
+    >
+      Structured 30-day program to build
+      <br />
+      skills, fitness & fighter mindset.
+    </p>
+  </div>
+
 </div>
-            <div
-              className="w-px h-[38px]"
-              style={{ backgroundColor: "rgba(255,255,255,0.18)" }}
-            />
-          </div>
 
-          {/* Right CTA */}
-          <div className="flex flex-1 flex-col items-center gap-2">
-            <button
-              onClick={() => { window.location.href = "/program"; }}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
-              style={{
-                backgroundColor: "#07b4ba",
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 18,
-                letterSpacing: 3,
-              }}
-            >
-              <span className="flex items-center gap-[9px]">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                30-Day Program
-              </span>
-              <span className="text-base">→</span>
-            </button>
-            <p
-              className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
-              style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
-            >
-              Structured 30-day program to build<br />skills, fitness & fighter mindset.
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom scroll prompt */}
-        <div className="mt-[14px]">
+{/* Bottom text */}
+<div className="mt-[14px]">
   <span
     className="text-[12px]"
-    style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.55)" }}
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      color: "rgba(255,255,255,0.55)"
+    }}
   >
     Explore the full structure, roadmap, and transformation process.
   </span>
