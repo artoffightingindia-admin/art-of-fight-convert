@@ -17,17 +17,18 @@ const IntroSection = () => (
           <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
   Welcome to the <span className="text-primary">AOF Family</span>
 </h2>
-          <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-            At Art of Fight, we're more than just a gym — we're a family built
-            on discipline, respect, and relentless growth. Our coaches bring
-            years of real fight experience to every session, guiding you through
-            proven techniques that work inside and outside the ring. Whether
-            you're a complete beginner or training for competition, you'll find
-            a system designed to push your limits safely. We focus on building
-            strong fundamentals, sharp technique, and the mental toughness that
-            defines a true fighter. Step in, train hard, and become part of a
-            community that wins together.
-          </p>
+         <p className="font-['Barlow'] text-[16px] text-white/70 leading-relaxed">
+  At Art of Fight, we're more than just a gym — we're a family built
+  on discipline, respect, and relentless growth. Our coaches bring
+  years of real fight experience to every session, guiding you through
+  proven techniques that work inside and outside the ring.
+  <br />
+  Whether you're a complete beginner or training for competition,
+  you'll find a system designed to push your limits safely. We focus
+  on building strong fundamentals, sharp technique, and the mental
+  toughness that defines a true fighter. Step in, train hard, and
+  become part of a community that wins together.
+</p>
         </div>
 
         {/* Right: video */}
