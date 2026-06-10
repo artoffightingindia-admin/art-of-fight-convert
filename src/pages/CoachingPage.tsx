@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
    with exactly 1cm gutters on left and right — unaffected by resolution/zoom.
 ───────────────────────────────────────────────────────────────────────────── */
 const NAVBAR_H = 62;
-const TRUST_H  = 68;
+const TRUST_H  = 57;
 
 /* shared inline style for the fixed 1cm side padding wrapper */
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
