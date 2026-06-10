@@ -49,7 +49,7 @@ const CtaPairSection = () => {
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
               onClick={() => { window.location.href = "/coaching"; }}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-full px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
+              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
@@ -75,17 +75,13 @@ const CtaPairSection = () => {
           </div>
 
           {/* OR divider */}
-          <div className="flex flex-col items-center justify-start pt-[6px] w-12 shrink-0">
-            <div
-              className="w-[34px] h-[34px] rounded-full flex items-center justify-center shrink-0 text-[11px] font-semibold tracking-[1px]"
-              style={{
-                border: "1.5px solid rgba(255,255,255,0.3)",
-                color: "rgba(255,255,255,0.6)",
-                fontFamily: "'Barlow', sans-serif",
-              }}
-            >
-              OR
-            </div>
+         {/* Vertical divider */}
+<div className="flex items-center justify-center w-12 shrink-0">
+  <div
+    className="w-px h-[80px]"
+    style={{ backgroundColor: "rgba(255,255,255,0.18)" }}
+  />
+</div>
             <div
               className="w-px h-[38px]"
               style={{ backgroundColor: "rgba(255,255,255,0.18)" }}
@@ -96,7 +92,7 @@ const CtaPairSection = () => {
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
               onClick={() => { window.location.href = "/program"; }}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-full px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
+              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
@@ -125,30 +121,15 @@ const CtaPairSection = () => {
         </div>
 
         {/* Bottom scroll prompt */}
-        <div className="flex items-center gap-[7px] mt-[14px]">
-          <div
-            className="w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0"
-            style={{ border: "1.5px solid rgba(255,255,255,0.35)" }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <polyline points="19 12 12 19 5 12" />
-            </svg>
-          </div>
-          <span
-            className="text-[12px]"
-            style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.55)" }}
-          >
-            Explore the full structure, roadmap, and transformation process.
-          </span>
-        </div>
+        <div className="mt-[14px]">
+  <span
+    className="text-[12px]"
+    style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.55)" }}
+  >
+    Explore the full structure, roadmap, and transformation process.
+  </span>
+</div>
 
-        <p
-          className="text-[11px] mt-[3px]"
-          style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.32)" }}
-        >
-          Choose the path that fits your goals.
-        </p>
       </div>
     </section>
   );
