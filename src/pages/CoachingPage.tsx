@@ -550,18 +550,28 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             <p className="font-['Bebas_Neue'] text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
             <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
             <p className="font-['Barlow'] text-[16px] md:text-[19px] leading-[1.9] text-white/76 italic">
-              <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-              Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-            </p>
+  <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-2.5">
+    "
+  </span>
+
+  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+
+  <span className="text-[#07b4ba] text-[42px] leading-none ml-1.5 font-serif relative top-2.5">
+    "
+  </span>
+</p>
           </div>
         </Reveal>
 
         {/* Book strip */}
-        <div className="mt-8 rounded-lg overflow-hidden bg-[#07b4ba]">
-          <button onClick={scrollToForm} className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/8 transition-colors">
-            Book A Call
-          </button>
-        </div>
+<div className="mt-8 -mx-[1cm] overflow-hidden bg-[#07b4ba]">
+  <button
+    onClick={scrollToForm}
+    className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/8 transition-colors"
+  >
+    Book A Call
+  </button>
+</div>
       </div>
     </div>
   );
@@ -668,9 +678,9 @@ export default function CoachingPage() {
         </section>
 
         {/* ── TRUST BAR ── fixed 68px */}
-        <div
-          className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0"
-          style={{ height: `${TRUST_H}px`, ...GUTTER }}
+     <div
+  className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0"
+  style={{ height: "1.5cm", ...GUTTER }}
         >
           <div className="w-full flex items-center justify-center md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-3">
