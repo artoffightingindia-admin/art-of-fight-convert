@@ -685,7 +685,7 @@ export default function ProgramPage() {
 
           {/* ── PROMISE ── */}
           <div className="relative overflow-hidden bg-transparent mt-[60px]">
-            <div className="w-full max-w-[820px] mx-auto text-center relative z-10">
+            <div className="w-full max-w-[900px] mx-auto text-center relative z-10">
               <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
               <div className="w-[70px] h-[2px] bg-[#07b4ba] mx-auto mb-[22px] rounded-full" />
               <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
