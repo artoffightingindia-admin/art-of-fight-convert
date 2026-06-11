@@ -553,10 +553,12 @@ export default function ProgramPage() {
 
       {/* ── ROADMAP SECTION ── */}
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#07b4ba]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%, rgba(0,240,255,0.12), transparent 28%), linear-gradient(180deg, #02070d 0%, #061018 52%, #03070c 100%)" } : {}}>
-        <div style={{
-          ...PAGE_PADDING,
-          paddingTop: "40px",
-          paddingBottom: "40px",
+       <div style={{
+  ...PAGE_PADDING,
+  paddingLeft: "0px",
+  paddingRight: "0px",
+  paddingTop: "40px",
+  paddingBottom: "40px",
           ...(isMobileRoadmap
             ? { backgroundImage: "linear-gradient(rgba(0,240,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.035) 1px, transparent 1px)", backgroundSize: "26px 26px" }
             : { backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.04) 0px, rgba(0,240,255,0.04) 1px, transparent 1px, transparent 6px)" })
