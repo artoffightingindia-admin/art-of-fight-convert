@@ -746,7 +746,7 @@ export default function CoachingPage() {
           </Reveal>
           <Reveal>
             <div className="flex flex-col md:flex-row gap-12 items-center mb-10 flex-wrap">
-              <div className="flex-1 max-w-[460px] w-full">
+              <div className="flex-1 max-w-[500px] w-full">
                 <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete"
                   className="w-full rounded-[10px] object-cover aspect-video" />
               </div>
