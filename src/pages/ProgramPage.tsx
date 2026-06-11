@@ -568,7 +568,7 @@ export default function ProgramPage() {
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3 inline-flex items-center gap-2">
               30 DAYS TRANSFORMATION JOURNEY
             </p>
-            <h2 className="font-['Bebas_Neue'] text-[36px] md:text-[60px] leading-[0.9] md:leading-[0.95] tracking-[1px] md:tracking-[3px] text-white m-0">
+            <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
               YOUR <span className="text-[#07b4ba]">5 WEEK</span> ROADMAP
             </h2>
             <p className="mt-[18px] text-white/60 font-['Barlow'] text-[12px] md:text-[15px] m-0">
