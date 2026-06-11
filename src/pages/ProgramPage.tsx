@@ -382,25 +382,20 @@ export default function ProgramPage() {
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] tracking-[2px] text-white text-center leading-none mb-12">WHAT YOU GET</h2>
           </Reveal>
-          <div className="hidden md:flex gap-4 justify-between">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-5 gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} delay={i * 80}>
-                <div className="flex-1 min-h-[255px] p-5 rounded-[18px] bg-[#0f1115] border border-white/5 flex flex-col items-center text-center gap-3.5">
-                  <div className="w-[70px] h-[70px] flex items-center justify-center">{item.icon}</div>
-                  <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] tracking-[2px] leading-snug">{item.title}</h4>
-                  <p className="text-[14px] text-white/50 leading-[1.55]">{item.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <div className="flex flex-col gap-3.5 md:hidden px-2">
-            {whatCards.map((item, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#0f1115] border border-white/5 min-h-[90px]">
-                  <div className="w-12 h-12 flex items-center justify-center shrink-0">{item.icon}</div>
-                  <div>
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[13px] tracking-[2px] leading-snug mb-1">{item.title}</h4>
-                    <p className="text-[11px] text-white/50 leading-[1.4]">{item.desc}</p>
+                <div className="w-full min-h-auto md:min-h-[255px] p-[16px] rounded-[18px] bg-gradient-to-b md:bg-none from-[#13171d] to-[#101318] md:bg-[#111417] border border-white/5 md:border-2 md:border-[#111417] text-left md:text-center flex flex-row md:flex-col items-center justify-start md:justify-center gap-[16px] md:gap-[18px]">
+                  <div className="w-[46px] h-[46px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">
+                    {item.icon}
+                  </div>
+                  <div className="flex flex-col md:items-center w-full">
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[2px] leading-[1.3] m-0 md:min-h-[58px] flex items-start justify-start md:justify-center text-left md:text-center mb-[4px]">
+                      {item.title}
+                    </h4>
+                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0 md:min-h-[44px] flex items-start justify-start md:justify-center">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               </Reveal>
