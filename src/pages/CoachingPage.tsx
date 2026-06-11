@@ -594,7 +594,7 @@ export default function CoachingPage() {
     "You have no structured plan, just random gym sessions",
     "You feel lost without proper coaching guidance",
     "Your conditioning fails before your skill does",
-    "You want to compete seriously but don't know the next step",
+ 
   ];
 
   return (
