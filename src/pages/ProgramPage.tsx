@@ -750,9 +750,15 @@ AOF exists to close that gap — with structure, accountability, and coaching th
           </Reveal>
           <Reveal>
             <div className="flex flex-col md:flex-row gap-[48px] items-center mb-[40px] flex-wrap">
-              <div className="flex-1 w-full md:max-w-[500px] aspect-video">
-                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete" className="w-full rounded-[10px] object-cover" />
-              </div>
+              <div className="flex-1 w-full md:max-w-[500px]">
+  <div className="aspect-video w-full overflow-hidden rounded-[10px]">
+    <img
+      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80"
+      alt="Athlete"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</div>
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[42px] tracking-[1.5px] leading-[1.1] mb-[16px] text-white">
                   <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top mr-2">"</span>
