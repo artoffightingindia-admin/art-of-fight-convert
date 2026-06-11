@@ -470,7 +470,7 @@ export default function ProgramPage() {
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-center flex-wrap">
               <div className="flex-1 min-w-[260px]">
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Sounds Familiar?</p>
-                <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[2px] text-white mb-[16px] leading-[1.1]">
+                <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white mb-[16px] leading-[1.1]">
                   You're Training Hard...<br />But Still Not Improving
                 </h2>
                 <div className="w-[80px] h-[3px] bg-[#e53e3e] rounded-sm mb-[24px] shadow-[0_0_10px_rgba(229,62,62,0.7)]" />
