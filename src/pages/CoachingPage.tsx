@@ -1,27 +1,11 @@
 import React, { useEffect, useRef, useState, CSSProperties, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   VIEWPORT-PROOF CONSTANTS
-   Navbar = 62px fixed. Trust bar = 68px fixed.
-   Wrapper height = 100dvh (dynamic — immune to bookmarks bar, iOS toolbar, etc.)
-   Hero flex-1 fills all space between navbar padding and trust bar.
-   dvh applied via ref callback so it cascades: dvh → svh → vh fallback.
-
-   LAYOUT NOTE:
-   All horizontal padding is fixed at exactly 1cm (px-[1cm]) on every container.
-   max-w-* constraints are removed so the layout always fills the full viewport
-   with exactly 1cm gutters on left and right — unaffected by resolution/zoom.
-───────────────────────────────────────────────────────────────────────────── */
 const NAVBAR_H = 62;
-const TRUST_H  = 57;
 
-/* shared inline style for the fixed 1cm side padding wrapper */
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
-const SECTION_INSET: CSSProperties = {
-  paddingLeft: "120px",
-  paddingRight: "120px",
-};
+const SECTION_INSET: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
+
 /* ── REVEAL ── */
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
 function Reveal({ children, style = {} }: RevealProps) {
@@ -45,7 +29,7 @@ function Reveal({ children, style = {} }: RevealProps) {
 
 /* ── ICONS ── */
 const ArrowLeftIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
     <path d="M19 12H5M12 5l-7 7 7 7" />
   </svg>
 );
@@ -56,9 +40,9 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-/* teal icon stroke helpers */
-const stroke = { fill: "none", stroke: "#07b4ba", strokeWidth: "1.8", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-const strokeW = { fill: "none", stroke: "#fff", strokeWidth: "1.8", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+/* teal icon stroke helpers — strokeWidth as number to satisfy React SVG types */
+const stroke = { fill: "none", stroke: "#07b4ba", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+const strokeW = { fill: "none", stroke: "#fff", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
 const IconPlan     = () => <svg viewBox="0 0 24 24" className="w-12 h-12" {...stroke}><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>;
 const IconChat     = () => <svg viewBox="0 0 24 24" className="w-12 h-12" {...stroke}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
@@ -129,15 +113,15 @@ const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
 const timeSlots = ["9:00 AM","10:00 AM","11:00 AM","12:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM"];
 function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => void }) {
   const today = new Date();
-  const [year, setYear]   = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth());
+  const [year, setYear]     = useState(today.getFullYear());
+  const [month, setMonth]   = useState(today.getMonth());
   const [selDay, setSelDay] = useState<number | null>(null);
   const [selTime, setSelTime] = useState<string | null>(null);
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDay    = new Date(year, month, 1).getDay();
   const days: (number|null)[] = [...Array(firstDay).fill(null), ...Array.from({length:daysInMonth},(_,i)=>i+1)];
-  const prevM = () => { month===0 ? (setMonth(11),setYear(y=>y-1)) : setMonth(m=>m-1); setSelDay(null); };
-  const nextM = () => { month===11 ? (setMonth(0),setYear(y=>y+1)) : setMonth(m=>m+1); setSelDay(null); };
+  const prevM = () => { if (month===0) { setMonth(11); setYear(y=>y-1); } else { setMonth(m=>m-1); } setSelDay(null); };
+  const nextM = () => { if (month===11) { setMonth(0); setYear(y=>y+1); } else { setMonth(m=>m+1); } setSelDay(null); };
   const isPast = (d:number) => { const x=new Date(year,month,d); x.setHours(0,0,0,0); const n=new Date(); n.setHours(0,0,0,0); return x<n; };
   return (
     <div>
@@ -151,7 +135,7 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
       </div>
       <div className="grid grid-cols-7 gap-1 mb-4">
         {days.map((d,i)=>(
-          <div key={i} onClick={()=>d&&!isPast(d)?setSelDay(d):undefined}
+          <div key={i} onClick={()=>{ if(d && !isPast(d)) setSelDay(d); }}
             className={`text-center py-1.5 rounded text-[13px] cursor-pointer transition-all
               ${!d?"invisible":isPast(d)?"text-white/15 cursor-default":d===selDay?"bg-[#07b4ba] text-white font-bold":"text-white/75 border border-white/5 hover:border-[#07b4ba]/50"}`}>
             {d||""}
@@ -173,7 +157,7 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
         </div>
       )}
       {selDay && selTime && (
-        <button onClick={()=>onConfirm(`${months[month]} ${selDay}, ${year}`,selTime!)}
+        <button onClick={()=>onConfirm(`${months[month]} ${selDay}, ${year}`, selTime!)}
           className="w-full py-3.5 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-xl tracking-[2px] border-none cursor-pointer hover:bg-[#059a9f] transition-colors mt-1">
           Confirm Booking
         </button>
@@ -184,44 +168,55 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
 
 /* ── FEEDBACK SLIDER ── */
 function InfiniteFeedbackSlider() {
-  const sliderRef   = useRef<HTMLDivElement>(null);
-  const trackRef    = useRef<HTMLDivElement>(null);
-  const animRef     = useRef<number>(0);
-  const pausedRef   = useRef(false);
-  const posRef      = useRef(0);
-  const [mPage, setMPage] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const trackRef  = useRef<HTMLDivElement>(null);
+  const animRef   = useRef<number>(0);
+  const pausedRef = useRef(false);
+  const posRef    = useRef(0);
+  const [mPage, setMPage]     = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const allCards = [...feedbackCards, ...feedbackCards];
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 768);
-    check(); window.addEventListener("resize", check);
+    check();
+    window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
 
   useEffect(() => {
     if (isMobile) return;
-    const slider = sliderRef.current; const track = trackRef.current;
+    const slider = sliderRef.current;
+    const track  = trackRef.current;
     if (!slider || !track) return;
     const speed = 0.55;
     const half = () => track.scrollWidth / 2;
     const animate = () => {
-      if (!pausedRef.current) { posRef.current += speed; if (posRef.current >= half()) posRef.current -= half(); track.style.transform = `translateX(-${posRef.current}px)`; }
+      if (!pausedRef.current) {
+        posRef.current += speed;
+        if (posRef.current >= half()) posRef.current -= half();
+        track.style.transform = `translateX(-${posRef.current}px)`;
+      }
       animRef.current = requestAnimationFrame(animate);
     };
     animRef.current = requestAnimationFrame(animate);
-    const pause = () => { pausedRef.current = true; };
+    const pause  = () => { pausedRef.current = true; };
     const resume = () => { setTimeout(() => { pausedRef.current = false; }, 600); };
-    slider.addEventListener("mouseenter", pause); slider.addEventListener("mouseleave", resume);
-    return () => { cancelAnimationFrame(animRef.current); slider.removeEventListener("mouseenter", pause); slider.removeEventListener("mouseleave", resume); };
+    slider.addEventListener("mouseenter", pause);
+    slider.addEventListener("mouseleave", resume);
+    return () => {
+      cancelAnimationFrame(animRef.current);
+      slider.removeEventListener("mouseenter", pause);
+      slider.removeEventListener("mouseleave", resume);
+    };
   }, [isMobile]);
 
-  const mCards = Array.from({length:3},(_,i)=>feedbackCards[(mPage+i)%feedbackCards.length]);
+  const mCards = Array.from({length:3}, (_,i) => feedbackCards[(mPage+i) % feedbackCards.length]);
 
   if (isMobile) return (
     <div className="w-full">
       <div className="flex flex-col gap-4">
-        {mCards.map((c,i)=>(
+        {mCards.map((c,i) => (
           <div key={`${c.author}-${mPage}-${i}`} className="bg-[#1a1d23] border border-white/5 rounded-2xl p-6">
             <div className="flex gap-1 text-[#07b4ba] text-base mb-3">★★★★★</div>
             <p className="text-white/70 text-[14px] leading-relaxed italic mb-4">"{c.text}"</p>
@@ -242,7 +237,7 @@ function InfiniteFeedbackSlider() {
   return (
     <div ref={sliderRef} className="w-full overflow-hidden">
       <div ref={trackRef} className="flex gap-6 w-max will-change-transform">
-        {allCards.map((c,i)=>(
+        {allCards.map((c,i) => (
           <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col">
             <div className="flex gap-1 text-[#07b4ba] text-base mb-4">★★★★★</div>
             <p className="text-white/70 text-[15px] leading-relaxed italic mb-5">"{c.text}"</p>
@@ -254,8 +249,18 @@ function InfiniteFeedbackSlider() {
         ))}
       </div>
       <div className="flex justify-center gap-4 mt-7">
-        <button onClick={()=>{ pausedRef.current=true; posRef.current=Math.max(posRef.current-364,0); if(trackRef.current){trackRef.current.style.transition="transform 0.7s cubic-bezier(0.22,1,0.36,1)";trackRef.current.style.transform=`translateX(-${posRef.current}px)`;setTimeout(()=>{if(trackRef.current)trackRef.current.style.transition=""},700);} setTimeout(()=>{pausedRef.current=false;},700); }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center">‹</button>
-        <button onClick={()=>{ pausedRef.current=true; posRef.current+=364; if(trackRef.current){trackRef.current.style.transition="transform 0.7s cubic-bezier(0.22,1,0.36,1)";trackRef.current.style.transform=`translateX(-${posRef.current}px)`;setTimeout(()=>{if(trackRef.current)trackRef.current.style.transition=""},700);} setTimeout(()=>{pausedRef.current=false;},700); }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center">›</button>
+        <button onClick={()=>{
+          pausedRef.current=true;
+          posRef.current=Math.max(posRef.current-364,0);
+          if(trackRef.current){ trackRef.current.style.transition="transform 0.7s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform=`translateX(-${posRef.current}px)`; setTimeout(()=>{ if(trackRef.current) trackRef.current.style.transition=""; },700); }
+          setTimeout(()=>{ pausedRef.current=false; },700);
+        }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center">‹</button>
+        <button onClick={()=>{
+          pausedRef.current=true;
+          posRef.current+=364;
+          if(trackRef.current){ trackRef.current.style.transition="transform 0.7s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform=`translateX(-${posRef.current}px)`; setTimeout(()=>{ if(trackRef.current) trackRef.current.style.transition=""; },700); }
+          setTimeout(()=>{ pausedRef.current=false; },700);
+        }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center">›</button>
       </div>
     </div>
   );
@@ -275,15 +280,15 @@ function FAQSection() {
           <div className="w-14 h-0.5 bg-[#07b4ba] mx-auto mt-4 mb-12 rounded-full" />
         </Reveal>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {faqItems.map((item,i)=>(
+          {faqItems.map((item,i) => (
             <Reveal key={i}>
-              <div className={`border rounded-xl bg-[#141414] overflow-hidden transition-colors duration-200 ${open===i?"border-[#07b4ba]/45":"border-white/8"}`}>
+              <div className={`border rounded-xl bg-[#141414] overflow-hidden transition-colors duration-200 ${open===i?"border-[#07b4ba]/45":"border-white/10"}`}>
                 <button onClick={()=>setOpen(open===i?null:i)} className="w-full bg-transparent border-none flex items-center justify-between py-5 px-6 cursor-pointer text-left gap-4">
                   <span className={`font-bold text-[15px] md:text-[17px] leading-snug flex-1 font-['Barlow'] ${open===i?"text-[#07b4ba]":"text-white"}`}>{item.question}</span>
                   <span className={`w-7 h-7 rounded-full border-[1.5px] flex items-center justify-center shrink-0 text-lg transition-all duration-300 ${open===i?"border-[#07b4ba] text-[#07b4ba] rotate-45 bg-[#07b4ba]/10":"border-white/20 text-white/60"}`}>+</span>
                 </button>
                 <div className="overflow-hidden transition-all duration-300 ease-in-out" style={{maxHeight:open===i?400:0,padding:open===i?"0 24px 20px":"0 24px"}}>
-                  <p className="text-[14px] text-white/58 leading-[1.75] font-['Barlow']">{item.answer}</p>
+                  <p className="text-[14px] text-white/60 leading-[1.75] font-['Barlow']">{item.answer}</p>
                 </div>
               </div>
             </Reveal>
@@ -296,11 +301,12 @@ function FAQSection() {
 
 /* ── ROADMAP ── */
 function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
-  const [idx, setIdx]       = useState(0);
-  const [isMobile, setMob]  = useState(false);
+  const [idx, setIdx]         = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const check = () => setMob(window.innerWidth <= 768);
-    check(); window.addEventListener("resize", check);
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
   useEffect(() => {
@@ -309,11 +315,9 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   }, [isMobile]);
 
   return (
-    <div className={`relative overflow-hidden mt-12 ${isMobile ? "border-y border-[#07b4ba]/15" : "bg-[#0b0b0b]"}`}
-      style={isMobile ? {background:"radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)"} : {}}>
-      <div className="w-full py-8 px-0"
-        style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)"}}>
-        {/* Header */}
+    <div className={`relative overflow-hidden mt-12 ${isMobile?"border-y border-[#07b4ba]/15":"bg-[#0b0b0b]"}`}
+      style={isMobile?{background:"radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)"}:{}}>
+      <div className="w-full py-8" style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)"}}>
         <div className="text-center mb-9" style={GUTTER}>
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">YOUR TRAINING JOURNEY</p>
           <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
@@ -324,110 +328,104 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
 
         {isMobile ? (
           <div className="w-full overflow-hidden pb-0.5">
-            {/* mobile timeline */}
             <div className="relative grid grid-cols-5 items-end gap-0 mx-3.5 mb-7 pt-1">
               <div className="absolute left-[9%] right-[9%] bottom-[7px] h-px bg-white/40" />
-              {roadmapCards.map((w,i)=>(
+              {roadmapCards.map((w,i) => (
                 <button key={w.title} onClick={()=>setIdx(i)}
-                  className={`relative z-10 flex flex-col items-center gap-2.5 min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i===idx?"text-[#07e8ef]":"text-white/70"}`}>
+                  className={`relative z-10 flex flex-col items-center gap-2.5 min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i===idx?"text-[#07b4ba]":"text-white/70"}`}>
                   <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px]">{w.title}</span>
-                  <i className={`w-[15px] h-[15px] rounded-full border not-italic ${i===idx?"border-2 border-[#07e8ef] bg-[#061018] shadow-[0_0_0_4px_rgba(7,180,186,.18),0_0_16px_rgba(7,232,239,.95)]":"border-white/65 bg-[#03070c]"}`} />
+                  <i className={`w-[15px] h-[15px] rounded-full border not-italic ${i===idx?"border-2 border-[#07b4ba] bg-[#061018] shadow-[0_0_0_4px_rgba(7,180,186,.18),0_0_16px_rgba(7,180,186,.95)]":"border-white/65 bg-[#03070c]"}`} />
                 </button>
               ))}
             </div>
-            {/* cards */}
             <div className="relative">
               <button disabled={idx===0} onClick={()=>setIdx(p=>Math.max(p-1,0))}
-                className="absolute top-1/2 left-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07e8ef]/55 rounded-lg bg-[#030b12]/90 text-[#07e8ef] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{"<"}</button>
+                className="absolute top-1/2 left-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{"<"}</button>
               <button disabled={idx===roadmapCards.length-1} onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-1))}
-                className="absolute top-1/2 right-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07e8ef]/55 rounded-lg bg-[#030b12]/90 text-[#07e8ef] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{">"}</button>
+                className="absolute top-1/2 right-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{">"}</button>
               <div className="overflow-hidden pl-5">
                 <div className="flex gap-4 transition-transform duration-[420ms] ease-out will-change-transform"
-                  style={{transform:`translateX(calc(-${idx}*(82vw + 16px)))`}}>
-                  {roadmapCards.map((card,i)=>(
-                    <div key={card.title} className="relative flex-none w-[82vw] min-h-[308px] overflow-hidden border border-[#74e1e8]/28 rounded-[10px] bg-[#061018]"
+                  style={{transform:`translateX(calc(-${idx} * (82vw + 16px)))`}}>
+                  {roadmapCards.map((card,i) => (
+                    <div key={card.title} className="relative flex-none w-[82vw] min-h-[308px] overflow-hidden border border-[#74e1e8]/30 rounded-[10px] bg-[#061018]"
                       style={{boxShadow:"inset 0 0 0 1px rgba(255,255,255,.02),0 18px 38px rgba(0,0,0,.34)"}}>
                       <div className="absolute inset-0 bg-cover bg-[62%_center] opacity-[.62]" style={{backgroundImage:`url(${card.image})`}} />
                       <div className="absolute inset-0 z-[1]" style={{background:"linear-gradient(90deg,rgba(2,7,12,.98) 0%,rgba(2,7,12,.78) 42%,rgba(2,7,12,.34) 76%),linear-gradient(180deg,rgba(2,7,12,.1) 0%,rgba(2,7,12,.9) 100%)"}} />
                       <div className="relative z-[2] min-h-[258px] p-7 pb-4 pt-7">
-                        {i===idx&&<p className="text-[#07e8ef] font-['Bebas_Neue'] text-[12px] mb-1.5">YOU ARE HERE</p>}
+                        {i===idx && <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[12px] mb-1.5">YOU ARE HERE</p>}
                         <h3 className="text-white font-['Bebas_Neue'] text-[28px] leading-[1.05] tracking-[2px] mb-3.5 min-h-[64px] flex items-start">{card.title}</h3>
-                        <div className="w-14 h-0.5 mb-7" style={{background:"#07e8ef",boxShadow:"0 0 10px rgba(7,232,239,.55)"}} />
+                        <div className="w-14 h-0.5 mb-7 bg-[#07b4ba]" style={{boxShadow:"0 0 10px rgba(7,180,186,.55)"}} />
                         <div className="flex flex-col gap-3.5">
-                          {card.points.map(p=>(
-                            <div key={p} className="flex items-center gap-2.5">
-                              <span className="flex w-3.5 h-3.5 shrink-0 items-center justify-center border border-[#07e8ef] rounded-full text-[#07e8ef] text-[8px]">✓</span>
-                              <p className="text-white/82 text-[11px] leading-[1.25]">{p}</p>
+                          {card.points.map(pt => (
+                            <div key={pt} className="flex items-center gap-2.5">
+                              <span className="flex w-3.5 h-3.5 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] text-[8px]">✓</span>
+                              <p className="text-white/80 text-[11px] leading-[1.25]">{pt}</p>
                             </div>
                           ))}
                         </div>
                       </div>
-                      <div className="relative z-[2] flex items-center justify-center gap-3 min-h-[50px] border-t border-white/10 bg-[#03090f]/72">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#07e8ef" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                        <p className="text-[#07e8ef] font-['Bebas_Neue'] text-[18px] tracking-[1px]">{card.days}</p>
+                      <div className="relative z-[2] flex items-center justify-center gap-3 min-h-[50px] border-t border-white/10 bg-[#03090f]/70">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                        <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[18px] tracking-[1px]">{card.days}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            {/* dots */}
             <div className="flex justify-center gap-3 mt-4">
-              {roadmapCards.map((_,i)=>(
+              {roadmapCards.map((_,i) => (
                 <button key={i} onClick={()=>setIdx(i)}
-                  className={`w-2 h-2 p-0 border-0 rounded-full cursor-pointer transition-all ${i===idx?"bg-[#07e8ef] shadow-[0_0_12px_rgba(7,232,239,.7)]":"bg-white/30"}`} />
+                  className={`w-2 h-2 p-0 border-0 rounded-full cursor-pointer transition-all ${i===idx?"bg-[#07b4ba] shadow-[0_0_12px_rgba(7,180,186,.7)]":"bg-white/30"}`} />
               ))}
             </div>
-            {/* note */}
-            <div className="flex items-center gap-3.5 mx-4 mt-5 p-4 border border-white/7 rounded-lg bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
-              <div className="flex w-9 h-9 shrink-0 items-center justify-center border border-[#07e8ef] rounded-full text-[#07e8ef]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+            <div className="flex items-center gap-3.5 mx-4 mt-5 p-4 border border-white/10 rounded-lg bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
+              <div className="flex w-9 h-9 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M5 4H3v2a4 4 0 0 0 4 4"/><path d="M19 4h2v2a4 4 0 0 1-4 4"/>
                 </svg>
               </div>
               <div>
                 <h3 className="text-white/90 font-['Bebas_Neue'] text-[16px] tracking-[.8px] leading-none mb-1">STAY CONSISTENT. TRUST THE PROCESS.</h3>
-                <p className="text-[#07e8ef] text-[11px] leading-[1.3]">Become the best version of yourself.</p>
+                <p className="text-[#07b4ba] text-[11px] leading-[1.3]">Become the best version of yourself.</p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="relative overflow-hidden" style={{ paddingLeft: "calc(1cm + 18px)", paddingRight: "calc(1cm + 18px)" }}>
+          <div className="relative overflow-hidden" style={{paddingLeft:"calc(1cm + 18px)",paddingRight:"calc(1cm + 18px)"}}>
             <button onClick={()=>setIdx(p=>Math.max(p-1,0))}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/8 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">‹</button>
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">‹</button>
             <button onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-2))}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/8 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">›</button>
-            {/* timeline dots */}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">›</button>
             <div className="flex justify-between mb-10 relative">
               <div className="absolute top-3.5 left-0 right-0 h-0.5 bg-white/10" />
-              {roadmapCards.map((w,i)=>(
+              {roadmapCards.map((w,i) => (
                 <div key={i} className="relative z-10 text-center">
                   <p className={`font-['Bebas_Neue'] text-[15px] tracking-[1px] mb-2.5 transition-colors ${i===idx||i===idx+1?"text-[#07b4ba]":"text-white/45"}`}>{w.title}</p>
                   <div className={`w-[26px] h-[26px] mx-auto rounded-full border-2 border-[#07b4ba] transition-all ${i===idx||i===idx+1?"bg-[#07b4ba] shadow-[0_0_18px_rgba(7,180,186,.95)]":"bg-[#0b0b0b]"}`} />
                 </div>
               ))}
             </div>
-            {/* cards */}
             <div className="overflow-hidden">
               <div className="flex gap-5 transition-transform duration-[450ms] ease-in-out" style={{transform:`translateX(-${idx*47}%)`}}>
-                {roadmapCards.map((card,i)=>(
-                  <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/6">
+                {roadmapCards.map((card,i) => (
+                  <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
                     <div className="grid grid-cols-2">
                       <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover" />
                       <div className="p-8 flex flex-col justify-center">
                         <h3 className="font-['Bebas_Neue'] text-[42px] text-white mb-4 leading-none">{card.title}</h3>
-                        <div className="w-15 h-[3px] bg-[#07b4ba] mb-5" />
+                        <div className="w-16 h-[3px] bg-[#07b4ba] mb-5" />
                         <div className="flex flex-col gap-3">
-                          {card.points.map((p,pi)=>(
+                          {card.points.map((pt,pi) => (
                             <div key={pi} className="flex items-center gap-2.5">
                               <div className="w-5 h-5 rounded-full border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[10px] shrink-0">✓</div>
-                              <p className="text-[14px] text-white/75 leading-snug">{p}</p>
+                              <p className="text-[14px] text-white/75 leading-snug">{pt}</p>
                             </div>
                           ))}
                         </div>
                       </div>
                     </div>
-                    <div className="py-4 border-t border-white/6 text-center">
+                    <div className="py-4 border-t border-white/5 text-center">
                       <p className="font-['Bebas_Neue'] text-[22px] text-[#07b4ba] tracking-[1px]">{card.days}</p>
                     </div>
                   </div>
@@ -453,7 +451,6 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
     <div id="method" className="relative overflow-hidden bg-[#0b0b0b]"
       style={{backgroundImage:"linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)",backgroundSize:"30px 30px"}}>
       <section className="w-full py-12" style={SECTION_INSET}>
-        {/* Header */}
         <Reveal>
           <div className="text-center mb-9">
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-2">THE AOF METHOD</p>
@@ -462,72 +459,60 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             </h2>
           </div>
         </Reveal>
-
-        {/* VS panels */}
         <Reveal>
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-1 rounded-xl overflow-hidden mb-6">
-              {/* bad */}
               <div className="relative aspect-video border-2 border-[#e53e3e]/75 rounded-xl overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')"}} />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 to-black/65" />
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-[#e53e3e]/18 border-2 border-[#e53e3e] text-[#e53e3e] flex items-center justify-center font-black text-lg">✕</div>
+                  <div className="w-8 h-8 rounded-full bg-[#e53e3e]/20 border-2 border-[#e53e3e] text-[#e53e3e] flex items-center justify-center font-black text-lg">✕</div>
                   <span className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white uppercase">Training Without Direction</span>
                 </div>
               </div>
-              {/* good */}
               <div className="relative aspect-video border-2 border-[#07b4ba]/75 rounded-xl overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')"}} />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 to-black/65" />
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-[#07b4ba]/18 border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center font-black text-lg">✓</div>
+                  <div className="w-8 h-8 rounded-full bg-[#07b4ba]/20 border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center font-black text-lg">✓</div>
                   <span className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white uppercase">Training The Right Way</span>
                 </div>
               </div>
             </div>
-            {/* VS badge */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[52px] h-[52px] rounded-full bg-[#1a1d23] border-2 border-white/18 flex items-center justify-center font-['Bebas_Neue'] text-[20px] tracking-[1px] text-white/75 shadow-[0_4px_20px_rgba(0,0,0,.5)]">VS</div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[52px] h-[52px] rounded-full bg-[#1a1d23] border-2 border-white/20 flex items-center justify-center font-['Bebas_Neue'] text-[20px] tracking-[1px] text-white/75 shadow-[0_4px_20px_rgba(0,0,0,.5)]">VS</div>
           </div>
         </Reveal>
-
-        {/* Feature cards 2×2 + centred 5th */}
         <Reveal style={{marginTop:24}}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-3.5">
-            {methodCards.map((c,i)=>(
-              <div key={i} className="flex items-start gap-4 p-5 rounded-[10px] bg-white/3 border border-white/7 hover:border-[#07b4ba]/30 transition-colors">
+            {methodCards.map((c,i) => (
+              <div key={i} className="flex items-start gap-4 p-5 rounded-[10px] bg-white/5 border border-white/10 hover:border-[#07b4ba]/30 transition-colors">
                 <div className="w-[45px] h-[45px] shrink-0 flex items-center justify-center">{c.icon}</div>
                 <div>
                   <h4 className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white mb-1.5 leading-snug">{c.title}</h4>
-                  <p className="text-[14px] text-white/52 leading-[1.55]">{c.desc}</p>
+                  <p className="text-[14px] text-white/50 leading-[1.55]">{c.desc}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="flex justify-center">
-            <div className="flex items-start gap-4 p-5 rounded-[10px] bg-white/3 border border-white/7 hover:border-[#07b4ba]/30 transition-colors max-w-[560px] w-full">
+            <div className="flex items-start gap-4 p-5 rounded-[10px] bg-white/5 border border-white/10 hover:border-[#07b4ba]/30 transition-colors max-w-[560px] w-full">
               <div className="w-[45px] h-[45px] shrink-0 flex items-center justify-center"><IconTrophy /></div>
               <div>
                 <h4 className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white mb-1.5 leading-snug">PERFORMANCE-FIRST</h4>
-                <p className="text-[14px] text-white/52 leading-[1.55]">Peak your body and mind for real fights — physically, mentally, and strategically.</p>
+                <p className="text-[14px] text-white/50 leading-[1.55]">Peak your body and mind for real fights — physically, mentally, and strategically.</p>
               </div>
             </div>
           </div>
         </Reveal>
-
-        {/* Roadmap */}
         <RoadmapSection scrollToForm={scrollToForm} />
-
-        {/* What you get */}
         <Reveal style={{marginTop:64}}>
           <div className="text-center mb-12">
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] tracking-[2px] text-white leading-none">WHAT YOU GET</h2>
           </div>
-          {/* desktop: 5 equal cols / mobile: stacked rows */}
           <div className="hidden md:flex gap-4 justify-between">
-            {whatCards.map((c,i)=>(
-              <div key={i} className="flex-1 min-h-[255px] p-5 rounded-[18px] bg-[#0f1115] border border-white/6 flex flex-col items-center text-center gap-3.5">
+            {whatCards.map((c,i) => (
+              <div key={i} className="flex-1 min-h-[255px] p-5 rounded-[18px] bg-[#0f1115] border border-white/5 flex flex-col items-center text-center gap-3.5">
                 <div className="w-[70px] h-[70px] flex items-center justify-center">{c.icon}</div>
                 <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] tracking-[2px] leading-snug">{c.title}</h4>
                 <p className="text-[14px] text-white/50 leading-[1.55]">{c.desc}</p>
@@ -535,8 +520,8 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             ))}
           </div>
           <div className="flex flex-col gap-3.5 md:hidden px-2">
-            {whatCards.map((c,i)=>(
-              <div key={i} className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#0f1115] border border-white/6 min-h-[90px]">
+            {whatCards.map((c,i) => (
+              <div key={i} className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#0f1115] border border-white/5 min-h-[90px]">
                 <div className="w-12 h-12 flex items-center justify-center shrink-0">{c.icon}</div>
                 <div>
                   <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[13px] tracking-[2px] leading-snug mb-1">{c.title}</h4>
@@ -546,36 +531,23 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             ))}
           </div>
         </Reveal>
-
-        {/* Promise */}
         <Reveal style={{marginTop:50}}>
           <div className="w-full mx-auto text-center px-10 py-8">
             <p className="font-['Bebas_Neue'] text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
             <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
-            <p className="font-['Barlow'] text-[16px] md:text-[19px] leading-[1.9] text-white/76 italic">
-  <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-2.5">
-    "
-  </span>
-
-  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-
-  <span className="text-[#07b4ba] text-[42px] leading-none ml-1.5 font-serif relative top-2.5">
-    "
-  </span>
-</p>
+            <p className="font-['Barlow'] text-[16px] md:text-[19px] leading-[1.9] text-white/75 italic">
+              <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
+              Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+              <span className="text-[#07b4ba] text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
+            </p>
           </div>
         </Reveal>
-
-        {/* Book strip */}
-<div className="mt-8 -mx-[1cm] overflow-hidden bg-[#07b4ba]">
-  <button
-    onClick={scrollToForm}
-    className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/8 transition-colors"
-  >
-    Book A Call
-  </button>
-</div>
-      </div>
+        <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-1cm",marginRight:"-1cm"}}>
+          <button onClick={scrollToForm} className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/10 transition-colors">
+            Book A Call
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
@@ -584,21 +556,23 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
 export default function CoachingPage() {
   const navigate = useNavigate();
   const formRef  = useRef<HTMLDivElement>(null);
-  const [lead, setLead] = useState({ name: "", phone: "", goal: "" });
-  const [stage, setStage]           = useState<1|2|3>(1);
-  const [isSubmitting, setSubmit]   = useState(false);
+  const [lead, setLead]         = useState({ name: "", phone: "", goal: "" });
+  const [stage, setStage]       = useState<1|2|3>(1);
+  const [isSubmitting, setSubmit] = useState(false);
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z8wTj9FLPdZuzOzSRhJ8-1JvlPxYk1210TelUjKuaSyYvVl/exec";
 
   const handleLeadSubmit = () => { if (!lead.name.trim() || !lead.phone.trim()) return; setStage(2); };
   const handleBookingConfirm = async (date: string, time: string) => {
-    if (isSubmitting) return; setSubmit(true);
+    if (isSubmitting) return;
+    setSubmit(true);
     try {
       const params = new URLSearchParams({ name:lead.name.trim(), phone:lead.phone.trim(), goal:lead.goal||"Not specified", date, time });
-      fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:params.toString()});
+      fetch(SHEET_URL, {method:"POST", mode:"no-cors", headers:{"Content-Type":"application/x-www-form-urlencoded"}, body:params.toString()});
       setStage(3);
-    } catch(e){console.error(e);} finally { setTimeout(()=>setSubmit(false),2000); }
+    } catch(e) { console.error(e); }
+    finally { setTimeout(()=>setSubmit(false), 2000); }
   };
 
   const painPoints = [
@@ -613,8 +587,8 @@ export default function CoachingPage() {
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
 
-      {/* ── NAVBAR ── fixed 62px */}
-      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/6 flex items-center justify-between" style={GUTTER}>
+      {/* ── NAVBAR ── */}
+      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between" style={GUTTER}>
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
         </span>
@@ -628,63 +602,42 @@ export default function CoachingPage() {
         </div>
       </nav>
 
-      {/*
-        ══════════════════════════════════════════════════════════════════════
-        VIEWPORT-PROOF WRAPPER
-        ══════════════════════════════════════════════════════════════════════
-      */}
+      {/* ── HERO + TRUST BAR WRAPPER ── */}
       <div
         className="relative flex flex-col w-full overflow-hidden"
         ref={(el) => {
           if (!el) return;
           el.style.paddingTop = `${NAVBAR_H}px`;
-          el.style.height = `calc(100vh - 0px)`;
-          el.style.height = `calc(100svh - 0px)`;
-          el.style.height = `100dvh`;
+          el.style.height = "100vh";
+          el.style.height = "100svh";
+          el.style.height = "100dvh";
         }}
       >
-        {/* ── HERO ── */}
-        <section
-          id="home"
-          className="relative w-full flex items-center overflow-hidden flex-1 min-h-0"
-          style={{
-            background:"radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c"
-          }}
-        >
-          {/* BG image */}
+        <section id="home" className="relative w-full flex items-center overflow-hidden flex-1 min-h-0"
+          style={{background:"radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c"}}>
           <div className="absolute inset-0 z-0 opacity-[.42]"
             style={{background:"linear-gradient(to bottom,rgba(6,8,12,.65),rgba(6,8,12,.92)),url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat"}} />
-          {/* overlay */}
           <div className="absolute inset-0 z-[1]"
             style={{background:"linear-gradient(180deg,rgba(6,8,12,.55) 0%,rgba(6,8,12,.78) 55%,#06080c 100%)"}} />
-
           <div className="w-full relative z-10" style={GUTTER}>
             <Reveal>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase mb-4">
-                AOF Academy — 1 On 1 Coaching
-              </p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase mb-4">AOF Academy — 1 On 1 Coaching</p>
               <h1 className="font-['Bebas_Neue'] text-[clamp(48px,5vw,72px)] leading-[.95] tracking-[2px] uppercase text-white mb-5">
-                Train Like A<br/>
-                <span className="text-[#07b4ba]">Champion.</span><br/>
-                Fight Like One
+                Train Like A<br/><span className="text-[#07b4ba]">Champion.</span><br/>Fight Like One
               </h1>
-              <p className="text-white/62 text-[16px] leading-[1.7] max-w-[480px] mb-8">
-                Stop training in the crowd. Get a personalised coaching program built around your body, your goals,
-                and your timeline — guided by coaches who have been in the ring.
+              <p className="text-white/60 text-[16px] leading-[1.7] max-w-[480px] mb-8">
+                Stop training in the crowd. Get a personalised coaching program built around your body, your goals, and your timeline — guided by coaches who have been in the ring.
               </p>
               <button onClick={scrollToForm}
-                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer hover:bg-[#057e82] hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(7,180,186,.38)] transition-all duration-250">
+                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer hover:bg-[#057e82] hover:-translate-y-0.5 transition-all duration-200">
                 Book A Call
               </button>
             </Reveal>
           </div>
         </section>
 
-        {/* ── TRUST BAR ── fixed 68px */}
-     <div
-  className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0"
-  style={{ height: "1.5cm", ...GUTTER }}
-        >
+        {/* ── TRUST BAR ── */}
+        <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0" style={{height:"1.5cm", ...GUTTER}}>
           <div className="w-full flex items-center justify-center md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-3">
               <div className="w-10 h-10 flex items-center justify-center shrink-0"><IconShield /></div>
@@ -700,13 +653,11 @@ export default function CoachingPage() {
             </div>
           </div>
         </div>
-
-      </div>{/* end viewport-proof wrapper */}
+      </div>
 
       {/* ── PAIN SECTION ── */}
-     <section className="w-full py-12" style={SECTION_INSET}>
+      <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
-          {/* text left */}
           <div className="flex-1 min-w-[260px]">
             <Reveal>
               <p className="text-[#07b4ba] font-bold text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
@@ -715,16 +666,15 @@ export default function CoachingPage() {
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-6" style={{boxShadow:"0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)"}} />
             </Reveal>
-            {painPoints.map((p,i)=>(
+            {painPoints.map((p,i) => (
               <Reveal key={i} style={{transitionDelay:`${i*70}ms`}}>
-                <div className="flex items-start gap-9 mb-3.5">
+                <div className="flex items-start gap-4 mb-3.5">
                   <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1" style={{boxShadow:"0 0 6px rgba(255,45,45,.9),0 0 16px rgba(255,45,45,.6)"}} />
                   <p className="text-white/70 text-[15px] leading-[1.5]">{p}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-          {/* image right */}
           <div className="flex-1 max-w-[500px] w-full">
             <Reveal>
               <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1400&auto=format&fit=crop"
@@ -749,7 +699,7 @@ export default function CoachingPage() {
                 <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[2px] text-white mb-1">Head Coach</h2>
                 <p className="text-[#07b4ba] font-bold text-[14px] tracking-[3px] uppercase mb-5">AOF Academy — Lead Trainer &amp; Founder</p>
                 <div className="mb-6">
-                  {coachCredentials.map((c,i)=>(
+                  {coachCredentials.map((c,i) => (
                     <div key={i} className="flex items-start gap-2.5 mb-3.5">
                       <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                       <p className="text-white/70 text-[15px] leading-[1.5]">{c}</p>
@@ -757,8 +707,8 @@ export default function CoachingPage() {
                   ))}
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-6">
-                  {stats.map((s,i)=>(
-                    <div key={i} className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/8 rounded-[14px] min-h-[110px] md:h-[140px] p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)]">
+                  {stats.map((s,i) => (
+                    <div key={i} className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[110px] md:h-[140px] p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)]">
                       <p className="font-['Bebas_Neue'] text-[32px] md:text-[42px] text-[#07b4ba] tracking-[1px] mb-2 leading-none">{s.val}</p>
                       <p className="text-white/45 text-[12px] tracking-[2px] uppercase leading-tight">{s.label}</p>
                     </div>
@@ -773,14 +723,14 @@ export default function CoachingPage() {
       {/* ── TESTIMONIALS ── */}
       <div id="testimonials" className="relative overflow-hidden bg-[#0b0b0b]"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)"}}>
-       <div className="w-full py-12" style={SECTION_INSET}>
+        <div className="w-full py-12" style={SECTION_INSET}>
           <Reveal>
             <div className="text-center mb-11">
               <p className="text-[#07b4ba] font-bold text-[13px] tracking-[3px] uppercase">Real People, Real Results</p>
               <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] tracking-[3px] text-white mt-2 leading-none">
                 Trusted By Fighters, <span className="text-[#07b4ba]">Proven Results</span>
               </h2>
-              <p className="text-white/42 mt-2 text-[15px]">Here's What Athletes Say About Their Transformation With AOF</p>
+              <p className="text-white/40 mt-2 text-[15px]">Here's What Athletes Say About Their Transformation With AOF</p>
             </div>
           </Reveal>
           <Reveal>
@@ -809,17 +759,16 @@ export default function CoachingPage() {
         style={{backgroundImage:"radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)",backgroundSize:"20px 20px"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
           <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
-            {/* left */}
             <div className="flex-1 min-w-[260px]">
               <Reveal>
                 <p className="text-[#07b4ba] font-bold text-[13px] tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(34px,5vw,54px)] tracking-[2px] leading-none mb-4 text-white">
                   Apply For Your<br/><span className="text-[#07b4ba]">1-On-1 Coaching Spot</span>
                 </h2>
-                <p className="text-white/52 text-[14px] leading-[1.7] mb-7 max-w-[380px]">
+                <p className="text-white/50 text-[14px] leading-[1.7] mb-7 max-w-[380px]">
                   Spots are limited. We only take on a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
-                {checklistItems.map((item,i)=>(
+                {checklistItems.map((item,i) => (
                   <div key={i} className="flex items-start gap-2.5 mb-3.5">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                     <p className="text-[16px] text-white leading-[1.55]">{item}</p>
@@ -833,7 +782,6 @@ export default function CoachingPage() {
                 </div>
               </Reveal>
             </div>
-            {/* form */}
             <div className="flex-1 min-w-[300px]">
               <Reveal>
                 <div className="bg-[#05070b] border border-white/10 rounded-2xl p-10">
@@ -854,12 +802,12 @@ export default function CoachingPage() {
                     <>
                       <h3 className="font-bold text-[13px] tracking-[3px] text-[#07b4ba] mb-1.5 uppercase">Start Your Journey With AOF</h3>
                       <p className="text-white/35 text-[12px] mb-5 tracking-[1px]">STEP 1 OF 2 — YOUR DETAILS</p>
-                      {[
-                        {placeholder:"Full Name", type:"text", key:"name"  },
+                      {([
+                        {placeholder:"Full Name", type:"text", key:"name"},
                         {placeholder:"Phone Number", type:"tel", key:"phone"},
-                      ].map(f=>(
+                      ] as {placeholder:string; type:string; key:"name"|"phone"}[]).map(f => (
                         <input key={f.key} type={f.type} placeholder={f.placeholder}
-                          value={(lead as any)[f.key]} onChange={e=>setLead(l=>({...l,[f.key]:e.target.value}))}
+                          value={lead[f.key]} onChange={e=>setLead(l=>({...l,[f.key]:e.target.value}))}
                           className="w-full px-4 py-3.5 rounded-lg bg-[#222] border border-white/10 text-white placeholder-white/35 text-[15px] mb-3.5 outline-none focus:border-[#07b4ba] transition-colors appearance-none" />
                       ))}
                       <select value={lead.goal} onChange={e=>setLead(l=>({...l,goal:e.target.value}))}
@@ -887,21 +835,21 @@ export default function CoachingPage() {
       <FAQSection />
 
       {/* ── FOOTER ── */}
-      <footer className="bg-[#0f1115] pt-8 pb-2 border-t border-white/6">
+      <footer className="bg-[#0f1115] pt-8 pb-2 border-t border-white/10">
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10" style={GUTTER}>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] text-white pt-5 mb-3.5">CONTACT</h3>
             <div className="flex flex-col gap-4">
-              <p className="text-white/52 text-[17px]">+91 00000 00000</p>
-              <p className="text-white/52 text-[17px]">info@aofacademy.com</p>
-              <p className="text-white/52 text-[17px]">Chennai, Tamil Nadu, India</p>
+              <p className="text-white/50 text-[17px]">+91 00000 00000</p>
+              <p className="text-white/50 text-[17px]">info@aofacademy.com</p>
+              <p className="text-white/50 text-[17px]">Chennai, Tamil Nadu, India</p>
             </div>
           </div>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] text-white pt-5 mb-3.5">NAVIGATION</h3>
             <div className="flex flex-col gap-2.5">
-              {[["#home","Home"],["#method","AOF Method"],["#testimonials","Testimonials"],["#faq","FAQ"],["#contact","Apply Now"]].map(([href,label])=>(
-                <a key={href} href={href} className="text-white/52 text-[17px] no-underline hover:text-[#07b4ba] transition-colors">{label}</a>
+              {([["#home","Home"],["#method","AOF Method"],["#testimonials","Testimonials"],["#faq","FAQ"],["#contact","Apply Now"]] as [string,string][]).map(([href,label]) => (
+                <a key={href} href={href} className="text-white/50 text-[17px] no-underline hover:text-[#07b4ba] transition-colors">{label}</a>
               ))}
             </div>
           </div>
@@ -909,16 +857,15 @@ export default function CoachingPage() {
             <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] pt-5 mb-3.5 flex">
               <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
             </h3>
-            <p className="text-white/52 text-[15px] leading-[1.8] max-w-[320px]">
+            <p className="text-white/50 text-[15px] leading-[1.8] max-w-[320px]">
               Art of Fighting Academy — building champions through proven systems and disciplined training.
             </p>
           </div>
         </div>
-        <div className="w-full mt-6 pt-3 border-t border-white/6 text-center text-[13px] text-white/30" style={GUTTER}>
+        <div className="w-full mt-6 pt-3 border-t border-white/10 text-center text-[13px] text-white/30" style={GUTTER}>
           © 2026 AOF Academy. All rights reserved.
         </div>
       </footer>
-
     </div>
   );
 }
