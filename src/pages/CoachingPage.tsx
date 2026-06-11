@@ -265,7 +265,7 @@ function InfiniteFeedbackSlider() {
   );
 }
 
-/* ── FAQ — unchanged, uses GUTTER ── */
+/* ── FAQ — GUTTER ── */
 function FAQSection() {
   const [open, setOpen] = useState<number|null>(null);
   return (
@@ -298,7 +298,7 @@ function FAQSection() {
   );
 }
 
-/* ── ROADMAP — unchanged ── */
+/* ── ROADMAP — title + cards both use GUTTER ── */
 function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   const [idx, setIdx]         = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -317,6 +317,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
     <div className={`relative overflow-hidden mt-12 ${isMobile?"border-y border-[#07b4ba]/15":"bg-[#0b0b0b]"}`}
       style={isMobile?{background:"radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)"}:{}}>
       <div className="w-full py-8" style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)"}}>
+        {/* Title — GUTTER */}
         <div className="text-center mb-9" style={GUTTER}>
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">YOUR TRAINING JOURNEY</p>
           <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
@@ -391,6 +392,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
             </div>
           </div>
         ) : (
+          /* Desktop cards — GUTTER with arrow-button offsets */
           <div className="relative overflow-hidden" style={{paddingLeft:"calc(1cm + 18px)",paddingRight:"calc(1cm + 18px)"}}>
             <button onClick={()=>setIdx(p=>Math.max(p-1,0))}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">‹</button>
@@ -438,7 +440,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   );
 }
 
-/* ── METHOD SECTION — SECTION_INSET applied to inner section ── */
+/* ── METHOD SECTION — SECTION_INSET for method cards only; Roadmap + What You Get + Promise use GUTTER ── */
 function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   const methodCards = [
     { icon: <IconTarget />, title: "CUSTOMISED & GOAL-DRIVEN",  desc: "A roadmap built entirely around your body type, skill level, and competition goals." },
@@ -449,7 +451,9 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   return (
     <div id="method" className="relative overflow-hidden bg-[#0b0b0b]"
       style={{backgroundImage:"linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)",backgroundSize:"30px 30px"}}>
-      <section className="w-full py-12" style={SECTION_INSET}>
+
+      {/* Method header + cards — SECTION_INSET */}
+      <section className="w-full pt-12 pb-0" style={SECTION_INSET}>
         <Reveal>
           <div className="text-center mb-9">
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-2">THE AOF METHOD</p>
@@ -503,10 +507,13 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             </div>
           </div>
         </Reveal>
+      </section>
 
-        {/* Roadmap — full bleed, unchanged */}
-        <RoadmapSection scrollToForm={scrollToForm} />
+      {/* Roadmap — full bleed, uses GUTTER internally */}
+      <RoadmapSection scrollToForm={scrollToForm} />
 
+      {/* What You Get + Promise — GUTTER */}
+      <div className="w-full" style={GUTTER}>
         <Reveal style={{marginTop:64}}>
           <div className="text-center mb-12">
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
@@ -544,13 +551,14 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             </p>
           </div>
         </Reveal>
-        {/* Book A Call strip — negative margin to break out of SECTION_INSET */}
-        <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-120px",marginRight:"-120px"}}>
+
+        {/* Book A Call strip — breaks out of GUTTER to full bleed */}
+        <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-1cm",marginRight:"-1cm"}}>
           <button onClick={scrollToForm} className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/10 transition-colors">
             Book A Call
           </button>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
@@ -590,7 +598,7 @@ export default function CoachingPage() {
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
 
-      {/* ── NAVBAR — unchanged, GUTTER ── */}
+      {/* ── NAVBAR — GUTTER ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between" style={GUTTER}>
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
@@ -605,7 +613,7 @@ export default function CoachingPage() {
         </div>
       </nav>
 
-      {/* ── HERO + TRUST BAR — unchanged ── */}
+      {/* ── HERO — GUTTER ── */}
       <div
         className="relative flex flex-col w-full overflow-hidden"
         ref={(el) => {
@@ -656,7 +664,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── PAIN SECTION — SECTION_INSET ── */}
+      {/* ── PAIN SECTION — SECTION_INSET (unchanged) ── */}
       <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           <div className="flex-1 min-w-[260px]">
@@ -685,10 +693,10 @@ export default function CoachingPage() {
         </div>
       </section>
 
-      {/* ── METHOD + ROADMAP + WHAT YOU GET — SECTION_INSET inside MethodSection ── */}
+      {/* ── METHOD + ROADMAP + WHAT YOU GET ── */}
       <MethodSection scrollToForm={scrollToForm} />
 
-      {/* ── COACH SECTION — SECTION_INSET ── */}
+      {/* ── COACH SECTION — SECTION_INSET (unchanged) ── */}
       <div className="bg-[#0f1115]">
         <div className="w-full py-12 pb-10" style={SECTION_INSET}>
           <Reveal>
@@ -721,7 +729,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── TESTIMONIALS — SECTION_INSET ── */}
+      {/* ── TESTIMONIALS — SECTION_INSET (unchanged) ── */}
       <div id="testimonials" className="relative overflow-hidden bg-[#0b0b0b]"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
@@ -755,7 +763,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── APPLY FORM — SECTION_INSET ── */}
+      {/* ── APPLY FORM — SECTION_INSET (unchanged) ── */}
       <div id="contact" ref={formRef} className="relative overflow-hidden bg-[#0a0a0a]"
         style={{backgroundImage:"radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)",backgroundSize:"20px 20px"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
@@ -832,10 +840,10 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── FAQ — unchanged, GUTTER ── */}
+      {/* ── FAQ — GUTTER ── */}
       <FAQSection />
 
-      {/* ── FOOTER — unchanged, GUTTER ── */}
+      {/* ── FOOTER — GUTTER ── */}
       <footer className="bg-[#0f1115] pt-8 pb-2 border-t border-white/10">
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10" style={GUTTER}>
           <div>
