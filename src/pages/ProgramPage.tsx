@@ -302,7 +302,6 @@ const stats = [
 ];
 
 /* ── FIXED VIEWPORT WRAPPER STYLE ── */
-/* Always exactly 10px (≈1cm) on left and right, never changes */
 const PAGE_PADDING: CSSProperties = {
   width: "100%",
   paddingLeft: "1cm",
@@ -423,21 +422,11 @@ export default function ProgramPage() {
         </section>
 
         {/* ── TRUST BAR ── */}
-<div
-  className="w-full bg-[#07b4ba] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0 translate-y-[6px]"
-  style={{ height: "1.5cm" }}
->
-         <div
-  className="
-    w-full
-    h-full
-    flex
-    items-center
-    justify-evenly
-    px-8
-    md:px-16
-  "
->
+        <div
+          className="w-full bg-[#07b4ba] relative z-20 border-b-[6px] border-[#111318] flex justify-center flex-shrink-0 translate-y-[6px]"
+          style={{ height: "1.5cm" }}
+        >
+          <div className="w-full h-full flex items-center justify-evenly px-8 md:px-16">
             <div className="flex items-center justify-center gap-3">
               <span className="flex items-center justify-center text-white">
                 <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -474,10 +463,9 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── PAIN SECTION ── */}
+      {/* ── PAIN SECTION — PAGE_PADDING only (matches CoachingPage SECTION_INSET) ── */}
       <div className="bg-[#0b0b0b]">
-        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
-          <div style={SECTION_INSET}>
+        <div style={{ ...PAGE_PADDING, ...SECTION_INSET, paddingTop: "60px", paddingBottom: "60px" }}>
           <Reveal>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-center flex-wrap">
               <div className="flex-1 min-w-[260px]">
@@ -501,14 +489,13 @@ export default function ProgramPage() {
             </div>
           </Reveal>
         </div>
-      </div>  </div>
+      </div>
 
-      {/* ── AOF INTRO SECTION ── */}
+      {/* ── AOF INTRO SECTION — PAGE_PADDING only (matches CoachingPage SECTION_INSET) ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 5px)" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "60px", paddingBottom: "60px" }}>
-          <div style={SECTION_INSET}>
+        <div style={{ ...PAGE_PADDING, ...SECTION_INSET, paddingTop: "60px", paddingBottom: "60px" }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center">
-           <div className="relative aspect-video w-[80%] mx-auto rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
+            <div className="relative aspect-video w-[80%] mx-auto rounded-[10px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632]">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-[90px] h-[90px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer">
                   <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[15px] border-l-black ml-1.5" />
@@ -531,7 +518,7 @@ export default function ProgramPage() {
             </div>
           </div>
         </div>
-      </div>  </div>
+      </div>
 
       {/* ── FEATURES ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.07) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.07) 1px, transparent 0.4px)", backgroundSize: "30px 30px" }}>
@@ -699,17 +686,11 @@ export default function ProgramPage() {
             <div className="w-full max-w-[820px] mx-auto text-center relative z-10">
               <p className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[2px] text-white mb-[12px] text-center">OUR PROMISE</p>
               <div className="w-[70px] h-[2px] bg-[#07b4ba] mx-auto mb-[22px] rounded-full" />
-             <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
-  <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">
-    "
-  </span>
-
-  Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-
-  <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[10px]">
-    "
-  </span>
-</p>
+              <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
+                <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">"</span>
+                Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+                <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[10px]">"</span>
+              </p>
             </div>
           </div>
 
@@ -720,10 +701,9 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── COACH SECTION ── */}
+      {/* ── COACH SECTION — SECTION_INSET (matches CoachingPage) ── */}
       <div className="bg-[#0b0b0b]">
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "40px" }}>
-          <div style={SECTION_INSET}>
+        <div style={{ ...PAGE_PADDING, ...SECTION_INSET, paddingTop: "48px", paddingBottom: "40px" }}>
           <Reveal>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">LED BY</p>
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[56px] items-start flex-wrap">
@@ -751,12 +731,11 @@ export default function ProgramPage() {
             </div>
           </Reveal>
         </div>
-      </div>  </div>
+      </div>
 
-      {/* ── TESTIMONIALS ── */}
+      {/* ── TESTIMONIALS — SECTION_INSET (matches CoachingPage) ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]">
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "48px" }}>
-          <div style={SECTION_INSET}>
+        <div style={{ ...PAGE_PADDING, ...SECTION_INSET, paddingTop: "48px", paddingBottom: "48px" }}>
           <Reveal>
             <div className="text-center mb-[44px]">
               <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Real People, Real Results</p>
@@ -773,16 +752,10 @@ export default function ProgramPage() {
               </div>
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[42px] tracking-[1.5px] leading-[1.1] mb-[16px] text-white">
-  <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top mr-2">
-    "
-  </span>
-
-  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
-
-  <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top ml-2">
-    "
-  </span>
-</h3>
+                  <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top mr-2">"</span>
+                  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
+                  <span className="text-[#07b4ba] text-[40px] md:text-[60px] leading-none align-top ml-2">"</span>
+                </h3>
                 <p className="font-['Barlow'] text-white/65 text-[15px] leading-[1.75] m-0">
                   The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
                 </p>
@@ -794,7 +767,7 @@ export default function ProgramPage() {
             <InfiniteFeedbackSlider />
           </Reveal>
         </div>
-      </div>  </div>
+      </div>
 
       {/* ── BONUSES SECTION ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(0,240,255,0.05) 1px, transparent 0.4px), linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 0.4px)", backgroundSize: "32px 32px" }}>
@@ -836,19 +809,18 @@ export default function ProgramPage() {
             </div>
             <div className="pl-[24px] border-l border-white/15 flex flex-col justify-center">
               <p className="font-['Bebas_Neue'] text-[28px] md:text-[40px] tracking-[2px] text-[#FFD700] leading-none m-0 drop-shadow-[0_0_10px_rgba(255,215,0,0.45)]">
-  YOURS 100% FREE
-</p>
+                YOURS 100% FREE
+              </p>
               <p className="font-['Barlow'] text-[15px] text-white/70 mt-[10px] m-0">When you join the AOF 30-Day MMA Striking Program.</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── APPLY / CTA SECTION ── */}
+      {/* ── APPLY / CTA SECTION — SECTION_INSET (matches CoachingPage) ── */}
       <div ref={footerRef} className="bg-[#0b0b0b] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(0,240,255,0.22) 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
-        <div style={{ ...PAGE_PADDING, paddingTop: "48px", paddingBottom: "80px" }}>
-          <div style={SECTION_INSET}>
-         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center pb-[80px]">
+        <div style={{ ...PAGE_PADDING, ...SECTION_INSET, paddingTop: "48px", paddingBottom: "80px" }}>
+          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-[40px] md:gap-[60px] items-center pb-[80px]">
             <div>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Ready To Start?</p>
               <h2 className="font-['Bebas_Neue'] text-[36px] md:text-[54px] leading-none tracking-[2px] text-white mb-[20px]">
@@ -870,8 +842,8 @@ export default function ProgramPage() {
                   </div>
                 ))}
 
-<div className="absolute left-1/2 top-[100%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
-                <p className="font-['Barlow'] text-[15px] font-bold text-white mb-[12px] m-0 text-center">
+                <div className="absolute left-1/2 top-[100%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
+                  <p className="font-['Barlow'] text-[15px] font-bold text-white mb-[12px] m-0 text-center">
                     Any Queries?
                   </p>
                   <button
@@ -913,7 +885,7 @@ export default function ProgramPage() {
             </div>
           </div>
         </div>
-      </div>  </div>
+      </div>
 
       {/* ── FAQ ── */}
       <FAQSection />
