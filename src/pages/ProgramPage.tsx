@@ -690,7 +690,8 @@ export default function ProgramPage() {
               <div className="w-[70px] h-[2px] bg-[#07b4ba] mx-auto mb-[22px] rounded-full" />
               <p className="font-['Barlow'] text-[15px] md:text-[19px] leading-[1.8] md:leading-[1.9] text-white/75 italic mx-auto m-0">
                 <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[10px]">"</span>
-                Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
+                Most fighters train hard. Very few train correctly.<br />
+AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
                 <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[10px]">"</span>
               </p>
             </div>
