@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const NAVBAR_H = 62;
 
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
-const SECTION_INSET: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
+const SECTION_INSET: CSSProperties = { paddingLeft: "120px", paddingRight: "120px" };
 
 /* ── REVEAL ── */
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
@@ -40,7 +40,6 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-/* teal icon stroke helpers — strokeWidth as number to satisfy React SVG types */
 const stroke = { fill: "none", stroke: "#07b4ba", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 const strokeW = { fill: "none", stroke: "#fff", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
@@ -266,7 +265,7 @@ function InfiniteFeedbackSlider() {
   );
 }
 
-/* ── FAQ ── */
+/* ── FAQ — unchanged, uses GUTTER ── */
 function FAQSection() {
   const [open, setOpen] = useState<number|null>(null);
   return (
@@ -299,7 +298,7 @@ function FAQSection() {
   );
 }
 
-/* ── ROADMAP ── */
+/* ── ROADMAP — unchanged ── */
 function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   const [idx, setIdx]         = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -439,7 +438,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   );
 }
 
-/* ── METHOD SECTION ── */
+/* ── METHOD SECTION — SECTION_INSET applied to inner section ── */
 function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   const methodCards = [
     { icon: <IconTarget />, title: "CUSTOMISED & GOAL-DRIVEN",  desc: "A roadmap built entirely around your body type, skill level, and competition goals." },
@@ -504,7 +503,10 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             </div>
           </div>
         </Reveal>
+
+        {/* Roadmap — full bleed, unchanged */}
         <RoadmapSection scrollToForm={scrollToForm} />
+
         <Reveal style={{marginTop:64}}>
           <div className="text-center mb-12">
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
@@ -542,7 +544,8 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
             </p>
           </div>
         </Reveal>
-        <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-1cm",marginRight:"-1cm"}}>
+        {/* Book A Call strip — negative margin to break out of SECTION_INSET */}
+        <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-120px",marginRight:"-120px"}}>
           <button onClick={scrollToForm} className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/10 transition-colors">
             Book A Call
           </button>
@@ -587,7 +590,7 @@ export default function CoachingPage() {
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
 
-      {/* ── NAVBAR ── */}
+      {/* ── NAVBAR — unchanged, GUTTER ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between" style={GUTTER}>
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
@@ -602,7 +605,7 @@ export default function CoachingPage() {
         </div>
       </nav>
 
-      {/* ── HERO + TRUST BAR WRAPPER ── */}
+      {/* ── HERO + TRUST BAR — unchanged ── */}
       <div
         className="relative flex flex-col w-full overflow-hidden"
         ref={(el) => {
@@ -635,8 +638,6 @@ export default function CoachingPage() {
             </Reveal>
           </div>
         </section>
-
-        {/* ── TRUST BAR ── */}
         <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0" style={{height:"1.5cm", ...GUTTER}}>
           <div className="w-full flex items-center justify-center md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-3">
@@ -655,7 +656,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── PAIN SECTION ── */}
+      {/* ── PAIN SECTION — SECTION_INSET ── */}
       <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           <div className="flex-1 min-w-[260px]">
@@ -684,10 +685,10 @@ export default function CoachingPage() {
         </div>
       </section>
 
-      {/* ── METHOD + ROADMAP + WHAT YOU GET ── */}
+      {/* ── METHOD + ROADMAP + WHAT YOU GET — SECTION_INSET inside MethodSection ── */}
       <MethodSection scrollToForm={scrollToForm} />
 
-      {/* ── COACH SECTION ── */}
+      {/* ── COACH SECTION — SECTION_INSET ── */}
       <div className="bg-[#0f1115]">
         <div className="w-full py-12 pb-10" style={SECTION_INSET}>
           <Reveal>
@@ -720,7 +721,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── TESTIMONIALS ── */}
+      {/* ── TESTIMONIALS — SECTION_INSET ── */}
       <div id="testimonials" className="relative overflow-hidden bg-[#0b0b0b]"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
@@ -754,7 +755,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── APPLY FORM ── */}
+      {/* ── APPLY FORM — SECTION_INSET ── */}
       <div id="contact" ref={formRef} className="relative overflow-hidden bg-[#0a0a0a]"
         style={{backgroundImage:"radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)",backgroundSize:"20px 20px"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
@@ -831,10 +832,10 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── FAQ ── */}
+      {/* ── FAQ — unchanged, GUTTER ── */}
       <FAQSection />
 
-      {/* ── FOOTER ── */}
+      {/* ── FOOTER — unchanged, GUTTER ── */}
       <footer className="bg-[#0f1115] pt-8 pb-2 border-t border-white/10">
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10" style={GUTTER}>
           <div>
