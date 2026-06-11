@@ -18,7 +18,10 @@ const TRUST_H  = 57;
 
 /* shared inline style for the fixed 1cm side padding wrapper */
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
-
+const SECTION_INSET: CSSProperties = {
+  paddingLeft: "120px",
+  paddingRight: "120px",
+};
 /* ── REVEAL ── */
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
 function Reveal({ children, style = {} }: RevealProps) {
@@ -449,7 +452,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   return (
     <div id="method" className="relative overflow-hidden bg-[#0b0b0b]"
       style={{backgroundImage:"linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)",backgroundSize:"30px 30px"}}>
-      <div className="w-full py-14" style={GUTTER}>
+      <section className="w-full py-12" style={SECTION_INSET}>
         {/* Header */}
         <Reveal>
           <div className="text-center mb-9">
@@ -701,7 +704,7 @@ export default function CoachingPage() {
       </div>{/* end viewport-proof wrapper */}
 
       {/* ── PAIN SECTION ── */}
-      <section className="w-full py-12" style={GUTTER}>
+     <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           {/* text left */}
           <div className="flex-1 min-w-[260px]">
@@ -736,7 +739,7 @@ export default function CoachingPage() {
 
       {/* ── COACH SECTION ── */}
       <div className="bg-[#0f1115]">
-        <div className="w-full py-12 pb-10" style={GUTTER}>
+        <div className="w-full py-12 pb-10" style={SECTION_INSET}>
           <Reveal>
             <p className="text-[#07b4ba] font-bold text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
             <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
@@ -770,7 +773,7 @@ export default function CoachingPage() {
       {/* ── TESTIMONIALS ── */}
       <div id="testimonials" className="relative overflow-hidden bg-[#0b0b0b]"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)"}}>
-        <div className="w-full py-12" style={GUTTER}>
+       <div className="w-full py-12" style={SECTION_INSET}>
           <Reveal>
             <div className="text-center mb-11">
               <p className="text-[#07b4ba] font-bold text-[13px] tracking-[3px] uppercase">Real People, Real Results</p>
@@ -804,7 +807,7 @@ export default function CoachingPage() {
       {/* ── APPLY FORM ── */}
       <div id="contact" ref={formRef} className="relative overflow-hidden bg-[#0a0a0a]"
         style={{backgroundImage:"radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)",backgroundSize:"20px 20px"}}>
-        <div className="w-full py-12" style={GUTTER}>
+        <div className="w-full py-12" style={SECTION_INSET}>
           <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
             {/* left */}
             <div className="flex-1 min-w-[260px]">
