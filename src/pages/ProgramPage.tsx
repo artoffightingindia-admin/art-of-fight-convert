@@ -741,7 +741,7 @@ export default function ProgramPage() {
           <Reveal>
             <div className="text-center mb-[44px]">
               <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">Real People, Real Results</p>
-              <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[60px] tracking-[3px] text-white mt-[8px] leading-none">
+              <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
                 Trusted By Fighters, <span className="text-[#07b4ba]">Proven Results</span>
               </h2>
               <p className="font-['Barlow'] text-white/40 mt-[8px] text-[15px]">Here's What Athletes Say About Their Transformation With AOF</p>
@@ -776,7 +776,7 @@ export default function ProgramPage() {
         <div style={{ ...PAGE_PADDING, paddingTop: "40px", paddingBottom: "40px" }}>
           <div className="text-center mb-[40px]">
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">EXCLUSIVE FOUNDERS BONUSES</p>
-            <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[60px] leading-[0.95] tracking-[2px] text-white mb-[18px]">
+            <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
               5 PREMIUM BONUSES.<span className="text-[#07b4ba]"> FREE WITH ENROLLMENT.</span>
             </h2>
             <p className="font-['Barlow'] text-[15px] text-white/60 leading-[1.7] m-0">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
