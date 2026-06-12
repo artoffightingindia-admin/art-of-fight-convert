@@ -756,10 +756,6 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
           </div>
         ) : (
           <div className="relative overflow-hidden" style={{paddingLeft:"calc(1cm + 18px)",paddingRight:"calc(1cm + 18px)"}}>
-            <button onClick={()=>setIdx(p=>Math.max(p-1,0))}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center magnetic-btn hover:border-[#07b4ba]/40 hover:shadow-[0_0_20px_rgba(7,180,186,0.15)] transition-all duration-200">‹</button>
-            <button onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-2))}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center magnetic-btn hover:border-[#07b4ba]/40 hover:shadow-[0_0_20px_rgba(7,180,186,0.15)] transition-all duration-200">›</button>
             <div className="flex justify-between mb-10 relative">
               <div className="absolute top-3.5 left-0 right-0 h-0.5 bg-white/10" />
               {roadmapCards.map((w,i) => (
@@ -769,6 +765,20 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
                 </div>
               ))}
             </div>
+          <div className="relative">
+            <button
+  onClick={()=>setIdx(p=>Math.max(p-1,0))}
+  className="absolute left-[-70px] top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center"
+>
+  ‹
+</button>
+
+<button
+  onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-2))}
+  className="absolute right-[-70px] top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center"
+>
+  ›
+</button>
             <div className="overflow-hidden">
               <div className="flex gap-5 transition-transform duration-[450ms] ease-in-out" style={{transform:`translateX(-${idx*47}%)`}}>
                 {roadmapCards.map((card,i) => (
