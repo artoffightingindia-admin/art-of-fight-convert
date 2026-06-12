@@ -136,16 +136,15 @@ const globalStyles = `
     background-clip: text;
     animation: shimmer 3s linear infinite;
   }
-
- .holo-card {
-  transition: box-shadow 0.3s ease;
-  transform: none !important;
+.holo-card {
+  transition: none !important;
 }
 
 .holo-card:hover {
-  outline: 1px solid rgba(7,180,186,0.5);
+  box-shadow: none !important;
+  transform: none !important;
 }
-  .magnetic-btn {
+.magnetic-btn {
     transition: transform 0.2s cubic-bezier(0.23,1,0.32,1);
     position: relative;
     overflow: hidden;
