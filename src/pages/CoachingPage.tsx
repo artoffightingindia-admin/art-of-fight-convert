@@ -751,9 +751,9 @@ export default function CoachingPage() {
               </div>
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[clamp(28px,3vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
-                  <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[8px]">"</span>
+                  <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[0px]">"</span>
                   AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
-                  <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[8px]">"</span>
+                  <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[0px]">"</span>
                 </h3>
                 <p className="text-white/65 text-[15px] leading-[1.75]">
                   The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
