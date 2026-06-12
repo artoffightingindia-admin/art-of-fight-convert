@@ -143,12 +143,7 @@ const globalStyles = `
 }
 
 .holo-card:hover {
-  transform: none !important;
-
-  box-shadow:
-    0 0 20px rgba(7,180,186,0.25),
-    0 0 40px rgba(7,180,186,0.15),
-    0 0 0 1px rgba(7,180,186,0.3);
+  outline: 1px solid rgba(7,180,186,0.5);
 }
   .magnetic-btn {
     transition: transform 0.2s cubic-bezier(0.23,1,0.32,1);
