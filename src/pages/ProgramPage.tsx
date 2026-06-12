@@ -40,7 +40,7 @@ function InfiniteFeedbackSlider() {
   const posRef = useRef(0);
   const [mobilePage, setMobilePage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const CARDS_PER_PAGE = 3;
+  const CARDS_PER_PAGE = 1; // mobile: show 1 card at a time for better readability
   const allCards = [...feedbackCards, ...feedbackCards];
 
   useEffect(() => {
@@ -77,29 +77,46 @@ function InfiniteFeedbackSlider() {
     };
   }, [isMobile]);
 
-  const pageCards = Array.from({ length: CARDS_PER_PAGE }, (_, i) => feedbackCards[(mobilePage + i) % feedbackCards.length]);
+  // Mobile: show 1 card at a time with swipe-style pagination
+  const currentCard = feedbackCards[mobilePage % feedbackCards.length];
 
   if (isMobile) {
     return (
       <div className="block w-full">
-        <div className="flex flex-col gap-4 px-1">
-          {pageCards.map((card, i) => (
-            <div key={`${card.author}-${mobilePage}-${i}`} className="w-full p-6 border border-white/5 rounded-2xl bg-[#1a1d23]">
-              <div className="flex gap-1 mb-3 text-[#07b4ba] text-base leading-none">★★★★★</div>
-              <p className="m-0 mb-4 text-white/70 font-['Barlow'] text-[14px] italic font-normal leading-relaxed">"{card.text}"</p>
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full bg-[#202533] flex items-center justify-center text-base">👤</div>
-                <div>
-                  <p className="m-0 mb-0.5 text-white font-['Barlow'] text-[14px] font-bold leading-none">{card.author}</p>
-                  <span className="text-white/40 font-['Barlow'] text-[12px] leading-none">Member</span>
-                </div>
-              </div>
+        {/* Single card display */}
+        <div className="w-full p-5 border border-white/8 rounded-2xl bg-[#1a1d23]">
+          <div className="flex gap-1 mb-3 text-[#07b4ba] text-sm leading-none">★★★★★</div>
+          <p className="m-0 mb-4 text-white/75 font-['Barlow'] text-[15px] italic font-normal leading-[1.7]">"{currentCard.text}"</p>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#202533] flex items-center justify-center text-base shrink-0">👤</div>
+            <div>
+              <p className="m-0 mb-0.5 text-white font-['Barlow'] text-[14px] font-bold leading-none">{currentCard.author}</p>
+              <span className="text-white/40 font-['Barlow'] text-[12px] leading-none">AOF Member</span>
             </div>
+          </div>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-4">
+          {feedbackCards.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setMobilePage(i)}
+              className={`w-2 h-2 rounded-full border-0 cursor-pointer transition-all duration-200 ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-5" : "bg-white/25"}`}
+            />
           ))}
         </div>
-        <div className="flex justify-center gap-10 mt-8">
-          <button className="flex items-center justify-center w-14 h-14 border-2 border-white/20 rounded-full bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer" onClick={() => setMobilePage(p => (p - 1 + feedbackCards.length) % feedbackCards.length)}>‹</button>
-          <button className="flex items-center justify-center w-14 h-14 border-2 border-white/20 rounded-full bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer" onClick={() => setMobilePage(p => (p + 1) % feedbackCards.length)}>›</button>
+
+        {/* Navigation arrows */}
+        <div className="flex justify-center gap-4 mt-5">
+          <button
+            className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
+            onClick={() => setMobilePage(p => (p - 1 + feedbackCards.length) % feedbackCards.length)}
+          >‹</button>
+          <button
+            className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
+            onClick={() => setMobilePage(p => (p + 1) % feedbackCards.length)}
+          >›</button>
         </div>
       </div>
     );
@@ -222,6 +239,11 @@ const stats = [
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
 const SECTION_INSET: CSSProperties = { paddingLeft: "140px", paddingRight: "140px" };
 
+/* ── MOBILE-SAFE SECTION INSET ── */
+/* On mobile (<768px) we fall back to the same 1cm gutter as GUTTER.
+   On desktop we keep the original 140px inset unchanged. */
+const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
+
 export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
@@ -257,13 +279,13 @@ export default function ProgramPage() {
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
         </span>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3 md:gap-5">
           <button className="hidden md:flex bg-transparent border-none text-white/65 font-['Barlow'] text-[14px] font-semibold cursor-pointer hover:text-white transition-colors items-center gap-2" onClick={() => navigate("/")}>
             ← Back To Home
           </button>
-          {/* Navbar CTA — hover: white bg, black text */}
+          {/* Navbar CTA */}
           <button
-            className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
+            className="h-9 px-4 md:px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[15px] md:text-[17px] tracking-[2px] border-none cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
             onClick={scrollToFooter}
           >
             JOIN NOW
@@ -279,23 +301,28 @@ export default function ProgramPage() {
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
           <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
+          {/* Mobile: stronger bottom fade so text stays readable on small screens */}
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/80 to-transparent" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c]" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c] md:via-[#06080c]/50" />
+          {/* Mobile: extra bottom scrim so hero text never fights with image */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 z-[3] bg-gradient-to-t from-[#06080c] to-transparent md:hidden" />
+
           <div className="w-full relative z-10" style={GUTTER}>
             <Reveal>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase mb-4">AOF 30-Day Online Program</p>
-              <h1 className="font-['Bebas_Neue'] text-[clamp(48px,5vw,72px)] leading-[.95] tracking-[2px] uppercase text-white mb-5">
+              {/* Mobile: tighter label */}
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase mb-3 md:mb-4">AOF 30-Day Online Program</p>
+              <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5">
                 BUILD REAL<br /><span className="text-[#07b4ba]">MMA STRIKING</span><br />FUNDAMENTALS
               </h1>
-              <p className="text-white/60 text-[16px] leading-[1.7] max-w-[480px] mb-8">
+              <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
                 A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
               </p>
-              {/* Hero CTA — hover: white bg, black text */}
+              {/* Mobile: full-width CTA button, larger tap target */}
               <button
-                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
+                className="inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
                 onClick={scrollToFooter}
               >
-                JOIN NOW
+                JOIN NOW — ₹999
               </button>
             </Reveal>
           </div>
@@ -303,60 +330,62 @@ export default function ProgramPage() {
 
         {/* Trust Bar */}
         <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0" style={{ height: "1.5cm", ...GUTTER }}>
-          <div className="w-full flex items-center justify-center md:justify-start gap-0">
-            <div className="flex-1 flex items-center justify-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center shrink-0"><IconShieldW /></div>
-              <span className="font-['Bebas_Neue'] text-[22px] tracking-[2px] text-white leading-none whitespace-nowrap">Proven System</span>
+          <div className="w-full flex items-center justify-between md:justify-start gap-0">
+            <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
+              <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconShieldW /></div>
+              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Proven System</span>
             </div>
-            <div className="flex-1 flex items-center justify-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
-              <span className="font-['Bebas_Neue'] text-[22px] tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
+            <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
+              <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
+              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
             </div>
-            <div className="flex-1 flex items-center justify-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
-              <span className="font-['Bebas_Neue'] text-[22px] tracking-[2px] text-white leading-none whitespace-nowrap">Real Results</span>
+            <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
+              <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
+              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Real Results</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── PAIN SECTION — SECTION_INSET ── */}
-      <section className="w-full py-12" style={SECTION_INSET}>
-        <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
-          <div className="flex-1 min-w-[260px]">
-            <Reveal>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-              <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                You're Training Hard...<br />But Still Not Improving
-              </h2>
-              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-6" style={{ boxShadow: "0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)" }} />
-            </Reveal>
-            {painPoints.map((p, i) => (
-              <Reveal key={i} delay={i * 70}>
-                <div className="flex items-start gap-4 mb-3.5">
-                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1" style={{ boxShadow: "0 0 6px rgba(255,45,45,.9),0 0 16px rgba(255,45,45,.6)" }} />
-                  <p className="text-white/70 text-[15px] leading-[1.5]">{p}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <div className="flex-1 max-w-[500px] w-full">
+      {/* ── PAIN SECTION ── */}
+      {/* Mobile: uses GUTTER (1cm) padding; desktop: uses SECTION_INSET (140px) */}
+      <section className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
+        <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
+          {/* Mobile: image shown ABOVE text for visual impact */}
+          <div className="flex-1 max-w-full md:max-w-[500px] w-full md:order-2">
             <Reveal>
               <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80" alt="MMA Training" className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block" />
             </Reveal>
           </div>
+          <div className="flex-1 min-w-[260px] md:order-1">
+            <Reveal>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
+              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+                You're Training Hard...<br />But Still Not Improving
+              </h2>
+              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" style={{ boxShadow: "0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)" }} />
+            </Reveal>
+            {painPoints.map((p, i) => (
+              <Reveal key={i} delay={i * 70}>
+                <div className="flex items-start gap-4 mb-3">
+                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1" style={{ boxShadow: "0 0 6px rgba(255,45,45,.9),0 0 16px rgba(255,45,45,.6)" }} />
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── AOF INTRO SECTION — SECTION_INSET ── */}
+      {/* ── AOF INTRO SECTION ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
-        <div className="w-full py-12" style={SECTION_INSET}>
-          <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
-            <div className="flex-1 max-w-[500px] w-full">
+        <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
+          <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
+            <div className="flex-1 max-w-full md:max-w-[500px] w-full">
               <Reveal>
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632] border border-white/10">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[80px] h-[80px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer hover:bg-[#059a9f] transition-colors">
+                    <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer hover:bg-[#059a9f] transition-colors">
                       <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[14px] border-l-white ml-1" />
                     </div>
                   </div>
@@ -365,15 +394,15 @@ export default function ProgramPage() {
             </div>
             <div className="flex-1 min-w-[260px]">
               <Reveal>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-2">AOF Intro</p>
-                <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">AOF Intro</p>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
                   Welcome to the <span className="text-[#07b4ba]">AOF Family</span>
                 </h2>
                 <div className="flex flex-col gap-4">
-                  <p className="font-['Barlow'] text-[15px] text-white/70 leading-[1.75]">
+                  <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
                     At Art of Fight, we're more than just a gym — we're a family built on discipline, respect, and relentless growth. Our coaches bring years of real fight experience to every session.
                   </p>
-                  <p className="font-['Barlow'] text-[15px] text-white/60 leading-[1.75]">
+                  <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
                     Whether you're a complete beginner or training for competition, you'll find a system designed to push your limits safely while building strong fundamentals, sharp technique, and fighter mentality.
                   </p>
                 </div>
@@ -383,21 +412,23 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── FEATURES / WHAT YOU GET — GUTTER ── */}
+      {/* ── FEATURES / WHAT YOU GET ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
-        <div className="w-full py-12" style={GUTTER}>
+        <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal>
-            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] tracking-[2px] text-white text-center leading-none mb-12">WHAT YOU GET</h2>
+            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">WHAT YOU GET</h2>
           </Reveal>
-          <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-5 gap-[16px]">
+          {/* Mobile: 2-col grid for compact display; desktop: 5-col */}
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} delay={i * 80}>
-                <div className="w-full min-h-auto md:min-h-[255px] p-[16px] rounded-[18px] bg-gradient-to-b md:bg-none from-[#13171d] to-[#101318] md:bg-[#111417] border border-white/5 md:border-2 md:border-[#111417] text-left md:text-center flex flex-row md:flex-col items-center justify-start md:justify-center gap-[16px] md:gap-[18px]">
-                  <div className="w-[46px] h-[46px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
-                  <div className="flex flex-col md:items-center w-full">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[2px] leading-[1.3] m-0 md:min-h-[58px] flex items-start justify-start md:justify-center text-left md:text-center mb-[4px]">{item.title}</h4>
-                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0 md:min-h-[44px] flex items-start justify-start md:justify-center">{item.desc}</p>
+                {/* Last card on mobile (5th) spans full width so it's not orphaned */}
+                <div className={`w-full p-4 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-center text-center gap-3 min-h-[160px] md:min-h-[255px] md:p-[16px] md:rounded-[18px] ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="w-[44px] h-[44px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
+                  <div className="flex flex-col items-center w-full">
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[13px] md:text-[17.5px] tracking-[1.5px] md:tracking-[2px] leading-[1.3] m-0 text-center mb-[3px]">{item.title}</h4>
+                    <p className="text-[12px] md:text-[14px] leading-[1.5] text-white/60 text-center m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -406,13 +437,13 @@ export default function ProgramPage() {
         </div>
       </section>
 
-      {/* ── ROADMAP SECTION — GUTTER ── */}
+      {/* ── ROADMAP SECTION ── */}
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#07b4ba]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)" } : {}}>
         <div className="w-full py-8" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)" }}>
-          <div className="text-center mb-9" style={GUTTER}>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">30 DAYS TRANSFORMATION JOURNEY</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">YOUR <span className="text-[#07b4ba]">5 WEEK</span> ROADMAP</h2>
-            <p className="mt-4 text-white/60 text-[15px] font-['Barlow']">A structured path. Weekly focus. Real results.</p>
+          <div className="text-center mb-7 md:mb-9" style={GUTTER}>
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">30 DAYS TRANSFORMATION JOURNEY</p>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">YOUR <span className="text-[#07b4ba]">5 WEEK</span> ROADMAP</h2>
+            <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">A structured path. Weekly focus. Real results.</p>
           </div>
 
           {isMobileRoadmap ? (
@@ -421,7 +452,7 @@ export default function ProgramPage() {
                 <div className="absolute left-[9%] right-[9%] bottom-[7px] h-px bg-white/40" />
                 {roadmapCards.map((week, i) => (
                   <button key={week.title} onClick={() => setRoadmapIndex(i)} className={`relative z-10 flex flex-col items-center gap-2.5 min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i === roadmapIndex ? "text-[#07b4ba]" : "text-white/70"}`}>
-                    <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px]">{week.title}</span>
+                    <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[11px] md:text-[12px]">{week.title}</span>
                     <i className={`w-[15px] h-[15px] rounded-full border not-italic ${i === roadmapIndex ? "border-2 border-[#07b4ba] bg-[#061018] shadow-[0_0_0_4px_rgba(7,180,186,.18),0_0_16px_rgba(7,180,186,.95)]" : "border-white/65 bg-[#03070c]"}`} />
                   </button>
                 ))}
@@ -467,7 +498,7 @@ export default function ProgramPage() {
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
                 </div>
                 <div>
-                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[16px] tracking-[.8px] leading-none mb-1">STAY CONSISTENT. TRUST THE PROCESS.</h3>
+                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[16px] tracking-[.8px] leading-none mb-1">STAY CONSISTENT. TRUST THE PROCESS.</h3>
                   <p className="text-[#07b4ba] text-[11px] leading-[1.3]">Become the best version of yourself.</p>
                 </div>
               </div>
@@ -515,20 +546,20 @@ export default function ProgramPage() {
           )}
 
           {/* Promise + Join Now strip */}
-          <div className="w-full mt-16" style={GUTTER}>
-            <div className="w-full mx-auto text-center px-10 py-8">
-              <p className="font-['Bebas_Neue'] text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
+          <div className="w-full mt-12 md:mt-16" style={GUTTER}>
+            <div className="w-full mx-auto text-center px-5 md:px-10 py-7 md:py-8">
+              <p className="font-['Bebas_Neue'] text-[26px] md:text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
               <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
-              <p className="font-['Barlow'] text-[16px] md:text-[19px] leading-[1.9] text-white/75 italic">
-                <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
+              <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
+                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
                 Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-                <span className="text-[#07b4ba] text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
+                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
               </p>
             </div>
-            {/* Join Now strip — hover: white bg, black text */}
-            <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
+            {/* Join Now strip */}
+            <div className="mt-6 md:mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
               <button
-                className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
+                className="w-full py-4 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
                 onClick={scrollToFooter}
               >
                 Join Now
@@ -538,29 +569,31 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── COACH SECTION — SECTION_INSET ── */}
+      {/* ── COACH SECTION ── */}
       <div className="bg-[#0f1115]">
-        <div className="w-full py-12 pb-10" style={SECTION_INSET}>
+        <div className={`w-full py-10 md:py-12 pb-8 md:pb-10 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
-            <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
-              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" className="w-full md:w-[240px] h-auto md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0" />
-              <div className="flex-1 min-w-[280px]">
-                <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[2px] text-white mb-1">Head Coach</h2>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[3px] uppercase mb-5">AOF Academy — Lead Trainer &amp; Founder</p>
-                <div className="mb-6">
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6">LED BY</p>
+            <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
+              {/* Mobile: coach photo full-width, shorter height */}
+              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0" />
+              <div className="flex-1 min-w-[260px]">
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Head Coach</h2>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">AOF Academy — Lead Trainer &amp; Founder</p>
+                <div className="mb-5 md:mb-6">
                   {coachCredentials.map((cred, i) => (
-                    <div key={i} className="flex items-start gap-2.5 mb-3.5">
+                    <div key={i} className="flex items-start gap-2.5 mb-3">
                       <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                      <p className="text-white/70 text-[15px] leading-[1.5]">{cred}</p>
+                      <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{cred}</p>
                     </div>
                   ))}
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-6">
+                {/* Mobile: 2x2 grid instead of 4-col row */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-4 md:mt-6">
                   {stats.map((stat, i) => (
-                    <div key={i} className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[110px] md:h-[140px] p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)]">
-                      <p className="font-['Bebas_Neue'] text-[32px] md:text-[42px] text-[#07b4ba] tracking-[1px] mb-2 leading-none">{stat.val}</p>
-                      <p className="text-white/45 text-[12px] tracking-[2px] uppercase leading-tight">{stat.label}</p>
+                    <div key={i} className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[95px] md:h-[140px] p-3 md:p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)]">
+                      <p className="font-['Bebas_Neue'] text-[26px] md:text-[42px] text-[#07b4ba] tracking-[1px] mb-1.5 md:mb-2 leading-none">{stat.val}</p>
+                      <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase leading-tight">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -570,33 +603,33 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── TESTIMONIALS — SECTION_INSET ── */}
+      {/* ── TESTIMONIALS ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
-        <div className="w-full py-12" style={SECTION_INSET}>
+        <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal>
-            <div className="text-center mb-11">
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] tracking-[3px] uppercase">Real People, Real Results</p>
-              <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] tracking-[3px] text-white mt-2 leading-none">
+            <div className="text-center mb-8 md:mb-11">
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase">Real People, Real Results</p>
+              <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] md:tracking-[3px] text-white mt-2 leading-none">
                 Trusted By Fighters, <span className="text-[#07b4ba]">Proven Results</span>
               </h2>
-              <p className="text-white/40 mt-2 text-[15px]">Here's What Athletes Say About Their Transformation With AOF</p>
+              <p className="text-white/40 mt-2 text-[13px] md:text-[15px]">Here's What Athletes Say About Their Transformation With AOF</p>
             </div>
           </Reveal>
           <Reveal>
-            <div className="flex flex-col md:flex-row gap-12 items-center mb-10 flex-wrap">
-              <div className="flex-1 max-w-[550px] w-full">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
+              <div className="flex-1 max-w-full md:max-w-[550px] w-full">
                 <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete" className="w-full rounded-[10px] object-cover aspect-video" />
               </div>
               <div className="flex-1 min-w-[260px]">
-                <h3 className="font-['Bebas_Neue'] text-[clamp(28px,3vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
-                  <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-0">"</span>
+                <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
+                  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-0">"</span>
                   AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
-                  <span className="text-[#07b4ba] text-[42px] leading-none ml-1.5 font-serif relative top-0">"</span>
+                  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-0">"</span>
                 </h3>
-                <p className="text-white/65 text-[15px] leading-[1.75]">
+                <p className="text-white/65 text-[14px] md:text-[15px] leading-[1.75]">
                   The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
                 </p>
-                <p className="mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[14px]">— Alex M., Amateur MMA Fighter</p>
+                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">— Alex M., Amateur MMA Fighter</p>
               </div>
             </div>
           </Reveal>
@@ -604,19 +637,20 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── BONUSES SECTION — GUTTER ── */}
+      {/* ── BONUSES SECTION ── */}
       <div className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.05) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.05) 1px,transparent .4px)", backgroundSize: "32px 32px" }}>
-        <div className="w-full py-12" style={GUTTER}>
+        <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal>
-            <div className="text-center mb-10">
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] tracking-[3px] uppercase mb-2">EXCLUSIVE FOUNDERS BONUSES</p>
-              <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
+            <div className="text-center mb-8 md:mb-10">
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase mb-2">EXCLUSIVE FOUNDERS BONUSES</p>
+              <h2 className="font-['Bebas_Neue'] text-[clamp(26px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">
                 5 PREMIUM BONUSES.<span className="text-[#07b4ba]"> FREE WITH ENROLLMENT.</span>
               </h2>
-              <p className="text-white/50 mt-2 text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
+              <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
+          {/* Mobile: 2-col grid; last item spans full */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 md:gap-2">
             {[
               { icon: <IconNutrition />, title: "FIGHTER NUTRITION GUIDE", value: "₹1499 VALUE" },
               { icon: <IconMobility />, title: "DAILY MOBILITY ROUTINE", value: "₹1299 VALUE" },
@@ -625,80 +659,82 @@ export default function ProgramPage() {
               { icon: <IconAudio />, title: "FIGHTER MINDSET AUDIO PACK", value: "₹1199 VALUE" },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
-                <div className="bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[18px] p-4 relative overflow-hidden min-h-[220px] flex flex-col items-center text-center">
-                  <div className="absolute top-3.5 left-3.5 bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[14px] tracking-[1px] px-2.5 py-1 rounded-[5px] leading-none">#{i + 1}</div>
-                  <div className="w-[70px] h-[70px] flex items-center justify-center mb-2 mt-4">{item.icon}</div>
-                  <h3 className="font-['Bebas_Neue'] text-[15px] md:text-[18px] leading-[1.1] tracking-[1.5px] text-white mb-2">{item.title}</h3>
-                  <div className="mt-auto border-t border-white/10 pt-2.5 w-full">
-                    <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[24px] tracking-[1px] m-0 leading-none">{item.value}</p>
+                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-3.5 md:p-4 relative overflow-hidden min-h-[180px] md:min-h-[220px] flex flex-col items-center text-center ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="absolute top-3 left-3 bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[13px] md:text-[14px] tracking-[1px] px-2 py-0.5 rounded-[5px] leading-none">#{i + 1}</div>
+                  <div className="w-[52px] h-[52px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-1.5 mt-5 md:mb-2 md:mt-4">{item.icon}</div>
+                  <h3 className="font-['Bebas_Neue'] text-[12px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-2">{item.title}</h3>
+                  <div className="mt-auto border-t border-white/10 pt-2 md:pt-2.5 w-full">
+                    <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[18px] md:text-[24px] tracking-[1px] m-0 leading-none">{item.value}</p>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
-          <div className="mt-4 border border-[#07b4ba]/30 rounded-[18px] p-5 flex flex-wrap items-center justify-center gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
-            <div className="flex items-center gap-4">
-              <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[70px] h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
+          {/* Total bonus value banner */}
+          <div className="mt-3 md:mt-4 border border-[#07b4ba]/30 rounded-[18px] p-4 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
+            <div className="flex items-center gap-3 md:gap-4">
+              <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
-                <p className="text-white/45 text-[12px] tracking-[2px] uppercase mb-1 leading-none">TOTAL BONUS VALUE</p>
-                <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] leading-none tracking-[2px] text-[#07b4ba]">₹7,499</h2>
+                <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">TOTAL BONUS VALUE</p>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] text-[#07b4ba]">₹7,499</h2>
               </div>
             </div>
-            <div className="pl-5 border-l border-white/10 flex flex-col justify-center">
-              <p className="font-['Bebas_Neue'] text-[26px] md:text-[38px] tracking-[2px] text-[#FFD700] leading-none drop-shadow-[0_0_10px_rgba(255,215,0,0.45)]">YOURS 100% FREE</p>
-              <p className="font-['Barlow'] text-[14px] text-white/70 mt-2">When you join the AOF 30-Day MMA Striking Program.</p>
+            <div className="pl-4 md:pl-5 border-l border-white/10 flex flex-col justify-center">
+              <p className="font-['Bebas_Neue'] text-[22px] md:text-[38px] tracking-[2px] text-[#FFD700] leading-none drop-shadow-[0_0_10px_rgba(255,215,0,0.45)]">YOURS 100% FREE</p>
+              <p className="font-['Barlow'] text-[13px] md:text-[14px] text-white/70 mt-1.5 md:mt-2">When you join the AOF 30-Day MMA Striking Program.</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── CTA / APPLY SECTION — SECTION_INSET ── */}
+      {/* ── CTA / APPLY SECTION ── */}
       <div ref={footerRef} className="bg-[#0a0a0a] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)", backgroundSize: "20px 20px" }}>
-        <div className="w-full py-12" style={SECTION_INSET}>
-          <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
+        <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
+          <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-start flex-wrap">
             <div className="flex-1 min-w-[260px]">
               <Reveal>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
-                <h2 className="font-['Bebas_Neue'] text-[clamp(34px,5vw,54px)] tracking-[2px] leading-none mb-4 text-white">
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
+                <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
                   APPLY FOR YOUR<br /><span className="text-[#07b4ba]">30-DAY PROGRAM</span>
                 </h2>
-                <p className="text-white/50 text-[14px] leading-[1.7] mb-7 max-w-[380px]">
+                <p className="text-white/50 text-[13px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
                   Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
                 {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5 mb-3.5">
+                  <div key={i} className="flex items-start gap-2.5 mb-3">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                    <p className="text-[16px] text-white leading-[1.55]">{item}</p>
+                    <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
                   </div>
                 ))}
               </Reveal>
             </div>
 
             {/* CTA Card */}
-            <div className="flex-1 min-w-[300px]">
+            <div className="flex-1 min-w-[300px] w-full">
               <Reveal>
-                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-10 text-center">
-                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] tracking-[2.5px] uppercase mb-3">LIMITED FOUNDER SPOTS</p>
-                  <h2 className="font-['Bebas_Neue'] text-[clamp(34px,4vw,54px)] tracking-[2px] leading-none mb-5 text-white">
+                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center">
+                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED FOUNDER SPOTS</p>
+                  <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
                     START YOUR<br /><span className="text-[#07b4ba]">TRANSFORMATION</span>
                   </h2>
-                  <div className="flex items-center justify-center gap-5 mb-5">
-                    <span className="font-['Bebas_Neue'] text-[32px] text-white/30 line-through leading-none">₹1999</span>
-                    <span className="font-['Bebas_Neue'] text-[48px] tracking-[2px] text-white leading-none">₹999</span>
+                  <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
+                    <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹1999</span>
+                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none">₹999</span>
                   </div>
-                  {/* Final CTA JOIN NOW — hover: white bg, black text */}
+                  {/* Mobile: full-width, large CTA */}
                   <button
-                    className="w-full py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
+                    className="w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
                     onClick={scrollToFooter}
                   >
                     JOIN NOW
                   </button>
-                  <p className="mt-4 font-['Barlow'] text-[13px] leading-[1.7] text-white/50">Build real striking fundamentals with a structured beginner-friendly system.</p>
-                  <div className="flex justify-center gap-3 mt-5">
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[12px] md:text-[13px] leading-[1.7] text-white/50">Build real striking fundamentals with a structured beginner-friendly system.</p>
+                  {/* Countdown */}
+                  <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[["01", "DAYS"], ["23", "HOURS"], ["49", "MIN"]].map(([num, label]) => (
                       <div key={label} className="text-center">
-                        <div className="w-[60px] h-[60px] rounded-xl border border-[#07b4ba]/25 flex items-center justify-center font-['Bebas_Neue'] text-[30px] text-[#07b4ba] bg-[#0b1016]">{num}</div>
-                        <p className="mt-1.5 font-['Bebas_Neue'] text-[11px] tracking-[2px] text-white/40">{label}</p>
+                        <div className="w-[54px] h-[54px] md:w-[60px] md:h-[60px] rounded-xl border border-[#07b4ba]/25 flex items-center justify-center font-['Bebas_Neue'] text-[26px] md:text-[30px] text-[#07b4ba] bg-[#0b1016]">{num}</div>
+                        <p className="mt-1.5 font-['Bebas_Neue'] text-[10px] md:text-[11px] tracking-[2px] text-white/40">{label}</p>
                       </div>
                     ))}
                   </div>
@@ -707,12 +743,11 @@ export default function ProgramPage() {
             </div>
           </div>
 
-          {/* Any Queries — centered below both columns */}
+          {/* Any Queries */}
           <Reveal>
-            <div className="flex flex-col items-center gap-3 mt-10">
-              <p className="text-white font-['Barlow'] font-bold text-[15px]">Any Queries?</p>
-              {/* WhatsApp button — unchanged, no white hover */}
-              <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
+            <div className="flex flex-col items-center gap-3 mt-8 md:mt-10">
+              <p className="text-white font-['Barlow'] font-bold text-[14px] md:text-[15px]">Any Queries?</p>
+              <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></svg>
                 Chat On WhatsApp
               </button>
@@ -724,33 +759,35 @@ export default function ProgramPage() {
       {/* ── FAQ ── */}
       <FAQSection />
 
-      {/* ── FOOTER — GUTTER ── */}
+      {/* ── FOOTER ── */}
       <footer className="bg-[#0f1115] pt-8 pb-2 border-t border-white/10">
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10" style={GUTTER}>
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10" style={GUTTER}>
           <div>
-            <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] text-white pt-5 mb-3.5">CONTACT</h3>
-            <div className="flex flex-col gap-4">
-              <p className="font-['Barlow'] text-white/50 text-[15px]">+91 00000 00000</p>
-              <p className="font-['Barlow'] text-white/50 text-[15px]">info@aofacademy.com</p>
-              <p className="font-['Barlow'] text-white/50 text-[15px]">Chennai, Tamil Nadu, India</p>
+            <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">CONTACT</h3>
+            <div className="flex flex-col gap-3 md:gap-4">
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 00000 00000</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">info@aofacademy.com</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Tamil Nadu, India</p>
             </div>
           </div>
           <div>
-            <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] text-white pt-5 mb-3.5">NAVIGATION</h3>
-            <div className="flex flex-col gap-2.5">
+            <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">NAVIGATION</h3>
+            {/* Mobile: horizontal wrap for nav links */}
+            <div className="flex flex-wrap gap-x-5 gap-y-2.5 md:flex-col md:gap-2.5">
               {([["#home", "Home"], ["#method", "AOF Method"], ["#testimonials", "Testimonials"], ["#faq", "FAQ"], ["#contact", "Apply Now"]] as [string, string][]).map(([href, label]) => (
-                <a key={href} href={href} className="font-['Barlow'] text-white/50 text-[15px] no-underline hover:text-[#07b4ba] transition-colors">{label}</a>
+                <a key={href} href={href} className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] no-underline hover:text-[#07b4ba] active:text-[#07b4ba] transition-colors">{label}</a>
               ))}
             </div>
           </div>
           <div>
-            <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] pt-5 mb-3.5 flex">
+            <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] pt-4 md:pt-5 mb-3 flex">
               <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
             </h3>
-            <p className="font-['Barlow'] text-white/50 text-[15px] leading-[1.8] max-w-[320px]">Art of Fighting Academy — building champions through proven systems and disciplined training.</p>
+            <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] leading-[1.8] max-w-[320px]">Art of Fighting Academy — building champions through proven systems and disciplined training.</p>
           </div>
         </div>
-        <div className="w-full mt-6 pt-3 border-t border-white/10 text-center font-['Barlow'] text-[13px] text-white/30" style={GUTTER}>
+        {/* Mobile: extra bottom padding to clear the floating back button */}
+        <div className="w-full mt-6 pt-3 border-t border-white/10 text-center font-['Barlow'] text-[12px] md:text-[13px] text-white/30 pb-[80px] md:pb-0" style={GUTTER}>
           © 2026 AOF Academy. All rights reserved.
         </div>
       </footer>
