@@ -220,7 +220,7 @@ const stats = [
 
 /* ── SHARED PADDING — identical to CoachingPage ── */
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
-const SECTION_INSET: CSSProperties = { paddingLeft: "120px", paddingRight: "120px" };
+const SECTION_INSET: CSSProperties = { paddingLeft: "140px", paddingRight: "140px" };
 
 export default function ProgramPage() {
   const navigate = useNavigate();
