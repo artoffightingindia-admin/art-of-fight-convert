@@ -787,12 +787,7 @@ export default function CoachingPage() {
                   </div>
                 ))}
                 {/* ── ANY QUERIES — centered, matching screenshot ── */}
-                <div className="mt-7 flex flex-col items-center gap-3 w-full">
-                  <p className="text-white font-bold text-[15px]">Any Queries?</p>
-                  <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
-                    <WhatsAppIcon /> Chat On WhatsApp
-                  </button>
-                </div>
+              
               </Reveal>
             </div>
             <div className="flex-1 min-w-[300px]">
@@ -841,6 +836,16 @@ export default function CoachingPage() {
               </Reveal>
             </div>
           </div>
+          <div className="mt-7 flex flex-col items-center gap-3 w-full">
+  <p className="text-white font-bold text-[15px]">
+    Any Queries?
+  </p>
+
+  <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,35)]">
+    <WhatsAppIcon />
+    Chat On WhatsApp
+  </button>
+</div>
         </div>
       </div>
 
