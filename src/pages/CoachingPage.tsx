@@ -144,7 +144,7 @@ const globalStyles = `
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .holo-card:hover {
-    transform: translateY(-6px) scale(1.02);
+    transform: translateY(-6px) scale(0.50);
     box-shadow: 0 20px 60px rgba(7,180,186,0.2), 0 0 0 1px rgba(7,180,186,0.3);
   }
 
