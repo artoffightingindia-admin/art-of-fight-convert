@@ -1245,7 +1245,7 @@ export default function CoachingPage() {
             </div>
           </Reveal>
           <Reveal>
-            <div className="flex flex-col md:flex-row gap-12 items-center mb-10 flex-wrap">
+            <div className="flex flex-col md:flex-row gap-12 items-center mb-5 flex-wrap">
               <div className="flex-1 max-w-[550px] w-full">
                 <div className="relative group overflow-hidden rounded-[10px]">
                   <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete"
