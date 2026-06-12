@@ -600,10 +600,10 @@ function InfiniteFeedbackSlider() {
     <div ref={sliderRef} className="w-full overflow-hidden">
       <div ref={trackRef} className="flex gap-6 w-max will-change-transform">
         {allCards.map((c,i) => (
-          <div key={i} className="w-[300px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col holo-card cursor-default"
+          <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-6 px-6 flex flex-col holo-card cursor-default"
             style={{ animationDelay: `${i * 0.1}s` }}>
-            <div className="flex gap-1 text-[#07b4ba] text-base mb-4">★★★★★</div>
-            <p className="text-white/70 text-[15px] leading-relaxed italic mb-5">"{c.text}"</p>
+            <div className="flex gap-1 text-[#07b4ba] text-base mb-3">★★★★★</div>
+            <p className="text-white/70 text-[15px] leading-relaxed italic mb-3">"{c.text}"</p>
             <div className="flex items-center gap-2.5 mt-auto">
               <div className="w-10 h-10 rounded-full bg-[#202533] flex items-center justify-center text-lg shrink-0">👤</div>
               <div><p className="text-white font-bold text-[15px]">{c.author}</p><span className="text-white/40 text-[13px]">Member</span></div>
