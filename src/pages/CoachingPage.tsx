@@ -6,22 +6,380 @@ const NAVBAR_H = 62;
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
 const SECTION_INSET: CSSProperties = { paddingLeft: "140px", paddingRight: "140px" };
 
+/* ── GLOBAL ANIMATION STYLES ── */
+const globalStyles = `
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 8px rgba(7,180,186,0.4), 0 0 20px rgba(7,180,186,0.2); }
+    50% { box-shadow: 0 0 20px rgba(7,180,186,0.8), 0 0 40px rgba(7,180,186,0.4), 0 0 60px rgba(7,180,186,0.15); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+  @keyframes glitch-1 {
+    0%, 95%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+    96% { clip-path: inset(20% 0 60% 0); transform: translate(-4px, 2px); }
+    97% { clip-path: inset(50% 0 30% 0); transform: translate(4px, -2px); }
+    98% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
+    99% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 2px); }
+  }
+  @keyframes glitch-2 {
+    0%, 95%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); opacity: 0; }
+    96% { clip-path: inset(60% 0 20% 0); transform: translate(4px, -2px); opacity: 0.7; }
+    97% { clip-path: inset(30% 0 50% 0); transform: translate(-4px, 2px); opacity: 0.7; }
+    98% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 0); opacity: 0.7; }
+    99% { clip-path: inset(5% 0 85% 0); transform: translate(-2px, -2px); opacity: 0.7; }
+  }
+  @keyframes border-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes number-count {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes particle-float {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-120vh) translateX(var(--drift)) scale(0.3); opacity: 0; }
+  }
+  @keyframes hero-line-in {
+    0% { width: 0; opacity: 0; }
+    100% { width: 100%; opacity: 1; }
+  }
+  @keyframes teal-pulse {
+    0%, 100% { opacity: 0.06; }
+    50% { opacity: 0.14; }
+  }
+  @keyframes magnetic-ripple {
+    0% { transform: translate(-50%,-50%) scale(0); opacity: 0.6; }
+    100% { transform: translate(-50%,-50%) scale(3); opacity: 0; }
+  }
+  @keyframes slide-in-left {
+    0% { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-in-right {
+    0% { opacity: 0; transform: translateX(40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes scale-in {
+    0% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes line-expand {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes holo-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes card-glow-enter {
+    0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes noise {
+    0% { transform: translate(0,0); }
+    10% { transform: translate(-2%,-2%); }
+    20% { transform: translate(2%,2%); }
+    30% { transform: translate(-1%,1%); }
+    40% { transform: translate(1%,-1%); }
+    50% { transform: translate(-2%,1%); }
+    60% { transform: translate(2%,-2%); }
+    70% { transform: translate(-1%,-1%); }
+    80% { transform: translate(1%,2%); }
+    90% { transform: translate(-2%,-1%); }
+    100% { transform: translate(0,0); }
+  }
+
+  .glitch-text { position: relative; }
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    color: inherit;
+    font: inherit;
+  }
+  .glitch-text::before {
+    color: #07b4ba;
+    animation: glitch-1 6s infinite;
+    text-shadow: 2px 0 #07b4ba;
+  }
+  .glitch-text::after {
+    color: #ff2d2d;
+    animation: glitch-2 6s infinite;
+    text-shadow: -2px 0 #ff2d2d;
+  }
+
+  .shimmer-text {
+    background: linear-gradient(90deg, #07b4ba 0%, #ffffff 40%, #07b4ba 60%, #ffffff 80%, #07b4ba 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .holo-card {
+    background: linear-gradient(135deg, rgba(7,180,186,0.08), rgba(255,255,255,0.03), rgba(7,180,186,0.08));
+    background-size: 400% 400%;
+    animation: holo-shift 6s ease infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .holo-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(7,180,186,0.2), 0 0 0 1px rgba(7,180,186,0.3);
+  }
+
+  .magnetic-btn {
+    transition: transform 0.2s cubic-bezier(0.23,1,0.32,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .magnetic-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+  }
+  .magnetic-btn:active::after {
+    animation: magnetic-ripple 0.6s ease-out;
+  }
+
+  .stat-card {
+    animation: card-glow-enter 0.6s ease backwards;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent 270deg, rgba(7,180,186,0.15) 360deg);
+    animation: border-spin 4s linear infinite;
+    border-radius: inherit;
+  }
+  .stat-card-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .reveal-left {
+    animation: slide-in-left 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .reveal-right {
+    animation: slide-in-right 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  .reveal-scale {
+    animation: scale-in 0.6s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  .scan-overlay {
+    pointer-events: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    z-index: 5;
+  }
+  .scan-overlay::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(7,180,186,0.4), transparent);
+    animation: scan-line 4s linear infinite;
+  }
+
+  .ticker-wrap {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: inline-block;
+    animation: ticker-scroll 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .floating-icon {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .pulse-dot {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glitch-text::before, .glitch-text::after,
+    .shimmer-text, .holo-card, .stat-card::before,
+    .scan-overlay::after, .ticker-track, .floating-icon, .pulse-dot {
+      animation: none !important;
+    }
+  }
+`;
+
+/* ── PARTICLE FIELD ── */
+function ParticleField() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let raf: number;
+    let W = canvas.width = canvas.offsetWidth;
+    let H = canvas.height = canvas.offsetHeight;
+
+    interface Particle {
+      x: number; y: number;
+      vx: number; vy: number;
+      size: number; alpha: number;
+      color: string;
+    }
+
+    const particles: Particle[] = Array.from({ length: 60 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -Math.random() * 0.5 - 0.2,
+      size: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.5 + 0.1,
+      color: Math.random() > 0.5 ? "7,180,186" : "255,255,255",
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+        if (p.x < -5) p.x = W + 5;
+        if (p.x > W + 5) p.x = -5;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+        ctx.fill();
+      });
+      // Draw connecting lines between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 80) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(7,180,186,${0.08 * (1 - dist / 80)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    const resize = () => {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener("resize", resize);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
+  }, []);
+  return <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1 }} />;
+}
+
+/* ── ANIMATED COUNTER ── */
+function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [displayed, setDisplayed] = useState("0");
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
+    const numeric = parseFloat(value.replace(/[^0-9.]/g, ""));
+    if (isNaN(numeric)) { setDisplayed(value); return; }
+    const prefix = value.replace(/[0-9.]/g, "").replace(numeric.toString(), "");
+    let start = 0;
+    const duration = 1400;
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(ease * numeric);
+      setDisplayed(current + (value.includes("+") ? "+" : ""));
+      if (progress < 1) requestAnimationFrame(tick);
+      else setDisplayed(value);
+    };
+    requestAnimationFrame(tick);
+  }, [started, value]);
+
+  return <span ref={ref}>{displayed}</span>;
+}
+
 /* ── REVEAL ── */
-interface RevealProps { children: ReactNode; style?: CSSProperties; }
-function Reveal({ children, style = {} }: RevealProps) {
+interface RevealProps { children: ReactNode; style?: CSSProperties; direction?: "up" | "left" | "right" | "scale"; }
+function Reveal({ children, style = {}, direction = "up" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.style.opacity = "1"; el.style.transform = "translateY(0)"; } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0) translateX(0) scale(1)";
+          obs.disconnect();
+        }
+      },
       { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
+
+  const initial: CSSProperties =
+    direction === "left" ? { opacity: 0, transform: "translateX(-40px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" } :
+    direction === "right" ? { opacity: 0, transform: "translateX(40px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" } :
+    direction === "scale" ? { opacity: 0, transform: "scale(0.88)", transition: "opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1)" } :
+    { opacity: 0, transform: "translateY(28px)", transition: "opacity 0.65s ease, transform 0.65s ease" };
+
   return (
-    <div ref={ref} style={{ opacity: 0, transform: "translateY(24px)", transition: "opacity 0.65s ease, transform 0.65s ease", ...style }}>
+    <div ref={ref} style={{ ...initial, ...style }}>
       {children}
     </div>
   );
@@ -125,9 +483,9 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <button onClick={prevM} className="w-8 h-8 border border-white/10 rounded text-white bg-transparent cursor-pointer text-base">‹</button>
+        <button onClick={prevM} className="w-8 h-8 border border-white/10 rounded text-white bg-transparent cursor-pointer text-base magnetic-btn">‹</button>
         <span className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white">{months[month]} {year}</span>
-        <button onClick={nextM} className="w-8 h-8 border border-white/10 rounded text-white bg-transparent cursor-pointer text-base">›</button>
+        <button onClick={nextM} className="w-8 h-8 border border-white/10 rounded text-white bg-transparent cursor-pointer text-base magnetic-btn">›</button>
       </div>
       <div className="grid grid-cols-7 gap-1 mb-1">
         {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d=><div key={d} className="text-center text-[11px] text-white/30 font-bold py-1">{d}</div>)}
@@ -135,8 +493,8 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
       <div className="grid grid-cols-7 gap-1 mb-4">
         {days.map((d,i)=>(
           <div key={i} onClick={()=>{ if(d && !isPast(d)) setSelDay(d); }}
-            className={`text-center py-1.5 rounded text-[13px] cursor-pointer transition-all
-              ${!d?"invisible":isPast(d)?"text-white/15 cursor-default":d===selDay?"bg-[#07b4ba] text-white font-bold":"text-white/75 border border-white/5 hover:border-[#07b4ba]/50"}`}>
+            className={`text-center py-1.5 rounded text-[13px] cursor-pointer transition-all duration-200
+              ${!d?"invisible":isPast(d)?"text-white/15 cursor-default":d===selDay?"bg-[#07b4ba] text-white font-bold shadow-[0_0_12px_rgba(7,180,186,0.6)]":"text-white/75 border border-white/5 hover:border-[#07b4ba]/50 hover:text-[#07b4ba] hover:shadow-[0_0_8px_rgba(7,180,186,0.3)]"}`}>
             {d||""}
           </div>
         ))}
@@ -147,8 +505,8 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
           <div className="flex flex-wrap gap-2 mb-4">
             {timeSlots.map(t=>(
               <button key={t} onClick={()=>setSelTime(t)}
-                className={`px-3 py-2 rounded text-[13px] border cursor-pointer transition-all
-                  ${selTime===t?"bg-[#07b4ba] text-white border-[#07b4ba] font-bold":"bg-[#222] border-white/10 text-white/55 hover:border-[#07b4ba] hover:text-white"}`}>
+                className={`px-3 py-2 rounded text-[13px] border cursor-pointer transition-all duration-200 magnetic-btn
+                  ${selTime===t?"bg-[#07b4ba] text-white border-[#07b4ba] font-bold shadow-[0_0_12px_rgba(7,180,186,0.5)]":"bg-[#222] border-white/10 text-white/55 hover:border-[#07b4ba] hover:text-white hover:shadow-[0_0_8px_rgba(7,180,186,0.3)]"}`}>
                 {t}
               </button>
             ))}
@@ -157,7 +515,7 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
       )}
       {selDay && selTime && (
         <button onClick={()=>onConfirm(`${months[month]} ${selDay}, ${year}`, selTime!)}
-          className="w-full py-3.5 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-xl tracking-[2px] border-none cursor-pointer transition-all duration-200 mt-1"
+          className="w-full py-3.5 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-xl tracking-[2px] border-none cursor-pointer transition-all duration-200 mt-1 magnetic-btn"
           style={{}}
           onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
           onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
@@ -221,7 +579,7 @@ function InfiniteFeedbackSlider() {
     <div className="w-full">
       <div className="flex flex-col gap-4">
         {mCards.map((c,i) => (
-          <div key={`${c.author}-${mPage}-${i}`} className="bg-[#1a1d23] border border-white/5 rounded-2xl p-6">
+          <div key={`${c.author}-${mPage}-${i}`} className="bg-[#1a1d23] border border-white/5 rounded-2xl p-6 holo-card">
             <div className="flex gap-1 text-[#07b4ba] text-base mb-3">★★★★★</div>
             <p className="text-white/70 text-[14px] leading-relaxed italic mb-4">"{c.text}"</p>
             <div className="flex items-center gap-2.5">
@@ -231,10 +589,9 @@ function InfiniteFeedbackSlider() {
           </div>
         ))}
       </div>
-      {/* Testimonial nav buttons — excluded from hover effect */}
       <div className="flex justify-center gap-10 mt-8">
-        <button onClick={()=>setMPage(p=>(p-1+feedbackCards.length)%feedbackCards.length)} className="w-14 h-14 rounded-full border-2 border-white/20 bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer flex items-center justify-center">‹</button>
-        <button onClick={()=>setMPage(p=>(p+1)%feedbackCards.length)} className="w-14 h-14 rounded-full border-2 border-white/20 bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer flex items-center justify-center">›</button>
+        <button onClick={()=>setMPage(p=>(p-1+feedbackCards.length)%feedbackCards.length)} className="w-14 h-14 rounded-full border-2 border-white/20 bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer flex items-center justify-center magnetic-btn">‹</button>
+        <button onClick={()=>setMPage(p=>(p+1)%feedbackCards.length)} className="w-14 h-14 rounded-full border-2 border-white/20 bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer flex items-center justify-center magnetic-btn">›</button>
       </div>
     </div>
   );
@@ -243,7 +600,8 @@ function InfiniteFeedbackSlider() {
     <div ref={sliderRef} className="w-full overflow-hidden">
       <div ref={trackRef} className="flex gap-6 w-max will-change-transform">
         {allCards.map((c,i) => (
-          <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col">
+          <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col holo-card cursor-default"
+            style={{ animationDelay: `${i * 0.1}s` }}>
             <div className="flex gap-1 text-[#07b4ba] text-base mb-4">★★★★★</div>
             <p className="text-white/70 text-[15px] leading-relaxed italic mb-5">"{c.text}"</p>
             <div className="flex items-center gap-2.5 mt-auto">
@@ -253,20 +611,19 @@ function InfiniteFeedbackSlider() {
           </div>
         ))}
       </div>
-      {/* Testimonial nav buttons — excluded from hover effect */}
       <div className="flex justify-center gap-4 mt-7">
         <button onClick={()=>{
           pausedRef.current=true;
           posRef.current=Math.max(posRef.current-364,0);
           if(trackRef.current){ trackRef.current.style.transition="transform 0.7s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform=`translateX(-${posRef.current}px)`; setTimeout(()=>{ if(trackRef.current) trackRef.current.style.transition=""; },700); }
           setTimeout(()=>{ pausedRef.current=false; },700);
-        }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center">‹</button>
+        }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center magnetic-btn">‹</button>
         <button onClick={()=>{
           pausedRef.current=true;
           posRef.current+=364;
           if(trackRef.current){ trackRef.current.style.transition="transform 0.7s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform=`translateX(-${posRef.current}px)`; setTimeout(()=>{ if(trackRef.current) trackRef.current.style.transition=""; },700); }
           setTimeout(()=>{ pausedRef.current=false; },700);
-        }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center">›</button>
+        }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] transition-all flex items-center justify-center magnetic-btn">›</button>
       </div>
     </div>
   );
@@ -283,15 +640,15 @@ function FAQSection() {
           <h2 className="text-center font-['Bebas_Neue'] text-[36px] md:text-[60px] tracking-[3px] text-white leading-none mb-2">
             Frequently Asked <span className="text-[#07b4ba]">Questions</span>
           </h2>
-          <div className="w-14 h-0.5 bg-[#07b4ba] mx-auto mt-4 mb-12 rounded-full" />
+          <div className="w-14 h-0.5 bg-[#07b4ba] mx-auto mt-4 mb-12 rounded-full" style={{animation:"line-expand 0.8s ease both"}} />
         </Reveal>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {faqItems.map((item,i) => (
-            <Reveal key={i}>
-              <div className={`border rounded-xl bg-[#141414] overflow-hidden transition-colors duration-200 ${open===i?"border-[#07b4ba]/45":"border-white/10"}`}>
-                <button onClick={()=>setOpen(open===i?null:i)} className="w-full bg-transparent border-none flex items-center justify-between py-5 px-6 cursor-pointer text-left gap-4">
-                  <span className={`font-bold text-[15px] md:text-[17px] leading-snug flex-1 font-['Barlow'] ${open===i?"text-[#07b4ba]":"text-white"}`}>{item.question}</span>
-                  <span className={`w-7 h-7 rounded-full border-[1.5px] flex items-center justify-center shrink-0 text-lg transition-all duration-300 ${open===i?"border-[#07b4ba] text-[#07b4ba] rotate-45 bg-[#07b4ba]/10":"border-white/20 text-white/60"}`}>+</span>
+            <Reveal key={i} style={{ transitionDelay: `${i * 60}ms` }}>
+              <div className={`border rounded-xl bg-[#141414] overflow-hidden transition-all duration-300 ${open===i?"border-[#07b4ba]/45 shadow-[0_0_20px_rgba(7,180,186,0.08)]":"border-white/10 hover:border-white/20"}`}>
+                <button onClick={()=>setOpen(open===i?null:i)} className="w-full bg-transparent border-none flex items-center justify-between py-5 px-6 cursor-pointer text-left gap-4 magnetic-btn">
+                  <span className={`font-bold text-[15px] md:text-[17px] leading-snug flex-1 font-['Barlow'] transition-colors duration-200 ${open===i?"text-[#07b4ba]":"text-white"}`}>{item.question}</span>
+                  <span className={`w-7 h-7 rounded-full border-[1.5px] flex items-center justify-center shrink-0 text-lg transition-all duration-300 ${open===i?"border-[#07b4ba] text-[#07b4ba] rotate-45 bg-[#07b4ba]/10 shadow-[0_0_10px_rgba(7,180,186,0.4)]":"border-white/20 text-white/60"}`}>+</span>
                 </button>
                 <div className="overflow-hidden transition-all duration-300 ease-in-out" style={{maxHeight:open===i?400:0,padding:open===i?"0 24px 20px":"0 24px"}}>
                   <p className="text-[14px] text-white/60 leading-[1.75] font-['Barlow']">{item.answer}</p>
@@ -324,7 +681,6 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
     <div className={`relative overflow-hidden mt-12 ${isMobile?"border-y border-[#07b4ba]/15":"bg-[#0b0b0b]"}`}
       style={isMobile?{background:"radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)"}:{}}>
       <div className="w-full py-8" style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)"}}>
-        {/* Title — GUTTER */}
         <div className="text-center mb-9" style={GUTTER}>
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">YOUR TRAINING JOURNEY</p>
           <h2 className="font-['Bebas_Neue'] text-[clamp(30px,4vw,60px)] leading-[.95] tracking-[3px] text-white">
@@ -339,17 +695,17 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
               <div className="absolute left-[9%] right-[9%] bottom-[7px] h-px bg-white/40" />
               {roadmapCards.map((w,i) => (
                 <button key={w.title} onClick={()=>setIdx(i)}
-                  className={`relative z-10 flex flex-col items-center gap-2.5 min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i===idx?"text-[#07b4ba]":"text-white/70"}`}>
+                  className={`relative z-10 flex flex-col items-center gap-2.5 min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer transition-colors duration-200 ${i===idx?"text-[#07b4ba]":"text-white/70"}`}>
                   <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[12px]">{w.title}</span>
-                  <i className={`w-[15px] h-[15px] rounded-full border not-italic ${i===idx?"border-2 border-[#07b4ba] bg-[#061018] shadow-[0_0_0_4px_rgba(7,180,186,.18),0_0_16px_rgba(7,180,186,.95)]":"border-white/65 bg-[#03070c]"}`} />
+                  <i className={`w-[15px] h-[15px] rounded-full border not-italic transition-all duration-300 ${i===idx?"border-2 border-[#07b4ba] bg-[#061018] shadow-[0_0_0_4px_rgba(7,180,186,.18),0_0_16px_rgba(7,180,186,.95)] pulse-dot":"border-white/65 bg-[#03070c]"}`} />
                 </button>
               ))}
             </div>
             <div className="relative">
               <button disabled={idx===0} onClick={()=>setIdx(p=>Math.max(p-1,0))}
-                className="absolute top-1/2 left-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{"<"}</button>
+                className="absolute top-1/2 left-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center magnetic-btn">{"<"}</button>
               <button disabled={idx===roadmapCards.length-1} onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-1))}
-                className="absolute top-1/2 right-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{">"}</button>
+                className="absolute top-1/2 right-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center magnetic-btn">{">"}</button>
               <div className="overflow-hidden pl-5">
                 <div className="flex gap-4 transition-transform duration-[420ms] ease-out will-change-transform"
                   style={{transform:`translateX(calc(-${idx} * (82vw + 16px)))`}}>
@@ -383,7 +739,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
             <div className="flex justify-center gap-3 mt-4">
               {roadmapCards.map((_,i) => (
                 <button key={i} onClick={()=>setIdx(i)}
-                  className={`w-2 h-2 p-0 border-0 rounded-full cursor-pointer transition-all ${i===idx?"bg-[#07b4ba] shadow-[0_0_12px_rgba(7,180,186,.7)]":"bg-white/30"}`} />
+                  className={`w-2 h-2 p-0 border-0 rounded-full cursor-pointer transition-all duration-300 ${i===idx?"bg-[#07b4ba] shadow-[0_0_12px_rgba(7,180,186,.7)]":"bg-white/30"}`} />
               ))}
             </div>
             <div className="flex items-center gap-3.5 mx-4 mt-5 p-4 border border-white/10 rounded-lg bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
@@ -399,35 +755,34 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
             </div>
           </div>
         ) : (
-          /* Desktop cards — GUTTER with arrow-button offsets */
           <div className="relative overflow-hidden" style={{paddingLeft:"calc(1cm + 18px)",paddingRight:"calc(1cm + 18px)"}}>
             <button onClick={()=>setIdx(p=>Math.max(p-1,0))}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">‹</button>
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center magnetic-btn hover:border-[#07b4ba]/40 hover:shadow-[0_0_20px_rgba(7,180,186,0.15)] transition-all duration-200">‹</button>
             <button onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-2))}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">›</button>
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center magnetic-btn hover:border-[#07b4ba]/40 hover:shadow-[0_0_20px_rgba(7,180,186,0.15)] transition-all duration-200">›</button>
             <div className="flex justify-between mb-10 relative">
               <div className="absolute top-3.5 left-0 right-0 h-0.5 bg-white/10" />
               {roadmapCards.map((w,i) => (
                 <div key={i} className="relative z-10 text-center">
-                  <p className={`font-['Bebas_Neue'] text-[15px] tracking-[1px] mb-2.5 transition-colors ${i===idx||i===idx+1?"text-[#07b4ba]":"text-white/45"}`}>{w.title}</p>
-                  <div className={`w-[26px] h-[26px] mx-auto rounded-full border-2 border-[#07b4ba] transition-all ${i===idx||i===idx+1?"bg-[#07b4ba] shadow-[0_0_18px_rgba(7,180,186,.95)]":"bg-[#0b0b0b]"}`} />
+                  <p className={`font-['Bebas_Neue'] text-[15px] tracking-[1px] mb-2.5 transition-all duration-300 ${i===idx||i===idx+1?"text-[#07b4ba]":"text-white/45"}`}>{w.title}</p>
+                  <div className={`w-[26px] h-[26px] mx-auto rounded-full border-2 border-[#07b4ba] transition-all duration-300 ${i===idx||i===idx+1?"bg-[#07b4ba] shadow-[0_0_18px_rgba(7,180,186,.95),0_0_36px_rgba(7,180,186,.4)] pulse-dot":"bg-[#0b0b0b]"}`} />
                 </div>
               ))}
             </div>
             <div className="overflow-hidden">
               <div className="flex gap-5 transition-transform duration-[450ms] ease-in-out" style={{transform:`translateX(-${idx*47}%)`}}>
                 {roadmapCards.map((card,i) => (
-                  <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
+                  <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 transition-all duration-300 hover:border-[#07b4ba]/20 hover:shadow-[0_20px_60px_rgba(7,180,186,0.08)]">
                     <div className="grid grid-cols-2">
-                      <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover" />
+                      <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover transition-transform duration-700 hover:scale-105" />
                       <div className="p-8 flex flex-col justify-center">
                         <h3 className="font-['Bebas_Neue'] text-[42px] text-white mb-4 leading-none">{card.title}</h3>
-                        <div className="w-16 h-[3px] bg-[#07b4ba] mb-5" />
+                        <div className="w-16 h-[3px] bg-[#07b4ba] mb-5" style={{boxShadow:"0 0 12px rgba(7,180,186,0.6)"}} />
                         <div className="flex flex-col gap-3">
                           {card.points.map((pt,pi) => (
-                            <div key={pi} className="flex items-center gap-2.5">
-                              <div className="w-5 h-5 rounded-full border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[10px] shrink-0">✓</div>
-                              <p className="text-[14px] text-white/75 leading-snug">{pt}</p>
+                            <div key={pi} className="flex items-center gap-2.5 group">
+                              <div className="w-5 h-5 rounded-full border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[10px] shrink-0 transition-all duration-200 group-hover:bg-[#07b4ba] group-hover:text-black group-hover:shadow-[0_0_10px_rgba(7,180,186,0.5)]">✓</div>
+                              <p className="text-[14px] text-white/75 leading-snug transition-colors duration-200 group-hover:text-white/95">{pt}</p>
                             </div>
                           ))}
                         </div>
@@ -459,7 +814,6 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
     <div id="method" className="relative overflow-hidden bg-[#0b0b0b]"
       style={{backgroundImage:"linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)",backgroundSize:"30px 30px"}}>
 
-      {/* Method header + cards — SECTION_INSET */}
       <section className="w-full pt-12 pb-0" style={SECTION_INSET}>
         <Reveal>
           <div className="text-center mb-9">
@@ -472,21 +826,23 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
         <Reveal>
           <div className="relative max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-7 rounded-xl overflow-hidden mb-6">
-              <div className="relative aspect-video border-2 border-[#e53e3e]/75 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')"}} />
+              <div className="relative aspect-video border-2 border-[#e53e3e]/75 rounded-xl overflow-hidden group">
+                <div className="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-700 group-hover:scale-105" style={{backgroundImage:"url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')"}} />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 to-black/65" />
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-[#e53e3e]/20 border-2 border-[#e53e3e] text-[#e53e3e] flex items-center justify-center font-black text-lg">✕</div>
                   <span className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white uppercase">Training Without Direction</span>
                 </div>
               </div>
-              <div className="relative aspect-video border-2 border-[#07b4ba]/75 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')"}} />
+              <div className="relative aspect-video border-2 border-[#07b4ba]/75 rounded-xl overflow-hidden group">
+                <div className="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-700 group-hover:scale-105" style={{backgroundImage:"url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1200')"}} />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/45 to-black/65" />
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-[#07b4ba]/20 border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center font-black text-lg">✓</div>
                   <span className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white uppercase">Training The Right Way</span>
                 </div>
+                {/* Scan overlay on the "right way" card */}
+                <div className="scan-overlay" />
               </div>
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[52px] h-[52px] rounded-full bg-[#1a1d23] border-2 border-white/20 flex items-center justify-center font-['Bebas_Neue'] text-[20px] tracking-[1px] text-white/75 shadow-[0_4px_20px_rgba(0,0,0,.5)]">VS</div>
@@ -495,20 +851,21 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
         <Reveal style={{marginTop:24}}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-3.5">
             {methodCards.map((c,i) => (
-              <div key={i} className="flex items-start gap-4 p-5 rounded-[10px] bg-white/5 border border-white/10 hover:border-[#07b4ba]/30 transition-colors">
-                <div className="w-[45px] h-[45px] shrink-0 flex items-center justify-center">{c.icon}</div>
+              <div key={i} className="flex items-start gap-4 p-5 rounded-[10px] bg-white/5 border border-white/10 hover:border-[#07b4ba]/30 transition-all duration-300 hover:shadow-[0_0_24px_rgba(7,180,186,0.07)] group"
+                style={{animationDelay:`${i*100}ms`}}>
+                <div className="w-[45px] h-[45px] shrink-0 flex items-center justify-center floating-icon" style={{animationDelay:`${i*0.5}s`}}>{c.icon}</div>
                 <div>
-                  <h4 className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white mb-1.5 leading-snug">{c.title}</h4>
+                  <h4 className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white mb-1.5 leading-snug group-hover:text-[#07b4ba] transition-colors duration-200">{c.title}</h4>
                   <p className="text-[14px] text-white/50 leading-[1.55]">{c.desc}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="flex justify-center">
-            <div className="flex items-start gap-4 p-5 rounded-[10px] bg-white/5 border border-white/10 hover:border-[#07b4ba]/30 transition-colors max-w-[560px] w-full">
-              <div className="w-[45px] h-[45px] shrink-0 flex items-center justify-center"><IconTrophy /></div>
+            <div className="flex items-start gap-4 p-5 rounded-[10px] bg-white/5 border border-white/10 hover:border-[#07b4ba]/30 transition-all duration-300 hover:shadow-[0_0_24px_rgba(7,180,186,0.07)] max-w-[560px] w-full group">
+              <div className="w-[45px] h-[45px] shrink-0 flex items-center justify-center floating-icon" style={{animationDelay:"2s"}}><IconTrophy /></div>
               <div>
-                <h4 className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white mb-1.5 leading-snug">PERFORMANCE-FIRST</h4>
+                <h4 className="font-['Bebas_Neue'] text-[18px] tracking-[2px] text-white mb-1.5 leading-snug group-hover:text-[#07b4ba] transition-colors duration-200">PERFORMANCE-FIRST</h4>
                 <p className="text-[14px] text-white/50 leading-[1.55]">Peak your body and mind for real fights — physically, mentally, and strategically.</p>
               </div>
             </div>
@@ -516,10 +873,8 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
         </Reveal>
       </section>
 
-      {/* Roadmap — full bleed */}
       <RoadmapSection scrollToForm={scrollToForm} />
 
-      {/* What You Get + Promise — GUTTER */}
       <div className="w-full" style={GUTTER}>
         <Reveal style={{marginTop:64}}>
           <div className="text-center mb-12">
@@ -528,8 +883,9 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
           </div>
           <div className="hidden md:flex gap-4 justify-between">
             {whatCards.map((c,i) => (
-              <div key={i} className="flex-1 min-h-[255px] p-5 rounded-[18px] bg-[#0f1115] border border-white/5 flex flex-col items-center text-center gap-3.5">
-                <div className="w-[70px] h-[70px] flex items-center justify-center">{c.icon}</div>
+              <div key={i} className="flex-1 min-h-[255px] p-5 rounded-[18px] bg-[#0f1115] border border-white/5 flex flex-col items-center text-center gap-3.5 holo-card"
+                style={{animationDelay:`${i*80}ms`}}>
+                <div className="w-[70px] h-[70px] flex items-center justify-center floating-icon" style={{animationDelay:`${i*0.7}s`}}>{c.icon}</div>
                 <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] tracking-[2px] leading-snug">{c.title}</h4>
                 <p className="text-[14px] text-white/50 leading-[1.55]">{c.desc}</p>
               </div>
@@ -537,7 +893,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
           </div>
           <div className="flex flex-col gap-3.5 md:hidden px-2">
             {whatCards.map((c,i) => (
-              <div key={i} className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#0f1115] border border-white/5 min-h-[90px]">
+              <div key={i} className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#0f1115] border border-white/5 min-h-[90px] holo-card">
                 <div className="w-12 h-12 flex items-center justify-center shrink-0">{c.icon}</div>
                 <div>
                   <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[13px] tracking-[2px] leading-snug mb-1">{c.title}</h4>
@@ -550,7 +906,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
         <Reveal style={{marginTop:50}}>
           <div className="w-full mx-auto text-center px-10 py-8">
             <p className="font-['Bebas_Neue'] text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
-            <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
+            <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" style={{boxShadow:"0 0 12px rgba(7,180,186,0.6)"}} />
             <p className="font-['Barlow'] text-[16px] md:text-[19px] leading-[1.9] text-white/75 italic">
               <span className="text-[#07b4ba] text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
 Most fighters train hard. Very few train correctly.
@@ -561,11 +917,10 @@ AOF exists to close that gap — with structure, accountability, and coaching th
           </div>
         </Reveal>
 
-        {/* Book A Call strip — breaks out of GUTTER to full bleed */}
         <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-1cm",marginRight:"-1cm"}}>
           <button
             onClick={scrollToForm}
-            className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-all duration-200"
+            className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-all duration-200 magnetic-btn"
             onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
             onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="transparent";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
             onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
@@ -585,6 +940,27 @@ export default function CoachingPage() {
   const [lead, setLead]         = useState({ name: "", phone: "", goal: "" });
   const [stage, setStage]       = useState<1|2|3>(1);
   const [isSubmitting, setSubmit] = useState(false);
+
+  // Cursor glow effect
+  const cursorGlowRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = cursorGlowRef.current;
+    if (!el) return;
+    let raf: number;
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    const move = (e: MouseEvent) => { mx = e.clientX; my = e.clientY; };
+    window.addEventListener("mousemove", move);
+    const tick = () => {
+      cx += (mx - cx) * 0.1;
+      cy += (my - cy) * 0.1;
+      el.style.left = cx + "px";
+      el.style.top = cy + "px";
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => { window.removeEventListener("mousemove", move); cancelAnimationFrame(raf); };
+  }, []);
+
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyLWY5cbUx7OC1t6SSy-Z8wTj9FLPdZuzOzSRhJ8-1JvlPxYk1210TelUjKuaSyYvVl/exec";
@@ -609,24 +985,47 @@ export default function CoachingPage() {
     "Your conditioning fails before your skill does",
   ];
 
+  // Ticker content
+  const tickerItems = ["TRAIN LIKE A CHAMPION", "FIGHT LIKE ONE", "AOF ACADEMY", "1-ON-1 COACHING", "REAL RESULTS", "PERSONALISED PLAN", "DIRECT COACH ACCESS"];
+
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
+      {/* Inject global animation styles */}
+      <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
+
+      {/* Cursor glow */}
+      <div
+        ref={cursorGlowRef}
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          zIndex: 9999,
+          width: 400,
+          height: 400,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(7,180,186,0.06) 0%, transparent 70%)",
+          transform: "translate(-50%, -50%)",
+          transition: "opacity 0.3s ease",
+        }}
+      />
 
       {/* ── NAVBAR — GUTTER ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between" style={GUTTER}>
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
-          <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
+          <span className="text-[#07b4ba]" style={{textShadow:"0 0 20px rgba(7,180,186,0.6)"}}>A</span>
+          <span className="text-white">O</span>
+          <span className="text-[#07b4ba]" style={{textShadow:"0 0 20px rgba(7,180,186,0.6)"}}>F</span>
         </span>
         <div className="flex items-center gap-5">
           <button onClick={()=>navigate("/")} className="hidden md:flex items-center gap-2 bg-transparent border-none text-white/65 font-['Barlow'] text-[14px] font-semibold cursor-pointer hover:text-white transition-colors">
             <ArrowLeftIcon /> Back To Home
           </button>
-          {/* Navbar CTA — white bg + black text on hover/active */}
           <button
             onClick={scrollToForm}
-            className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer transition-all duration-200"
-            onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
-            onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
+            className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer transition-all duration-200 magnetic-btn"
+            style={{boxShadow:"0 0 16px rgba(7,180,186,0.3)"}}
+            onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.boxShadow="none";}}
+            onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";(e.currentTarget as HTMLButtonElement).style.boxShadow="0 0 16px rgba(7,180,186,0.3)";}}
             onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
             onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
             Book A Call
@@ -651,28 +1050,63 @@ export default function CoachingPage() {
             style={{background:"linear-gradient(to bottom,rgba(6,8,12,.65),rgba(6,8,12,.92)),url('https://images.unsplash.com/photo-1549476464-37392f717541?w=1400&q=80') center/cover no-repeat"}} />
           <div className="absolute inset-0 z-[1]"
             style={{background:"linear-gradient(180deg,rgba(6,8,12,.55) 0%,rgba(6,8,12,.78) 55%,#06080c 100%)"}} />
+
+          {/* Particle field */}
+          <ParticleField />
+
+          {/* Animated teal orb */}
+          <div style={{
+            position:"absolute", top:"20%", right:"15%", width:320, height:320,
+            borderRadius:"50%",
+            background:"radial-gradient(circle, rgba(7,180,186,0.08) 0%, transparent 70%)",
+            animation:"float 6s ease-in-out infinite",
+            pointerEvents:"none", zIndex:2,
+          }} />
+          <div style={{
+            position:"absolute", top:"20%", right:"15%", width:320, height:320,
+            borderRadius:"50%",
+            border:"1px solid rgba(7,180,186,0.12)",
+            animation:"float 6s ease-in-out infinite, border-spin 12s linear infinite",
+            pointerEvents:"none", zIndex:2,
+          }} />
+
           <div className="w-full relative z-10" style={GUTTER}>
-            <Reveal>
+            <div style={{animation:"slide-in-left 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay:"0.1s"}}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[3px] uppercase mb-4">AOF Academy — 1 On 1 Coaching</p>
+            </div>
+            <div style={{animation:"slide-in-left 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay:"0.25s"}}>
               <h1 className="font-['Bebas_Neue'] text-[clamp(48px,5vw,72px)] leading-[.95] tracking-[2px] uppercase text-white mb-5">
-                Train Like A<br/><span className="text-[#07b4ba]">Champion.</span><br/>Fight Like One
+                Train Like A<br/>
+                <span
+                  className="glitch-text"
+                  data-text="CHAMPION."
+                  style={{color:"#07b4ba", textShadow:"0 0 30px rgba(7,180,186,0.5), 0 0 60px rgba(7,180,186,0.2)", display:"inline-block"}}>
+                  CHAMPION.
+                </span>
+                <br/>Fight Like One
               </h1>
+            </div>
+            <div style={{animation:"slide-in-left 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay:"0.4s"}}>
               <p className="text-white/60 text-[16px] leading-[1.7] max-w-[480px] mb-8">
                 Stop training in the crowd. Get a personalised coaching program built around your body, your goals, and your timeline — guided by coaches who have been in the ring.
               </p>
-              {/* Hero CTA — white bg + black text on hover/active */}
+            </div>
+            <div style={{animation:"slide-in-left 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay:"0.55s"}}>
               <button
                 onClick={scrollToForm}
-                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-all duration-200"
-                onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.borderColor="#fff";(e.currentTarget as HTMLButtonElement).style.transform="translateY(-2px)";}}
-                onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";(e.currentTarget as HTMLButtonElement).style.borderColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.transform="translateY(0)";}}
-                onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.borderColor="#fff";}}
-                onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.borderColor="#fff";}}>
+                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-all duration-200 magnetic-btn"
+                style={{boxShadow:"0 0 30px rgba(7,180,186,0.35), 0 0 60px rgba(7,180,186,0.15)"}}
+                onMouseEnter={e=>{const b=e.currentTarget as HTMLButtonElement; b.style.backgroundColor="#fff"; b.style.color="#000"; b.style.borderColor="#fff"; b.style.transform="translateY(-2px)"; b.style.boxShadow="0 10px 40px rgba(255,255,255,0.2)";}}
+                onMouseLeave={e=>{const b=e.currentTarget as HTMLButtonElement; b.style.backgroundColor="#07b4ba"; b.style.color="#fff"; b.style.borderColor="#07b4ba"; b.style.transform="translateY(0)"; b.style.boxShadow="0 0 30px rgba(7,180,186,0.35), 0 0 60px rgba(7,180,186,0.15)";}}
+                onMouseDown={e=>{const b=e.currentTarget as HTMLButtonElement; b.style.backgroundColor="#fff"; b.style.color="#000"; b.style.borderColor="#fff";}}
+                onMouseUp={e=>{const b=e.currentTarget as HTMLButtonElement; b.style.backgroundColor="#fff"; b.style.color="#000"; b.style.borderColor="#fff";}}>
                 Book A Call
               </button>
-            </Reveal>
+            </div>
           </div>
         </section>
+
+        {/* Badge strip */}
         <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0" style={{height:"1.5cm", ...GUTTER}}>
           <div className="w-full flex items-center justify-center md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-3">
@@ -691,11 +1125,25 @@ export default function CoachingPage() {
         </div>
       </div>
 
+      {/* ── TICKER ── */}
+      <div className="w-full bg-[#050507] border-y border-white/5 py-3 overflow-hidden">
+        <div className="ticker-wrap">
+          <div className="ticker-track">
+            {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
+              <span key={i} className="inline-block mx-6 font-['Bebas_Neue'] text-[14px] tracking-[4px] text-white/25">
+                {item}
+                <span className="mx-6 text-[#07b4ba]">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* ── PAIN SECTION — SECTION_INSET ── */}
       <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           <div className="flex-1 min-w-[260px]">
-            <Reveal>
+            <Reveal direction="left">
               <p className="text-[#07b4ba] font-bold text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
                 You're Training Hard...<br/>But Still Not Improving
@@ -703,18 +1151,24 @@ export default function CoachingPage() {
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-6" style={{boxShadow:"0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)"}} />
             </Reveal>
             {painPoints.map((p,i) => (
-              <Reveal key={i} style={{transitionDelay:`${i*70}ms`}}>
-                <div className="flex items-start gap-4 mb-3.5">
-                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1" style={{boxShadow:"0 0 6px rgba(255,45,45,.9),0 0 16px rgba(255,45,45,.6)"}} />
-                  <p className="text-white/70 text-[15px] leading-[1.5]">{p}</p>
+              <Reveal key={i} style={{transitionDelay:`${i*80}ms`}}>
+                <div className="flex items-start gap-4 mb-3.5 group">
+                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 transition-all duration-200 group-hover:shadow-[0_0_10px_rgba(255,45,45,1),0_0_20px_rgba(255,45,45,0.8)]" style={{boxShadow:"0 0 6px rgba(255,45,45,.9),0 0 16px rgba(255,45,45,.6)"}} />
+                  <p className="text-white/70 text-[15px] leading-[1.5] group-hover:text-white/90 transition-colors duration-200">{p}</p>
                 </div>
               </Reveal>
             ))}
           </div>
           <div className="flex-1 max-w-[500px] w-full">
-            <Reveal>
-              <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1400&auto=format&fit=crop"
-                alt="AOF Training" className="w-full rounded-[14px] border border-white/10 aspect-video object-cover" />
+            <Reveal direction="right">
+              <div className="relative group overflow-hidden rounded-[14px] border border-white/10">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1400&auto=format&fit=crop"
+                  alt="AOF Training" className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Corner accent */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#07b4ba] rounded-tl-[14px]" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#07b4ba] rounded-br-[14px]" />
+              </div>
             </Reveal>
           </div>
         </div>
@@ -729,24 +1183,34 @@ export default function CoachingPage() {
           <Reveal>
             <p className="text-[#07b4ba] font-bold text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
             <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
-              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach"
-                className="w-full md:w-[240px] h-auto md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0" />
+              <div className="relative group">
+                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach"
+                  className="w-full md:w-[240px] h-auto md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0 transition-all duration-500 group-hover:border-[#07b4ba]/40 group-hover:shadow-[0_0_40px_rgba(7,180,186,0.15)]" />
+                {/* Corner accents on coach photo */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#07b4ba]/60 rounded-tl-xl transition-all duration-300 group-hover:border-[#07b4ba]" />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#07b4ba]/60 rounded-br-xl transition-all duration-300 group-hover:border-[#07b4ba]" />
+              </div>
               <div className="flex-1 min-w-[280px]">
                 <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[2px] text-white mb-1">Head Coach</h2>
                 <p className="text-[#07b4ba] font-bold text-[14px] tracking-[3px] uppercase mb-5">AOF Academy — Lead Trainer &amp; Founder</p>
                 <div className="mb-6">
                   {coachCredentials.map((c,i) => (
-                    <div key={i} className="flex items-start gap-2.5 mb-3.5">
-                      <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                      <p className="text-white/70 text-[15px] leading-[1.5]">{c}</p>
+                    <div key={i} className="flex items-start gap-2.5 mb-3.5 group">
+                      <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5 transition-all duration-200 group-hover:drop-shadow-[0_0_6px_rgba(7,180,186,0.8)]">✓</span>
+                      <p className="text-white/70 text-[15px] leading-[1.5] group-hover:text-white/90 transition-colors duration-200">{c}</p>
                     </div>
                   ))}
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-6">
                   {stats.map((s,i) => (
-                    <div key={i} className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[110px] md:h-[140px] p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)]">
-                      <p className="font-['Bebas_Neue'] text-[32px] md:text-[42px] text-[#07b4ba] tracking-[1px] mb-2 leading-none">{s.val}</p>
-                      <p className="text-white/45 text-[12px] tracking-[2px] uppercase leading-tight">{s.label}</p>
+                    <div key={i} className="stat-card bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[110px] md:h-[140px] p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)] hover:border-[#07b4ba]/30 hover:shadow-[0_0_24px_rgba(7,180,186,0.12)] transition-all duration-300"
+                      style={{animationDelay:`${i*150}ms`}}>
+                      <div className="stat-card-inner w-full flex flex-col items-center justify-center">
+                        <p className="font-['Bebas_Neue'] text-[32px] md:text-[42px] text-[#07b4ba] tracking-[1px] mb-2 leading-none" style={{textShadow:"0 0 20px rgba(7,180,186,0.4)"}}>
+                          <AnimatedCounter value={s.val} />
+                        </p>
+                        <p className="text-white/45 text-[12px] tracking-[2px] uppercase leading-tight">{s.label}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -772,8 +1236,11 @@ export default function CoachingPage() {
           <Reveal>
             <div className="flex flex-col md:flex-row gap-12 items-center mb-10 flex-wrap">
               <div className="flex-1 max-w-[550px] w-full">
-                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete"
-                  className="w-full rounded-[10px] object-cover aspect-video" />
+                <div className="relative group overflow-hidden rounded-[10px]">
+                  <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete"
+                    className="w-full object-cover aspect-video transition-transform duration-700 group-hover:scale-105" />
+                  <div className="scan-overlay" />
+                </div>
               </div>
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[clamp(28px,3vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
@@ -798,7 +1265,7 @@ export default function CoachingPage() {
         <div className="w-full py-12" style={SECTION_INSET}>
           <div className="flex flex-col md:flex-row gap-14 items-start flex-wrap">
             <div className="flex-1 min-w-[260px]">
-              <Reveal>
+              <Reveal direction="left">
                 <p className="text-[#07b4ba] font-bold text-[13px] tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(34px,5vw,54px)] tracking-[2px] leading-none mb-4 text-white">
                   Apply For Your<br/><span className="text-[#07b4ba]">1-On-1 Coaching Spot</span>
@@ -807,61 +1274,78 @@ export default function CoachingPage() {
                   Spots are limited. We only take on a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
                 {checklistItems.map((item,i) => (
-                  <div key={i} className="flex items-start gap-2.5 mb-3.5">
-                    <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                    <p className="text-[16px] text-white leading-[1.55]">{item}</p>
+                  <div key={i} className="flex items-start gap-2.5 mb-3.5 group" style={{animationDelay:`${i*80}ms`}}>
+                    <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5 transition-all duration-200 group-hover:drop-shadow-[0_0_6px_rgba(7,180,186,0.8)]">✓</span>
+                    <p className="text-[16px] text-white leading-[1.55] group-hover:text-white transition-colors duration-200">{item}</p>
                   </div>
                 ))}
               </Reveal>
             </div>
             <div className="flex-1 min-w-[300px]">
-              <Reveal>
-                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-10">
-                  {stage===3 ? (
-                    <div className="text-center py-12">
-                      <div className="text-[52px] mb-4">✅</div>
-                      <h4 className="font-['Bebas_Neue'] text-white text-[28px] tracking-[2px] mb-2">Booking Confirmed!</h4>
-                      <p className="text-white/50 text-[15px]">We'll reach out within 24 hours to confirm your session.</p>
-                    </div>
-                  ) : stage===2 ? (
-                    <>
-                      <h3 className="font-bold text-[13px] tracking-[3px] text-[#07b4ba] mb-1.5 uppercase">Schedule Your Call</h3>
-                      <p className="text-white/35 text-[12px] mb-5 tracking-[1px]">STEP 2 OF 2 — PICK A DATE AND TIME</p>
-                      <CalendarPicker onConfirm={handleBookingConfirm} />
-                      <button onClick={()=>setStage(1)} className="mt-3 bg-transparent border-none text-white/45 text-[13px] cursor-pointer underline hover:text-white transition-colors">Back to details</button>
-                    </>
-                  ) : (
-                    <>
-                      <h3 className="font-bold text-[13px] tracking-[3px] text-[#07b4ba] mb-1.5 uppercase">Start Your Journey With AOF</h3>
-                      <p className="text-white/35 text-[12px] mb-5 tracking-[1px]">STEP 1 OF 2 — YOUR DETAILS</p>
-                      {([
-                        {placeholder:"Full Name", type:"text", key:"name"},
-                        {placeholder:"Phone Number", type:"tel", key:"phone"},
-                      ] as {placeholder:string; type:string; key:"name"|"phone"}[]).map(f => (
-                        <input key={f.key} type={f.type} placeholder={f.placeholder}
-                          value={lead[f.key]} onChange={e=>setLead(l=>({...l,[f.key]:e.target.value}))}
-                          className="w-full px-4 py-3.5 rounded-lg bg-[#222] border border-white/10 text-white placeholder-white/35 text-[15px] mb-3.5 outline-none focus:border-[#07b4ba] transition-colors appearance-none" />
-                      ))}
-                      <select value={lead.goal} onChange={e=>setLead(l=>({...l,goal:e.target.value}))}
-                        className="w-full px-4 py-3.5 rounded-lg bg-[#222] border border-white/10 text-white text-[15px] mb-3.5 outline-none focus:border-[#07b4ba] transition-colors appearance-none cursor-pointer">
-                        <option value="">Main Goal</option>
-                        <option value="technique">Improve Technique</option>
-                        <option value="competition">Competition Prep</option>
-                        <option value="fitness">Fitness and Conditioning</option>
-                        <option value="beginner">Learn MMA from Scratch</option>
-                      </select>
-                      {/* Form submit CTA — white bg + black text on hover/active */}
-                      <button
-                        onClick={handleLeadSubmit}
-                        className="w-full py-3.5 mt-1 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[2px] border-none cursor-pointer transition-all duration-200"
-                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
-                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
-                        onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
-                        onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
-                        Next — Schedule a Time
-                      </button>
-                    </>
-                  )}
+              <Reveal direction="right">
+                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-10 relative overflow-hidden"
+                  style={{boxShadow:"0 0 60px rgba(7,180,186,0.06), inset 0 0 60px rgba(7,180,186,0.02)"}}>
+                  {/* Animated corner border */}
+                  <div style={{
+                    position:"absolute", top:0, left:0, right:0, bottom:0,
+                    borderRadius:"1rem",
+                    background:"linear-gradient(90deg, transparent, rgba(7,180,186,0.1), transparent)",
+                    backgroundSize:"200% 100%",
+                    animation:"shimmer 3s linear infinite",
+                    pointerEvents:"none",
+                    zIndex:0,
+                  }} />
+                  <div className="relative z-10">
+                    {stage===3 ? (
+                      <div className="text-center py-12" style={{animation:"scale-in 0.5s cubic-bezier(0.22,1,0.36,1) both"}}>
+                        <div className="text-[52px] mb-4" style={{animation:"float 3s ease-in-out infinite"}}>✅</div>
+                        <h4 className="font-['Bebas_Neue'] text-white text-[28px] tracking-[2px] mb-2">Booking Confirmed!</h4>
+                        <p className="text-white/50 text-[15px]">We'll reach out within 24 hours to confirm your session.</p>
+                      </div>
+                    ) : stage===2 ? (
+                      <>
+                        <h3 className="font-bold text-[13px] tracking-[3px] text-[#07b4ba] mb-1.5 uppercase">Schedule Your Call</h3>
+                        <p className="text-white/35 text-[12px] mb-5 tracking-[1px]">STEP 2 OF 2 — PICK A DATE AND TIME</p>
+                        <CalendarPicker onConfirm={handleBookingConfirm} />
+                        <button onClick={()=>setStage(1)} className="mt-3 bg-transparent border-none text-white/45 text-[13px] cursor-pointer underline hover:text-white transition-colors">Back to details</button>
+                      </>
+                    ) : (
+                      <>
+                        <h3 className="font-bold text-[13px] tracking-[3px] text-[#07b4ba] mb-1.5 uppercase">Start Your Journey With AOF</h3>
+                        <p className="text-white/35 text-[12px] mb-5 tracking-[1px]">STEP 1 OF 2 — YOUR DETAILS</p>
+                        {([
+                          {placeholder:"Full Name", type:"text", key:"name"},
+                          {placeholder:"Phone Number", type:"tel", key:"phone"},
+                        ] as {placeholder:string; type:string; key:"name"|"phone"}[]).map(f => (
+                          <input key={f.key} type={f.type} placeholder={f.placeholder}
+                            value={lead[f.key]} onChange={e=>setLead(l=>({...l,[f.key]:e.target.value}))}
+                            className="w-full px-4 py-3.5 rounded-lg bg-[#222] border border-white/10 text-white placeholder-white/35 text-[15px] mb-3.5 outline-none focus:border-[#07b4ba] transition-all duration-200 appearance-none"
+                            style={{background:"#1a1a1a"}}
+                            onFocus={e=>{e.currentTarget.style.boxShadow="0 0 0 2px rgba(7,180,186,0.15)";}}
+                            onBlur={e=>{e.currentTarget.style.boxShadow="none";}} />
+                        ))}
+                        <select value={lead.goal} onChange={e=>setLead(l=>({...l,goal:e.target.value}))}
+                          className="w-full px-4 py-3.5 rounded-lg bg-[#222] border border-white/10 text-white text-[15px] mb-3.5 outline-none focus:border-[#07b4ba] transition-all duration-200 appearance-none cursor-pointer"
+                          style={{background:"#1a1a1a"}}>
+                          <option value="">Main Goal</option>
+                          <option value="technique">Improve Technique</option>
+                          <option value="competition">Competition Prep</option>
+                          <option value="fitness">Fitness and Conditioning</option>
+                          <option value="beginner">Learn MMA from Scratch</option>
+                        </select>
+                        <button
+                          onClick={handleLeadSubmit}
+                          className="w-full py-3.5 mt-1 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[2px] border-none cursor-pointer transition-all duration-200 magnetic-btn"
+                          style={{boxShadow:"0 0 24px rgba(7,180,186,0.3)"}}
+                          onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.boxShadow="none";}}
+                          onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";(e.currentTarget as HTMLButtonElement).style.boxShadow="0 0 24px rgba(7,180,186,0.3)";}}
+                          onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+                          onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
+                          Next — Schedule a Time
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </Reveal>
             </div>
@@ -870,8 +1354,8 @@ export default function CoachingPage() {
             <p className="text-white font-bold text-[15px]">
               Any Queries?
             </p>
-            {/* WhatsApp button — excluded from hover effect, keeps its own green style */}
-            <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,35)]">
+            <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-all duration-200 magnetic-btn"
+              style={{boxShadow:"0 4px 18px rgba(37,211,102,0.35)"}}>
               <WhatsAppIcon />
               Chat On WhatsApp
             </button>
@@ -897,13 +1381,15 @@ export default function CoachingPage() {
             <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] text-white pt-5 mb-3.5">NAVIGATION</h3>
             <div className="flex flex-col gap-2.5">
               {([["#home","Home"],["#method","AOF Method"],["#testimonials","Testimonials"],["#faq","FAQ"],["#contact","Apply Now"]] as [string,string][]).map(([href,label]) => (
-                <a key={href} href={href} className="text-white/50 text-[17px] no-underline hover:text-[#07b4ba] transition-colors">{label}</a>
+                <a key={href} href={href} className="text-white/50 text-[17px] no-underline hover:text-[#07b4ba] transition-colors duration-200">{label}</a>
               ))}
             </div>
           </div>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[24px] tracking-[1px] pt-5 mb-3.5 flex">
-              <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
+              <span className="text-[#07b4ba]" style={{textShadow:"0 0 16px rgba(7,180,186,0.5)"}}>A</span>
+              <span className="text-white">O</span>
+              <span className="text-[#07b4ba]" style={{textShadow:"0 0 16px rgba(7,180,186,0.5)"}}>F</span>
             </h3>
             <p className="text-white/50 text-[15px] leading-[1.8] max-w-[320px]">
               Art of Fighting Academy — building champions through proven systems and disciplined training.
