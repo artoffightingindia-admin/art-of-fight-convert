@@ -600,7 +600,7 @@ function InfiniteFeedbackSlider() {
     <div ref={sliderRef} className="w-full overflow-hidden">
       <div ref={trackRef} className="flex gap-6 w-max will-change-transform">
         {allCards.map((c,i) => (
-          <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col holo-card cursor-default"
+          <div key={i} className="w-[300px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col holo-card cursor-default"
             style={{ animationDelay: `${i * 0.1}s` }}>
             <div className="flex gap-1 text-[#07b4ba] text-base mb-4">★★★★★</div>
             <p className="text-white/70 text-[15px] leading-relaxed italic mb-5">"{c.text}"</p>
@@ -1245,7 +1245,7 @@ export default function CoachingPage() {
             </div>
           </Reveal>
           <Reveal>
-            <div className="flex flex-col md:flex-row gap-12 items-center mb-5 flex-wrap">
+            <div className="flex flex-col md:flex-row gap-12 items-center mb-10 flex-wrap">
               <div className="flex-1 max-w-[550px] w-full">
                 <div className="relative group overflow-hidden rounded-[10px]">
                   <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete"
