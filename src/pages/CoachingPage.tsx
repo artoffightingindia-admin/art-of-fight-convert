@@ -594,7 +594,6 @@ export default function CoachingPage() {
     "You have no structured plan, just random gym sessions",
     "You feel lost without proper coaching guidance",
     "Your conditioning fails before your skill does",
- 
   ];
 
   return (
@@ -751,17 +750,11 @@ export default function CoachingPage() {
                   className="w-full rounded-[10px] object-cover aspect-video" />
               </div>
               <div className="flex-1 min-w-[260px]">
-<h3 className="font-['Bebas_Neue'] text-[clamp(28px,3vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
-  <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[8px]">
-    "
-  </span>
-
-  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
-
-  <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[8px]">
-    "
-  </span>
-</h3>
+                <h3 className="font-['Bebas_Neue'] text-[clamp(28px,3vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
+                  <span className="text-[#07b4ba] text-[42px] leading-none mr-[6px] font-serif relative top-[8px]">"</span>
+                  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
+                  <span className="text-[#07b4ba] text-[42px] leading-none ml-[6px] font-serif relative top-[8px]">"</span>
+                </h3>
                 <p className="text-white/65 text-[15px] leading-[1.75]">
                   The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
                 </p>
@@ -793,9 +786,10 @@ export default function CoachingPage() {
                     <p className="text-[16px] text-white leading-[1.55]">{item}</p>
                   </div>
                 ))}
-                <div className="mt-7 flex flex-col items-start gap-2">
+                {/* ── ANY QUERIES — centered, matching screenshot ── */}
+                <div className="mt-7 flex flex-col items-center gap-3 w-full">
                   <p className="text-white font-bold text-[15px]">Any Queries?</p>
-                  <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-7 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
+                  <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
                     <WhatsAppIcon /> Chat On WhatsApp
                   </button>
                 </div>
