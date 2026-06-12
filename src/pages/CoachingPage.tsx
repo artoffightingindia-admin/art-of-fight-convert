@@ -463,7 +463,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
           </div>
         </Reveal>
         <Reveal>
-          <div className="relative max-w-4.2xl mx-auto">
+          <div className="relative max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-7 rounded-xl overflow-hidden mb-6">
               <div className="relative aspect-video border-2 border-[#e53e3e]/75 rounded-xl overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{backgroundImage:"url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200')"}} />
