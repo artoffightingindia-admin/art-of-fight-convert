@@ -157,7 +157,12 @@ function CalendarPicker({ onConfirm }: { onConfirm: (d: string, t: string) => vo
       )}
       {selDay && selTime && (
         <button onClick={()=>onConfirm(`${months[month]} ${selDay}, ${year}`, selTime!)}
-          className="w-full py-3.5 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-xl tracking-[2px] border-none cursor-pointer hover:bg-[#059a9f] transition-colors mt-1">
+          className="w-full py-3.5 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-xl tracking-[2px] border-none cursor-pointer transition-all duration-200 mt-1"
+          style={{}}
+          onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+          onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
+          onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+          onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
           Confirm Booking
         </button>
       )}
@@ -226,6 +231,7 @@ function InfiniteFeedbackSlider() {
           </div>
         ))}
       </div>
+      {/* Testimonial nav buttons — excluded from hover effect */}
       <div className="flex justify-center gap-10 mt-8">
         <button onClick={()=>setMPage(p=>(p-1+feedbackCards.length)%feedbackCards.length)} className="w-14 h-14 rounded-full border-2 border-white/20 bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer flex items-center justify-center">‹</button>
         <button onClick={()=>setMPage(p=>(p+1)%feedbackCards.length)} className="w-14 h-14 rounded-full border-2 border-white/20 bg-[#070a10]/35 text-white/70 text-3xl cursor-pointer flex items-center justify-center">›</button>
@@ -247,6 +253,7 @@ function InfiniteFeedbackSlider() {
           </div>
         ))}
       </div>
+      {/* Testimonial nav buttons — excluded from hover effect */}
       <div className="flex justify-center gap-4 mt-7">
         <button onClick={()=>{
           pausedRef.current=true;
@@ -440,7 +447,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
   );
 }
 
-/* ── METHOD SECTION — SECTION_INSET for method cards only; Roadmap + What You Get + Promise use GUTTER ── */
+/* ── METHOD SECTION ── */
 function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
   const methodCards = [
     { icon: <IconTarget />, title: "CUSTOMISED & GOAL-DRIVEN",  desc: "A roadmap built entirely around your body type, skill level, and competition goals." },
@@ -509,7 +516,7 @@ function MethodSection({ scrollToForm }: { scrollToForm: () => void }) {
         </Reveal>
       </section>
 
-      {/* Roadmap — full bleed, uses GUTTER internally */}
+      {/* Roadmap — full bleed */}
       <RoadmapSection scrollToForm={scrollToForm} />
 
       {/* What You Get + Promise — GUTTER */}
@@ -556,7 +563,13 @@ AOF exists to close that gap — with structure, accountability, and coaching th
 
         {/* Book A Call strip — breaks out of GUTTER to full bleed */}
         <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{marginLeft:"-1cm",marginRight:"-1cm"}}>
-          <button onClick={scrollToForm} className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/10 transition-colors">
+          <button
+            onClick={scrollToForm}
+            className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-all duration-200"
+            onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+            onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="transparent";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
+            onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+            onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
             Book A Call
           </button>
         </div>
@@ -608,7 +621,14 @@ export default function CoachingPage() {
           <button onClick={()=>navigate("/")} className="hidden md:flex items-center gap-2 bg-transparent border-none text-white/65 font-['Barlow'] text-[14px] font-semibold cursor-pointer hover:text-white transition-colors">
             <ArrowLeftIcon /> Back To Home
           </button>
-          <button onClick={scrollToForm} className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer hover:bg-[#059a9f] transition-colors">
+          {/* Navbar CTA — white bg + black text on hover/active */}
+          <button
+            onClick={scrollToForm}
+            className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer transition-all duration-200"
+            onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+            onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
+            onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+            onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
             Book A Call
           </button>
         </div>
@@ -640,8 +660,14 @@ export default function CoachingPage() {
               <p className="text-white/60 text-[16px] leading-[1.7] max-w-[480px] mb-8">
                 Stop training in the crowd. Get a personalised coaching program built around your body, your goals, and your timeline — guided by coaches who have been in the ring.
               </p>
-              <button onClick={scrollToForm}
-                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer hover:bg-[#057e82] hover:-translate-y-0.5 transition-all duration-200">
+              {/* Hero CTA — white bg + black text on hover/active */}
+              <button
+                onClick={scrollToForm}
+                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-all duration-200"
+                onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.borderColor="#fff";(e.currentTarget as HTMLButtonElement).style.transform="translateY(-2px)";}}
+                onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";(e.currentTarget as HTMLButtonElement).style.borderColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.transform="translateY(0)";}}
+                onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.borderColor="#fff";}}
+                onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";(e.currentTarget as HTMLButtonElement).style.borderColor="#fff";}}>
                 Book A Call
               </button>
             </Reveal>
@@ -665,7 +691,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── PAIN SECTION — SECTION_INSET (unchanged) ── */}
+      {/* ── PAIN SECTION — SECTION_INSET ── */}
       <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           <div className="flex-1 min-w-[260px]">
@@ -697,7 +723,7 @@ export default function CoachingPage() {
       {/* ── METHOD + ROADMAP + WHAT YOU GET ── */}
       <MethodSection scrollToForm={scrollToForm} />
 
-      {/* ── COACH SECTION — SECTION_INSET (unchanged) ── */}
+      {/* ── COACH SECTION — SECTION_INSET ── */}
       <div className="bg-[#0f1115]">
         <div className="w-full py-12 pb-10" style={SECTION_INSET}>
           <Reveal>
@@ -730,7 +756,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── TESTIMONIALS — SECTION_INSET (unchanged) ── */}
+      {/* ── TESTIMONIALS — SECTION_INSET ── */}
       <div id="testimonials" className="relative overflow-hidden bg-[#0b0b0b]"
         style={{backgroundImage:"repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
@@ -766,7 +792,7 @@ export default function CoachingPage() {
         </div>
       </div>
 
-      {/* ── APPLY FORM — SECTION_INSET (unchanged) ── */}
+      {/* ── APPLY FORM — SECTION_INSET ── */}
       <div id="contact" ref={formRef} className="relative overflow-hidden bg-[#0a0a0a]"
         style={{backgroundImage:"radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)",backgroundSize:"20px 20px"}}>
         <div className="w-full py-12" style={SECTION_INSET}>
@@ -786,8 +812,6 @@ export default function CoachingPage() {
                     <p className="text-[16px] text-white leading-[1.55]">{item}</p>
                   </div>
                 ))}
-                {/* ── ANY QUERIES — centered, matching screenshot ── */}
-              
               </Reveal>
             </div>
             <div className="flex-1 min-w-[300px]">
@@ -826,8 +850,14 @@ export default function CoachingPage() {
                         <option value="fitness">Fitness and Conditioning</option>
                         <option value="beginner">Learn MMA from Scratch</option>
                       </select>
-                      <button onClick={handleLeadSubmit}
-                        className="w-full py-3.5 mt-1 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[2px] border-none cursor-pointer hover:bg-[#059a9f] transition-colors">
+                      {/* Form submit CTA — white bg + black text on hover/active */}
+                      <button
+                        onClick={handleLeadSubmit}
+                        className="w-full py-3.5 mt-1 rounded-lg bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[2px] border-none cursor-pointer transition-all duration-200"
+                        onMouseEnter={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+                        onMouseLeave={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#07b4ba";(e.currentTarget as HTMLButtonElement).style.color="#fff";}}
+                        onMouseDown={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}
+                        onMouseUp={e=>{(e.currentTarget as HTMLButtonElement).style.backgroundColor="#fff";(e.currentTarget as HTMLButtonElement).style.color="#000";}}>
                         Next — Schedule a Time
                       </button>
                     </>
@@ -837,15 +867,15 @@ export default function CoachingPage() {
             </div>
           </div>
           <div className="mt-7 flex flex-col items-center gap-3 w-full">
-  <p className="text-white font-bold text-[15px]">
-    Any Queries?
-  </p>
-
-  <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,35)]">
-    <WhatsAppIcon />
-    Chat On WhatsApp
-  </button>
-</div>
+            <p className="text-white font-bold text-[15px]">
+              Any Queries?
+            </p>
+            {/* WhatsApp button — excluded from hover effect, keeps its own green style */}
+            <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-10 rounded-full font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,35)]">
+              <WhatsAppIcon />
+              Chat On WhatsApp
+            </button>
+          </div>
         </div>
       </div>
 
