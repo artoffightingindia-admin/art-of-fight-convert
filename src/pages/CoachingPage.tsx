@@ -768,14 +768,14 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
           <div className="relative">
             <button
   onClick={()=>setIdx(p=>Math.max(p-1,0))}
-  className="absolute left-[-70px] top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center"
+  className="absolute left-[calc(-1cm-18px)] top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center"
 >
   ‹
 </button>
 
 <button
   onClick={()=>setIdx(p=>Math.min(p+1,roadmapCards.length-2))}
-  className="absolute right-[-70px] top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center"
+  className="absolute right-[calc(-1cm-18px)] top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center"
 >
   ›
 </button>
