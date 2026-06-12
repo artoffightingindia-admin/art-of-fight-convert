@@ -806,6 +806,7 @@ function RoadmapSection({ scrollToForm }: { scrollToForm: () => void }) {
               </div>
             </div>
           </div>
+            </div>
         )}
       </div>
     </div>
