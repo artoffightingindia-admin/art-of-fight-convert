@@ -252,7 +252,7 @@ export default function ProgramPage() {
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
 
-      {/* ── NAVBAR — matches CoachingPage height 62px ── */}
+      {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between" style={GUTTER}>
         <span className="font-['Bebas_Neue'] text-[30px] leading-none">
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
@@ -261,7 +261,11 @@ export default function ProgramPage() {
           <button className="hidden md:flex bg-transparent border-none text-white/65 font-['Barlow'] text-[14px] font-semibold cursor-pointer hover:text-white transition-colors items-center gap-2" onClick={() => navigate("/")}>
             ← Back To Home
           </button>
-          <button className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer hover:bg-[#059a9f] transition-colors" onClick={scrollToFooter}>
+          {/* Navbar CTA — hover: white bg, black text */}
+          <button
+            className="h-9 px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[17px] tracking-[2px] border-none cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
+            onClick={scrollToFooter}
+          >
             JOIN NOW
           </button>
         </div>
@@ -270,7 +274,7 @@ export default function ProgramPage() {
       {/* Mobile Back Button */}
       <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-[#13171d] text-[#07b4ba] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
-      {/* ── HERO + TRUST BAR — matches CoachingPage 62px offset ── */}
+      {/* ── HERO + TRUST BAR ── */}
       <div className="relative flex flex-col w-full overflow-hidden" ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; el.style.height = "100vh"; el.style.height = "100svh"; el.style.height = "100dvh"; }}>
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
           <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
@@ -286,14 +290,18 @@ export default function ProgramPage() {
               <p className="text-white/60 text-[16px] leading-[1.7] max-w-[480px] mb-8">
                 A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
               </p>
-              <button className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer hover:bg-[#057e82] hover:-translate-y-0.5 transition-all duration-200" onClick={scrollToFooter}>
+              {/* Hero CTA — hover: white bg, black text */}
+              <button
+                className="inline-flex items-center justify-center px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
+                onClick={scrollToFooter}
+              >
                 JOIN NOW
               </button>
             </Reveal>
           </div>
         </section>
 
-        {/* Trust Bar — identical style to CoachingPage */}
+        {/* Trust Bar */}
         <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0" style={{ height: "1.5cm", ...GUTTER }}>
           <div className="w-full flex items-center justify-center md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-3">
@@ -312,7 +320,7 @@ export default function ProgramPage() {
         </div>
       </div>
 
-      {/* ── PAIN SECTION — SECTION_INSET, matches CoachingPage ── */}
+      {/* ── PAIN SECTION — SECTION_INSET ── */}
       <section className="w-full py-12" style={SECTION_INSET}>
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-center flex-wrap">
           <div className="flex-1 min-w-[260px]">
@@ -386,16 +394,10 @@ export default function ProgramPage() {
             {whatCards.map((item, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div className="w-full min-h-auto md:min-h-[255px] p-[16px] rounded-[18px] bg-gradient-to-b md:bg-none from-[#13171d] to-[#101318] md:bg-[#111417] border border-white/5 md:border-2 md:border-[#111417] text-left md:text-center flex flex-row md:flex-col items-center justify-start md:justify-center gap-[16px] md:gap-[18px]">
-                  <div className="w-[46px] h-[46px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">
-                    {item.icon}
-                  </div>
+                  <div className="w-[46px] h-[46px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
                   <div className="flex flex-col md:items-center w-full">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[2px] leading-[1.3] m-0 md:min-h-[58px] flex items-start justify-start md:justify-center text-left md:text-center mb-[4px]">
-                      {item.title}
-                    </h4>
-                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0 md:min-h-[44px] flex items-start justify-start md:justify-center">
-                      {item.desc}
-                    </p>
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[2px] leading-[1.3] m-0 md:min-h-[58px] flex items-start justify-start md:justify-center text-left md:text-center mb-[4px]">{item.title}</h4>
+                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0 md:min-h-[44px] flex items-start justify-start md:justify-center">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -512,7 +514,7 @@ export default function ProgramPage() {
             </div>
           )}
 
-          {/* Promise */}
+          {/* Promise + Join Now strip */}
           <div className="w-full mt-16" style={GUTTER}>
             <div className="w-full mx-auto text-center px-10 py-8">
               <p className="font-['Bebas_Neue'] text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
@@ -523,10 +525,14 @@ export default function ProgramPage() {
                 <span className="text-[#07b4ba] text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
               </p>
             </div>
-
-            {/* Join Now Strip */}
+            {/* Join Now strip — hover: white bg, black text */}
             <div className="mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
-              <button className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] hover:bg-black/10 transition-colors" onClick={scrollToFooter}>Join Now</button>
+              <button
+                className="w-full py-3.5 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
+                onClick={scrollToFooter}
+              >
+                Join Now
+              </button>
             </div>
           </div>
         </div>
@@ -680,7 +686,11 @@ export default function ProgramPage() {
                     <span className="font-['Bebas_Neue'] text-[32px] text-white/30 line-through leading-none">₹1999</span>
                     <span className="font-['Bebas_Neue'] text-[48px] tracking-[2px] text-white leading-none">₹999</span>
                   </div>
-                  <button className="w-full py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[26px] tracking-[2px] cursor-pointer hover:bg-[#059a9f] transition-colors">
+                  {/* Final CTA JOIN NOW — hover: white bg, black text */}
+                  <button
+                    className="w-full py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
+                    onClick={scrollToFooter}
+                  >
                     JOIN NOW
                   </button>
                   <p className="mt-4 font-['Barlow'] text-[13px] leading-[1.7] text-white/50">Build real striking fundamentals with a structured beginner-friendly system.</p>
@@ -701,6 +711,7 @@ export default function ProgramPage() {
           <Reveal>
             <div className="flex flex-col items-center gap-3 mt-10">
               <p className="text-white font-['Barlow'] font-bold text-[15px]">Any Queries?</p>
+              {/* WhatsApp button — unchanged, no white hover */}
               <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></svg>
                 Chat On WhatsApp
