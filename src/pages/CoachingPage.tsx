@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const NAVBAR_H = 62;
 
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
-const SECTION_INSET: CSSProperties = { paddingLeft: "120px", paddingRight: "120px" };
+const SECTION_INSET: CSSProperties = { paddingLeft: "140px", paddingRight: "140px" };
 
 /* ── REVEAL ── */
 interface RevealProps { children: ReactNode; style?: CSSProperties; }
