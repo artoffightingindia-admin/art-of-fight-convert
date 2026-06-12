@@ -141,13 +141,14 @@ const globalStyles = `
     background: linear-gradient(135deg, rgba(7,180,186,0.08), rgba(255,255,255,0.03), rgba(7,180,186,0.08));
     background-size: 400% 400%;
     animation: holo-shift 6s ease infinite;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
   }
-  .holo-card:hover {
-    transform: scale(1.01);
-    box-shadow: 0 20px 60px rgba(7,180,186,0.2), 0 0 0 1px rgba(7,180,186,0.3);
-  }
-
+ .holo-card:hover {
+  box-shadow:
+    0 0 20px rgba(7,180,186,0.25),
+    0 0 40px rgba(7,180,186,0.15),
+    0 0 0 1px rgba(7,180,186,0.3);
+}
   .magnetic-btn {
     transition: transform 0.2s cubic-bezier(0.23,1,0.32,1);
     position: relative;
