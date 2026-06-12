@@ -11,7 +11,7 @@ const services = [
       "Flexible scheduling",
     ],
     cta: "Book a Session",
-    popular: true,
+    badge: "Most Popular",
   },
   {
     title: "AOF 30 Days Program",
@@ -22,7 +22,7 @@ const services = [
       "Learn fundamental MMA techniques",
     ],
     cta: "Apply Due — Limited Availability",
-    popular: false,
+    badge: "30-Day Transformation",
   },
 ];
 
@@ -42,11 +42,11 @@ const ServicesSection = () => (
             style={{ animationDelay: `${idx * 150}ms` }}
             className="relative bg-card border border-border rounded-lg p-8 flex flex-col items-start text-left gap-5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 animate-fade-up"
           >
-            {s.popular && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-wide px-4 py-1 rounded-full">
-                Most Popular
-              </span>
-            )}
+           {s.badge && (
+  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-wide px-4 py-1 rounded-full">
+    {s.badge}
+  </span>
+)}
             <h3 className="font-display text-3xl text-foreground">{s.title}</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
             <ul className="flex flex-col gap-3 w-full">
