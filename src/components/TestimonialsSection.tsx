@@ -175,7 +175,7 @@ const TestimonialsSection = () => {
   }}
 >
   Hear It From Our Fighters
-</h3>>
+</h3>
           <div
             
             className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
