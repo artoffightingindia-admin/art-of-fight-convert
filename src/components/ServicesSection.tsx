@@ -32,9 +32,13 @@ const ServicesSection = () => (
    <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3 text-center">
   Service Selection
 </p>
-      <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-10">
-        Choose Your Path
-      </h2>
+     <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-3">
+  Choose Your Path
+</h2>
+
+<p className="text-muted-foreground text-sm leading-relaxed text-center max-w-2xl mx-auto mb-10">
+  Intensive group training designed to transform your fitness and fighting skills in just 30 days.
+</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {services.map((s, idx) => (
           <div
