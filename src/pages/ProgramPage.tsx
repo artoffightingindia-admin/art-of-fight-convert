@@ -357,6 +357,19 @@ export default function ProgramPage() {
           <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
             <div className="flex-1 max-w-full md:max-w-[500px] w-full">
               <Reveal>
+                {/* ── LABEL TEXT ABOVE VIDEO ── */}
+                <h3
+                  className="mb-4 text-center italic"
+                  style={{
+                    fontFamily: "'Barlow', sans-serif",
+                    fontSize: "22px",
+                    fontWeight: 600,
+                    color: "#ffffff",
+                    letterSpacing: "0.5px",
+                  }}
+                >
+                  Hear Directly From People Who Have Trained Under Coach Purushothaman
+                </h3>
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632] border border-white/10">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer hover:bg-[#059a9f] transition-colors">
@@ -517,6 +530,21 @@ export default function ProgramPage() {
             </div>
           )}
 
+          {/* ── DESKTOP: Consistency box between roadmap cards and promise strip ── */}
+          {!isMobileRoadmap && (
+            <div className="w-full mt-10 md:mt-12" style={GUTTER}>
+              <div className="flex items-center gap-4 p-5 md:p-6 border border-[#07b4ba]/25 rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
+                <div className="flex w-10 h-10 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[18px] md:text-[20px] tracking-[1px] leading-none mb-1">STAY CONSISTENT. TRUST THE PROCESS.</h3>
+                  <p className="text-[#07b4ba] font-['Barlow'] text-[13px] md:text-[14px] leading-[1.4]">Become the best version of yourself — week by week, rep by rep.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Promise + Join Now strip */}
           <div className="w-full mt-12 md:mt-16" style={GUTTER}>
             <div className="w-full mx-auto text-center px-5 md:px-10 py-7 md:py-8">
@@ -620,20 +648,18 @@ export default function ProgramPage() {
           </Reveal>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 md:gap-2">
             {[
-              { icon: <IconNutrition />, title: "FIGHTER NUTRITION GUIDE", value: "₹1499 VALUE" },
-              { icon: <IconMobility />, title: "DAILY MOBILITY ROUTINE", value: "₹1299 VALUE" },
-              { icon: <IconCommunity />, title: "PRIVATE FIGHTERS COMMUNITY", value: "₹1299 VALUE" },
-              { icon: <IconShadowboxing />, title: "ADVANCED SHADOWBOXING FLOWS", value: "₹1299 VALUE" },
-              { icon: <IconAudio />, title: "FIGHTER MINDSET AUDIO PACK", value: "₹1199 VALUE" },
+              { icon: <IconNutrition />, title: "FIGHTER NUTRITION GUIDE", desc: "Fuel your training with a meal plan designed for fighters — optimise energy, recovery, and body composition." },
+              { icon: <IconMobility />, title: "DAILY MOBILITY ROUTINE", desc: "Loosen tight hips, shoulders and ankles with targeted drills that keep you injury-free and fight-ready." },
+              { icon: <IconCommunity />, title: "PRIVATE FIGHTERS COMMUNITY", desc: "Join a squad of driven athletes — share wins, ask questions, and stay accountable every single day." },
+              { icon: <IconShadowboxing />, title: "ADVANCED SHADOWBOXING FLOWS", desc: "Fluid, coach-designed shadowboxing sequences to sharpen movement, timing, and muscle memory." },
+              { icon: <IconAudio />, title: "FIGHTER MINDSET AUDIO PACK", desc: "Pre-training audio sessions to lock in focus, kill self-doubt, and build the mental edge of a competitor." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
                 <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-3.5 md:p-4 relative overflow-hidden min-h-[180px] md:min-h-[220px] flex flex-col items-center text-center ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
                   <div className="absolute top-3 left-3 bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[13px] md:text-[14px] tracking-[1px] px-2 py-0.5 rounded-[5px] leading-none">#{i + 1}</div>
                   <div className="w-[52px] h-[52px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-1.5 mt-5 md:mb-2 md:mt-4">{item.icon}</div>
-                  <h3 className="font-['Bebas_Neue'] text-[12px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-2">{item.title}</h3>
-                  <div className="mt-auto border-t border-white/10 pt-2 md:pt-2.5 w-full">
-                    <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[18px] md:text-[24px] tracking-[1px] m-0 leading-none">{item.value}</p>
-                  </div>
+                  <h3 className="font-['Bebas_Neue'] text-[12px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-1.5">{item.title}</h3>
+                  <p className="font-['Barlow'] text-[11px] md:text-[13px] text-white/55 leading-[1.55] px-1">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -662,63 +688,86 @@ export default function ProgramPage() {
               <Reveal>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
-                  APPLY FOR YOUR<br /><span className="text-[#07b4ba]">30-DAY PROGRAM</span>
+                  DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK.</span>
                 </h2>
-                <p className="text-white/50 text-[13px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
-                  Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
+                <p className="text-white/55 text-[13px] md:text-[14px] leading-[1.7] mb-4 max-w-[400px]">
+                  Every week you wait is another week spent wondering where to start. Join the next batch and begin building real MMA striking skills with a proven step-by-step system.
                 </p>
-                {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
+                {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Progress Guarantee"].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5 mb-3">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
                   </div>
                 ))}
+                {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
+                <div className="mt-5 md:mt-6 flex items-start gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80">
+                  <div className="flex w-10 h-10 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] mt-0.5">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">CONDITIONAL PROGRESS GUARANTEE</p>
+                    <p className="font-['Barlow'] text-[13px] md:text-[14px] text-white/65 leading-[1.65]">Complete the program, submit your training work, and follow the process. If you don't achieve the promised outcome, we'll make it right.</p>
+                  </div>
+                </div>
               </Reveal>
             </div>
 
             {/* ── CTA Card with offer ribbon ── */}
             <div className="flex-1 min-w-[350px] w-full">
               <Reveal>
-                {/*
-                  relative + overflow-hidden enables the ribbon to clip at card edges.
-                  The ribbon is a rotated banner anchored to the top-left corner,
-                  exactly matching the reference image placement.
-                */}
                 <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center relative overflow-hidden">
 
-                  {/* ── OFFER RIBBON (top-left diagonal, brand teal) ── */}
+                  {/* ── OFFER RIBBON (top-left diagonal, fully finished) ── */}
                   <div
                     style={{
                       position: "absolute",
                       top: 0,
                       left: 0,
-                      width: "180px",
+                      width: "160px",
                       height: "160px",
                       overflow: "hidden",
                       zIndex: 10,
                       pointerEvents: "none",
                     }}
                   >
+                    {/* Ribbon band */}
                     <div
                       style={{
                         position: "absolute",
-                        top: "38px",
-                        left: "-42px",
-                        width: "170px",
-                        background: "linear-gradient(135deg, #059a9f, #07b4ba)",
+                        top: "32px",
+                        left: "-48px",
+                        width: "192px",
+                        background: "linear-gradient(135deg, #059a9f 0%, #07b4ba 50%, #059a9f 100%)",
                         color: "#fff",
                         fontFamily: "'Bebas Neue', sans-serif",
                         fontSize: "13px",
-                        letterSpacing: "2px",
+                        letterSpacing: "2.5px",
                         textAlign: "center",
-                        padding: "7px 0",
+                        padding: "8px 0",
                         transform: "rotate(-45deg)",
-                        boxShadow: "0 3px 14px rgba(7,180,186,0.55)",
+                        boxShadow: "0 4px 18px rgba(7,180,186,0.55), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.15)",
                         userSelect: "none",
                       }}
                     >
                       LIMITED OFFER
                     </div>
+                    {/* Top-left corner fold triangle */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: 0,
+                        height: 0,
+                        borderStyle: "solid",
+                        borderWidth: "14px 14px 0 0",
+                        borderColor: "#034e52 transparent transparent transparent",
+                        zIndex: 11,
+                      }}
+                    />
                   </div>
 
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED FOUNDER SPOTS</p>
