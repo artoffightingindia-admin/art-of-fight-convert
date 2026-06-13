@@ -170,7 +170,7 @@ const TestimonialsSection = () => {
     fontFamily: "'Barlow', sans-serif",
     fontSize: "22px",
     fontWeight: 600,
-    color: "#07b4ba",
+    color: "fff",
     letterSpacing: "0.5px",
   }}
 >
