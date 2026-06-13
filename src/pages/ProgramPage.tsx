@@ -327,10 +327,27 @@ export default function ProgramPage() {
       <section className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
         <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
           <div className="flex-1 max-w-full md:max-w-[500px] w-full md:order-2">
-            <Reveal>
-              <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80" alt="MMA Training" className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block" />
-            </Reveal>
-          </div>
+  <Reveal>
+    <h3
+      className="mb-4 text-center italic"
+      style={{
+        fontFamily: "'Barlow', sans-serif",
+        fontSize: "22px",
+        fontWeight: 600,
+        color: "#ffffff",
+        letterSpacing: "0.5px",
+      }}
+    >
+      Hear Directly From People Who Have Trained Under Coach Purushothaman
+    </h3>
+
+    <img
+      src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80"
+      alt="MMA Training"
+      className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block"
+    />
+  </Reveal>
+</div>
           <div className="flex-1 min-w-[260px] md:order-1">
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
@@ -357,19 +374,7 @@ export default function ProgramPage() {
           <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
             <div className="flex-1 max-w-full md:max-w-[500px] w-full">
               <Reveal>
-                {/* ── LABEL TEXT ABOVE VIDEO ── */}
-                <h3
-                  className="mb-4 text-center italic"
-                  style={{
-                    fontFamily: "'Barlow', sans-serif",
-                    fontSize: "22px",
-                    fontWeight: 600,
-                    color: "#ffffff",
-                    letterSpacing: "0.5px",
-                  }}
-                >
-                  Hear Directly From People Who Have Trained Under Coach Purushothaman
-                </h3>
+             
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632] border border-white/10">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer hover:bg-[#059a9f] transition-colors">
