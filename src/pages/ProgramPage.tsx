@@ -40,7 +40,6 @@ function InfiniteFeedbackSlider() {
   const posRef = useRef(0);
   const [mobilePage, setMobilePage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const CARDS_PER_PAGE = 1; // mobile: show 1 card at a time for better readability
   const allCards = [...feedbackCards, ...feedbackCards];
 
   useEffect(() => {
@@ -77,13 +76,11 @@ function InfiniteFeedbackSlider() {
     };
   }, [isMobile]);
 
-  // Mobile: show 1 card at a time with swipe-style pagination
   const currentCard = feedbackCards[mobilePage % feedbackCards.length];
 
   if (isMobile) {
     return (
       <div className="block w-full">
-        {/* Single card display */}
         <div className="w-full p-5 border border-white/8 rounded-2xl bg-[#1a1d23]">
           <div className="flex gap-1 mb-3 text-[#07b4ba] text-sm leading-none">★★★★★</div>
           <p className="m-0 mb-4 text-white/75 font-['Barlow'] text-[15px] italic font-normal leading-[1.7]">"{currentCard.text}"</p>
@@ -95,28 +92,17 @@ function InfiniteFeedbackSlider() {
             </div>
           </div>
         </div>
-
-        {/* Dot indicators */}
         <div className="flex justify-center gap-2 mt-4">
           {feedbackCards.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setMobilePage(i)}
-              className={`w-2 h-2 rounded-full border-0 cursor-pointer transition-all duration-200 ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-5" : "bg-white/25"}`}
-            />
+            <button key={i} onClick={() => setMobilePage(i)}
+              className={`w-2 h-2 rounded-full border-0 cursor-pointer transition-all duration-200 ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-5" : "bg-white/25"}`} />
           ))}
         </div>
-
-        {/* Navigation arrows */}
         <div className="flex justify-center gap-4 mt-5">
-          <button
-            className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
-            onClick={() => setMobilePage(p => (p - 1 + feedbackCards.length) % feedbackCards.length)}
-          >‹</button>
-          <button
-            className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
-            onClick={() => setMobilePage(p => (p + 1) % feedbackCards.length)}
-          >›</button>
+          <button className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
+            onClick={() => setMobilePage(p => (p - 1 + feedbackCards.length) % feedbackCards.length)}>‹</button>
+          <button className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
+            onClick={() => setMobilePage(p => (p + 1) % feedbackCards.length)}>›</button>
         </div>
       </div>
     );
@@ -235,13 +221,8 @@ const stats = [
   { val: "3", label: "Continents" },
 ];
 
-/* ── SHARED PADDING — identical to CoachingPage ── */
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
 const SECTION_INSET: CSSProperties = { paddingLeft: "140px", paddingRight: "140px" };
-
-/* ── MOBILE-SAFE SECTION INSET ── */
-/* On mobile (<768px) we fall back to the same 1cm gutter as GUTTER.
-   On desktop we keep the original 140px inset unchanged. */
 const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 
 export default function ProgramPage() {
@@ -283,7 +264,6 @@ export default function ProgramPage() {
           <button className="hidden md:flex bg-transparent border-none text-white/65 font-['Barlow'] text-[14px] font-semibold cursor-pointer hover:text-white transition-colors items-center gap-2" onClick={() => navigate("/")}>
             ← Back To Home
           </button>
-          {/* Navbar CTA */}
           <button
             className="h-9 px-4 md:px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[15px] md:text-[17px] tracking-[2px] border-none cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
             onClick={scrollToFooter}
@@ -301,15 +281,12 @@ export default function ProgramPage() {
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
           <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-          {/* Mobile: stronger bottom fade so text stays readable on small screens */}
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/80 to-transparent" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c] md:via-[#06080c]/50" />
-          {/* Mobile: extra bottom scrim so hero text never fights with image */}
           <div className="absolute bottom-0 left-0 right-0 h-1/2 z-[3] bg-gradient-to-t from-[#06080c] to-transparent md:hidden" />
 
           <div className="w-full relative z-10" style={GUTTER}>
             <Reveal>
-              {/* Mobile: tighter label */}
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase mb-3 md:mb-4">AOF 30-Day Online Program</p>
               <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5">
                 BUILD REAL<br /><span className="text-[#07b4ba]">MMA STRIKING</span><br />FUNDAMENTALS
@@ -317,12 +294,11 @@ export default function ProgramPage() {
               <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
                 A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
               </p>
-              {/* Mobile: full-width CTA button, larger tap target */}
               <button
                 className="inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
                 onClick={scrollToFooter}
               >
-                JOIN NOW 
+                JOIN NOW
               </button>
             </Reveal>
           </div>
@@ -348,10 +324,8 @@ export default function ProgramPage() {
       </div>
 
       {/* ── PAIN SECTION ── */}
-      {/* Mobile: uses GUTTER (1cm) padding; desktop: uses SECTION_INSET (140px) */}
       <section className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
         <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-          {/* Mobile: image shown ABOVE text for visual impact */}
           <div className="flex-1 max-w-full md:max-w-[500px] w-full md:order-2">
             <Reveal>
               <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80" alt="MMA Training" className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block" />
@@ -419,11 +393,9 @@ export default function ProgramPage() {
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">WHAT YOU GET</h2>
           </Reveal>
-          {/* Mobile: 2-col grid for compact display; desktop: 5-col */}
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} delay={i * 80}>
-                {/* Last card on mobile (5th) spans full width so it's not orphaned */}
                 <div className={`w-full p-4 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-center text-center gap-3 min-h-[160px] md:min-h-[255px] md:p-[16px] md:rounded-[18px] ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
                   <div className="w-[44px] h-[44px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
                   <div className="flex flex-col items-center w-full">
@@ -556,7 +528,6 @@ export default function ProgramPage() {
                 <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
               </p>
             </div>
-            {/* Join Now strip */}
             <div className="mt-6 md:mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
               <button
                 className="w-full py-4 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
@@ -575,7 +546,6 @@ export default function ProgramPage() {
           <Reveal>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6">LED BY</p>
             <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
-              {/* Mobile: coach photo full-width, shorter height */}
               <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0" />
               <div className="flex-1 min-w-[260px]">
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Head Coach</h2>
@@ -588,7 +558,6 @@ export default function ProgramPage() {
                     </div>
                   ))}
                 </div>
-                {/* Mobile: 2x2 grid instead of 4-col row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-4 md:mt-6">
                   {stats.map((stat, i) => (
                     <div key={i} className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[95px] md:h-[140px] p-3 md:p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)]">
@@ -649,7 +618,6 @@ export default function ProgramPage() {
               <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
           </Reveal>
-          {/* Mobile: 2-col grid; last item spans full */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 md:gap-2">
             {[
               { icon: <IconNutrition />, title: "FIGHTER NUTRITION GUIDE", value: "₹1499 VALUE" },
@@ -670,7 +638,6 @@ export default function ProgramPage() {
               </Reveal>
             ))}
           </div>
-          {/* Total bonus value banner */}
           <div className="mt-3 md:mt-4 border border-[#07b4ba]/30 rounded-[18px] p-4 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
@@ -709,10 +676,51 @@ export default function ProgramPage() {
               </Reveal>
             </div>
 
-            {/* CTA Card */}
+            {/* ── CTA Card with offer ribbon ── */}
             <div className="flex-1 min-w-[300px] w-full">
               <Reveal>
-                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center">
+                {/*
+                  relative + overflow-hidden enables the ribbon to clip at card edges.
+                  The ribbon is a rotated banner anchored to the top-left corner,
+                  exactly matching the reference image placement.
+                */}
+                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center relative overflow-hidden">
+
+                  {/* ── OFFER RIBBON (top-left diagonal, brand teal) ── */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "160px",
+                      height: "160px",
+                      overflow: "hidden",
+                      zIndex: 10,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "38px",
+                        left: "-42px",
+                        width: "170px",
+                        background: "linear-gradient(135deg, #059a9f, #07b4ba)",
+                        color: "#fff",
+                        fontFamily: "'Bebas Neue', sans-serif",
+                        fontSize: "13px",
+                        letterSpacing: "2px",
+                        textAlign: "center",
+                        padding: "7px 0",
+                        transform: "rotate(-45deg)",
+                        boxShadow: "0 3px 14px rgba(7,180,186,0.55)",
+                        userSelect: "none",
+                      }}
+                    >
+                      LIMITED OFFER
+                    </div>
+                  </div>
+
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED FOUNDER SPOTS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
                     START YOUR<br /><span className="text-[#07b4ba]">TRANSFORMATION</span>
@@ -721,7 +729,6 @@ export default function ProgramPage() {
                     <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹1999</span>
                     <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none">₹999</span>
                   </div>
-                  {/* Mobile: full-width, large CTA */}
                   <button
                     className="w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
                     onClick={scrollToFooter}
@@ -729,7 +736,6 @@ export default function ProgramPage() {
                     JOIN NOW
                   </button>
                   <p className="mt-3 md:mt-4 font-['Barlow'] text-[12px] md:text-[13px] leading-[1.7] text-white/50">Build real striking fundamentals with a structured beginner-friendly system.</p>
-                  {/* Countdown */}
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[["01", "DAYS"], ["23", "HOURS"], ["49", "MIN"]].map(([num, label]) => (
                       <div key={label} className="text-center">
@@ -772,7 +778,6 @@ export default function ProgramPage() {
           </div>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">NAVIGATION</h3>
-            {/* Mobile: horizontal wrap for nav links */}
             <div className="flex flex-wrap gap-x-5 gap-y-2.5 md:flex-col md:gap-2.5">
               {([["#home", "Home"], ["#method", "AOF Method"], ["#testimonials", "Testimonials"], ["#faq", "FAQ"], ["#contact", "Apply Now"]] as [string, string][]).map(([href, label]) => (
                 <a key={href} href={href} className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] no-underline hover:text-[#07b4ba] active:text-[#07b4ba] transition-colors">{label}</a>
@@ -786,7 +791,6 @@ export default function ProgramPage() {
             <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] leading-[1.8] max-w-[320px]">Art of Fighting Academy — building champions through proven systems and disciplined training.</p>
           </div>
         </div>
-        {/* Mobile: extra bottom padding to clear the floating back button */}
         <div className="w-full mt-6 pt-3 border-t border-white/10 text-center font-['Barlow'] text-[12px] md:text-[13px] text-white/30 pb-[80px] md:pb-0" style={GUTTER}>
           © 2026 AOF Academy. All rights reserved.
         </div>
