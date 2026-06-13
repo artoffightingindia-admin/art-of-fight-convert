@@ -162,6 +162,18 @@ const TestimonialsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
           {/* LEFT: video */}
+
+          <h3
+  className="mb-4"
+  style={{
+    fontFamily: "'Bebas Neue', sans-serif",
+    fontSize: "clamp(14px, 1vw, 22px)",
+    letterSpacing: "1px",
+    color: "#fff",
+  }}
+>
+  Hear It From Our Fighters
+</h3>
           <div
             className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
             style={{
