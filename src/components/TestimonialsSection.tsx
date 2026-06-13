@@ -163,7 +163,19 @@ const TestimonialsSection = () => {
 
           {/* LEFT: video */}
 
-  
+  <div className="flex flex-col">
+  <h3
+    className="mb-4"
+    style={{
+      fontFamily: "'Bebas Neue', sans-serif",
+      fontSize: "clamp(24px, 3vw, 32px)",
+      letterSpacing: "1px",
+      color: "#fff",
+      lineHeight: 1,
+    }}
+  >
+    Hear It From Our Fighters
+  </h3>
           <div
             
             className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
@@ -172,19 +184,7 @@ const TestimonialsSection = () => {
               background: "linear-gradient(135deg, #131c27 0%, #0d1117 100%)",
             }}
           >
-            <h3
-  className="absolute top-4 left-4 z-20"
-  style={{
-    fontFamily: "'Barlow', sans-serif",
-    fontSize: "14px",
-    fontWeight: 700,
-    letterSpacing: "1px",
-    color: "#fff",
-  }}
->
-  Hear It From Our Fighters
-</h3>
-            <div
+              <div
               className="absolute inset-0"
               style={{
                 background: "radial-gradient(ellipse 55% 55% at 50% 55%, rgba(7,180,186,0.13) 0%, transparent 70%)",
@@ -207,8 +207,8 @@ const TestimonialsSection = () => {
                     borderLeft: "18px solid #0a0f14",
                   }}
                 />
-                </div>
-              </div>
+      </div>
+            </div>
             </div>
           </div>
 
