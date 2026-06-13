@@ -163,24 +163,27 @@ const TestimonialsSection = () => {
 
           {/* LEFT: video */}
 
-          <h3
-  className="mb-4"
-  style={{
-    fontFamily: "'Bebas Neue', sans-serif",
-    fontSize: "clamp(14px, 1vw, 22px)",
-    letterSpacing: "1px",
-    color: "#fff",
-  }}
->
-  Hear It From Our Fighters
-</h3>
+  
           <div
+            
             className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
             style={{
               aspectRatio: "16/9",
               background: "linear-gradient(135deg, #131c27 0%, #0d1117 100%)",
             }}
           >
+            <h3
+  className="absolute top-4 left-4 z-20"
+  style={{
+    fontFamily: "'Barlow', sans-serif",
+    fontSize: "14px",
+    fontWeight: 700,
+    letterSpacing: "1px",
+    color: "#fff",
+  }}
+>
+  Hear It From Our Fighters
+</h3>
             <div
               className="absolute inset-0"
               style={{
