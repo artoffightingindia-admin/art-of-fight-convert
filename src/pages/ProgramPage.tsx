@@ -691,12 +691,12 @@ export default function ProgramPage() {
           <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-start flex-wrap">
             <div className="flex-1 min-w-[260px]">
               <Reveal>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
+                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
-                  DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK.</span>
+                  APPLY FOR YOUR<br /><span className="text-[#07b4ba]">30-DAY PROGRAM</span>
                 </h2>
-                <p className="text-white/55 text-[13px] md:text-[14px] leading-[1.7] mb-4 max-w-[400px]">
-                  Every week you wait is another week spent wondering where to start. Join the next batch and begin building real MMA striking skills with a proven step-by-step system.
+                <p className="text-white/50 text-[13px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
+                  Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
                 {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Progress Guarantee"].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5 mb-3">
