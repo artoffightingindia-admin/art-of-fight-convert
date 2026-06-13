@@ -698,7 +698,7 @@ export default function ProgramPage() {
                 <p className="text-white/50 text-[13px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
                   Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
                 </p>
-                {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Progress Guarantee"].map((item, i) => (
+                 {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5 mb-3">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
