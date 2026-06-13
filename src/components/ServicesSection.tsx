@@ -11,7 +11,7 @@ const services = [
       "Flexible scheduling",
     ],
     cta: "Book a Session",
-    badge: "Most Popular",
+    badge: "Most Personalized",
   },
   {
     title: "AOF 30 Days Program",
@@ -22,7 +22,7 @@ const services = [
       "Learn fundamental MMA techniques",
     ],
     cta: "Apply Due — Limited Availability",
-    badge: "30-Day Transformation",
+    badge: "Best For Self Learners",
   },
 ];
 
