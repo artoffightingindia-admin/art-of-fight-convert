@@ -322,7 +322,7 @@ export default function ProgramPage() {
                 className="inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
                 onClick={scrollToFooter}
               >
-                JOIN NOW — ₹999
+                JOIN NOW 
               </button>
             </Reveal>
           </div>
