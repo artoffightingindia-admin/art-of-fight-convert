@@ -174,7 +174,7 @@ const TestimonialsSection = () => {
     letterSpacing: "0.5px",
   }}
 >
-  Hear It From Our Fighters
+  Here Directly From People Who Have Trained Under Coach Purushothaman
 </h3>
           <div
             
