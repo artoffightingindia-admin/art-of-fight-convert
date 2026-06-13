@@ -207,6 +207,7 @@ const TestimonialsSection = () => {
                     borderLeft: "18px solid #0a0f14",
                   }}
                 />
+                </div>
               </div>
             </div>
           </div>
