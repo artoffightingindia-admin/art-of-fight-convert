@@ -174,7 +174,7 @@ const TestimonialsSection = () => {
     letterSpacing: "0.5px",
   }}
 >
-  Here Directly From People Who Have Trained Under Coach Purushothaman
+  "Hear Directly From People Who Have Trained Under Coach Purushothaman"
 </h3>
           <div
             
