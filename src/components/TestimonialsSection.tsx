@@ -165,17 +165,17 @@ const TestimonialsSection = () => {
 
   <div className="flex flex-col">
   <h3
-    className="mb-4"
-    style={{
-      fontFamily: "'Bebas Neue', sans-serif",
-      fontSize: "clamp(24px, 3vw, 32px)",
-      letterSpacing: "1px",
-      color: "#fff",
-      lineHeight: 1,
-    }}
-  >
-    Hear It From Our Fighters
-  </h3>
+  className="mb-4 text-center italic"
+  style={{
+    fontFamily: "'Barlow', sans-serif",
+    fontSize: "22px",
+    fontWeight: 600,
+    color: "#07b4ba",
+    letterSpacing: "0.5px",
+  }}
+>
+  Hear It From Our Fighters
+</h3>>
           <div
             
             className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
