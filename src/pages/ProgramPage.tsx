@@ -677,7 +677,7 @@ export default function ProgramPage() {
             </div>
 
             {/* ── CTA Card with offer ribbon ── */}
-            <div className="flex-1 min-w-[300px] w-full">
+            <div className="flex-1 min-w-[350px] w-full">
               <Reveal>
                 {/*
                   relative + overflow-hidden enables the ribbon to clip at card edges.
@@ -692,7 +692,7 @@ export default function ProgramPage() {
                       position: "absolute",
                       top: 0,
                       left: 0,
-                      width: "160px",
+                      width: "180px",
                       height: "160px",
                       overflow: "hidden",
                       zIndex: 10,
