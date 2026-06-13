@@ -760,7 +760,9 @@ export default function ProgramPage() {
                       LIMITED OFFER
                     </div>
                     {/* Top-left corner fold triangle */}
-      
+          
+                  </div>
+
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED FOUNDER SPOTS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
                     START YOUR<br /><span className="text-[#07b4ba]">TRANSFORMATION</span>
