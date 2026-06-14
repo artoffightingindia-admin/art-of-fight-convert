@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const CtaPairSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative w-full overflow-hidden aspect-[21/6] min-h-[280px]">
 
