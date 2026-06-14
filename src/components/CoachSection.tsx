@@ -52,9 +52,7 @@ SUPPORTED BY
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Bullets on the LEFT */}
         <div className="flex-1 order-2 md:order-1 flex md:justify-end">
-            <div className="max-w-xl">
-
-<div className="md:ml-[340px] mb-4">
+          <div className="md:ml-[340px] mb-4">
     <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
       Kaviarasu K
     </h2>
@@ -62,8 +60,9 @@ SUPPORTED BY
       Program Development | MMA Athlete
     </p>
   </div>
+            <div className="max-w-xl">
 
-  <div className="space-y-3">
+ <div className="space-y-3">
     <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
       As the driving force behind Art of Fighting, Kaviarasu leads program development, student support, and community growth. His focus is helping students stay accountable, build strong fundamentals, and get the most out of their training.
     </p>
