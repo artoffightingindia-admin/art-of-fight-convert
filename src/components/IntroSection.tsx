@@ -20,7 +20,7 @@ const IntroSection = () => (
 
           <p className="font-['Barlow'] text-[16px] text-white/70 leading-relaxed">
             You don't struggle because you lack motivation. You struggle because you
-            lack structure. Without the right structure, At Art of Fighting, we
+            lack structure. At Art of Fighting, we
             simplify the learning process through structured training, clear
             progressions, and direct mentorship.
             <br />
