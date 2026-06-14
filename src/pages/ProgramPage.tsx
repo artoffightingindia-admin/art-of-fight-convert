@@ -503,7 +503,7 @@ export default function ProgramPage() {
               <div className="flex w-9 h-9 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 max-w-[620px]">
                 <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[20px] tracking-[1px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
                 <p className="text-[#07b4ba] font-['Barlow'] text-[11px] md:text-[14px] leading-[1.3] md:leading-[1.4]">
   Every week includes Movement Fundamentals and White Belt Mentality sessions,
