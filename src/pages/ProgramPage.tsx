@@ -23,9 +23,9 @@ function Reveal({ children, style = {}, delay = 0 }: { children: ReactNode; styl
 
 /* ── FEEDBACK SLIDER ── */
 const feedbackCards = [
-  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
+  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" },
   { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
-  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
+  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" },
   { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose" },
   { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V" },
   { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P" },
@@ -84,7 +84,13 @@ function InfiniteFeedbackSlider() {
           <div className="flex gap-1 mb-4 text-[#07b4ba] text-sm leading-none">★★★★★</div>
           <p className="m-0 mb-5 text-white/80 font-['Barlow'] text-[15px] italic font-normal leading-[1.7]">"{currentCard.text}"</p>
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-[#202533] border border-[#07b4ba]/20 flex items-center justify-center text-lg shrink-0 shadow-inner">👤</div>
+            <div className="w-11 h-11 rounded-full bg-[#202533] border border-[#07b4ba]/20 flex items-center justify-center text-lg shrink-0 shadow-inner overflow-hidden">
+              {currentCard.image ? (
+                <img src={currentCard.image} alt={currentCard.author} className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-[#07b4ba] font-['Barlow'] font-bold">{currentCard.author.charAt(0).toUpperCase()}</span>
+              )}
+            </div>
             <div>
               <p className="m-0 mb-0.5 text-white font-['Barlow'] text-[15px] font-bold leading-none">{currentCard.author}</p>
               <span className="text-[#07b4ba]/70 font-['Barlow'] text-[12px] uppercase tracking-wider font-semibold leading-none">AOF Member</span>
@@ -116,7 +122,13 @@ function InfiniteFeedbackSlider() {
               <div className="flex gap-1 mb-4 text-[#07b4ba] text-base">★★★★★</div>
               <p className="font-['Barlow'] font-normal text-white/70 text-[15px] leading-relaxed italic mb-5">"{card.text}"</p>
               <div className="flex items-center gap-2.5 mt-auto min-h-[52px]">
-                <div className="w-10 h-10 rounded-full bg-[#202533] flex items-center justify-center text-lg shrink-0">👤</div>
+                <div className="w-10 h-10 rounded-full bg-[#202533] flex items-center justify-center text-lg shrink-0 overflow-hidden">
+                  {card.image ? (
+                    <img src={card.image} alt={card.author} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-[#07b4ba] font-['Barlow'] font-bold">{card.author.charAt(0).toUpperCase()}</span>
+                  )}
+                </div>
                 <div>
                   <p className="font-['Barlow'] font-bold text-white text-[15px] mb-0.5">{card.author}</p>
                   <span className="font-['Barlow'] font-normal text-white/40 text-[13px]">Member</span>
@@ -140,7 +152,7 @@ const faqItems = [
   { question: "How does the remote coaching work?", answer: "After your strategy call, your coach builds a fully customised training plan and delivers it digitally. You'll have direct WhatsApp access to your coach for questions, feedback, and check-ins. You submit session videos for review, and your coach adjusts the plan in real time based on what they see." },
   { question: "How quickly will I see results?", answer: "Most athletes report noticeable improvements in technique and conditioning within the first 3–4 weeks. Significant transformation typically takes 6–8 weeks of consistent training under the AOF method." },
   { question: "What if I'm a complete beginner?", answer: "Beginners are welcome and thrive in the AOF system. In fact, starting with proper 1-on-1 coaching before picking up bad habits is the fastest route to becoming a skilled fighter." },
-  { question: "Is there a contract or long-term commitment?", answer: "No long-term contracts. You can cancel anytime. We also back that up with a results guarantee — if you don't see measurable progress, we'll extend your coaching for free until you do." },
+  { question: "Is there a contract or long-term commitment?", answer: "No long-term contracts. You can cancel anytime. We also back that up with a results guarantee — if you don't see measurable progress, well extend your coaching for free until you do." },
   { question: "How many sessions should I train per week?", answer: "Most athletes train between 3–6 sessions per week depending on their goals, recovery capacity, and schedule. Your coach will create the optimal structure for you." },
 ];
 
