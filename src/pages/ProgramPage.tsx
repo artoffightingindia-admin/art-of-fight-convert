@@ -283,7 +283,7 @@ export default function ProgramPage() {
           <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/J04Z9Zcm/Program-page-Hero.jpg')] bg-center bg-cover opacity-100" />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/30 to-transparent" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c] md:via-[#06080c]/50" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/20 to-[#06080c] md:via-[#06080c]/20" />
           <div className="absolute bottom-0 left-0 right-0 h-1/2 z-[3] bg-gradient-to-t from-[#06080c] to-transparent md:hidden" />
 
           <div className="w-full relative z-10" style={GUTTER}>
