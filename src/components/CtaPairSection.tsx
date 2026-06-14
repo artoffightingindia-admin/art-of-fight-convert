@@ -58,9 +58,7 @@ const CtaPairSection = () => {
           {/* Left CTA */}
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
-              onClick={() => {
-                window.location.href = "/coaching";
-              }}
+              onClick={() => navigate("/coaching")}
               className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
@@ -115,9 +113,7 @@ const CtaPairSection = () => {
           {/* Right CTA */}
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
-              onClick={() => {
-                window.location.href = "/program";
-              }}
+              onClick={() => navigate("/program")}
               className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
