@@ -254,8 +254,13 @@ const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
-  const scrollToFooter = () => footerRef.current?.scrollIntoView({ behavior: "smooth" });
   const [roadmapIndex, setRoadmapIndex] = useState(0);
+
+  // --- RAZORPAY PAYMENT LINK INTEGRATION ---
+  const handlePayment = () => {
+    // 🚨 PASTE YOUR RAZORPAY PAYMENT LINK INSIDE THESE QUOTES 🚨
+    window.location.href = "https://rzp.io/rzp/RlhbhH2";
+  };
 
   const roadmapCards = [
     { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation",   image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
@@ -266,6 +271,8 @@ export default function ProgramPage() {
   ];
 
   const maxRoadmapIndex = roadmapCards.length - 2;
+
+  // IMPORTANT: For the buttons below, `onClick={scrollToFooter}` has been replaced with `onClick={handlePayment}`
 
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
@@ -281,7 +288,7 @@ export default function ProgramPage() {
           </button>
           <button
             className="h-9 px-4 md:px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[15px] md:text-[17px] tracking-[2px] border-none cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
-            onClick={scrollToFooter}
+            onClick={handlePayment}
           >
             JOIN NOW
           </button>
@@ -311,7 +318,7 @@ export default function ProgramPage() {
               </p>
               <button
                 className="inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
-                onClick={scrollToFooter}
+                onClick={handlePayment}
               >
                 JOIN NOW
               </button>
@@ -538,7 +545,7 @@ CHALLENGES OF BEGINNERS  </span>
             <div className="mt-6 md:mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
               <button
                 className="w-full py-4 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
-                onClick={scrollToFooter}
+                onClick={handlePayment}
               >
                 Join Now
               </button>
@@ -741,7 +748,7 @@ CHALLENGES OF BEGINNERS  </span>
                   </div>
                   <button
                     className="w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
-                    onClick={scrollToFooter}
+                    onClick={handlePayment}
                   >
                     JOIN THE NEXT BATCH
                   </button>
