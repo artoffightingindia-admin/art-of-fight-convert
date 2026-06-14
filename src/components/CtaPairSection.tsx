@@ -62,8 +62,9 @@ const CtaPairSection = () => {
           {/* Left CTA */}
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
-              onClick={() => navigate("/coaching")}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
+              disabled
+              // onClick={() => navigate("/coaching")} // Commented out until ready
+              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[280px] hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
@@ -85,7 +86,7 @@ const CtaPairSection = () => {
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
-                1-1 Coaching
+                1-1 Coaching (Coming Soon)
               </span>
 
               <span className="text-base">→</span>
@@ -118,7 +119,7 @@ const CtaPairSection = () => {
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
               onClick={() => navigate("/program")}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
+              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[280px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
