@@ -280,7 +280,7 @@ export default function ProgramPage() {
       {/* ── HERO + TRUST BAR ── */}
       <div className="relative flex flex-col w-full overflow-hidden" ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; el.style.height = "100vh"; el.style.height = "100svh"; el.style.height = "100dvh"; }}>
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
-          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
+          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/J04Z9Zcm/Program-page-Hero.jpg')] bg-center bg-cover opacity-90" />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/80 to-transparent" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c] md:via-[#06080c]/50" />
