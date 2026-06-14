@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 
 const services = [
   {
-    title: "PREMIUM 1-ON-1 HOME TRANSFORMATION",
+    title: "1-ON-1 HOME TRANSFORMATION",
     desc: "A fully customized coaching experience combining MMA training, fitness, nutrition, accountability, and lifestyle guidance.",
     bullets: [
       "Personalized Coaching",
@@ -14,7 +14,7 @@ const services = [
     badge: "Most Personalized",
   },
   {
-    title: "AOF 30-DAY MMA STRIKING PROGRAM",
+    title: "30-DAY MMA STRIKING PROGRAM",
     desc: "A structured online coaching experience designed to help beginners learn MMA striking fundamentals from home with confidence.",
     bullets: [
       "Step-by-step roadmap",
