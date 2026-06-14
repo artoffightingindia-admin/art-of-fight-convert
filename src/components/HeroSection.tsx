@@ -29,14 +29,13 @@ const HeroSection = () => {
           </p>
 
           <h1 className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground">
-            AOF Academy:
+         STOP DOUBTING.
             <br />
-            Unleash Your Potential
+          START LEARNING MMA THE RIGHT WAY.
           </h1>
 
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-md">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Transform your body and mind.
+            Whether you want to learn striking at home or transform your fitness with personal coaching, AOF gives you a proven path to train smarter, stay consistent, and see real progress.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
