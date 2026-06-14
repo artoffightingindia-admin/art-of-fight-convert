@@ -163,7 +163,7 @@ const CtaPairSection = () => {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Learn MMA online from anywhere with
+              Learn MMA online with
               <br />
               a structured, beginner-friendly roadmap.
             </p>
