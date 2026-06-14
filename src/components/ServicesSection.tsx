@@ -33,7 +33,11 @@ const ServicesSection = () => (
  CHOOSE YOUR PATH
 </p>
      <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-3">
-TWO PATHS.ONE GOAL.REAL TRANSFORMATION.
+TWO PATHS.ONE GOAL.
+       <span className="text-[#07b4ba]">
+   REAL TRANSFORMATION.
+  </span>
+
 </h2>
 
 <p className="text-muted-foreground text-sm leading-relaxed text-center max-w-2xl mx-auto mb-10">
