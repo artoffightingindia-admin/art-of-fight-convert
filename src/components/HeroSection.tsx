@@ -13,7 +13,7 @@ const HeroSection = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
 <img
-  src="/images/Hero.jpg.jpeg"
+  src="/public/images/Hero .jpg.jpeg"
   alt="MMA Fighter"
   className="w-full h-full object-cover"
 />
