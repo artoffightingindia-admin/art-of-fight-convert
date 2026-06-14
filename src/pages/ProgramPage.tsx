@@ -752,7 +752,7 @@ CHALLENGES OF BEGINNERS  </span>
                   >
                     JOIN THE NEXT BATCH
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting July 7th 2026</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting July 6th 2026</p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[["01", "DAYS"], ["23", "HOURS"], ["49", "MIN"]].map(([num, label]) => (
                       <div key={label} className="text-center">
