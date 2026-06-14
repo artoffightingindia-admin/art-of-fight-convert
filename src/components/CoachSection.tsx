@@ -10,11 +10,15 @@ const CoachSection = () => (
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Coach photo — same size as team image */}
-          <div className="w-full md:w-[180px] shrink-0">
+         <div className="w-full md:w-[180px] shrink-0">
   <img
     src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
     alt="Purushothaman MK"
-    className="aspect-[4/5] w-full rounded-xl object-cover"
+    className="aspect-[4/5] w-full rounded-xl object-cover border border-[#07b4ba]/30"
+    style={{
+      boxShadow:
+        "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
+    }}
   />
 </div>
 
@@ -98,7 +102,11 @@ SUPPORTED BY
   <img
     src="https://i.postimg.cc/Zn2hykcD/Kaviarasu-jpg.jpg"
     alt="Kaviarasu K"
-    className="aspect-[4/5] w-full rounded-xl object-cover"
+    className="aspect-[4/5] w-full rounded-xl object-cover border border-[#07b4ba]/30"
+    style={{
+      boxShadow:
+        "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
+    }}
   />
 </div>
         </div>
