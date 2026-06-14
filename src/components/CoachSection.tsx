@@ -28,12 +28,13 @@ const CoachSection = () => (
             <h2 className="font-display text-3xl md:text-5xl text-[#07b4ba] leading-tight">
   Purushothaman MK
 </h2>
-              <p className="text-muted-foreground text-sm mt-1">Head Coach | PRO MMA Fighter</p>
+             <p className="text-white text-sm mt-1">
+  Head Coach | Professional MMA Fighter
+</p>
             </div>
 
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
-             Purushothaman has dedicated his career to helping people develop real skills, confidence, and discipline through structured training. From complete beginners to competitive athletes, his coaching philosophy remains the same: simplify the process, focus on fundamentals, and create lasting progress.
-            </p>
+            Purushothaman: Helping beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.
 
             <ul className="space-y-2">
               <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
@@ -66,14 +67,14 @@ SUPPORTED BY
 <h2 className="font-display text-3xl md:text-5xl text-[#07b4ba] leading-tight">
   Kaviarasu K
 </h2>
-    <p className="text-muted-foreground text-sm mt-1">
-      Program Development | MMA Athlete
-    </p>
+   <p className="text-white text-sm mt-1">
+  Program Development | MMA Athlete
+</p>
   </div>
 </div>
  <div className="space-y-3">
     <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
-      As the driving force behind Art of Fighting, Kaviarasu leads program development, student support, and community growth. His focus is helping students stay accountable, build strong fundamentals, and get the most out of their training.
+       Kaviarasu oversees program development and student support at Art of Fighting, ensuring every member has the guidance, accountability, and structure needed to succeed.
     </p>
 
     <ul className="space-y-2">
