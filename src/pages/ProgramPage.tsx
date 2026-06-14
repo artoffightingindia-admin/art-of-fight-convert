@@ -630,7 +630,7 @@ CHALLENGES OF BEGINNERS  </span>
               <h2 className="font-['Bebas_Neue'] text-[clamp(26px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">
                 EVERYTHING DESIGNED TO<span className="text-[#07b4ba]"> HELP YOU SUCCEED</span>
               </h2>
-              <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
+              <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Enroll now and receive exclusive bonus resources designed to maximize your results.</p>
             </div>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-2">
@@ -723,7 +723,7 @@ CHALLENGES OF BEGINNERS  </span>
     textAlign: "center"
   }}
 >                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#fff", lineHeight: "1" }}>
-                      SAVE 1500₹ 
+                      SAVE ₹1500
                       </div>
                       <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#fff", textTransform: "uppercase", marginTop: "2px" }}>
                         Early Bird Offer
