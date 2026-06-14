@@ -6,22 +6,26 @@ const testimonials = [
     name: "Pradeep",    
     role: "Member",  
     text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence.",
-    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" 
+    image: "https://i.postimg.cc/ZYjqbkYs/Pradeep-(1).jpg" 
   },
   { 
     name: "Rahul",   
     role: "Member",  
-    text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply." 
+    text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply.",
+    image: "https://i.postimg.cc/7PXLHvPV/Rahul-(1).jpg"  
   },
   { 
     name: "Bharathwaj",   
     role: "Member",  
-    text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward." 
+    text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward.",
+    image: "https://i.postimg.cc/bYLvyXYF/Bharathwaj-(1).jpg"  
   },
   { 
     name: "Surya", 
     role: "Fighter", 
-    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete."
+    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
+    image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg"  
+
     },
   { 
     name: "Madhan",   
