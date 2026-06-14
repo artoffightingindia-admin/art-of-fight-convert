@@ -505,7 +505,12 @@ export default function ProgramPage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[20px] tracking-[1px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
-                <p className="text-[#07b4ba] font-['Barlow'] text-[11px] md:text-[14px] leading-[1.3] md:leading-[1.4]">Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library, Technique Cue Cards, and Warm-Up & Cooldown Guide to support your learning throughout the program.</p>
+                <p className="text-[#07b4ba] font-['Barlow'] text-[11px] md:text-[14px] leading-[1.3] md:leading-[1.4]">
+  Every week includes Movement Fundamentals and White Belt Mentality sessions,
+  along with access to the Mistake Library.
+  <br />
+  Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program.
+</p>
               </div>
             </div>
           </div>
