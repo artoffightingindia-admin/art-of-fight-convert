@@ -12,11 +12,11 @@ const HeroSection = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/images/hero-fighter.jpg"
-          alt="MMA Fighter"
-          className="w-full h-full object-cover"
-        />
+       <img
+  src="https://i.postimg.cc/KcL6zL2D/Home-Hero.jpg"
+  alt="MMA Fighter"
+  className="w-full h-full object-cover"
+/>
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
       </div>
 
