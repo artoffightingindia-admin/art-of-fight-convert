@@ -54,8 +54,7 @@ const CoachSection = () => (
       {/* ---------- AND A TEAM ---------- */}
       <div className="md:ml-25">
         <p className="text-primary text-xs md:text-sm font-semibold uppercase tracking-widest mb-4 md:text-right">
-SUPPORTED BY
-        </p>
+AND        </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Bullets on the LEFT */}
             
