@@ -724,7 +724,7 @@ export default function ProgramPage() {
                         userSelect: "none",
                       }}
                     >
-                      LIMITED OFFER
+                      CELEBRATING 2 YEARS OF AOF -50% OFF
                     </div>
                   </div>
 
