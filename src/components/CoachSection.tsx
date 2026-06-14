@@ -51,7 +51,7 @@ SUPPORTED BY
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Bullets on the LEFT */}
-        <div className="max-w-md space-y-3 md:-ml-12">
+        <div className="flex-1 order-2 md:order-1 flex md:justify-end">
             <div className="max-w-md space-y-3">
               <div>
                 <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
@@ -64,7 +64,7 @@ SUPPORTED BY
                 As the driving force behind Art of Fighting, Kaviarasu leads program development, student support, and community growth. His focus is helping students stay accountable, build strong fundamentals, and get the most out of their training.
               </p>
 
-              <ul className="space-y-2">
+             <ul className="space-y-2 ml-4">
                 <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
                   <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> State Boxing Champion & Pro-Am National Muay Thai Champion.
                 </li>
