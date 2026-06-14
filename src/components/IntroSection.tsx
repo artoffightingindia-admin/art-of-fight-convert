@@ -4,8 +4,8 @@ const IntroSection = () => (
 
       {/* Section Caption */}
       <p
-        className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3"
-        style={{ transform: "translateY(30px)" }}
+        className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3 "
+        style={{ transform: "translateY(10px)" }}
       >
         WHY AOF ?
       </p>
