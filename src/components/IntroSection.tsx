@@ -18,11 +18,9 @@ const IntroSection = () => (
 A SYSTEM FOR <span className="text-primary">REAL PROGRESS.</span>
 </h2>
         <p className="font-['Barlow'] text-[16px] text-white/70 leading-relaxed">
- You don't struggle because you lack motivation. You struggle because you lack structure.Without the right structure, It's easy to feel confused about what to train, how to progress, and whether you're improving at all.
+ You don't struggle because you lack motivation. You struggle because you lack structure.Without the right structure,At Art of Fighting, We simplify the learning process through structured training, clear progressions, and direct mentorship.
   <br />
           <br />
-At Art of Fighting, we simplify the learning process through structured training, clear progressions, and direct mentorship.
-
 Whether you're training to learn MMA, improve your fitness, build confidence, develop self-defense skills, or eventually compete, our goal is simple: Help you make measurable progress without wasting months figuring things out on your own.
 </p>
         </div>
