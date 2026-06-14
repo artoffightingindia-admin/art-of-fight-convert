@@ -54,7 +54,7 @@ SUPPORTED BY
         <div className="flex-1 order-2 md:order-1 flex md:justify-end">
             <div className="max-w-xl">
 
-<div className="ml-20 mb-4">
+<div className="md:ml-[300px] mb-4">
     <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
       Kaviarasu K
     </h2>
