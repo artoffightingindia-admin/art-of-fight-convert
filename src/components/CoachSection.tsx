@@ -45,7 +45,7 @@ const CoachSection = () => (
       </div>
 
       {/* ---------- AND A TEAM ---------- */}
-      <div>
+      <div className="md:ml-12">
         <p className="text-primary text-xs md:text-sm font-semibold uppercase tracking-widest mb-4 md:text-right">
 SUPPORTED BY
         </p>
@@ -64,7 +64,7 @@ SUPPORTED BY
                 As the driving force behind Art of Fighting, Kaviarasu leads program development, student support, and community growth. His focus is helping students stay accountable, build strong fundamentals, and get the most out of their training.
               </p>
 
-             <ul className="space-y-2 ml-4">
+             <ul className="space-y-2 -ml-4">
                 <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
                   <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> State Boxing Champion & Pro-Am National Muay Thai Champion.
                 </li>
