@@ -7,7 +7,7 @@ const IntroSection = () => (
         className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3"
         style={{ transform: "translateY(30px)" }}
       >
-        AOF Intro Section
+        WHY AOF ?
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -15,17 +15,15 @@ const IntroSection = () => (
         {/* Left: intro wordings */}
         <div className="space-y-4">
           <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-  Welcome to the <span className="text-primary">AOF Family</span>
+A SYSTEM FOR <span className="text-primary">REAL PROGRESS.</span>
 </h2>
         <p className="font-['Barlow'] text-[16px] text-white/70 leading-relaxed">
-  At Art of Fight, we're more than just a gym — we're a community built on
-  discipline, respect, and continuous growth. Our experienced coaches guide
-  you through proven training methods that develop both skill and confidence.
+ You don't struggle because you lack motivation. You struggle because you lack structure.Without the right structure, It's easy to feel confused about what to train, how to progress, and whether you're improving at all.
   <br />
           <br />
-  Whether you're a beginner or an aspiring competitor, our structured system
-  helps you build strong fundamentals, sharpen technique, and unlock your full
-  potential.
+At Art of Fighting, we simplify the learning process through structured training, clear progressions, and direct mentorship.
+
+Whether you're training to learn MMA, improve your fitness, build confidence, develop self-defense skills, or eventually compete, our goal is simple: Help you make measurable progress without wasting months figuring things out on your own.
 </p>
         </div>
 
