@@ -10,7 +10,7 @@ const CtaPairSection = () => {
 }}
     >
       {/* Dark overlay */}
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.32)" }} />
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.22)" }} />
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
 
