@@ -3,11 +3,11 @@ const CtaPairSection = () => {
     <section
       className="relative w-full overflow-hidden h-[280px]"
       style={{
-        backgroundImage: `url('/Box.png')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
-      }}
+  backgroundImage: `url('https://i.postimg.cc/g2KvzG4M/CTA-Image-jpg.jpg')`,
+  backgroundSize: "cover",
+  backgroundPosition: "center center",
+  backgroundRepeat: "no-repeat",
+}}
     >
       {/* Dark overlay */}
       <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.72)" }} />
