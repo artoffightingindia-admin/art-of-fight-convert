@@ -23,10 +23,10 @@ function Reveal({ children, style = {}, delay = 0 }: { children: ReactNode; styl
 
 /* ── FEEDBACK SLIDER ── */
 const feedbackCards = [
-  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" },
+  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
   { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
-  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" },
-  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose" },
+  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
+  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose",image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
   { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V" },
   { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P" },
 ];
@@ -644,7 +644,7 @@ export default function ProgramPage() {
                   <div className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-0 mt-0 md:mb-2 md:mt-4 shrink-0">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full mt-0 md:mt-0">
                     <h3 className="font-['Bebas_Neue'] text-[16px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-2 md:mb-1.5">{item.title}</h3>
-                    <p className="font-['Barlow'] text-[13px] md:text-[13px] text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
+                    <p className="font-['Barlow'] text-[13px] md:text-[14px]text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -655,7 +655,7 @@ export default function ProgramPage() {
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
                 <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">TOTAL BONUS VALUE</p>
-                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] text-[#07b4ba]">₹7,499</h2>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] text-[#07b4ba]">₹2,999</h2>
               </div>
             </div>
             <div className="pl-4 md:pl-5 border-l border-white/10 flex flex-col justify-center">
@@ -709,11 +709,11 @@ export default function ProgramPage() {
                   {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
                   <div className="absolute top-0 left-0 z-20 overflow-hidden" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
                     <div style={{ position: "absolute", top: "30px", left: "-60px", width: "260px", transform: "rotate(-45deg)", background: "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)", boxShadow: "0 6px 25px rgba(7,180,186,0.45)", padding: "10px 0", textAlign: "center" }}>
-                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "24px", letterSpacing: "2px", color: "#ffffff", lineHeight: "1" }}>
-                        50% OFF
+                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#ffffff", lineHeight: "1" }}>
+                      SAVE 1500 
                       </div>
-                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1px", color: "rgba(255,255,255,0.9)", textTransform: "uppercase", marginTop: "2px" }}>
-                        Celebrating 2 Years Of AOF
+                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "rgba(255,255,255,0.9)", textTransform: "uppercase", marginTop: "2px" }}>
+                        Early Bird Offer
                       </div>
                     </div>
                   </div>
@@ -723,8 +723,8 @@ export default function ProgramPage() {
                     START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
-                    <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹1999</span>
-                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none">₹999</span>
+                    <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹3499</span>
+                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none">₹1,999</span>
                   </div>
                   <button
                     className="w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
