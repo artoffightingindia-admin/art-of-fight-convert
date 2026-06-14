@@ -41,9 +41,8 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-md">
-            Whether you want to learn striking at home or transform your fitness
-            with personal coaching, AOF gives you a proven path to train
-            smarter, stay consistent, and see real progress.
+         Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results.
+
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
