@@ -636,7 +636,7 @@ export default function ProgramPage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-4 md:mt-4 border border-[#07b4ba]/30 rounded-[18px] p-4 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
+          <div className="mt-4 md:mt-4 max-w-3xl mx-auto border border-[#07b4ba]/30 rounded-[18px] p-4 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
