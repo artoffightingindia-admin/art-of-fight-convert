@@ -259,7 +259,7 @@ export default function ProgramPage() {
   // --- RAZORPAY PAYMENT LINK INTEGRATION ---
   const handlePayment = () => {
     // 🚨 PASTE YOUR RAZORPAY PAYMENT LINK INSIDE THESE QUOTES 🚨
-    window.location.href = "https://rzp.io/rzp/RlhbhH2";
+    window.location.href = "https://rzp.io/rzp/aof30dayprogram";
   };
 
   const roadmapCards = [
