@@ -163,54 +163,65 @@ const TestimonialsSection = () => {
 
           {/* LEFT: video */}
 
-  <div className="flex flex-col">
+  {/* LEFT: testimonial thumbnail */}
+
+<div className="flex flex-col">
   <h3
-  className="mb-4 text-center italic"
-  style={{
-    fontFamily: "'Barlow', sans-serif",
-    fontSize: "22px",
-    fontWeight: 600,
-    color: "fff",
-    letterSpacing: "0.5px",
-  }}
->
-  **Hear Directly From People Who Have Trained Under Coach Purushothaman**
-</h3>
+    className="mb-4 text-center italic"
+    style={{
+      fontFamily: "'Barlow', sans-serif",
+      fontSize: "22px",
+      fontWeight: 600,
+      color: "#fff",
+      letterSpacing: "0.5px",
+    }}
+  >
+    Hear Directly From People Who Have Trained Under Coach Purushothaman
+  </h3>
+
+  <div className="w-full">
+    <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06]">
+
+      {/* Thumbnail */}
+      <img
+        src="https://i.postimg.cc/6QhDKcWp/Testimonial-Thumbnail-jpg.jpg"
+        alt="Testimonial Video"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "rgba(0,0,0,0.25)",
+        }}
+      />
+
+      {/* Play Button */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center">
+        <div
+          className="w-[62px] h-[62px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+          style={{
+            backgroundColor: "#07b4ba",
+            boxShadow: "0 0 28px 6px rgba(7,180,186,0.28)",
+          }}
+        >
           <div
-            
-            className="relative rounded-[14px] overflow-hidden border border-white/[0.06]"
+            className="ml-[5px]"
             style={{
-              aspectRatio: "16/9",
-              background: "linear-gradient(135deg, #131c27 0%, #0d1117 100%)",
+              width: 0,
+              height: 0,
+              borderTop: "10px solid transparent",
+              borderBottom: "10px solid transparent",
+              borderLeft: "18px solid #0a0f14",
             }}
-          >
-              <div
-              className="absolute inset-0"
-              style={{
-                background: "radial-gradient(ellipse 55% 55% at 50% 55%, rgba(7,180,186,0.13) 0%, transparent 70%)",
-              }}
-            />
-            <div className="absolute inset-0 z-10 flex items-center justify-center">
-              <div
-                className="w-[62px] h-[62px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
-                style={{
-                  backgroundColor: "#07b4ba",
-                  boxShadow: "0 0 28px 6px rgba(7,180,186,0.28)",
-                }}
-              >
-                <div
-                  className="ml-[5px]"
-                  style={{
-                    width: 0, height: 0,
-                    borderTop: "10px solid transparent",
-                    borderBottom: "10px solid transparent",
-                    borderLeft: "18px solid #0a0f14",
-                  }}
-                />
+          />
+        </div>
       </div>
-            </div>
-            </div>
-          </div>
+
+    </div>
+  </div>
+</div>
 
           {/* RIGHT: cards + nav */}
           <div
