@@ -143,7 +143,7 @@ const TestimonialsSection = () => {
             className="text-sm font-bold uppercase tracking-[4px] mb-2"
             style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba" }}
           >
-            Testimonials
+            Results and Success Stories
           </p>
           <h2
             className="uppercase m-0 leading-[1.05]"
@@ -154,7 +154,7 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-            What People Say
+           Real People, Real Progress
           </h2>
         </div>
 
