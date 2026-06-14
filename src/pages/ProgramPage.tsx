@@ -690,41 +690,56 @@ export default function ProgramPage() {
               <Reveal>
                 <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center relative overflow-hidden">
 
-                  {/* ── OFFER RIBBON (top-left diagonal, fully finished) ── */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "160px",
-                      height: "160px",
-                      overflow: "hidden",
-                      zIndex: 10,
-                      pointerEvents: "none",
-                    }}
-                  >
-                    {/* Ribbon band */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "32px",
-                        left: "-48px",
-                        width: "192px",
-                        background: "linear-gradient(135deg, #059a9f 0%, #07b4ba 50%, #059a9f 100%)",
-                        color: "#fff",
-                        fontFamily: "'Bebas Neue', sans-serif",
-                        fontSize: "13px",
-                        letterSpacing: "2.5px",
-                        textAlign: "center",
-                        padding: "8px 0",
-                        transform: "rotate(-45deg)",
-                        boxShadow: "0 4px 18px rgba(7,180,186,0.55), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.15)",
-                        userSelect: "none",
-                      }}
-                    >
-                      LIMITED OFFER
-                    </div>
-                  </div>
+                  {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
+<div
+  className="absolute top-0 left-0 z-20 overflow-hidden"
+  style={{
+    width: "170px",
+    height: "170px",
+    pointerEvents: "none",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      top: "30px",
+left: "-60px",
+      width: "260px",
+      transform: "rotate(-45deg)",
+      background:
+        "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)",
+      boxShadow: "0 6px 25px rgba(7,180,186,0.45)",
+      padding: "10px 0",
+      textAlign: "center",
+    }}
+  >
+    <div
+      style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: "24px",
+        letterSpacing: "2px",
+        color: "#ffffff",
+        lineHeight: "1",
+      }}
+    >
+      50% OFF
+    </div>
+
+    <div
+      style={{
+        fontFamily: "'Barlow', sans-serif",
+        fontSize: "10px",
+        fontWeight: 700,
+        letterSpacing: "1px",
+        color: "rgba(255,255,255,0.9)",
+        textTransform: "uppercase",
+        marginTop: "2px",
+      }}
+    >
+      Celebrating 2 Years Of AOF
+    </div>
+  </div>
+</div>
 
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED TO 20 MEMBERS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
