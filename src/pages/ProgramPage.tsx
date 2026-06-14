@@ -280,9 +280,9 @@ export default function ProgramPage() {
       {/* ── HERO + TRUST BAR ── */}
       <div className="relative flex flex-col w-full overflow-hidden" ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; el.style.height = "100vh"; el.style.height = "100svh"; el.style.height = "100dvh"; }}>
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
-          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/J04Z9Zcm/Program-page-Hero.jpg')] bg-center bg-cover opacity-90" />
+          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/J04Z9Zcm/Program-page-Hero.jpg')] bg-center bg-cover opacity-100" />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/80 to-transparent" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/30 to-transparent" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c] md:via-[#06080c]/50" />
           <div className="absolute bottom-0 left-0 right-0 h-1/2 z-[3] bg-gradient-to-t from-[#06080c] to-transparent md:hidden" />
 
@@ -452,7 +452,7 @@ export default function ProgramPage() {
                 <button disabled={roadmapIndex === 0} onClick={() => setRoadmapIndex(p => Math.max(p - 1, 0))} className="absolute top-1/2 left-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{"<"}</button>
                 <button disabled={roadmapIndex === roadmapCards.length - 1} onClick={() => setRoadmapIndex(p => Math.min(p + 1, roadmapCards.length - 1))} className="absolute top-1/2 right-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{">"}</button>
                 <div className="overflow-hidden pl-5">
-                  <div className="flex gap-4 transition-transform duration-[420ms] ease-out will-change-transform" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
+                  <div className="flex gap-4 transition-transform duration-500 ease-out will-change-transform" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
                     {roadmapCards.map((card, i) => (
                       <div key={card.title} className="relative flex-none w-[82vw] min-h-[308px] overflow-hidden border border-[#74e1e8]/30 rounded-[10px] bg-[#061018]" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,.02),0 18px 38px rgba(0,0,0,.34)" }}>
                         <div className="absolute inset-0 bg-cover bg-[62%_center] opacity-[.62]" style={{ backgroundImage: `url(${card.image})` }} />
@@ -508,7 +508,7 @@ export default function ProgramPage() {
                 ))}
               </div>
               <div className="overflow-hidden">
-                <div className="flex gap-5 transition-transform duration-[450ms] ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
+                <div className="flex gap-5 transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
                   {roadmapCards.map((card, i) => (
                     <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
                       <div className="grid grid-cols-2">
