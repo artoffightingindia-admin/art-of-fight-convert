@@ -258,11 +258,11 @@ export default function ProgramPage() {
   const [roadmapIndex, setRoadmapIndex] = useState(0);
 
   const roadmapCards = [
-    { title: "Week 01", days: "DAYS 1 - 7: Build your foundation",   image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
-    { title: "Week 02", days: "DAYS 8 - 14: Defense to Offense",  image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
-    { title: "Week 03", days: "DAYS 15 - 21: BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
-    { title: "Week 04", days: "DAYS 22 - 28: Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
-    { title: "Week 05", days: "DAYS 29 - 30: PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
+    { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation",   image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+    { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense",  image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+    { title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+    { title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+    { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
   ];
 
   const maxRoadmapIndex = roadmapCards.length - 2;
@@ -434,7 +434,7 @@ CHALLENGES OF BEGINNERS  </span>
           
           <div className="text-center mb-7 md:mb-12" style={GUTTER}>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">THE AOF BLUEPRINT</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white"><span className="text-[#07b4ba]">A CLEARPATH TO </span> MMA STRIKING.</h2>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white"><span className="text-[#07b4ba]">A CLEARPATH</span>TO MMA STRIKING.</h2>
             <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.</p>
           </div>
 
@@ -718,14 +718,14 @@ CHALLENGES OF BEGINNERS  </span>
     left: "-60px",
     width: "260px",
     transform: "rotate(-45deg)",
-    background: "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)",
+    background: "linear-gradient(135deg, #EFAF27 20%, #FFD700 100%, #FEEC6C 50%)",
     padding: "10px 0",
     textAlign: "center"
   }}
->                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#FFD700", lineHeight: "1" }}>
+>                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#fff", lineHeight: "1" }}>
                       SAVE 1500₹ 
                       </div>
-                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#FFD700", textTransform: "uppercase", marginTop: "2px" }}>
+                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#fff", textTransform: "uppercase", marginTop: "2px" }}>
                         Early Bird Offer
                       </div>
                     </div>
@@ -745,7 +745,7 @@ CHALLENGES OF BEGINNERS  </span>
                   >
                     JOIN THE NEXT BATCH
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[12px] md:text-[13px] leading-[1.7] text-white/50">Everything you need to start. Your first session could be today.</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting July 7th 2026</p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[["01", "DAYS"], ["23", "HOURS"], ["49", "MIN"]].map(([num, label]) => (
                       <div key={label} className="text-center">
