@@ -223,6 +223,7 @@ const stats = [
 ];
 
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
+const SECTION_INSET: CSSProperties = { paddingLeft: "140px", paddingRight: "140px" };
 const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 
 export default function ProgramPage() {
@@ -230,6 +231,7 @@ export default function ProgramPage() {
   const footerRef = useRef<HTMLDivElement>(null);
   const scrollToFooter = () => footerRef.current?.scrollIntoView({ behavior: "smooth" });
   const [roadmapIndex, setRoadmapIndex] = useState(0);
+  const [isMobileRoadmap, setIsMobileRoadmap] = useState(false);
 
   const roadmapCards = [
     { title: "Week 01: Build your foundation", days: "DAYS 1 - 7",   image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
@@ -239,7 +241,17 @@ export default function ProgramPage() {
     { title: "Week 05: PUTTING IT ALL TOGETHER", days: "DAYS 29 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
   ];
 
-  const maxIndex = roadmapCards.length - 2;
+  useEffect(() => {
+    const check = () => setIsMobileRoadmap(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  useEffect(() => {
+    const maxIndex = isMobileRoadmap ? roadmapCards.length - 1 : roadmapCards.length - 2;
+    setRoadmapIndex(prev => Math.min(prev, maxIndex));
+  }, [isMobileRoadmap, roadmapCards.length]);
 
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
@@ -268,7 +280,7 @@ export default function ProgramPage() {
       {/* ── HERO + TRUST BAR ── */}
       <div className="relative flex flex-col w-full overflow-hidden" ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; el.style.height = "100vh"; el.style.height = "100svh"; el.style.height = "100dvh"; }}>
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
-          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/HWBD3qMR/Chat-GPT-Image-May-1-2026-12-14-18-AM.png')] bg-center bg-cover opacity-80" />
+          <div className="absolute inset-0 z-0 bg-[url('https://i.postimg.cc/J04Z9Zcm/Program-page-Hero.jpg')] bg-center bg-cover opacity-90" />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/80 to-transparent" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/50 to-[#06080c] md:via-[#06080c]/50" />
@@ -363,6 +375,7 @@ export default function ProgramPage() {
           <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
             <div className="flex-1 max-w-full md:max-w-[500px] w-full">
               <Reveal>
+             
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632] border border-white/10">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer hover:bg-[#059a9f] transition-colors">
@@ -399,31 +412,14 @@ export default function ProgramPage() {
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHY THIS PROGRAM WORKS?</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL CHALLENGES OF BEGINNERS</h2>
           </Reveal>
-
-          {/* Mobile: horizontal row cards stacked */}
-          <div className="flex flex-col gap-3 md:hidden">
-            {whatCards.map((item, i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div className="w-full flex flex-row items-center gap-4 p-4 rounded-[14px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5">
-                  <div className="w-[48px] h-[48px] flex items-center justify-center shrink-0">{item.icon}</div>
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[15px] tracking-[1.5px] leading-[1.3] mb-[3px]">{item.title}</h4>
-                    <p className="text-[12px] leading-[1.5] text-white/60 m-0">{item.desc}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Desktop: grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-[16px]">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} delay={i * 80}>
-                <div className="w-full p-[16px] rounded-[18px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-center text-center gap-3 min-h-[255px]">
-                  <div className="w-[70px] h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
+                <div className={`w-full p-4 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-center text-center gap-3 min-h-[160px] md:min-h-[255px] md:p-[16px] md:rounded-[18px] ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="w-[44px] h-[44px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
                   <div className="flex flex-col items-center w-full">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[17.5px] tracking-[2px] leading-[1.3] m-0 text-center mb-[3px]">{item.title}</h4>
-                    <p className="text-[14px] leading-[1.5] text-white/60 text-center m-0">{item.desc}</p>
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[13px] md:text-[17.5px] tracking-[1.5px] md:tracking-[2px] leading-[1.3] m-0 text-center mb-[3px]">{item.title}</h4>
+                    <p className="text-[12px] md:text-[14px] leading-[1.5] text-white/60 text-center m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -432,8 +428,8 @@ export default function ProgramPage() {
         </div>
       </section>
 
-      {/* ── ROADMAP SECTION — unified layout for all screen sizes ── */}
-      <div className="relative overflow-hidden bg-[#0b0b0b]">
+      {/* ── ROADMAP SECTION ── */}
+      <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#07b4ba]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)" } : {}}>
         <div className="w-full py-8" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)" }}>
           <div className="text-center mb-7 md:mb-9" style={GUTTER}>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">THE AOF BLUEPRINT</p>
@@ -441,87 +437,119 @@ export default function ProgramPage() {
             <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.</p>
           </div>
 
-          {/* ── Unified Roadmap: same desktop-style layout on all screens ── */}
-          <div className="relative" style={{ paddingLeft: "calc(1cm + 18px)", paddingRight: "calc(1cm + 18px)" }}>
-            {/* Prev arrow */}
-            <button
-              disabled={roadmapIndex === 0}
-              onClick={() => setRoadmapIndex(p => Math.max(p - 1, 0))}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[36px] h-[36px] md:w-[52px] md:h-[52px] rounded-[10px] md:rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-xl md:text-2xl cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
-            >‹</button>
-            {/* Next arrow */}
-            <button
-              disabled={roadmapIndex >= maxIndex}
-              onClick={() => setRoadmapIndex(p => Math.min(p + 1, maxIndex))}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[36px] h-[36px] md:w-[52px] md:h-[52px] rounded-[10px] md:rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-xl md:text-2xl cursor-pointer flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
-            >›</button>
-
-            {/* Timeline dots */}
-            <div className="flex justify-between mb-6 md:mb-10 relative">
-              <div className="absolute top-3 left-0 right-0 h-0.5 bg-white/10" />
-              {roadmapCards.map((week, i) => (
-                <div key={i} className="relative z-10 text-center flex-1">
-                  <p className={`font-['Bebas_Neue'] text-[9px] md:text-[15px] tracking-[0.5px] md:tracking-[1px] mb-2 md:mb-2.5 transition-colors leading-tight px-0.5 ${i === roadmapIndex || i === roadmapIndex + 1 ? "text-[#07b4ba]" : "text-white/45"}`}>{week.title}</p>
-                  <div className={`w-[16px] h-[16px] md:w-[26px] md:h-[26px] mx-auto rounded-full border-2 border-[#07b4ba] transition-all ${i === roadmapIndex || i === roadmapIndex + 1 ? "bg-[#07b4ba] shadow-[0_0_12px_rgba(7,180,186,.95)]" : "bg-[#0b0b0b]"}`} />
-                </div>
-              ))}
-            </div>
-
-            {/* Cards slider */}
-            <div className="overflow-hidden">
-              <div
-                className="flex gap-3 md:gap-5 transition-transform duration-[450ms] ease-in-out"
-                style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}
-              >
-                {roadmapCards.map((card, i) => (
-                  <div key={i} className="min-w-[92vw] md:min-w-[45%] rounded-[14px] md:rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 flex-shrink-0">
-                    <div className="grid grid-cols-2">
-                      <img src={card.image} alt={card.title} className="w-full h-[160px] md:h-[285px] object-cover" />
-                      <div className="p-4 md:p-8 flex flex-col justify-center">
-                        <h3 className="font-['Bebas_Neue'] text-[20px] md:text-[42px] text-white mb-2 md:mb-4 leading-none">{card.title}</h3>
-                        <div className="w-10 md:w-16 h-[2px] md:h-[3px] bg-[#07b4ba] mb-3 md:mb-5" />
-                        <div className="flex flex-col gap-2 md:gap-3">
-                          {card.points.map((pt, pi) => (
-                            <div key={pi} className="flex items-center gap-1.5 md:gap-2.5">
-                              <div className="w-4 h-4 md:w-5 md:h-5 rounded-full border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[8px] md:text-[10px] shrink-0">✓</div>
-                              <p className="text-[11px] md:text-[14px] text-white/75 leading-snug">{pt}</p>
-                            </div>
-                          ))}
+          {isMobileRoadmap ? (
+            <div className="w-full overflow-hidden pb-0.5">
+              <div className="relative grid grid-cols-5 items-end gap-0 mx-3.5 mb-7 pt-1">
+                <div className="absolute left-[9%] right-[9%] bottom-[7px] h-px bg-white/40" />
+                {roadmapCards.map((week, i) => (
+                  <button key={week.title} onClick={() => setRoadmapIndex(i)} className={`relative z-10 flex flex-col items-center gap-2.5 min-w-0 border-0 bg-transparent font-['Bebas_Neue'] cursor-pointer ${i === roadmapIndex ? "text-[#07b4ba]" : "text-white/70"}`}>
+                    <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-[11px] md:text-[12px]">{week.title}</span>
+                    <i className={`w-[15px] h-[15px] rounded-full border not-italic ${i === roadmapIndex ? "border-2 border-[#07b4ba] bg-[#061018] shadow-[0_0_0_4px_rgba(7,180,186,.18),0_0_16px_rgba(7,180,186,.95)]" : "border-white/65 bg-[#03070c]"}`} />
+                  </button>
+                ))}
+              </div>
+              <div className="relative">
+                <button disabled={roadmapIndex === 0} onClick={() => setRoadmapIndex(p => Math.max(p - 1, 0))} className="absolute top-1/2 left-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{"<"}</button>
+                <button disabled={roadmapIndex === roadmapCards.length - 1} onClick={() => setRoadmapIndex(p => Math.min(p + 1, roadmapCards.length - 1))} className="absolute top-1/2 right-0 z-10 w-[34px] h-[34px] -translate-y-1/2 border border-[#07b4ba]/55 rounded-lg bg-[#030b12]/90 text-[#07b4ba] text-lg cursor-pointer disabled:opacity-35 flex items-center justify-center">{">"}</button>
+                <div className="overflow-hidden pl-5">
+                  <div className="flex gap-4 transition-transform duration-[420ms] ease-out will-change-transform" style={{ transform: `translateX(calc(-${roadmapIndex} * (82vw + 16px)))` }}>
+                    {roadmapCards.map((card, i) => (
+                      <div key={card.title} className="relative flex-none w-[82vw] min-h-[308px] overflow-hidden border border-[#74e1e8]/30 rounded-[10px] bg-[#061018]" style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,.02),0 18px 38px rgba(0,0,0,.34)" }}>
+                        <div className="absolute inset-0 bg-cover bg-[62%_center] opacity-[.62]" style={{ backgroundImage: `url(${card.image})` }} />
+                        <div className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(90deg,rgba(2,7,12,.98) 0%,rgba(2,7,12,.78) 42%,rgba(2,7,12,.34) 76%),linear-gradient(180deg,rgba(2,7,12,.1) 0%,rgba(2,7,12,.9) 100%)" }} />
+                        <div className="relative z-[2] min-h-[258px] p-7 pb-4 pt-7">
+                          {i === roadmapIndex && <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[12px] mb-1.5">YOU ARE HERE</p>}
+                          <h3 className="text-white font-['Bebas_Neue'] text-[28px] leading-[1.05] tracking-[2px] mb-3.5 min-h-[64px] flex items-start">{card.title}</h3>
+                          <div className="w-14 h-0.5 mb-7 bg-[#07b4ba]" style={{ boxShadow: "0 0 10px rgba(7,180,186,.55)" }} />
+                          <div className="flex flex-col gap-3.5">
+                            {card.points.map(pt => (
+                              <div key={pt} className="flex items-center gap-2.5">
+                                <span className="flex w-3.5 h-3.5 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] text-[8px]">✓</span>
+                                <p className="text-white/80 text-[11px] leading-[1.25]">{pt}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="relative z-[2] flex items-center justify-center gap-3 min-h-[50px] border-t border-white/10 bg-[#03090f]/70">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+                          <p className="text-[#07b4ba] font-['Bebas_Neue'] text-[18px] tracking-[1px]">{card.days}</p>
                         </div>
                       </div>
-                    </div>
-                    <div className="py-3 md:py-4 border-t border-white/5 text-center">
-                      <p className="font-['Bebas_Neue'] text-[16px] md:text-[22px] text-[#07b4ba] tracking-[1px]">{card.days}</p>
-                    </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-center gap-3 mt-4">
+                {roadmapCards.map((_, i) => (
+                  <button key={i} onClick={() => setRoadmapIndex(i)} className={`w-2 h-2 p-0 border-0 rounded-full cursor-pointer transition-all ${i === roadmapIndex ? "bg-[#07b4ba] shadow-[0_0_12px_rgba(7,180,186,.7)]" : "bg-white/30"}`} />
+                ))}
+              </div>
+              <div className="flex items-center gap-3.5 mx-4 mt-5 p-4 border border-white/10 rounded-lg bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
+                <div className="flex w-9 h-9 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[16px] tracking-[.8px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
+                  <p className="text-[#07b4ba] text-[11px] leading-[1.3]">Weekly Training, Tools, and Learning Resources</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="relative overflow-hidden" style={{ paddingLeft: "calc(1cm + 18px)", paddingRight: "calc(1cm + 18px)" }}>
+              <button onClick={() => setRoadmapIndex(p => Math.max(p - 1, 0))} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">‹</button>
+              <button onClick={() => setRoadmapIndex(p => Math.min(p + 1, roadmapCards.length - 2))} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-[52px] h-[52px] rounded-[14px] border border-white/10 bg-[#0d1117] text-white text-2xl cursor-pointer flex items-center justify-center">›</button>
+              <div className="flex justify-between mb-10 relative">
+                <div className="absolute top-3.5 left-0 right-0 h-0.5 bg-white/10" />
+                {roadmapCards.map((week, i) => (
+                  <div key={i} className="relative z-10 text-center">
+                    <p className={`font-['Bebas_Neue'] text-[15px] tracking-[1px] mb-2.5 transition-colors ${i === roadmapIndex || i === roadmapIndex + 1 ? "text-[#07b4ba]" : "text-white/45"}`}>{week.title}</p>
+                    <div className={`w-[26px] h-[26px] mx-auto rounded-full border-2 border-[#07b4ba] transition-all ${i === roadmapIndex || i === roadmapIndex + 1 ? "bg-[#07b4ba] shadow-[0_0_18px_rgba(7,180,186,.95)]" : "bg-[#0b0b0b]"}`} />
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Dot indicators */}
-            <div className="flex justify-center gap-2 mt-5">
-              {roadmapCards.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setRoadmapIndex(Math.min(i, maxIndex))}
-                  className={`w-2 h-2 p-0 border-0 rounded-full cursor-pointer transition-all ${(i === roadmapIndex || i === roadmapIndex + 1) ? "bg-[#07b4ba] shadow-[0_0_8px_rgba(7,180,186,.7)]" : "bg-white/30"}`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Consistency box */}
-          <div className="w-full mt-10 md:mt-12" style={GUTTER}>
-            <div className="flex items-center gap-4 p-5 md:p-6 border border-[#07b4ba]/25 rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
-              <div className="flex w-10 h-10 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
+              <div className="overflow-hidden">
+                <div className="flex gap-5 transition-transform duration-[450ms] ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
+                  {roadmapCards.map((card, i) => (
+                    <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
+                      <div className="grid grid-cols-2">
+                        <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover" />
+                        <div className="p-8 flex flex-col justify-center">
+                          <h3 className="font-['Bebas_Neue'] text-[42px] text-white mb-4 leading-none">{card.title}</h3>
+                          <div className="w-16 h-[3px] bg-[#07b4ba] mb-5" />
+                          <div className="flex flex-col gap-3">
+                            {card.points.map((pt, pi) => (
+                              <div key={pi} className="flex items-center gap-2.5">
+                                <div className="w-5 h-5 rounded-full border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[10px] shrink-0">✓</div>
+                                <p className="text-[14px] text-white/75 leading-snug">{pt}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="py-4 border-t border-white/5 text-center">
+                        <p className="font-['Bebas_Neue'] text-[22px] text-[#07b4ba] tracking-[1px]">{card.days}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div>
-                <h3 className="text-white/90 font-['Bebas_Neue'] text-[18px] md:text-[20px] tracking-[1px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
-                <p className="text-[#07b4ba] font-['Barlow'] text-[13px] md:text-[14px] leading-[1.4]">Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library, Technique Cue Cards, and Warm-Up & Cooldown Guide to support your learning throughout the program.</p>
+            </div>
+          )}
+
+          {/* ── DESKTOP: Consistency box between roadmap cards and promise strip ── */}
+          {!isMobileRoadmap && (
+            <div className="w-full mt-10 md:mt-12" style={GUTTER}>
+              <div className="flex items-center gap-4 p-5 md:p-6 border border-[#07b4ba]/25 rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
+                <div className="flex w-10 h-10 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[18px] md:text-[20px] tracking-[1px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
+                  <p className="text-[#07b4ba] font-['Barlow'] text-[13px] md:text-[14px] leading-[1.4]">Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library, Technique Cue Cards, and Warm-Up & Cooldown Guide to support your learning throughout the program.</p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Promise + Join Now strip */}
           <div className="w-full mt-12 md:mt-16" style={GUTTER}>
@@ -529,10 +557,10 @@ export default function ProgramPage() {
               <p className="font-['Bebas_Neue'] text-[26px] md:text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
               <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
               <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
-                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-                In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.Commit to the process, and we'll show you the path.
-                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
-              </p>
+  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
+  In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.Commit to the process, and we'll show you the path.
+  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
+</p>
             </div>
             <div className="mt-6 md:mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
               <button
@@ -624,9 +652,7 @@ export default function ProgramPage() {
               <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
           </Reveal>
-
-          {/* Mobile: horizontal row bonus cards stacked */}
-          <div className="flex flex-col gap-3 md:hidden">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 md:gap-2">
             {[
               { icon: <IconNutrition />, title: "MOVEMENT FUNDAMENTALS", desc: "Fuel your training with a meal plan designed for fighters — optimise energy, recovery, and body composition." },
               { icon: <IconMobility />, title: "WHITE BELT MENTALITY", desc: "Loosen tight hips, shoulders and ankles with targeted drills that keep you injury-free and fight-ready." },
@@ -635,38 +661,15 @@ export default function ProgramPage() {
               { icon: <IconAudio />, title: "Warm Up & Cool Down Guide", desc: "Pre-training audio sessions to lock in focus, kill self-doubt, and build the mental edge of a competitor." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
-                <div className="w-full flex flex-row items-center gap-4 p-4 rounded-[14px] bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 relative overflow-hidden">
-                  <div className="absolute top-2 left-2 bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[11px] tracking-[1px] px-1.5 py-0.5 rounded-[4px] leading-none">#{i + 1}</div>
-                  <div className="w-[48px] h-[48px] flex items-center justify-center shrink-0 mt-2">{item.icon}</div>
-                  <div className="flex flex-col flex-1 min-w-0 mt-1">
-                    <h3 className="font-['Bebas_Neue'] text-[14px] leading-[1.1] tracking-[1px] text-white mb-1">{item.title}</h3>
-                    <p className="font-['Barlow'] text-[11px] text-white/55 leading-[1.5] m-0">{item.desc}</p>
-                  </div>
+                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-3.5 md:p-4 relative overflow-hidden min-h-[180px] md:min-h-[220px] flex flex-col items-center text-center ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="absolute top-3 left-3 bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[13px] md:text-[14px] tracking-[1px] px-2 py-0.5 rounded-[5px] leading-none">#{i + 1}</div>
+                  <div className="w-[52px] h-[52px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-1.5 mt-5 md:mb-2 md:mt-4">{item.icon}</div>
+                  <h3 className="font-['Bebas_Neue'] text-[12px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-1.5">{item.title}</h3>
+                  <p className="font-['Barlow'] text-[11px] md:text-[13px] text-white/55 leading-[1.55] px-1">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-
-          {/* Desktop: grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-2">
-            {[
-              { icon: <IconNutrition />, title: "MOVEMENT FUNDAMENTALS", desc: "Fuel your training with a meal plan designed for fighters — optimise energy, recovery, and body composition." },
-              { icon: <IconMobility />, title: "WHITE BELT MENTALITY", desc: "Loosen tight hips, shoulders and ankles with targeted drills that keep you injury-free and fight-ready." },
-              { icon: <IconCommunity />, title: "THE MISTAKE LIBRARY", desc: "Join a squad of driven athletes — share wins, ask questions, and stay accountable every single day." },
-              { icon: <IconShadowboxing />, title: "TECHNIQUE CUE CARDS", desc: "Fluid, coach-designed shadowboxing sequences to sharpen movement, timing, and muscle memory." },
-              { icon: <IconAudio />, title: "Warm Up & Cool Down Guide", desc: "Pre-training audio sessions to lock in focus, kill self-doubt, and build the mental edge of a competitor." },
-            ].map((item, i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[18px] p-4 relative overflow-hidden min-h-[220px] flex flex-col items-center text-center ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
-                  <div className="absolute top-3 left-3 bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[14px] tracking-[1px] px-2 py-0.5 rounded-[5px] leading-none">#{i + 1}</div>
-                  <div className="w-[70px] h-[70px] flex items-center justify-center mb-2 mt-4">{item.icon}</div>
-                  <h3 className="font-['Bebas_Neue'] text-[18px] leading-[1.1] tracking-[1.5px] text-white mb-1.5">{item.title}</h3>
-                  <p className="font-['Barlow'] text-[13px] text-white/55 leading-[1.55] px-1">{item.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
           <div className="mt-3 md:mt-4 border border-[#07b4ba]/30 rounded-[18px] p-4 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
@@ -702,6 +705,7 @@ export default function ProgramPage() {
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
                   </div>
                 ))}
+                {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
                 <div className="mt-5 md:mt-6 flex items-start gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80">
                   <div className="flex w-10 h-10 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] mt-0.5">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
@@ -717,13 +721,49 @@ export default function ProgramPage() {
               </Reveal>
             </div>
 
-            {/* ── CTA Card ── */}
+            {/* ── CTA Card with offer ribbon ── */}
             <div className="flex-1 min-w-[350px] w-full">
               <Reveal>
                 <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center relative overflow-hidden">
-                  <div style={{ position: "absolute", top: 0, left: 0, width: "160px", height: "160px", overflow: "hidden", zIndex: 10, pointerEvents: "none" }}>
-                    <div style={{ position: "absolute", top: "32px", left: "-48px", width: "192px", background: "linear-gradient(135deg, #059a9f 0%, #07b4ba 50%, #059a9f 100%)", color: "#fff", fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "2.5px", textAlign: "center", padding: "8px 0", transform: "rotate(-45deg)", boxShadow: "0 4px 18px rgba(7,180,186,0.55), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.15)", userSelect: "none" }}>LIMITED OFFER</div>
+
+                  {/* ── OFFER RIBBON (top-left diagonal, fully finished) ── */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "160px",
+                      height: "160px",
+                      overflow: "hidden",
+                      zIndex: 10,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    {/* Ribbon band */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "32px",
+                        left: "-48px",
+                        width: "192px",
+                        background: "linear-gradient(135deg, #059a9f 0%, #07b4ba 50%, #059a9f 100%)",
+                        color: "#fff",
+                        fontFamily: "'Bebas Neue', sans-serif",
+                        fontSize: "13px",
+                        letterSpacing: "2.5px",
+                        textAlign: "center",
+                        padding: "8px 0",
+                        transform: "rotate(-45deg)",
+                        boxShadow: "0 4px 18px rgba(7,180,186,0.55), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.15)",
+                        userSelect: "none",
+                      }}
+                    >
+                      LIMITED OFFER
+                    </div>
+                    {/* Top-left corner fold triangle */}
+          
                   </div>
+
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED TO 20 MEMBERS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
                     START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
