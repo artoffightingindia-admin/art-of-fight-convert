@@ -36,7 +36,7 @@ const IntroSection = () => (
         <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/10">
 
           <img
-            src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
+            src="https://i.postimg.cc/bJ1697pT/Intro-AOF-jpg.jpg
             alt="Purushothaman MK"
             className="w-full h-full object-cover object-center"
           />
