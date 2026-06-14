@@ -41,18 +41,18 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-md">
-         Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results.
-
+            Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Button
               size="lg"
               variant="outline"
-              onClick={() => navigate("/coaching")}
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-sm uppercase tracking-wide"
+              disabled // <--- Disables the button so it cannot be clicked
+              // onClick={() => navigate("/coaching")} // <--- Commented out until you are ready to launch
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-sm uppercase tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              1 on 1 Coaching
+              1 on 1 Coaching (Coming Soon)
             </Button>
 
             <Button
