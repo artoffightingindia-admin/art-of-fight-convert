@@ -21,19 +21,19 @@ const testimonials = [
   { 
     name: "Surya", 
     role: "Fighter", 
-    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
-    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop"
-  },
+    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete."
+    },
   { 
     name: "Madhan",   
     role: "Member",  
-    text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development." 
+    text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.",
+    image: "https://i.postimg.cc/q7HbD53j/Madan-jpg.jpg"
   },
   { 
     name: "Sohail Mohammad",  
     role: "Athlete", 
-    text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected." 
-  },
+    text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.",
+        image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" },
 ];
 
 const VISIBLE = 3;
