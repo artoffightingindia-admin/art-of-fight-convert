@@ -21,9 +21,9 @@ const CoachSection = () => (
           {/* Right side: name + paragraph + bullets */}
           <div className="flex-1 space-y-3">
             <div>
-              <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-                Purushothaman MK
-              </h2>
+            <h2 className="font-display text-3xl md:text-5xl text-[#07b4ba] leading-tight">
+  Purushothaman MK
+</h2>
               <p className="text-muted-foreground text-sm mt-1">Head Coach | PRO MMA Fighter</p>
             </div>
 
@@ -59,9 +59,9 @@ SUPPORTED BY
             <div className="max-w-xl">
 <div className="flex justify-end mb-4">
   <div>
-    <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-      Kaviarasu K
-    </h2>
+<h2 className="font-display text-3xl md:text-5xl text-[#07b4ba] leading-tight">
+  Kaviarasu K
+</h2>
     <p className="text-muted-foreground text-sm mt-1">
       Program Development | MMA Athlete
     </p>
