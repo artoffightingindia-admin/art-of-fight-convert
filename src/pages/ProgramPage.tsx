@@ -558,10 +558,7 @@ export default function ProgramPage() {
               <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
               <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-  In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.
-  <br />
-  <br />
-  Commit to the process, and we'll show you the path.
+  In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.Commit to the process, and we'll show you the path.
   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
 </p>
             </div>
