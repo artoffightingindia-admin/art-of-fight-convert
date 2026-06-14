@@ -19,7 +19,7 @@ const CtaPairSection = () => {
           className="uppercase font-bold text-sm tracking-[4px] mb-1"
           style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif" }}
         >
-          Your New Standard Starts Here
+          Start Your New Journey
         </p>
 
         {/* Main heading */}
@@ -31,7 +31,7 @@ const CtaPairSection = () => {
             letterSpacing: 2,
           }}
         >
-          Join AOF. Train Like A Fighter.
+          How Do You Want To T  rain?
         </h2>
 
         {/* Subtitle */}
@@ -39,7 +39,7 @@ const CtaPairSection = () => {
           className="text-sm mb-[18px]"
           style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.55)" }}
         >
-          Results Don't Wait.
+          Choose The Coaching Experience That Fits Your Goals.
         </p>
 
        {/* Button row */}
@@ -62,7 +62,7 @@ const CtaPairSection = () => {
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
-        Explore Coaching
+        1-1 Coaching
       </span>
       <span className="text-base">→</span>
     </button>
@@ -71,9 +71,9 @@ const CtaPairSection = () => {
       className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
       style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
     >
-      Personalized 1-on-1 coaching
+      Personalized coaching tailored to your goals,
       <br />
-      with direct coach attention.
+       lifestyle, and schedule.
     </p>
   </div>
 
@@ -104,7 +104,7 @@ const CtaPairSection = () => {
           <line x1="8" y1="2" x2="8" y2="6" />
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
-        30-Day Program
+        30-Days Program
       </span>
       <span className="text-base">→</span>
     </button>
@@ -113,9 +113,9 @@ const CtaPairSection = () => {
       className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
       style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
     >
-      Structured 30-day program to build
+      Learn MMA online from anywhere with
       <br />
-      skills, fitness & fighter mindset.
+      a structured, beginner-friendly roadmap.
     </p>
   </div>
 
@@ -130,7 +130,7 @@ const CtaPairSection = () => {
       color: "rgba(255,255,255,0.55)"
     }}
   >
-    Explore the full structure, roadmap, and transformation process.
+    Progress starts when you stop guessing and start training.
   </span>
 </div>
 
