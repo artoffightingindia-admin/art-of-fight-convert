@@ -17,6 +17,8 @@ const HeroSection = () => {
   alt="MMA Fighter"
   className="w-full h-full object-cover"
 />
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/20 to-transparent" /> */}
+      </div>
 
       {/* Content */}
       <div className="container relative z-10 flex-1 flex items-center pt-16">
