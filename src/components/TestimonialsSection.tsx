@@ -193,8 +193,12 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-           Real People, Real Progress
-          </h2>
+           Real People,
+            <span className="text-[#07b4ba]">
+  Real Progress
+  </span>
+
+         </h2>
         </div>
 
         {/* 2-col layout */}
