@@ -71,9 +71,9 @@ const CtaPairSection = () => {
       className="text-[12px] leading-[1.5] text-center max-w-[200px] m-0"
       style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.5)" }}
     >
-      Personalized coaching tailored to your goals,
+      Personalized coaching tailored to your
       <br />
-       lifestyle, and schedule.
+      goals, lifestyle, and schedule.
     </p>
   </div>
 
