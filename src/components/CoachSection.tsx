@@ -51,7 +51,7 @@ SUPPORTED BY
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Bullets on the LEFT */}
-          <div className="flex-1 order-2 md:order-1 flex md:justify-end">
+        <div className="max-w-md space-y-3 md:-ml-12">
             <div className="max-w-md space-y-3">
               <div>
                 <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
