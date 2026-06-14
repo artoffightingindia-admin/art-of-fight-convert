@@ -1,10 +1,12 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const faqs = [
-  { q: "What age do I need to start?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { q: "Are there any requirements?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { q: "Can I try a class for free?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { q: "What equipment do I need?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+  { q: "What is AOF?", a: "AOF is a coaching platform focused on helping people build real fighting skills, fitness, discipline, and confidence through structured training systems." },
+  { q: "Which program is right for me?", a: "Choose the 30-Day Program if you want a structured online system. Choose 1-on-1 Coaching if you want personalized guidance and direct coach support." },
+  { q: "Do I need prior MMA experience?", a: "No. Both beginners and experienced athletes can benefit from our programs." },
+  { q: "Can I train from home?", a: "Yes. Our programs are designed to be practical and accessible, even if you don't train at a gym every day." },
+   { q: "Will I receive coach support?", a: "Yes. The level of support depends on the program you choose, with 1-on-1 Coaching offering the most direct guidance." },
+   { q: "How do I get started?", a: "Simply explore the program that best fits your goals and follow the enrollment process on the next page." },
 ];
 
 const FAQSection = () => (
