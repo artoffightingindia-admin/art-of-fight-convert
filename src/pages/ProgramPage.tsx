@@ -232,11 +232,11 @@ export default function ProgramPage() {
   const [roadmapIndex, setRoadmapIndex] = useState(0);
 
   const roadmapCards = [
-    { title: "Week 01", days: "DAYS 1 - 7: Build your foundation",   image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
-    { title: "Week 02", days: "DAYS 8 - 14: Defense to Offense",  image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
-    { title: "Week 03", days: "DAYS 15 - 21: BEYOND THE HANDS", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
-    { title: "Week 04", days: "DAYS 22 - 28: Expanding Your Arsenal", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
-    { title: "Week 05", days: "DAYS 29 - 30: PUTTING IT ALL TOGETHER", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
+    { title: "Week 01", days: "DAYS 1 - 7: Build your foundation",   image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+    { title: "Week 02", days: "DAYS 8 - 14: Defense to Offense",  image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+    { title: "Week 03", days: "DAYS 15 - 21: BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+    { title: "Week 04", days: "DAYS 22 - 28: Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+    { title: "Week 05", days: "DAYS 29 - 30: PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
   ];
 
   const maxRoadmapIndex = roadmapCards.length - 2;
@@ -583,7 +583,7 @@ export default function ProgramPage() {
           <Reveal>
             <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
               <div className="flex-1 max-w-full md:max-w-[550px] w-full">
-                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&q=80" alt="Athlete" className="w-full rounded-[10px] object-cover aspect-video" />
+                <img src="https://i.postimg.cc/BZ8Pjwr4/8B9HN-2-jpg.jpg" alt="Athlete" className="w-full rounded-[10px] object-cover aspect-video" />
               </div>
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
