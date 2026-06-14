@@ -498,7 +498,7 @@ export default function ProgramPage() {
           </div>
 
           {/* Consistency box between roadmap cards and promise strip */}
-          <div className="w-full mt-10 md:mt-12" style={GUTTER}>
+          <div className="w-full max-w-3xl mx-auto mt-10 md:mt-12" style={GUTTER}>
             <div className="flex flex-row items-center md:items-center gap-3 md:gap-4 p-4 md:p-6 border border-[#07b4ba]/25 rounded-[12px] md:rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
               <div className="flex w-9 h-9 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
@@ -724,7 +724,7 @@ export default function ProgramPage() {
                         userSelect: "none",
                       }}
                     >
-                      CELEBRATING 2 YEARS OF AOF -50% OFF
+                      LIMITED OFFER
                     </div>
                   </div>
 
