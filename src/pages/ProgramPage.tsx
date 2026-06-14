@@ -23,12 +23,12 @@ function Reveal({ children, style = {}, delay = 0 }: { children: ReactNode; styl
 
 /* ── FEEDBACK SLIDER ── */
 const feedbackCards = [
-  { text: "In 8 weeks my footwork completely changed. My coach saw things I couldn't see myself and fixed them immediately.", author: "Jordan K." },
-  { text: "I was plateau'd for over a year. AOF broke that within the first month. The personalised approach is unlike anything else.", author: "Priya S." },
-  { text: "Best investment I've made in my fight career. The plan, the feedback, the accountability — it's all dialled in perfectly.", author: "Carlos R." },
-  { text: "The coaches actually care. I've gained real skill in just a few months of training with AOF.", author: "Seity M." },
-  { text: "Best decision I made this year. The structure and support is unlike any gym I've trained at before.", author: "Rolen A." },
-  { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V." },
+  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
+  { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
+  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
+  { text: "I started the program feeling anxious and unsure, but as the days went on, my technique improved, my mistakes got corrected, and my confidence grew.",  author: "Palanippan" },
+  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose" },
+  { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V" },
   { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P." },
 ];
 
@@ -622,11 +622,11 @@ export default function ProgramPage() {
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-2">
             {[
-              { icon: <IconNutrition />, title: "MOVEMENT FUNDAMENTALS", desc: "Fuel your training with a meal plan designed for fighters — optimise energy, recovery, and body composition." },
-              { icon: <IconMobility />, title: "WHITE BELT MENTALITY", desc: "Loosen tight hips, shoulders and ankles with targeted drills that keep you injury-free and fight-ready." },
-              { icon: <IconCommunity />, title: "THE MISTAKE LIBRARY", desc: "Join a squad of driven athletes — share wins, ask questions, and stay accountable every single day." },
-              { icon: <IconShadowboxing />, title: "TECHNIQUE CUE CARDS", desc: "Fluid, coach-designed shadowboxing sequences to sharpen movement, timing, and muscle memory." },
-              { icon: <IconAudio />, title: "Warm Up & Cool Down Guide", desc: "Pre-training audio sessions to lock in focus, kill self-doubt, and build the mental edge of a competitor." },
+              { icon: <IconNutrition />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
+              { icon: <IconMobility />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
+              { icon: <IconCommunity />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
+              { icon: <IconShadowboxing />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
+              { icon: <IconAudio />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
                 <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-4 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0 ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
