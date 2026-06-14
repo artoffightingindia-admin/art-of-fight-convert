@@ -203,7 +203,6 @@ const whatCards = [
 const painPoints = [
   "Don't know where to begin",
   "Don't have access to a quality MMA gym",
-  "You have no structured plan, just random gym sessions",
   "Don't have a training partner or equipment",
   "Can't commit hours every day to training",
   "Can't find structured MMA guidance in Tamil",
