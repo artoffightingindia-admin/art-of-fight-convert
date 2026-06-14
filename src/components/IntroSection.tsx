@@ -25,9 +25,9 @@ const IntroSection = () => (
             progressions, and direct mentorship.
             <br />
             <br />
-            Whether you're training to learn MMA, improve your fitness, build
+            Whether you're looking to learn MMA, improve your fitness, build
             confidence, develop self-defense skills, or eventually compete, our goal
-            is simple: Help you make measurable progress without wasting months
+            is simple: Help you make progress without wasting months
             figuring things out on your own.
           </p>
         </div>
