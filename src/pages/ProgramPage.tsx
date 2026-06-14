@@ -26,7 +26,6 @@ const feedbackCards = [
   { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
   { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
   { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
-  { text: "I started the program feeling anxious and unsure, but as the days went on, my technique improved, my mistakes got corrected, and my confidence grew.",  author: "Palanippan" },
   { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose" },
   { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V" },
   { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P." },
@@ -548,7 +547,15 @@ export default function ProgramPage() {
           <Reveal>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6">LED BY</p>
             <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
-              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0" />
+              <img
+  src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
+  alt="Head Coach"
+  className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0"
+  style={{
+    boxShadow:
+      "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
+  }}
+/>
               <div className="flex-1 min-w-[260px]">
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
@@ -594,13 +601,13 @@ export default function ProgramPage() {
               <div className="flex-1 min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-0">"</span>
-                  AOF Changed The Way <span className="text-[#07b4ba]">I Train And Perform.</span>
+                  The More I Progressed,<span className="text-[#07b4ba]">The More I Wanted To Train</span>
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-0">"</span>
                 </h3>
                 <p className="text-white/65 text-[14px] md:text-[15px] leading-[1.75]">
-                  The structure, the attention to detail, and the accountability took me to a level I never thought possible. I'm stronger, faster, and fight with more confidence than ever.
+                  I started with doubts and made mistakes. But as I progressed through the program my technique improved and my confidence grew. I even found myself drilling techniques whenever I had free time.
                 </p>
-                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">— Alex M., Amateur MMA Fighter</p>
+                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">— Palanippan, AOF 30 Days Program Member</p>
               </div>
             </div>
           </Reveal>
