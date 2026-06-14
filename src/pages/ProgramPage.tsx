@@ -28,7 +28,7 @@ const feedbackCards = [
   { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
   { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose" },
   { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V" },
-  { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P." },
+  { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P" },
 ];
 
 function InfiniteFeedbackSlider() {
@@ -607,7 +607,7 @@ export default function ProgramPage() {
                 <p className="text-white/65 text-[14px] md:text-[15px] leading-[1.75]">
                   I started with doubts and made mistakes. But as I progressed through the program my technique improved and my confidence grew. I even found myself drilling techniques whenever I had free time.
                 </p>
-                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">— Palanippan, AOF 30 Days Program Member</p>
+                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">— Palanippan, AOF 30 Days Program Member.</p>
               </div>
             </div>
           </Reveal>
