@@ -327,11 +327,10 @@ export default function ProgramPage() {
         letterSpacing: "0.5px",
       }}
     >
-      Hear Directly From People Who Have Trained Under Coach Purushothaman
-    </h3>
+5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION    </h3>
 
     <img
-      src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=900&q=80"
+      src="https://i.postimg.cc/fWvp0Bmj/Pain-Point.png"
       alt="MMA Training"
       className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block"
     />
@@ -357,41 +356,49 @@ export default function ProgramPage() {
         </div>
       </section>
 
-      {/* ── AOF INTRO SECTION ── */}
-      <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
-        <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
-          <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-            <div className="flex-1 max-w-full md:max-w-[500px] w-full">
-              <Reveal>
-             
-                <div className="relative aspect-video w-full rounded-[14px] overflow-hidden bg-gradient-to-br from-[#1c2230] to-[#202632] border border-white/10">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full bg-[#07b4ba] flex items-center justify-center cursor-pointer hover:bg-[#059a9f] transition-colors">
-                      <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[14px] border-l-white ml-1" />
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-            <div className="flex-1 min-w-[260px]">
-              <Reveal>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Introducing AOF 30-Day Program</p>
-                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                  THE STARTING POINT <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
-                </h2>
-                <div className="flex flex-col gap-4">
-                  <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
-                    The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.
-                  </p>
-                  <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
-                    Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day. We've built the roadmap. You just need to follow it.
-                  </p>
-                </div>
-              </Reveal>
-            </div>
+  {/* ── AOF INTRO SECTION ── */}
+<div
+  className="bg-[#0b0b0b]"
+  style={{
+    backgroundImage:
+      "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)",
+  }}
+>
+  <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
+    <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
+      <div className="flex-1 max-w-full md:max-w-[500px] w-full">
+        <Reveal>
+          <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10">
+            <img
+              src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg"
+              alt="AOF Program Intro"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
           </div>
-        </div>
+        </Reveal>
       </div>
+
+      <div className="flex-1 min-w-[260px]">
+        <Reveal>
+          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
+            Introducing AOF 30-Day Program
+          </p>
+          <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+            THE STARTING POINT <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
+          </h2>
+          <div className="flex flex-col gap-4">
+            <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
+              The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.
+            </p>
+            <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
+              Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day. We've built the roadmap. You just need to follow it.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* ── FEATURES / WHAT YOU GET ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
