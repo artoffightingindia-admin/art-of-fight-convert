@@ -353,7 +353,7 @@ export default function ProgramPage() {
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#07b4ba]">
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">
 HAVEN'T STARTED  </span> BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" style={{ boxShadow: "0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)" }} />
@@ -391,10 +391,10 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
                 </h2>
                 <div className="flex flex-col gap-4">
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
-                    The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.
+                    The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day.
                   </p>
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
-                    Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day. We've built the roadmap. You just need to follow it.
+                    We've built the roadmap. You just need to follow it.
                   </p>
                 </div>
               </Reveal>
@@ -408,7 +408,9 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHY THIS PROGRAM WORKS?</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL CHALLENGES OF BEGINNERS</h2>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba]">
+CHALLENGES OF BEGINNERS  </span>
+</h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -432,7 +434,7 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
           
           <div className="text-center mb-7 md:mb-12" style={GUTTER}>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">THE AOF BLUEPRINT</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">A CLEAR<span className="text-[#07b4ba]">PATH TO </span> MMA STRIKING.</h2>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white"><span className="text-[#07b4ba]">A CLEARPATH TO </span> MMA STRIKING.</h2>
             <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.</p>
           </div>
 
@@ -529,7 +531,7 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
               <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
               <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
                 <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-                In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.Commit to the process, and we'll show you the path.
+                In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and shadowbox confidently on your own.Commit to the process, and we'll show you the path.
                 <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
               </p>
             </div>
@@ -709,11 +711,21 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
 
                   {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
                   <div className="absolute top-0 left-0 z-20 overflow-hidden" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
-                    <div style={{ position: "absolute", top: "30px", left: "-60px", width: "260px", transform: "rotate(-45deg)", background: "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)", boxShadow: "0 6px 25px rgba(7,180,186,0.45)", padding: "10px 0", textAlign: "center" }}>
-                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#ffffff", lineHeight: "1" }}>
-                      SAVE 1500 
+<div
+  style={{
+    position: "absolute",
+    top: "30px",
+    left: "-60px",
+    width: "260px",
+    transform: "rotate(-45deg)",
+    background: "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)",
+    padding: "10px 0",
+    textAlign: "center"
+  }}
+>                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#FFD700", lineHeight: "1" }}>
+                      SAVE 1500₹ 
                       </div>
-                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "rgba(255,255,255,0.9)", textTransform: "uppercase", marginTop: "2px" }}>
+                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#FFD700", textTransform: "uppercase", marginTop: "2px" }}>
                         Early Bird Offer
                       </div>
                     </div>
