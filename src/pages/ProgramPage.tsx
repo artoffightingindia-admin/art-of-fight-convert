@@ -353,7 +353,8 @@ export default function ProgramPage() {
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT HAVEN'T STARTED BECAUSE YOU:
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#07b4ba]">
+HAVEN'T STARTED  </span> BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" style={{ boxShadow: "0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)" }} />
             </Reveal>
@@ -386,7 +387,7 @@ export default function ProgramPage() {
                   Introducing AOF 30-Day Program
                 </p>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                  THE STARTING POINT <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
+                  THE STARTING POINT <br /> <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
                 </h2>
                 <div className="flex flex-col gap-4">
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
