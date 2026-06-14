@@ -34,15 +34,15 @@ const SocialProofSection = () => {
         {/* Heading */}
         <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
           <h2 className="font-display text-[clamp(30px,4vw,60px)] text-foreground leading-none">
-            SEE HOW WE TEACH.
-            <span className="text-primary">
-              SEE HOW WE TRAIN.
-            </span>
-          </h2>
+  SEE HOW WE TEACH.
+  <br />
+  <span className="text-primary">
+    SEE HOW WE TRAIN.
+  </span>
+</h2>
 
           <p className="text-muted-foreground text-xs md:text-sm">
-            Join 5,000+ MMA fans who follow AOF for training insights,
-            fight analysis, and coaching content.
+           5,000+ MMA fans follow AOF to learn, improve, and stay connected to the sport.
           </p>
         </div>
 
