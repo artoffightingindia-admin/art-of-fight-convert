@@ -507,10 +507,15 @@ export default function ProgramPage() {
                   </div>
                 ))}
               </div>
-              <div className="overflow-hidden">
+              <div
+  className="overflow-hidden mx-auto"
+  style={{
+    width: "1400px", maxWidth: "100%"
+  }}
+>
                 <div className="flex gap-5 transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${roadmapIndex * 47}%)` }}>
                   {roadmapCards.map((card, i) => (
-                    <div key={i} className="min-w-[45%] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
+                    <div key={i} className="flex-[0_0_680px] rounded-[22px] overflow-hidden bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5">
                       <div className="grid grid-cols-2">
                         <img src={card.image} alt={card.title} className="w-full h-[285px] object-cover" />
                         <div className="p-8 flex flex-col justify-center">
