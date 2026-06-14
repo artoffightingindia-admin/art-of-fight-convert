@@ -33,9 +33,9 @@ const CoachSection = () => (
 </p>
             </div>
 
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
-            Purushothaman: Helping beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.
-
+           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
+  Purushothaman: Helping beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.
+</p>
             <ul className="space-y-2">
               <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
                 <Star className="w-4 h-4 text-primary shrink-0 mt-1" />  Only Tamil Fighter to compete in MFN and a Multiple-Time National Medalist.
