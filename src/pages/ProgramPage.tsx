@@ -329,7 +329,7 @@ export default function ProgramPage() {
 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION    </h3>
 
     <img
-      src="https://i.postimg.cc/fWvp0Bmj/Pain-Point.png"
+      src="/images/Pain Point.png"
       alt="MMA Training"
       className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block"
     />
