@@ -54,7 +54,7 @@ function InfiniteFeedbackSlider() {
     const slider = sliderRef.current;
     const track = trackRef.current;
     if (!slider || !track) return;
-    const speed = 0.55;
+    const speed = 0;
     const getHalfWidth = () => track.scrollWidth / 2;
     const animate = () => {
       if (!isPausedRef.current) {
