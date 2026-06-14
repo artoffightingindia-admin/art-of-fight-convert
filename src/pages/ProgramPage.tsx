@@ -664,7 +664,7 @@ CHALLENGES OF BEGINNERS  </span>
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
-                <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">TOTAL BONUS VALUE</p>
+                <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">BONUSES WORTH </p>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] text-[#07b4ba]">₹2,999</h2>
               </div>
             </div>
