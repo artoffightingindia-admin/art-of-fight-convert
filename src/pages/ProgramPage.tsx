@@ -193,32 +193,33 @@ const IconUsersW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" str
 const IconTrophyW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16M12 17v5M7 4v6a5 5 0 0 0 10 0V4H7z" /></svg>);
 
 const whatCards = [
-  { icon: <IconPlan />, title: "MADE EXCLUSIVELY FOR BEGINNERS", desc: "Clear guidance from day one" },
-  { icon: <IconChart />, title: "STRUCTURED PROGRESSION", desc: "Stance → punches → kicks → combinations" },
-  { icon: <IconLeaf />, title: "NO EQUIPMENT OR PARTNER NEEDED", desc: "Train effectively from the comfort of your home." },
-  { icon: <IconGlobe />, title: "TAMIL-GUIDED INSTRUCTION", desc: "For better understanding" },
-  { icon: <IconChat />, title: "JUST 30-40 MINUTES A DAY", desc: "Built for busy schedules" },
+  { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
+  { icon: <IconChart />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
+  { icon: <IconLeaf />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
+  { icon: <IconGlobe />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
+  { icon: <IconChat />, title: "LEARN IN Thamizh", desc: "Understand concepts faster through coaching delivered in Thamizh and simple English." },
 ];
 
 const painPoints = [
-  "You train 4-5 days a week but your technique isn't improving",
-  "Your sparring partners are getting better — you feel stuck",
+  "Don't know where to begin",
+  "Don't have access to a quality MMA gym",
   "You have no structured plan, just random gym sessions",
-  "Coaches at your gym don't give you personal attention",
-  "You don't know what to fix or where to even start",
+  "Don't have a training partner or equipment",
+  "Can't commit hours every day to training",
+  "Can't find structured MMA guidance in Thamizh",
 ];
 
 const coachCredentials = [
-  "Former Professional MMA Fighter — 12+ Years Ring Experience",
-  "Trained athletes who compete at national and international level",
-  "Specialist in striking, grappling transitions and mental conditioning",
+  "Only Thamizh MMA Fighter in MFN and Multiple-Time National Medalist",
+  "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
+  "Specialized in Developing Strong Fundamentals for Beginners",
 ];
 
 const stats = [
-  { val: "1,000+", label: "Athletes Coached" },
+  { val: "2,000+", label: "Clients Coached" },
   { val: "10+", label: "Years Experience" },
-  { val: "50+", label: "Champions Trained" },
-  { val: "3", label: "Continents" },
+  { val: "20+", label: "MMA Fights" },
+  { val: "10K+", label: "AOF Community" },
 ];
 
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
@@ -233,11 +234,11 @@ export default function ProgramPage() {
   const [isMobileRoadmap, setIsMobileRoadmap] = useState(false);
 
   const roadmapCards = [
-    { title: "1ST WEEK", days: "DAYS 1 - 7",   image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Fundamentals", "Basic Techniques", "Conditioning", "Mindset Building"] },
-    { title: "2ND WEEK", days: "DAYS 8 - 14",  image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Skill Development", "Strength & Power", "Drills & Combos", "Recovery Focus"] },
-    { title: "3RD WEEK", days: "DAYS 15 - 21", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Advanced Techniques", "Sparring Practice", "Endurance Boost", "Mental Toughness"] },
-    { title: "4TH WEEK", days: "DAYS 22 - 28", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Fight IQ", "Combination Chains", "Counter Attacks", "Explosive Training"] },
-    { title: "5TH WEEK", days: "DAYS 29 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Full Integration", "Fight Simulation", "Peak Conditioning", "Program Completion"] },
+    { title: "Week 01: Build your foundation", days: "DAYS 1 - 7",   image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+    { title: "Week 02: Defense to Offense", days: "DAYS 8 - 14",  image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+    { title: "Week 03: BEYOND THE HANDS", days: "DAYS 15 - 21", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+    { title: "Week 04: Expanding Your Arsenal", days: "DAYS 22 - 28", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+    { title: "Week 05: PUTTING IT ALL TOGETHER", days: "DAYS 29 - 30", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
   ];
 
   useEffect(() => {
@@ -292,7 +293,7 @@ export default function ProgramPage() {
                 BUILD REAL<br /><span className="text-[#07b4ba]">MMA STRIKING</span><br />FUNDAMENTALS
               </h1>
               <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
-                A structured system designed to create visible improvement in your first 30 days. Built for absolute beginners.
+                A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before.
               </p>
               <button
                 className="inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black hover:-translate-y-0.5 active:bg-white active:text-black"
@@ -313,7 +314,7 @@ export default function ProgramPage() {
             </div>
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
-              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
+              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Thamizh Team</span>
             </div>
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
@@ -352,7 +353,7 @@ export default function ProgramPage() {
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                You're Training Hard...<br />But Still Not Improving
+                YOU WANT TO LEARN MMA.<br />BUT HAVEN'T STARTED BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" style={{ boxShadow: "0 0 10px rgba(229,62,62,.7),0 0 24px rgba(229,62,62,.35)" }} />
             </Reveal>
@@ -386,16 +387,16 @@ export default function ProgramPage() {
             </div>
             <div className="flex-1 min-w-[260px]">
               <Reveal>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">AOF Intro</p>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Introducing AOF 30-Day Program</p>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                  Welcome to the <span className="text-[#07b4ba]">AOF Family</span>
+                  THE STARTING POINT <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
                 </h2>
                 <div className="flex flex-col gap-4">
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
-                    At Art of Fight, we're more than just a gym — we're a family built on discipline, respect, and relentless growth. Our coaches bring years of real fight experience to every session.
+                    The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.
                   </p>
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
-                    Whether you're a complete beginner or training for competition, you'll find a system designed to push your limits safely while building strong fundamentals, sharp technique, and fighter mentality.
+                    Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day. We've built the roadmap. You just need to follow it.
                   </p>
                 </div>
               </Reveal>
@@ -408,8 +409,8 @@ export default function ProgramPage() {
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal>
-            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHAT'S INCLUDED</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">WHAT YOU GET</h2>
+            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHY THIS PROGRAM WORKS?</p>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL CHALLENGES OF BEGINNERS</h2>
           </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -431,9 +432,9 @@ export default function ProgramPage() {
       <div className={`relative overflow-hidden ${isMobileRoadmap ? "border-y border-[#07b4ba]/15" : "bg-[#0b0b0b]"}`} style={isMobileRoadmap ? { background: "radial-gradient(circle at 50% 9%,rgba(7,180,186,.12),transparent 28%),linear-gradient(180deg,#02070d 0%,#061018 52%,#03070c 100%)" } : {}}>
         <div className="w-full py-8" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.04) 0px,rgba(7,180,186,.04) 1px,transparent 1px,transparent 6px)" }}>
           <div className="text-center mb-7 md:mb-9" style={GUTTER}>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">30 DAYS TRANSFORMATION JOURNEY</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">YOUR <span className="text-[#07b4ba]">5 WEEK</span> ROADMAP</h2>
-            <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">A structured path. Weekly focus. Real results.</p>
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">THE AOF BLUEPRINT</p>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">A CLEAR<span className="text-[#07b4ba]">PATH TO </span> MMA STRIKING.</h2>
+            <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.</p>
           </div>
 
           {isMobileRoadmap ? (
@@ -488,8 +489,8 @@ export default function ProgramPage() {
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
                 </div>
                 <div>
-                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[16px] tracking-[.8px] leading-none mb-1">STAY CONSISTENT. TRUST THE PROCESS.</h3>
-                  <p className="text-[#07b4ba] text-[11px] leading-[1.3]">Become the best version of yourself.</p>
+                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[16px] tracking-[.8px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
+                  <p className="text-[#07b4ba] text-[11px] leading-[1.3]">Weekly Training, Tools, and Learning Resources</p>
                 </div>
               </div>
             </div>
@@ -543,8 +544,8 @@ export default function ProgramPage() {
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
                 </div>
                 <div>
-                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[18px] md:text-[20px] tracking-[1px] leading-none mb-1">STAY CONSISTENT. TRUST THE PROCESS.</h3>
-                  <p className="text-[#07b4ba] font-['Barlow'] text-[13px] md:text-[14px] leading-[1.4]">Become the best version of yourself — week by week, rep by rep.</p>
+                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[18px] md:text-[20px] tracking-[1px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
+                  <p className="text-[#07b4ba] font-['Barlow'] text-[13px] md:text-[14px] leading-[1.4]">Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library, Technique Cue Cards, and Warm-Up & Cooldown Guide to support your learning throughout the program.</p>
                 </div>
               </div>
             </div>
@@ -556,10 +557,13 @@ export default function ProgramPage() {
               <p className="font-['Bebas_Neue'] text-[26px] md:text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
               <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
               <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
-                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-                Most fighters train hard. Very few train correctly. AOF exists to close that gap — with structure, accountability, and coaching that actually evolves with you.
-                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
-              </p>
+  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
+  In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.
+  <br />
+  <br />
+  Commit to the process, and we'll show you the path.
+  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
+</p>
             </div>
             <div className="mt-6 md:mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
               <button
@@ -581,8 +585,8 @@ export default function ProgramPage() {
             <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
               <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80" alt="Head Coach" className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-white/10 shrink-0" />
               <div className="flex-1 min-w-[260px]">
-                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Head Coach</h2>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">AOF Academy — Lead Trainer &amp; Founder</p>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
                 <div className="mb-5 md:mb-6">
                   {coachCredentials.map((cred, i) => (
                     <div key={i} className="flex items-start gap-2.5 mb-3">
@@ -610,11 +614,11 @@ export default function ProgramPage() {
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal>
             <div className="text-center mb-8 md:mb-11">
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase">Real People, Real Results</p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase">FROM OUR FIRST BATCH</p>
               <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] md:tracking-[3px] text-white mt-2 leading-none">
-                Trusted By Fighters, <span className="text-[#07b4ba]">Proven Results</span>
+                WHAT HAPPENED  <span className="text-[#07b4ba]">AFTER 30 DAYS</span>
               </h2>
-              <p className="text-white/40 mt-2 text-[13px] md:text-[15px]">Here's What Athletes Say About Their Transformation With AOF</p>
+              <p className="text-white/40 mt-2 text-[13px] md:text-[15px]">Hear directly from people who completed the AOF 30-Day MMA Striking Program</p>
             </div>
           </Reveal>
           <Reveal>
@@ -644,20 +648,20 @@ export default function ProgramPage() {
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal>
             <div className="text-center mb-8 md:mb-10">
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase mb-2">EXCLUSIVE FOUNDERS BONUSES</p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase mb-2">BEYOND THE CORE PROGRAM</p>
               <h2 className="font-['Bebas_Neue'] text-[clamp(26px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">
-                5 PREMIUM BONUSES.<span className="text-[#07b4ba]"> FREE WITH ENROLLMENT.</span>
+                EVERYTHING DESIGNED TO<span className="text-[#07b4ba]"> HELP YOU SUCCEED</span>
               </h2>
               <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
           </Reveal>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 md:gap-2">
             {[
-              { icon: <IconNutrition />, title: "FIGHTER NUTRITION GUIDE", desc: "Fuel your training with a meal plan designed for fighters — optimise energy, recovery, and body composition." },
-              { icon: <IconMobility />, title: "DAILY MOBILITY ROUTINE", desc: "Loosen tight hips, shoulders and ankles with targeted drills that keep you injury-free and fight-ready." },
-              { icon: <IconCommunity />, title: "PRIVATE FIGHTERS COMMUNITY", desc: "Join a squad of driven athletes — share wins, ask questions, and stay accountable every single day." },
-              { icon: <IconShadowboxing />, title: "ADVANCED SHADOWBOXING FLOWS", desc: "Fluid, coach-designed shadowboxing sequences to sharpen movement, timing, and muscle memory." },
-              { icon: <IconAudio />, title: "FIGHTER MINDSET AUDIO PACK", desc: "Pre-training audio sessions to lock in focus, kill self-doubt, and build the mental edge of a competitor." },
+              { icon: <IconNutrition />, title: "MOVEMENT FUNDAMENTALS", desc: "Fuel your training with a meal plan designed for fighters — optimise energy, recovery, and body composition." },
+              { icon: <IconMobility />, title: "WHITE BELT MENTALITY", desc: "Loosen tight hips, shoulders and ankles with targeted drills that keep you injury-free and fight-ready." },
+              { icon: <IconCommunity />, title: "THE MISTAKE LIBRARY", desc: "Join a squad of driven athletes — share wins, ask questions, and stay accountable every single day." },
+              { icon: <IconShadowboxing />, title: "TECHNIQUE CUE CARDS", desc: "Fluid, coach-designed shadowboxing sequences to sharpen movement, timing, and muscle memory." },
+              { icon: <IconAudio />, title: "Warm Up & Cool Down Guide", desc: "Pre-training audio sessions to lock in focus, kill self-doubt, and build the mental edge of a competitor." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
                 <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-3.5 md:p-4 relative overflow-hidden min-h-[180px] md:min-h-[220px] flex flex-col items-center text-center ${i === 4 ? "col-span-2 lg:col-span-1" : ""}`}>
@@ -693,12 +697,12 @@ export default function ProgramPage() {
               <Reveal>
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
-                  APPLY FOR YOUR<br /><span className="text-[#07b4ba]">30-DAY PROGRAM</span>
+                  DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK</span>
                 </h2>
                 <p className="text-white/50 text-[13px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
-                  Spots are limited. We only take a small number of students at a time to ensure every athlete gets the attention they deserve.
+                  No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day.
                 </p>
-                 {["Structured step-by-step training system", "Beginner friendly progression", "Train anytime from your home", "Tamil-guided instructions"].map((item, i) => (
+                 {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Refund Policy"].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5 mb-3">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
@@ -763,9 +767,9 @@ export default function ProgramPage() {
           
                   </div>
 
-                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED FOUNDER SPOTS</p>
+                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED TO 20 MEMBERS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
-                    START YOUR<br /><span className="text-[#07b4ba]">TRANSFORMATION</span>
+                    START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
                     <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹1999</span>
@@ -775,9 +779,9 @@ export default function ProgramPage() {
                     className="w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer transition-colors duration-200 hover:bg-white hover:text-black active:bg-white active:text-black"
                     onClick={scrollToFooter}
                   >
-                    JOIN NOW
+                    JOIN THE NEXT BATCH
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[12px] md:text-[13px] leading-[1.7] text-white/50">Build real striking fundamentals with a structured beginner-friendly system.</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[12px] md:text-[13px] leading-[1.7] text-white/50">Everything you need to start. Your first session could be today.</p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[["01", "DAYS"], ["23", "HOURS"], ["49", "MIN"]].map(([num, label]) => (
                       <div key={label} className="text-center">
@@ -815,7 +819,7 @@ export default function ProgramPage() {
             <div className="flex flex-col gap-3 md:gap-4">
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 00000 00000</p>
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">info@aofacademy.com</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Tamil Nadu, India</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Thamizh Nadu, India</p>
             </div>
           </div>
           <div>
