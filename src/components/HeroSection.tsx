@@ -12,30 +12,38 @@ const HeroSection = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
-<img
-  src="/images/Hero.jpg"
-  alt="MMA Fighter"
-  className="w-full h-full object-cover"
-/>
+        <img
+          src="/images/Hero.jpg"
+          alt="MMA Fighter"
+          className="w-full h-full object-cover"
+        />
+
+        {/* Optional overlay if needed later */}
         {/* <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/20 to-transparent" /> */}
       </div>
 
       {/* Content */}
       <div className="container relative z-10 flex-1 flex items-center pt-16">
         <div className="max-w-lg space-y-5">
-          
+
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">
             Art of Fighting Academy
           </p>
 
           <h1 className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground">
-         STOP DOUBTING.
+            STOP DOUBTING.
             <br />
-          START LEARNING MMA THE RIGHT WAY.
+            <span className="text-[#07b4ba]">
+              START LEARNING MMA
+            </span>
+            <br />
+            THE RIGHT WAY.
           </h1>
 
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-md">
-            Whether you want to learn striking at home or transform your fitness with personal coaching, AOF gives you a proven path to train smarter, stay consistent, and see real progress.
+            Whether you want to learn striking at home or transform your fitness
+            with personal coaching, AOF gives you a proven path to train
+            smarter, stay consistent, and see real progress.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
