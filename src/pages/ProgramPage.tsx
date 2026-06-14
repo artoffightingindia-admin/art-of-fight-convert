@@ -197,7 +197,7 @@ const whatCards = [
   { icon: <IconChart />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
   { icon: <IconLeaf />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
   { icon: <IconGlobe />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
-  { icon: <IconChat />, title: "LEARN IN Thamizh", desc: "Understand concepts faster through coaching delivered in Thamizh and simple English." },
+  { icon: <IconChat />, title: "LEARN IN Tamil", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." },
 ];
 
 const painPoints = [
@@ -206,11 +206,11 @@ const painPoints = [
   "You have no structured plan, just random gym sessions",
   "Don't have a training partner or equipment",
   "Can't commit hours every day to training",
-  "Can't find structured MMA guidance in Thamizh",
+  "Can't find structured MMA guidance in Tamil",
 ];
 
 const coachCredentials = [
-  "Only Thamizh MMA Fighter in MFN and Multiple-Time National Medalist",
+  "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
   "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
   "Specialized in Developing Strong Fundamentals for Beginners",
 ];
@@ -314,7 +314,7 @@ export default function ProgramPage() {
             </div>
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
-              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Thamizh Team</span>
+              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
             </div>
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
@@ -816,7 +816,7 @@ export default function ProgramPage() {
             <div className="flex flex-col gap-3 md:gap-4">
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 00000 00000</p>
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">info@aofacademy.com</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Thamizh Nadu, India</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Tamil Nadu, India</p>
             </div>
           </div>
           <div>
