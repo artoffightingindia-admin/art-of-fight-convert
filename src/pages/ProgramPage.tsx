@@ -80,27 +80,27 @@ function InfiniteFeedbackSlider() {
   if (isMobile) {
     return (
       <div className="block w-full">
-        <div className="w-full p-5 border border-white/8 rounded-2xl bg-[#1a1d23]">
-          <div className="flex gap-1 mb-3 text-[#07b4ba] text-sm leading-none">★★★★★</div>
-          <p className="m-0 mb-4 text-white/75 font-['Barlow'] text-[15px] italic font-normal leading-[1.7]">"{currentCard.text}"</p>
+        <div className="w-full p-6 border border-white/10 rounded-2xl bg-gradient-to-b from-[#1a1d23] to-[#15181d] shadow-lg">
+          <div className="flex gap-1 mb-4 text-[#07b4ba] text-sm leading-none">★★★★★</div>
+          <p className="m-0 mb-5 text-white/80 font-['Barlow'] text-[15px] italic font-normal leading-[1.7]">"{currentCard.text}"</p>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#202533] flex items-center justify-center text-base shrink-0">👤</div>
+            <div className="w-11 h-11 rounded-full bg-[#202533] border border-[#07b4ba]/20 flex items-center justify-center text-lg shrink-0 shadow-inner">👤</div>
             <div>
-              <p className="m-0 mb-0.5 text-white font-['Barlow'] text-[14px] font-bold leading-none">{currentCard.author}</p>
-              <span className="text-white/40 font-['Barlow'] text-[12px] leading-none">AOF Member</span>
+              <p className="m-0 mb-0.5 text-white font-['Barlow'] text-[15px] font-bold leading-none">{currentCard.author}</p>
+              <span className="text-[#07b4ba]/70 font-['Barlow'] text-[12px] uppercase tracking-wider font-semibold leading-none">AOF Member</span>
             </div>
           </div>
         </div>
-        <div className="flex justify-center gap-2 mt-4">
+        <div className="flex justify-center gap-2 mt-5">
           {feedbackCards.map((_, i) => (
             <button key={i} onClick={() => setMobilePage(i)}
-              className={`w-2 h-2 rounded-full border-0 cursor-pointer transition-all duration-200 ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-5" : "bg-white/25"}`} />
+              className={`w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-6 shadow-[0_0_8px_rgba(7,180,186,0.6)]" : "bg-white/20 hover:bg-white/40"}`} />
           ))}
         </div>
-        <div className="flex justify-center gap-4 mt-5">
-          <button className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
+        <div className="flex justify-center gap-4 mt-6">
+          <button className="flex items-center justify-center w-12 h-12 border border-white/10 rounded-full bg-[#111419] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
             onClick={() => setMobilePage(p => (p - 1 + feedbackCards.length) % feedbackCards.length)}>‹</button>
-          <button className="flex items-center justify-center w-12 h-12 border border-white/15 rounded-full bg-[#15181d] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
+          <button className="flex items-center justify-center w-12 h-12 border border-white/10 rounded-full bg-[#111419] text-white/70 text-2xl cursor-pointer active:border-[#07b4ba] active:text-[#07b4ba] transition-all"
             onClick={() => setMobilePage(p => (p + 1) % feedbackCards.length)}>›</button>
         </div>
       </div>
@@ -183,25 +183,25 @@ const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 
 const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>);
 const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
 
-// New Bonus Icons
+// New Bonus Icons Optimized
 const IconStretch = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <circle cx="15" cy="5" r="2.5" />
-    <path d="M14.5 8 C11 11 10 15 9 21" />
-    <path d="M10.5 16 L15 22" />
-    <path d="M14.5 8 L13 2.5 L7.5 4.5" />
-    <path d="M12 13 L16 14 L14.5 18" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
+    <circle cx="14" cy="5" r="2.5" />
+    <path d="M13 8 C11 12 10 14 9 21" />
+    <path d="M10.5 14 L14 21" />
+    <path d="M13 8 C11 5 7 4 6 7" />
+    <path d="M13 9 L16 12 L13 14" />
   </svg>
 );
-const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></svg>);
-const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>);
+const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></svg>);
+const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>);
 const IconFlashcards = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <rect x="8" y="6" width="10" height="14" rx="1.5" transform="rotate(35 13 13)" />
-    <rect x="4" y="4" width="10" height="14" rx="1.5" transform="rotate(15 9 11)" fill="#0c1015" />
+  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
+    <path d="M7 6h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" transform="rotate(-9 11 13)" />
+    <path d="M9 4h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" transform="rotate(6 13 11)" fill="#0b0b0b" />
   </svg>
 );
-const IconStopwatch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2" /><path d="M10 3h4" /><path d="M12 3v2" /><path d="M6 6l-2-2" /></svg>);
+const IconStopwatch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2" /><path d="M10 3h4" /><path d="M12 3v2" /><path d="M6 6l-2-2" /></svg>);
 
 const IconShieldW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>);
 const IconUsersW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>);
@@ -312,15 +312,15 @@ export default function ProgramPage() {
           <div className="w-full flex items-center justify-between md:justify-start gap-0">
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconShieldW /></div>
-              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Proven System</span>
+              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Proven System</span>
             </div>
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
-              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
+              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
             </div>
             <div className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
-              <span className="font-['Bebas_Neue'] text-[16px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Real Results</span>
+              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Real Results</span>
             </div>
           </div>
         </div>
@@ -330,26 +330,13 @@ export default function ProgramPage() {
       <section className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
         <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
           <div className="flex-1 max-w-full md:max-w-[500px] w-full md:order-2">
-  <Reveal>
-    <h3
-      className="mb-4 text-center italic"
-      style={{
-        fontFamily: "'Barlow', sans-serif",
-        fontSize: "22px",
-        fontWeight: 600,
-        color: "#ffffff",
-        letterSpacing: "0.5px",
-      }}
-    >
-5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION    </h3>
-
-    <img
-      src="/images/Pain Point.png"
-      alt="MMA Training"
-      className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block"
-    />
-  </Reveal>
-</div>
+            <Reveal>
+              <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
+                5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
+              </h3>
+              <img src="/images/Pain Point.png" alt="MMA Training" className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block" />
+            </Reveal>
+          </div>
           <div className="flex-1 min-w-[260px] md:order-1">
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
@@ -370,49 +357,38 @@ export default function ProgramPage() {
         </div>
       </section>
 
-  {/* ── AOF INTRO SECTION ── */}
-<div
-  className="bg-[#0b0b0b]"
-  style={{
-    backgroundImage:
-      "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)",
-  }}
->
-  <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
-    <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-      <div className="flex-1 max-w-full md:max-w-[500px] w-full">
-        <Reveal>
-          <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10">
-            <img
-              src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg"
-              alt="AOF Program Intro"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-            />
+      {/* ── AOF INTRO SECTION ── */}
+      <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
+        <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
+          <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
+            <div className="flex-1 max-w-full md:max-w-[500px] w-full">
+              <Reveal>
+                <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10">
+                  <img src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center" />
+                </div>
+              </Reveal>
+            </div>
+            <div className="flex-1 min-w-[260px]">
+              <Reveal>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
+                  Introducing AOF 30-Day Program
+                </p>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+                  THE STARTING POINT <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
+                </h2>
+                <div className="flex flex-col gap-4">
+                  <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
+                    The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.
+                  </p>
+                  <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
+                    Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day. We've built the roadmap. You just need to follow it.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
           </div>
-        </Reveal>
+        </div>
       </div>
-
-      <div className="flex-1 min-w-[260px]">
-        <Reveal>
-          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
-            Introducing AOF 30-Day Program
-          </p>
-          <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-            THE STARTING POINT <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
-          </h2>
-          <div className="flex flex-col gap-4">
-            <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
-              The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.
-            </p>
-            <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
-              Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day. We've built the roadmap. You just need to follow it.
-            </p>
-          </div>
-        </Reveal>
-      </div>
-    </div>
-  </div>
-</div>
 
       {/* ── FEATURES / WHAT YOU GET ── */}
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
@@ -421,14 +397,14 @@ export default function ProgramPage() {
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3">WHY THIS PROGRAM WORKS?</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL CHALLENGES OF BEGINNERS</h2>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} delay={i * 80}>
-                <div className={`w-full p-4 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-3 md:min-h-[255px] md:p-[16px] md:rounded-[18px] ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
-                  <div className="w-[44px] h-[44px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
+                <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-3 md:min-h-[255px] md:p-[16px] md:rounded-[18px] ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[15px] md:text-[17.5px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 text-left md:text-center mb-[3px]">{item.title}</h4>
-                    <p className="text-[12px] md:text-[14px] leading-[1.5] text-white/60 text-left md:text-center m-0">{item.desc}</p>
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 text-left md:text-center mb-[3px]">{item.title}</h4>
+                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -448,7 +424,6 @@ export default function ProgramPage() {
           </div>
 
           <div className="relative w-full max-w-full">
-            
             {/* Timeline */}
             <div className="relative w-full px-[5%] md:px-[10%] mb-8 md:mb-12">
               <div className="absolute top-[28px] md:top-[42px] left-[10%] right-[10%] h-[1px] md:h-[2px] bg-white/10 z-0" />
@@ -469,12 +444,10 @@ export default function ProgramPage() {
 
             {/* Slider Container */}
             <div className="relative w-full overflow-visible md:overflow-hidden" style={GUTTER}>
-              
               <button 
                 onClick={() => setRoadmapIndex(p => Math.max(0, p - 1))} 
                 className={`absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 transition-all ${roadmapIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >‹</button>
-              
               <button 
                 onClick={() => setRoadmapIndex(p => Math.min(maxRoadmapIndex, p + 1))} 
                 className={`absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 transition-all ${roadmapIndex === maxRoadmapIndex ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
@@ -484,14 +457,10 @@ export default function ProgramPage() {
                 <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: '2%', transform: `translateX(-${roadmapIndex * 47}%)` }}>
                   {roadmapCards.map((card, i) => (
                     <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: '45%' }}>
-                      
-                      {/* Card Body */}
                       <div className="flex flex-row h-[180px] md:h-[300px]">
-                        {/* Image Left */}
                         <div className="w-[45%] h-full shrink-0">
                           <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
                         </div>
-                        {/* Content Right */}
                         <div className="w-[55%] p-3 md:p-8 flex flex-col justify-center">
                           <h3 className="font-['Bebas_Neue'] text-[16px] md:text-[32px] lg:text-[40px] text-white leading-[1.05] mb-2 uppercase line-clamp-2">{card.title}</h3>
                           <div className="w-8 md:w-16 h-[2px] md:h-[3px] bg-[#07b4ba] mb-3 md:mb-5" />
@@ -505,12 +474,9 @@ export default function ProgramPage() {
                           </div>
                         </div>
                       </div>
-                      
-                      {/* Days Bottom Strip */}
                       <div className="py-2.5 md:py-4 border-t border-white/5 text-center bg-[#080b10]">
                         <p className="font-['Bebas_Neue'] text-[14px] md:text-[20px] text-[#07b4ba] tracking-[1px] m-0">{card.days}</p>
                       </div>
-
                     </div>
                   ))}
                 </div>
@@ -520,16 +486,25 @@ export default function ProgramPage() {
 
           {/* Consistency box between roadmap cards and promise strip */}
           <div className="w-full max-w-4xl mx-auto mt-10 md:mt-12" style={GUTTER}>
-            <div className="flex flex-row items-center md:items-center gap-3 md:gap-4 p-4 md:p-6 border border-[#07b4ba]/25 rounded-[12px] md:rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90">
-              <div className="flex w-9 h-9 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 p-5 md:p-6 border border-[#07b4ba]/25 rounded-[12px] md:rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90 relative overflow-hidden">
+              <div className="flex w-10 h-10 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] bg-[#07b4ba]/10">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
               </div>
-              <div className="flex-1 max-w-[620px]">
-                <h3 className="text-white/90 font-['Bebas_Neue'] text-[15px] md:text-[20px] tracking-[1px] leading-none mb-1">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
-                <p className="text-[#07b4ba] font-['Barlow'] text-[11px] md:text-[14px] leading-[1.3] md:leading-[1.4]">
-  Every week includes Movement Fundamentals and White Belt Mentality sessions,
-  along with access to the Mistake Library.Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program.
-</p>
+              <div className="flex-1 w-full md:max-w-[620px]">
+                <h3 className="text-white/90 font-['Bebas_Neue'] text-[17px] md:text-[20px] tracking-[1px] leading-none mb-2 md:mb-1.5">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
+                
+                {/* Desktop Text */}
+                <p className="hidden md:block text-[#07b4ba] font-['Barlow'] text-[14px] leading-[1.4] m-0">
+                  Every week includes Movement Fundamentals and White Belt Mentality sessions,
+                  along with access to the Mistake Library. Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program.
+                </p>
+
+                {/* Mobile Specific UI Text */}
+                <div className="md:hidden mt-3 pt-3 border-t border-[#07b4ba]/20 w-full">
+                  <p className="text-white/80 font-['Barlow'] text-[13.5px] leading-[1.5] italic font-medium m-0">
+                    Includes mindset coaching, movement training, and many exclusive bonus learning resources.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -540,10 +515,10 @@ export default function ProgramPage() {
               <p className="font-['Bebas_Neue'] text-[26px] md:text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
               <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
               <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
-  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-  In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.Commit to the process, and we'll show you the path.
-  <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
-</p>
+                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
+                In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and confidently on your own.Commit to the process, and we'll show you the path.
+                <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
+              </p>
             </div>
             <div className="mt-6 md:mt-8 overflow-hidden bg-[#07b4ba]" style={{ marginLeft: "-1cm", marginRight: "-1cm" }}>
               <button
@@ -564,14 +539,14 @@ export default function ProgramPage() {
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6">LED BY</p>
             <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
               <img
-  src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
-  alt="Head Coach"
-  className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0"
-  style={{
-    boxShadow:
-      "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
-  }}
-/>
+                src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
+                alt="Head Coach"
+                className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0"
+                style={{
+                  boxShadow:
+                    "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
+                }}
+              />
               <div className="flex-1 min-w-[260px]">
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
@@ -643,7 +618,7 @@ export default function ProgramPage() {
               <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Join the Founder's Batch and unlock premium resources at no extra cost.</p>
             </div>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-2">
             {[
               { icon: <IconStretch />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
               { icon: <IconBrain />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
@@ -652,18 +627,18 @@ export default function ProgramPage() {
               { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
-                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-4 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0 ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
-                  <div className="absolute top-0 right-0 md:top-3 md:left-3 md:right-auto bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[11px] md:text-[14px] tracking-[1px] px-2 py-1 md:py-0.5 rounded-bl-[10px] md:rounded-none md:rounded-[5px] leading-none">#{i + 1}</div>
-                  <div className="w-[44px] h-[44px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-0 mt-0 md:mb-2 md:mt-4 shrink-0">{item.icon}</div>
+                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-5 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-0 ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="absolute top-0 right-0 md:top-3 md:left-3 md:right-auto bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[12px] md:text-[14px] tracking-[1px] px-2.5 py-1.5 md:py-0.5 rounded-bl-[10px] md:rounded-none md:rounded-[5px] leading-none">#{i + 1}</div>
+                  <div className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-0 mt-0 md:mb-2 md:mt-4 shrink-0">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full mt-0 md:mt-0">
-                    <h3 className="font-['Bebas_Neue'] text-[15px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-1.5">{item.title}</h3>
-                    <p className="font-['Barlow'] text-[12px] md:text-[13px] text-white/55 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
+                    <h3 className="font-['Bebas_Neue'] text-[16px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-2 md:mb-1.5">{item.title}</h3>
+                    <p className="font-['Barlow'] text-[13px] md:text-[13px] text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
-          <div className="mt-4 md:mt-4 max-w-3xl mx-auto border border-[#07b4ba]/30 rounded-[18px] p-4 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
+          <div className="mt-5 md:mt-4 max-w-3xl mx-auto border border-[#07b4ba]/30 rounded-[18px] p-5 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
@@ -689,7 +664,7 @@ export default function ProgramPage() {
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
                   DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK</span>
                 </h2>
-                <p className="text-white/50 text-[13px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
+                <p className="text-white/50 text-[14px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
                   No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day.
                 </p>
                  {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Refund Policy"].map((item, i) => (
@@ -699,7 +674,7 @@ export default function ProgramPage() {
                   </div>
                 ))}
                 {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
-                <div className="mt-5 md:mt-6 flex items-start gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80">
+                <div className="mt-5 md:mt-6 flex items-start gap-4 md:gap-3.5 p-5 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80">
                   <div className="flex w-10 h-10 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] mt-0.5">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -707,8 +682,8 @@ export default function ProgramPage() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">CONDITIONAL PROGRESS GUARANTEE</p>
-                    <p className="font-['Barlow'] text-[13px] md:text-[14px] text-white/65 leading-[1.65]">Complete the program, submit your training work, and follow the process. If you don't achieve the promised outcome, we'll make it right.</p>
+                    <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">CONDITIONAL PROGRESS GUARANTEE</p>
+                    <p className="font-['Barlow'] text-[13.5px] md:text-[14px] text-white/65 leading-[1.65] m-0">Complete the program, submit your training work, and follow the process. If you don't achieve the promised outcome, we'll make it right.</p>
                   </div>
                 </div>
               </Reveal>
@@ -720,57 +695,18 @@ export default function ProgramPage() {
                 <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center relative overflow-hidden">
 
                   {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
-<div
-  className="absolute top-0 left-0 z-20 overflow-hidden"
-  style={{
-    width: "170px",
-    height: "170px",
-    pointerEvents: "none",
-  }}
->
-  <div
-    style={{
-      position: "absolute",
-      top: "30px",
-left: "-60px",
-      width: "260px",
-      transform: "rotate(-45deg)",
-      background:
-        "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)",
-      boxShadow: "0 6px 25px rgba(7,180,186,0.45)",
-      padding: "10px 0",
-      textAlign: "center",
-    }}
-  >
-    <div
-      style={{
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: "24px",
-        letterSpacing: "2px",
-        color: "#ffffff",
-        lineHeight: "1",
-      }}
-    >
-      50% OFF
-    </div>
+                  <div className="absolute top-0 left-0 z-20 overflow-hidden" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
+                    <div style={{ position: "absolute", top: "30px", left: "-60px", width: "260px", transform: "rotate(-45deg)", background: "linear-gradient(135deg, #06a7ad 0%, #07b4ba 50%, #06a7ad 100%)", boxShadow: "0 6px 25px rgba(7,180,186,0.45)", padding: "10px 0", textAlign: "center" }}>
+                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "24px", letterSpacing: "2px", color: "#ffffff", lineHeight: "1" }}>
+                        50% OFF
+                      </div>
+                      <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1px", color: "rgba(255,255,255,0.9)", textTransform: "uppercase", marginTop: "2px" }}>
+                        Celebrating 2 Years Of AOF
+                      </div>
+                    </div>
+                  </div>
 
-    <div
-      style={{
-        fontFamily: "'Barlow', sans-serif",
-        fontSize: "10px",
-        fontWeight: 700,
-        letterSpacing: "1px",
-        color: "rgba(255,255,255,0.9)",
-        textTransform: "uppercase",
-        marginTop: "2px",
-      }}
-    >
-      Celebrating 2 Years Of AOF
-    </div>
-  </div>
-</div>
-
-                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">LIMITED TO 20 MEMBERS</p>
+                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 mt-4 md:mt-0">LIMITED TO 20 MEMBERS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
                     START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
                   </h2>
