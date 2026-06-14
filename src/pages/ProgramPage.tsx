@@ -183,90 +183,25 @@ const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 
 const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>);
 const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
 
-/* ── BONUS SECTION ICONS (matching uploaded images) ── */
-
-/* #1 Movement Fundamentals — Stretching Pose (person bending sideways, arm overhead) */
-const IconNutrition = () => (
+// New Bonus Icons
+const IconStretch = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Head */}
-    <circle cx="14.5" cy="3.5" r="1.5" />
-    {/* Body bending sideways */}
-    <path d="M14.5 5 C14 8 12 10 9 13" />
-    {/* Right arm raised overhead */}
-    <path d="M14.5 7 C16 5.5 17.5 4.5 19 3" />
-    {/* Left arm on hip */}
-    <path d="M12 9 C11 10 10.5 11 11 12" />
-    {/* Legs */}
-    <path d="M9 13 L8 18 L7.5 22" />
-    <path d="M9 13 L10.5 18 L11 22" />
+    <circle cx="15" cy="5" r="2.5" />
+    <path d="M14.5 8 C11 11 10 15 9 21" />
+    <path d="M10.5 16 L15 22" />
+    <path d="M14.5 8 L13 2.5 L7.5 4.5" />
+    <path d="M12 13 L16 14 L14.5 18" />
   </svg>
 );
-
-/* #2 White Belt Mentality — Brain */
-const IconMobility = () => (
-  <svg viewBox="0 0 56 56" fill="none" stroke="#07b4ba" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Brain outline — left hemisphere */}
-    <path d="M28 48 C20 48 13 43 11 36 C8 35 6 32 6 29 C6 26 8 23 11 22 C11 18 14 15 18 14 C19 10 23 8 28 8" />
-    {/* Brain outline — right hemisphere */}
-    <path d="M28 8 C33 8 37 10 38 14 C42 15 45 18 45 22 C48 23 50 26 50 29 C50 32 48 35 45 36 C43 43 36 48 28 48" />
-    {/* Center stem */}
-    <path d="M28 8 L28 48" strokeDasharray="2 2" strokeWidth="1.4" />
-    {/* Left hemisphere folds */}
-    <path d="M15 22 C17 20 20 21 21 24" />
-    <path d="M12 30 C14 28 17 29 18 32" />
-    <path d="M14 38 C17 36 20 37 21 40" />
-    {/* Right hemisphere folds */}
-    <path d="M41 22 C39 20 36 21 35 24" />
-    <path d="M44 30 C42 28 39 29 38 32" />
-    <path d="M42 38 C39 36 36 37 35 40" />
-    {/* Brain stem */}
-    <path d="M24 48 C24 51 32 51 32 48" />
-  </svg>
-);
-
-/* #3 Mistake Library — Magnifying Glass */
-const IconCommunity = () => (
+const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></svg>);
+const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>);
+const IconFlashcards = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <circle cx="10" cy="10" r="7" />
-    <line x1="15.5" y1="15.5" x2="22" y2="22" strokeWidth="2.2" strokeLinecap="round" />
+    <rect x="8" y="6" width="10" height="14" rx="1.5" transform="rotate(35 13 13)" />
+    <rect x="4" y="4" width="10" height="14" rx="1.5" transform="rotate(15 9 11)" fill="#0c1015" />
   </svg>
 );
-
-/* #4 Technique Cue Cards — Flashcards (fanned cards) */
-const IconShadowboxing = () => (
-  <svg viewBox="0 0 56 56" fill="none" stroke="#07b4ba" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Back card (rotated right) */}
-    <rect x="22" y="10" width="22" height="28" rx="3"
-      transform="rotate(15 33 24)"
-      strokeOpacity="0.5" />
-    {/* Middle card (slight rotate left) */}
-    <rect x="16" y="12" width="22" height="28" rx="3"
-      transform="rotate(-8 27 26)"
-      strokeOpacity="0.75" />
-    {/* Front card (straight) */}
-    <rect x="10" y="14" width="22" height="28" rx="3" />
-  </svg>
-);
-
-/* #5 Warm Up & Cool Down — Stopwatch */
-const IconAudio = () => (
-  <svg viewBox="0 0 56 56" fill="none" stroke="#07b4ba" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Crown / button top */}
-    <rect x="22" y="6" width="12" height="5" rx="2" />
-    {/* Side button */}
-    <path d="M14 14 L11 11" strokeWidth="2.5" />
-    {/* Main circle */}
-    <circle cx="28" cy="34" r="17" />
-    {/* Inner ring */}
-    <circle cx="28" cy="34" r="14" strokeOpacity="0.35" strokeWidth="1.2" />
-    {/* Stem connecting button to circle */}
-    <line x1="28" y1="11" x2="28" y2="17" />
-    {/* Minute hand pointing to ~8 o'clock */}
-    <line x1="28" y1="34" x2="20" y2="26" strokeWidth="2" />
-    {/* Center dot */}
-    <circle cx="28" cy="34" r="1.5" fill="#07b4ba" stroke="none" />
-  </svg>
-);
+const IconStopwatch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2" /><path d="M10 3h4" /><path d="M12 3v2" /><path d="M6 6l-2-2" /></svg>);
 
 const IconShieldW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>);
 const IconUsersW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>);
@@ -710,11 +645,11 @@ export default function ProgramPage() {
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-2">
             {[
-              { icon: <IconNutrition />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
-              { icon: <IconMobility />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
-              { icon: <IconCommunity />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
-              { icon: <IconShadowboxing />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
-              { icon: <IconAudio />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
+              { icon: <IconStretch />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
+              { icon: <IconBrain />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
+              { icon: <IconSearch />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
+              { icon: <IconFlashcards />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
+              { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
                 <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-4 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0 ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
