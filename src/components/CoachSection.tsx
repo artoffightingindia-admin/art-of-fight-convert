@@ -20,24 +20,24 @@ const CoachSection = () => (
           <div className="flex-1 space-y-3">
             <div>
               <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-                Coach Name
+                Purushothaman MK
               </h2>
-              <p className="text-muted-foreground text-sm mt-1">Head Coach</p>
+              <p className="text-muted-foreground text-sm mt-1">Head Coach | PRO MMA Fighter</p>
             </div>
 
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+             Purushothaman has dedicated his career to helping people develop real skills, confidence, and discipline through structured training. From complete beginners to competitive athletes, his coaching philosophy remains the same: simplify the process, focus on fundamentals, and create lasting progress.
             </p>
 
             <ul className="space-y-2">
               <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
-                <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> 00+ Years of professional fighting experience
+                <Star className="w-4 h-4 text-primary shrink-0 mt-1" />  Only Tamil Fighter to compete in MFN and a Multiple-Time National Medalist.
               </li>
               <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
-                <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> Trained 0,000+ fighters across all levels
+                <Star className="w-4 h-4 text-primary shrink-0 mt-1" />Trained 2000+ MMA students, including national champions across multiple disciplines.
               </li>
               <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
-                <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> Coached 00 national & state champions
+                <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> 10+ Years in MMA with 20+ Fights Competed Nationally \& Internationally.
               </li>
             </ul>
           </div>
@@ -47,7 +47,7 @@ const CoachSection = () => (
       {/* ---------- AND A TEAM ---------- */}
       <div>
         <p className="text-primary text-xs md:text-sm font-semibold uppercase tracking-widest mb-4 md:text-right">
-          And A Team
+SUPPORTED BY
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Bullets on the LEFT */}
@@ -55,24 +55,24 @@ const CoachSection = () => (
             <div className="max-w-md space-y-3">
               <div>
                 <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-                  Team Name
+                  Kaviarasu K
                 </h2>
-                <p className="text-muted-foreground text-sm mt-1">Assistant Coaches</p>
+                <p className="text-muted-foreground text-sm mt-1">Program Development | MMA Athlete</p>
               </div>
 
               <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+                As the driving force behind Art of Fighting, Kaviarasu leads program development, student support, and community growth. His focus is helping students stay accountable, build strong fundamentals, and get the most out of their training.
               </p>
 
               <ul className="space-y-2">
                 <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
-                  <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> Specialised assistant coaches across striking, grappling and conditioning
+                  <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> State Boxing Champion & Pro-Am National Muay Thai Champion.
                 </li>
                 <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
-                  <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> National & state-level competition experience
+                  <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> 5+ Years of Mixed Martial Arts Experience.
                 </li>
                 <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
-                  <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> Hands-on mentorship for every student, every session
+                  <Star className="w-4 h-4 text-primary shrink-0 mt-1" /> Co-Creator of AOF's Programs & Content.
                 </li>
               </ul>
             </div>
