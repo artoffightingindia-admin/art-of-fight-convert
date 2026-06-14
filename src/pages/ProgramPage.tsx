@@ -232,11 +232,11 @@ export default function ProgramPage() {
   const [roadmapIndex, setRoadmapIndex] = useState(0);
 
   const roadmapCards = [
-    { title: "DAYS 1 - 7", days: "Week 01: Build your foundation",   image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
-    { title: "DAYS 8 - 14", days: "Week 02: Defense to Offense",  image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
-    { title: "DAYS 15 - 21", days: "Week 03: BEYOND THE HANDS", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
-    { title: "DAYS 22 - 28", days: "Week 04: Expanding Your Arsenal", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
-    { title: "DAYS 29 - 30", days: "Week 05: PUTTING IT ALL TOGETHER", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
+    { title: "Week 01", days: "DAYS 1 - 7: Build your foundation",   image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+    { title: "Week 02", days: "DAYS 8 - 14: Defense to Offense",  image: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1200", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+    { title: "Week 03", days: "DAYS 15 - 21: BEYOND THE HANDS", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+    { title: "Week 04", days: "DAYS 22 - 28: Expanding Your Arsenal", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+    { title: "Week 05", days: "DAYS 29 - 30: PUTTING IT ALL TOGETHER", image: "https://images.unsplash.com/photo-1517438984742-1262db08379e?q=80&w=1200", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
   ];
 
   const maxRoadmapIndex = roadmapCards.length - 2;
