@@ -2,12 +2,12 @@ import { Star, ChevronLeft, ChevronRight, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const testimonials = [
-  { name: "Syde",    role: "Member",  text: "AOF transformed how I train — discipline, technique, and family vibe all in one." },
-  { name: "Seity",   role: "Member",  text: "The coaches actually care. I've gained real skill and real confidence." },
-  { name: "Rolen",   role: "Member",  text: "Best decision I made this year. The 30-day program is no joke — results are real." },
-  { name: "Karthik", role: "Fighter", text: "From beginner to ring-ready in months. The system works." },
-  { name: "Arjun",   role: "Member",  text: "Pad work, sparring, conditioning — every session pushes you to level up." },
-  { name: "Vikram",  role: "Athlete", text: "Best coaching in the city — period. The team feels like family." },
+  { name: "Pradeep",    role: "Member",  text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence." },
+  { name: "Rahul",   role: "Member",  text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply." },
+  { name: "Bharathwaj",   role: "Member",  text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward." },
+  { name: "Surya", role: "Fighter", text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete." },
+  { name: "Madhan",   role: "Member",  text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development." },
+  { name: "Sohail Mohammad",  role: "Athlete", text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected." },
 ];
 
 const VISIBLE = 3;
