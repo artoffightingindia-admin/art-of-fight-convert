@@ -1,13 +1,39 @@
-import { Star, ChevronLeft, ChevronRight, User } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const testimonials = [
-  { name: "Pradeep",    role: "Member",  text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence." },
-  { name: "Rahul",   role: "Member",  text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply." },
-  { name: "Bharathwaj",   role: "Member",  text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward." },
-  { name: "Surya", role: "Fighter", text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete." },
-  { name: "Madhan",   role: "Member",  text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development." },
-  { name: "Sohail Mohammad",  role: "Athlete", text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected." },
+  { 
+    name: "Pradeep",    
+    role: "Member",  
+    text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence.",
+    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop" 
+  },
+  { 
+    name: "Rahul",   
+    role: "Member",  
+    text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply." 
+  },
+  { 
+    name: "Bharathwaj",   
+    role: "Member",  
+    text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward." 
+  },
+  { 
+    name: "Surya", 
+    role: "Fighter", 
+    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
+    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop"
+  },
+  { 
+    name: "Madhan",   
+    role: "Member",  
+    text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development." 
+  },
+  { 
+    name: "Sohail Mohammad",  
+    role: "Athlete", 
+    text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected." 
+  },
 ];
 
 const VISIBLE = 3;
@@ -61,10 +87,19 @@ const TiltCard = ({ t, animClass, delay }) => {
       {/* Author */}
       <div className="flex items-center gap-[10px]">
         <div
-          className="w-[34px] h-[34px] rounded-full flex items-center justify-center shrink-0"
+          className="w-[34px] h-[34px] rounded-full flex items-center justify-center shrink-0 overflow-hidden"
           style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
         >
-          <User className="w-4 h-4" style={{ color: "rgba(255,255,255,0.4)" }} />
+          {t.image ? (
+            <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+          ) : (
+            <span
+              className="text-[14px] font-bold"
+              style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif" }}
+            >
+              {t.name.charAt(0).toUpperCase()}
+            </span>
+          )}
         </div>
         <div>
           <p
@@ -161,67 +196,64 @@ const TestimonialsSection = () => {
         {/* 2-col layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-          {/* LEFT: video */}
+          {/* LEFT: testimonial thumbnail */}
+          <div className="flex flex-col">
+            <h3
+              className="mb-4 text-center italic"
+              style={{
+                fontFamily: "'Barlow', sans-serif",
+                fontSize: "22px",
+                fontWeight: 600,
+                color: "#fff",
+                letterSpacing: "0.5px",
+              }}
+            >
+              Hear Directly From People Who Have Trained Under Coach Purushothaman
+            </h3>
 
-  {/* LEFT: testimonial thumbnail */}
+            <div className="w-full">
+              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06]">
 
-<div className="flex flex-col">
-  <h3
-    className="mb-4 text-center italic"
-    style={{
-      fontFamily: "'Barlow', sans-serif",
-      fontSize: "22px",
-      fontWeight: 600,
-      color: "#fff",
-      letterSpacing: "0.5px",
-    }}
-  >
-    Hear Directly From People Who Have Trained Under Coach Purushothaman
-  </h3>
+                {/* Thumbnail */}
+                <img
+                  src="https://i.postimg.cc/6QhDKcWp/Testimonial-Thumbnail-jpg.jpg"
+                  alt="Testimonial Video"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
 
-  <div className="w-full">
-    <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06]">
+                {/* Overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "rgba(0,0,0,0.25)",
+                  }}
+                />
 
-      {/* Thumbnail */}
-      <img
-        src="https://i.postimg.cc/6QhDKcWp/Testimonial-Thumbnail-jpg.jpg"
-        alt="Testimonial Video"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+                {/* Play Button */}
+                <div className="absolute inset-0 z-10 flex items-center justify-center">
+                  <div
+                    className="w-[62px] h-[62px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                    style={{
+                      backgroundColor: "#07b4ba",
+                      boxShadow: "0 0 28px 6px rgba(7,180,186,0.28)",
+                    }}
+                  >
+                    <div
+                      className="ml-[5px]"
+                      style={{
+                        width: 0,
+                        height: 0,
+                        borderTop: "10px solid transparent",
+                        borderBottom: "10px solid transparent",
+                        borderLeft: "18px solid #0a0f14",
+                      }}
+                    />
+                  </div>
+                </div>
 
-      {/* Overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "rgba(0,0,0,0.25)",
-        }}
-      />
-
-      {/* Play Button */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <div
-          className="w-[62px] h-[62px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
-          style={{
-            backgroundColor: "#07b4ba",
-            boxShadow: "0 0 28px 6px rgba(7,180,186,0.28)",
-          }}
-        >
-          <div
-            className="ml-[5px]"
-            style={{
-              width: 0,
-              height: 0,
-              borderTop: "10px solid transparent",
-              borderBottom: "10px solid transparent",
-              borderLeft: "18px solid #0a0f14",
-            }}
-          />
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
+              </div>
+            </div>
+          </div>
 
           {/* RIGHT: cards + nav */}
           <div
