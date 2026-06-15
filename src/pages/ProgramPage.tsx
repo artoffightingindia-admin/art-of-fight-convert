@@ -273,7 +273,7 @@ export default function ProgramPage() {
 
   // --- WHATSAPP REDIRECT INTEGRATION ---
   const handleWhatsAppClick = () => {
-    const phoneNumber = "910000000000"; // Replace with your actual connected WhatsApp number
+    const phoneNumber = "919385431051"; // Updated to actual connected WhatsApp number
     const message = "Hey Team, I've a doubt about AOF 30 days program.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
@@ -495,28 +495,28 @@ CHALLENGES OF BEGINNERS  </span>
 
               <div className="overflow-hidden w-full">
                 {/* Dynamically adjust slide distance and gap based on mobile vs desktop */}
-                <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: '2%', transform: `translateX(-${roadmapIndex * (isMobileView ? 77 : 47)}%)` }}>
+                <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: isMobileView ? '4%' : '2%', transform: `translateX(-${roadmapIndex * (isMobileView ? 74 : 47)}%)` }}>
                   {roadmapCards.map((card, i) => (
-                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '100%' : '45%' }}>
-                      <div className="flex flex-row h-[270px] md:h-[300px]">
-                        <div className="w-[45%] h-full shrink-0">
+                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '70%' : '45%' }}>
+                      <div className="flex flex-col md:flex-row h-auto md:h-[300px]">
+                        <div className="w-full h-[180px] md:w-[45%] md:h-full shrink-0">
                           <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
                         </div>
-                        <div className="w-[55%] p-3 md:p-8 flex flex-col justify-center">
-                          <h3 className="font-['Bebas_Neue'] text-[16px] md:text-[32px] lg:text-[40px] text-white leading-[1.05] mb-2 uppercase line-clamp-2">{card.title}</h3>
-                          <div className="w-8 md:w-16 h-[2px] md:h-[3px] bg-[#07b4ba] mb-3 md:mb-5" />
-                          <div className="flex flex-col gap-1.5 md:gap-3">
+                        <div className="w-full md:w-[55%] p-5 md:p-8 flex flex-col justify-center">
+                          <h3 className="font-['Bebas_Neue'] text-[20px] md:text-[32px] lg:text-[40px] text-white leading-[1.05] mb-2 uppercase line-clamp-2">{card.title}</h3>
+                          <div className="w-10 md:w-16 h-[2px] md:h-[3px] bg-[#07b4ba] mb-3 md:mb-5" />
+                          <div className="flex flex-col gap-2 md:gap-3">
                             {card.points.map((pt, pi) => (
-                              <div key={pi} className="flex items-center gap-1.5 md:gap-2.5">
-                                <div className="w-3 h-3 md:w-5 md:h-5 rounded-full border md:border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[7px] md:text-[10px] shrink-0">✓</div>
-                                <p className="text-[10px] md:text-[14px] text-white/75 leading-none md:leading-snug truncate block w-full m-0">{pt}</p>
+                              <div key={pi} className="flex items-center gap-2 md:gap-2.5">
+                                <div className="w-4 h-4 md:w-5 md:h-5 rounded-full border md:border-2 border-[#07b4ba] text-[#07b4ba] flex items-center justify-center text-[8px] md:text-[10px] shrink-0">✓</div>
+                                <p className="text-[12px] md:text-[14px] text-white/75 leading-none md:leading-snug truncate block w-full m-0">{pt}</p>
                               </div>
                             ))}
                           </div>
                         </div>
                       </div>
-                      <div className="py-2.5 md:py-4 border-t border-white/5 text-center bg-[#080b10]">
-                        <p className="font-['Bebas_Neue'] text-[14px] md:text-[20px] text-[#07b4ba] tracking-[1px] m-0">{card.days}</p>
+                      <div className="py-3 md:py-4 border-t border-white/5 text-center bg-[#080b10] mt-auto">
+                        <p className="font-['Bebas_Neue'] text-[16px] md:text-[20px] text-[#07b4ba] tracking-[1px] m-0">{card.days}</p>
                       </div>
                     </div>
                   ))}
@@ -698,8 +698,8 @@ CHALLENGES OF BEGINNERS  </span>
       {/* ── CTA / APPLY SECTION ── */}
       <div ref={footerRef} className="bg-[#0a0a0a] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)", backgroundSize: "20px 20px" }}>
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
-          <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-start flex-wrap">
-            <div className="flex-1 w-full md:min-w-[260px]">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center lg:items-start w-full">
+            <div className="w-full lg:flex-1 max-w-2xl mx-auto">
               <Reveal>
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
@@ -731,7 +731,7 @@ CHALLENGES OF BEGINNERS  </span>
             </div>
 
             {/* ── CTA Card with offer ribbon ── */}
-            <div className="flex-1 w-full md:min-w-[350px]">
+            <div className="w-full lg:w-[420px] max-w-md mx-auto shrink-0">
               <Reveal>
                 <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 pt-16 md:p-10 text-center relative overflow-hidden flex flex-col items-center">
 
