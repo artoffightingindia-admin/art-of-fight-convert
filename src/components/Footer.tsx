@@ -6,8 +6,8 @@ const Footer = () => (
       <div>
         <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Contact</h4>
         <ul className="space-y-2 text-sm text-muted-foreground">
-          <li className="flex items-center gap-2"><Phone size={14} className="text-primary" /> +91 00000 00000</li>
-          <li className="flex items-center gap-2"><Mail size={14} className="text-primary" /> info@aofacademy.com</li>
+          <li className="flex items-center gap-2"><Phone size={14} className="text-primary" /> +91 93854 31051</li>
+          <li className="flex items-center gap-2"><Mail size={14} className="text-primary" /> info@artoffighting.in</li>
           <li className="flex items-start gap-2"><MapPin size={14} className="text-primary mt-0.5" /> Chennai, Tamil Nadu, India</li>
         </ul>
       </div>
@@ -27,8 +27,7 @@ const Footer = () => (
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li><a href="#" className="hover:text-primary transition-colors">30 Days Program</a></li>
           <li><a href="#" className="hover:text-primary transition-colors">1-on-1 Coaching</a></li>
-          <li><a href="#" className="hover:text-primary transition-colors">Group Classes</a></li>
-          <li><a href="#" className="hover:text-primary transition-colors">Kids Training</a></li>
+      
         </ul>
       </div>
 
