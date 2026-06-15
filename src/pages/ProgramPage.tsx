@@ -148,12 +148,12 @@ function InfiniteFeedbackSlider() {
 
 /* ── FAQ ── */
 const faqItems = [
-  { question: "Who is AOF 1-on-1 coaching for?", answer: "AOF coaching is designed for serious fighters and committed beginners alike — anyone who is tired of training without direction. Whether you're a competitive MMA athlete looking to peak for your next bout, or someone starting from scratch who wants to build real skill fast, our personalised system is built around your specific goals, body type, and schedule." },
-  { question: "How does the remote coaching work?", answer: "After your strategy call, your coach builds a fully customised training plan and delivers it digitally. You'll have direct WhatsApp access to your coach for questions, feedback, and check-ins. You submit session videos for review, and your coach adjusts the plan in real time based on what they see." },
-  { question: "How quickly will I see results?", answer: "Most athletes report noticeable improvements in technique and conditioning within the first 3–4 weeks. Significant transformation typically takes 6–8 weeks of consistent training under the AOF method." },
-  { question: "What if I'm a complete beginner?", answer: "Beginners are welcome and thrive in the AOF system. In fact, starting with proper 1-on-1 coaching before picking up bad habits is the fastest route to becoming a skilled fighter." },
-  { question: "Is there a contract or long-term commitment?", answer: "No long-term contracts. You can cancel anytime. We also back that up with a results guarantee — if you don't see measurable progress, well extend your coaching for free until you do." },
-  { question: "How many sessions should I train per week?", answer: "Most athletes train between 3–6 sessions per week depending on their goals, recovery capacity, and schedule. Your coach will create the optimal structure for you." },
+  { question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee" },
+  { question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
+  { question: "How much time do I need each day?", answer: "Most sessions take around 30–45 minutes, making it easy to fit into a busy schedule." },
+  { question: "What equipment do I need?", answer: "Comfortable training clothes and a small training space are enough to get started. Additional equipment is optional." },
+  { question: "What happens after I join?", answer: "You'll receive access to the program, onboarding instructions, and a clear roadmap showing exactly what to do each day." },
+  { question: "How many sessions should I train per week?", answer: "You can reach out through the designated support channels and receive guidance from the AOF team." },
 ];
 
 function FAQSection() {
@@ -801,7 +801,7 @@ CHALLENGES OF BEGINNERS  </span>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">CONTACT</h3>
             <div className="flex flex-col gap-3 md:gap-4">
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 93854 31051</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">artoffightingindia@gmail.com</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">info@artoffighting.in</p>
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Tamil Nadu, India</p>
             </div>
           </div>
