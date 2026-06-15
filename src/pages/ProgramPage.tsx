@@ -497,7 +497,7 @@ CHALLENGES OF BEGINNERS  </span>
                 {/* Dynamically adjust slide distance and gap based on mobile vs desktop */}
                 <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: '2%', transform: `translateX(-${roadmapIndex * (isMobileView ? 77 : 47)}%)` }}>
                   {roadmapCards.map((card, i) => (
-                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '85%' : '45%' }}>
+                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '100%' : '45%' }}>
                       <div className="flex flex-row h-[270px] md:h-[300px]">
                         <div className="w-[45%] h-full shrink-0">
                           <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
