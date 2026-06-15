@@ -255,11 +255,28 @@ export default function ProgramPage() {
   const navigate = useNavigate();
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  // Track mobile view strictly for the Roadmap Slider layout adjustments
+  useEffect(() => {
+    const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // --- RAZORPAY PAYMENT LINK INTEGRATION ---
   const handlePayment = () => {
     // 🚨 PASTE YOUR RAZORPAY PAYMENT LINK INSIDE THESE QUOTES 🚨
     window.location.href = "https://rzp.io/rzp/aof30dayprogram";
+  };
+
+  // --- WHATSAPP REDIRECT INTEGRATION ---
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "910000000000"; // Replace with your actual connected WhatsApp number
+    const message = "Hey Team, I've a doubt about AOF 30 days program.";
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const roadmapCards = [
@@ -270,7 +287,8 @@ export default function ProgramPage() {
     { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
   ];
 
-  const maxRoadmapIndex = roadmapCards.length - 2;
+  // Adjust max index based on whether we are showing 1 card (mobile) or 2 cards (desktop) per view
+  const maxRoadmapIndex = isMobileView ? roadmapCards.length - 1 : roadmapCards.length - 2;
 
   // IMPORTANT: For the buttons below, `onClick={scrollToFooter}` has been replaced with `onClick={handlePayment}`
 
@@ -348,7 +366,7 @@ export default function ProgramPage() {
       {/* ── PAIN SECTION ── */}
       <section className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
         <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-          <div className="flex-1 max-w-full md:max-w-[500px] w-full md:order-2">
+          <div className="flex-1 w-full md:max-w-[500px] md:order-2">
             <Reveal>
               <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
@@ -356,7 +374,7 @@ export default function ProgramPage() {
               <img src="/images/Pain Point.png" alt="MMA Training" className="w-full rounded-[14px] border border-white/10 aspect-video object-cover block" />
             </Reveal>
           </div>
-          <div className="flex-1 min-w-[260px] md:order-1">
+          <div className="flex-1 w-full md:min-w-[260px] md:order-1">
             <Reveal>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
@@ -381,14 +399,14 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
           <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-            <div className="flex-1 max-w-full md:max-w-[500px] w-full">
+            <div className="flex-1 w-full md:max-w-[500px]">
               <Reveal>
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10">
                   <img src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center" />
                 </div>
               </Reveal>
             </div>
-            <div className="flex-1 min-w-[260px]">
+            <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
                   Introducing AOF 30-Day Program
@@ -451,7 +469,7 @@ CHALLENGES OF BEGINNERS  </span>
               <div className="absolute top-[28px] md:top-[42px] left-[10%] right-[10%] h-[1px] md:h-[2px] bg-white/10 z-0" />
               <div className="flex justify-between relative z-10 w-full">
                 {roadmapCards.map((week, i) => {
-                  const isActive = i === roadmapIndex || i === roadmapIndex + 1;
+                  const isActive = isMobileView ? (i === roadmapIndex) : (i === roadmapIndex || i === roadmapIndex + 1);
                   return (
                     <div key={i} className="flex flex-col items-center justify-end w-[18%] cursor-pointer group" onClick={() => setRoadmapIndex(Math.min(i, maxRoadmapIndex))}>
                       <p className={`text-[8px] md:text-[14px] font-['Bebas_Neue'] tracking-[1px] mb-2 md:mb-3 uppercase text-center line-clamp-2 h-[24px] md:h-[40px] flex items-end justify-center transition-colors ${isActive ? 'text-[#07b4ba]' : 'text-white/40 group-hover:text-white/70'}`}>
@@ -476,9 +494,10 @@ CHALLENGES OF BEGINNERS  </span>
               >›</button>
 
               <div className="overflow-hidden w-full">
-                <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: '2%', transform: `translateX(-${roadmapIndex * 47}%)` }}>
+                {/* Dynamically adjust slide distance and gap based on mobile vs desktop */}
+                <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: '2%', transform: `translateX(-${roadmapIndex * (isMobileView ? 77 : 47)}%)` }}>
                   {roadmapCards.map((card, i) => (
-                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: '45%' }}>
+                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '75%' : '45%' }}>
                       <div className="flex flex-row h-[180px] md:h-[300px]">
                         <div className="w-[45%] h-full shrink-0">
                           <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
@@ -569,7 +588,7 @@ CHALLENGES OF BEGINNERS  </span>
                     "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
                 }}
               />
-              <div className="flex-1 min-w-[260px]">
+              <div className="flex-1 w-full md:min-w-[260px]">
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
                 <div className="mb-5 md:mb-6">
@@ -611,7 +630,7 @@ CHALLENGES OF BEGINNERS  </span>
               <div className="flex-1 max-w-full md:max-w-[550px] w-full">
                 <img src="https://i.postimg.cc/BZ8Pjwr4/8B9HN-2-jpg.jpg" alt="Athlete" className="w-full rounded-[10px] object-cover aspect-video" />
               </div>
-              <div className="flex-1 min-w-[260px]">
+              <div className="flex-1 w-full md:min-w-[260px]">
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-0">"</span>
                   The More I Progressed,<span className="text-[#07b4ba]">The More I Wanted To Train</span>
@@ -664,7 +683,7 @@ CHALLENGES OF BEGINNERS  </span>
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
-                <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">BONUSES WORTH </p>
+                <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">TOTAL BONUS VALUE</p>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] text-[#07b4ba]">₹2,999</h2>
               </div>
             </div>
@@ -680,7 +699,7 @@ CHALLENGES OF BEGINNERS  </span>
       <div ref={footerRef} className="bg-[#0a0a0a] relative overflow-hidden" style={{ backgroundImage: "radial-gradient(rgba(7,180,186,.18) .75px,transparent .75px)", backgroundSize: "20px 20px" }}>
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
           <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-start flex-wrap">
-            <div className="flex-1 min-w-[260px]">
+            <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal>
                   <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
@@ -712,25 +731,15 @@ CHALLENGES OF BEGINNERS  </span>
             </div>
 
             {/* ── CTA Card with offer ribbon ── */}
-            <div className="flex-1 min-w-[350px] w-full">
+            <div className="flex-1 w-full md:min-w-[350px]">
               <Reveal>
-                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 md:p-10 text-center relative overflow-hidden">
+                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 pt-16 md:p-10 text-center relative overflow-hidden flex flex-col items-center">
 
                   {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
-                  <div className="absolute top-0 left-0 z-20 overflow-hidden" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
-<div
-  style={{
-    position: "absolute",
-    top: "30px",
-    left: "-60px",
-    width: "260px",
-    transform: "rotate(-45deg)",
-    background: "linear-gradient(135deg, #EFAF27 20%, #FFD700 100%, #FEEC6C 50%)",
-    padding: "10px 0",
-    textAlign: "center"
-  }}
->                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#fff", lineHeight: "1" }}>
-                      SAVE ₹1500
+                  <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
+                    <div style={{ position: "absolute", top: "30px", left: "-60px", width: "260px", transform: "rotate(-45deg)", background: "linear-gradient(135deg, #EFAF27 20%, #FFD700 100%, #FEEC6C 50%)", padding: "10px 0", textAlign: "center" }}>
+                      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#fff", lineHeight: "1" }}>
+                        SAVE ₹1500
                       </div>
                       <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "1px", color: "#fff", textTransform: "uppercase", marginTop: "2px" }}>
                         Early Bird Offer
@@ -770,7 +779,10 @@ CHALLENGES OF BEGINNERS  </span>
           <Reveal>
             <div className="flex flex-col items-center gap-3 mt-8 md:mt-10">
               <p className="text-white font-['Barlow'] font-bold text-[14px] md:text-[15px]">Any Queries?</p>
-              <button className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]">
+              <button 
+                onClick={handleWhatsAppClick}
+                className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-colors shadow-[0_4px_18px_rgba(37,211,102,.35)]"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></svg>
                 Chat On WhatsApp
               </button>
