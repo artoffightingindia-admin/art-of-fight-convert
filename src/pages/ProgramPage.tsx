@@ -733,11 +733,11 @@ CHALLENGES OF BEGINNERS  </span>
             {/* ── CTA Card with offer ribbon ── */}
             <div className="w-full lg:w-[420px] max-w-md mx-auto shrink-0">
               <Reveal>
-                <div className="bg-[#05070b] border border-white/10 rounded-2xl px-4 pb-7 pt-[84px] md:p-10 text-center relative overflow-hidden flex flex-col items-center w-[calc(100%+32px)] -ml-4 sm:w-full sm:ml-0 md:pt-10">
+                <div className="bg-[#05070b] border border-white/10 rounded-2xl px-4 pb-7 pt-[90px] md:px-10 md:pb-10 md:pt-[90px] text-center relative overflow-hidden flex flex-col items-center w-[calc(100%+32px)] -ml-4 sm:w-full sm:ml-0">
 
                   {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
-                  <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
-                    <div style={{ position: "absolute", top: "30px", left: "-60px", width: "260px", transform: "rotate(-45deg)", background: "linear-gradient(135deg, #EFAF27 20%, #FFD700 100%, #FEEC6C 50%)", padding: "10px 0", textAlign: "center" }}>
+                  <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "190px", height: "190px", pointerEvents: "none" }}>
+                    <div style={{ position: "absolute", top: "36px", left: "-65px", width: "280px", transform: "rotate(-45deg)", background: "linear-gradient(135deg, #EFAF27 20%, #FFD700 100%, #FEEC6C 50%)", padding: "10px 0", textAlign: "center" }}>
                       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#fff", lineHeight: "1" }}>
                         SAVE ₹1500
                       </div>
@@ -747,7 +747,7 @@ CHALLENGES OF BEGINNERS  </span>
                     </div>
                   </div>
 
-                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 mt-4 md:mt-0">LIMITED TO 20 MEMBERS</p>
+                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 mt-4 md:mt-0 relative z-30">LIMITED TO 20 MEMBERS</p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
                     START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
                   </h2>
