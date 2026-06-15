@@ -8,27 +8,24 @@ const indicators = [
 
 const TrustIndicators = () => (
   <div
-    className="grid grid-cols-3 w-full gap-4 md:gap-6 px-4 md:px-8"
-    style={{ backgroundColor: "#07b4ba", height: "1.5cm" }}
+    className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0 px-2 md:px-8"
+    style={{ height: "1.5cm" }}
   >
-    {indicators.map((item) => (
-      <div key={item.title} className="flex items-center justify-center gap-2 text-center">
-        <item.icon
-          style={{ width: "25px", height: "25px", color: "#fff", flexShrink: 0 }}
-        />
-        <span
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            color: "#fff",
-            fontSize: "clamp(20px, 2vw, 20px)",
-            letterSpacing: "0.12em",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {item.title}
-        </span>
-      </div>
-    ))}
+    <div className="w-full flex items-center justify-between gap-0">
+      {indicators.map((item) => (
+        <div key={item.title} className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
+          <item.icon
+            className="w-5 h-5 md:w-7 md:h-7 text-white shrink-0"
+            strokeWidth={1.8}
+          />
+          <span
+            className="font-['Bebas_Neue'] text-white text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] leading-none whitespace-nowrap mt-0.5"
+          >
+            {item.title}
+          </span>
+        </div>
+      ))}
+    </div>
   </div>
 );
 
