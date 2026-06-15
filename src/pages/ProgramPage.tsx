@@ -668,7 +668,7 @@ CHALLENGES OF BEGINNERS  </span>
               { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 60}>
-                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-5 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-0 ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
+                <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] px-4 pb-7 pt-16 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-0 ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
                   <div className="absolute top-0 right-0 md:top-3 md:left-3 md:right-auto bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[12px] md:text-[14px] tracking-[1px] px-2.5 py-1.5 md:py-0.5 rounded-bl-[10px] md:rounded-none md:rounded-[5px] leading-none">#{i + 1}</div>
                   <div className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-0 mt-0 md:mb-2 md:mt-4 shrink-0">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full mt-0 md:mt-0">
@@ -679,7 +679,7 @@ CHALLENGES OF BEGINNERS  </span>
               </Reveal>
             ))}
           </div>
-          <div className="mt-5 md:mt-4 max-w-3xl mx-auto border border-[#07b4ba]/30 rounded-[18px] p-5 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
+          <div className="mt-5 md:mt-4 max-w-3xl mx-auto border border-[#07b4ba]/30 rounded-[18px] px-4 pb-7 pt-16 md:p-5 flex flex-wrap items-center justify-center gap-4 md:gap-5 bg-gradient-to-r from-[#0f1115] to-[#0a0f14]">
             <div className="flex items-center gap-3 md:gap-4">
               <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_10px_rgba(255,215,0,0.35)]" />
               <div>
@@ -715,7 +715,7 @@ CHALLENGES OF BEGINNERS  </span>
                   </div>
                 ))}
                 {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
-                <div className="mt-5 md:mt-6 flex items-start gap-4 md:gap-3.5 p-5 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80">
+                <div className="mt-5 md:mt-6 flex items-start gap-4 md:gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80">
                   <div className="flex w-10 h-10 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] mt-0.5">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -733,7 +733,7 @@ CHALLENGES OF BEGINNERS  </span>
             {/* ── CTA Card with offer ribbon ── */}
             <div className="w-full lg:w-[420px] max-w-md mx-auto shrink-0">
               <Reveal>
-                <div className="bg-[#05070b] border border-white/10 rounded-2xl p-7 pt-16 md:p-10 text-center relative overflow-hidden flex flex-col items-center">
+                <div className="bg-[#05070b] border border-white/10 rounded-2xl px-4 pb-7 pt-16 md:p-10 text-center relative overflow-hidden flex flex-col items-center">
 
                   {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
                   <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "170px", height: "170px", pointerEvents: "none" }}>
