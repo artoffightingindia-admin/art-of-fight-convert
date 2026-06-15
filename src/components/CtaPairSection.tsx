@@ -64,15 +64,15 @@ const CtaPairSection = () => {
             <button
               disabled
               // onClick={() => navigate("/coaching")} // Commented out until ready
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[280px] hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
+              className="relative flex items-center justify-between gap-2 md:gap-[10px] text-white uppercase rounded-[10px] px-3 md:px-[22px] py-2.5 md:py-[10px] border-none cursor-pointer w-full max-w-full md:max-w-[280px] hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 18,
-                letterSpacing: 3,
+                fontSize: "clamp(14px, 2.5vw, 18px)",
+                letterSpacing: "clamp(1px, 0.5vw, 3px)",
               }}
             >
-              <span className="flex items-center gap-[9px]">
+              <span className="flex items-center gap-2 text-left leading-tight">
                 <svg
                   width="18"
                   height="18"
@@ -82,6 +82,7 @@ const CtaPairSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="shrink-0"
                 >
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
@@ -89,7 +90,7 @@ const CtaPairSection = () => {
                 1-1 Coaching (Coming Soon)
               </span>
 
-              <span className="text-base">→</span>
+              <span className="text-base shrink-0">→</span>
             </button>
 
             <p
@@ -100,15 +101,15 @@ const CtaPairSection = () => {
               }}
             >
               Personalized coaching tailored to your
-              <br />
+              <br className="hidden md:block" />
               goals, lifestyle, and schedule.
             </p>
           </div>
 
           {/* Divider */}
-          <div className="flex items-center justify-center w-12 shrink-0">
+          <div className="flex items-center justify-center w-8 md:w-12 shrink-0">
             <div
-              className="w-px h-[80px]"
+              className="w-px h-[60px] md:h-[80px]"
               style={{
                 backgroundColor: "rgba(255,255,255,0.18)",
               }}
@@ -119,15 +120,15 @@ const CtaPairSection = () => {
           <div className="flex flex-1 flex-col items-center gap-2">
             <button
               onClick={() => navigate("/program")}
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[280px] hover:opacity-90 transition-opacity"
+              className="relative flex items-center justify-between gap-2 md:gap-[10px] text-white uppercase rounded-[10px] px-3 md:px-[22px] py-2.5 md:py-[10px] border-none cursor-pointer w-full max-w-full md:max-w-[280px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: 18,
-                letterSpacing: 3,
+                fontSize: "clamp(14px, 2.5vw, 18px)",
+                letterSpacing: "clamp(1px, 0.5vw, 3px)",
               }}
             >
-              <span className="flex items-center gap-[9px]">
+              <span className="flex items-center gap-2 text-left leading-tight">
                 <svg
                   width="18"
                   height="18"
@@ -137,24 +138,17 @@ const CtaPairSection = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="shrink-0"
                 >
-                  <rect
-                    x="3"
-                    y="4"
-                    width="18"
-                    height="18"
-                    rx="2"
-                    ry="2"
-                  />
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                   <line x1="16" y1="2" x2="16" y2="6" />
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-
                 30-Days Program
               </span>
 
-              <span className="text-base">→</span>
+              <span className="text-base shrink-0">→</span>
             </button>
 
             <p
@@ -165,7 +159,7 @@ const CtaPairSection = () => {
               }}
             >
               Learn MMA online with
-              <br />
+              <br className="hidden md:block" />
               a structured, beginner-friendly roadmap.
             </p>
           </div>
