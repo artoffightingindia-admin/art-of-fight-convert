@@ -497,8 +497,8 @@ CHALLENGES OF BEGINNERS  </span>
                 {/* Dynamically adjust slide distance and gap based on mobile vs desktop */}
                 <div className="flex transition-transform duration-500 ease-in-out" style={{ gap: '2%', transform: `translateX(-${roadmapIndex * (isMobileView ? 77 : 47)}%)` }}>
                   {roadmapCards.map((card, i) => (
-                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '75%' : '45%' }}>
-                      <div className="flex flex-row h-[180px] md:h-[300px]">
+                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col" style={{ width: isMobileView ? '85%' : '45%' }}>
+                      <div className="flex flex-row h-[270px] md:h-[300px]">
                         <div className="w-[45%] h-full shrink-0">
                           <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
                         </div>
@@ -800,8 +800,8 @@ CHALLENGES OF BEGINNERS  </span>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">CONTACT</h3>
             <div className="flex flex-col gap-3 md:gap-4">
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 00000 00000</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">info@aofacademy.com</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 93854 31051</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">artoffightingindia@gmail.com</p>
               <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Tamil Nadu, India</p>
             </div>
           </div>
