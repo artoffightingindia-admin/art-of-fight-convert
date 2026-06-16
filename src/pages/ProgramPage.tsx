@@ -134,7 +134,7 @@ function InfiniteFeedbackSlider() {
     const slider = sliderRef.current;
     const track = trackRef.current;
     if (!slider || !track) return;
-    const speed = 0.5; // Added slight movement for premium feel
+    const speed = 0; // Removed auto-animation as requested
     const getHalfWidth = () => track.scrollWidth / 2;
     const animate = () => {
       if (!isPausedRef.current) {
@@ -161,7 +161,7 @@ function InfiniteFeedbackSlider() {
   if (isMobile) {
     return (
       <div className="block w-full">
-        <div className="w-full p-6 border border-white/10 rounded-2xl bg-gradient-to-b from-[#1a1d23] to-[#15181d] shadow-lg transition-all duration-500">
+        <div className="w-full p-6 border border-white/10 rounded-2xl bg-gradient-to-b from-[#1a1d23] to-[#15181d] shadow-lg">
           <div className="flex gap-1 mb-4 text-[#07b4ba] text-sm leading-none">★★★★★</div>
           <p className="m-0 mb-5 text-white/80 font-['Barlow'] text-[15px] italic font-normal leading-[1.7]">"{currentCard.text}"</p>
           <div className="flex items-center gap-3">
@@ -181,7 +181,7 @@ function InfiniteFeedbackSlider() {
         <div className="flex justify-center gap-2 mt-5">
           {feedbackCards.map((_, i) => (
             <button key={i} onClick={() => setMobilePage(i)}
-              className={`w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-500 cubic-bezier(0.22, 1, 0.36, 1) ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-8 shadow-[0_0_10px_rgba(7,180,186,0.8)]" : "bg-white/20 hover:bg-white/40"}`} />
+              className={`w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 ${i === mobilePage % feedbackCards.length ? "bg-[#07b4ba] w-6 shadow-[0_0_8px_rgba(7,180,186,0.6)]" : "bg-white/20 hover:bg-white/40"}`} />
           ))}
         </div>
         <div className="flex justify-center gap-4 mt-6">
@@ -199,7 +199,7 @@ function InfiniteFeedbackSlider() {
       <div ref={sliderRef} className="overflow-hidden w-full relative group">
         <div ref={trackRef} className="flex gap-6 w-max will-change-transform">
           {allCards.map((card, i) => (
-            <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col premium-hover hover:z-10 bg-gradient-to-b from-[#1a1d23] to-[#15181d]">
+            <div key={i} className="w-[340px] shrink-0 rounded-[18px] bg-[#1a1d23] border border-white/5 py-7 px-6 flex flex-col">
               <div className="flex gap-1 mb-4 text-[#07b4ba] text-base">★★★★★</div>
               <p className="font-['Barlow'] font-normal text-white/70 text-[15px] leading-relaxed italic mb-5">"{card.text}"</p>
               <div className="flex items-center gap-2.5 mt-auto min-h-[52px]">
@@ -220,8 +220,8 @@ function InfiniteFeedbackSlider() {
         </div>
       </div>
       <div className="flex justify-center gap-4 mt-7">
-        <button onClick={() => { isPausedRef.current = true; posRef.current = Math.max(posRef.current - 364, 0); if (trackRef.current) { trackRef.current.style.transition = "transform 0.8s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform = `translateX(-${posRef.current}px)`; setTimeout(() => { if (trackRef.current) trackRef.current.style.transition = ""; }, 800); } setTimeout(() => { isPausedRef.current = false; }, 800); }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">‹</button>
-        <button onClick={() => { isPausedRef.current = true; posRef.current += 364; if (trackRef.current) { trackRef.current.style.transition = "transform 0.8s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform = `translateX(-${posRef.current}px)`; setTimeout(() => { if (trackRef.current) trackRef.current.style.transition = ""; }, 800); } setTimeout(() => { isPausedRef.current = false; }, 800); }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">›</button>
+        <button onClick={() => { isPausedRef.current = true; posRef.current = Math.max(posRef.current - 364, 0); if (trackRef.current) { trackRef.current.style.transition = "transform 0.8s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform = `translateX(-${posRef.current}px)`; setTimeout(() => { if (trackRef.current) trackRef.current.style.transition = ""; }, 800); } setTimeout(() => { isPausedRef.current = false; }, 800); }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] transition-all duration-300 flex items-center justify-center">‹</button>
+        <button onClick={() => { isPausedRef.current = true; posRef.current += 364; if (trackRef.current) { trackRef.current.style.transition = "transform 0.8s cubic-bezier(0.22,1,0.36,1)"; trackRef.current.style.transform = `translateX(-${posRef.current}px)`; setTimeout(() => { if (trackRef.current) trackRef.current.style.transition = ""; }, 800); } setTimeout(() => { isPausedRef.current = false; }, 800); }} className="w-12 h-12 rounded-full border border-white/15 bg-[#15181d] text-white text-2xl cursor-pointer hover:border-[#07b4ba] hover:text-[#07b4ba] hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] transition-all duration-300 flex items-center justify-center">›</button>
       </div>
     </div>
   );
@@ -337,6 +337,8 @@ export default function ProgramPage() {
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
+  const videoRef = useRef<HTMLIFrameElement>(null);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
@@ -354,6 +356,15 @@ export default function ProgramPage() {
     const message = "Hey Team, I've a doubt about AOF 30 days program.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  // Video Overlay Mute Toggle
+  const toggleMute = () => {
+    if (videoRef.current && videoRef.current.contentWindow) {
+      const func = isVideoMuted ? 'unMute' : 'mute';
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+      setIsVideoMuted(!isVideoMuted);
+    }
   };
 
   const roadmapCards = [
@@ -452,17 +463,30 @@ export default function ProgramPage() {
               <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
-             <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-  <div className="relative w-full aspect-video">
-    <iframe
-      className="absolute inset-0 w-full h-full"
-      src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0"
-      title="AOF Video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    />
-  </div>
-</div>
+              <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                <div className="relative w-full aspect-video">
+                  <iframe
+                    ref={videoRef}
+                    className="absolute inset-0 w-full h-full pointer-events-auto"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
+                    title="AOF Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  {/* Mobile Unmute Button Overlay */}
+                  <button
+                    onClick={toggleMute}
+                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
+                    aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
+                  >
+                    {isVideoMuted ? (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    )}
+                  </button>
+                </div>
+              </div>
             </Reveal>
           </div>
           <div className="flex-1 w-full md:min-w-[260px] md:order-1">
