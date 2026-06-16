@@ -108,8 +108,6 @@ const feedbackCards = [
   { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
   { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
   { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose",image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
-  { text: "From complete beginner to ring-ready in just a few months. AOF's system truly works.", author: "Karthik V" },
-  { text: "My performance improved drastically. The personalised game plan made all the difference in my last fight.", author: "Rahul P" },
 ];
 
 function InfiniteFeedbackSlider() {
