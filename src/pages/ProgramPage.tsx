@@ -452,9 +452,17 @@ export default function ProgramPage() {
               <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
-              <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                <img src="/images/Pain Point.png" alt="MMA Training" className="w-full aspect-video object-cover block image-hover-zoom" />
-              </div>
+             <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+  <div className="relative w-full aspect-video">
+    <iframe
+      className="absolute inset-0 w-full h-full"
+      src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0"
+      title="AOF Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  </div>
+</div>
             </Reveal>
           </div>
           <div className="flex-1 w-full md:min-w-[260px] md:order-1">
