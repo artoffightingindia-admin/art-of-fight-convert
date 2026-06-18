@@ -45,7 +45,8 @@ const SocialProofSection = () => {
           </h2>
 
           <p className="text-muted-foreground text-xs md:text-sm">
-            5,000+ MMA fans follow AOF to learn, improve, and stay connected to the sport.
+            5,000+ MMA fans follow AOF to learn, improve, and stay connected to
+            the sport.
           </p>
         </div>
 
@@ -71,7 +72,7 @@ const SocialProofSection = () => {
                   allowFullScreen
                 />
 
-                {/* Mute / Unmute Button */}
+                {/* Mute / Unmute */}
                 <button
                   onClick={() => setMuted(!muted)}
                   className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black/90 text-white text-xs px-3 py-1 rounded-full transition"
@@ -83,31 +84,44 @@ const SocialProofSection = () => {
           })}
         </div>
 
-        {/* Mobile Navigation - Below Video */}
+        {/* Mobile Navigation */}
         {visibleCount === 1 && (
           <div className="flex justify-center items-center gap-3 mt-5">
+            {/* Prev */}
             <button
-              onClick={() =>
-                setCurrentVideo((prev) =>
-                  prev === 0 ? videos.length - 1 : prev - 1
-                )
-              }
-              className="px-4 py-2 rounded-full bg-[#07b4ba] text-white font-bold text-sm hover:opacity-90 transition"
+              onClick={() => {
+                if (currentVideo > 0) {
+                  setCurrentVideo(currentVideo - 1);
+                }
+              }}
+              disabled={currentVideo === 0}
+              className={`px-4 py-2 rounded-full font-bold text-sm transition ${
+                currentVideo === 0
+                  ? "bg-[#07b4ba]/40 text-white/50 cursor-not-allowed"
+                  : "bg-[#07b4ba] text-white hover:opacity-90"
+              }`}
             >
               ← Prev
             </button>
 
+            {/* Counter */}
             <div className="text-white/60 text-sm font-medium min-w-[40px] text-center">
               {currentVideo + 1} / {videos.length}
             </div>
 
+            {/* Next */}
             <button
-              onClick={() =>
-                setCurrentVideo((prev) =>
-                  prev === videos.length - 1 ? 0 : prev + 1
-                )
-              }
-              className="px-4 py-2 rounded-full bg-[#07b4ba] text-white font-bold text-sm hover:opacity-90 transition"
+              onClick={() => {
+                if (currentVideo < videos.length - 1) {
+                  setCurrentVideo(currentVideo + 1);
+                }
+              }}
+              disabled={currentVideo === videos.length - 1}
+              className={`px-4 py-2 rounded-full font-bold text-sm transition ${
+                currentVideo === videos.length - 1
+                  ? "bg-[#07b4ba]/40 text-white/50 cursor-not-allowed"
+                  : "bg-[#07b4ba] text-white hover:opacity-90"
+              }`}
             >
               Next →
             </button>
