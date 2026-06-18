@@ -12,11 +12,11 @@ const HeroSection = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/images/Hero.jpg"
-          alt="MMA Fighter"
-          className="w-full h-full object-cover"
-        />
+       <img
+  src="/images/Hero.jpg"
+  alt="MMA Fighter"
+  className="w-full h-full object-cover opacity-50 md:opacity-100"
+/>
 
         {/* Optional overlay if needed later */}
         {/* <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-background/20 to-transparent" /> */}
