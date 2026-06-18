@@ -7,10 +7,10 @@ const indicators = [
 ];
 
 const TrustIndicators = () => (
-  <div
-    className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0 px-2 md:px-8"
-    style={{ height: "1.5cm" }}
-  >
+<div
+  className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0 px-2 md:px-8 -translate-y-2 md:translate-y-0"
+  style={{ height: "1.5cm" }}
+>
     <div className="w-full flex items-center justify-between gap-0">
       {indicators.map((item) => (
         <div key={item.title} className="flex-1 flex items-center justify-center gap-1.5 md:gap-3">
