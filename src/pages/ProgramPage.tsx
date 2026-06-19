@@ -512,15 +512,15 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
           <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-            <div className="flex-1 w-full md:max-w-[500px]">
-              <Reveal type="fade-right" duration={1200}>
+<div className="flex-1 w-full md:max-w-[500px] order-2 md:order-1">
+  <Reveal type="fade-right" duration={1200}>
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10 premium-hover shadow-[0_0_30px_rgba(7,180,186,0.1)]">
                   <img src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center image-hover-zoom" />
                 </div>
               </Reveal>
             </div>
-            <div className="flex-1 w-full md:min-w-[260px]">
-              <Reveal type="fade-left" duration={1000}>
+<div className="flex-1 w-full md:min-w-[260px] order-1 md:order-2">
+  <Reveal type="fade-left" duration={1000}>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
                   Introducing AOF 30-Day Program
                 </p>
