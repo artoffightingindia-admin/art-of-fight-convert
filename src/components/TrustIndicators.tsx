@@ -2,8 +2,9 @@ import { ShieldCheck, Users, Trophy } from "lucide-react";
 
 const indicators = [
   { icon: ShieldCheck, title: "Proven System" },
-  { icon: Users, title: "Tamil Team" },
+
   { icon: Trophy, title: "Real Results" },
+    { icon: Users, title: "Tamil Team" },
 ];
 
 const TrustIndicators = () => (
