@@ -58,7 +58,7 @@ const CoachSection = () => (
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Team photo — Small on mobile (130px), Enlarged on desktop (240px) */}
-          <div className="w-full max-w-[130px] md:max-w-none md:w-[240px] shrink-0 order-1 md:order-2">
+          <div className="w-full max-w-[150px] md:max-w-none md:w-[220px] shrink-0 order-1 md:order-2">
             <img
               src="https://i.postimg.cc/Zn2hykcD/Kaviarasu-jpg.jpg"
               alt="Kaviarasu K"
