@@ -194,6 +194,7 @@ const TestimonialsSection = () => {
             }}
           >
 Real People,{" "}
+            <br className="md:hidden" />
             <span className="text-[#07b4ba]">
               Real Progress
             </span>
