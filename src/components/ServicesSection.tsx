@@ -39,7 +39,11 @@ const ServicesSection = () => {
           CHOOSE YOUR PATH
         </p>
         <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-3">
-          TWO PATHS.ONE GOAL.
+          TWO PATHS.
+          {/* This breaks the line on mobile, but disappears on desktop */}
+         
+          ONE GOAL.
+           <br className="md:hidden" />
           <span className="text-[#07b4ba]"> REAL TRANSFORMATION. </span>
         </h2>
 
