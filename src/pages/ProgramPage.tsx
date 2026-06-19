@@ -577,7 +577,7 @@ CHALLENGES OF BEGINNERS  </span>
           <div className="text-center mb-7 md:mb-12" style={GUTTER}>
             <Reveal type="fade-down" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">THE AOF BLUEPRINT</p>
-              <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white"><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">A CLEARPATH</span>TO MMA STRIKING.</h2>
+              <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white"><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">A CLEARPATH </span>TO MMA STRIKING.</h2>
               <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.</p>
             </Reveal>
           </div>
