@@ -116,7 +116,7 @@ const SocialProofSection = () => {
                   : "text-[#07b4ba] hover:opacity-80"
               }`}
             >
-              <
+              "<"
             </button>
 
             {/* Counter */}
@@ -138,7 +138,7 @@ const SocialProofSection = () => {
                   : "text-[#07b4ba] hover:opacity-80"
               }`}
             >
-               >
+               ">"
             </button>
           </div>
         )}
