@@ -2,15 +2,15 @@ import { Star } from "lucide-react";
 
 const CoachSection = () => (
   <section id="coaches" className="py-6 md:py-8 texture-diagonal">
-    <div className="container max-w-6xl space-y-8 md:space-y-4">
+    <div className="container max-w-6xl space-y-10 md:space-y-4">
       {/* ---------- LED BY ---------- */}
       <div>
         <p className="text-primary text-xs md:text-sm font-semibold uppercase tracking-widest mb-4">
           Led By
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-          {/* Coach photo — reduced desktop width to 150px */}
-          <div className="w-full max-w-[200px] md:w-[150px] shrink-0 mx-auto md:mx-0">
+          {/* Coach photo — Small on mobile (130px max), original size on desktop (180px) */}
+          <div className="w-full max-w-[130px] md:w-[180px] shrink-0">
             <img
               src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
               alt="Purushothaman MK"
@@ -57,8 +57,8 @@ const CoachSection = () => (
           And
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-          {/* Team photo - scales on mobile, matches coach on desktop */}
-          <div className="w-full max-w-[200px] md:w-[150px] shrink-0 order-1 md:order-2 mx-auto md:mx-0">
+          {/* Team photo — Appears first on mobile, scaled down to max-w-[130px] */}
+          <div className="w-full max-w-[130px] md:w-[180px] shrink-0 order-1 md:order-2">
             <img
               src="https://i.postimg.cc/Zn2hykcD/Kaviarasu-jpg.jpg"
               alt="Kaviarasu K"
@@ -70,7 +70,7 @@ const CoachSection = () => (
             />
           </div>
 
-          {/* Bullets & Text: Left on mobile, Right on desktop */}
+          {/* Text content: Left-aligned on mobile, Right-aligned on desktop */}
           <div className="flex-1 order-2 md:order-1 flex justify-start md:justify-end w-full">
             <div className="max-w-xl w-full">
               <div className="flex justify-start md:justify-end mb-4">
