@@ -34,7 +34,7 @@ const CoachSection = () => (
             </div>
 
            <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xl">
-  Purushothaman: Helping beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.
+  Purushothaman helps beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.
 </p>
             <ul className="space-y-2">
               <li className="flex items-start gap-3 text-foreground text-sm md:text-base">
