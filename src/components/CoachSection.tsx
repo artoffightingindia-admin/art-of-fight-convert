@@ -10,7 +10,7 @@ const CoachSection = () => (
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
           {/* Coach photo — Small on mobile (130px), Enlarged on desktop (240px) */}
-          <div className="w-full max-w-[130px] md:max-w-none md:w-[240px] shrink-0">
+          <div className="w-full max-w-[150px] md:max-w-none md:w-[220px] shrink-0">
             <img
               src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
               alt="Purushothaman MK"
