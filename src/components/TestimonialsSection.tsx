@@ -193,9 +193,7 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-            Real People,
-            {/* Added a responsive horizontal space component to split the text blocks */}
-            <span className="inline-block mx-2 md:mx-3">{" "}</span>
+Real People,{" "}
             <span className="text-[#07b4ba]">
               Real Progress
             </span>
