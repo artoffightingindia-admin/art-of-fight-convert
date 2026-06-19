@@ -25,8 +25,7 @@ const testimonials = [
     role: "Fighter", 
     text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
     image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg"  
-
-    },
+  },
   { 
     name: "Madhan",   
     role: "Member",  
@@ -37,7 +36,8 @@ const testimonials = [
     name: "Sohail Mohammad",  
     role: "Athlete", 
     text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.",
-        image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" },
+    image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" 
+  },
 ];
 
 const VISIBLE = 3;
@@ -185,7 +185,7 @@ const TestimonialsSection = () => {
             Results and Success Stories
           </p>
           <h2
-            className="uppercase m-0 leading-[1.05]"
+            className="uppercase m-0 leading-[1.2]"
             style={{
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "clamp(32px, 4vw, 52px)",
@@ -193,12 +193,13 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-           Real People,
+            Real People,
+            {/* Added a responsive horizontal space component to split the text blocks */}
+            <span className="inline-block mx-2 md:mx-3">{" "}</span>
             <span className="text-[#07b4ba]">
-   Real Progress
-  </span>
-
-         </h2>
+              Real Progress
+            </span>
+          </h2>
         </div>
 
         {/* 2-col layout */}
