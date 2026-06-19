@@ -11,7 +11,8 @@ const SocialProofSection = () => {
     typeof window !== "undefined" && window.innerWidth < 768 ? 1 : 3
   );
 
-  const [muted, setMuted] = useState(true);
+  // Track muted state for each video individually
+  const [mutedStates, setMutedStates] = useState(videos.map(() => true));
   const [currentVideo, setCurrentVideo] = useState(0);
 
   useEffect(() => {
@@ -25,6 +26,19 @@ const SocialProofSection = () => {
       window.removeEventListener("resize", onResize);
     };
   }, []);
+
+  const handleToggleMute = (index) => {
+    if (visibleCount === 1) {
+      // Mobile: Toggle all videos to share the same mute state
+      const newMuteState = !mutedStates[index];
+      setMutedStates(videos.map(() => newMuteState));
+    } else {
+      // Desktop: Unmute selected video, mute all others
+      setMutedStates((prev) =>
+        prev.map((isMuted, i) => (i === index ? !isMuted : true))
+      );
+    }
+  };
 
   const visibleVideos =
     visibleCount === 1
@@ -55,6 +69,7 @@ const SocialProofSection = () => {
           {visibleVideos.map((videoId, index) => {
             const actualIndex =
               visibleCount === 1 ? currentVideo : index;
+            const isMuted = mutedStates[actualIndex];
 
             return (
               <div
@@ -62,10 +77,10 @@ const SocialProofSection = () => {
                 className="relative aspect-[9/16] w-[70%] md:w-[28%] max-w-[260px] rounded-xl overflow-hidden bg-card border border-border"
               >
                 <iframe
-                  key={`${videoId}-${muted}`}
+                  key={`${videoId}-${isMuted}`}
                   className="absolute inset-0 w-full h-full"
                   src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${
-                    muted ? 1 : 0
+                    isMuted ? 1 : 0
                   }&loop=1&playlist=${videoId}&controls=1&playsinline=1&rel=0`}
                   title={`YouTube Video ${actualIndex + 1}`}
                   allow="autoplay; encrypted-media"
@@ -74,10 +89,10 @@ const SocialProofSection = () => {
 
                 {/* Mute / Unmute */}
                 <button
-                  onClick={() => setMuted(!muted)}
+                  onClick={() => handleToggleMute(actualIndex)}
                   className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black/90 text-white text-xs px-3 py-1 rounded-full transition"
                 >
-                  {muted ? "🔇 Unmute" : "🔊 Mute"}
+                  {isMuted ? "🔇 Unmute" : "🔊 Mute"}
                 </button>
               </div>
             );
@@ -95,10 +110,10 @@ const SocialProofSection = () => {
                 }
               }}
               disabled={currentVideo === 0}
-              className={`px-4 py-2 rounded-full font-bold text-sm transition ${
+              className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
                 currentVideo === 0
-                  ? "bg-[#07b4ba]/40 text-white/50 cursor-not-allowed"
-                  : "bg-[#07b4ba] text-white hover:opacity-90"
+                  ? "text-white/30 cursor-not-allowed"
+                  : "text-[#07b4ba] hover:opacity-80"
               }`}
             >
               ← Prev
@@ -117,10 +132,10 @@ const SocialProofSection = () => {
                 }
               }}
               disabled={currentVideo === videos.length - 1}
-              className={`px-4 py-2 rounded-full font-bold text-sm transition ${
+              className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
                 currentVideo === videos.length - 1
-                  ? "bg-[#07b4ba]/40 text-white/50 cursor-not-allowed"
-                  : "bg-[#07b4ba] text-white hover:opacity-90"
+                  ? "text-white/30 cursor-not-allowed"
+                  : "text-[#07b4ba] hover:opacity-80"
               }`}
             >
               Next →
