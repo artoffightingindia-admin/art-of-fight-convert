@@ -9,8 +9,8 @@ const CoachSection = () => (
           Led By
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-          {/* Coach photo — Small on mobile (130px max), original size on desktop (180px) */}
-          <div className="w-full max-w-[130px] md:w-[180px] shrink-0">
+          {/* Coach photo — Small on mobile (130px), Enlarged on desktop (240px) */}
+          <div className="w-full max-w-[130px] md:max-w-none md:w-[240px] shrink-0">
             <img
               src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
               alt="Purushothaman MK"
@@ -57,8 +57,8 @@ const CoachSection = () => (
           And
         </p>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-          {/* Team photo — Appears first on mobile, scaled down to max-w-[130px] */}
-          <div className="w-full max-w-[130px] md:w-[180px] shrink-0 order-1 md:order-2">
+          {/* Team photo — Small on mobile (130px), Enlarged on desktop (240px) */}
+          <div className="w-full max-w-[130px] md:max-w-none md:w-[240px] shrink-0 order-1 md:order-2">
             <img
               src="https://i.postimg.cc/Zn2hykcD/Kaviarasu-jpg.jpg"
               alt="Kaviarasu K"
