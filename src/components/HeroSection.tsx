@@ -6,10 +6,10 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
- <section
-  id="home"
-  className="relative h-[93vh] md:h-screen flex flex-col overflow-hidden"
->
+    <section
+      id="home"
+      className="relative h-screen flex flex-col overflow-hidden"
+    >
       {/* Background */}
       <div className="absolute inset-0 z-0">
        <img
