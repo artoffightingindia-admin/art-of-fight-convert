@@ -195,7 +195,7 @@ const TestimonialsSection = () => {
           >
            Real People,
             <span className="text-[#07b4ba]">
-  Real Progress
+   Real Progress
   </span>
 
          </h2>
