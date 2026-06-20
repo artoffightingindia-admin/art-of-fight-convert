@@ -338,11 +338,41 @@ export default function ProgramPage() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
 
+  // Dynamic Real-time Timer State
+  const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
+
   useEffect(() => {
     const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Timer Countdown Logic using exact target date
+  useEffect(() => {
+    // Set exact dealine here: June 28, 2026
+    const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
+
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const difference = TARGET_DATE - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0'),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0')
+        });
+      } else {
+        // Halt at 00:00:00 once the deadline has been reached
+        setTimeLeft({ days: "00", hours: "00", minutes: "00" });
+      }
+    };
+
+    updateTimer(); // Initial call
+    const timerInterval = setInterval(updateTimer, 1000); // Check every second
+
+    return () => clearInterval(timerInterval); // Cleanup interval on component unmount
   }, []);
 
   const handlePayment = () => {
@@ -817,7 +847,7 @@ CHALLENGES OF BEGINNERS  </span>
               <div className="flex items-center gap-3 md:gap-4">
                 <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] animate-float" />
                 <div>
-                  <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">TOTAL BONUS VALUE</p>
+                  <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">BONUSES WORTH </p>
                   <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] shimmer-text">₹2,999</h2>
                 </div>
               </div>
@@ -898,9 +928,13 @@ CHALLENGES OF BEGINNERS  </span>
                   >
                     JOIN THE NEXT BATCH
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting July 6th 2026</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting Soon...</p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
-                    {[["01", "DAYS"], ["23", "HOURS"], ["49", "MIN"]].map(([num, label]) => (
+                    {[
+                      [timeLeft.days, "DAYS"],
+                      [timeLeft.hours, "HOURS"],
+                      [timeLeft.minutes, "MIN"]
+                    ].map(([num, label]) => (
                       <div key={label} className="text-center group">
                         <div className="w-[54px] h-[54px] md:w-[60px] md:h-[60px] rounded-xl border border-[#07b4ba]/25 flex items-center justify-center font-['Bebas_Neue'] text-[26px] md:text-[30px] text-[#07b4ba] bg-[#0b1016] transition-all duration-300 group-hover:border-[#07b4ba] group-hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] group-hover:-translate-y-1">{num}</div>
                         <p className="mt-1.5 font-['Bebas_Neue'] text-[10px] md:text-[11px] tracking-[2px] text-white/40 transition-colors duration-300 group-hover:text-white">{label}</p>
@@ -945,7 +979,7 @@ CHALLENGES OF BEGINNERS  </span>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">NAVIGATION</h3>
             <div className="flex flex-wrap gap-x-5 gap-y-2.5 md:flex-col md:gap-2.5">
-              {([["#home", "Home"], ["#method", "AOF Method"], ["#testimonials", "Testimonials"], ["#faq", "FAQ"], ["#contact", "Apply Now"]] as [string, string][]).map(([href, label]) => (
+              {(["#home", "Home"], ["#method", "AOF Method"], ["#testimonials", "Testimonials"], ["#faq", "FAQ"], ["#contact", "Apply Now"]] as [string, string][]).map(([href, label]) => (
                 <a key={href} href={href} className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] no-underline hover:text-[#07b4ba] active:text-[#07b4ba] transition-colors">{label}</a>
               ))}
             </div>
