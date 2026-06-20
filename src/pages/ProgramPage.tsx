@@ -979,7 +979,7 @@ CHALLENGES OF BEGINNERS  </span>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">NAVIGATION</h3>
             <div className="flex flex-wrap gap-x-5 gap-y-2.5 md:flex-col md:gap-2.5">
-              {(["#home", "Home"], ["#method", "AOF Method"], ["#testimonials", "Testimonials"], ["#faq", "FAQ"], ["#contact", "Apply Now"]] as [string, string][]).map(([href, label]) => (
+              {([["#home", "Home"], ["#method", "AOF Method"], ["#testimonials", "Testimonials"], ["#faq", "FAQ"], ["#contact", "Apply Now"]] as [string, string][]).map(([href, label]) => (
                 <a key={href} href={href} className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] no-underline hover:text-[#07b4ba] active:text-[#07b4ba] transition-colors">{label}</a>
               ))}
             </div>
