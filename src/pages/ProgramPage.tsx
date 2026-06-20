@@ -431,7 +431,10 @@ export default function ProgramPage() {
       <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-[#13171d] text-[#07b4ba] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer hover:scale-110 hover:bg-[#07b4ba] hover:text-white transition-all duration-300" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
       {/* ── HERO + TRUST BAR ── */}
-      <div className="relative flex flex-col w-full overflow-hidden" ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; el.style.height = "100vh"; el.style.height = "100svh"; el.style.height = "100dvh"; }}>
+      <div 
+        className="relative flex flex-col w-full overflow-hidden min-h-[115dvh] md:min-h-[100dvh]" 
+        ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; }}
+      >
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
           <div className="absolute inset-0 z-0 bg-center bg-cover opacity-0 animate-subtle-pan" style={{ backgroundImage: "url('/images/Program page Hero.jpeg')" }} />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
