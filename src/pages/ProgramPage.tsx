@@ -70,7 +70,7 @@ function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 
           obs.unobserve(el);
         } 
       },
-      { threshold: 0.15 } // Slightly delayed trigger for a more deliberate feel
+      { threshold: 0.15 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -132,7 +132,7 @@ function InfiniteFeedbackSlider() {
     const slider = sliderRef.current;
     const track = trackRef.current;
     if (!slider || !track) return;
-    const speed = 0; // Removed auto-animation as requested
+    const speed = 0;
     const getHalfWidth = () => track.scrollWidth / 2;
     const animate = () => {
       if (!isPausedRef.current) {
@@ -435,7 +435,7 @@ export default function ProgramPage() {
         </section>
 
         {/* Trust Bar */}
-        <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0 shadow-[0_-5px_20px_rgba(7,180,186,0.2)]" style={{ height: "1.5cm", ...GUTTER }}>
+        <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0 shadow-[0_-5px_20px_rgba(7,180,186,0.2)]" style={{ height: "1.5cm", paddingLeft: isMobileView ? "0" : "1cm", paddingRight: isMobileView ? "0" : "1cm" }}>
           <div className="w-full flex items-center justify-between md:justify-start gap-0">
             <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={100} duration={800}>
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconShieldW /></div>
@@ -613,9 +613,9 @@ CHALLENGES OF BEGINNERS  </span>
               >›</button>
 
               <div className="overflow-hidden w-full">
-                <div className="flex transition-transform duration-700 cubic-bezier(0.22, 1, 0.36, 1)" style={{ gap: isMobileView ? '4%' : '2%', transform: `translateX(-${roadmapIndex * (isMobileView ? 74 : 47)}%)` }}>
+                <div className="flex transition-transform duration-700 cubic-bezier(0.22, 1, 0.36, 1)" style={{ gap: isMobileView ? 'calc(4vw - 0.08cm)' : '2%', transform: isMobileView ? `translateX(calc(${10 - roadmapIndex * 80}vw + ${roadmapIndex * 1.6 - 0.2}cm))` : `translateX(-${roadmapIndex * 47}%)` }}>
                   {roadmapCards.map((card, i) => (
-                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col group transition-all duration-500 hover:border-[#07b4ba]/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]" style={{ width: isMobileView ? '70%' : '45%' }}>
+                    <div key={i} className="flex-shrink-0 bg-gradient-to-b from-[#10151d] to-[#0b0f14] border border-white/5 rounded-[12px] md:rounded-[20px] overflow-hidden flex flex-col group transition-all duration-500 hover:border-[#07b4ba]/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]" style={{ width: isMobileView ? 'calc(76vw - 1.52cm)' : '45%' }}>
                       <div className="flex flex-col md:flex-row h-auto md:h-[300px]">
                         <div className="w-full h-[180px] md:w-[45%] md:h-full shrink-0 overflow-hidden relative">
                           <img src={card.image} alt={card.title} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
@@ -647,23 +647,23 @@ CHALLENGES OF BEGINNERS  </span>
           {/* Consistency box between roadmap cards and promise strip */}
           <div className="w-full max-w-4xl mx-auto mt-10 md:mt-12" style={GUTTER}>
             <Reveal type="fade-up" duration={1000}>
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 p-5 md:p-6 border border-[#07b4ba]/25 rounded-[12px] md:rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90 relative overflow-hidden premium-hover">
-                <div className="flex w-10 h-10 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] bg-[#07b4ba]/10 transition-transform duration-500 hover:rotate-12">
+              <div className="flex items-start md:items-center gap-3.5 md:gap-4 p-4 md:p-6 border border-[#07b4ba]/25 rounded-[14px] md:rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90 relative overflow-hidden premium-hover shadow-[0_0_20px_rgba(7,180,186,0.1)] md:shadow-none">
+                <div className="flex w-10 h-10 md:w-12 md:h-12 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] bg-[#07b4ba]/10 md:bg-transparent mt-0.5 md:mt-0 transition-transform duration-500 hover:rotate-12">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
                 </div>
                 <div className="flex-1 w-full md:max-w-[620px]">
-                  <h3 className="text-white/90 font-['Bebas_Neue'] text-[17px] md:text-[20px] tracking-[1px] leading-none mb-2 md:mb-1.5">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
-                  
+                  {/* Desktop Title & Text */}
+                  <h3 className="hidden md:block text-white/90 font-['Bebas_Neue'] text-[20px] tracking-[1px] leading-none mb-1.5">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
                   <p className="hidden md:block text-[#07b4ba] font-['Barlow'] text-[14px] leading-[1.4] m-0">
                     Every week includes Movement Fundamentals and White Belt Mentality sessions,
                     along with access to the Mistake Library. Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program.
                   </p>
-
-                  <div className="md:hidden mt-3 pt-3 border-t border-[#07b4ba]/20 w-full">
-                    <p className="text-white/80 font-['Barlow'] text-[13.5px] leading-[1.5] italic font-medium m-0">
-                      Includes mindset coaching, movement training, and many exclusive bonus learning resources.
-                    </p>
-                  </div>
+                  
+                  {/* Mobile Title & Text */}
+                  <p className="md:hidden text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">MORE THAN JUST TECHNICAL SESSIONS</p>
+                  <p className="md:hidden font-['Barlow'] text-[13.5px] text-white/65 leading-[1.65] m-0">
+                    Includes mindset coaching, movement training, and many exclusive bonus learning resources.
+                  </p>
                 </div>
               </div>
             </Reveal>
