@@ -70,20 +70,9 @@ const LeadPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const videoRef = useRef<HTMLIFrameElement>(null);
-  const [isVideoMuted, setIsVideoMuted] = useState(true);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const toggleMute = () => {
-    if (videoRef.current && videoRef.current.contentWindow) {
-      const func = isVideoMuted ? 'unMute' : 'mute';
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsVideoMuted(!isVideoMuted);
-    }
-  };
 
   const scrollToForm = () => {
     const element = document.getElementById("email-form-section");
@@ -158,13 +147,13 @@ const LeadPage = () => {
               </p>
             </Reveal>
 
-            {/* Glowing Brand Feature Container Box */}
+            {/* Glowing Brand Feature Container Box - Explicit 16:9 Aspect Ratio Alignment */}
             <Reveal type="scale-up" delay={500} duration={1200}>
-              <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.1)] rounded-2xl p-6 md:p-9 max-w-2xl mx-auto mb-8 premium-hover">
-                <p className="text-[#07b4ba] text-[11px] font-bold uppercase tracking-[3px] mb-2.5">
+              <div className="w-full max-w-xl mx-auto aspect-video mb-8 bg-gradient-to-b from-[#13171d] to-[#101318] border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.1)] rounded-2xl p-6 flex flex-col items-center justify-center premium-hover">
+                <p className="text-[#07b4ba] text-[11px] font-bold uppercase tracking-[3px] mb-3">
                   This live workshop will show you how to earn
                 </p>
-                <p className="font-['Bebas_Neue'] text-[46px] md:text-[64px] tracking-[1px] text-white leading-none mb-1.5">
+                <p className="font-['Bebas_Neue'] text-[52px] md:text-[76px] tracking-[1px] text-white leading-none mb-2">
                   $5K/MONTH
                 </p>
                 <p className="text-white/40 text-[13px] italic font-['Barlow']">The number most coaches are chasing</p>
@@ -180,7 +169,8 @@ const LeadPage = () => {
               </p>
             </Reveal>
 
-            <Reveal type="fade-up" delay={700} duration={1200}>
+            {/* Adjusted Down Padding on CTA Action Segment Wrapper */}
+            <Reveal type="fade-up" delay={700} duration={1200} className="mb-12 md:mb-16">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                 <div className="flex items-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[12px] font-bold tracking-[1px] text-[#07b4ba]">
                   <span>📅</span> TUESDAY JUNE 23, 8:30PM EST.
@@ -201,35 +191,22 @@ const LeadPage = () => {
         </section>
       </div>
 
-      {/* ================= SOUNDS FAMILIAR SECTION (UNIFIED BRAND SOURCE) ================= */}
-      <section className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE} border-t border-white/5 bg-[#0a0a0a]`}>
+      {/* ================= SOUNDS FAMILIAR SECTION (UPDATED BACKGROUND COLOR & IMAGE REPLACEMENT) ================= */}
+      <section className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white text-zinc-900`}>
         <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
           <div className="flex-1 w-full md:max-w-[500px] md:order-2">
             <Reveal type="fade-left" duration={1200}>
-              <h3 className="mb-4 text-center italic font-semibold text-white tracking-[0.5px] text-[22px]">
+              <h3 className="mb-4 text-center italic font-semibold text-zinc-800 tracking-[0.5px] text-[22px]">
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
-              <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+              {/* Replaced video node with high-fidelity brand graphic assets */}
+              <div className="premium-hover rounded-[14px] overflow-hidden border border-zinc-200 shadow-xl bg-zinc-100">
                 <div className="relative w-full aspect-video">
-                  <iframe
-                    ref={videoRef}
-                    className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
-                    title="AOF Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                  <img 
+                    src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" 
+                    alt="Art of Fighting Program Overview Illustration"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                   />
-                  <button
-                    onClick={toggleMute}
-                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer"
-                    aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
-                  >
-                    {isVideoMuted ? (
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    )}
-                  </button>
                 </div>
               </div>
             </Reveal>
@@ -237,16 +214,16 @@ const LeadPage = () => {
           <div className="flex-1 w-full md:min-w-[260px] md:order-1">
             <Reveal type="fade-right" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED </span> BECAUSE YOU:
+              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-zinc-900 leading-[1.1] mb-4">
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#e53e3e]">HAVEN'T STARTED </span> BECAUSE YOU:
               </h2>
-              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
+              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" />
             </Reveal>
             {painPoints.map((p, i) => (
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3">
-                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
+                  <p className="text-zinc-600 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -279,10 +256,13 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* Decorative Accent Joint Element Strip */}
-      <div className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[18px] tracking-[4px] flex items-center justify-center shadow-md">
+      {/* ================= INTERACTIVE CLICKABLE ANCHOR JOIN NOW STRIP ================= */}
+      <button 
+        onClick={scrollToForm}
+        className="w-full h-12 bg-[#07b4ba] hover:bg-[#06a2a7] transition-colors duration-200 text-white font-['Bebas_Neue'] text-[18px] tracking-[4px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none"
+      >
         JOIN NOW
-      </div>
+      </button>
 
       {/* ================= COACH SECTION (UNIFIED BRAND SOURCE) ================= */}
       <div className="bg-[#0f1115] border-t border-b border-white/5">
@@ -374,16 +354,22 @@ const LeadPage = () => {
             </div>
           </div>
 
-          {/* Right Panel: Advanced Functional Input Registration Card */}
+          {/* Right Panel: Advanced Functional Input Registration Card - UPDATED TO PREMIUM HIGHLIGHTED WHITE COLOR STYLE */}
           <div className="p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
-            <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/10 rounded-2xl p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
+            <div className="bg-white border border-zinc-200 text-zinc-900 rounded-2xl p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
               
               {!submitted && (
                 <>
-                  <h3 className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[1.5px] text-center text-white mb-1 uppercase">
-                    ENTER YOUR DETAILS
-                  </h3>
-                  <p className="text-center text-[13px] text-white/50 mb-6 font-['Barlow'] leading-relaxed">
+                  {/* Added Dedicated Title Selector element node to block wrapper */}
+                  <div className="text-center mb-5">
+                    <span className="bg-[#07b4ba]/10 text-[#07b4ba] px-3 py-1 rounded text-[11px] font-bold tracking-[2px] uppercase inline-block mb-2">
+                      REGISTRATION FORM
+                    </span>
+                    <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[32px] tracking-[1.5px] text-zinc-900 uppercase leading-none">
+                      ENTER YOUR DETAILS
+                    </h3>
+                  </div>
+                  <p className="text-center text-[13px] text-zinc-500 mb-6 font-['Barlow'] leading-relaxed">
                     Fill out the form below to reserve your live workshop invitation link.
                   </p>
                 </>
@@ -409,13 +395,13 @@ const LeadPage = () => {
                   
                   <div>
                     <p className="font-['Bebas_Neue'] text-[24px] text-[#07b4ba] tracking-[1.5px] mb-1">YOUR SEAT IS CONFIRMED!</p>
-                    <p className="text-[13px] text-white/70 font-['Barlow'] max-w-xs mx-auto">
+                    <p className="text-[13px] text-zinc-600 font-['Barlow'] max-w-xs mx-auto">
                       Awesome! Your setup details have been submitted. Let's make it official below.
                     </p>
                   </div>
 
                   {/* WhatsApp Integration Community Link Panel Module */}
-                  <div className="w-full pt-5 border-t border-white/5 flex flex-col items-center">
+                  <div className="w-full pt-5 border-t border-zinc-100 flex flex-col items-center">
                     <p className="text-[11px] font-bold text-[#07b4ba] tracking-[2px] uppercase mb-3">FINAL STEP</p>
                     <a
                       href="https://chat.whatsapp.com/G0rrNtZAYOkAFpOjqEv4nL"
@@ -425,7 +411,7 @@ const LeadPage = () => {
                     >
                       JOIN TO START YOUR JOURNEY WITH US
                     </a>
-                    <p className="mt-2.5 text-[10px] text-white/40 font-['Barlow'] italic text-center leading-normal">
+                    <p className="mt-2.5 text-[10px] text-zinc-400 font-['Barlow'] italic text-center leading-normal">
                       Click above to receive direct event links & connect with coaches inside the community.
                     </p>
                   </div>
@@ -439,8 +425,7 @@ const LeadPage = () => {
                     setIsSubmitting(true);
 
                     try {
-                      // Insert your deployed Apps Script Web App Endpoint URL string structure here
-                      const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzsRr-TJAtfF2nVhxNBAlGgnphTFdg_7LCmbgPfh05Q297MMdJZzVOj5VvmWIFCil9K/exec";
+                      const GOOGLE_SCRIPT_WEBAPP_URL = "YOUR_DEPLOYED_APPS_SCRIPT_WEBAPP_URL";
                       
                       await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
                         method: "POST",
@@ -452,7 +437,6 @@ const LeadPage = () => {
                       setSubmitted(true);
                     } catch (error) {
                       console.error("Error storing details parameters:", error);
-                      // Fallback visual forward transition context
                       setSubmitted(true);
                     } finally {
                       setIsSubmitting(false);
@@ -462,63 +446,63 @@ const LeadPage = () => {
                 >
                   {/* Full Name field */}
                   <div>
-                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">FULL NAME</label>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">FULL NAME</label>
                     <input
                       type="text"
                       placeholder="e.g. Bhupathi"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all"
+                      className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-lg text-[14px] text-zinc-900 placeholder-zinc-300 font-medium focus:outline-none focus:border-[#07b4ba] focus:bg-white transition-all"
                     />
                   </div>
 
                   {/* Email Address field */}
                   <div>
-                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">EMAIL ADDRESS</label>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">EMAIL ADDRESS</label>
                     <input
                       type="email"
                       placeholder="e.g. sean@mygym.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all"
+                      className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-lg text-[14px] text-zinc-900 placeholder-zinc-300 font-medium focus:outline-none focus:border-[#07b4ba] focus:bg-white transition-all"
                     />
                   </div>
 
                   {/* Mobile Phone Number field with help tip text indicator */}
                   <div>
-                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">MOBILE NUMBER</label>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">MOBILE NUMBER</label>
                     <input
                       type="tel"
                       placeholder="e.g. +91 93854 31051"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all mb-1.5"
+                      className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-lg text-[14px] text-zinc-900 placeholder-zinc-300 font-medium focus:outline-none focus:border-[#07b4ba] focus:bg-white transition-all mb-1.5"
                     />
-                    <p className="text-[11px] text-[#07b4ba]/90 font-semibold leading-tight px-1">
+                    <p className="text-[11px] text-[#07b4ba] font-semibold leading-tight px-1">
                       Session details and important updates will be shared here.
                     </p>
                   </div>
 
                   {/* Custom Styled Filtering Dropdown select setup */}
                   <div>
-                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">WHICH DESCRIBES YOU RIGHT NOW?</label>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">WHICH DESCRIBES YOU RIGHT NOW?</label>
                     <div className="relative">
                       <select
                         value={situation}
                         onChange={(e) => setSituation(e.target.value)}
                         required
-                        className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[13px] text-white font-medium focus:outline-none focus:border-[#07b4ba] transition-all appearance-none cursor-pointer"
+                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-lg text-[13px] text-zinc-800 font-medium focus:outline-none focus:border-[#07b4ba] focus:bg-white transition-all appearance-none cursor-pointer"
                       >
-                        <option value="" disabled className="text-white/25">Select an option...</option>
+                        <option value="" disabled className="text-zinc-400">Select an option...</option>
                         <option value="a. I want to start mma and need clear direction">I want to start MMA and need clear direction</option>
                         <option value="b. I'm interested in mma but unsure how to begin properly">I'm interested in MMA but unsure how to begin properly</option>
                         <option value="c. I train another combat sport and want to understand mma basics">I train another combat sport and want to understand MMA basics</option>
                         <option value="d. I'm just exploring and learning for now">I'm just exploring and learning for now</option>
                       </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/30 text-[10px]">
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-400 text-[10px]">
                         ▼
                       </div>
                     </div>
@@ -532,10 +516,10 @@ const LeadPage = () => {
                       checked={agreed}
                       onChange={(e) => setAgreed(e.target.checked)}
                       required
-                      className="mt-0.5 w-4 h-4 shrink-0 rounded border-white/10 bg-[#0a0a0a] text-[#07b4ba] focus:ring-[#07b4ba]"
+                      className="mt-0.5 w-4 h-4 shrink-0 rounded border-zinc-300 bg-zinc-50 text-[#07b4ba] focus:ring-[#07b4ba]"
                     />
-                    <label htmlFor="lead-agree" className="text-[10px] text-white/40 leading-relaxed text-left cursor-pointer">
-                      Yes, text me. I agree to receive automated notification logs from <span className="text-white/70 font-semibold">Champion of Business</span> at the number provided. Reply STOP to opt out.
+                    <label htmlFor="lead-agree" className="text-[10px] text-zinc-400 leading-relaxed text-left cursor-pointer select-none">
+                      Yes, text me. I agree to receive automated notification logs from <span className="text-zinc-600 font-semibold">Champion of Business</span> at the number provided. Reply STOP to opt out.
                     </label>
                   </div>
 
@@ -546,7 +530,7 @@ const LeadPage = () => {
                     <button
                       type="submit"
                       disabled={!name || !email || !phone || !situation || !agreed || isSubmitting}
-                      className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed uppercase"
+                      className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed uppercase transition-colors"
                     >
                       {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
                     </button>
