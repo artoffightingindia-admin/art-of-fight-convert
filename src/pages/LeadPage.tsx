@@ -393,4 +393,70 @@ const LeadPage = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full pl-9 pr-4 py-3 bg-white border border-gray-300 rounded-lg t
+                        className="w-full pl-9 pr-4 py-3 bg-white border border-gray-300 rounded-lg text-sm text-zinc-900 placeholder-gray-400 font-medium focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-black text-zinc-700 uppercase tracking-wider mb-1">
+                      MOBILE NUMBER (FOR SMS ACCESS LINK)
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-3.5 text-gray-400 text-sm">📞</span>
+                      <input
+                        type="tel"
+                        placeholder="e.g. (555) 000-1234"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        className="w-full pl-9 pr-4 py-3 bg-white border border-gray-300 rounded-lg text-sm text-zinc-900 placeholder-gray-400 font-medium focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5 py-2">
+                    <input
+                      type="checkbox"
+                      id="agree-checkbox"
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      required
+                      className="mt-0.5 w-4 h-4 shrink-0 rounded border-gray-300 text-cyan-500 focus:ring-cyan-500 cursor-pointer"
+                    />
+                    <label htmlFor="agree-checkbox" className="text-[10px] text-zinc-500 leading-relaxed text-left cursor-pointer select-none">
+                      Yes, text me. I agree to receive recurring automated marketing texts (workshop and bootcamp updates) from <span className="font-bold text-zinc-800">Champion of Business</span> at the number provided. Consent is not a condition of purchase. Message frequency varies. Msg and data rates may apply. Reply STOP to cancel, HELP for help.
+                    </label>
+                  </div>
+
+                  <div className="pt-2">
+                    <a href="#" className="block text-center text-[10px] font-bold text-cyan-600 hover:underline mb-4">
+                      See our Terms, Conditions & Privacy details
+                    </a>
+
+                    <button
+                      type="submit"
+                      disabled={!email || !phone || !agreed}
+                      className="w-full bg-cyan-500 hover:bg-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed text-black font-black py-3.5 px-6 rounded-lg transition-all duration-200 text-base uppercase tracking-wide shadow-md"
+                    >
+                      SAVE MY SEAT
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              <p className="text-center text-[9px] text-gray-400 font-semibold mt-4 tracking-wide">
+                🔒 Your information is 100% secure & never shared with third parties.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default LeadPage;
