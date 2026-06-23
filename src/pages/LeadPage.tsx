@@ -425,7 +425,7 @@ const LeadPage = () => {
                     setIsSubmitting(true);
 
                     try {
-                      const GOOGLE_SCRIPT_WEBAPP_URL = "YOUR_DEPLOYED_APPS_SCRIPT_WEBAPP_URL";
+                      const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzsRr-TJAtfF2nVhxNBAlGgnphTFdg_7LCmbgPfh05Q297MMdJZzVOj5VvmWIFCil9K/exec";
                       
                       await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
                         method: "POST",
