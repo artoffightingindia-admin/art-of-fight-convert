@@ -1,13 +1,70 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+
+/* ── REUSED PREMIUM STYLES INJECTION ── */
+const premiumStyles = `
+  @keyframes subtle-pan {
+    0% { transform: scale(1.1); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes pulse-glow-red {
+    0%, 100% { box-shadow: 0 0 10px rgba(229,62,62,0.7), 0 0 24px rgba(229,62,62,0.35); }
+    50% { box-shadow: 0 0 20px rgba(229,62,62,0.9), 0 0 40px rgba(229,62,62,0.6); }
+  }
+  @keyframes shimmer-bg {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+  .animate-subtle-pan { animation: subtle-pan 12s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-pulse-red { animation: pulse-glow-red 3s ease-in-out infinite; }
+  
+  .premium-hover {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.6s ease;
+  }
+  .premium-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(7,180,186,0.15);
+    border-color: rgba(7,180,186,0.4) !important;
+  }
+  
+  .shimmer-ribbon {
+    background: linear-gradient(135deg, #EFAF27 25%, #FFF9D2 50%, #EFAF27 75%, #FFD700 100%);
+    background-size: 200% auto;
+    animation: shimmer-bg 3s linear infinite;
+  }
+  
+  .btn-glow {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  }
+  .btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(7,180,186,0.4);
+  }
+`;
+
+/* ── EXACT REUSED BRAND SVGs ── */
+const IconPlan = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" /></svg>);
+const IconChat = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>);
+const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" /></svg>);
+const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>);
+const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
 
 const LeadPage = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const videoRef = useRef<HTMLIFrameElement>(null);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,7 +84,14 @@ const LeadPage = () => {
     }
   };
 
-  // Helper to quickly scroll down to the sticky form card
+  const toggleMute = () => {
+    if (videoRef.current && videoRef.current.contentWindow) {
+      const func = isVideoMuted ? 'unMute' : 'mute';
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+      setIsVideoMuted(!isVideoMuted);
+    }
+  };
+
   const scrollToForm = () => {
     const element = document.getElementById("email-form-section");
     if (element) {
@@ -35,197 +99,162 @@ const LeadPage = () => {
     }
   };
 
+  /* ── DATA MODEL ALIGNMENTS FROM PROGRAM PAGE ── */
+  const whatCards = [
+    { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
+    { icon: <IconChart />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
+    { icon: <IconLeaf />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
+    { icon: <IconGlobe />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
+    { icon: <IconChat />, title: "LEARN IN TAMIL", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." },
+  ];
+
+  const painPoints = [
+    "Don't know where to begin",
+    "Don't have access to a quality MMA gym",
+    "Don't have a training partner or equipment",
+    "Can't commit hours every day to training",
+    "Can't find structured MMA guidance in Tamil",
+  ];
+
+  const coachCredentials = [
+    "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
+    "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
+    "Specialized in Developing Strong Fundamentals for Beginners",
+  ];
+
+  const stats = [
+    { val: "2,000+", label: "Clients Coached" },
+    { val: "10+", label: "Years Experience" },
+    { val: "20+", label: "MMA Fights" },
+    { val: "10K+", label: "AOF Community" },
+  ];
+
+  const GUTTER: React.CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
+  const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
+
   return (
-    <div className="min-h-screen bg-black text-white antialiased font-sans">
+    <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
+      <style>{premiumStyles}</style>
       <Navbar />
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative w-full pt-12 pb-20 px-4 flex flex-col items-center justify-center overflow-hidden bg-black">
-        {/* Top Badge */}
-        <div className="mb-6 inline-block bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-gray-400">
-          FREE LIVE WORKSHOP FOR COACHES & FIGHTERS • <span className="text-cyan-400">JUNE 23</span>
-        </div>
-
-        <div className="container mx-auto max-w-4xl text-center z-10">
-          <Reveal animation="fade-up">
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight leading-tight uppercase">
-              HOW TO TURN YOUR IN-PERSON COACHING INTO{" "}
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-500">
-                $5K/MONTH
-              </span>{" "}
-              ONLINE
-            </h1>
-          </Reveal>
-
-          <Reveal animation="fade-up" delay={0.1}>
-            <p className="text-lg md:text-xl text-cyan-400/80 font-medium mb-10 italic">
-              (Without Quitting What Already Works)
-            </p>
-          </Reveal>
-
-          {/* Centralized CTA Glowing Box */}
-          <Reveal animation="scale-in" delay={0.2}>
-            <div className="bg-slate-950/60 border border-cyan-500/20 shadow-[0_0_50px_rgba(6,182,212,0.05)] rounded-2xl p-6 md:p-10 max-w-2xl mx-auto mb-10">
-              <p className="text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">
-                This live workshop will show you how to earn
-              </p>
-              <p className="text-5xl md:text-6xl font-extrabold text-white mb-3 tracking-tight">
-                $5K/MONTH
-              </p>
-              <p className="text-gray-400 text-sm italic">The number most coaches are chasing</p>
-            </div>
-          </Reveal>
-
-          <Reveal animation="fade-up" delay={0.3}>
-            <p className="text-gray-400 text-base md:text-lg max-w-3xl mx-auto mb-4 leading-relaxed">
-              A free live workshop for coaches and fighters who already get paid for what they know, and want to add online income without burning out on more hours.
-            </p>
-            <p className="text-base font-medium text-gray-300 mb-8">
-              Live with <span className="text-white font-semibold underline decoration-cyan-500 decoration-2">Sean Fagan</span>
-            </p>
-          </Reveal>
-
-          {/* Hero Meta Badges */}
-          <Reveal animation="fade-up" delay={0.4}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-2.5 text-xs font-semibold text-cyan-400">
-                <span>📅</span> TUESDAY JUNE 23, 8:30PM EST.
-              </div>
-              <div className="bg-red-950/40 border border-red-900/50 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wider text-red-400 uppercase">
-                REAL Q&A. REPLAY ONLY IF YOU REGISTER.
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Primary Action Button (Scrolls to Form) */}
-          <Reveal animation="scale-in" delay={0.5}>
-            <button
-              onClick={scrollToForm}
-              className="bg-cyan-500 hover:bg-cyan-400 text-black font-black py-4 px-10 rounded-lg transition-all duration-200 text-lg shadow-[0_4px_20px_rgba(6,182,212,0.3)] hover:scale-[1.02] active:scale-[0.98] tracking-wide uppercase"
-            >
-              SAVE MY FREE SEAT NOW
-            </button>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ================= PAIN POINT / VIDEO SECTION ================= */}
-      <section className="py-20 px-4 bg-zinc-950 border-t border-zinc-900">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="relative flex flex-col w-full overflow-hidden pt-[82px] min-h-[105dvh] md:min-h-[95dvh]" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
+        <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0">
+          <div className="w-full relative z-10 text-center" style={GUTTER}>
             
-            {/* Left Column Text */}
-            <div className="lg:col-span-5 space-y-4">
-              <p className="text-cyan-500 text-xs font-bold uppercase tracking-widest">
-                SOUNDS FAMILIAR?
-              </p>
-              <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight uppercase">
-                YOU WANT TO LEARN MMA. <br />
-                BUT <span className="text-red-500">HAVEN'T STARTED</span> BECAUSE YOU:
-              </h2>
-              
-              <ul className="space-y-3.5 pt-4 text-sm text-gray-300">
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold text-lg leading-none">|</span>
-                  <span>Don't know where to begin</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold text-lg leading-none">|</span>
-                  <span>Don't have access to a quality MMA gym</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold text-lg leading-none">|</span>
-                  <span>Don't have a training partner or equipment</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold text-lg leading-none">|</span>
-                  <span>Don't commit hours every day to training</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold text-lg leading-none">|</span>
-                  <span>Don't find structured MMA guidance in Tamil</span>
-                </li>
-              </ul>
-            </div>
+            {/* Top Badge lowered down safely under navbar */}
+            <Reveal type="fade-down" delay={100} duration={1000} className="mb-6 mt-4 inline-block">
+              <span className="bg-[#111419]/90 border border-white/10 rounded-full px-5 py-2 text-[11px] md:text-[12px] font-bold tracking-[3px] text-[#07b4ba] uppercase shadow-lg">
+                FREE LIVE WORKSHOP FOR COACHES & FIGHTERS • <span className="text-white">JUNE 23</span>
+              </span>
+            </Reveal>
 
-            {/* Right Column Video Frame Component placeholder matching image */}
-            <div className="lg:col-span-7 w-full">
-              <div className="space-y-3 text-center lg:text-left mb-4">
-                <p className="text-white text-base md:text-lg font-bold uppercase tracking-wide italic">
-                  5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
+            <Reveal type="fade-up" delay={300} duration={1200}>
+              <h1 className="font-['Bebas_Neue'] text-[clamp(36px,9vw,68px)] leading-[.93] tracking-[2px] uppercase text-white mb-3">
+                HOW TO TURN YOUR IN-PERSON COACHING INTO <br />
+                <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
+                  $5K/MONTH
+                </span>{" "}
+                ONLINE
+              </h1>
+            </Reveal>
+
+            <Reveal type="fade-up" delay={400} duration={1200}>
+              <p className="text-white/60 font-medium font-['Barlow'] text-[15px] md:text-[18px] mb-8 italic">
+                (Without Quitting What Already Works)
+              </p>
+            </Reveal>
+
+            {/* Centralized CTA Glowing Box matching brand style variables */}
+            <Reveal type="scale-up" delay={500} duration={1200}>
+              <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.1)] rounded-2xl p-6 md:p-9 max-w-2xl mx-auto mb-8 premium-hover">
+                <p className="text-[#07b4ba] text-[11px] font-bold uppercase tracking-[3px] mb-2.5">
+                  This live workshop will show you how to earn
                 </p>
+                <p className="font-['Bebas_Neue'] text-[46px] md:text-[64px] tracking-[1px] text-white leading-none mb-1.5">
+                  $5K/MONTH
+                </p>
+                <p className="text-white/40 text-[13px] italic font-['Barlow']">The number most coaches are chasing</p>
               </div>
-              <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-zinc-800 shadow-2xl group">
-                {/* Mock Image Overlay mimicking a customized YouTube configuration */}
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10 flex items-center justify-center cursor-pointer">
-                  <div className="w-16 h-16 rounded-full bg-cyan-500 text-black flex items-center justify-center pl-1 font-bold shadow-lg transition-transform group-hover:scale-110">
-                    ▶
-                  </div>
+            </Reveal>
+
+            <Reveal type="fade-up" delay={600} duration={1200}>
+              <p className="text-white/70 text-[14px] md:text-[16px] leading-[1.65] max-w-3xl mx-auto mb-[18px]">
+                A free live workshop for coaches and fighters who already get paid for what they know, and want to add online income without burning out on more hours.
+              </p>
+              <p className="text-[15px] font-semibold text-white/90 mb-8 font-['Barlow']">
+                Live with <span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Sean Fagan</span>
+              </p>
+            </Reveal>
+
+            {/* Actions Panel layout matching visual specs */}
+            <Reveal type="fade-up" delay={700} duration={1200}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[12px] font-bold tracking-[1px] text-[#07b4ba]">
+                  <span>📅</span> TUESDAY JUNE 23, 8:30PM EST.
                 </div>
-                {/* Simulated video poster background */}
-                <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-600 text-xs">
-                  [Embed Code or Video Preview: AOF 30-Days MMA Striking Video Layout]
+                <div className="bg-red-950/40 border border-red-900/40 rounded-lg px-4 py-2.5 text-[11px] font-black tracking-[1.5px] text-red-500 uppercase">
+                  REAL Q&A. REPLAY ONLY IF YOU REGISTER.
                 </div>
               </div>
-            </div>
+              <button
+                onClick={scrollToForm}
+                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-[50px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer"
+              >
+                SAVE MY FREE SEAT NOW
+              </button>
+            </Reveal>
 
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* ================= BENEFIT GRID SECTION ================= */}
-      <section className="py-20 px-4 bg-black border-t border-zinc-900">
-        <div className="container mx-auto max-w-6xl">
-          <Reveal animation="fade-up">
-            <div className="text-center mb-16">
-              <p className="text-cyan-500 text-xs font-bold uppercase tracking-widest mb-2">
-                WHY THIS PROGRAM WORKS?
-              </p>
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase">
-                BUILT AROUND THE REAL <span className="text-cyan-400">CHALLENGES OF BEGINNERS</span>
+      {/* ================= PAIN SECTION (EXACT PROGRAM PAGE SOURCE MATCH) ================= */}
+      <section className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE} border-t border-white/5 bg-[#0a0a0a]`}>
+        <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
+          <div className="flex-1 w-full md:max-w-[500px] md:order-2">
+            <Reveal type="fade-left" duration={1200}>
+              <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
+                5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
+              </h3>
+              <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                <div className="relative w-full aspect-video">
+                  <iframe
+                    ref={videoRef}
+                    className="absolute inset-0 w-full h-full pointer-events-auto"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
+                    title="AOF Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  <button
+                    onClick={toggleMute}
+                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
+                    aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
+                  >
+                    {isVideoMuted ? (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          <div className="flex-1 w-full md:min-w-[260px] md:order-1">
+            <Reveal type="fade-right" duration={1000}>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
+              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED </span> BECAUSE YOU:
               </h2>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[
-              {
-                title: "Clear Roadmap",
-                desc: "Know exactly what to train, when to train, and how to progress throughout the program.",
-                icon: "📅",
-              },
-              {
-                title: "Train on Your Schedule",
-                desc: "Access pre-recorded sessions and tools whenever it suits you. Most sessions take just 30-45 minutes a day.",
-                icon: "⚡",
-              },
-              {
-                title: "Train with Confidence",
-                desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly.",
-                icon: "🌱",
-              },
-              {
-                title: "Beginner Friendly",
-                desc: "Start with confidence, even if you've never trained MMA before.",
-                icon: "🌐",
-              },
-              {
-                title: "Learn in Tamil",
-                desc: "Lessons and concepts structured through coaching delivered in Tamil and simple English.",
-                icon: "💬",
-              },
-            ].map((item, idx) => (
-              <Reveal key={idx} animation="fade-up" delay={idx * 0.05}>
-                <div className="bg-zinc-950 border border-zinc-900 rounded-xl p-6 h-full text-center flex flex-col items-center justify-start hover:border-zinc-800 transition-colors">
-                  <div className="text-3xl text-cyan-400 mb-4 bg-zinc-900 w-12 h-12 rounded-lg flex items-center justify-center border border-zinc-800">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    {item.desc}
-                  </p>
+              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
+            </Reveal>
+            {painPoints.map((p, i) => (
+              <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
+                <div className="flex items-start gap-4 mb-3">
+                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -233,221 +262,197 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* Divider Accent strip from visual hierarchy layout */}
-      <div className="w-full h-11 bg-cyan-500 text-black flex items-center justify-center font-black tracking-widest text-xs uppercase shadow-inner">
-        JOIN NOW
-      </div>
-
-      {/* ================= BIO / INSTRUCTOR SECTION ================= */}
-      <section className="py-20 px-4 bg-zinc-950">
-        <div className="container mx-auto max-w-4xl">
-          <div className="space-y-2 mb-10 text-left">
-            <p className="text-cyan-400 text-xs font-bold uppercase tracking-widest">LED BY</p>
-          </div>
-
-          <Reveal animation="scale-in">
-            <div className="bg-black rounded-2xl p-6 md:p-10 border border-zinc-900">
-              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                
-                {/* Coach Portrait Visual */}
-                <div className="w-48 h-56 shrink-0 rounded-xl overflow-hidden border-2 border-cyan-500/30 bg-zinc-900 shadow-xl">
-                  <div className="w-full h-full flex items-center justify-center text-zinc-600 text-xs font-semibold">
-                    [Purushothaman MK Photo]
-                  </div>
-                </div>
-
-                {/* Profile Breakdown Info */}
-                <div className="flex-1 w-full">
-                  <h3 className="text-3xl font-black text-white mb-1 tracking-tight uppercase">
-                    PURUSHOTHAMAN MK
-                  </h3>
-                  <p className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6">
-                    HEAD COACH AND MMA FIGHTER
-                  </p>
-                  
-                  <ul className="space-y-3 text-xs md:text-sm text-gray-300 mb-8 list-none pl-0">
-                    <li className="flex items-start gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span>
-                      <span>Only Tamil MMA Fighter in IMP and Multiple-Time National Medalist</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span>
-                      <span>Coached 2000+ Students, Including National Champions Across Multiple Disciplines</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span>
-                      <span>Specialized in Developing Strong Fundamentals for Beginners</span>
-                    </li>
-                  </ul>
-
-                  {/* Operational Metric Data Blocks */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {[
-                      { val: "2,000+", label: "CLIENTS COACHED" },
-                      { val: "10+", label: "YEARS EXPERIENCE" },
-                      { val: "20+", label: "MMA FIGHTS" },
-                      { val: "10K+", label: "AOF COMMUNITY" },
-                    ].map((metric, i) => (
-                      <div key={i} className="bg-zinc-950 border border-zinc-900 rounded-xl p-3 text-center">
-                        <p className="text-xl font-black text-cyan-400">{metric.val}</p>
-                        <p className="text-[9px] text-gray-500 font-bold tracking-wider mt-0.5 uppercase">
-                          {metric.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-              </div>
-            </div>
+      {/* ================= FEATURES GRID SECTION (EXACT MATCH) ================= */}
+      <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
+        <div className="w-full py-14 md:py-20" style={GUTTER}>
+          <Reveal type="fade-down" duration={1000}>
+            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
+              BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS</span>
+            </h2>
           </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
+            {whatCards.map((item, i) => (
+              <Reveal key={i} type="scale-up" delay={i * 150} duration={800}>
+                <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-3 md:min-h-[255px] md:p-[16px] md:rounded-[18px] premium-hover ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
+                  <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
+                  <div className="flex flex-col items-start md:items-center w-full">
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 text-left md:text-center mb-[3px]">{item.title}</h4>
+                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0">{item.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ================= SPLIT SCREEN FOOTER INTERACTION ================= */}
-      <section id="email-form-section" className="border-t border-zinc-900 bg-black">
+      {/* Structural accent join strip layout */}
+      <div className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[18px] tracking-[4px] flex items-center justify-center shadow-md">
+        JOIN NOW
+      </div>
+
+      {/* ================= COACH MODULE (EXACT MATCH) ================= */}
+      <div className="bg-[#0f1115] border-t border-b border-white/5">
+        <div className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE}`}>
+          <Reveal type="fade-down" duration={1000}>
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
+          </Reveal>
+          <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
+            <Reveal type="fade-right" duration={1200}>
+              <img
+                src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
+                alt="Head Coach"
+                className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
+                style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
+              />
+            </Reveal>
+            <div className="flex-1 w-full md:min-w-[260px]">
+              <Reveal type="fade-left" delay={100} duration={1000}>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
+              </Reveal>
+              <div className="mb-5 md:mb-6">
+                {coachCredentials.map((cred, i) => (
+                  <Reveal key={i} type="fade-up" delay={200 + i * 150} duration={800}>
+                    <div className="flex items-start gap-2.5 mb-3">
+                      <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
+                      <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{cred}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-4 md:mt-6">
+                {stats.map((stat, i) => (
+                  <Reveal key={i} type="scale-up" delay={400 + i * 100} duration={800}>
+                    <div className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[95px] md:h-[140px] p-3 md:p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)] premium-hover">
+                      <p className="font-['Bebas_Neue'] text-[26px] md:text-[42px] text-[#07b4ba] tracking-[1px] mb-1.5 md:mb-2 leading-none drop-shadow-[0_0_8px_rgba(7,180,186,0.3)]">{stat.val}</p>
+                      <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase leading-tight">{stat.label}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= SPLIT INTERACTION MODAL INTERFACE ================= */}
+      <section id="email-form-section" className="border-t border-white/5 bg-[#0a0a0a]">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           
-          {/* Left Panel: Information & Live Session Details */}
-          <div className="p-8 md:p-16 lg:p-20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-zinc-900">
-            
-            {/* Top: Workshop Info Sub-component */}
-            <div className="mb-12 bg-white text-zinc-900 p-8 rounded-xl shadow-xl">
-              <h4 className="text-cyan-600 font-extrabold text-xs uppercase tracking-widest mb-6">
-                WORKSHOP DETAILS
-              </h4>
-              <div className="grid grid-cols-2 gap-y-6 gap-x-4">
+          {/* Left Block Description Details */}
+          <div className="p-8 md:p-14 lg:p-20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/5">
+            <div className="mb-10 bg-[#111419] border border-white/10 p-6 md:p-8 rounded-xl shadow-2xl">
+              <h4 className="text-[#07b4ba] font-['Bebas_Neue'] text-[16px] tracking-[2px] mb-5">WORKSHOP DETAILS</h4>
+              <div className="grid grid-cols-2 gap-y-5 gap-x-4">
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">LIVE SESSION</p>
-                  <p className="text-sm font-black text-zinc-900 flex items-center gap-1.5 mt-0.5">
-                    <span className="text-cyan-600">🔹</span> On Zoom
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">LIVE SESSION</p>
+                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5 flex items-center gap-2">
+                    <span className="text-[#07b4ba]">🔹</span> On Zoom
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">DATE</p>
-                  <p className="text-sm font-black text-zinc-900 mt-0.5">Tuesday, June 24</p>
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">DATE</p>
+                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">Tuesday, June 24</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">LIVE Q&A</p>
-                  <p className="text-sm font-black text-zinc-900 flex items-center gap-1.5 mt-0.5">
-                    <span className="text-cyan-600">🔹</span> Ask anything
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">LIVE Q&A</p>
+                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5 flex items-center gap-2">
+                    <span className="text-[#07b4ba]">🔹</span> Ask anything
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">TIME</p>
-                  <p className="text-sm font-black text-zinc-900 mt-0.5">8:30 PM IST</p>
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">TIME</p>
+                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">8:30 PM IST</p>
                 </div>
-                <div className="col-span-2 pt-2 border-t border-gray-100">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">BONUS</p>
-                  <p className="text-sm font-black text-zinc-900 mt-0.5">MMA Beginners Blueprint (PDF)</p>
+                <div className="col-span-2 pt-3 border-t border-white/5">
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">BONUS</p>
+                  <p className="text-[14px] font-bold text-[#07b4ba] mt-0.5">MMA Beginners Blueprint (PDF)</p>
                 </div>
               </div>
             </div>
 
-            {/* Bottom: Why Registered Quote Panel */}
-            <div className="bg-zinc-950 border border-zinc-900 rounded-xl p-6 relative overflow-hidden">
-              <div className="absolute top-3 right-3 text-[10px] uppercase font-bold tracking-widest text-zinc-700 px-2 py-0.5 border border-zinc-900 rounded bg-black">
-                LIVE BROADCAST
-              </div>
-              <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-3">
-                THIS IS LIVE FOR A REASON
-              </p>
-              <blockquote className="text-sm text-gray-300 leading-relaxed italic mb-4">
+            <div className="bg-[#0b0b0b] border border-white/5 rounded-xl p-6">
+              <p className="text-[12px] font-bold text-[#07b4ba] tracking-[2px] uppercase mb-2">THIS IS LIVE FOR A REASON</p>
+              <blockquote className="text-[14px] md:text-[15px] font-normal text-white/70 leading-relaxed italic mb-3 font-['Barlow']">
                 "You can ask me anything about your own situation in real time. At the end, I'm opening up something not going in the replay. You need to be in the room."
               </blockquote>
-              <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                — SEAN FAGAN, COACH
-              </p>
+              <p className="text-[11px] font-bold text-white/30 tracking-[1.5px] uppercase">— SEAN FAGAN, COACH</p>
             </div>
-
           </div>
 
-          {/* Right Panel: Functional Form Interface */}
-          <div className="p-8 md:p-16 lg:p-20 bg-zinc-950 flex items-center justify-center">
-            <div className="bg-white text-zinc-900 rounded-2xl p-8 md:p-10 w-full max-w-md shadow-2xl border border-gray-100">
-              <h3 className="text-2xl font-black text-center tracking-tight text-zinc-900 mb-1 uppercase">
+          {/* Right Input Registration Box Interface */}
+          <div className="p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
+            <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/10 rounded-2xl p-6 md:p-9 w-full max-w-md shadow-2xl relative">
+              <h3 className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[1.5px] text-center text-white mb-1 uppercase">
                 ENTER YOUR EMAIL
               </h3>
-              <p className="text-center text-xs text-zinc-500 mb-6 max-w-xs mx-auto leading-relaxed">
-                You'll receive a private invitation & link to join the live workshop on Tuesday, June 23. Workshop begins at 8:30pm EST.
+              <p className="text-center text-[13px] text-white/50 mb-6 font-['Barlow'] leading-relaxed">
+                You'll receive a private invitation & link to join the live workshop.
               </p>
 
               {submitted ? (
-                <div className="text-center py-12 bg-emerald-50 rounded-xl border border-emerald-200">
-                  <p className="text-2xl font-black text-emerald-600 mb-2">✓ YOU'RE IN!</p>
-                  <p className="text-sm text-zinc-600 px-4">
-                    Check your inbox shortly for confirmation details and your links.
+                <div className="text-center py-10 bg-[#07b4ba]/5 border border-[#07b4ba]/20 rounded-xl">
+                  <p className="font-['Bebas_Neue'] text-[20px] text-[#07b4ba] tracking-[1px] mb-1">✓ SEAT RESERVED!</p>
+                  <p className="text-[13px] text-white/60 px-4 font-['Barlow']">
+                    Check your email shortly for verification handles and invitations.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 font-['Barlow']">
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-700 uppercase tracking-wider mb-1">
-                      EMAIL ADDRESS
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-3.5 top-3.5 text-gray-400 text-sm">✉</span>
-                      <input
-                        type="email"
-                        placeholder="e.g. sean@mygym.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full pl-9 pr-4 py-3 bg-white border border-gray-300 rounded-lg text-sm text-zinc-900 placeholder-gray-400 font-medium focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
-                      />
-                    </div>
+                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">EMAIL ADDRESS</label>
+                    <input
+                      type="email"
+                      placeholder="e.g. sean@mygym.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all"
+                    />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-700 uppercase tracking-wider mb-1">
-                      MOBILE NUMBER (FOR SMS ACCESS LINK)
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-3.5 top-3.5 text-gray-400 text-sm">📞</span>
-                      <input
-                        type="tel"
-                        placeholder="e.g. (555) 000-1234"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        required
-                        className="w-full pl-9 pr-4 py-3 bg-white border border-gray-300 rounded-lg text-sm text-zinc-900 placeholder-gray-400 font-medium focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
-                      />
-                    </div>
+                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">MOBILE NUMBER (FOR SMS LINK)</label>
+                    <input
+                      type="tel"
+                      placeholder="e.g. (555) 000-1234"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all"
+                    />
                   </div>
 
-                  <div className="flex items-start gap-2.5 py-2">
+                  <div className="flex items-start gap-2.5 pt-2">
                     <input
                       type="checkbox"
-                      id="agree-checkbox"
+                      id="lead-agree"
                       checked={agreed}
                       onChange={(e) => setAgreed(e.target.checked)}
                       required
-                      className="mt-0.5 w-4 h-4 shrink-0 rounded border-gray-300 text-cyan-500 focus:ring-cyan-500 cursor-pointer"
+                      className="mt-0.5 w-4 h-4 shrink-0 rounded border-white/10 bg-[#0a0a0a] text-[#07b4ba] focus:ring-[#07b4ba]"
                     />
-                    <label htmlFor="agree-checkbox" className="text-[10px] text-zinc-500 leading-relaxed text-left cursor-pointer select-none">
-                      Yes, text me. I agree to receive recurring automated marketing texts (workshop and bootcamp updates) from <span className="font-bold text-zinc-800">Champion of Business</span> at the number provided. Consent is not a condition of purchase. Message frequency varies. Msg and data rates may apply. Reply STOP to cancel, HELP for help.
+                    <label htmlFor="lead-agree" className="text-[10px] text-white/40 leading-relaxed text-left cursor-pointer">
+                      Yes, text me. I agree to receive recurring automated marketing texts (workshop updates) from <span className="text-white/70 font-semibold">Champion of Business</span> at the number provided. Consent is not a condition. Msg/data rates apply. Reply STOP to cancel.
                     </label>
                   </div>
 
-                  <div className="pt-2">
-                    <a href="#" className="block text-center text-[10px] font-bold text-cyan-600 hover:underline mb-4">
+                  <div className="pt-3">
+                    <a href="#" className="block text-center text-[11px] font-bold text-[#07b4ba] hover:underline mb-4 tracking-[0.5px]">
                       See our Terms, Conditions & Privacy details
                     </a>
-
                     <button
                       type="submit"
                       disabled={!email || !phone || !agreed}
-                      className="w-full bg-cyan-500 hover:bg-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed text-black font-black py-3.5 px-6 rounded-lg transition-all duration-200 text-base uppercase tracking-wide shadow-md"
+                      className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       SAVE MY SEAT
                     </button>
                   </div>
                 </form>
               )}
-
-              <p className="text-center text-[9px] text-gray-400 font-semibold mt-4 tracking-wide">
-                🔒 Your information is 100% secure & never shared with third parties.
-              </p>
             </div>
           </div>
 
