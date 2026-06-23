@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 
-/* ── REUSED PREMIUM STYLES INJECTION ── */
+/* ── PREMIUM UNIFIED STYLES INJECTION ── */
 const premiumStyles = `
   @keyframes subtle-pan {
     0% { transform: scale(1.1); opacity: 0; }
@@ -21,6 +21,9 @@ const premiumStyles = `
   @keyframes shimmer-bg {
     0% { background-position: 200% center; }
     100% { background-position: -200% center; }
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: 0; }
   }
   .animate-subtle-pan { animation: subtle-pan 12s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
   .animate-float { animation: float 6s ease-in-out infinite; }
@@ -50,7 +53,7 @@ const premiumStyles = `
   }
 `;
 
-/* ── EXACT REUSED BRAND SVGs ── */
+/* ── REUSED DESIGN SYSTEM BRAND SVGs ── */
 const IconPlan = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" /></svg>);
 const IconChat = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>);
 const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" /></svg>);
@@ -58,10 +61,14 @@ const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
 const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
 
 const LeadPage = () => {
+  // Functional Form Interactive States
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [situation, setSituation] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
@@ -69,20 +76,6 @@ const LeadPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && phone && agreed) {
-      setSubmitted(true);
-      console.log("Form submitted:", { email, phone });
-      setTimeout(() => {
-        setEmail("");
-        setPhone("");
-        setAgreed(false);
-        setSubmitted(false);
-      }, 2000);
-    }
-  };
 
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
@@ -99,7 +92,7 @@ const LeadPage = () => {
     }
   };
 
-  /* ── DATA MODEL ALIGNMENTS FROM PROGRAM PAGE ── */
+  /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
     { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
     { icon: <IconChart />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
@@ -142,7 +135,7 @@ const LeadPage = () => {
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0">
           <div className="w-full relative z-10 text-center" style={GUTTER}>
             
-            {/* Top Badge lowered down safely under navbar */}
+            {/* Top Badge safely lower than fixed header context */}
             <Reveal type="fade-down" delay={100} duration={1000} className="mb-6 mt-4 inline-block">
               <span className="bg-[#111419]/90 border border-white/10 rounded-full px-5 py-2 text-[11px] md:text-[12px] font-bold tracking-[3px] text-[#07b4ba] uppercase shadow-lg">
                 FREE LIVE WORKSHOP FOR COACHES & FIGHTERS • <span className="text-white">JUNE 23</span>
@@ -165,7 +158,7 @@ const LeadPage = () => {
               </p>
             </Reveal>
 
-            {/* Centralized CTA Glowing Box matching brand style variables */}
+            {/* Glowing Brand Feature Container Box */}
             <Reveal type="scale-up" delay={500} duration={1200}>
               <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.1)] rounded-2xl p-6 md:p-9 max-w-2xl mx-auto mb-8 premium-hover">
                 <p className="text-[#07b4ba] text-[11px] font-bold uppercase tracking-[3px] mb-2.5">
@@ -187,7 +180,6 @@ const LeadPage = () => {
               </p>
             </Reveal>
 
-            {/* Actions Panel layout matching visual specs */}
             <Reveal type="fade-up" delay={700} duration={1200}>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                 <div className="flex items-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[12px] font-bold tracking-[1px] text-[#07b4ba]">
@@ -209,12 +201,12 @@ const LeadPage = () => {
         </section>
       </div>
 
-      {/* ================= PAIN SECTION (EXACT PROGRAM PAGE SOURCE MATCH) ================= */}
+      {/* ================= SOUNDS FAMILIAR SECTION (UNIFIED BRAND SOURCE) ================= */}
       <section className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE} border-t border-white/5 bg-[#0a0a0a]`}>
         <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
           <div className="flex-1 w-full md:max-w-[500px] md:order-2">
             <Reveal type="fade-left" duration={1200}>
-              <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
+              <h3 className="mb-4 text-center italic font-semibold text-white tracking-[0.5px] text-[22px]">
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
@@ -229,7 +221,7 @@ const LeadPage = () => {
                   />
                   <button
                     onClick={toggleMute}
-                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
+                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer"
                     aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
                   >
                     {isVideoMuted ? (
@@ -262,7 +254,7 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* ================= FEATURES GRID SECTION (EXACT MATCH) ================= */}
+      {/* ================= WHY THIS PROGRAM WORKS GRID (UNIFIED MATCH) ================= */}
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
         <div className="w-full py-14 md:py-20" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
@@ -287,12 +279,12 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* Structural accent join strip layout */}
+      {/* Decorative Accent Joint Element Strip */}
       <div className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[18px] tracking-[4px] flex items-center justify-center shadow-md">
         JOIN NOW
       </div>
 
-      {/* ================= COACH MODULE (EXACT MATCH) ================= */}
+      {/* ================= COACH SECTION (UNIFIED BRAND SOURCE) ================= */}
       <div className="bg-[#0f1115] border-t border-b border-white/5">
         <div className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
@@ -337,11 +329,11 @@ const LeadPage = () => {
         </div>
       </div>
 
-      {/* ================= SPLIT INTERACTION MODAL INTERFACE ================= */}
+      {/* ================= SPLIT INTERACTION FOOTER SECTION ================= */}
       <section id="email-form-section" className="border-t border-white/5 bg-[#0a0a0a]">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           
-          {/* Left Block Description Details */}
+          {/* Left Block Content Metrics & Description Handles */}
           <div className="p-8 md:p-14 lg:p-20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/5">
             <div className="mb-10 bg-[#111419] border border-white/10 p-6 md:p-8 rounded-xl shadow-2xl">
               <h4 className="text-[#07b4ba] font-['Bebas_Neue'] text-[16px] tracking-[2px] mb-5">WORKSHOP DETAILS</h4>
@@ -382,25 +374,106 @@ const LeadPage = () => {
             </div>
           </div>
 
-          {/* Right Input Registration Box Interface */}
+          {/* Right Panel: Advanced Functional Input Registration Card */}
           <div className="p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
-            <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/10 rounded-2xl p-6 md:p-9 w-full max-w-md shadow-2xl relative">
-              <h3 className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[1.5px] text-center text-white mb-1 uppercase">
-                ENTER YOUR EMAIL
-              </h3>
-              <p className="text-center text-[13px] text-white/50 mb-6 font-['Barlow'] leading-relaxed">
-                You'll receive a private invitation & link to join the live workshop.
-              </p>
+            <div className="bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/10 rounded-2xl p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
+              
+              {!submitted && (
+                <>
+                  <h3 className="font-['Bebas_Neue'] text-[24px] md:text-[30px] tracking-[1.5px] text-center text-white mb-1 uppercase">
+                    ENTER YOUR DETAILS
+                  </h3>
+                  <p className="text-center text-[13px] text-white/50 mb-6 font-['Barlow'] leading-relaxed">
+                    Fill out the form below to reserve your live workshop invitation link.
+                  </p>
+                </>
+              )}
 
               {submitted ? (
-                <div className="text-center py-10 bg-[#07b4ba]/5 border border-[#07b4ba]/20 rounded-xl">
-                  <p className="font-['Bebas_Neue'] text-[20px] text-[#07b4ba] tracking-[1px] mb-1">✓ SEAT RESERVED!</p>
-                  <p className="text-[13px] text-white/60 px-4 font-['Barlow']">
-                    Check your email shortly for verification handles and invitations.
-                  </p>
+                /* Instant Form Submission Success Animation State Panel Layout */
+                <div className="text-center py-6 flex flex-col items-center justify-center space-y-5 animate-[scale-up_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]">
+                  
+                  {/* Styled Checkmark Circle Badge wrapper element */}
+                  <div className="w-16 h-16 bg-[#07b4ba]/10 border-2 border-[#07b4ba] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(7,180,186,0.3)]">
+                    <svg className="w-8 h-8 text-[#07b4ba] stroke-current stroke-[3] fill-none" viewBox="0 0 24 24">
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        d="M5 13l4 4L19 7" 
+                        strokeDasharray="50"
+                        strokeDashoffset="50"
+                        className="animate-[dash_0.5s_ease-in-out_0.1s_forwards]" 
+                      />
+                    </svg>
+                  </div>
+                  
+                  <div>
+                    <p className="font-['Bebas_Neue'] text-[24px] text-[#07b4ba] tracking-[1.5px] mb-1">YOUR SEAT IS CONFIRMED!</p>
+                    <p className="text-[13px] text-white/70 font-['Barlow'] max-w-xs mx-auto">
+                      Awesome! Your setup details have been submitted. Let's make it official below.
+                    </p>
+                  </div>
+
+                  {/* WhatsApp Integration Community Link Panel Module */}
+                  <div className="w-full pt-5 border-t border-white/5 flex flex-col items-center">
+                    <p className="text-[11px] font-bold text-[#07b4ba] tracking-[2px] uppercase mb-3">FINAL STEP</p>
+                    <a
+                      href="https://chat.whatsapp.com/G0rrNtZAYOkAFpOjqEv4nL"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-glow inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] text-white font-['Bebas_Neue'] text-[18px] tracking-[1.5px] rounded-xl cursor-pointer hover:bg-[#1ebe57] transition-all shadow-[0_10px_20px_rgba(37,211,102,0.2)]"
+                    >
+                      JOIN TO START YOUR JOURNEY WITH US
+                    </a>
+                    <p className="mt-2.5 text-[10px] text-white/40 font-['Barlow'] italic text-center leading-normal">
+                      Click above to receive direct event links & connect with coaches inside the community.
+                    </p>
+                  </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 font-['Barlow']">
+                <form 
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    if (!name || !email || !phone || !situation || !agreed) return;
+                    
+                    setIsSubmitting(true);
+
+                    try {
+                      // Insert your deployed Apps Script Web App Endpoint URL string structure here
+                      const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzsRr-TJAtfF2nVhxNBAlGgnphTFdg_7LCmbgPfh05Q297MMdJZzVOj5VvmWIFCil9K/exec";
+                      
+                      await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+                        method: "POST",
+                        mode: "no-cors", 
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name, email, phone, situation })
+                      });
+
+                      setSubmitted(true);
+                    } catch (error) {
+                      console.error("Error storing details parameters:", error);
+                      // Fallback visual forward transition context
+                      setSubmitted(true);
+                    } finally {
+                      setIsSubmitting(false);
+                    }
+                  }} 
+                  className="space-y-4 font-['Barlow']"
+                >
+                  {/* Full Name field */}
+                  <div>
+                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">FULL NAME</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Bhupathi"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all"
+                    />
+                  </div>
+
+                  {/* Email Address field */}
                   <div>
                     <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">EMAIL ADDRESS</label>
                     <input
@@ -413,19 +486,46 @@ const LeadPage = () => {
                     />
                   </div>
 
+                  {/* Mobile Phone Number field with help tip text indicator */}
                   <div>
-                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">MOBILE NUMBER (FOR SMS LINK)</label>
+                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">MOBILE NUMBER</label>
                     <input
                       type="tel"
-                      placeholder="e.g. (555) 000-1234"
+                      placeholder="e.g. +91 93854 31051"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
-                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all"
+                      className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[14px] text-white placeholder-white/20 font-medium focus:outline-none focus:border-[#07b4ba] transition-all mb-1.5"
                     />
+                    <p className="text-[11px] text-[#07b4ba]/90 font-semibold leading-tight px-1">
+                      Session details and important updates will be shared here.
+                    </p>
                   </div>
 
-                  <div className="flex items-start gap-2.5 pt-2">
+                  {/* Custom Styled Filtering Dropdown select setup */}
+                  <div>
+                    <label className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1.5">WHICH DESCRIBES YOU RIGHT NOW?</label>
+                    <div className="relative">
+                      <select
+                        value={situation}
+                        onChange={(e) => setSituation(e.target.value)}
+                        required
+                        className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[13px] text-white font-medium focus:outline-none focus:border-[#07b4ba] transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled text-white/25>Select an option...</option>
+                        <option value="a. I want to start mma and need clear direction">I want to start MMA and need clear direction</option>
+                        <option value="b. I'm interested in mma but unsure how to begin properly">I'm interested in MMA but unsure how to begin properly</option>
+                        <option value="c. I train another combat sport and want to understand mma basics">I train another combat sport and want to understand MMA basics</option>
+                        <option value="d. I'm just exploring and learning for now">I'm just exploring and learning for now</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/30 text-[10px]">
+                        ▼
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verification checkbox interface module element */}
+                  <div className="flex items-start gap-2.5 pt-1">
                     <input
                       type="checkbox"
                       id="lead-agree"
@@ -435,20 +535,20 @@ const LeadPage = () => {
                       className="mt-0.5 w-4 h-4 shrink-0 rounded border-white/10 bg-[#0a0a0a] text-[#07b4ba] focus:ring-[#07b4ba]"
                     />
                     <label htmlFor="lead-agree" className="text-[10px] text-white/40 leading-relaxed text-left cursor-pointer">
-                      Yes, text me. I agree to receive recurring automated marketing texts (workshop updates) from <span className="text-white/70 font-semibold">Champion of Business</span> at the number provided. Consent is not a condition. Msg/data rates apply. Reply STOP to cancel.
+                      Yes, text me. I agree to receive automated notification logs from <span className="text-white/70 font-semibold">Champion of Business</span> at the number provided. Reply STOP to opt out.
                     </label>
                   </div>
 
-                  <div className="pt-3">
+                  <div className="pt-2">
                     <a href="#" className="block text-center text-[11px] font-bold text-[#07b4ba] hover:underline mb-4 tracking-[0.5px]">
                       See our Terms, Conditions & Privacy details
                     </a>
                     <button
                       type="submit"
-                      disabled={!email || !phone || !agreed}
-                      className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                      disabled={!name || !email || !phone || !situation || !agreed || isSubmitting}
+                      className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed uppercase"
                     >
-                      SAVE MY SEAT
+                      {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
                     </button>
                   </div>
                 </form>
