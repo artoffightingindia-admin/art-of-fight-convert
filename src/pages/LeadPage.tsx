@@ -512,7 +512,7 @@ const LeadPage = () => {
                         required
                         className="w-full px-4 py-3 bg-[#0a0a0a] border border-white/10 rounded-lg text-[13px] text-white font-medium focus:outline-none focus:border-[#07b4ba] transition-all appearance-none cursor-pointer"
                       >
-                        <option value="" disabled text-white/25>Select an option...</option>
+                        <option value="" disabled className="text-white/25">Select an option...</option>
                         <option value="a. I want to start mma and need clear direction">I want to start MMA and need clear direction</option>
                         <option value="b. I'm interested in mma but unsure how to begin properly">I'm interested in MMA but unsure how to begin properly</option>
                         <option value="c. I train another combat sport and want to understand mma basics">I train another combat sport and want to understand MMA basics</option>
