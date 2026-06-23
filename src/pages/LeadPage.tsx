@@ -170,7 +170,7 @@ const LeadPage = () => {
             </Reveal>
 
             {/* Adjusted Down Padding on CTA Action Segment Wrapper */}
-            <Reveal type="fade-up" delay={700} duration={1200} className="mb-12 md:mb-16">
+            <Reveal type="fade-up" delay={700} duration={1200} className="mb-8 md:mb-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 max-w-md mx-auto sm:max-w-none">
                 <div className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[11px] md:text-[12px] font-bold tracking-[1px] text-[#07b4ba]">
                   <span>📅</span> TUESDAY JUNE 23, 8:30PM EST.
@@ -192,13 +192,14 @@ const LeadPage = () => {
       </div>
 
       {/* ================= SOUNDS FAMILIAR SECTION (HIGH LEGIBILITY CONTRAST FOR WHITE BG) ================= */}
-      <section className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
+      <section className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-center">
           <div className="flex-1 w-full lg:max-w-[500px] lg:order-2">
             <Reveal type="fade-left" duration={1200}>
               <h3 className="mb-4 text-center italic font-semibold text-zinc-900 tracking-[0.5px] text-[18px] md:text-[22px]">
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
+              {/* Replaced video node with high-fidelity brand graphic assets */}
               <div className="premium-hover rounded-[14px] overflow-hidden border border-zinc-200 shadow-xl bg-zinc-100">
                 <div className="relative w-full aspect-video">
                   <img 
@@ -232,7 +233,7 @@ const LeadPage = () => {
 
       {/* ================= WHY THIS PROGRAM WORKS GRID (UNIFIED MATCH) ================= */}
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
-        <div className="w-full py-14 md:py-20 px-4 md:px-0" style={GUTTER}>
+        <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
@@ -265,7 +266,7 @@ const LeadPage = () => {
 
       {/* ================= COACH SECTION (UNIFIED BRAND SOURCE) ================= */}
       <div className="bg-[#0f1115] border-t border-b border-white/5">
-        <div className={`w-full py-14 md:py-20 ${SECTION_INSET_RESPONSIVE}`}>
+        <div className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
           </Reveal>
@@ -312,9 +313,22 @@ const LeadPage = () => {
       <section id="email-form-section" className="border-t border-white/5 bg-[#0a0a0a]">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           
-          {/* Left Block Content Metrics & Description Handles */}
-          <div className="p-6 md:p-14 lg:p-20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/5">
-            <div className="mb-8 lg:mb-10 bg-[#111419] border border-white/10 p-5 md:p-8 rounded-xl shadow-2xl">
+          {/* Left Block Content - Configured with 2-Line Heading, Eyebrow, and Centered Quote */}
+          <div className="p-6 md:p-14 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5 space-y-8">
+            
+            {/* Added Premium 2-Line Heading Layout and Eyebrow */}
+            <div className="text-left">
+              <span className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase block mb-2">
+                WORKSHOP ONBOARDING
+              </span>
+              <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[1.5px] text-white leading-[1.05] uppercase">
+                SECURE YOUR ACCESS <br />
+                <span className="text-[#07b4ba]">TO THE LIVE BROADCAST</span>
+              </h2>
+              <div className="w-16 h-[2px] bg-[#07b4ba] mt-4" />
+            </div>
+
+            <div className="bg-[#111419] border border-white/10 p-5 md:p-8 rounded-xl shadow-2xl">
               <h4 className="text-[#07b4ba] font-['Bebas_Neue'] text-[16px] tracking-[2px] mb-5">WORKSHOP DETAILS</h4>
               <div className="grid grid-cols-2 gap-y-5 gap-x-4">
                 <div>
@@ -344,9 +358,10 @@ const LeadPage = () => {
               </div>
             </div>
 
-            <div className="bg-[#0b0b0b] border border-white/5 rounded-xl p-5 md:p-6">
+            {/* Quote container box placed perfectly centered internally */}
+            <div className="bg-[#0b0b0b] border border-white/5 rounded-xl p-6 text-center flex flex-col items-center justify-center">
               <p className="text-[12px] font-bold text-[#07b4ba] tracking-[2px] uppercase mb-2">THIS IS LIVE FOR A REASON</p>
-              <blockquote className="text-[14px] md:text-[15px] font-normal text-white/70 leading-relaxed italic mb-3 font-['Barlow']">
+              <blockquote className="text-[14px] md:text-[15px] font-normal text-white/70 leading-relaxed italic mb-3 font-['Barlow'] max-w-md mx-auto">
                 "You can ask me anything about your own situation in real time. At the end, I'm opening up something not going in the replay. You need to be in the room."
               </blockquote>
               <p className="text-[11px] font-bold text-white/30 tracking-[1.5px] uppercase">— SEAN FAGAN, COACH</p>
