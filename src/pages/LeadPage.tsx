@@ -60,6 +60,12 @@ const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 
 const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>);
 const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
 
+/* ── SCREENSHOT NEW COMPONENT SVGs ── */
+const IconBroadcast = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M4.93 19.07a10 10 0 0 1 0-14.14M7.76 16.24a6 6 0 0 1 0-8.49M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM16.24 7.76a6 6 0 0 1 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>);
+const IconTarget = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="m22 22-4.3-4.3"/></svg>);
+const IconUsers = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
+const IconQuestion = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>);
+
 const LeadPage = () => {
   // Functional Form Interactive States
   const [name, setName] = useState("");
@@ -191,7 +197,7 @@ const LeadPage = () => {
         </section>
       </div>
 
-      {/* ================= SOUNDS FAMILIAR SECTION (HIGH LEGIBILITY CONTRAST FOR WHITE BG) ================= */}
+      {/* ================= SOUNDS FAMILIAR SECTION ================= */}
       <section className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-center">
           <div className="flex-1 w-full lg:max-w-[500px] lg:order-2">
@@ -199,7 +205,6 @@ const LeadPage = () => {
               <h3 className="mb-4 text-center italic font-semibold text-zinc-900 tracking-[0.5px] text-[18px] md:text-[22px]">
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
-              {/* Replaced video node with high-fidelity brand graphic assets */}
               <div className="premium-hover rounded-[14px] overflow-hidden border border-zinc-200 shadow-xl bg-zinc-100">
                 <div className="relative w-full aspect-video">
                   <img 
@@ -231,7 +236,7 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* ================= WHY THIS PROGRAM WORKS GRID (UNIFIED MATCH) ================= */}
+      {/* ================= WHY THIS PROGRAM WORKS GRID ================= */}
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
         <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
@@ -256,15 +261,15 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* ================= INTERACTIVE CLICKABLE ANCHOR JOIN NOW STRIP ================= */}
+      {/* ================= CLICKABLE STRIP BUTTON (PROGRAM PAGE HOVER DESIGN SYNC) ================= */}
       <button 
         onClick={scrollToForm}
-        className="w-full h-12 bg-[#07b4ba] hover:bg-[#06a2a7] transition-colors duration-200 text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] md:tracking-[4px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none"
+        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#07b4ba] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
       >
         JOIN NOW
       </button>
 
-      {/* ================= COACH SECTION (UNIFIED BRAND SOURCE) ================= */}
+      {/* ================= COACH SECTION ================= */}
       <div className="bg-[#0f1115] border-t border-b border-white/5">
         <div className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
@@ -313,10 +318,10 @@ const LeadPage = () => {
       <section id="email-form-section" className="border-t border-white/5 bg-[#0a0a0a]">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           
-          {/* Left Block Content - Configured with 2-Line Heading, Eyebrow, and Centered Quote */}
-          <div className="p-6 md:p-14 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5 space-y-8">
+          {/* Left Block Content - Re-designed to fully replicate Screenshot_2026-06-25-01-18-19-31_6012fa4d4ddec268fc5c7112cbb265e7.jpg */}
+          <div className="p-6 md:p-14 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5 space-y-6">
             
-            {/* Added Premium 2-Line Heading Layout and Eyebrow */}
+            {/* Onboarding Heading Block */}
             <div className="text-left">
               <span className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase block mb-2">
                 WORKSHOP ONBOARDING
@@ -325,9 +330,10 @@ const LeadPage = () => {
                 SECURE YOUR ACCESS <br />
                 <span className="text-[#07b4ba]">TO THE LIVE BROADCAST</span>
               </h2>
-              <div className="w-16 h-[2px] bg-[#07b4ba] mt-4" />
+              <div className="w-16 h-[2px] bg-[#07b4ba] mt-3" />
             </div>
 
+            {/* Workshop Parameters */}
             <div className="bg-[#111419] border border-white/10 p-5 md:p-8 rounded-xl shadow-2xl">
               <h4 className="text-[#07b4ba] font-['Bebas_Neue'] text-[16px] tracking-[2px] mb-5">WORKSHOP DETAILS</h4>
               <div className="grid grid-cols-2 gap-y-5 gap-x-4">
@@ -358,17 +364,52 @@ const LeadPage = () => {
               </div>
             </div>
 
-            {/* Quote container box placed perfectly centered internally */}
-            <div className="bg-[#0b0b0b] border border-white/5 rounded-xl p-6 text-center flex flex-col items-center justify-center">
-              <p className="text-[12px] font-bold text-[#07b4ba] tracking-[2px] uppercase mb-2">THIS IS LIVE FOR A REASON</p>
-              <blockquote className="text-[14px] md:text-[15px] font-normal text-white/70 leading-relaxed italic mb-3 font-['Barlow'] max-w-md mx-auto">
-                "You can ask me anything about your own situation in real time. At the end, I'm opening up something not going in the replay. You need to be in the room."
-              </blockquote>
-              <p className="text-[11px] font-bold text-white/30 tracking-[1.5px] uppercase">— SEAN FAGAN, COACH</p>
+            {/* Re-designed Live Quote Container mapped precisely from image mockup */}
+            <div className="bg-zinc-950/60 border border-zinc-900 rounded-xl p-6 text-left">
+              <div className="flex items-center gap-3 mb-2.5">
+                <IconBroadcast />
+                <h3 className="font-['Barlow'] font-extrabold text-[17px] md:text-[19px] uppercase tracking-wide text-white">
+                  THIS IS <span className="text-[#07b4ba]">LIVE</span> FOR A REASON
+                </h3>
+              </div>
+              
+              <p className="text-zinc-400 font-medium text-[13.5px] md:text-[14.5px] font-['Barlow'] leading-relaxed mb-6">
+                You'll get direct access to ask questions, get real-time answers, and interact with the coach.
+              </p>
+
+              {/* 3-Column Visual Metrics Grid ordered backwards dynamically (3, 2, 1) */}
+              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-zinc-900/50 text-center">
+                
+                {/* Position 3: Target Element */}
+                <div className="flex flex-col items-center px-1">
+                  <div className="mb-2"><IconTarget /></div>
+                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
+                    Leave with clarity and next steps
+                  </p>
+                </div>
+
+                {/* Position 2: Personal Feedback Users Element */}
+                <div className="flex flex-col items-center px-1 border-x border-zinc-900/50">
+                  <div className="mb-2"><IconUsers /></div>
+                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
+                    Get personal feedback
+                  </p>
+                </div>
+
+                {/* Position 1: Live Interactive Q&A Element */}
+                <div className="flex flex-col items-center px-1">
+                  <div className="mb-2"><IconQuestion /></div>
+                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
+                    Ask your questions live
+                  </p>
+                </div>
+
+              </div>
             </div>
+
           </div>
 
-          {/* Right Panel: REGISTRATION FORM (OPTIMIZED COLOR CONTRAST & MOBILE INPUT SCALING) */}
+          {/* Right Panel: REGISTRATION FORM */}
           <div className="p-4 sm:p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
             <div className="bg-white border border-zinc-200 text-zinc-950 rounded-2xl p-5 sm:p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
               
@@ -430,7 +471,7 @@ const LeadPage = () => {
                     if (!name || !email || !phone || !situation || !agreed) return;
                     setIsSubmitting(true);
                     try {
-                      const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzsRr-TJAtfF2nVhxNBAlGgnphTFdg_7LCmbgPfh05Q297MMdJZzVOj5VvmWIFCil9K/exec";
+                      const GOOGLE_SCRIPT_WEBAPP_URL = "YOUR_DEPLOYED_APPS_SCRIPT_WEBAPP_URL";
                       await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
                         method: "POST",
                         mode: "no-cors", 
