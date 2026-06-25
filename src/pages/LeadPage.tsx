@@ -233,17 +233,21 @@ const LeadPage = () => {
         </section>
       </div>
 
-      {/* ================= SOUNDS FAMILIAR SECTION (CENTERED HEADING ALIGNMENT) ================= */}
+      {/* ================= SOUNDS FAMILIAR SECTION (WITH NEW INJECTED CENTER HEADER & DESIGN MATCH) ================= */}
       <section className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
+        
+        {/* New 1:1 Matched Center Header Component Grid Overlay Block */}
         <div className="w-full text-center max-w-3xl mx-auto mb-10">
-          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-          <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[45px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-[1.1] uppercase">
-            You've Been Wanting To Learn MMA...<br />But you're <span className="text-[#e53e3e]">still unsure </span> where to start because:
+          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">SOUNDS FAMILIAR?</p>
+          <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[45px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-none uppercase">
+            WHY MOST BEGINNERS <span className="text-[#07b4ba]">GET STUCK BEFORE THEY START</span>
           </h2>
-          <div className="w-20 h-[3px] bg-[#e53e3e] mx-auto mt-4" />
+          <div className="w-14 h-0.5 bg-[#07b4ba] mx-auto mt-4 rounded-full" />
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-center">
+          
+          {/* Right Image Node (Kept at 16:9 Aspect Video Formats) */}
           <div className="flex-1 w-full lg:max-w-[500px] lg:order-2">
             <Reveal type="fade-left" duration={1200}>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-zinc-200 shadow-xl bg-zinc-100">
@@ -257,16 +261,24 @@ const LeadPage = () => {
               </div>
             </Reveal>
           </div>
+
+          {/* Left Side Content & Original Sub Heading Layout Block */}
           <div className="flex-1 w-full lg:order-1">
+            <Reveal type="fade-right" duration={1000}>
+              <h3 className="font-['Bebas_Neue'] text-[24px] md:text-[32px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
+                You've Been Wanting To Learn MMA...<br />But you're <span className="text-[#e53e3e]">still unsure </span> where to start because:
+              </h3>
+            </Reveal>
             {painPoints.map((p, i) => (
               <Reveal key={i} type="fade-right" delay={200 + (i * 120)} duration={800}>
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
-                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5] text-left">{p}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -406,7 +418,6 @@ const LeadPage = () => {
                 You'll get direct access to ask questions, get real-time answers, and interact with the coach.
               </p>
 
-              {/* 3-Column Visual Metrics Grid ordered backwards dynamically (3, 2, 1) */}
               <div className="grid grid-cols-3 gap-2 pt-4 border-t border-zinc-900/50 text-center">
                 <div className="flex flex-col items-center px-1">
                   <div className="mb-2"><IconTarget /></div>
