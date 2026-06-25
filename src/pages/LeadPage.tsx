@@ -239,7 +239,7 @@ const LeadPage = () => {
         {/* New 1:1 Matched Center Header Component Grid Overlay Block */}
         <div className="w-full text-center max-w-3xl mx-auto mb-10">
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">SOUNDS FAMILIAR?</p>
-          <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[45px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-none uppercase">
+          <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-none uppercase">
             WHY MOST BEGINNERS <span className="text-[#07b4ba]">GET STUCK BEFORE THEY START</span>
           </h2>
           <div className="w-14 h-0.5 bg-[#07b4ba] mx-auto mt-4 rounded-full" />
@@ -265,7 +265,7 @@ const LeadPage = () => {
           {/* Left Side Content & Original Sub Heading Layout Block */}
           <div className="flex-1 w-full lg:order-1">
             <Reveal type="fade-right" duration={1000}>
-              <h3 className="font-['Bebas_Neue'] text-[24px] md:text-[32px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
+              <h3 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
                 You've Been Wanting To Learn MMA...<br />But you're <span className="text-[#e53e3e]">still unsure </span> where to start because:
               </h3>
             </Reveal>
