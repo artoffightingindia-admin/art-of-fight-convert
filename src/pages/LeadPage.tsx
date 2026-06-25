@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -53,7 +53,7 @@ const premiumStyles = `
   }
 `;
 
-/* ── CUSTOM BRAND DESIGN SYSTEM SVGs ── */
+/* ── REUSED DESIGN SYSTEM BRAND SVGs ── */
 const IconClock = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
     <circle cx="12" cy="12" r="10" />
@@ -63,19 +63,20 @@ const IconClock = () => (
 
 const IconGymShield = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Outer verification shield structure */}
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    {/* Map Pin core mapping inside to select the perfect gym */}
     <circle cx="12" cy="10" r="2" />
     <path d="M12 7c-1.66 0-3 1.34-3 3 0 2 3 5 3 5s3-3 3-5c0-1.66-1.34-3-3-3z" />
   </svg>
 );
 
-const IconAim = () => (
+/* Updated IconAim with an incorporated diagnostic breakthrough arrow vector marker directly inside it */
+const IconAimWithArrow = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
     <circle cx="12" cy="12" r="10" />
     <circle cx="12" cy="12" r="6" />
     <circle cx="12" cy="12" r="2" />
+    {/* Clean vector dynamic breakthrough overlay arrow tracking indicator */}
+    <path d="M19 4l-7 7m0 0h4m-4 0V7" strokeWidth="2" />
   </svg>
 );
 
@@ -89,10 +90,8 @@ const IconWarningTriangle = () => (
 
 const IconConfidenceMindset = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Mindset container path */}
     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
     <circle cx="9" cy="7" r="4" />
-    {/* Rising breaking arrow signaling confidence development over fear */}
     <polyline points="16 11 19 8 22 11" />
     <line x1="19" y1="16" x2="19" y2="8" />
   </svg>
@@ -105,7 +104,7 @@ const IconUsers = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
 const IconQuestion = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>);
 
 const IconCalendar = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mx-auto mb-3">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
     <line x1="16" y1="2" x2="16" y2="6" />
     <line x1="8" y1="2" x2="8" y2="6" />
@@ -136,7 +135,7 @@ const LeadPage = () => {
   const whatCards = [
     { icon: <IconClock />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
     { icon: <IconGymShield />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
-    { icon: <IconAim />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
+    { icon: <IconAimWithArrow />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
     { icon: <IconWarningTriangle />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
     { icon: <IconConfidenceMindset />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
   ];
@@ -187,7 +186,7 @@ const LeadPage = () => {
                 <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
                   AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
                 </span>
-              </h1>
+              </span>
             </Reveal>
 
             <Reveal type="fade-up" delay={400} duration={1200}>
@@ -210,7 +209,7 @@ const LeadPage = () => {
 
             <Reveal type="fade-up" delay={600} duration={1200}>
               <p className="text-[14px] md:text-[15px] font-semibold text-white/90 mb-8 font-['Barlow']">
-                MMA Roadmap -Live Q&A -On Google Meet <br />
+                MMA Roadmap - Live Q&A - On Google Meet <br />
                 <span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Live with Tamilnadu's first MFN Fighter Purushothaman MK.</span>
               </p>
             </Reveal>
@@ -236,8 +235,16 @@ const LeadPage = () => {
         </section>
       </div>
 
-      {/* ================= SOUNDS FAMILIAR SECTION ================= */}
+      {/* ================= SOUNDS FAMILIAR SECTION (CENTERED HEADING ALIGNMENT) ================= */}
       <section className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
+        <div className="w-full text-center max-w-3xl mx-auto mb-10">
+          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
+          <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[45px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-[1.1] uppercase">
+            You've Been Wanting To Learn MMA...<br />But you're <span className="text-[#e53e3e]">still unsure </span> where to start because:
+          </h2>
+          <div className="w-20 h-[3px] bg-[#e53e3e] mx-auto mt-4" />
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-center">
           <div className="flex-1 w-full lg:max-w-[500px] lg:order-2">
             <Reveal type="fade-left" duration={1200}>
@@ -253,16 +260,9 @@ const LeadPage = () => {
             </Reveal>
           </div>
           <div className="flex-1 w-full lg:order-1">
-            <Reveal type="fade-right" duration={1000}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-              <h2 className="font-['Bebas_Neue'] text-[26px] md:text-[42px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-[1.1] mb-4">
-                You've Been Wanting To Learn MMA...<br />But you're  <span className="text-[#e53e3e]">still unsure  </span> where to start because:
-              </h2>
-              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" />
-            </Reveal>
             {painPoints.map((p, i) => (
-              <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
-                <div className="flex items-start gap-4 mb-3.5">
+              <Reveal key={i} type="fade-right" delay={200 + (i * 120)} duration={800}>
+                <div className="flex items-start gap-4 mb-4">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
                   <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
                 </div>
@@ -297,10 +297,10 @@ const LeadPage = () => {
         </div>
       </section>
 
-      {/* ================= CLICKABLE STRIP BUTTON ================= */}
+      {/* ================= CLICKABLE STRIP BUTTON (PROGRAM PAGE HOVER DESIGN SYNC) ================= */}
       <button 
         onClick={scrollToForm}
-        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#000] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
+        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#07b4ba] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
       >
         JOIN NOW
       </button>
@@ -408,7 +408,7 @@ const LeadPage = () => {
                 You'll get direct access to ask questions, get real-time answers, and interact with the coach.
               </p>
 
-              {/* 3-Column Visual Metrics Grid */}
+              {/* 3-Column Visual Metrics Grid ordered backwards dynamically (3, 2, 1) */}
               <div className="grid grid-cols-3 gap-2 pt-4 border-t border-zinc-900/50 text-center">
                 <div className="flex flex-col items-center px-1">
                   <div className="mb-2"><IconTarget /></div>
@@ -419,7 +419,7 @@ const LeadPage = () => {
 
                 <div className="flex flex-col items-center px-1 border-x border-zinc-900/50">
                   <div className="mb-2"><IconUsers /></div>
-                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 durability-tight">
+                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
                     Get personal feedback
                   </p>
                 </div>
@@ -435,25 +435,25 @@ const LeadPage = () => {
 
           </div>
 
-          {/* Right Panel: REGISTRATION FORM */}
+          {/* Right Panel: REGISTRATION FORM (CLEANED REGISTRATION TEXT, ROUNDED CALENDAR CIRCLE BADGE, GAP TIGHTENED) */}
           <div className="p-4 sm:p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
             <div className="bg-white border border-zinc-200 text-zinc-950 rounded-2xl p-5 sm:p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
               
               {!submitted && (
-                <>
-                  <div className="text-center mb-5">
+                <div className="text-center flex flex-col items-center">
+                  {/* Cleaned layout: Removed string badge, isolated Calendar inside an offset filled tracking circle boundary */}
+                  <div className="w-12 h-12 bg-[#07b4ba]/10 rounded-full flex items-center justify-center border border-[#07b4ba]/20 text-[#07b4ba] mb-3">
                     <IconCalendar />
-                    <span className="bg-[#07b4ba]/10 text-[#07b4ba] px-3 py-1 rounded text-[11px] font-bold tracking-[2px] uppercase inline-block mb-2">
-                      REGISTRATION FORM
-                    </span>
-                    <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[32px] tracking-[1.5px] text-zinc-950 uppercase leading-none">
-                      RESERVE YOUR SPOT
-                    </h3>
                   </div>
+                  
+                  {/* Reduced gap structurally via tracking margins */}
+                  <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[32px] tracking-[1.5px] text-zinc-950 uppercase leading-none mb-1">
+                    RESERVE YOUR SPOT
+                  </h3>
                   <p className="text-center text-[13px] text-zinc-600 mb-6 font-['Barlow'] leading-relaxed">
                     Fill out the form below to reserve your live workshop invitation link.
                   </p>
-                </>
+                </div>
               )}
 
               {submitted ? (
