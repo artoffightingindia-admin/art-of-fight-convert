@@ -53,7 +53,7 @@ const premiumStyles = `
   }
 `;
 
-/* ── REUSED DESIGN SYSTEM BRAND SVGs ── */
+/* ── CUSTOM BRAND DESIGN SYSTEM SVGs ── */
 const IconClock = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
     <circle cx="12" cy="12" r="10" />
@@ -69,13 +69,11 @@ const IconGymShield = () => (
   </svg>
 );
 
-/* Updated IconAim with an incorporated diagnostic breakthrough arrow vector marker directly inside it */
 const IconAimWithArrow = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
     <circle cx="12" cy="12" r="10" />
     <circle cx="12" cy="12" r="6" />
     <circle cx="12" cy="12" r="2" />
-    {/* Clean vector dynamic breakthrough overlay arrow tracking indicator */}
     <path d="M19 4l-7 7m0 0h4m-4 0V7" strokeWidth="2" />
   </svg>
 );
@@ -186,7 +184,7 @@ const LeadPage = () => {
                 <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
                   AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
                 </span>
-              </span>
+              </h1>
             </Reveal>
 
             <Reveal type="fade-up" delay={400} duration={1200}>
@@ -368,7 +366,7 @@ const LeadPage = () => {
               <div className="w-16 h-[2px] bg-[#07b4ba] mt-3" />
             </div>
 
-            {/* Workshop Parameters */}
+            {/* Workshop Details Parameters */}
             <div className="bg-[#111419] border border-white/10 p-5 md:p-8 rounded-xl shadow-2xl">
               <h4 className="text-[#07b4ba] font-['Bebas_Neue'] text-[16px] tracking-[2px] mb-5">WORKSHOP DETAILS</h4>
               <div className="grid grid-cols-2 gap-y-5 gap-x-4">
@@ -435,18 +433,16 @@ const LeadPage = () => {
 
           </div>
 
-          {/* Right Panel: REGISTRATION FORM (CLEANED REGISTRATION TEXT, ROUNDED CALENDAR CIRCLE BADGE, GAP TIGHTENED) */}
+          {/* Right Panel: REGISTRATION FORM */}
           <div className="p-4 sm:p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
             <div className="bg-white border border-zinc-200 text-zinc-950 rounded-2xl p-5 sm:p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
               
               {!submitted && (
                 <div className="text-center flex flex-col items-center">
-                  {/* Cleaned layout: Removed string badge, isolated Calendar inside an offset filled tracking circle boundary */}
                   <div className="w-12 h-12 bg-[#07b4ba]/10 rounded-full flex items-center justify-center border border-[#07b4ba]/20 text-[#07b4ba] mb-3">
                     <IconCalendar />
                   </div>
                   
-                  {/* Reduced gap structurally via tracking margins */}
                   <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[32px] tracking-[1.5px] text-zinc-950 uppercase leading-none mb-1">
                     RESERVE YOUR SPOT
                   </h3>
