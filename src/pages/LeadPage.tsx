@@ -61,14 +61,13 @@ const IconClock = () => (
   </svg>
 );
 
-const IconBoxingGlove = () => (
+const IconGymShield = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Main body of the glove */}
-    <path d="M6 14V9a5 5 0 0 1 10 0v1a3 3 0 0 1 3 3v2a4 4 0 0 1-4 4H9a3 3 0 0 1-3-3z" />
-    {/* Thumb curve segment */}
-    <path d="M6 11a3 3 0 0 0-3 3v1a2 2 0 0 0 2 2h1" />
-    {/* Wrist cuff line */}
-    <path d="M7 19h10v2H7z" />
+    {/* Outer verification shield structure */}
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    {/* Map Pin core mapping inside to select the perfect gym */}
+    <circle cx="12" cy="10" r="2" />
+    <path d="M12 7c-1.66 0-3 1.34-3 3 0 2 3 5 3 5s3-3 3-5c0-1.66-1.34-3-3-3z" />
   </svg>
 );
 
@@ -88,16 +87,14 @@ const IconWarningTriangle = () => (
   </svg>
 );
 
-const IconBiceps = () => (
+const IconConfidenceMindset = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Flexed bicep muscle peak and shoulder curve */}
-    <path d="M4 15c0-4.5 3.5-7 7-7 2.5 0 4.5 1.5 5.5 3.5" />
-    {/* Forearm bending upwards */}
-    <path d="M11 8c2-2.5 4.5-3 6.5-1.5s2 4.5 0 6.5l-4 3.5" />
-    {/* Clenched fist outline closing the forearm */}
-    <circle cx="18" cy="6" r="1.5" />
-    {/* Tricep bottom curve leading down to wrist line */}
-    <path d="M4 15c1 3.5 4 4.5 8 4.5h5c1.5 0 2.5-1 2.5-2.5v-1" />
+    {/* Mindset container path */}
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    {/* Rising breaking arrow signaling confidence development over fear */}
+    <polyline points="16 11 19 8 22 11" />
+    <line x1="19" y1="16" x2="19" y2="8" />
   </svg>
 );
 
@@ -138,10 +135,10 @@ const LeadPage = () => {
   /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
     { icon: <IconClock />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
-    { icon: <IconBoxingGlove />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
+    { icon: <IconGymShield />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
     { icon: <IconAim />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
     { icon: <IconWarningTriangle />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
-    { icon: <IconBiceps />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
+    { icon: <IconConfidenceMindset />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
   ];
 
   const painPoints = [
@@ -422,7 +419,7 @@ const LeadPage = () => {
 
                 <div className="flex flex-col items-center px-1 border-x border-zinc-900/50">
                   <div className="mb-2"><IconUsers /></div>
-                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
+                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 durability-tight">
                     Get personal feedback
                   </p>
                 </div>
