@@ -54,11 +54,44 @@ const premiumStyles = `
 `;
 
 /* ── REUSED DESIGN SYSTEM BRAND SVGs ── */
-const IconPlan = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" /></svg>);
-const IconChat = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>);
-const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" /></svg>);
-const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>);
-const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
+const IconClock = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const IconBoxingGlove = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <path d="M18 11V6a4 4 0 0 0-8 0v1a5 5 0 0 0-5 5v3a3 3 0 0 0 3 3h7" />
+    <path d="M16 19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h10v4z" />
+    <path d="M6 12h4" />
+  </svg>
+);
+
+const IconAim = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+  </svg>
+);
+
+const IconWarningTriangle = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+    <line x1="12" y1="9" x2="12" y2="13" />
+    <line x1="12" y1="17" x2="12.01" y2="17" />
+  </svg>
+);
+
+const IconBiceps = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <path d="M6 20a4 4 0 0 1-4-4v-3a5 5 0 0 1 5-5h1a4 4 0 0 1 4 4v3" />
+    <path d="M8 8V5a3 3 0 0 1 6 0v3" />
+    <path d="M12 15h6a4 4 0 0 1 4 4v1" />
+  </svg>
+);
 
 /* ── SCREENSHOT NEW COMPONENT SVGs ── */
 const IconBroadcast = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M4.93 19.07a10 10 0 0 1 0-14.14M7.76 16.24a6 6 0 0 1 0-8.49M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM16.24 7.76a6 6 0 0 1 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>);
@@ -66,12 +99,21 @@ const IconTarget = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2
 const IconUsers = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
 const IconQuestion = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>);
 
+const IconCalendar = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 mx-auto mb-3">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="18" y2="10" />
+  </svg>
+);
+
 const LeadPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [situation, setSituation] = useState("");
-  const [agreed, setAgreed] = useState(false);
+  const [agreed] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -88,11 +130,11 @@ const LeadPage = () => {
 
   /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
-    { icon: <IconPlan />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
-    { icon: <IconChart />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
-    { icon: <IconLeaf />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
-    { icon: <IconGlobe />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
-    { icon: <IconChat />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
+    { icon: <IconClock />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
+    { icon: <IconBoxingGlove />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
+    { icon: <IconAim />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
+    { icon: <IconWarningTriangle />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
+    { icon: <IconBiceps />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
   ];
 
   const painPoints = [
@@ -221,7 +263,7 @@ const LeadPage = () => {
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3.5">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
-                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5export]">{p}</p>
+                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -231,7 +273,7 @@ const LeadPage = () => {
 
       {/* ================= WHY THIS PROGRAM WORKS GRID ================= */}
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
-        <div className="w-full py-10 md:py-14 px-4 md:0" style={GUTTER}>
+        <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
@@ -317,11 +359,11 @@ const LeadPage = () => {
             {/* Onboarding Heading Block */}
             <div className="text-left">
               <span className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase block mb-2">
-                WORKSHOP ONBOARDING
+                FROM CONFUSION TO CLARITY
               </span>
               <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[1.5px] text-white leading-[1.05] uppercase">
-                SECURE YOUR ACCESS <br />
-                <span className="text-[#07b4ba]">TO THE LIVE BROADCAST</span>
+                Everything You Need To Start MMA - <br />
+                <span className="text-[#07b4ba]">In One Live Session</span>
               </h2>
               <div className="w-16 h-[2px] bg-[#07b4ba] mt-3" />
             </div>
@@ -341,7 +383,7 @@ const LeadPage = () => {
                   <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">Tuesday, June 24</p>
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">LIVE Q&A</p>
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">Duration: 30 Mins + Q&A</p>
                   <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5 flex items-center gap-2">
                     <span className="text-[#07b4ba]">🔹</span> Ask anything
                   </p>
@@ -349,10 +391,6 @@ const LeadPage = () => {
                 <div>
                   <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">TIME</p>
                   <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">8:30 PM IST</p>
-                </div>
-                <div className="col-span-2 pt-3 border-t border-white/5">
-                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">BONUS</p>
-                  <p className="text-[14px] font-bold text-[#07b4ba] mt-0.5">MMA Beginners Blueprint (PDF)</p>
                 </div>
               </div>
             </div>
@@ -404,11 +442,12 @@ const LeadPage = () => {
               {!submitted && (
                 <>
                   <div className="text-center mb-5">
+                    <IconCalendar />
                     <span className="bg-[#07b4ba]/10 text-[#07b4ba] px-3 py-1 rounded text-[11px] font-bold tracking-[2px] uppercase inline-block mb-2">
                       REGISTRATION FORM
                     </span>
                     <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[32px] tracking-[1.5px] text-zinc-950 uppercase leading-none">
-                      ENTER YOUR DETAILS
+                      RESERVE YOUR SPOT
                     </h3>
                   </div>
                   <p className="text-center text-[13px] text-zinc-600 mb-6 font-['Barlow'] leading-relaxed">
@@ -456,7 +495,7 @@ const LeadPage = () => {
                 <form 
                   onSubmit={async (e) => {
                     e.preventDefault();
-                    if (!name || !email || !phone || !situation || !agreed) return;
+                    if (!name || !email || !phone || !situation) return;
                     setIsSubmitting(true);
                     try {
                       const GOOGLE_SCRIPT_WEBAPP_URL = "YOUR_DEPLOYED_APPS_SCRIPT_WEBAPP_URL";
@@ -481,7 +520,7 @@ const LeadPage = () => {
                     <label className="block text-[10px] font-bold text-zinc-700 uppercase tracking-widest mb-1.5">FULL NAME</label>
                     <input
                       type="text"
-                      placeholder="e.g. Bhupathi"
+                      placeholder="Your Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -494,7 +533,7 @@ const LeadPage = () => {
                     <label className="block text-[10px] font-bold text-zinc-700 uppercase tracking-widest mb-1.5">EMAIL ADDRESS</label>
                     <input
                       type="email"
-                      placeholder="e.g. sean@mygym.com"
+                      placeholder="Email Address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -507,7 +546,7 @@ const LeadPage = () => {
                     <label className="block text-[10px] font-bold text-zinc-700 uppercase tracking-widest mb-1.5">MOBILE NUMBER</label>
                     <input
                       type="tel"
-                      placeholder="e.g. +91 93854 31051"
+                      placeholder="+91 9XXXXXXXXX"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
@@ -540,33 +579,13 @@ const LeadPage = () => {
                     </div>
                   </div>
 
-                  {/* Verification Consent */}
-                  <div className="flex items-start gap-2.5 pt-1">
-                    <input
-                      type="checkbox"
-                      id="lead-agree"
-                      checked={agreed}
-                      onChange={(e) => setAgreed(e.target.checked)}
-                      required
-                      className="mt-0.5 w-4 h-4 shrink-0 rounded border-zinc-300 bg-zinc-50 text-[#07b4ba] focus:ring-[#07b4ba]"
-                    />
-                    <label htmlFor="lead-agree" className="text-[10px] text-zinc-500 leading-relaxed text-left cursor-pointer select-none">
-                      Yes, text me. I agree to receive automated notification logs from <span className="text-zinc-700 font-semibold">Champion of Business</span> at the number provided. Reply STOP to opt out.
-                    </label>
-                  </div>
-
-                  <div className="pt-2">
-                    <a href="#" className="block text-center text-[11px] font-bold text-[#07b4ba] hover:underline mb-4 tracking-[0.5px]">
-                      See our Terms, Conditions & Privacy details
-                    </a>
-                    <button
-                      type="submit"
-                      disabled={!name || !email || !phone || !situation || !agreed || isSubmitting}
-                      className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed uppercase transition-colors"
-                    >
-                      {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={!name || !email || !phone || !situation || isSubmitting}
+                    className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed uppercase transition-colors"
+                  >
+                    {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
+                  </button>
                 </form>
               )}
             </div>
