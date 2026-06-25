@@ -89,25 +89,25 @@ const LeadPage = () => {
 
   /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
-    { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
-    { icon: <IconChart />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
-    { icon: <IconLeaf />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
-    { icon: <IconGlobe />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
-    { icon: <IconChat />, title: "LEARN IN TAMIL", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." },
+    { icon: <IconPlan />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
+    { icon: <IconChart />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
+    { icon: <IconLeaf />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
+    { icon: <IconGlobe />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
+    { icon: <IconChat />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
   ];
 
   const painPoints = [
-    "Don't know where to begin",
-    "Don't have access to a quality MMA gym",
-    "Don't have a training partner or equipment",
-    "Can't commit hours every day to training",
-    "Can't find structured MMA guidance in Tamil",
+    "You don't know where to begin",
+    "You're self-training but feel stuck and confused",
+    "You don't know how to find the right MMA gym",
+    "You don't feel fit or confident enough to start",
+    "You're worried about wasting time learning the wrong things",
   ];
 
   const coachCredentials = [
     "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
-    "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
-    "Specialized in Developing Strong Fundamentals for Beginners",
+    "Helped 2,000+ beginners build strong MMA fundamentals",
+    "Created the MMA Beginners Blueprint to help you start with clarity",
   ];
 
   const stats = [
@@ -133,23 +133,22 @@ const LeadPage = () => {
             {/* Top Badge safely lower than fixed header context */}
             <Reveal type="fade-down" delay={100} duration={1000} className="mb-6 mt-2 inline-block">
               <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2 text-[10px] md:text-[12px] font-bold tracking-[2px] md:tracking-[3px] text-[#07b4ba] uppercase shadow-lg">
-                FREE LIVE WORKSHOP FOR COACHES & FIGHTERS • <span className="text-white">JUNE 23</span>
+                FREE MMA Beginners Blueprint Session • <span className="text-white">July 05</span>
               </span>
             </Reveal>
 
             <Reveal type="fade-up" delay={300} duration={1200}>
               <h1 className="font-['Bebas_Neue'] text-[clamp(28px,8vw,56px)] leading-[1] md:leading-[.93] tracking-[1.5px] md:tracking-[2px] uppercase text-white mb-4">
-                HOW TO TURN YOUR IN-PERSON COACHING INTO <br />
+                CONFUSED ABOUT WHERE TO START LEARNING MMA? <br />
                 <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
-                  $5K/MONTH
-                </span>{" "}
-                ONLINE
+AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
+              
               </h1>
             </Reveal>
 
             <Reveal type="fade-up" delay={400} duration={1200}>
               <p className="text-white/60 font-medium font-['Barlow'] text-[14px] md:text-[18px] mb-6 md:mb-8 italic">
-                (Without Quitting What Already Works)
+                Learn what to train first, what mistakes to avoid, and how to begin your MMA journey with confidence.
               </p>
             </Reveal>
 
@@ -167,11 +166,10 @@ const LeadPage = () => {
             </Reveal>
 
             <Reveal type="fade-up" delay={600} duration={1200}>
-              <p className="text-white/70 text-[13px] md:text-[16px] leading-[1.6] max-w-3xl mx-auto mb-[18px]">
-                A free live workshop for coaches and fighters who already get paid for what they know, and want to add online income without burning out on more hours.
-              </p>
               <p className="text-[14px] md:text-[15px] font-semibold text-white/90 mb-8 font-['Barlow']">
-                Live with <span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Sean Fagan</span>
+            MMA Roadmap -Live Q&A -On Google Meet
+
+<span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Live with Tamilnadu's first MFN Fighter Purushothaman MK.</span>
               </p>
             </Reveal>
 
@@ -179,17 +177,17 @@ const LeadPage = () => {
             <Reveal type="fade-up" delay={700} duration={1200} className="mb-8 md:mb-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 max-w-md mx-auto sm:max-w-none">
                 <div className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[11px] md:text-[12px] font-bold tracking-[1px] text-[#07b4ba]">
-                  <span>📅</span> TUESDAY JUNE 23, 8:30PM EST.
+                  <span>📅</span> Sunday, July 05 11:00 a.m. IST
                 </div>
                 <div className="w-full sm:w-auto bg-red-950/40 border border-red-900/40 rounded-lg px-4 py-2.5 text-[10px] md:text-[11px] font-black tracking-[1px] md:tracking-[1.5px] text-red-500 uppercase">
-                  REAL Q&A. REPLAY ONLY IF YOU REGISTER.
+                  Limited seats to keep the session interactive
                 </div>
               </div>
               <button
                 onClick={scrollToForm}
                 className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] md:text-[15px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer"
               >
-                SAVE MY FREE SEAT NOW
+                Join The Free Blueprint
               </button>
             </Reveal>
 
@@ -202,9 +200,6 @@ const LeadPage = () => {
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-center">
           <div className="flex-1 w-full lg:max-w-[500px] lg:order-2">
             <Reveal type="fade-left" duration={1200}>
-              <h3 className="mb-4 text-center italic font-semibold text-zinc-900 tracking-[0.5px] text-[18px] md:text-[22px]">
-                5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
-              </h3>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-zinc-200 shadow-xl bg-zinc-100">
                 <div className="relative w-full aspect-video">
                   <img 
@@ -220,7 +215,7 @@ const LeadPage = () => {
             <Reveal type="fade-right" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[26px] md:text-[42px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#e53e3e]">HAVEN'T STARTED </span> BECAUSE YOU:
+                You've Been Wanting To Learn MMA...<br />But you're  <span className="text-[#e53e3e]">still unsure  </span> where to start because:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" />
             </Reveal>
@@ -240,9 +235,9 @@ const LeadPage = () => {
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
         <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
-            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
+            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
-              BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS</span>
+              You'll Leave With A Clear <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">Roadmap To Start MMA</span>
             </h2>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
@@ -264,7 +259,7 @@ const LeadPage = () => {
       {/* ================= CLICKABLE STRIP BUTTON (PROGRAM PAGE HOVER DESIGN SYNC) ================= */}
       <button 
         onClick={scrollToForm}
-        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#07b4ba] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
+        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#000] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
       >
         JOIN NOW
       </button>
@@ -273,7 +268,7 @@ const LeadPage = () => {
       <div className="bg-[#0f1115] border-t border-b border-white/5">
         <div className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-6">LED BY</p>
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-6">YOUR GUIDE FOR THIS SESSION</p>
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
             <Reveal type="fade-right" duration={1200} className="w-full md:w-auto">
@@ -287,7 +282,7 @@ const LeadPage = () => {
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={100} duration={1000}>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">MMA Fighter & AOF Co-Founder</p>
               </Reveal>
               <div className="mb-5 md:mb-6">
                 {coachCredentials.map((cred, i) => (
