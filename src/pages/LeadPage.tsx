@@ -209,29 +209,19 @@ const LeadPage = () => {
               </div>
             </Reveal>
           </div>
-          
           <div className="flex-1 w-full lg:order-1">
             <Reveal type="fade-right" duration={1000}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[16px] tracking-[4px] uppercase mb-3">
-                Sounds Familiar?
-              </p>
-              
-              {/* Increased overall heading size & container max-width constraints */}
-              <div className="w-full max-w-2xl">
-                <h2 className="font-['Bebas_Neue'] text-[36px] md:text-[54px] tracking-[1.5px] md:tracking-[2.5px] text-zinc-900 leading-[1.05] mb-5 uppercase">
-                  You've Been Wanting To Learn MMA...<br />
-                  But you're  <span className="text-[#e53e3e]">still unsure  </span> where to start because:
-                </h2>
-              </div>
-              
-              <div className="w-28 h-[4px] bg-[#e53e3e] rounded mb-6 md:mb-8" />
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
+              <h2 className="font-['Bebas_Neue'] text-[26px] md:text-[42px] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-[1.1] mb-4">
+                You've Been Wanting To Learn MMA...<br />But you're  <span className="text-[#e53e3e]">still unsure  </span> where to start because:
+              </h2>
+              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6" />
             </Reveal>
-            
             {painPoints.map((p, i) => (
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3.5">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
-                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5export]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -241,7 +231,7 @@ const LeadPage = () => {
 
       {/* ================= WHY THIS PROGRAM WORKS GRID ================= */}
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
-        <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
+        <div className="w-full py-10 md:py-14 px-4 md:0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
