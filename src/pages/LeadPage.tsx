@@ -53,7 +53,7 @@ const premiumStyles = `
   }
 `;
 
-/* ── REUSED DESIGN SYSTEM BRAND SVGs ── */
+/* ── CUSTOM BRAND DESIGN SYSTEM SVGs ── */
 const IconClock = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
     <circle cx="12" cy="12" r="10" />
@@ -63,9 +63,12 @@ const IconClock = () => (
 
 const IconBoxingGlove = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <path d="M18 11V6a4 4 0 0 0-8 0v1a5 5 0 0 0-5 5v3a3 3 0 0 0 3 3h7" />
-    <path d="M16 19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h10v4z" />
-    <path d="M6 12h4" />
+    {/* Main body of the glove */}
+    <path d="M6 14V9a5 5 0 0 1 10 0v1a3 3 0 0 1 3 3v2a4 4 0 0 1-4 4H9a3 3 0 0 1-3-3z" />
+    {/* Thumb curve segment */}
+    <path d="M6 11a3 3 0 0 0-3 3v1a2 2 0 0 0 2 2h1" />
+    {/* Wrist cuff line */}
+    <path d="M7 19h10v2H7z" />
   </svg>
 );
 
@@ -81,19 +84,24 @@ const IconWarningTriangle = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
     <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
     <line x1="12" y1="9" x2="12" y2="13" />
-    <line x1="12" y1="17" x2="12.01" y2="17" />
+    <circle cx="12" cy="17" r="0.5" fill="#07b4ba" />
   </svg>
 );
 
 const IconBiceps = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <path d="M6 20a4 4 0 0 1-4-4v-3a5 5 0 0 1 5-5h1a4 4 0 0 1 4 4v3" />
-    <path d="M8 8V5a3 3 0 0 1 6 0v3" />
-    <path d="M12 15h6a4 4 0 0 1 4 4v1" />
+    {/* Flexed bicep muscle peak and shoulder curve */}
+    <path d="M4 15c0-4.5 3.5-7 7-7 2.5 0 4.5 1.5 5.5 3.5" />
+    {/* Forearm bending upwards */}
+    <path d="M11 8c2-2.5 4.5-3 6.5-1.5s2 4.5 0 6.5l-4 3.5" />
+    {/* Clenched fist outline closing the forearm */}
+    <circle cx="18" cy="6" r="1.5" />
+    {/* Tricep bottom curve leading down to wrist line */}
+    <path d="M4 15c1 3.5 4 4.5 8 4.5h5c1.5 0 2.5-1 2.5-2.5v-1" />
   </svg>
 );
 
-/* ── SCREENSHOT NEW COMPONENT SVGs ── */
+/* ── CONTEXT PARAMETER SVGs ── */
 const IconBroadcast = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M4.93 19.07a10 10 0 0 1 0-14.14M7.76 16.24a6 6 0 0 1 0-8.49M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM16.24 7.76a6 6 0 0 1 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>);
 const IconTarget = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="m22 22-4.3-4.3"/></svg>);
 const IconUsers = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
@@ -104,7 +112,7 @@ const IconCalendar = () => (
     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
     <line x1="16" y1="2" x2="16" y2="6" />
     <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="18" y2="10" />
+    <line x1="3" y1="10" x2="21" y2="10" />
   </svg>
 );
 
@@ -113,7 +121,6 @@ const LeadPage = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [situation, setSituation] = useState("");
-  const [agreed] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -171,7 +178,6 @@ const LeadPage = () => {
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0">
           <div className="w-full relative z-10 text-center px-4 md:px-0">
             
-            {/* Top Badge safely lower than fixed header context */}
             <Reveal type="fade-down" delay={100} duration={1000} className="mb-6 mt-2 inline-block">
               <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2 text-[10px] md:text-[12px] font-bold tracking-[2px] md:tracking-[3px] text-[#07b4ba] uppercase shadow-lg">
                 FREE MMA Beginners Blueprint Session • <span className="text-white">July 05</span>
@@ -193,7 +199,6 @@ const LeadPage = () => {
               </p>
             </Reveal>
 
-            {/* Glowing Brand Feature Container Box - Explicit 16:9 Aspect Ratio Alignment */}
             <Reveal type="scale-up" delay={500} duration={1200}>
               <div className="w-full max-w-xl mx-auto aspect-video mb-8 bg-gradient-to-b from-[#13171d] to-[#101318] border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.1)] rounded-2xl p-4 md:p-6 flex flex-col items-center justify-center premium-hover">
                 <p className="text-[#07b4ba] text-[10px] md:text-[11px] font-bold uppercase tracking-[2px] md:tracking-[3px] mb-2 md:mb-3">
@@ -213,7 +218,6 @@ const LeadPage = () => {
               </p>
             </Reveal>
 
-            {/* Adjusted Down Padding on CTA Action Segment Wrapper */}
             <Reveal type="fade-up" delay={700} duration={1200} className="mb-8 md:mb-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 max-w-md mx-auto sm:max-w-none">
                 <div className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[11px] md:text-[12px] font-bold tracking-[1px] text-[#07b4ba]">
@@ -356,7 +360,6 @@ const LeadPage = () => {
           {/* Left Block Content */}
           <div className="p-6 md:p-14 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5 space-y-6">
             
-            {/* Onboarding Heading Block */}
             <div className="text-left">
               <span className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase block mb-2">
                 FROM CONFUSION TO CLARITY
