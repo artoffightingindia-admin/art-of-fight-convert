@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -67,7 +67,6 @@ const IconUsers = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24
 const IconQuestion = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>);
 
 const LeadPage = () => {
-  // Functional Form Interactive States
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -141,8 +140,8 @@ const LeadPage = () => {
               <h1 className="font-['Bebas_Neue'] text-[clamp(28px,8vw,56px)] leading-[1] md:leading-[.93] tracking-[1.5px] md:tracking-[2px] uppercase text-white mb-4">
                 CONFUSED ABOUT WHERE TO START LEARNING MMA? <br />
                 <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
-AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
-              
+                  AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
+                </span>
               </h1>
             </Reveal>
 
@@ -167,9 +166,8 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
 
             <Reveal type="fade-up" delay={600} duration={1200}>
               <p className="text-[14px] md:text-[15px] font-semibold text-white/90 mb-8 font-['Barlow']">
-            MMA Roadmap -Live Q&A -On Google Meet
-
-<span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Live with Tamilnadu's first MFN Fighter Purushothaman MK.</span>
+                MMA Roadmap -Live Q&A -On Google Meet <br />
+                <span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Live with Tamilnadu's first MFN Fighter Purushothaman MK.</span>
               </p>
             </Reveal>
 
@@ -223,7 +221,7 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3.5">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
-                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5export]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -233,7 +231,7 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
 
       {/* ================= WHY THIS PROGRAM WORKS GRID ================= */}
       <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
-        <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
+        <div className="w-full py-10 md:py-14 px-4 md:0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
             <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
@@ -256,7 +254,7 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
         </div>
       </section>
 
-      {/* ================= CLICKABLE STRIP BUTTON (PROGRAM PAGE HOVER DESIGN SYNC) ================= */}
+      {/* ================= CLICKABLE STRIP BUTTON ================= */}
       <button 
         onClick={scrollToForm}
         className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#000] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
@@ -313,7 +311,7 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
       <section id="email-form-section" className="border-t border-white/5 bg-[#0a0a0a]">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           
-          {/* Left Block Content - Re-designed to fully replicate Screenshot_2026-06-25-01-18-19-31_6012fa4d4ddec268fc5c7112cbb265e7.jpg */}
+          {/* Left Block Content */}
           <div className="p-6 md:p-14 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/5 space-y-6">
             
             {/* Onboarding Heading Block */}
@@ -359,7 +357,7 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
               </div>
             </div>
 
-            {/* Re-designed Live Quote Container mapped precisely from image mockup */}
+            {/* Live Quote Container */}
             <div className="bg-zinc-950/60 border border-zinc-900 rounded-xl p-6 text-left">
               <div className="flex items-center gap-3 mb-2.5">
                 <IconBroadcast />
@@ -372,10 +370,8 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
                 You'll get direct access to ask questions, get real-time answers, and interact with the coach.
               </p>
 
-              {/* 3-Column Visual Metrics Grid ordered backwards dynamically (3, 2, 1) */}
+              {/* 3-Column Visual Metrics Grid */}
               <div className="grid grid-cols-3 gap-2 pt-4 border-t border-zinc-900/50 text-center">
-                
-                {/* Position 3: Target Element */}
                 <div className="flex flex-col items-center px-1">
                   <div className="mb-2"><IconTarget /></div>
                   <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
@@ -383,7 +379,6 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
                   </p>
                 </div>
 
-                {/* Position 2: Personal Feedback Users Element */}
                 <div className="flex flex-col items-center px-1 border-x border-zinc-900/50">
                   <div className="mb-2"><IconUsers /></div>
                   <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
@@ -391,14 +386,12 @@ AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
                   </p>
                 </div>
 
-                {/* Position 1: Live Interactive Q&A Element */}
                 <div className="flex flex-col items-center px-1">
                   <div className="mb-2"><IconQuestion /></div>
                   <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
                     Ask your questions live
                   </p>
                 </div>
-
               </div>
             </div>
 
