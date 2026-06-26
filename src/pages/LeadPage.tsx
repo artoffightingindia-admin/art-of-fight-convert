@@ -63,7 +63,7 @@ const IconClock = () => (
 
 const IconDumbbell = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <line x1="6" y1="12" x2="18" y2="12" />
+    <line x1="6" y1="12" x2="18" y2="12" strokeWidth="1.8" />
     <rect x="4" y="6" width="2" height="12" rx="0.5" />
     <rect x="2" y="8" width="2" height="8" rx="0.5" />
     <rect x="18" y="6" width="2" height="12" rx="0.5" />
@@ -123,10 +123,12 @@ const IconMessage = () => (
 
 const IconRocket = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 mx-auto">
-    <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
-    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.25.25 2.5.75 3.5l7.75-7.75L12 2z" />
-    <path d="M22 2s-5.5 0-10 4.5l7.75 7.75C22 9.75 22 2 22 2z" />
-    <path d="M9.5 14.5L2 22s3.5-2.5 3.5-2.5l4-5z" />
+    <path d="M12 2s3 4 3 9H9c0-5 3-9 3-9z" />
+    <rect x="9" y="11" width="6" height="7" />
+    <path d="M9 14l-3 4v2h3v-6zM15 14l3 4v2h-3v-6z" />
+    <path d="M10 18h4v2h-4z" />
+    <line x1="11" y1="20" x2="11" y2="22" />
+    <line x1="13" y1="20" x2="13" y2="22" />
   </svg>
 );
 
@@ -152,7 +154,7 @@ const LeadPage = () => {
   /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
     { icon: <IconClock />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
-    { icon: <IconGymShield />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
+    { icon: <IconDumbbell />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
     { icon: <IconAimWithArrow />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
     { icon: <IconWarningTriangle />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
     { icon: <IconConfidenceMindset />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
@@ -225,6 +227,7 @@ const LeadPage = () => {
               </div>
             </Reveal>
 
+            {/* Injected Horizontal Single-Line Checkmark Grid */}
             <Reveal type="fade-up" delay={600} duration={1200}>
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8 text-[14px] md:text-[15px] font-semibold text-white/90 font-['Barlow']">
                 <span className="flex items-center gap-1.5">
@@ -323,22 +326,17 @@ const LeadPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} type="scale-up" delay={i * 150} duration={800}>
-                {/* 🚀 FIXED FOR ALIGNMENT: 
-                    - Converted the card box container into an explicit flex-col layout layout container block
-                    - Applied full flex stretching properties to the content text wrapper column node below */}
                 <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-start md:items-center text-left md:text-center gap-4 md:min-h-[275px] md:p-[20px] md:rounded-[18px] premium-hover ${i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}`}>
                   
                   <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110 mx-auto">
                     {item.icon}
                   </div>
                   
-                  {/* Text wrapper with flex column alignment layout parameters */}
                   <div className="flex flex-col flex-grow w-full items-start md:items-center">
                     <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[18px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 mb-[8px] min-h-[24px] md:min-h-[44px] flex items-center text-left md:text-center">
                       {item.title}
                     </h4>
                     
-                    {/* This spacing element expands dynamically to absorb title variance differences across rows */}
                     <div className="flex-grow hidden md:block" />
                     
                     <p className="text-[14px] md:text-[13.5px] leading-[1.55] text-white/60 text-left md:text-center m-0">
