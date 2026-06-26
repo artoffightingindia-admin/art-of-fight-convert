@@ -12,7 +12,7 @@ const Footer = () => {
 
     // Navigate on double click (2 clicks)
     if (newCount === 2) {
-      navigate("/lead");
+      navigate("/blueprint");
       setClickCount(0); // Reset counter
     }
 
