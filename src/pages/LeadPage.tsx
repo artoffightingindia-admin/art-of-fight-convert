@@ -63,16 +63,38 @@ const IconClock = () => (
 
 const IconDumbbell = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <path d="M6.5 6.5h11M6.5 17.5h11M3 8.5h3.5v7h-3.5zM17.5 8.5H21v7h-3.5zM6.5 12h11" strokeWidth="2.2" />
+    {/* Central Knurled Grip Handle */}
+    <line x1="6" y1="12" x2="18" y2="12" />
+    
+    {/* Left Heavy Plate Stacks (Inner & Outer) */}
+    <rect x="4" y="6" width="2" height="12" rx="0.5" />
+    <rect x="2" y="8" width="2" height="8" rx="0.5" />
+    
+    {/* Right Heavy Plate Stacks (Inner & Outer) */}
+    <rect x="18" y="6" width="2" height="12" rx="0.5" />
+    <rect x="20" y="8" width="2" height="8" rx="0.5" />
+    
+    {/* Weight Collar Locks holding plates to the bar */}
+    <rect x="6" y="10" width="1" height="4" fill="#07b4ba" />
+    <rect x="17" y="10" width="1" height="4" fill="#07b4ba" />
   </svg>
 );
 
 const IconAimWithArrow = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <circle cx="12" cy="12" r="10" />
-    <circle cx="12" cy="12" r="6" />
-    <circle cx="12" cy="12" r="2" />
-    <path d="M19 4l-7 7m0 0h4m-4 0V7" strokeWidth="2" />
+    {/* Outer, Middle, and Inner Bullseye Rings */}
+    <circle cx="10" cy="14" r="8" />
+    <circle cx="10" cy="14" r="5" />
+    <circle cx="10" cy="14" r="2" />
+    
+    {/* Realistic Arrow striking cleanly down into the dead center (10, 14) */}
+    {/* Arrow Shaft */}
+    <line x1="21" y1="3" x2="11.2" y2="12.8" strokeWidth="2" />
+    {/* Arrow Head resting directly inside the bullseye */}
+    <polyline points="14 13 10 14 11 10" />
+    {/* Geometric Arrow Fletching / Feathers at the tail tail end */}
+    <line x1="19" y1="3" x2="21" y2="5" />
+    <line x1="17.5" y1="4.5" x2="19.5" y2="6.5" />
   </svg>
 );
 
