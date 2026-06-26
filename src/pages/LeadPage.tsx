@@ -147,7 +147,7 @@ const LeadPage = () => {
   ];
 
   const coachCredentials = [
-    "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
+    "Only Tamil MFN Fighter and Multiple-Time National Medalist",
     "Helped 2,000+ beginners build strong MMA fundamentals",
     "Created the MMA Beginners Blueprint to help you start with clarity",
   ];
@@ -180,9 +180,9 @@ const LeadPage = () => {
 
             <Reveal type="fade-up" delay={300} duration={1200}>
               <h1 className="font-['Bebas_Neue'] text-[clamp(28px,8vw,56px)] leading-[1] md:leading-[.93] tracking-[1.5px] md:tracking-[2px] uppercase text-white mb-4">
-                CONFUSED ABOUT WHERE TO START LEARNING MMA? <br />
+                CONFUSED ABOUT HOW TO START MMA? <br />
                 <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
-                  AVOID MONTHS OF CONFUSION IN JUST ONE LIVE SESSION.
+                  GET THE CLARITY TO FINALLY BEGIN.
                 </span>
               </h1>
             </Reveal>
@@ -238,10 +238,12 @@ const LeadPage = () => {
         
         {/* New 1:1 Matched Center Header Component Grid Overlay Block */}
         <div className="w-full text-center max-w-3xl mx-auto mb-10">
-          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">SOUNDS FAMILIAR?</p>
-          <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-none uppercase">
-            WHY MOST BEGINNERS <span className="text-[#07b4ba]">GET STUCK BEFORE THEY START</span>
-          </h2>
+          <p className="text-[#FF0000] font-['Barlow'] font-bold text-[15px] md:text-[14px] tracking-[3px] uppercase mb-2">SOUNDS FAMILIAR?</p>
+<h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-zinc-900 leading-none uppercase">
+  YOU WANT TO LEARN MMA BUT<br />
+  <span className="text-[#FF0000]">SOMETHING'S HOLDING YOU BACK?</span>
+</h2>
+
           <div className="w-14 h-0.5 bg-[#07b4ba] mx-auto mt-4 rounded-full" />
         </div>
 
@@ -266,14 +268,14 @@ const LeadPage = () => {
           <div className="flex-1 w-full lg:order-1">
             <Reveal type="fade-right" duration={1000}>
               <h3 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
-                You've Been Wanting To Learn MMA...<br />But you're <span className="text-[#e53e3e]">still unsure </span> where to start because:
+                YOU MIGHT RELATE TO THIS..
               </h3>
             </Reveal>
             {painPoints.map((p, i) => (
               <Reveal key={i} type="fade-right" delay={200 + (i * 120)} duration={800}>
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
-                  <p className="text-zinc-800 font-medium text-[14px] md:text-[15px] leading-[1.5] text-left">{p}</p>
+                  <p className="text-zinc-850 font-medium text-[15px] md:text-[16px] leading-[1.5] text-left">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -298,7 +300,7 @@ const LeadPage = () => {
                   <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full">
                     <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 text-left md:text-center mb-[3px]">{item.title}</h4>
-                    <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0">{item.desc}</p>
+                    <p className="text-[14px] md:text-[15px] leading-[1.55] text-white/60 text-left md:text-center m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -372,7 +374,7 @@ const LeadPage = () => {
                 FROM CONFUSION TO CLARITY
               </span>
               <h2 className="font-['Bebas_Neue'] text-[32px] md:text-[48px] tracking-[1.5px] text-white leading-[1.05] uppercase">
-                Everything You Need To Start MMA - <br />
+                Everything You Need To Start MMA  <br />
                 <span className="text-[#07b4ba]">In One Live Session</span>
               </h2>
               <div className="w-16 h-[2px] bg-[#07b4ba] mt-3" />
@@ -393,9 +395,9 @@ const LeadPage = () => {
                   <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">Tuesday, June 24</p>
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">Duration: 30 Mins + Q&A</p>
+                  <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">Duration: </p>
                   <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5 flex items-center gap-2">
-                    <span className="text-[#07b4ba]">🔹</span> Ask anything
+                    <span className="text-[#07b4ba]">🔹</span> 30 Mins + Q&A
                   </p>
                 </div>
                 <div>
@@ -415,30 +417,34 @@ const LeadPage = () => {
               </div>
               
               <p className="text-zinc-400 font-medium text-[13.5px] md:text-[14.5px] font-['Barlow'] leading-relaxed mb-6">
-                You'll get direct access to ask questions, get real-time answers, and interact with the coach.
-              </p>
+Everyone starts from a different place. Join live to ask questions, get personal guidance, and leave with the clarity to take your very first step into MMA.              </p>
 
               <div className="grid grid-cols-3 gap-2 pt-4 border-t border-zinc-900/50 text-center">
                 <div className="flex flex-col items-center px-1">
                   <div className="mb-2"><IconTarget /></div>
                   <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
-                    Leave with clarity and next steps
+                    Leave with clarity
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center px-1 border-x border-zinc-900/50">
-                  <div className="mb-2"><IconUsers /></div>
-                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
-                    Get personal feedback
-                  </p>
-                </div>
+              <div className="flex flex-col items-center px-1 border-x border-zinc-900/50">
+  <div className="mb-2">
+    <IconMessage />
+  </div>
+  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
+    Get Your Questions Answered
+  </p>
+</div>
 
-                <div className="flex flex-col items-center px-1">
-                  <div className="mb-2"><IconQuestion /></div>
-                  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
-                    Ask your questions live
-                  </p>
-                </div>
+
+<div className="flex flex-col items-center px-1">
+  <div className="mb-2">
+    <IconRocket />
+  </div>
+  <p className="text-[11px] md:text-[12px] font-semibold text-zinc-300 leading-tight">
+    Start With Confidence
+  </p>
+</div>
               </div>
             </div>
 
@@ -454,7 +460,7 @@ const LeadPage = () => {
                     <IconCalendar />
                   </div>
                   
-                  <h3 className="font-['Bebas_Neue'] text-[26px] md:text-[32px] tracking-[1.5px] text-zinc-950 uppercase leading-none mb-1">
+                  <h3 className="font-['Bebas_Neue'] text-[28px] md:text-[34px] tracking-[1.5px] text-zinc-950 uppercase leading-none mb-1">
                     RESERVE YOUR SPOT
                   </h3>
                   <p className="text-center text-[13px] text-zinc-600 mb-6 font-['Barlow'] leading-relaxed">
