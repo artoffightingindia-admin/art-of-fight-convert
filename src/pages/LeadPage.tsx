@@ -61,14 +61,20 @@ const IconClock = () => (
   </svg>
 );
 
-const IconGymShield = () => (
+const IconDumbbell = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    <circle cx="12" cy="10" r="2" />
-    <path d="M12 7c-1.66 0-3 1.34-3 3 0 2 3 5 3 5s3-3 3-5c0-1.66-1.34-3-3-3z" />
+    <path d="M6.5 6.5h11M6.5 17.5h11M3 8.5h3.5v7h-3.5zM17.5 8.5H21v7h-3.5zM6.5 12h11" strokeWidth="2.2" />
   </svg>
 );
 
+const IconAimWithArrow = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+    <path d="M19 4l-7 7m0 0h4m-4 0V7" strokeWidth="2" />
+  </svg>
+);
 
 const IconWarningTriangle = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
@@ -108,10 +114,16 @@ const IconMessage = () => (
 
 const IconRocket = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 mx-auto">
-    <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
-    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.25.25 2.5.75 3.5l7.75-7.75L12 2z" />
-    <path d="M22 2s-5.5 0-10 4.5l7.75 7.75C22 9.75 22 2 22 2z" />
-    <path d="M9.5 14.5L2 22s3.5-2.5 3.5-2.5l4-5z" />
+    {/* Real Structured Rocket Body Nosecone */}
+    <path d="M12 2s3 4 3 9H9c0-5 3-9 3-9z" />
+    {/* Main Cylindrical Engine Hull */}
+    <rect x="9" y="11" width="6" height="7" />
+    {/* Left and Right Aerodynamic Wing Fins */}
+    <path d="M9 14l-3 4v2h3v-6zM15 14l3 4v2h-3v-6z" />
+    {/* Rocket Propulsion Exhaust Ports */}
+    <path d="M10 18h4v2h-4z" />
+    <line x1="11" y1="20" x2="11" y2="22" />
+    <line x1="13" y1="20" x2="13" y2="22" />
   </svg>
 );
 
@@ -137,8 +149,8 @@ const LeadPage = () => {
   /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
     { icon: <IconClock />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
-    { icon: <IconGymShield />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
-    { icon: <IconTarget />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
+    { icon: <IconDumbbell />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
+    { icon: <IconAimWithArrow />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
     { icon: <IconWarningTriangle />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
     { icon: <IconConfidenceMindset />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
   ];
@@ -210,9 +222,20 @@ const LeadPage = () => {
               </div>
             </Reveal>
 
+            {/* Injected Horizontal Single-Line Checkmark Grid */}
             <Reveal type="fade-up" delay={600} duration={1200}>
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8 text-[14px] md:text-[15px] font-semibold text-white/90 font-['Barlow']">
+                <span className="flex items-center gap-1.5">
+                  <span className="text-[#07b4ba] font-bold text-[16px]">✓</span> MMA Roadmap
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="text-[#07b4ba] font-bold text-[16px]">✓</span> Live Q&A
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="text-[#07b4ba] font-bold text-[16px]">✓</span> On Google Meet
+                </span>
+              </div>
               <p className="text-[14px] md:text-[15px] font-semibold text-white/90 mb-8 font-['Barlow']">
-                MMA Roadmap - Live Q&A - On Google Meet <br />
                 <span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Live with Tamilnadu's first MFN Fighter Purushothaman MK.</span>
               </p>
             </Reveal>
@@ -266,6 +289,7 @@ const LeadPage = () => {
             </Reveal>
           </div>
 
+          {/* Bullet points shifted to text-black color constraints */}
           <div className="flex-1 w-full lg:order-1">
             <Reveal type="fade-right" duration={1000}>
               <h3 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
@@ -276,7 +300,7 @@ const LeadPage = () => {
               <Reveal key={i} type="fade-right" delay={200 + (i * 120)} duration={800}>
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-[3px] h-[22px] bg-[#e53e3e] rounded shrink-0 mt-1" />
-                  <p className="text-zinc-850 font-medium text-[15px] md:text-[16px] leading-[1.5] text-left">{p}</p>
+                  <p className="text-black font-medium text-[15px] md:text-[16px] leading-[1.5] text-left">{p}</p>
                 </div>
               </Reveal>
             ))}
