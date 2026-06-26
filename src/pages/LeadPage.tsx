@@ -326,20 +326,19 @@ const LeadPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} type="scale-up" delay={i * 150} duration={800}>
-                <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-start md:items-center text-left md:text-center gap-4 md:min-h-[275px] md:p-[20px] md:rounded-[18px] premium-hover ${i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}`}>
+                <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-center text-center gap-4 md:min-h-[290px] md:p-[20px] md:rounded-[18px] premium-hover ${i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}`}>
                   
                   <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110 mx-auto">
                     {item.icon}
                   </div>
                   
-                  <div className="flex flex-col flex-grow w-full items-start md:items-center">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[18px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 mb-[8px] min-h-[24px] md:min-h-[44px] flex items-center text-left md:text-center">
+                  <div className="flex flex-col flex-grow w-full items-center text-center">
+                    {/* Locked minimum height block so titles take exactly 2 lines of standard text space everywhere */}
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[18px] tracking-[1px] md:tracking-[1.5px] leading-[1.2] m-0 text-center w-full min-h-[44px] flex items-center justify-center mb-[12px]">
                       {item.title}
                     </h4>
                     
-                    <div className="flex-grow hidden md:block" />
-                    
-                    <p className="text-[14px] md:text-[13.5px] leading-[1.55] text-white/60 text-left md:text-center m-0">
+                    <p className="text-[13.5px] md:text-[14px] leading-[1.5] text-white/60 text-center m-0">
                       {item.desc}
                     </p>
                   </div>
