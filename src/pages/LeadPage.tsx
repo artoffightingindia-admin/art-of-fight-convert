@@ -63,18 +63,11 @@ const IconClock = () => (
 
 const IconDumbbell = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Central Knurled Grip Handle */}
     <line x1="6" y1="12" x2="18" y2="12" />
-    
-    {/* Left Heavy Plate Stacks (Inner & Outer) */}
     <rect x="4" y="6" width="2" height="12" rx="0.5" />
     <rect x="2" y="8" width="2" height="8" rx="0.5" />
-    
-    {/* Right Heavy Plate Stacks (Inner & Outer) */}
     <rect x="18" y="6" width="2" height="12" rx="0.5" />
     <rect x="20" y="8" width="2" height="8" rx="0.5" />
-    
-    {/* Weight Collar Locks holding plates to the bar */}
     <rect x="6" y="10" width="1" height="4" fill="#07b4ba" />
     <rect x="17" y="10" width="1" height="4" fill="#07b4ba" />
   </svg>
@@ -82,17 +75,11 @@ const IconDumbbell = () => (
 
 const IconAimWithArrow = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    {/* Outer, Middle, and Inner Bullseye Rings */}
     <circle cx="10" cy="14" r="8" />
     <circle cx="10" cy="14" r="5" />
     <circle cx="10" cy="14" r="2" />
-    
-    {/* Realistic Arrow striking cleanly down into the dead center (10, 14) */}
-    {/* Arrow Shaft */}
     <line x1="21" y1="3" x2="11.2" y2="12.8" strokeWidth="2" />
-    {/* Arrow Head resting directly inside the bullseye */}
     <polyline points="14 13 10 14 11 10" />
-    {/* Geometric Arrow Fletching / Feathers at the tail tail end */}
     <line x1="19" y1="3" x2="21" y2="5" />
     <line x1="17.5" y1="4.5" x2="19.5" y2="6.5" />
   </svg>
@@ -136,16 +123,10 @@ const IconMessage = () => (
 
 const IconRocket = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 mx-auto">
-    {/* Real Structured Rocket Body Nosecone */}
-    <path d="M12 2s3 4 3 9H9c0-5 3-9 3-9z" />
-    {/* Main Cylindrical Engine Hull */}
-    <rect x="9" y="11" width="6" height="7" />
-    {/* Left and Right Aerodynamic Wing Fins */}
-    <path d="M9 14l-3 4v2h3v-6zM15 14l3 4v2h-3v-6z" />
-    {/* Rocket Propulsion Exhaust Ports */}
-    <path d="M10 18h4v2h-4z" />
-    <line x1="11" y1="20" x2="11" y2="22" />
-    <line x1="13" y1="20" x2="13" y2="22" />
+    <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
+    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.25.25 2.5.75 3.5l7.75-7.75L12 2z" />
+    <path d="M22 2s-5.5 0-10 4.5l7.75 7.75C22 9.75 22 2 22 2z" />
+    <path d="M9.5 14.5L2 22s3.5-2.5 3.5-2.5l4-5z" />
   </svg>
 );
 
@@ -171,7 +152,7 @@ const LeadPage = () => {
   /* ── DATA MODELS FROM BRAND DESIGN SYSTEM ── */
   const whatCards = [
     { icon: <IconClock />, title: "Where To Start", desc: "Know exactly how to begin your MMA journey with confidence." },
-    { icon: <IconDumbbell />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
+    { icon: <IconGymShield />, title: "How To Choose The Right Gym", desc: "Avoid wasting time and money on the wrong coach or gym." },
     { icon: <IconAimWithArrow />, title: "What To Train First", desc: "Learn what actually matters as a beginner—and what doesn't." },
     { icon: <IconWarningTriangle />, title: "Beginner Mistakes To Avoid", desc: "Learn the common mistakes that slow progress before you make them." },
     { icon: <IconConfidenceMindset />, title: "How To Build Confidence", desc: "Overcome the fear and self-doubt that's stopping you from getting started." },
@@ -244,7 +225,6 @@ const LeadPage = () => {
               </div>
             </Reveal>
 
-            {/* Injected Horizontal Single-Line Checkmark Grid */}
             <Reveal type="fade-up" delay={600} duration={1200}>
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8 text-[14px] md:text-[15px] font-semibold text-white/90 font-['Barlow']">
                 <span className="flex items-center gap-1.5">
@@ -311,7 +291,6 @@ const LeadPage = () => {
             </Reveal>
           </div>
 
-          {/* Bullet points shifted to text-black color constraints */}
           <div className="flex-1 w-full lg:order-1">
             <Reveal type="fade-right" duration={1000}>
               <h3 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
@@ -340,15 +319,33 @@ const LeadPage = () => {
               You'll Leave With A Clear <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">Roadmap To Start MMA</span>
             </h2>
           </Reveal>
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
               <Reveal key={i} type="scale-up" delay={i * 150} duration={800}>
-                <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-3 md:min-h-[255px] md:p-[16px] md:rounded-[18px] premium-hover ${i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}`}>
-                  <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
-                  <div className="flex flex-col items-start md:items-center w-full">
-                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 text-left md:text-center mb-[3px]">{item.title}</h4>
-                    <p className="text-[14px] md:text-[15px] leading-[1.55] text-white/60 text-left md:text-center m-0">{item.desc}</p>
+                {/* 🚀 FIXED FOR ALIGNMENT: 
+                    - Converted the card box container into an explicit flex-col layout layout container block
+                    - Applied full flex stretching properties to the content text wrapper column node below */}
+                <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-col items-start md:items-center text-left md:text-center gap-4 md:min-h-[275px] md:p-[20px] md:rounded-[18px] premium-hover ${i === 4 ? "sm:col-span-2 lg:col-span-1" : ""}`}>
+                  
+                  <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110 mx-auto">
+                    {item.icon}
                   </div>
+                  
+                  {/* Text wrapper with flex column alignment layout parameters */}
+                  <div className="flex flex-col flex-grow w-full items-start md:items-center">
+                    <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[18px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 mb-[8px] min-h-[24px] md:min-h-[44px] flex items-center text-left md:text-center">
+                      {item.title}
+                    </h4>
+                    
+                    {/* This spacing element expands dynamically to absorb title variance differences across rows */}
+                    <div className="flex-grow hidden md:block" />
+                    
+                    <p className="text-[14px] md:text-[13.5px] leading-[1.55] text-white/60 text-left md:text-center m-0">
+                      {item.desc}
+                    </p>
+                  </div>
+
                 </div>
               </Reveal>
             ))}
@@ -359,7 +356,7 @@ const LeadPage = () => {
       {/* ================= CLICKABLE STRIP BUTTON ================= */}
       <button 
         onClick={scrollToForm}
-        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#07b4ba] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
+        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none focus:outline-none transition-all duration-300 hover:bg-white hover:text-[#000] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
       >
         JOIN NOW
       </button>
@@ -558,7 +555,7 @@ const LeadPage = () => {
                     if (!name || !email || !phone || !situation) return;
                     setIsSubmitting(true);
                     try {
-                      const GOOGLE_SCRIPT_WEBAPP_URL = "YOUR_DEPLOYED_APPS_SCRIPT_WEBAPP_URL";
+                      const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzsRr-TJAtfF2nVhxNBAlGgnphTFdg_7LCmbgPfh05Q297MMdJZzVOj5VvmWIFCil9K/exec";
                       await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
                         method: "POST",
                         mode: "no-cors", 
