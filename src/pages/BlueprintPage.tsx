@@ -525,9 +525,10 @@ const BlueprintPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="font-['Bebas_Neue'] text-[24px] text-[#07b4ba] tracking-[1.5px] mb-1">YOUR SEAT IS CONFIRMED!</p>
+                    <p className="font-['Bebas_Neue'] text-[24px] text-[#07b4ba] tracking-[1.5px] mb-1">YOU'RE IN</p>
                     <p className="text-[13px] text-zinc-600 font-['Barlow'] max-w-xs mx-auto">
-                      Awesome! Your setup details have been submitted. Let's make it official below.
+                     Your registration has been successfully received. <br />
+Complete one final step to receive your session link, important announcements, and exclusive updates from Art of Fighting.
                     </p>
                   </div>
                   <div className="w-full pt-5 border-t border-zinc-100 flex flex-col items-center">
@@ -538,10 +539,10 @@ const BlueprintPage = () => {
                       rel="noopener noreferrer"
                       className="btn-glow inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] text-white font-['Bebas_Neue'] text-[18px] tracking-[1.5px] rounded-xl cursor-pointer border-none hover:bg-[#1f9d52]"
                     >
-                      JOIN TO START YOUR JOURNEY WITH US
+                      JOIN AOF WHATSAPP COMMUNITY
                     </a>
                     <p className="mt-2.5 text-[10px] text-zinc-500 font-['Barlow'] italic text-center leading-normal">
-                      Click above to receive direct event links & connect with coaches inside the community.
+                    This is where we'll share your Google Meet link, reminders, and everything you need before the session.
                     </p>
                   </div>
                 </div>
