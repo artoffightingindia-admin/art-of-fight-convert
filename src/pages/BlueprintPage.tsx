@@ -191,6 +191,21 @@ const BlueprintPage = () => {
     }
   };
 
+  // Force play and unmute as soon as the YouTube iframe is loaded
+  const handleIframeLoad = () => {
+    if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
+      heroVideoRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*'
+      );
+      heroVideoRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*'
+      );
+      heroVideoRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*'
+      );
+    }
+  };
+
   // Custom Video Audio Toggle Function
   const toggleHeroVideoMute = (e?: React.MouseEvent) => {
     e?.stopPropagation(); // Prevent play/pause toggle from triggering if clicked directly
@@ -287,6 +302,7 @@ const BlueprintPage = () => {
                 <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden select-none relative">
                   <iframe
                     ref={heroVideoRef}
+                    onLoad={handleIframeLoad}
                     className="absolute inset-0 w-full h-full border-0 scale-105 pointer-events-none"
                     src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
                     title="MMA Beginners Blueprint Introduction Video"
