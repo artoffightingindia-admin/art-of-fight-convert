@@ -9,9 +9,11 @@ import CtaPairSection from "@/components/CtaPairSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import StickyAd from "@/components/StickyAd";
 
 const Index = () => (
   <div className="min-h-screen">
+    <StickyAd />
     <Navbar />
     <HeroSection />
     <Reveal animation="fade-up">
