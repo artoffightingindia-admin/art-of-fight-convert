@@ -339,12 +339,12 @@ export default function ProgramPage() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
 
-  // Dedicated Testimonial Custom Player Ref States (MUST BE TRUE FOR AUTOPLAY)
+  // Dedicated Testimonial Custom Player Ref States (Now initialized to false for default audio)
   const heroVideoRef = useRef<HTMLIFrameElement>(null);
   const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
 
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
+  const [isTestimonialMuted, setIsTestimonialMuted] = useState(false);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -491,7 +491,7 @@ export default function ProgramPage() {
                   <iframe
                     ref={heroVideoRef}
                     className="absolute inset-0 w-full h-full border-0 scale-105"
-src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&cc_load_policy=0"
+                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
                     title="MMA Beginners Blueprint Introduction Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -706,7 +706,7 @@ src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&show
                 className={`absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:-translate-x-1 transition-all duration-300 ${roadmapIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >‹</button>
               <button 
-                onClick={() => setRoadmapIndex(p => Math.min(maxRoadmapIndex, p + 1))} 
+                onClick={() => setRoadmapIndex(p => Math.min(maxRoadmaxIndex, p + 1))} 
                 className={`absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:translate-x-1 transition-all duration-300 ${roadmapIndex === maxRoadmapIndex ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >›</button>
 
@@ -854,19 +854,18 @@ src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&show
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
             
-            {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME */}
+            {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME (Configured to load unmuted, without captions) */}
             <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
               <Reveal type="fade-right" duration={1200}>
                 <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
                   <iframe
                     ref={testimonialVideoRef}
                     className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                    src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&cc_load_policy=0"
                     title="AOF 30-Day Batch Student Results"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  {/* Pointer events canvas cover preventing drop downs on header wrapper regions */}
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
                 </div>
               </Reveal>
@@ -874,8 +873,8 @@ src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&show
               {/* Custom floating localized controller block layer */}
               <button
                 onClick={toggleTestimonialMute}
-                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
-                aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
+                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
+                aria-label={isTestimonialMuted ? "Mute feedback video" : "Unmute feedback video"}
               >
                 {isTestimonialMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
               </button>
