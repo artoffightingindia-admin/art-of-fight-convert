@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
+import { Volume2, VolumeX } from "lucide-react";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
@@ -335,22 +336,16 @@ export default function ProgramPage() {
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
-  
-  // Video Refs
-  const painVideoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
-  // ── CHANGE 1: default to true so video 1 starts muted ──
   const [isVideoMuted, setIsVideoMuted] = useState(true);
-  
-  const testimonialContainerRef = useRef<HTMLDivElement>(null);
-  const video2Ref = useRef<HTMLIFrameElement>(null);
-  const [playTestimonial, setPlayTestimonial] = useState(false);
-  // ── NEW: track mute state for testimonial video ──
-  const [isVideo2Muted, setIsVideo2Muted] = useState(true);
+
+  // Dedicated Testimonial Custom Player Ref States (Initialized to false for audio autoplay)
+  const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
+  const [isTestimonialMuted, setIsTestimonialMuted] = useState(false);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
-  
+
   useEffect(() => {
     const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
     checkMobile();
@@ -360,7 +355,7 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
-    // Set exact deadline here: June 28, 2026
+    // Set exact dealine here: June 28, 2026
     const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
 
     const updateTimer = () => {
@@ -385,73 +380,6 @@ export default function ProgramPage() {
     return () => clearInterval(timerInterval); // Cleanup interval on component unmount
   }, []);
 
-  // ── OBSERVER: PAIN SECTION VIDEO ──
-  useEffect(() => {
-    const el = painVideoContainerRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (videoRef.current && videoRef.current.contentWindow) {
-          if (e.isIntersecting) {
-            videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
-          } else {
-            videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
-          }
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  // ── OBSERVER: TESTIMONIAL VIDEO ──
-  useEffect(() => {
-    const el = testimonialContainerRef.current;
-    if (!el) return;
-    
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setPlayTestimonial(true); // Mount iframe if not already mounted
-          if (video2Ref.current && video2Ref.current.contentWindow) {
-            video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
-          }
-        } else {
-          if (video2Ref.current && video2Ref.current.contentWindow) {
-            video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
-          }
-        }
-      },
-      { threshold: 0.3 } 
-    );
-    
-    obs.observe(el);
-    return () => obs.disconnect(); 
-  }, []);
-
-  // ── FORCE MUTED PLAY ON LOAD (Video 1) ──
-  // Video starts muted by default; no need to send unMute on load
-  const handlePainVideoLoad = () => {
-    if (videoRef.current && videoRef.current.contentWindow) {
-      // Ensure it stays muted on load (matches mute=1 in src)
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
-    }
-  };
-
-  // ── FORCE MUTED PLAY ON LOAD (Video 2) ──
-  const handleTestimonialVideoLoad = () => {
-    if (video2Ref.current && video2Ref.current.contentWindow) {
-      // Ensure it stays muted on load (matches mute=1 in src)
-      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
-      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
-      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
-    }
-  };
-
   const handlePayment = () => {
     window.location.href = "https://rzp.io/rzp/aof30dayprogram";
   };
@@ -463,7 +391,7 @@ export default function ProgramPage() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // ── Video 1 Mute Toggle ──
+  // Video Overlay Mute Toggle
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
       const func = isVideoMuted ? 'unMute' : 'mute';
@@ -472,12 +400,12 @@ export default function ProgramPage() {
     }
   };
 
-  // ── Video 2 Mute Toggle ──
-  const toggleMute2 = () => {
-    if (video2Ref.current && video2Ref.current.contentWindow) {
-      const func = isVideo2Muted ? 'unMute' : 'mute';
-      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsVideo2Muted(!isVideo2Muted);
+  // Localized frame message pipe poster for Testimonial Clean Player
+  const toggleTestimonialMute = () => {
+    if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
+      const func = isTestimonialMuted ? 'unMute' : 'mute';
+      testimonialVideoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+      setIsTestimonialMuted(!isTestimonialMuted);
     }
   };
 
@@ -581,28 +509,24 @@ export default function ProgramPage() {
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                <div ref={painVideoContainerRef} className="relative w-full aspect-video">
+                <div className="relative w-full aspect-video">
                   <iframe
                     ref={videoRef}
-                    onLoad={handlePainVideoLoad}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    {/* ── CHANGE 2: mute=1 so video 1 starts muted, autoplay still works ── */}
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?enablejsapi=1&autoplay=1&mute=1&rel=0"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
                     title="AOF Video"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  {/* Mute/Unmute Button Overlay — shown on ALL screens for video 1 */}
+                  {/* Mobile Unmute Button Overlay */}
                   <button
                     onClick={toggleMute}
-                    className="absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
+                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
                     aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
                   >
                     {isVideoMuted ? (
-                      /* Muted icon */
                       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
                     ) : (
-                      /* Unmuted icon */
                       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     )}
                   </button>
@@ -614,8 +538,7 @@ export default function ProgramPage() {
             <Reveal type="fade-right" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">
-HAVEN'T STARTED  </span> BECAUSE YOU:
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
             </Reveal>
@@ -623,7 +546,7 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3">
                   <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5িলেন]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -687,9 +610,7 @@ HAVEN'T STARTED  </span> BECAUSE YOU:
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">
-CHALLENGES OF BEGINNERS  </span>
-</h2>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS  </span></h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -892,48 +813,31 @@ CHALLENGES OF BEGINNERS  </span>
             </div>
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
-            <div className="flex-1 max-w-full md:max-w-[550px] w-full">
-              <Reveal type="fade-right" duration={1200}>
-                <div className="premium-hover rounded-[10px] overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                  {/* ── CHANGE 3: mute=1 so video 2 starts muted ── */}
-                  <div className="relative w-full aspect-video bg-[#0b0b0b]" ref={testimonialContainerRef}>
-                    {!playTestimonial ? (
-                      <img 
-                        src="https://img.youtube.com/vi/4Z8PSdk6Ak0/maxresdefault.jpg" 
-                        alt="Testimonial Video Preview" 
-                        className="absolute inset-0 w-full h-full object-cover opacity-80 transition-opacity duration-500"
-                      />
-                    ) : (
-                      <iframe
-                        ref={video2Ref}
-                        onLoad={handleTestimonialVideoLoad}
-                        className="absolute inset-0 w-full h-full pointer-events-auto"
-                        src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=1&rel=0&enablejsapi=1"
-                        title="AOF Testimonial Video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    )}
-                    {/* Mute/Unmute overlay for video 2 — only shown once iframe is mounted */}
-                    {playTestimonial && (
-                      <button
-                        onClick={toggleMute2}
-                        className="absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
-                        aria-label={isVideo2Muted ? "Unmute video" : "Mute video"}
-                      >
-                        {isVideo2Muted ? (
-                          /* Muted icon */
-                          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                        ) : (
-                          /* Unmuted icon */
-                          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                        )}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </Reveal>
+            
+            {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME */}
+            <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
+              <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
+                <iframe
+                  ref={testimonialVideoRef}
+                  className="absolute inset-0 w-full h-full border-0 scale-105"
+                  src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                  title="AOF Testimonials Video Result Loop"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+              </div>
+
+              {/* Custom floating sound control button toggling audio state */}
+              <button
+                onClick={toggleTestimonialMute}
+                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
+                aria-label={isTestimonialMuted ? "Unmute testimonials video" : "Mute testimonials video"}
+              >
+                {isTestimonialMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              </button>
             </div>
+
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={200} duration={1000}>
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
@@ -1016,11 +920,11 @@ CHALLENGES OF BEGINNERS  </span>
                   No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day.
                 </p>
                  {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Refund Policy"].map((item, i) => (
-                   <Reveal key={i} type="fade-up" delay={i * 150} duration={800} className="flex items-start gap-2.5 mb-3">
-                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
-                   </Reveal>
-                 ))}
+                  <Reveal key={i} type="fade-up" delay={i * 150} duration={800} className="flex items-start gap-2.5 mb-3">
+                    <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
+                    <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
+                  </Reveal>
+                ))}
                 {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
                 <Reveal type="fade-up" delay={600} duration={1000}>
                   <div className="mt-5 md:mt-6 flex items-start gap-4 md:gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80 premium-hover shadow-[0_0_20px_rgba(7,180,186,0.1)]">
