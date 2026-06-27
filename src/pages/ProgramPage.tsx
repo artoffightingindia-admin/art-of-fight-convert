@@ -570,7 +570,7 @@ export default function ProgramPage() {
                     ref={videoRef}
                     onLoad={handlePainVideoLoad}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?mute=0&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
+src="https://www.youtube.com/embed/ymDRsWPnEH0?enablejsapi=1&autoplay=1&mute=0&rel=0"
                     title="AOF Video"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
