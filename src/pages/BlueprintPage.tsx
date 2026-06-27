@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, Play, Pause } from "lucide-react";
 
 /* ── PREMIUM UNIFIED STYLES INJECTION ── */
 const premiumStyles = `
@@ -141,12 +141,47 @@ const BlueprintPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Video context states - initialized to false so it plays with sound by default
+  // Video context states
   const heroVideoRef = useRef<HTMLIFrameElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // Intersection Observer to auto-pause/play based on scroll visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
+          if (entry.isIntersecting) {
+            heroVideoRef.current.contentWindow.postMessage(
+              JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*'
+            );
+            setIsPlaying(true);
+          } else {
+            heroVideoRef.current.contentWindow.postMessage(
+              JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'
+            );
+            setIsPlaying(false);
+          }
+        }
+      },
+      { threshold: 0.2 } // Triggers when 20% of the element is visible
+    );
+
+    if (videoContainerRef.current) {
+      observer.observe(videoContainerRef.current);
+    }
+
+    return () => {
+      if (videoContainerRef.current) {
+        observer.unobserve(videoContainerRef.current);
+      }
+    };
   }, []);
 
   const scrollToForm = () => {
@@ -157,7 +192,8 @@ const BlueprintPage = () => {
   };
 
   // Custom Video Audio Toggle Function
-  const toggleHeroVideoMute = () => {
+  const toggleHeroVideoMute = (e?: React.MouseEvent) => {
+    e?.stopPropagation(); // Prevent play/pause toggle from triggering if clicked directly
     if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
       const command = isHeroVideoMuted ? 'unMute' : 'mute';
       heroVideoRef.current.contentWindow.postMessage(
@@ -165,6 +201,19 @@ const BlueprintPage = () => {
         '*'
       );
       setIsHeroVideoMuted(!isHeroVideoMuted);
+    }
+  };
+
+  // Custom Video Play/Pause Toggle Function
+  const togglePlayPause = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
+      const command = isPlaying ? 'pauseVideo' : 'playVideo';
+      heroVideoRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: command, args: [] }),
+        '*'
+      );
+      setIsPlaying(!isPlaying);
     }
   };
 
@@ -232,29 +281,44 @@ const BlueprintPage = () => {
               </p>
             </Reveal>
 
-            {/* Premium Autoplaying Clean Video Player Section (Defaulting to mute=0 for sound) */}
+            {/* Premium Autoplaying Clean Video Player Section */}
             <Reveal type="scale-up" delay={350} duration={1200}>
-              <div className="w-full max-w-xl mx-auto aspect-video mb-8 relative group">
-                <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden pointer-events-none select-none relative">
+              <div ref={videoContainerRef} className="w-full max-w-xl mx-auto aspect-video mb-8 relative group">
+                <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden select-none relative">
                   <iframe
                     ref={heroVideoRef}
-                    className="absolute inset-0 w-full h-full border-0 scale-105"
+                    className="absolute inset-0 w-full h-full border-0 scale-105 pointer-events-none"
                     src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
                     title="MMA Beginners Blueprint Introduction Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                  {/* Clickable transparent overlay to block YouTube UI & handle toggle */}
+                  <div 
+                    className="absolute inset-0 bg-transparent cursor-pointer z-10 transition-colors hover:bg-black/10" 
+                    onClick={togglePlayPause}
+                    title={isPlaying ? "Click to pause" : "Click to play"}
+                  />
                 </div>
 
-                {/* Floating audio control overlay */}
-                <button
-                  onClick={toggleHeroVideoMute}
-                  className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
-                  aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
-                >
-                  {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
+                {/* Floating controls overlay */}
+                <div className="absolute bottom-4 left-4 z-20 flex gap-3 pointer-events-auto">
+                  <button
+                    onClick={togglePlayPause}
+                    className="flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer"
+                    aria-label={isPlaying ? "Pause introduction video" : "Play introduction video"}
+                  >
+                    {isPlaying ? <Pause className="w-4 h-4" fill="currentColor" /> : <Play className="w-4 h-4" fill="currentColor" />}
+                  </button>
+
+                  <button
+                    onClick={toggleHeroVideoMute}
+                    className="flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer"
+                    aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
+                  >
+                    {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
             </Reveal>
 
