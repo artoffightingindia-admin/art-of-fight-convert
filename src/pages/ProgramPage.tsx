@@ -335,16 +335,19 @@ export default function ProgramPage() {
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
+  
+  // Video Refs
+  const painVideoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
-  const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [isVideoMuted, setIsVideoMuted] = useState(false); // Default to unmuted
+  
+  const testimonialContainerRef = useRef<HTMLDivElement>(null);
+  const video2Ref = useRef<HTMLIFrameElement>(null);
+  const [playTestimonial, setPlayTestimonial] = useState(false);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
   
-  // Testimonial Scroll Observer State
-  const testimonialContainerRef = useRef<HTMLDivElement>(null);
-  const [playTestimonial, setPlayTestimonial] = useState(false);
-
   useEffect(() => {
     const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
     checkMobile();
@@ -379,7 +382,29 @@ export default function ProgramPage() {
     return () => clearInterval(timerInterval); // Cleanup interval on component unmount
   }, []);
 
-  // Observer for Testimonial Video to Auto Play exactly when visible
+  // ── OBSERVER: PAIN SECTION VIDEO ──
+  useEffect(() => {
+    const el = painVideoContainerRef.current;
+    if (!el) return;
+
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (videoRef.current && videoRef.current.contentWindow) {
+          if (e.isIntersecting) {
+            videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+          } else {
+            videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // ── OBSERVER: TESTIMONIAL VIDEO ──
   useEffect(() => {
     const el = testimonialContainerRef.current;
     if (!el) return;
@@ -387,16 +412,39 @@ export default function ProgramPage() {
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          setPlayTestimonial(true);
-          obs.unobserve(el);
+          setPlayTestimonial(true); // Mount iframe if not already mounted
+          if (video2Ref.current && video2Ref.current.contentWindow) {
+            video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+          }
+        } else {
+          if (video2Ref.current && video2Ref.current.contentWindow) {
+            video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
+          }
         }
       },
-      { threshold: 0.3 } // Triggers when 30% of the video container is visible
+      { threshold: 0.3 } 
     );
     
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => obs.disconnect(); 
   }, []);
+
+  // ── FORCE SOUND & PLAY ON LOAD ──
+  const handlePainVideoLoad = () => {
+    if (videoRef.current && videoRef.current.contentWindow) {
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+    }
+  };
+
+  const handleTestimonialVideoLoad = () => {
+    if (video2Ref.current && video2Ref.current.contentWindow) {
+      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
+      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+    }
+  };
 
   const handlePayment = () => {
     window.location.href = "https://rzp.io/rzp/aof30dayprogram";
@@ -518,11 +566,12 @@ export default function ProgramPage() {
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                <div className="relative w-full aspect-video">
+                <div ref={painVideoContainerRef} className="relative w-full aspect-video">
                   <iframe
                     ref={videoRef}
+                    onLoad={handlePainVideoLoad}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=0&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
                     title="AOF Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -837,8 +886,10 @@ CHALLENGES OF BEGINNERS  </span>
                       />
                     ) : (
                       <iframe
+                        ref={video2Ref}
+                        onLoad={handleTestimonialVideoLoad}
                         className="absolute inset-0 w-full h-full pointer-events-auto"
-                        src="https://www.youtube.com/embed/4Z8PSdk6Ak0?rel=0&autoplay=1&mute=1"
+                        src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=0&controls=1&rel=0&enablejsapi=1"
                         title="AOF Testimonial Video"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
