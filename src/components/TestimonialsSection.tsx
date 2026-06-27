@@ -1,4 +1,4 @@
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const testimonials = [
@@ -129,6 +129,9 @@ const TestimonialsSection = () => {
   const [paused, setPaused]       = useState(false);
   const [animDir, setAnimDir]     = useState(null);
   const [animating, setAnimating] = useState(false);
+  
+  const iframeRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (paused) return;
@@ -145,6 +148,19 @@ const TestimonialsSection = () => {
     if (animating) return;
     setAnimDir("prev"); setAnimating(true);
     setTimeout(() => { setStart(s => (s - 1 + testimonials.length) % testimonials.length); setAnimating(false); }, 320);
+  };
+
+  // Toggle Mute function posting messages directly over the API pipeline
+  const toggleMute = () => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.contentWindow) {
+      const command = isMuted ? "unMute" : "mute";
+      iframe.contentWindow.postMessage(
+        JSON.stringify({ event: "command", func: command, args: [] }), 
+        "*"
+      );
+      setIsMuted(!isMuted);
+    }
   };
 
   const visible = Array.from({ length: VISIBLE }, (_, i) =>
@@ -204,7 +220,7 @@ const TestimonialsSection = () => {
         {/* 2-col layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-          {/* LEFT: Autoplaying Muted Clean Player Frame */}
+          {/* LEFT: Clean Autoplaying Video Frame with Manual Mute Toggle Control */}
           <div className="flex flex-col">
             <h3
               className="mb-4 text-center italic"
@@ -219,17 +235,30 @@ const TestimonialsSection = () => {
               Hear Directly From People Who Have Trained Under Coach Purushothaman
             </h3>
 
-            <div className="w-full">
-              {/* pointer-events-none completely blocks overlay titles or recommendations from hover states */}
-              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)] pointer-events-none select-none">
+            <div className="w-full relative group">
+              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)]">
+                {/* Notice enablejsapi=1 parameter appended to wire up API calls */}
                 <iframe
+                  ref={iframeRef}
                   className="absolute inset-0 w-full h-full border-0 scale-105"
-                  src="https://www.youtube.com/embed/KTlqLcAeisU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+                  src="https://www.youtube.com/embed/KTlqLcAeisU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
                   title="Coach Purushothaman MMA Training Testimonials"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
+                
+                {/* Pointer overlay blocker to restrict native frame UI headers from rendering on hover */}
+                <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
               </div>
+
+              {/* Custom floating audio toggle layout element positioned inside relative zone */}
+              <button
+                onClick={toggleMute}
+                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer"
+                aria-label={isMuted ? "Unmute testimonials video" : "Mute testimonials video"}
+              >
+                {isMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
+              </button>
             </div>
           </div>
 
