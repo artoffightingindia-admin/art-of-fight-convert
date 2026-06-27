@@ -141,9 +141,9 @@ const BlueprintPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Video context states
+  // Video context states - initialized to false so it plays with sound by default
   const heroVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
+  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -232,19 +232,18 @@ const BlueprintPage = () => {
               </p>
             </Reveal>
 
-            {/* Premium Autoplaying, Auto-Muted Clean Video Player Section */}
+            {/* Premium Autoplaying Clean Video Player Section (Defaulting to mute=0 for sound) */}
             <Reveal type="scale-up" delay={350} duration={1200}>
               <div className="w-full max-w-xl mx-auto aspect-video mb-8 relative group">
                 <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden pointer-events-none select-none relative">
                   <iframe
                     ref={heroVideoRef}
                     className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
                     title="MMA Beginners Blueprint Introduction Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  {/* Invisible blocker blocking native iframe header link overrides */}
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
                 </div>
 
@@ -350,9 +349,7 @@ const BlueprintPage = () => {
         <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(24px,7vw,54px)] tracking-[1.5px] md:tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
-              You'll Leave With A Clear <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">Roadmap To Start MMA</span>
-            </h2>
+            <div className="w-full h-2" />
           </Reveal>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
