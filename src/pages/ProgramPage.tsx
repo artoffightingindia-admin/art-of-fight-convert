@@ -339,9 +339,12 @@ export default function ProgramPage() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
 
-  // Dedicated Testimonial Custom Player Ref States (Initialized to false for audio autoplay)
+  // Dedicated Testimonial Custom Player Ref States (MUST BE TRUE FOR AUTOPLAY)
+  const heroVideoRef = useRef<HTMLIFrameElement>(null);
+  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
+
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isTestimonialMuted, setIsTestimonialMuted] = useState(false);
+  const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -355,7 +358,6 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
-    // Set exact dealine here: June 28, 2026
     const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
 
     const updateTimer = () => {
@@ -369,15 +371,14 @@ export default function ProgramPage() {
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0')
         });
       } else {
-        // Halt at 00:00:00 once the deadline has been reached
         setTimeLeft({ days: "00", hours: "00", minutes: "00" });
       }
     };
 
-    updateTimer(); // Initial call
-    const timerInterval = setInterval(updateTimer, 1000); // Check every second
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
 
-    return () => clearInterval(timerInterval); // Cleanup interval on component unmount
+    return () => clearInterval(timerInterval);
   }, []);
 
   const handlePayment = () => {
@@ -391,12 +392,24 @@ export default function ProgramPage() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // Video Overlay Mute Toggle
+  // Pain Section Video Overlay Mute Toggle
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
       const func = isVideoMuted ? 'unMute' : 'mute';
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
       setIsVideoMuted(!isVideoMuted);
+    }
+  };
+
+  // Hero Section Video Audio Toggle
+  const toggleHeroVideoMute = () => {
+    if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
+      const command = isHeroVideoMuted ? 'unMute' : 'mute';
+      heroVideoRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: command, args: [] }), 
+        '*'
+      );
+      setIsHeroVideoMuted(!isHeroVideoMuted);
     }
   };
 
@@ -470,6 +483,33 @@ export default function ProgramPage() {
                 A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before.
               </p>
             </Reveal>
+
+            {/* Premium Autoplaying Clean Video Player Section (Hero) */}
+            <Reveal type="scale-up" delay={700} duration={1200}>
+              <div className="w-full max-w-[480px] aspect-video mb-8 relative group">
+                <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden pointer-events-none select-none relative">
+                  <iframe
+                    ref={heroVideoRef}
+                    className="absolute inset-0 w-full h-full border-0 scale-105"
+                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                    title="MMA Beginners Blueprint Introduction Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                </div>
+
+                {/* Floating audio control overlay */}
+                <button
+                  onClick={toggleHeroVideoMute}
+                  className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
+                  aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
+                >
+                  {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                </button>
+              </div>
+            </Reveal>
+
             <Reveal type="scale-up" delay={800} duration={1200}>
               <button
                 className="btn-glow inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer"
@@ -546,7 +586,7 @@ export default function ProgramPage() {
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3">
                   <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5িলেন]">{p}</p>
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -816,25 +856,28 @@ export default function ProgramPage() {
             
             {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME */}
             <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
-              <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
-                <iframe
-                  ref={testimonialVideoRef}
-                  className="absolute inset-0 w-full h-full border-0 scale-105"
-                  src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
-                  title="AOF Testimonials Video Result Loop"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-                <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-              </div>
+              <Reveal type="fade-right" duration={1200}>
+                <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
+                  <iframe
+                    ref={testimonialVideoRef}
+                    className="absolute inset-0 w-full h-full border-0 scale-105"
+                    src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                    title="AOF 30-Day Batch Student Results"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  {/* Pointer events canvas cover preventing drop downs on header wrapper regions */}
+                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                </div>
+              </Reveal>
 
-              {/* Custom floating sound control button toggling audio state */}
+              {/* Custom floating localized controller block layer */}
               <button
                 onClick={toggleTestimonialMute}
-                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
-                aria-label={isTestimonialMuted ? "Unmute testimonials video" : "Mute testimonials video"}
+                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
+                aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
               >
-                {isTestimonialMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                {isTestimonialMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
               </button>
             </div>
 
