@@ -204,7 +204,7 @@ const TestimonialsSection = () => {
         {/* 2-col layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-          {/* LEFT: Autoplaying Live Video Embed */}
+          {/* LEFT: Autoplaying Muted Clean Player Frame */}
           <div className="flex flex-col">
             <h3
               className="mb-4 text-center italic"
@@ -220,10 +220,11 @@ const TestimonialsSection = () => {
             </h3>
 
             <div className="w-full">
-              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)]">
+              {/* pointer-events-none completely blocks overlay titles or recommendations from hover states */}
+              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)] pointer-events-none select-none">
                 <iframe
-                  className="absolute inset-0 w-full h-full border-0"
-                  src="https://www.youtube.com/embed/KTlqLcAeisU?autoplay=1&mute=1&rel=0"
+                  className="absolute inset-0 w-full h-full border-0 scale-105"
+                  src="https://www.youtube.com/embed/KTlqLcAeisU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
                   title="Coach Purushothaman MMA Training Testimonials"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
