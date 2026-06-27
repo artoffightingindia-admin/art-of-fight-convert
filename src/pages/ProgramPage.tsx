@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
-import { Volume2, VolumeX } from "lucide-react";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
@@ -339,10 +338,6 @@ export default function ProgramPage() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
 
-  // Dedicated Testimonials Section Clean Player Ref States
-  const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
-
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
 
@@ -366,7 +361,7 @@ export default function ProgramPage() {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0'),
           hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0')
         });
       } else {
         // Halt at 00:00:00 once the deadline has been reached
@@ -397,15 +392,6 @@ export default function ProgramPage() {
       const func = isVideoMuted ? 'unMute' : 'mute';
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
       setIsVideoMuted(!isVideoMuted);
-    }
-  };
-
-  // Custom Iframe API Poster for Testimonials Section clean player loop
-  const toggleTestimonialMute = () => {
-    if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
-      const func = isTestimonialMuted ? 'unMute' : 'mute';
-      testimonialVideoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsTestimonialMuted(!isTestimonialMuted);
     }
   };
 
@@ -537,8 +523,9 @@ export default function ProgramPage() {
           <div className="flex-1 w-full md:min-w-[260px] md:order-1">
             <Reveal type="fade-right" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white stroke-none leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
+              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">
+HAVEN'T STARTED  </span> BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
             </Reveal>
@@ -546,7 +533,7 @@ export default function ProgramPage() {
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3">
                   <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5 Freemium]">{p}</p>
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -610,7 +597,9 @@ export default function ProgramPage() {
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS  </span></h2>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">
+CHALLENGES OF BEGINNERS  </span>
+</h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -813,32 +802,21 @@ export default function ProgramPage() {
             </div>
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
-            
-            {/* SWAPPED AREA: Implemented Autoplaying Clean Iframe with localized custom mute controller */}
-            <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
-              <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
-                <iframe
-                  ref={testimonialVideoRef}
-                  className="absolute inset-0 w-full h-full border-0 scale-105"
-                  src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
-                  title="AOF 30-Day Batch Student Results"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-                {/* Pointer events canvas cover preventing drop downs on header wrapper regions */}
-                <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-              </div>
-
-              {/* Custom floating localized controller block layer */}
-              <button
-                onClick={toggleTestimonialMute}
-                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
-                aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
-              >
-                {isTestimonialMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
-              </button>
+            <div className="flex-1 max-w-full md:max-w-[550px] w-full">
+              <Reveal type="fade-right" duration={1200}>
+                <div className="premium-hover rounded-[10px] overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                  <div className="relative w-full aspect-video">
+                    <iframe
+                      className="absolute inset-0 w-full h-full pointer-events-auto"
+                      src="https://www.youtube.com/embed/4Z8PSdk6Ak0?rel=0"
+                      title="AOF Testimonial Video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              </Reveal>
             </div>
-
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={200} duration={1000}>
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
