@@ -434,7 +434,6 @@ export default function ProgramPage() {
     if (videoRef.current && videoRef.current.contentWindow) {
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
     }
   };
 
@@ -571,9 +570,9 @@ export default function ProgramPage() {
                     ref={videoRef}
                     onLoad={handlePainVideoLoad}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=0&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?mute=0&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
                     title="AOF Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
                   {/* Mobile Unmute Button Overlay */}
@@ -981,11 +980,11 @@ CHALLENGES OF BEGINNERS  </span>
                   No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day.
                 </p>
                  {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Refund Policy"].map((item, i) => (
-                  <Reveal key={i} type="fade-up" delay={i * 150} duration={800} className="flex items-start gap-2.5 mb-3">
-                    <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                    <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
-                  </Reveal>
-                ))}
+                   <Reveal key={i} type="fade-up" delay={i * 150} duration={800} className="flex items-start gap-2.5 mb-3">
+                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
+                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
+                   </Reveal>
+                 ))}
                 {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
                 <Reveal type="fade-up" delay={600} duration={1000}>
                   <div className="mt-5 md:mt-6 flex items-start gap-4 md:gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80 premium-hover shadow-[0_0_20px_rgba(7,180,186,0.1)]">
