@@ -297,7 +297,7 @@ const BlueprintPage = () => {
           <div className="flex-1 w-full lg:order-1">
             <Reveal type="fade-right" duration={1000}>
               <h3 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[1px] text-zinc-900 leading-[1.1] mb-4 text-left uppercase">
-                YOU MIGHT RELATE TO THIS..
+                YOU MIGHT RELATE TO THIS...
               </h3>
             </Reveal>
             {painPoints.map((p, i) => (
@@ -433,17 +433,17 @@ const BlueprintPage = () => {
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">DATE</p>
-                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">Tuesday, June 24</p>
+                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">Monday, July 05</p>
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">Duration: </p>
                   <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5 flex items-center gap-2">
-                    <span className="text-[#07b4ba]">🔹</span> 30 Mins + Q&A
+                    <span className="text-[#07b4ba]">🔹</span> 40 Mins + Q&A
                   </p>
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest">TIME</p>
-                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">8:30 PM IST</p>
+                  <p className="text-[14px] md:text-[15px] font-bold text-white mt-0.5">11:00 AM IST</p>
                 </div>
               </div>
             </div>
