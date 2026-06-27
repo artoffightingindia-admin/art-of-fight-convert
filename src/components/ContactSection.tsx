@@ -1,36 +1,36 @@
 import { useState } from "react";
 
 const faqItems = [
-  {
-    question: "What age do I need to start?",
+ {
+    question: "What is AOF?",
     answer:
-      "We welcome students from age 8 and up. Programs are tailored to your level.",
+      "AOF is a coaching platform focused on helping people build real fighting skills, fitness, discipline, and confidence through structured training systems.",
   },
   {
-    question: "Are there any requirements?",
+    question: "Which program is right for me?",
     answer:
-      "No prior experience required — just commitment and the willingness to learn.",
+      "Choose the 30-Day Program if you want a structured online system. Choose 1-on-1 Coaching if you want personalized guidance and direct coach support.",
   },
   {
-    question: "Can I try a class for free?",
+    question: "Do I need prior MMA experience?",
     answer:
-      "Yes, your first trial class is on us. Book through the enquiry form.",
+      "No. Both beginners and experienced athletes can benefit from our programs.",
   },
   {
-    question: "What equipment do I need?",
+    question: "Can I train from home?",
     answer:
-      "Just comfortable training gear to start. We'll guide you on gloves and gear later.",
+      "Yes. Our programs are designed to be practical and accessible, even if you don't train at a gym every day.",
   },
   {
-    question: "Where is the academy located?",
+    question: "Will I receive coach support?",
     answer:
-      "We're based in Chennai, Tamil Nadu. Full address shared on enquiry.",
+      "Yes. The level of support depends on the program you choose, with 1-on-1 Coaching offering the most direct guidance.",
   },
   {
-  question: "How many days per week should I train?",
-  answer:
-    "For the best results, we recommend training 3–5 times per week. However, our programs can be adapted to fit your schedule and fitness level."
-},
+    question: "How do I get started?",
+    answer:
+      "Simply explore the program that best fits your goals and follow the enrollment process on the next page.",
+  },
 ];
 
 const ContactSection = () => {
