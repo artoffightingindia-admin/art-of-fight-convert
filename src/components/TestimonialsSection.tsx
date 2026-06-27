@@ -27,7 +27,7 @@ const testimonials = [
     image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg"  
   },
   { 
-    name: "Madhan",   
+    name: "Madhan",    
     role: "Member",  
     text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.",
     image: "https://i.postimg.cc/q7HbD53j/Madan-jpg.jpg"
@@ -193,7 +193,7 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-Real People,{" "}
+            Real People,{" "}
             <br className="md:hidden" />
             <span className="text-[#07b4ba]">
               Real Progress
@@ -204,7 +204,7 @@ Real People,{" "}
         {/* 2-col layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-          {/* LEFT: testimonial thumbnail */}
+          {/* LEFT: Autoplaying Live Video Embed */}
           <div className="flex flex-col">
             <h3
               className="mb-4 text-center italic"
@@ -220,45 +220,14 @@ Real People,{" "}
             </h3>
 
             <div className="w-full">
-              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06]">
-
-                {/* Thumbnail */}
-                <img
-                  src="https://i.postimg.cc/6QhDKcWp/Testimonial-Thumbnail-jpg.jpg"
-                  alt="Testimonial Video"
-                  className="absolute inset-0 w-full h-full object-cover"
+              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)]">
+                <iframe
+                  className="absolute inset-0 w-full h-full border-0"
+                  src="https://www.youtube.com/embed/KTlqLcAeisU?autoplay=1&mute=1&rel=0"
+                  title="Coach Purushothaman MMA Training Testimonials"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 />
-
-                {/* Overlay */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "rgba(0,0,0,0.25)",
-                  }}
-                />
-
-                {/* Play Button */}
-                <div className="absolute inset-0 z-10 flex items-center justify-center">
-                  <div
-                    className="w-[62px] h-[62px] rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
-                    style={{
-                      backgroundColor: "#07b4ba",
-                      boxShadow: "0 0 28px 6px rgba(7,180,186,0.28)",
-                    }}
-                  >
-                    <div
-                      className="ml-[5px]"
-                      style={{
-                        width: 0,
-                        height: 0,
-                        borderTop: "10px solid transparent",
-                        borderBottom: "10px solid transparent",
-                        borderLeft: "18px solid #0a0f14",
-                      }}
-                    />
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>
