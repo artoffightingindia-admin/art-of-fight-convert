@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import { Volume2, VolumeX } from "lucide-react";
 
 /* ── PREMIUM UNIFIED STYLES INJECTION ── */
 const premiumStyles = `
@@ -140,6 +141,10 @@ const BlueprintPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Video context states
+  const heroVideoRef = useRef<HTMLIFrameElement>(null);
+  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -148,6 +153,18 @@ const BlueprintPage = () => {
     const element = document.getElementById("email-form-section");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Custom Video Audio Toggle Function
+  const toggleHeroVideoMute = () => {
+    if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
+      const command = isHeroVideoMuted ? 'unMute' : 'mute';
+      heroVideoRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: command, args: [] }), 
+        '*'
+      );
+      setIsHeroVideoMuted(!isHeroVideoMuted);
     }
   };
 
@@ -194,13 +211,13 @@ const BlueprintPage = () => {
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0">
           <div className="w-full relative z-10 text-center px-4 md:px-0">
             
-            <Reveal type="fade-down" delay={100} duration={1000} className="mb-6 mt-2 inline-block">
+            <div className="mb-6 mt-2 inline-block">
               <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2 text-[10px] md:text-[12px] font-bold tracking-[2px] md:tracking-[3px] text-[#07b4ba] uppercase shadow-lg">
                 FREE MMA Beginners Blueprint Session • <span className="text-white">July 05</span>
               </span>
-            </Reveal>
+            </div>
 
-            <Reveal type="fade-up" delay={300} duration={1200}>
+            <Reveal type="fade-up" delay={100} duration={1200}>
               <h1 className="font-['Bebas_Neue'] text-[clamp(28px,8vw,56px)] leading-[1] md:leading-[.93] tracking-[1.5px] md:tracking-[2px] uppercase text-white mb-4">
                 CONFUSED ABOUT HOW TO START MMA? <br />
                 <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
@@ -209,26 +226,41 @@ const BlueprintPage = () => {
               </h1>
             </Reveal>
 
-            <Reveal type="fade-up" delay={400} duration={1200}>
+            <Reveal type="fade-up" delay={200} duration={1200}>
               <p className="text-white/60 font-medium font-['Barlow'] text-[14px] md:text-[18px] mb-6 md:mb-8 italic">
                 Learn what to train first, what mistakes to avoid, and how to begin your MMA journey with confidence.
               </p>
             </Reveal>
 
-            <Reveal type="scale-up" delay={500} duration={1200}>
-              <div className="w-full max-w-xl mx-auto aspect-video mb-8 bg-gradient-to-b from-[#13171d] to-[#101318] border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.1)] rounded-2xl p-6 md:p-8">
-                <p className="text-[#07b4ba] text-[10px] md:text-[11px] font-bold uppercase tracking-[2px] md:tracking-[3px] mb-2 md:mb-3">
-                  This live workshop will show you how to earn
-                </p>
-                <p className="font-['Bebas_Neue'] text-[38px] md:text-[76px] tracking-[1px] text-white leading-none mb-2">
-                  $5K/MONTH
-                </p>
-                <p className="text-white/40 text-[11px] md:text-[13px] italic font-['Barlow']">The number most coaches are chasing</p>
+            {/* Premium Autoplaying, Auto-Muted Clean Video Player Section */}
+            <Reveal type="scale-up" delay={350} duration={1200}>
+              <div className="w-full max-w-xl mx-auto aspect-video mb-8 relative group">
+                <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden pointer-events-none select-none relative">
+                  <iframe
+                    ref={heroVideoRef}
+                    className="absolute inset-0 w-full h-full border-0 scale-105"
+                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                    title="MMA Beginners Blueprint Introduction Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  {/* Invisible blocker blocking native iframe header link overrides */}
+                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                </div>
+
+                {/* Floating audio control overlay */}
+                <button
+                  onClick={toggleHeroVideoMute}
+                  className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
+                  aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
+                >
+                  {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                </button>
               </div>
             </Reveal>
 
             {/* Injected Horizontal Single-Line Checkmark Grid */}
-            <Reveal type="fade-up" delay={600} duration={1200}>
+            <Reveal type="fade-up" delay={450} duration={1200}>
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8 text-[14px] md:text-[15px] font-semibold text-white/90 font-['Barlow']">
                 <span className="flex items-center gap-1.5">
                   <span className="text-[#07b4ba] font-bold text-[16px]">✓</span> MMA Roadmap
@@ -245,7 +277,7 @@ const BlueprintPage = () => {
               </p>
             </Reveal>
 
-            <Reveal type="fade-up" delay={700} duration={1200} className="mb-8 md:mb-12">
+            <Reveal type="fade-up" delay={550} duration={1200} className="mb-8 md:mb-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 max-w-md mx-auto sm:max-w-none">
                 <div className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[11px] md:text-[12px] font-bold tracking-[1px] md:tracking-[1.5px]">
                   <span>📅</span> Sunday, July 05 11:00 a.m. IST
@@ -333,7 +365,6 @@ const BlueprintPage = () => {
                   </div>
                   
                   <div className="flex flex-col flex-grow w-full items-center text-center">
-                    {/* Locked minimum height block so titles take exactly 2 lines of standard text space everywhere */}
                     <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[18px] tracking-[1px] md:tracking-[1.5px] leading-[1.2] m-0 text-center w-full min-h-[44px] flex items-center justify-center">
                       {item.title}
                     </h4>
@@ -359,20 +390,20 @@ const BlueprintPage = () => {
       </button>
 
       {/* ================= COACH SECTION ================= */}
-      <div className="bg-[#0f1115] border-t border-b border-white/5">
+      <div className="border-t border-b border-white/5 bg-[#0f1115]">
         <div className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE}`}>
-          <Reveal type="fade-down" duration={1000}>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-6">YOUR GUIDE FOR THIS SESSION</p>
-          </Reveal>
+          <div className="w-full mb-6">
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase">YOUR GUIDE FOR THIS SESSION</p>
+          </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
-            <Reveal type="fade-right" duration={1200} className="w-full md:w-auto">
+            <div className="w-full md:w-auto">
               <img
                 src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
                 alt="Head Coach"
                 className="w-full md:w-[240px] h-[260px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
                 style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
               />
-            </Reveal>
+            </div>
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={100} duration={1000}>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
@@ -527,8 +558,8 @@ const BlueprintPage = () => {
                   <div>
                     <p className="font-['Bebas_Neue'] text-[24px] text-[#07b4ba] tracking-[1.5px] mb-1">YOU'RE IN</p>
                     <p className="text-[13px] text-zinc-600 font-['Barlow'] max-w-xs mx-auto">
-                     Your registration has been successfully received. <br />
-Complete one final step to receive your session link, important announcements, and exclusive updates from Art of Fighting.
+                      Your registration has been successfully received. <br />
+                      Complete one final step to receive your session link, important announcements, and exclusive updates from Art of Fighting.
                     </p>
                   </div>
                   <div className="w-full pt-5 border-t border-zinc-100 flex flex-col items-center">
@@ -542,7 +573,7 @@ Complete one final step to receive your session link, important announcements, a
                       JOIN AOF WHATSAPP COMMUNITY
                     </a>
                     <p className="mt-2.5 text-[10px] text-zinc-500 font-['Barlow'] italic text-center leading-normal">
-                    This is where we'll share your Google Meet link, reminders, and everything you need before the session.
+                      This is where we'll share your Google Meet link, reminders, and everything you need before the session.
                     </p>
                   </div>
                 </div>
@@ -601,7 +632,7 @@ Complete one final step to receive your session link, important announcements, a
                     <label className="block text-[10px] font-bold text-zinc-700 uppercase tracking-widest mb-1.5">MOBILE NUMBER</label>
                     <input
                       type="tel"
-                      placeholder="+91 9XXXXXXXXX"
+                      placeholder="Your Phone Number"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
