@@ -340,6 +340,10 @@ export default function ProgramPage() {
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
+  
+  // Testimonial Scroll Observer State
+  const testimonialContainerRef = useRef<HTMLDivElement>(null);
+  const [playTestimonial, setPlayTestimonial] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
@@ -373,6 +377,25 @@ export default function ProgramPage() {
     const timerInterval = setInterval(updateTimer, 1000); // Check every second
 
     return () => clearInterval(timerInterval); // Cleanup interval on component unmount
+  }, []);
+
+  // Observer for Testimonial Video to Auto Play exactly when visible
+  useEffect(() => {
+    const el = testimonialContainerRef.current;
+    if (!el) return;
+    
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setPlayTestimonial(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.3 } // Triggers when 30% of the video container is visible
+    );
+    
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   const handlePayment = () => {
@@ -805,14 +828,22 @@ CHALLENGES OF BEGINNERS  </span>
             <div className="flex-1 max-w-full md:max-w-[550px] w-full">
               <Reveal type="fade-right" duration={1200}>
                 <div className="premium-hover rounded-[10px] overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                  <div className="relative w-full aspect-video">
-                    <iframe
-                      className="absolute inset-0 w-full h-full pointer-events-auto"
-                      src="https://www.youtube.com/embed/4Z8PSdk6Ak0?rel=0"
-                      title="AOF Testimonial Video"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                  <div className="relative w-full aspect-video bg-[#0b0b0b]" ref={testimonialContainerRef}>
+                    {!playTestimonial ? (
+                      <img 
+                        src="https://img.youtube.com/vi/4Z8PSdk6Ak0/maxresdefault.jpg" 
+                        alt="Testimonial Video Preview" 
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 transition-opacity duration-500"
+                      />
+                    ) : (
+                      <iframe
+                        className="absolute inset-0 w-full h-full pointer-events-auto"
+                        src="https://www.youtube.com/embed/4Z8PSdk6Ak0?rel=0&autoplay=1&mute=1"
+                        title="AOF Testimonial Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    )}
                   </div>
                 </div>
               </Reveal>
