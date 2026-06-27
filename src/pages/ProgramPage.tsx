@@ -133,7 +133,7 @@ function InfiniteFeedbackSlider() {
     const slider = sliderRef.current;
     const track = trackRef.current;
     if (!slider || !track) return;
-    const speed = 1;
+    const speed = 0;
     const getHalfWidth = () => track.scrollWidth / 2;
     const animate = () => {
       if (!isPausedRef.current) {
@@ -275,6 +275,7 @@ const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 
 const IconChart = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>);
 const IconGlobe = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
 
+// New Bonus Icons Optimized
 const IconStretch = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
     <circle cx="14" cy="5" r="2.5" />
@@ -335,12 +336,10 @@ export default function ProgramPage() {
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
-  
-  // Pain section video states
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
 
-  // Testimonials section video states
+  // Dedicated Testimonials Section Clean Player Ref States
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
   const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
 
@@ -354,25 +353,31 @@ export default function ProgramPage() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Timer Countdown Logic
+  // Timer Countdown Logic using exact target date
   useEffect(() => {
+    // Set exact dealine here: June 28, 2026
     const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
+
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
+
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0'),
           hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0')
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
         });
       } else {
+        // Halt at 00:00:00 once the deadline has been reached
         setTimeLeft({ days: "00", hours: "00", minutes: "00" });
       }
     };
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
-    return () => clearInterval(timerInterval);
+
+    updateTimer(); // Initial call
+    const timerInterval = setInterval(updateTimer, 1000); // Check every second
+
+    return () => clearInterval(timerInterval); // Cleanup interval on component unmount
   }, []);
 
   const handlePayment = () => {
@@ -386,7 +391,7 @@ export default function ProgramPage() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // Pain Video Overlay Mute Toggle
+  // Video Overlay Mute Toggle
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
       const func = isVideoMuted ? 'unMute' : 'mute';
@@ -395,7 +400,7 @@ export default function ProgramPage() {
     }
   };
 
-  // Testimonial Video Overlay Mute Toggle
+  // Custom Iframe API Poster for Testimonials Section clean player loop
   const toggleTestimonialMute = () => {
     if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
       const func = isTestimonialMuted ? 'unMute' : 'mute';
@@ -420,7 +425,7 @@ export default function ProgramPage() {
 
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between transition-all duration-300" style={GUTTER}>
-        <span className="font-['Bebas_Neue'] text-[30px] leading-[none] cursor-pointer hover:scale-105 transition-transform" onClick={() => navigate("/")}>
+        <span className="font-['Bebas_Neue'] text-[30px] leading-none cursor-pointer hover:scale-105 transition-transform" onClick={() => navigate("/")}>
           <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
         </span>
         <div className="flex items-center gap-3 md:gap-5">
@@ -532,7 +537,7 @@ export default function ProgramPage() {
           <div className="flex-1 w-full md:min-w-[260px] md:order-1">
             <Reveal type="fade-right" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
+              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white stroke-none leading-[1.1] mb-4">
                 YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
@@ -541,7 +546,7 @@ export default function ProgramPage() {
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3">
                   <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5 Freemium]">{p}</p>
                 </div>
               </Reveal>
             ))}
@@ -809,34 +814,31 @@ export default function ProgramPage() {
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
             
-            {/* LEFT: Premium Autoplaying, Auto-Muted Clean Video Player Frame */}
+            {/* SWAPPED AREA: Implemented Autoplaying Clean Iframe with localized custom mute controller */}
             <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
-              <Reveal type="fade-right" duration={1200}>
-                <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/10 bg-black shadow-[0_0_30px_rgba(7,180,186,0.15)] premium-hover pointer-events-none select-none">
-                  <iframe
-                    ref={testimonialVideoRef}
-                    className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
-                    title="AOF Testimonials Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  {/* Overlay blocker to hide hovers/related components natively */}
-                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-                </div>
-              </Reveal>
+              <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
+                <iframe
+                  ref={testimonialVideoRef}
+                  className="absolute inset-0 w-full h-full border-0 scale-105"
+                  src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                  title="AOF 30-Day Batch Student Results"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                {/* Pointer events canvas cover preventing drop downs on header wrapper regions */}
+                <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+              </div>
 
-              {/* Custom floating sound control button */}
+              {/* Custom floating localized controller block layer */}
               <button
                 onClick={toggleTestimonialMute}
-                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
-                aria-label={isTestimonialMuted ? "Unmute testimonial video" : "Mute testimonial video"}
+                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
+                aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
               >
-                {isTestimonialMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                {isTestimonialMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
               </button>
             </div>
 
-            {/* RIGHT: Content context text info */}
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={200} duration={1000}>
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
@@ -881,7 +883,7 @@ export default function ProgramPage() {
                   <div className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-0 mt-0 md:mb-2 md:mt-4 shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full mt-0 md:mt-0">
                     <h3 className="font-['Bebas_Neue'] text-[16px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-2 md:mb-1.5">{item.title}</h3>
-                    <p className="font-['Barlow'] text-[13px] md:text-[14px] text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
+                    <p className="font-['Barlow'] text-[13px] md:text-[14px]text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -989,21 +991,21 @@ export default function ProgramPage() {
                 </div>
               </Reveal>
             </div>
-
-            {/* Any Queries */}
-            <Reveal type="fade-up" delay={500} duration={1000}>
-              <div className="flex flex-col items-center gap-3 mt-8 md:mt-10">
-                <p className="text-white font-['Barlow'] font-bold text-[14px] md:text-[15px]">Any Queries?</p>
-                <button 
-                  onClick={handleWhatsAppClick}
-                  className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-all duration-500 cubic-bezier(0.22, 1, 0.36, 1) hover:scale-105 hover:shadow-[0_10px_25px_rgba(37,211,102,.4)] hover:-translate-y-1 shadow-[0_4px_18px_rgba(37,211,102,.35)]"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></svg>
-                  Chat On WhatsApp
-                </button>
-              </div>
-            </Reveal>
           </div>
+
+          {/* Any Queries */}
+          <Reveal type="fade-up" delay={500} duration={1000}>
+            <div className="flex flex-col items-center gap-3 mt-8 md:mt-10">
+              <p className="text-white font-['Barlow'] font-bold text-[14px] md:text-[15px]">Any Queries?</p>
+              <button 
+                onClick={handleWhatsAppClick}
+                className="inline-flex items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-8 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-all duration-500 cubic-bezier(0.22, 1, 0.36, 1) hover:scale-105 hover:shadow-[0_10px_25px_rgba(37,211,102,.4)] hover:-translate-y-1 shadow-[0_4px_18px_rgba(37,211,102,.35)]"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></svg>
+                Chat On WhatsApp
+              </button>
+            </div>
+          </Reveal>
         </div>
       </div>
 
