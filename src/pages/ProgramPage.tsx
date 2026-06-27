@@ -484,31 +484,7 @@ export default function ProgramPage() {
               </p>
             </Reveal>
 
-            {/* Premium Autoplaying Clean Video Player Section (Hero) */}
-            <Reveal type="scale-up" delay={700} duration={1200}>
-              <div className="w-full max-w-[480px] aspect-video mb-8 relative group">
-                <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden pointer-events-none select-none relative">
-                  <iframe
-                    ref={heroVideoRef}
-                    className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
-                    title="MMA Beginners Blueprint Introduction Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-                </div>
-
-                {/* Floating audio control overlay */}
-                <button
-                  onClick={toggleHeroVideoMute}
-                  className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
-                  aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
-                >
-                  {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-              </div>
-            </Reveal>
+          
 
             <Reveal type="scale-up" delay={800} duration={1200}>
               <button
