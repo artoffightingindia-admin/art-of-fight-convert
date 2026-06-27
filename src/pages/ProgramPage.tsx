@@ -339,11 +339,14 @@ export default function ProgramPage() {
   // Video Refs
   const painVideoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
-  const [isVideoMuted, setIsVideoMuted] = useState(false); // Default to unmuted
+  // ── CHANGE 1: default to true so video 1 starts muted ──
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
   
   const testimonialContainerRef = useRef<HTMLDivElement>(null);
   const video2Ref = useRef<HTMLIFrameElement>(null);
   const [playTestimonial, setPlayTestimonial] = useState(false);
+  // ── NEW: track mute state for testimonial video ──
+  const [isVideo2Muted, setIsVideo2Muted] = useState(true);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -357,7 +360,7 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
-    // Set exact dealine here: June 28, 2026
+    // Set exact deadline here: June 28, 2026
     const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
 
     const updateTimer = () => {
@@ -429,17 +432,21 @@ export default function ProgramPage() {
     return () => obs.disconnect(); 
   }, []);
 
-  // ── FORCE SOUND & PLAY ON LOAD ──
+  // ── FORCE MUTED PLAY ON LOAD (Video 1) ──
+  // Video starts muted by default; no need to send unMute on load
   const handlePainVideoLoad = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+      // Ensure it stays muted on load (matches mute=1 in src)
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
     }
   };
 
+  // ── FORCE MUTED PLAY ON LOAD (Video 2) ──
   const handleTestimonialVideoLoad = () => {
     if (video2Ref.current && video2Ref.current.contentWindow) {
-      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+      // Ensure it stays muted on load (matches mute=1 in src)
+      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
       video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
       video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
     }
@@ -456,12 +463,21 @@ export default function ProgramPage() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // Video Overlay Mute Toggle
+  // ── Video 1 Mute Toggle ──
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
       const func = isVideoMuted ? 'unMute' : 'mute';
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
       setIsVideoMuted(!isVideoMuted);
+    }
+  };
+
+  // ── Video 2 Mute Toggle ──
+  const toggleMute2 = () => {
+    if (video2Ref.current && video2Ref.current.contentWindow) {
+      const func = isVideo2Muted ? 'unMute' : 'mute';
+      video2Ref.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+      setIsVideo2Muted(!isVideo2Muted);
     }
   };
 
@@ -570,20 +586,23 @@ export default function ProgramPage() {
                     ref={videoRef}
                     onLoad={handlePainVideoLoad}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-src="https://www.youtube.com/embed/ymDRsWPnEH0?enablejsapi=1&autoplay=1&mute=0&rel=0"
+                    {/* ── CHANGE 2: mute=1 so video 1 starts muted, autoplay still works ── */}
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?enablejsapi=1&autoplay=1&mute=1&rel=0"
                     title="AOF Video"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  {/* Mobile Unmute Button Overlay */}
+                  {/* Mute/Unmute Button Overlay — shown on ALL screens for video 1 */}
                   <button
                     onClick={toggleMute}
-                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
+                    className="absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
                     aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
                   >
                     {isVideoMuted ? (
+                      /* Muted icon */
                       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
                     ) : (
+                      /* Unmuted icon */
                       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     )}
                   </button>
@@ -876,6 +895,7 @@ CHALLENGES OF BEGINNERS  </span>
             <div className="flex-1 max-w-full md:max-w-[550px] w-full">
               <Reveal type="fade-right" duration={1200}>
                 <div className="premium-hover rounded-[10px] overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                  {/* ── CHANGE 3: mute=1 so video 2 starts muted ── */}
                   <div className="relative w-full aspect-video bg-[#0b0b0b]" ref={testimonialContainerRef}>
                     {!playTestimonial ? (
                       <img 
@@ -888,11 +908,27 @@ CHALLENGES OF BEGINNERS  </span>
                         ref={video2Ref}
                         onLoad={handleTestimonialVideoLoad}
                         className="absolute inset-0 w-full h-full pointer-events-auto"
-                        src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=0&controls=1&rel=0&enablejsapi=1"
+                        src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=1&rel=0&enablejsapi=1"
                         title="AOF Testimonial Video"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       />
+                    )}
+                    {/* Mute/Unmute overlay for video 2 — only shown once iframe is mounted */}
+                    {playTestimonial && (
+                      <button
+                        onClick={toggleMute2}
+                        className="absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
+                        aria-label={isVideo2Muted ? "Unmute video" : "Mute video"}
+                      >
+                        {isVideo2Muted ? (
+                          /* Muted icon */
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                        ) : (
+                          /* Unmuted icon */
+                          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        )}
+                      </button>
                     )}
                   </div>
                 </div>
