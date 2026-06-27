@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
-import { Volume2, VolumeX } from "lucide-react";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
@@ -339,13 +338,6 @@ export default function ProgramPage() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
 
-  // Dedicated Testimonial Custom Player Ref States (Now initialized to false for default audio)
-  const heroVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
-
-  const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isTestimonialMuted, setIsTestimonialMuted] = useState(false);
-
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
 
@@ -358,6 +350,7 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
+    // Set exact dealine here: June 28, 2026
     const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
 
     const updateTimer = () => {
@@ -371,14 +364,15 @@ export default function ProgramPage() {
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0')
         });
       } else {
+        // Halt at 00:00:00 once the deadline has been reached
         setTimeLeft({ days: "00", hours: "00", minutes: "00" });
       }
     };
 
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer(); // Initial call
+    const timerInterval = setInterval(updateTimer, 1000); // Check every second
 
-    return () => clearInterval(timerInterval);
+    return () => clearInterval(timerInterval); // Cleanup interval on component unmount
   }, []);
 
   const handlePayment = () => {
@@ -392,33 +386,12 @@ export default function ProgramPage() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // Pain Section Video Overlay Mute Toggle
+  // Video Overlay Mute Toggle
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
       const func = isVideoMuted ? 'unMute' : 'mute';
       videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
       setIsVideoMuted(!isVideoMuted);
-    }
-  };
-
-  // Hero Section Video Audio Toggle
-  const toggleHeroVideoMute = () => {
-    if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
-      const command = isHeroVideoMuted ? 'unMute' : 'mute';
-      heroVideoRef.current.contentWindow.postMessage(
-        JSON.stringify({ event: 'command', func: command, args: [] }), 
-        '*'
-      );
-      setIsHeroVideoMuted(!isHeroVideoMuted);
-    }
-  };
-
-  // Localized frame message pipe poster for Testimonial Clean Player
-  const toggleTestimonialMute = () => {
-    if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
-      const func = isTestimonialMuted ? 'unMute' : 'mute';
-      testimonialVideoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsTestimonialMuted(!isTestimonialMuted);
     }
   };
 
@@ -483,33 +456,6 @@ export default function ProgramPage() {
                 A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before.
               </p>
             </Reveal>
-
-            {/* Premium Autoplaying Clean Video Player Section (Hero) */}
-            <Reveal type="scale-up" delay={700} duration={1200}>
-              <div className="w-full max-w-[480px] aspect-video mb-8 relative group">
-                <div className="w-full h-full bg-black border border-[#07b4ba]/20 shadow-[0_0_30px_rgba(7,180,186,0.15)] rounded-2xl overflow-hidden pointer-events-none select-none relative">
-                  <iframe
-                    ref={heroVideoRef}
-                    className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/7WqUa9XDoR0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
-                    title="MMA Beginners Blueprint Introduction Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-                </div>
-
-                {/* Floating audio control overlay */}
-                <button
-                  onClick={toggleHeroVideoMute}
-                  className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
-                  aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
-                >
-                  {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-              </div>
-            </Reveal>
-
             <Reveal type="scale-up" delay={800} duration={1200}>
               <button
                 className="btn-glow inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer"
@@ -578,7 +524,8 @@ export default function ProgramPage() {
             <Reveal type="fade-right" duration={1000}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
               <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
+                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">
+HAVEN'T STARTED  </span> BECAUSE YOU:
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
             </Reveal>
@@ -650,7 +597,9 @@ export default function ProgramPage() {
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS  </span></h2>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">
+CHALLENGES OF BEGINNERS  </span>
+</h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -706,7 +655,7 @@ export default function ProgramPage() {
                 className={`absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:-translate-x-1 transition-all duration-300 ${roadmapIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >‹</button>
               <button 
-                onClick={() => setRoadmapIndex(p => Math.min(maxRoadmaxIndex, p + 1))} 
+                onClick={() => setRoadmapIndex(p => Math.min(maxRoadmapIndex, p + 1))} 
                 className={`absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:translate-x-1 transition-all duration-300 ${roadmapIndex === maxRoadmapIndex ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >›</button>
 
@@ -853,33 +802,21 @@ export default function ProgramPage() {
             </div>
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
-            
-            {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME (Configured to load unmuted, without captions) */}
-            <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
+            <div className="flex-1 max-w-full md:max-w-[550px] w-full">
               <Reveal type="fade-right" duration={1200}>
-                <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
-                  <iframe
-                    ref={testimonialVideoRef}
-                    className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&cc_load_policy=0"
-                    title="AOF 30-Day Batch Student Results"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                <div className="premium-hover rounded-[10px] overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                  <div className="relative w-full aspect-video">
+                    <iframe
+                      className="absolute inset-0 w-full h-full pointer-events-auto"
+                      src="https://www.youtube.com/embed/4Z8PSdk6Ak0?rel=0"
+                      title="AOF Testimonial Video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
               </Reveal>
-
-              {/* Custom floating localized controller block layer */}
-              <button
-                onClick={toggleTestimonialMute}
-                className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer pointer-events-auto"
-                aria-label={isTestimonialMuted ? "Mute feedback video" : "Unmute feedback video"}
-              >
-                {isTestimonialMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
-              </button>
             </div>
-
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={200} duration={1000}>
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
