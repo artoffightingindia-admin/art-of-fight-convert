@@ -1,84 +1,87 @@
 import { useState } from "react";
-import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const StickyAd = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
-
-  if (!isVisible) return null;
 
   const handleReserveClick = () => {
     navigate("/blueprint");
   };
 
   return (
-    <div className="hidden lg:fixed lg:right-0 lg:top-24 lg:w-80 lg:z-40 lg:flex lg:flex-col">
-      {/* Sticky Ad Container */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border border-cyan-500/30 rounded-lg overflow-hidden shadow-2xl shadow-cyan-500/20 mx-4">
-        {/* Close Button */}
-        <button
-          onClick={() => setIsVisible(false)}
-          className="absolute top-3 right-3 z-50 bg-slate-700/80 hover:bg-slate-600 rounded-full p-1.5 transition-all duration-200 group"
-          aria-label="Close ad"
-        >
-          <X className="w-4 h-4 text-cyan-400 group-hover:text-cyan-300" />
-        </button>
+    <div 
+      className={`hidden lg:flex fixed top-28 right-0 z-50 transition-all duration-500 ease-in-out transform ${
+        isOpen ? "translate-x-0" : "translate-x-[320px]"
+      }`}
+    >
+      {/* Toggle Handle Button (Push In / Out) */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#05070b] border-y border-l border-[#07b4ba]/30 text-[#07b4ba] hover:text-white px-2 py-4 rounded-l-xl shadow-lg transition-colors duration-300 flex items-center justify-center font-bebas text-sm tracking-widest [writing-mode:vertical-lr] rotate-180 select-none cursor-pointer"
+        style={{ boxShadow: "0 0 15px rgba(7,180,186,0.15)" }}
+      >
+        {isOpen ? "» CLOSE OFFER" : "« LIVE SESSION OFFER"}
+      </button>
 
-        {/* Content */}
-        <div className="p-6 space-y-4">
-          {/* Header */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold tracking-widest text-cyan-400 uppercase">
-              Limited Offer
-            </h3>
-            <h2 className="font-bebas text-2xl text-white leading-none">
-              FREE
+      {/* Sticky Ad Box (Matches Screenshot Layout & Landing Page Styling) */}
+      <div className="w-80 bg-[#05070b] border-l border-y border-[#07b4ba]/30 rounded-tl-2xl rounded-bl-2xl overflow-hidden shadow-2xl shadow-cyan-500/10 relative">
+        {/* Main Wrapper matching p-6 space-y-4 structure */}
+        <div className="p-6 space-y-5 relative z-10">
+          
+          {/* Header Area */}
+          <div className="flex items-start justify-between">
+            <h2 className="font-bebas text-4xl text-white leading-[0.95] tracking-wide">
+              <span className="text-[#07b4ba]">FREE</span>
               <br />
-              <span className="text-cyan-400">LIVE SESSION</span>
+              <span className="text-[17px] tracking-[3px] font-sans font-bold block mt-1 text-white/90">
+                LIVE SESSION
+              </span>
             </h2>
           </div>
 
-          {/* Main Message */}
-          <p className="text-white font-bebas text-lg leading-tight">
-            DON'T KNOW HOW TO START MMA?
+          <div className="w-full h-[1px] bg-white/10 my-1" />
+
+          {/* Main Hook Message */}
+          <p className="text-white font-bebas text-2xl tracking-wide leading-tight uppercase">
+            Don't know how to start MMA?
           </p>
 
-          {/* Description */}
-          <p className="text-slate-300 text-sm leading-relaxed font-barlow">
+          {/* Core Subtitle / Value Statement */}
+          <p className="text-white/70 font-barlow text-[15px] leading-relaxed italic">
             Avoid months of confusion.
           </p>
 
-          {/* Benefits / Icon */}
-          <div className="flex items-center gap-3 py-2">
-            <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-cyan-400/10 border border-cyan-400/30">
-                <svg
-                  className="h-6 w-6 text-cyan-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
+          {/* Feature Highlight Row with Icon */}
+          <div className="flex items-center gap-3 py-1">
+            <div className="flex-shrink-0 w-8 h-8 rounded-full border border-[#07b4ba] bg-[#07b4ba]/10 flex items-center justify-center text-[#07b4ba] shadow-[0_0_10px_rgba(7,180,186,0.2)]">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
             </div>
-            <p className="text-slate-200 text-sm font-barlow">
+            <p className="text-white/80 font-barlow text-[14px] font-medium leading-tight">
               Join our free live beginner session.
             </p>
           </div>
 
-          {/* CTA Button */}
+          {/* Primary CTA Button (Employs landing page btn-glow characteristics) */}
           <button
             onClick={handleReserveClick}
-            className="w-full bg-gradient-to-r from-cyan-500 to-cyan-400 hover:from-cyan-400 hover:to-cyan-300 text-slate-900 font-bebas text-sm tracking-wider py-3 px-4 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/50 hover:shadow-cyan-400/70"
+            className="btn-glow w-full bg-[#07b4ba] hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(7,180,186,0.6)] text-white font-bebas text-lg tracking-[2px] py-3.5 px-4 rounded-xl font-bold border-none transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#07b4ba]/20"
           >
             RESERVE MY FREE SEAT
             <svg
-              className="w-4 h-4"
+              className="w-4 h-4 stroke-[2.5]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -86,22 +89,21 @@ const StickyAd = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </svg>
           </button>
 
-          {/* Bottom accent */}
-          <div className="pt-2 border-t border-slate-700/50">
-            <p className="text-xs text-slate-400 text-center">
+          {/* Subtext Footer Accent */}
+          <div className="pt-2 border-t border-white/5">
+            <p className="text-[11px] font-barlow tracking-[1.5px] uppercase text-white/40 text-center font-semibold">
               Limited spots available
             </p>
           </div>
         </div>
 
-        {/* Gradient overlay effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
+        {/* Diagonal Subtle Premium Ambient Glow Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#07b4ba]/5 via-transparent to-transparent pointer-events-none z-0" />
       </div>
     </div>
   );
