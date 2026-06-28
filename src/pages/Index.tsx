@@ -1,4 +1,4 @@
-\import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -16,25 +16,25 @@ const Index = () => (
     <StickyAd />
     <Navbar />
     <HeroSection />
-    <Reveal animation="fade-up">
+    <Reveal type="fade-up">
       <IntroSection />
     </Reveal>
-    <Reveal animation="fade-up">
+    <Reveal type="fade-up">
       <ServicesSection />
     </Reveal>
-    <Reveal animation="fade-up">
+    <Reveal type="fade-up">
       <CoachSection />
     </Reveal>
-    <Reveal animation="scale-in">
+    <Reveal type="scale-up">
       <SocialProofSection />
     </Reveal>
-    <Reveal animation="fade-up">
+    <Reveal type="fade-up">
       <TestimonialsSection />
     </Reveal>
-    <Reveal animation="scale-in">
+    <Reveal type="scale-up">
       <CtaPairSection />
     </Reveal>
-    <Reveal animation="fade-up">
+    <Reveal type="fade-up">
       <ContactSection />
     </Reveal>
     <Footer />
