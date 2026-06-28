@@ -275,26 +275,30 @@ const BlueprintPage = () => {
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0">
           <div className="w-full relative z-10 text-center px-4 md:px-0">
             
-            <div className="mb-6 mt-2 inline-block">
-              <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2 text-[10px] md:text-[12px] font-bold tracking-[2px] md:tracking-[3px] text-[#07b4ba] uppercase shadow-lg">
-                FREE MMA Beginners Blueprint Session • <span className="text-white">July 05</span>
+            {/* OPTIMIZED MOBILE HEADING BLOCK START */}
+            <div className="mb-6 mt-4 md:mt-2 flex justify-center w-full">
+              <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2.5 md:py-2 text-[10px] md:text-[12px] font-bold tracking-[1.5px] md:tracking-[3px] text-[#07b4ba] uppercase shadow-lg flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 md:inline-flex max-w-[90vw] text-center">
+                <span>FREE MMA Beginners Blueprint Session</span> 
+                <span className="hidden md:inline text-white/40">•</span> 
+                <span className="text-white">July 05</span>
               </span>
             </div>
 
             <Reveal type="fade-up" delay={100} duration={1200}>
-              <h1 className="font-['Bebas_Neue'] text-[clamp(28px,8vw,56px)] leading-[1] md:leading-[.93] tracking-[1.5px] md:tracking-[2px] uppercase text-white mb-4">
-                CONFUSED ABOUT HOW TO START MMA? <br />
-                <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
+              <h1 className="font-['Bebas_Neue'] text-[40px] sm:text-[46px] md:text-[56px] leading-[1.05] md:leading-[.93] tracking-[1px] md:tracking-[2px] uppercase text-white mb-5 mx-auto max-w-[95vw] md:max-w-none">
+                CONFUSED ABOUT HOW TO START MMA? <br className="hidden md:block" />
+                <span className="block mt-1 md:inline md:mt-0 text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
                   GET THE CLARITY TO FINALLY BEGIN.
                 </span>
               </h1>
             </Reveal>
 
             <Reveal type="fade-up" delay={200} duration={1200}>
-              <p className="text-white/60 font-medium font-['Barlow'] text-[14px] md:text-[18px] mb-6 md:mb-8 italic">
+              <p className="text-white/70 font-medium font-['Barlow'] text-[15px] md:text-[18px] leading-[1.5] md:leading-normal mb-8 md:mb-8 italic max-w-[320px] md:max-w-2xl mx-auto">
                 Learn what to train first, what mistakes to avoid, and how to begin your MMA journey with confidence.
               </p>
             </Reveal>
+            {/* OPTIMIZED MOBILE HEADING BLOCK END */}
 
             {/* Premium Autoplaying Clean Video Player Section */}
             <Reveal type="scale-up" delay={350} duration={1200}>
