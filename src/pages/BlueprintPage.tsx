@@ -104,8 +104,8 @@ const IconConfidenceMindset = () => (
 );
 
 /* ── CONTEXT PARAMETER SVGs ── */
-const IconBroadcast = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" /><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /></svg>);
-const IconTarget = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>);
+const IconBroadcast = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M4 12c0 1.657.895 3.108 2.228 3.9M20 12c0-1.657-.895-3.108-2.228-3.9M4 12c0 3.314 1.79 6.208 4.471 7.779M20 12c0 3.314-1.79 6.208-4.471 7.779M12 2v20M7 12c0 2.761 2.239 5 5 5s5-2.239 5-5"/></svg>);
+const IconTarget = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
 
 const IconCalendar = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
@@ -149,6 +149,45 @@ const BlueprintPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Set meta tags for Blueprint page
+    document.title = "Free MMA Beginners Blueprint Session | Art of Fighting India";
+    
+    const updateMetaTag = (name: string, content: string) => {
+      let meta = document.querySelector(`meta[name="${name}"]`);
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", name);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", content);
+    };
+
+    const updateOgTag = (property: string, content: string) => {
+      let meta = document.querySelector(`meta[property="${property}"]`);
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("property", property);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", content);
+    };
+
+    // Meta descriptions
+    updateMetaTag("description", "Join our FREE live MMA Beginners Blueprint session. Get clarity on how to start MMA, choose the right gym, build confidence, and avoid common mistakes. Exclusive Q&A with expert fighters.");
+    updateMetaTag("keywords", "free MMA session, MMA beginners, MMA roadmap, how to start MMA, MMA fundamentals, beginner MMA training");
+    updateMetaTag("viewport", "width=device-width, initial-scale=1.0");
+
+    // Open Graph tags
+    updateOgTag("og:title", "Free MMA Beginners Blueprint Session | Art of Fighting India");
+    updateOgTag("og:description", "Join a FREE live MMA session to get clarity on starting your MMA journey with expert guidance and Q&A.");
+    updateOgTag("og:type", "website");
+    updateOgTag("og:url", window.location.origin + "/blueprint");
+
+    // Twitter Card tags
+    updateMetaTag("twitter:card", "summary_large_image");
+    updateMetaTag("twitter:title", "Free MMA Beginners Blueprint Session | Art of Fighting India");
+    updateMetaTag("twitter:description", "Get free expert guidance on starting MMA with live Q&A and personalized clarity.");
   }, []);
 
   // Intersection Observer to auto-pause/play based on scroll visibility
@@ -283,7 +322,7 @@ const BlueprintPage = () => {
             
             {/* OPTIMIZED MOBILE HEADING BLOCK START */}
             <div className="mb-6 mt-4 md:mt-2 flex justify-center w-full">
-              <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2.5 md:py-2 text-[10px] md:text-[12px] font-bold tracking-[1.5px] md:tracking-[3px] text-[#07b4ba] uppercase shadow-lg flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 md:inline-flex max-w-[90vw] text-center">
+              <span className="bg-[#111419]/90 border border-white/10 rounded-full px-4 py-2.5 md:py-2 text-[10px] md:text-[12px] font-bold tracking-[1.5px] md:tracking-[3px] text-[#07b4ba] uppercase">
                 <span>FREE MMA Beginners Blueprint Session</span> 
                 <span className="hidden md:inline text-white/40">•</span> 
                 <span className="text-white">July 05</span>
@@ -291,7 +330,7 @@ const BlueprintPage = () => {
             </div>
 
             <Reveal type="fade-up" delay={100} duration={1200}>
-              <h1 className="font-['Bebas_Neue'] text-[40px] sm:text-[46px] md:text-[56px] leading-[1.05] md:leading-[.93] tracking-[1px] md:tracking-[2px] uppercase text-white mb-5 mx-auto max-w-[95vw] md:max-w-none">
+              <h1 className="font-['Bebas_Neue'] text-[40px] sm:text-[46px] md:text-[56px] leading-[1.05] md:leading-[.93] tracking-[1px] md:tracking-[2px] uppercase text-white mb-5 mx-auto max-w-4xl">
                 CONFUSED ABOUT HOW TO START MMA? <br className="hidden md:block" />
                 <span className="block mt-1 md:inline md:mt-0 text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.25)]">
                   GET THE CLARITY TO FINALLY BEGIN.
@@ -331,7 +370,7 @@ const BlueprintPage = () => {
                 <div className="absolute bottom-4 left-4 z-20 flex gap-3 pointer-events-auto">
                   <button
                     onClick={togglePlayPause}
-                    className="flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer"
+                    className="flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg"
                     aria-label={isPlaying ? "Pause introduction video" : "Play introduction video"}
                   >
                     {isPlaying ? <Pause className="w-4 h-4" fill="currentColor" /> : <Play className="w-4 h-4" fill="currentColor" />}
@@ -339,7 +378,7 @@ const BlueprintPage = () => {
 
                   <button
                     onClick={toggleHeroVideoMute}
-                    className="flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm cursor-pointer"
+                    className="flex items-center justify-center p-3 bg-black/70 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-lg"
                     aria-label={isHeroVideoMuted ? "Unmute introduction video" : "Mute introduction video"}
                   >
                     {isHeroVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -368,7 +407,7 @@ const BlueprintPage = () => {
 
             <Reveal type="fade-up" delay={550} duration={1200} className="mb-8 md:mb-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 max-w-md mx-auto sm:max-w-none">
-                <div className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[11px] md:text-[12px] font-bold tracking-[1px] md:tracking-[1.5px]">
+                <div className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#13171d] border border-white/10 rounded-lg px-4 py-2.5 text-[11px] md:text-[12px] font-bold tracking-[1px]">
                   <span>📅</span> Sunday, July 05 11:00 a.m. IST
                 </div>
                 <div className="w-full sm:w-auto bg-red-950/40 border border-red-900/40 rounded-lg px-4 py-2.5 text-[10px] md:text-[11px] font-black tracking-[1px] md:tracking-[1.5px] text-red-50">
@@ -377,7 +416,7 @@ const BlueprintPage = () => {
               </div>
               <button
                 onClick={scrollToForm}
-                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] md:text-[16px] uppercase tracking-wider cursor-pointer border-none hover:bg-[#06a2a7]"
+                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] md:text-[16px] tracking-[1px] uppercase hover:bg-[#06a2a7] transition-all"
               >
                 Join The Free Blueprint
               </button>
@@ -435,10 +474,10 @@ const BlueprintPage = () => {
       </section>
 
       {/* ================= WHY THIS PROGRAM WORKS GRID ================= */}
-      <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "40px 40px" }}>
+      <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)" }}>
         <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
-            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
+            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION YOU'LL KNOW:</p>
             <div className="w-full h-2" />
           </Reveal>
           
@@ -471,7 +510,7 @@ const BlueprintPage = () => {
       {/* ================= CLICKABLE STRIP BUTTON ================= */}
       <button 
         onClick={scrollToForm}
-        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none hover:bg-[#06a2a7]"
+        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none hover:bg-[#06a2a7] transition-colors"
       >
         JOIN NOW
       </button>
@@ -486,7 +525,7 @@ const BlueprintPage = () => {
             <div className="w-full md:w-auto">
               <img
                 src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
-                alt="Head Coach"
+                alt="Head Coach Purushothaman MK"
                 className="w-full md:w-[240px] h-[260px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
                 style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
               />
@@ -655,7 +694,7 @@ const BlueprintPage = () => {
                       href="https://chat.whatsapp.com/G0rrNtZAYOkAFpOjqEv4nL"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-glow inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] text-white font-['Bebas_Neue'] text-[18px] tracking-[1.5px] rounded-xl cursor-pointer border-none hover:bg-[#1f9d52]"
+                      className="btn-glow inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] text-white font-['Bebas_Neue'] text-[18px] tracking-[1.5px] rounded-xl cursor-pointer hover:bg-[#1fad50] transition-all"
                     >
                       JOIN AOF WHATSAPP COMMUNITY
                     </a>
@@ -738,7 +777,7 @@ const BlueprintPage = () => {
                         value={situation}
                         onChange={(e) => setSituation(e.target.value)}
                         required
-                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-300 rounded-lg text-base lg:text-[13px] text-zinc-900 font-medium focus:outline-none focus:border-[#07b4ba] focus:ring-1 focus:ring-[#07b4ba]/20"
+                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-300 rounded-lg text-base lg:text-[13px] text-zinc-900 font-medium focus:outline-none focus:border-[#07b4ba] focus:ring-1 focus:ring-[#07b4ba]/20 appearance-none transition-colors"
                       >
                         <option value="" disabled className="text-zinc-400">Select an option...</option>
                         <option value="a. I want to start mma and need clear direction">I want to start MMA and need clear direction</option>
@@ -755,7 +794,7 @@ const BlueprintPage = () => {
                   <button
                     type="submit"
                     disabled={!name || !email || !phone || !situation || isSubmitting}
-                    className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
                     {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
                   </button>
