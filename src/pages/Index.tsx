@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+\import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import IntroSection from "@/components/IntroSection";
 import ServicesSection from "@/components/ServicesSection";
