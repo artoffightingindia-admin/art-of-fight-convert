@@ -443,7 +443,7 @@ const BlueprintPage = () => {
           </Reveal>
 
           <Reveal type="fade-up" delay={150} duration={1000}>
-  <h2 className="text-center font-['Bebas_Neue'] uppercase text-white text-[44px] md:text-[72px] leading-[0.9] tracking-[1px] mb-10">
+ <h2 className="text-center font-['Bebas_Neue'] uppercase text-white text-[36px] md:text-[60px] leading-[0.9] tracking-[1px] mb-10">
     You'll Leave With A Clear{" "}
     <span className="text-[#07b4ba]">
       Roadmap To Start MMA
