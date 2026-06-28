@@ -441,6 +441,15 @@ const BlueprintPage = () => {
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
             <div className="w-full h-2" />
           </Reveal>
+
+          <Reveal type="fade-up" delay={150} duration={1000}>
+  <h2 className="text-center font-['Bebas_Neue'] uppercase text-white text-[44px] md:text-[72px] leading-[0.9] tracking-[1px] mb-10">
+    You'll Leave With A Clear{" "}
+    <span className="text-[#07b4ba]">
+      Roadmap To Start MMA
+    </span>
+  </h2>
+</Reveal>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
