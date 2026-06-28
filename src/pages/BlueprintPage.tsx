@@ -185,7 +185,13 @@ const BlueprintPage = () => {
   }, []);
 
   const scrollToForm = () => {
-    const element = document.getElementById("email-form-section");
+    // Check if the screen is mobile/tablet width (under 1024px)
+    const isMobile = window.innerWidth < 1024;
+    
+    // Choose the target ID dynamically
+    const targetId = isMobile ? "registration-form" : "email-form-section";
+    const element = document.getElementById(targetId);
+    
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -604,7 +610,7 @@ const BlueprintPage = () => {
           </div>
 
           {/* Right Panel: REGISTRATION FORM */}
-          <div className="p-4 sm:p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
+          <div id="registration-form" className="p-4 sm:p-8 md:p-14 lg:p-20 bg-[#0d1117] flex items-center justify-center">
             <div className="bg-white border border-zinc-200 text-zinc-950 rounded-2xl p-5 sm:p-6 md:p-9 w-full max-w-md shadow-2xl relative overflow-hidden">
               
               {!submitted && (
