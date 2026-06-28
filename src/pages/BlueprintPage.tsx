@@ -396,7 +396,7 @@ const BlueprintPage = () => {
               <div className="premium-hover rounded-[14px] overflow-hidden border border-zinc-200 shadow-xl bg-zinc-100">
                 <div className="relative w-full aspect-video">
                   <img 
-                    src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" 
+                    src="https://i.postimg.cc/1txSt1v7/Intro-AOF-jpg.jpg" 
                     alt="Art of Fighting Program Overview Illustration"
                     className="absolute inset-0 w-full h-full object-cover object-center"
                   />
