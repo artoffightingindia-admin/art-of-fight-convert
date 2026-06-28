@@ -142,8 +142,8 @@ const BlueprintPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Video context states
-  const heroVideoRef = useRef<HTMLIFrameElement>(null);
-  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const heroVideoRef = useRef(null);
+  const videoContainerRef = useRef(null);
   const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
 
@@ -153,7 +153,7 @@ const BlueprintPage = () => {
     // Set meta tags for Blueprint page
     document.title = "Free MMA Beginners Blueprint Session | Art of Fighting India";
     
-    const updateMetaTag = (name: string, content: string) => {
+    const updateMetaTag = (name, content) => {
       let meta = document.querySelector(`meta[name="${name}"]`);
       if (!meta) {
         meta = document.createElement("meta");
@@ -163,7 +163,7 @@ const BlueprintPage = () => {
       meta.setAttribute("content", content);
     };
 
-    const updateOgTag = (property: string, content: string) => {
+    const updateOgTag = (property, content) => {
       let meta = document.querySelector(`meta[property="${property}"]`);
       if (!meta) {
         meta = document.createElement("meta");
@@ -192,6 +192,8 @@ const BlueprintPage = () => {
 
   // Intersection Observer to auto-pause/play based on scroll visibility
   useEffect(() => {
+    const currentRef = videoContainerRef.current;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -209,16 +211,16 @@ const BlueprintPage = () => {
           }
         }
       },
-      { threshold: 0.2 } // Triggers when 20% of the element is visible
+      { threshold: 0.2 }
     );
 
-    if (videoContainerRef.current) {
-      observer.observe(videoContainerRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (videoContainerRef.current) {
-        observer.unobserve(videoContainerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -252,8 +254,8 @@ const BlueprintPage = () => {
   };
 
   // Custom Video Audio Toggle Function
-  const toggleHeroVideoMute = (e?: React.MouseEvent) => {
-    e?.stopPropagation(); // Prevent play/pause toggle from triggering if clicked directly
+  const toggleHeroVideoMute = (e) => {
+    if (e) e.stopPropagation();
     if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
       const command = isHeroVideoMuted ? 'unMute' : 'mute';
       heroVideoRef.current.contentWindow.postMessage(
@@ -265,8 +267,8 @@ const BlueprintPage = () => {
   };
 
   // Custom Video Play/Pause Toggle Function
-  const togglePlayPause = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
+  const togglePlayPause = (e) => {
+    if (e) e.stopPropagation();
     if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
       const command = isPlaying ? 'pauseVideo' : 'playVideo';
       heroVideoRef.current.contentWindow.postMessage(
@@ -307,12 +309,12 @@ const BlueprintPage = () => {
     { val: "10K+", label: "AOF Community" },
   ];
 
-  const GUTTER: React.CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
+  const GUTTER = { paddingLeft: "1cm", paddingRight: "1cm" };
   const SECTION_INSET_RESPONSIVE = "px-4 md:px-[140px]";
 
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
-      <style>{premiumStyles}</style>
+      <style dangerouslySetInnerHTML={{ __html: premiumStyles }} />
       <Navbar />
 
       {/* ================= HERO SECTION ================= */}
