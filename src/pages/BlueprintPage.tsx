@@ -485,7 +485,7 @@ const BlueprintPage = () => {
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
             <div className="w-full md:w-auto">
               <img
-                src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
+                src="https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"
                 alt="Head Coach"
                 className="w-full md:w-[240px] h-[260px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
                 style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
