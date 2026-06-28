@@ -141,56 +141,18 @@ const BlueprintPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // JS refs instead of TS refs
-  const heroVideoRef = useRef(null);
-  const videoContainerRef = useRef(null);
+  // Video context states
+  const heroVideoRef = useRef<HTMLIFrameElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  // Setup Meta Tags and scroll top
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    document.title = "Free MMA Beginners Blueprint Session | Art of Fighting India";
-    
-    const updateMetaTag = (name, content) => {
-      let meta = document.querySelector(`meta[name="${name}"]`);
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("name", name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute("content", content);
-    };
-
-    const updateOgTag = (property, content) => {
-      let meta = document.querySelector(`meta[property="${property}"]`);
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("property", property);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute("content", content);
-    };
-
-    updateMetaTag("description", "Join our FREE live MMA Beginners Blueprint session. Get clarity on how to start MMA, choose the right gym, build confidence, and avoid common mistakes. Exclusive Q&A with expert fighters.");
-    updateMetaTag("keywords", "free MMA session, MMA beginners, MMA roadmap, how to start MMA, MMA fundamentals, beginner MMA training");
-    updateMetaTag("viewport", "width=device-width, initial-scale=1.0");
-
-    updateOgTag("og:title", "Free MMA Beginners Blueprint Session | Art of Fighting India");
-    updateOgTag("og:description", "Join a FREE live MMA session to get clarity on starting your MMA journey with expert guidance and Q&A.");
-    updateOgTag("og:type", "website");
-    updateOgTag("og:url", window.location.origin + "/blueprint");
-
-    updateMetaTag("twitter:card", "summary_large_image");
-    updateMetaTag("twitter:title", "Free MMA Beginners Blueprint Session | Art of Fighting India");
-    updateMetaTag("twitter:description", "Get free expert guidance on starting MMA with live Q&A and personalized clarity.");
   }, []);
 
   // Intersection Observer to auto-pause/play based on scroll visibility
   useEffect(() => {
-    const currentRef = videoContainerRef.current;
-
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -211,19 +173,22 @@ const BlueprintPage = () => {
       { threshold: 0.2 } // Triggers when 20% of the element is visible
     );
 
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (videoContainerRef.current) {
+      observer.observe(videoContainerRef.current);
     }
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (videoContainerRef.current) {
+        observer.unobserve(videoContainerRef.current);
       }
     };
   }, []);
 
   const scrollToForm = () => {
+    // Check if the screen is mobile/tablet width (under 1024px)
     const isMobile = window.innerWidth < 1024;
+    
+    // Choose the target ID dynamically
     const targetId = isMobile ? "registration-form" : "email-form-section";
     const element = document.getElementById(targetId);
     
@@ -232,6 +197,7 @@ const BlueprintPage = () => {
     }
   };
 
+  // Force play and unmute as soon as the YouTube iframe is loaded
   const handleIframeLoad = () => {
     if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
       heroVideoRef.current.contentWindow.postMessage(
@@ -246,8 +212,9 @@ const BlueprintPage = () => {
     }
   };
 
-  const toggleHeroVideoMute = (e) => {
-    if (e) e.stopPropagation(); 
+  // Custom Video Audio Toggle Function
+  const toggleHeroVideoMute = (e?: React.MouseEvent) => {
+    e?.stopPropagation(); // Prevent play/pause toggle from triggering if clicked directly
     if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
       const command = isHeroVideoMuted ? 'unMute' : 'mute';
       heroVideoRef.current.contentWindow.postMessage(
@@ -258,8 +225,9 @@ const BlueprintPage = () => {
     }
   };
 
-  const togglePlayPause = (e) => {
-    if (e) e.stopPropagation();
+  // Custom Video Play/Pause Toggle Function
+  const togglePlayPause = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
       const command = isPlaying ? 'pauseVideo' : 'playVideo';
       heroVideoRef.current.contentWindow.postMessage(
@@ -300,12 +268,12 @@ const BlueprintPage = () => {
     { val: "10K+", label: "AOF Community" },
   ];
 
-  const GUTTER = { paddingLeft: "1cm", paddingRight: "1cm" };
+  const GUTTER: React.CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
   const SECTION_INSET_RESPONSIVE = "px-4 md:px-[140px]";
 
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
-      <style dangerouslySetInnerHTML={{ __html: premiumStyles }} />
+      <style>{premiumStyles}</style>
       <Navbar />
 
       {/* ================= HERO SECTION ================= */}
@@ -770,7 +738,7 @@ const BlueprintPage = () => {
                         value={situation}
                         onChange={(e) => setSituation(e.target.value)}
                         required
-                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-300 rounded-lg text-base lg:text-[13px] text-zinc-900 font-medium focus:outline-none focus:border-[#07b4ba] focus:ring-1 focus:ring-[#07b4ba]/20 appearance-none transition-colors"
+                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-300 rounded-lg text-base lg:text-[13px] text-zinc-900 font-medium focus:outline-none focus:border-[#07b4ba] focus:ring-1 focus:ring-[#07b4ba]/20"
                       >
                         <option value="" disabled className="text-zinc-400">Select an option...</option>
                         <option value="a. I want to start mma and need clear direction">I want to start MMA and need clear direction</option>
