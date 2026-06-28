@@ -37,7 +37,7 @@ const StickyAd = () => {
       {/* ---------------------------------------------------- */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#0d0f12] border-y border-l border-[#07b4ba]/30 text-[#07b4ba] hover:text-white px-2 py-4 rounded-l-xl shadow-xl transition-all duration-300 items-center justify-center cursor-pointer"
+        className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#0d0f12] border-y border-l border-[#D4AF37]/30 text-[#D4AF37] hover:text-white px-2 py-4 rounded-l-xl shadow-xl transition-all duration-300 items-center justify-center cursor-pointer"
         aria-label={isOpen ? "Push ad out" : "Push ad in"}
       >
         {isOpen ? <ChevronRight className="w-5 h-5 animate-pulse" /> : <ChevronLeft className="w-5 h-5" />}
@@ -48,7 +48,7 @@ const StickyAd = () => {
       {/* ---------------------------------------------------- */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-[#0d0f12] border-t border-x border-[#07b4ba]/30 text-[#07b4ba] hover:text-white px-5 py-2 rounded-t-xl shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+        className="lg:hidden absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-[#0d0f12] border-t border-x border-[#D4AF37]/30 text-[#D4AF37] hover:text-white px-5 py-2 rounded-t-xl shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
         aria-label={isOpen ? "Push ad down" : "Pull ad up"}
       >
         <span className="font-['Barlow'] uppercase text-[12px] font-bold tracking-widest">
@@ -60,11 +60,11 @@ const StickyAd = () => {
       {/* ---------------------------------------------------- */}
       {/* MAIN CONTAINER */}
       {/* ---------------------------------------------------- */}
-      <div className="w-full lg:w-[310px] bg-[#0d0f12] border-t lg:border border-[#07b4ba]/30 rounded-t-2xl lg:rounded-xl p-5 shadow-2xl relative overflow-hidden select-none">
+      <div className="w-full lg:w-[310px] bg-[#0d0f12] border-t lg:border border-[#D4AF37]/30 rounded-t-2xl lg:rounded-xl p-5 shadow-2xl relative overflow-hidden select-none">
         
         {/* Top Header Row */}
         <div className="flex items-center gap-3.5 alignment-baseline mb-4">
-          <span className="font-['Bebas_Neue'] text-[56px] text-[#07b4ba] tracking-tight leading-none">
+          <span className="font-['Bebas_Neue'] text-[56px] text-[#D4AF37] tracking-tight leading-none drop-shadow-[0_0_10px_rgba(212,175,55,0.15)]">
             FREE
           </span>
           <div className="font-['Barlow'] text-white uppercase text-[13px] font-bold tracking-widest leading-[1.15]">
@@ -89,7 +89,7 @@ const StickyAd = () => {
 
           {/* Value Feature Row */}
           <div className="flex items-start gap-4 py-1">
-            <Users className="w-6 h-6 text-[#07b4ba] shrink-0 mt-0.5" />
+            <Users className="w-6 h-6 text-[#D4AF37] shrink-0 mt-0.5" />
             <p className="font-['Barlow'] text-white/90 text-[15px] font-medium leading-snug">
               Join our free live beginner session.
             </p>
@@ -98,7 +98,7 @@ const StickyAd = () => {
           {/* CTA Action Button */}
           <button
             onClick={handleReserveClick}
-            className="w-full bg-[#07b4ba] hover:bg-[#059da2] text-black font-['Barlow'] text-[14px] font-extrabold tracking-wider py-3.5 px-5 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 mt-2 shadow-[0_4px_20px_rgba(7,180,186,0.25)] hover:shadow-[0_4px_25px_rgba(7,180,186,0.4)] cursor-pointer border-none"
+            className="w-full bg-[#D4AF37] hover:bg-[#C19B2E] text-black font-['Barlow'] text-[14px] font-extrabold tracking-wider py-3.5 px-5 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 mt-2 shadow-[0_4px_20px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_25px_rgba(212,175,55,0.4)] cursor-pointer border-none"
           >
             RESERVE MY FREE SEAT
             <ArrowRight className="w-4 h-4 stroke-[3]" />
