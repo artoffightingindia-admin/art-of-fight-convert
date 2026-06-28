@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Users, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { 
+  Users, 
+  ArrowRight, 
+  ChevronLeft, 
+  ChevronRight, 
+  ChevronUp, 
+  ChevronDown 
+} from "lucide-react";
 
 const StickyAd = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -12,21 +19,48 @@ const StickyAd = () => {
 
   return (
     <div 
-      className={`hidden lg:flex fixed top-32 right-6 z-50 transition-all duration-500 ease-in-out ${
-        isOpen ? "translate-x-0" : "translate-x-[calc(100%+24px)]"
-      }`}
+      className={`fixed z-50 flex transition-transform duration-500 ease-in-out
+        /* Mobile: Bottom aligned, full width */
+        bottom-0 left-0 right-0 w-full
+        /* Desktop: Right aligned, auto width */
+        lg:bottom-auto lg:top-32 lg:left-auto lg:right-6 lg:w-auto
+        /* Visibility transforms based on screen size */
+        ${
+          isOpen 
+            ? "translate-y-0 lg:translate-x-0" 
+            : "translate-y-full lg:translate-y-0 lg:translate-x-[calc(100%+24px)]"
+        }
+      `}
     >
-      {/* Toggle Tab Handle (Push In / Out Trigger) */}
+      {/* ---------------------------------------------------- */}
+      {/* DESKTOP TOGGLE HANDLE (Left side, hidden on mobile) */}
+      {/* ---------------------------------------------------- */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#0d0f12] border-y border-l border-[#07b4ba]/30 text-[#07b4ba] hover:text-white px-2 py-4 rounded-l-xl shadow-xl transition-all duration-300 flex items-center justify-center cursor-pointer"
+        className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#0d0f12] border-y border-l border-[#07b4ba]/30 text-[#07b4ba] hover:text-white px-2 py-4 rounded-l-xl shadow-xl transition-all duration-300 items-center justify-center cursor-pointer"
         aria-label={isOpen ? "Push ad out" : "Push ad in"}
       >
         {isOpen ? <ChevronRight className="w-5 h-5 animate-pulse" /> : <ChevronLeft className="w-5 h-5" />}
       </button>
 
-      {/* Main Container styled exactly like Screenshot 2026-06-27 192223_2.png */}
-      <div className="w-[310px] bg-[#0d0f12] border border-[#07b4ba]/30 rounded-xl p-5 shadow-2xl relative overflow-hidden select-none">
+      {/* ---------------------------------------------------- */}
+      {/* MOBILE TOGGLE HANDLE (Top center, hidden on desktop) */}
+      {/* ---------------------------------------------------- */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="lg:hidden absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-[#0d0f12] border-t border-x border-[#07b4ba]/30 text-[#07b4ba] hover:text-white px-5 py-2 rounded-t-xl shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+        aria-label={isOpen ? "Push ad down" : "Pull ad up"}
+      >
+        <span className="font-['Barlow'] uppercase text-[12px] font-bold tracking-widest">
+          Free Session
+        </span>
+        {isOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4 animate-pulse" />}
+      </button>
+
+      {/* ---------------------------------------------------- */}
+      {/* MAIN CONTAINER */}
+      {/* ---------------------------------------------------- */}
+      <div className="w-full lg:w-[310px] bg-[#0d0f12] border-t lg:border border-[#07b4ba]/30 rounded-t-2xl lg:rounded-xl p-5 shadow-2xl relative overflow-hidden select-none">
         
         {/* Top Header Row */}
         <div className="flex items-center gap-3.5 alignment-baseline mb-4">
