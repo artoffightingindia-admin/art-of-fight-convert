@@ -786,7 +786,7 @@ export default function ProgramPage() {
                 }}
               />
             </Reveal>
-            <div className="flex-1 w-full md:min-w-[260px]">
+            <div className="flex-1 w-full md:min-w-[280px]">
               <Reveal type="fade-left" delay={100} duration={1000}>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
