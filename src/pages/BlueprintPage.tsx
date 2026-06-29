@@ -493,12 +493,13 @@ const BlueprintPage = () => {
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
             <div className="w-full md:w-auto">
-              <img
-                src="https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"
-                alt="Head Coach"
-                className="w-full md:w-[240px] h-[260px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
-                style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
-              />
+            <img
+  src="https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"
+  alt="Head Coach"
+  // Replaced h-[260px] with aspect-[3/4] for mobile, added md:aspect-auto to reset it on desktop
+  className="w-full aspect-[3/4] md:aspect-auto md:w-[240px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
+  style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
+/>
             </div>
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={100} duration={1000}>
