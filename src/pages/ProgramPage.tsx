@@ -772,36 +772,38 @@ export default function ProgramPage() {
       <div className="bg-[#0f1115]">
         <div className={`w-full py-10 md:py-12 pb-8 md:pb-10 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6">LED BY</p>
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6 text-center md:text-left">LED BY</p>
           </Reveal>
-          <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-center md:items-start flex-wrap">
             <Reveal type="fade-right" duration={1200}>
               <img
                 src="https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg"
                 alt="Head Coach"
-                className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
+                className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 mx-auto md:mx-0 premium-hover"
                 style={{
                   boxShadow:
                     "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)",
                 }}
               />
             </Reveal>
-            <div className="flex-1 w-full md:min-w-[280px]">
-              <Reveal type="fade-left" delay={100} duration={1000}>
+            <div className="flex-1 w-full md:min-w-[280px] flex flex-col items-center md:items-start text-center md:text-left">
+              <Reveal type="fade-left" delay={100} duration={1000} className="w-full">
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
               </Reveal>
-              <div className="mb-5 md:mb-6">
-                {coachCredentials.map((cred, i) => (
-                  <Reveal key={i} type="fade-up" delay={200 + i * 150} duration={800}>
-                    <div className="flex items-start gap-2.5 mb-3">
-                      <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
-                      <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{cred}</p>
-                    </div>
-                  </Reveal>
-                ))}
+              <div className="mb-5 md:mb-6 flex flex-col items-center md:items-start w-full">
+                <div className="inline-block text-left">
+                  {coachCredentials.map((cred, i) => (
+                    <Reveal key={i} type="fade-up" delay={200 + i * 150} duration={800}>
+                      <div className="flex items-start gap-2.5 mb-3">
+                        <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
+                        <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{cred}</p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-4 md:mt-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mt-4 md:mt-6 w-full">
                 {stats.map((stat, i) => (
                   <Reveal key={i} type="scale-up" delay={400 + i * 100} duration={800}>
                     <div className="bg-gradient-to-b from-[#181818] to-[#121212] border border-white/10 rounded-[14px] min-h-[95px] md:h-[140px] p-3 md:p-4 text-center flex flex-col justify-center items-center shadow-[0_0_14px_rgba(0,0,0,.18)] premium-hover">
