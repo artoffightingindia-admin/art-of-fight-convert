@@ -336,15 +336,21 @@ export default function ProgramPage() {
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
+  
+  // Pain Section Video Refs/States
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
 
-  // Dedicated Testimonial Custom Player Ref States (MUST BE TRUE FOR AUTOPLAY)
+  // Hero Section Video Ref/State
   const heroVideoRef = useRef<HTMLIFrameElement>(null);
   const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
 
+  // Testimonial Section Video Refs/States
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
+  const testimonialSectionRef = useRef<HTMLDivElement>(null);
   const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
+  const [isTestimonialInView, setIsTestimonialInView] = useState(false);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -381,6 +387,21 @@ export default function ProgramPage() {
     return () => clearInterval(timerInterval);
   }, []);
 
+  // Autoplay Testimonial Video on Scroll
+  useEffect(() => {
+    const el = testimonialSectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsTestimonialInView(true);
+        obs.disconnect(); // Stop observing once triggered
+      }
+    }, { threshold: 0.2 });
+    
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   const handlePayment = () => {
     window.location.href = "https://rzp.io/rzp/aof30dayprogram";
   };
@@ -390,6 +411,15 @@ export default function ProgramPage() {
     const message = "Hey Team, I've a doubt about AOF 30 days program.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  // Pain Section Video Play/Pause Toggle
+  const togglePlay = () => {
+    if (videoRef.current && videoRef.current.contentWindow) {
+      const func = isVideoPlaying ? 'pauseVideo' : 'playVideo';
+      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+      setIsVideoPlaying(!isVideoPlaying);
+    }
   };
 
   // Pain Section Video Overlay Mute Toggle
@@ -525,27 +555,43 @@ export default function ProgramPage() {
                 5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
               </h3>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                <div className="relative w-full aspect-video">
+                <div className="relative w-full aspect-video group">
                   <iframe
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=1&rel=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1"
                     title="AOF Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  {/* Mobile Unmute Button Overlay */}
-                  <button
-                    onClick={toggleMute}
-                    className="md:hidden absolute bottom-2 left-2 z-10 flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-black/80 transition-colors backdrop-blur shadow-md"
-                    aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
-                  >
-                    {isVideoMuted ? (
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    )}
-                  </button>
+                  
+                  {/* Pointer events canvas cover to prevent interacting with hidden YouTube UI */}
+                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+
+                  {/* Custom Play/Pause and Mute Controls (Visible on all devices) */}
+                  <div className="absolute bottom-3 left-3 z-20 flex gap-2 pointer-events-auto">
+                    {/* Play/Pause Toggle */}
+                    <button
+                      onClick={togglePlay}
+                      className="flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-[#07b4ba] hover:text-black hover:border-transparent transition-all backdrop-blur shadow-md"
+                      aria-label={isVideoPlaying ? "Pause video" : "Play video"}
+                    >
+                      {isVideoPlaying ? (
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 4h4v16H6zm8 0h4v16h-4z" /></svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                      )}
+                    </button>
+                    
+                    {/* Mute/Unmute Toggle */}
+                    <button
+                      onClick={toggleMute}
+                      className="flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-[#07b4ba] hover:text-black hover:border-transparent transition-all backdrop-blur shadow-md"
+                      aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
+                    >
+                      {isVideoMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
+                    </button>
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -833,18 +879,17 @@ export default function ProgramPage() {
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
             
             {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME */}
-            <div className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
+            <div ref={testimonialSectionRef} className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
               <Reveal type="fade-right" duration={1200}>
                 <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
                   <iframe
                     ref={testimonialVideoRef}
                     className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src="https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+                    src={isTestimonialInView ? "https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1" : ""}
                     title="AOF 30-Day Batch Student Results"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  {/* Pointer events canvas cover preventing drop downs on header wrapper regions */}
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
                 </div>
               </Reveal>
