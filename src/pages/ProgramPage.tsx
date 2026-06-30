@@ -571,18 +571,7 @@ export default function ProgramPage() {
                   {/* Custom Play/Pause and Mute Controls (Visible on all devices) */}
                   <div className="absolute bottom-3 left-3 z-20 flex gap-2 pointer-events-auto">
                     {/* Play/Pause Toggle */}
-                    <button
-                      onClick={togglePlay}
-                      className="flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-[#07b4ba] hover:text-black hover:border-transparent transition-all backdrop-blur shadow-md"
-                      aria-label={isVideoPlaying ? "Pause video" : "Play video"}
-                    >
-                      {isVideoPlaying ? (
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6 4h4v16H6zm8 0h4v16h-4z" /></svg>
-                      ) : (
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-                      )}
-                    </button>
-                    
+                  
                     {/* Mute/Unmute Toggle */}
                     <button
                       onClick={toggleMute}
