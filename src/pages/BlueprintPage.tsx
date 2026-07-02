@@ -348,9 +348,9 @@ const BlueprintPage = () => {
               </div>
             </Reveal>
 
-            {/* Injected Horizontal Single-Line Checkmark Grid */}
+            {/* Injected Horizontal Single-Line Checkmark Grid with Join Button and Presenter Name */}
             <Reveal type="fade-up" delay={450} duration={1200}>
-              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8 text-[14px] md:text-[15px] font-semibold text-white/90 font-['Barlow']">
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-6 text-[14px] md:text-[15px] font-semibold text-white/90 font-['Barlow']">
                 <span className="flex items-center gap-1.5">
                   <span className="text-[#07b4ba] font-bold text-[16px]">✓</span> MMA Roadmap
                 </span>
@@ -361,6 +361,14 @@ const BlueprintPage = () => {
                   <span className="text-[#07b4ba] font-bold text-[16px]">✓</span> On Google Meet
                 </span>
               </div>
+              
+              <button
+                onClick={scrollToForm}
+                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 mb-6 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] md:text-[16px] uppercase tracking-wider cursor-pointer border-none hover:bg-[#06a2a7]"
+              >
+                Join The Free Blueprint
+              </button>
+              
               <p className="text-[14px] md:text-[15px] font-semibold text-white/90 mb-8 font-['Barlow']">
                 <span className="text-[#07b4ba] underline decoration-2 underline-offset-4 font-bold">Live with Tamilnadu's first MFN Fighter Purushothaman MK.</span>
               </p>
@@ -375,12 +383,6 @@ const BlueprintPage = () => {
                   Limited seats to keep the session interactive
                 </div>
               </div>
-              <button
-                onClick={scrollToForm}
-                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] md:text-[16px] uppercase tracking-wider cursor-pointer border-none hover:bg-[#06a2a7]"
-              >
-                Join The Free Blueprint
-              </button>
             </Reveal>
 
           </div>
