@@ -389,8 +389,8 @@ const BlueprintPage = () => {
         </section>
       </div>
 
-      {/* ================= SOUNDS FAMILIAR SECTION ================= */}
-      <section className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
+      {/* ================= SOUNDS FAMILIAR SECTION (WITH TARGET ID) ================= */}
+      <section id="overview" className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE} border-t border-zinc-200 bg-white`}>
         
         <div className="w-full text-center max-w-3xl mx-auto mb-10">
           <p className="text-[#FF0000] font-['Barlow'] font-bold text-[15px] md:text-[14px] tracking-[3px] uppercase mb-2">SOUNDS FAMILIAR?</p>
@@ -436,8 +436,8 @@ const BlueprintPage = () => {
         </div>
       </section>
 
-      {/* ================= WHY THIS PROGRAM WORKS GRID ================= */}
-      <section className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "40px 40px" }}>
+      {/* ================= WHY THIS PROGRAM WORKS GRID (WITH TARGET ID) ================= */}
+      <section id="roadmap" className="relative overflow-hidden bg-[#0b0b0b] border-t border-white/5" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "40px 40px" }}>
         <div className="w-full py-10 md:py-14 px-4 md:px-0" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">AFTER THIS SESSION</p>
@@ -445,13 +445,13 @@ const BlueprintPage = () => {
           </Reveal>
 
           <Reveal type="fade-up" delay={150} duration={1000}>
- <h2 className="text-center font-['Bebas_Neue'] uppercase text-white text-[36px] md:text-[60px] leading-[0.9] tracking-[1px] mb-10">
-    You'll Leave With A Clear{" "}
-    <span className="text-[#07b4ba]">
-      Roadmap To Start MMA
-    </span>
-  </h2>
-</Reveal>
+          <h2 className="text-center font-['Bebas_Neue'] uppercase text-white text-[36px] md:text-[60px] leading-[0.9] tracking-[1px] mb-10">
+            You'll Leave With A Clear{" "}
+            <span className="text-[#07b4ba]">
+              Roadmap To Start MMA
+            </span>
+          </h2>
+          </Reveal>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -487,8 +487,8 @@ const BlueprintPage = () => {
         JOIN NOW
       </button>
 
-      {/* ================= COACH SECTION ================= */}
-      <div className="border-t border-b border-white/5 bg-[#0f1115]">
+      {/* ================= COACH SECTION (WITH TARGET ID) ================= */}
+      <div id="coach" className="border-t border-b border-white/5 bg-[#0f1115]">
         <div className={`w-full py-10 md:py-14 ${SECTION_INSET_RESPONSIVE}`}>
           <div className="w-full mb-6">
             <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase">YOUR GUIDE FOR THIS SESSION</p>
@@ -496,12 +496,11 @@ const BlueprintPage = () => {
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-start flex-wrap">
             <div className="w-full md:w-auto">
             <img
-  src="https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"
-  alt="Head Coach"
-  // Replaced h-[260px] with aspect-[3/4] for mobile, added md:aspect-auto to reset it on desktop
-  className="w-full aspect-[3/4] md:aspect-auto md:w-[240px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
-  style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
-/>
+              src="https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"
+              alt="Head Coach"
+              className="w-full aspect-[3/4] md:aspect-auto md:w-[240px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 premium-hover"
+              style={{ boxShadow: "0 0 15px rgba(7,180,186,0.25), 0 0 40px rgba(7,180,186,0.15)" }}
+            />
             </div>
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" delay={100} duration={1000}>
