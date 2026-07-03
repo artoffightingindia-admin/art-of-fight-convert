@@ -57,12 +57,12 @@ const Footer = () => {
               <>
                 <li>
                   <button onClick={() => navigate("/")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
-                    Back to Home
+                    Home
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => navigate("/programs")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
-                    Our Programs
+                  <button onClick={() => navigate("/program")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
+                    30 Days Program 
                   </button>
                 </li>
               </>
