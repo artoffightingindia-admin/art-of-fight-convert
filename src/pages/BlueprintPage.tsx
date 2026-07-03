@@ -679,7 +679,7 @@ const BlueprintPage = () => {
                 <form 
                   onSubmit={async (e) => {
                     e.preventDefault();
-                    if (!name || !email || !phone || !situation) return;
+                    if (!name || !email || phone.length !== 10 || !situation) return;
                     setIsSubmitting(true);
                     try {
                       const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzsRr-TJAtfF2nVhxNBAlGgnphTFdg_7LCmbgPfh05Q297MMdJZzVOj5VvmWIFCil9K/exec";
@@ -732,12 +732,23 @@ const BlueprintPage = () => {
                       type="tel"
                       placeholder="Your Phone Number"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => {
+                        const numericValue = e.target.value.replace(/\D/g, "");
+                        if (numericValue.length <= 10) {
+                          setPhone(numericValue);
+                        }
+                      }}
+                      maxLength={10}
+                      pattern="[0-9]{10}"
                       required
                       className="w-full px-4 py-3 bg-zinc-50 border border-zinc-300 rounded-lg text-base lg:text-[14px] text-zinc-950 placeholder-zinc-400 font-medium focus:outline-none focus:border-[#07b4ba] transition-colors"
                     />
-                    <p className="text-[11px] text-[#07b4ba] font-semibold leading-tight px-1">
-                      Session details and important updates will be shared here.
+                    <p className="text-[11px] text-[#07b4ba] font-semibold leading-tight px-1 mt-1">
+                      {phone.length > 0 && phone.length < 10 ? (
+                        <span className="text-red-500">Please enter exactly 10 digits.</span>
+                      ) : (
+                        "Session details and important updates will be shared here."
+                      )}
                     </p>
                   </div>
 
@@ -765,7 +776,7 @@ const BlueprintPage = () => {
 
                   <button
                     type="submit"
-                    disabled={!name || !email || !phone || !situation || isSubmitting}
+                    disabled={!name || !email || phone.length !== 10 || !situation || isSubmitting}
                     className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   >
                     {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
