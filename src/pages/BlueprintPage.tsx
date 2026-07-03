@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
+import { useNavigate } from "react-router-dom";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { Volume2, VolumeX, Play, Pause } from "lucide-react";
@@ -134,6 +134,7 @@ const IconRocket = () => (
 );
 
 const BlueprintPage = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -274,7 +275,27 @@ const BlueprintPage = () => {
   return (
     <div className="font-['Barlow'] text-white bg-[#0a0a0a] overflow-x-hidden w-full antialiased">
       <style>{premiumStyles}</style>
-      <Navbar />
+
+      {/* ── NAVBAR ── */}
+      <nav className="fixed top-0 left-0 right-0 z-[1000] h-[62px] bg-[#111419]/80 backdrop-blur-[10px] border-b border-white/10 flex items-center justify-between transition-all duration-300" style={GUTTER}>
+        <span className="font-['Bebas_Neue'] text-[30px] leading-none cursor-pointer hover:scale-105 transition-transform" onClick={() => navigate("/")}>
+          <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
+        </span>
+        <div className="flex items-center gap-3 md:gap-5">
+          <button className="hidden md:flex bg-transparent border-none text-white/65 font-['Barlow'] text-[14px] font-semibold cursor-pointer hover:text-white transition-colors items-center gap-2" onClick={() => navigate("/")}>
+            ← Back To Home
+          </button>
+          <button
+            className="h-9 px-4 md:px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[15px] md:text-[17px] tracking-[2px] border-none cursor-pointer hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(7,180,186,0.5)] transition-all duration-300"
+            onClick={scrollToForm}
+          >
+            JOIN NOW
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Back Button */}
+      <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-[#13171d] text-[#07b4ba] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer hover:scale-110 hover:bg-[#07b4ba] hover:text-white transition-all duration-300" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
       {/* ================= HERO SECTION ================= */}
       <div className="relative flex flex-col w-full overflow-hidden pt-[82px] min-h-[100dvh]" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
