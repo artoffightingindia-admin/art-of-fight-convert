@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { Volume2, VolumeX, Play, Pause, Home, Layers } from "lucide-react";
+import { Volume2, VolumeX, Play, Pause } from "lucide-react";
 
 /* ── PREMIUM UNIFIED STYLES INJECTION ── */
 const premiumStyles = `
@@ -134,8 +134,6 @@ const IconRocket = () => (
 );
 
 const BlueprintPage = () => {
-  const navigate = useNavigate();
-  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -780,42 +778,7 @@ const BlueprintPage = () => {
         </div>
       </section>
 
-      {/* ================= UNIQUE BLUEPRINT FOOTER NAVIGATION ================= */}
-      <footer className="w-full border-t border-white/5 bg-[#06080c] py-14 flex flex-col items-center justify-center relative z-20">
-        <h3 className="font-['Bebas_Neue'] text-[22px] tracking-[2px] text-white/50 mb-6 uppercase">
-          Explore More From AOF
-        </h3>
-        
-        <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
-          {/* Home Button */}
-          <button
-            onClick={() => navigate("/")}
-            className="group relative flex items-center justify-center gap-3 w-64 sm:w-auto px-8 py-4 bg-[#13171d] border border-white/10 rounded-xl hover:border-[#07b4ba]/60 transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(7,180,186,0.15)]"
-          >
-            <Home className="w-5 h-5 text-white/50 group-hover:text-[#07b4ba] transition-colors" />
-            <span className="font-['Barlow'] font-bold text-[14px] text-white/90 uppercase tracking-[2px] group-hover:text-[#07b4ba] transition-colors mt-[2px]">
-              Back To Home
-            </span>
-          </button>
-          
-          {/* Programs Button */}
-          <button
-            onClick={() => navigate("/programs")} // Make sure this matches your actual route string
-            className="group relative flex items-center justify-center gap-3 w-64 sm:w-auto px-8 py-4 bg-[#13171d] border border-white/10 rounded-xl hover:border-[#07b4ba]/60 transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(7,180,186,0.15)]"
-          >
-            <Layers className="w-5 h-5 text-white/50 group-hover:text-[#07b4ba] transition-colors" />
-            <span className="font-['Barlow'] font-bold text-[14px] text-white/90 uppercase tracking-[2px] group-hover:text-[#07b4ba] transition-colors mt-[2px]">
-              Our Programs
-            </span>
-          </button>
-        </div>
-
-        <div className="text-center">
-          <p className="text-white/30 text-[11px] font-['Barlow'] font-semibold tracking-[1.5px] uppercase">
-            © {new Date().getFullYear()} Art of Fighting Academy
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
