@@ -46,11 +46,11 @@ const premiumStyles = `
   }
   
   .btn-glow {
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, background-color 0.3s ease, color 0.3s ease;
   }
   .btn-glow:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(7,180,186,0.4);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.2);
   }
 `;
 
@@ -364,7 +364,7 @@ const BlueprintPage = () => {
               
               <button
                 onClick={scrollToForm}
-                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 mb-6 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[14px] md:text-[16px] uppercase tracking-wider cursor-pointer border-none hover:bg-[#06a2a7]"
+                className="btn-glow inline-flex items-center justify-center w-full sm:w-auto px-8 md:px-[50px] py-4 mb-6 rounded-lg bg-[#07b4ba] text-white hover:bg-white hover:text-black transition-colors duration-300 font-['Barlow'] font-bold text-[14px] md:text-[16px] uppercase tracking-wider cursor-pointer border-none"
               >
                 Join The Free Blueprint
               </button>
@@ -482,7 +482,7 @@ const BlueprintPage = () => {
       {/* ================= CLICKABLE STRIP BUTTON ================= */}
       <button 
         onClick={scrollToForm}
-        className="w-full h-12 bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none hover:bg-[#06a2a7]"
+        className="w-full h-12 bg-[#07b4ba] text-white hover:bg-white hover:text-black transition-colors duration-300 font-['Bebas_Neue'] text-[16px] md:text-[18px] tracking-[3px] flex items-center justify-center shadow-md cursor-pointer uppercase border-none"
       >
         JOIN NOW
       </button>
@@ -666,7 +666,7 @@ const BlueprintPage = () => {
                       href="https://chat.whatsapp.com/G0rrNtZAYOkAFpOjqEv4nL"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-glow inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] text-white font-['Bebas_Neue'] text-[18px] tracking-[1.5px] rounded-xl cursor-pointer border-none hover:bg-[#1f9d52]"
+                      className="btn-glow inline-flex items-center justify-center gap-2.5 w-full py-3.5 bg-[#25D366] text-white hover:bg-white hover:text-black transition-colors duration-300 font-['Bebas_Neue'] text-[18px] tracking-[1.5px] rounded-xl cursor-pointer border-none"
                     >
                       JOIN AOF WHATSAPP COMMUNITY
                     </a>
@@ -777,7 +777,7 @@ const BlueprintPage = () => {
                   <button
                     type="submit"
                     disabled={!name || !email || phone.length !== 10 || !situation || isSubmitting}
-                    className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] hover:bg-[#06a2a7] text-white font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="btn-glow w-full py-3.5 border-none rounded-xl bg-[#07b4ba] text-white hover:bg-white hover:text-black transition-colors duration-300 font-['Bebas_Neue'] text-[20px] tracking-[1.5px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "Processing..." : "SAVE MY SEAT"}
                   </button>
