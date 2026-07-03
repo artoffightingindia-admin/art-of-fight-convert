@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Phone, Mail, MapPin, Camera, Video, Users } from "lucide-react";
 
 const Footer = () => {
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if we are currently on the blueprint page
+  const isBlueprintPage = location.pathname.includes("/blueprint");
 
   const handleYearClick = () => {
     const newCount = clickCount + 1;
@@ -27,6 +31,8 @@ const Footer = () => {
   return (
     <footer className="bg-background border-t border-border">
       <div className="container py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        {/* Contact Section */}
         <div>
           <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Contact</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
@@ -42,48 +48,82 @@ const Footer = () => {
           </ul>
         </div>
 
+        {/* Dynamic Quick Links Section */}
         <div>
           <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Quick Links</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>
-              <a href="#home" className="hover:text-primary transition-colors">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="hover:text-primary transition-colors">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#programs" className="hover:text-primary transition-colors">
-                Services
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="hover:text-primary transition-colors">
-                Contact
-              </a>
-            </li>
+            {isBlueprintPage ? (
+              // Navigation ONLY for the Blueprint Page
+              <>
+                <li>
+                  <button onClick={() => navigate("/")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
+                    Back to Home
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => navigate("/programs")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
+                    Our Programs
+                  </button>
+                </li>
+              </>
+            ) : (
+              // Default Navigation for the rest of the site
+              <>
+                <li>
+                  <a href="#home" className="hover:text-primary transition-colors">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#about" className="hover:text-primary transition-colors">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#programs" className="hover:text-primary transition-colors">
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a href="#contact" className="hover:text-primary transition-colors">
+                    Contact
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
 
+        {/* Dynamic Programs Section */}
         <div>
           <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Programs</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>
-              <a href="#" className="hover:text-primary transition-colors">
-                30 Days Program
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-primary transition-colors">
-                1-on-1 Coaching
-              </a>
-            </li>
+            {isBlueprintPage ? (
+              // Custom text or links for the Blueprint page program section
+              <li>
+                <span className="text-muted-foreground/70">
+                  Currently viewing: MMA Beginners Blueprint
+                </span>
+              </li>
+            ) : (
+              // Default Program links
+              <>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    30 Days Program
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    1-on-1 Coaching
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
 
+        {/* Brand Section */}
         <div className="space-y-3">
           <p className="font-display text-2xl text-primary">AOF</p>
           <p className="text-muted-foreground text-xs leading-relaxed">
