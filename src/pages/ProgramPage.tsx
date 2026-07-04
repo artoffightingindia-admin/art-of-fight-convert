@@ -376,8 +376,7 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
-    const TARGET_DATE = new Date("2026-06-28T23:59:59").getTime();
-
+const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
@@ -1041,7 +1040,7 @@ export default function ProgramPage() {
                   >
                     JOIN THE NEXT BATCH
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting Soon...</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting 13th july</p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[
                       [timeLeft.days, "DAYS"],
