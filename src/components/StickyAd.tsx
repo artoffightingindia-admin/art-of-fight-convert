@@ -10,8 +10,16 @@ import {
 } from "lucide-react";
 
 const StickyAd = () => {
+  // 🛑 AD TOGGLE: Change this to 'true' when you want to ACTIVATE it later
+  const IS_ACTIVE = false;
+
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
+
+  // If the ad is paused, render absolutely nothing
+  if (!IS_ACTIVE) {
+    return null;
+  }
 
   const handleReserveClick = () => {
     navigate("/blueprint");
