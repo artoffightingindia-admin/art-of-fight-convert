@@ -1040,7 +1040,7 @@ const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
                   >
                     JOIN THE NEXT BATCH
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting 13th july</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 2 Starting 13th July</p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[
                       [timeLeft.days, "DAYS"],
