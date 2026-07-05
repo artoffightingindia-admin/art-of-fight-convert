@@ -366,7 +366,6 @@ export default function ProgramPage() {
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
-  const [isTimerEnded, setIsTimerEnded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
@@ -377,7 +376,7 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
-    const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
+const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
@@ -388,10 +387,8 @@ export default function ProgramPage() {
           hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0'),
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0')
         });
-        setIsTimerEnded(false);
       } else {
         setTimeLeft({ days: "00", hours: "00", minutes: "00" });
-        setIsTimerEnded(true);
       }
     };
 
@@ -417,12 +414,7 @@ export default function ProgramPage() {
   }, []);
 
   const handlePayment = () => {
-    // Replace this placeholder with your actual Razorpay link
-    const newPaymentLink = "YOUR_NEW_RAZORPAY_LINK_HERE";
-    const currentPaymentLink = "https://rzp.io/rzp/aof30dayprogram";
-    
-    // Redirects based on whether the timer has ended
-    window.location.href = isTimerEnded ? newPaymentLink : currentPaymentLink;
+    window.location.href = "https://rzp.io/rzp/aof30dayprogram";
   };
 
   const handleWhatsAppClick = () => {
@@ -578,7 +570,7 @@ export default function ProgramPage() {
                   <iframe
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/79xvYiiBFfk?autoplay=1&mute=1&loop=1&playlist=79xvYiiBFfk&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1"
+                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1"
                     title="AOF Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -686,7 +678,7 @@ export default function ProgramPage() {
             {whatCards.map((item, i) => (
               <Reveal key={i} type="scale-up" delay={i * 150} duration={800}>
                 <div className={`w-full p-5 rounded-[16px] bg-gradient-to-b from-[#13171d] to-[#101318] border border-white/5 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-3 md:min-h-[255px] md:p-[16px] md:rounded-[18px] premium-hover ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
-                  <div className="w-[48px] h-[48px] md:w-[70px] h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
+                  <div className="w-[48px] h-[48px] md:w-[70px] md:h-[70px] flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full">
                     <h4 className="font-['Bebas_Neue'] text-[#07b4ba] text-[16px] md:text-[17.5px] tracking-[1px] md:tracking-[2px] leading-[1.3] m-0 text-left md:text-center mb-[3px]">{item.title}</h4>
                     <p className="text-[13px] md:text-[14px] leading-[1.55] text-white/60 text-left md:text-center m-0">{item.desc}</p>
@@ -1026,7 +1018,7 @@ export default function ProgramPage() {
                   <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "190px", height: "190px", pointerEvents: "none" }}>
                     <div className="shimmer-ribbon" style={{ position: "absolute", top: "36px", left: "-65px", width: "280px", transform: "rotate(-45deg)", padding: "10px 0", textAlign: "center", boxShadow: "0 5px 15px rgba(0,0,0,0.5)" }}>
                       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#111", lineHeight: "1" }}>
-                        SAVE {isTimerEnded ? "₹1200" : "₹1500"}
+                        SAVE ₹1500
                       </div>
                       <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 800, letterSpacing: "1px", color: "#111", textTransform: "uppercase", marginTop: "2px" }}>
                         Early Bird Offer
@@ -1040,9 +1032,7 @@ export default function ProgramPage() {
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
                     <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹3499</span>
-                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                      {isTimerEnded ? "₹2,299" : "₹1,999"}
-                    </span>
+                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">₹1,999</span>
                   </div>
                   <button
                     className="btn-glow w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer"
