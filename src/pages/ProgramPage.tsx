@@ -1032,7 +1032,7 @@ const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
                     <span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 line-through leading-none">₹3499</span>
-                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">₹1,999</span>
+                    <span className="font-['Bebas_Neue'] text-[42px] md:text-[48px] tracking-[2px] text-white leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">₹2,299</span>
                   </div>
                   <button
                     className="btn-glow w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer"
