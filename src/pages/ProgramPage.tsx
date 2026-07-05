@@ -570,7 +570,7 @@ const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
                   <iframe
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/ymDRsWPnEH0?autoplay=1&mute=1&loop=1&playlist=ymDRsWPnEH0&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1"
+                    src="https://www.youtube.com/embed/79xvYiiBFfk?autoplay=1&mute=1&loop=1&playlist=79xvYiiBFfk&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1"
                     title="AOF Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
