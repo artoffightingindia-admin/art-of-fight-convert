@@ -1021,7 +1021,7 @@ const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
                         SAVE ₹1200
                       </div>
                       <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 800, letterSpacing: "1px", color: "#111", textTransform: "uppercase", marginTop: "2px" }}>
-                        Early Bird Offer
+                        2Yrs of AOF Offer
                       </div>
                     </div>
                   </div>
