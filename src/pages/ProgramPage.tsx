@@ -1018,7 +1018,7 @@ const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
                   <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "190px", height: "190px", pointerEvents: "none" }}>
                     <div className="shimmer-ribbon" style={{ position: "absolute", top: "36px", left: "-65px", width: "280px", transform: "rotate(-45deg)", padding: "10px 0", textAlign: "center", boxShadow: "0 5px 15px rgba(0,0,0,0.5)" }}>
                       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#111", lineHeight: "1" }}>
-                        SAVE ₹1500
+                        SAVE ₹1200
                       </div>
                       <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 800, letterSpacing: "1px", color: "#111", textTransform: "uppercase", marginTop: "2px" }}>
                         Early Bird Offer
