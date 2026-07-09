@@ -376,7 +376,7 @@ export default function ProgramPage() {
 
   // Timer Countdown Logic using exact target date
   useEffect(() => {
-const TARGET_DATE = new Date("2026-07-05T23:59:59").getTime();
+const TARGET_DATE = new Date("2026-07-12T23:59:59").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
