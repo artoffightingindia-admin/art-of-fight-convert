@@ -132,10 +132,27 @@ const TestimonialsSection = () => {
 
   const iframeRef = useRef(null);
   const playerRef = useRef(null);
+  const containerRef = useRef(null);
+  const hideTimerRef = useRef(null);
 
   const [isMuted, setIsMuted]     = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [playerReady, setPlayerReady] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+
+  // Auto-fade controls after 5s of inactivity; click/tap on video reveals them again
+  const revealControls = () => {
+    setShowControls(true);
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => setShowControls(false), 5000);
+  };
+
+  useEffect(() => {
+    revealControls();
+    return () => {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
+  }, []);
 
   // Load YouTube IFrame API once and bind it to our existing iframe
   useEffect(() => {
@@ -205,10 +222,15 @@ const TestimonialsSection = () => {
   };
 
   const toggleFullscreen = () => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
-    if (iframe.requestFullscreen) iframe.requestFullscreen();
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+    const el = containerRef.current;
+    if (!el) return;
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } else {
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    }
   };
 
   const visible = Array.from({ length: VISIBLE }, (_, i) =>
@@ -239,6 +261,23 @@ const TestimonialsSection = () => {
         }
         .card-next { animation: slideInBottom 0.32s ease both; }
         .card-prev { animation: slideInTop    0.32s ease both; }
+
+        .testimonial-video-container:fullscreen,
+        .testimonial-video-container:-webkit-full-screen {
+          width: 100vw;
+          height: 100vh;
+          background: #000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .testimonial-video-container:fullscreen .video-frame,
+        .testimonial-video-container:-webkit-full-screen .video-frame {
+          width: 100%;
+          height: 100%;
+          aspect-ratio: unset;
+          border-radius: 0;
+        }
       `}</style>
 
       <div className="max-w-[1100px] mx-auto px-6">
@@ -286,8 +325,8 @@ const TestimonialsSection = () => {
               Hear Directly From People Who Have Trained Under Coach Purushothaman
             </h3>
 
-            <div className="w-full relative group">
-              <div className="relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)]">
+            <div ref={containerRef} className="testimonial-video-container w-full relative group">
+              <div className="video-frame relative w-full aspect-video overflow-hidden rounded-[14px] border border-white/[0.06] bg-black shadow-[0_0_30px_rgba(7,180,186,0.1)]">
                 <iframe
                   ref={iframeRef}
                   id="testimonials-yt-player"
@@ -298,12 +337,20 @@ const TestimonialsSection = () => {
                   allowFullScreen
                 />
 
-                {/* Pointer overlay blocker so clicking the video itself does nothing */}
-                <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                {/* Click-to-reveal surface: also blocks clicks from reaching the iframe/YouTube logo */}
+                <div
+                  className="absolute inset-0 bg-transparent z-10 cursor-pointer"
+                  onClick={revealControls}
+                />
               </div>
 
-              {/* Custom control bar */}
-              <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between gap-2">
+              {/* Custom control bar — fades after 5s idle, click on video to bring back */}
+              <div
+                onClick={revealControls}
+                className={`absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between gap-2 transition-opacity duration-300 ${
+                  showControls ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+              >
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => skip(-10)}
