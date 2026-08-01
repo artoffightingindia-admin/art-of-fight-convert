@@ -4,7 +4,7 @@ const CtaPairSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative w-full overflow-hidden aspect-auto md:aspect-[21/6] min-h-[420px] md:min-h-[280px] py-12 md:py-0">
+    <section className="relative w-full overflow-hidden aspect-[21/6] min-h-[280px]">
 
       {/* Background Image */}
       <img
@@ -47,7 +47,7 @@ const CtaPairSection = () => {
 
         {/* Subtitle */}
         <p
-          className="text-sm mb-[18px] md:mb-[24px]"
+          className="text-sm mb-[18px]"
           style={{
             fontFamily: "'Barlow', sans-serif",
             color: "rgba(255,255,255,0.55)",
@@ -56,15 +56,14 @@ const CtaPairSection = () => {
           Choose The Coaching Experience That Fits Your Goals.
         </p>
 
-        {/* Button Row (Stacked on Mobile, Row on Desktop) */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-center w-full max-w-[680px]">
+        {/* Button Row */}
+        <div className="flex items-start justify-center w-full max-w-[680px]">
 
           {/* Left CTA */}
-          <div className="flex flex-1 flex-col items-center gap-2 w-full">
+          <div className="flex flex-1 flex-col items-center gap-2">
             <button
-              disabled
-              // onClick={() => navigate("/coaching")} // Commented out until ready
-              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[320px] hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
+              onClick={() => navigate("/coaching")}
+              className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
                 fontFamily: "'Bebas Neue', sans-serif",
@@ -86,7 +85,7 @@ const CtaPairSection = () => {
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
-                1-1 Coaching (Coming Soon)
+                1-1 Coaching
               </span>
 
               <span className="text-base">→</span>
@@ -105,10 +104,10 @@ const CtaPairSection = () => {
             </p>
           </div>
 
-          {/* Divider (Horizontal on Mobile, Vertical on Desktop) */}
-          <div className="flex items-center justify-center w-full md:w-12 py-5 md:py-0 shrink-0">
+          {/* Divider */}
+          <div className="flex items-center justify-center w-12 shrink-0">
             <div
-              className="w-[100px] h-px md:w-px md:h-[80px]"
+              className="w-px h-[80px]"
               style={{
                 backgroundColor: "rgba(255,255,255,0.18)",
               }}
@@ -116,7 +115,7 @@ const CtaPairSection = () => {
           </div>
 
           {/* Right CTA */}
-          <div className="flex flex-1 flex-col items-center gap-2 w-full">
+          <div className="flex flex-1 flex-col items-center gap-2">
             <button
               onClick={() => navigate("/program")}
               className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
@@ -172,7 +171,7 @@ const CtaPairSection = () => {
         </div>
 
         {/* Bottom Text */}
-        <div className="mt-[20px] md:mt-[14px]">
+        <div className="mt-[14px]">
           <span
             className="text-[12px]"
             style={{
