@@ -1031,7 +1031,7 @@ const TARGET_DATE = new Date("2026-07-12T23:59:59").getTime();
                     START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
-<span className="font-['Bebas_Neue'] text-[26px] md:text-[32px] text-white/30 leading-none">₹4999</span>
+<span className="font-['Bebas_Neue'] text-[32px] md:text-[32px] text-white/100 leading-none">₹4,999</span>
             
                   </div>
                   <button
