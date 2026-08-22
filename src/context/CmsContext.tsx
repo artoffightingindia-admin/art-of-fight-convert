@@ -1,5 +1,4 @@
-// src/context/CmsContext.tsx
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+aimport React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface SiteContent {
   heroTitle: string;
@@ -36,18 +35,25 @@ const CmsContext = createContext<CmsContextType | undefined>(undefined);
 
 export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<SiteContent>(() => {
-    const saved = localStorage.getItem("aof_site_content");
-    return saved ? JSON.parse(saved) : defaultContent;
+    try {
+      const saved = localStorage.getItem("aof_site_content");
+      return saved ? JSON.parse(saved) : defaultContent;
+    } catch {
+      return defaultContent;
+    }
   });
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return sessionStorage.getItem("aof_admin_auth") === "true";
+    try {
+      return sessionStorage.getItem("aof_admin_auth") === "true";
+    } catch {
+      return false;
+    }
   });
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-  // Shortcut Listener: CTRL + SHIFT + META(WIN) + A / a
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
@@ -72,18 +78,30 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const updateContent = (newContent: Partial<SiteContent>) => {
     const updated = { ...content, ...newContent };
     setContent(updated);
-    localStorage.setItem("aof_site_content", JSON.stringify(updated));
+    try {
+      localStorage.setItem("aof_site_content", JSON.stringify(updated));
+    } catch (err) {
+      console.error("Storage error:", err);
+    }
   };
 
   const resetContent = () => {
     setContent(defaultContent);
-    localStorage.removeItem("aof_site_content");
+    try {
+      localStorage.removeItem("aof_site_content");
+    } catch (err) {
+      console.error("Storage error:", err);
+    }
   };
 
   const login = (email: string, pass: string) => {
-    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24")[cite: 1] {
+    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24") {
       setIsAuthenticated(true);
-      sessionStorage.setItem("aof_admin_auth", "true");
+      try {
+        sessionStorage.setItem("aof_admin_auth", "true");
+      } catch (err) {
+        console.error("Session storage error:", err);
+      }
       setIsAuthModalOpen(false);
       setIsPanelOpen(true);
       return true;
@@ -93,7 +111,11 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const logout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem("aof_admin_auth");
+    try {
+      sessionStorage.removeItem("aof_admin_auth");
+    } catch (err) {
+      console.error("Session storage error:", err);
+    }
     setIsPanelOpen(false);
   };
 
