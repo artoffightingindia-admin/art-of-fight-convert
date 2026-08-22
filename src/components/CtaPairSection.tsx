@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { useCms } from "@/context/CmsContext";
 
 const CtaPairSection = () => {
   const navigate = useNavigate();
+  const { content } = useCms();
+  const c = content.home;
 
   return (
     <section className="relative w-full overflow-hidden aspect-auto md:aspect-[21/6] min-h-[420px] md:min-h-[280px] py-12 md:py-0">
-
       {/* Background Image */}
       <img
-        src="https://i.postimg.cc/g2KvzG4M/CTA-Image-jpg.jpg"
+        src={c.ctaPairBgImage || "https://i.postimg.cc/g2KvzG4M/CTA-Image-jpg.jpg"}
         alt="CTA Background"
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
@@ -21,7 +23,6 @@ const CtaPairSection = () => {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-
         {/* Blue eyebrow */}
         <p
           className="uppercase font-bold text-sm tracking-[4px] mb-1"
@@ -30,7 +31,7 @@ const CtaPairSection = () => {
             fontFamily: "'Barlow', sans-serif",
           }}
         >
-          Start Your New Journey
+          {c.ctaPairHeading || "Start Your New Journey"}
         </p>
 
         {/* Main heading */}
@@ -42,7 +43,7 @@ const CtaPairSection = () => {
             letterSpacing: 2,
           }}
         >
-          How Do You Want To Train?
+          {c.ctaPairSubtitle || "How Do You Want To Train?"}
         </h2>
 
         {/* Subtitle */}
@@ -53,17 +54,15 @@ const CtaPairSection = () => {
             color: "rgba(255,255,255,0.55)",
           }}
         >
-          Choose The Coaching Experience That Fits Your Goals.
+          {c.ctaPairDesc || "Choose The Coaching Experience That Fits Your Goals."}
         </p>
 
         {/* Button Row (Stacked on Mobile, Row on Desktop) */}
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center w-full max-w-[680px]">
-
           {/* Left CTA */}
           <div className="flex flex-1 flex-col items-center gap-2 w-full">
             <button
               disabled
-              // onClick={() => navigate("/coaching")} // Commented out until ready
               className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[320px] hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
@@ -86,7 +85,7 @@ const CtaPairSection = () => {
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
-                1-1 Coaching (Coming Soon)
+                {c.ctaCard1Title || "1-1 Coaching (Coming Soon)"}
               </span>
 
               <span className="text-base">→</span>
@@ -99,9 +98,7 @@ const CtaPairSection = () => {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Personalized coaching tailored to your
-              <br />
-              goals, lifestyle, and schedule.
+              {c.ctaCard1Desc || "Personalized coaching tailored to your goals, lifestyle, and schedule."}
             </p>
           </div>
 
@@ -118,7 +115,7 @@ const CtaPairSection = () => {
           {/* Right CTA */}
           <div className="flex flex-1 flex-col items-center gap-2 w-full">
             <button
-              onClick={() => navigate("/program")}
+              onClick={() => navigate(c.ctaPairBtn2Link || "/program")}
               className="flex items-center justify-between gap-[10px] text-white uppercase rounded-[10px] px-[22px] py-[10px] border-none cursor-pointer whitespace-nowrap w-full max-w-[240px] hover:opacity-90 transition-opacity"
               style={{
                 backgroundColor: "#07b4ba",
@@ -150,8 +147,7 @@ const CtaPairSection = () => {
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-
-                30-Days Program
+                {c.ctaCard2Title || "30-Days Program"}
               </span>
 
               <span className="text-base">→</span>
@@ -164,9 +160,7 @@ const CtaPairSection = () => {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Learn MMA online with
-              <br />
-              a structured, beginner-friendly roadmap.
+              {c.ctaCard2Desc || "Learn MMA online with a structured, beginner-friendly roadmap."}
             </p>
           </div>
         </div>
@@ -180,7 +174,7 @@ const CtaPairSection = () => {
               color: "rgba(255,255,255,0.55)",
             }}
           >
-            Progress starts when you stop guessing and start training.
+            {c.ctaBottomText || "Progress starts when you stop guessing and start training."}
           </span>
         </div>
       </div>
