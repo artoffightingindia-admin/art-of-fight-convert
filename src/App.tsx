@@ -12,26 +12,32 @@ import NotFound from "./pages/NotFound.tsx";
 
 import ScrollToTop from "./components/ScrollToTop";
 
+// CMS & Admin Panel Imports
+import { CmsProvider } from "./context/CmsContext";
+import { AdminPanel } from "./components/AdminPanel";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
+      <CmsProvider>
+        <AdminPanel />
+        <Toaster />
+        <Sonner />
 
-      <BrowserRouter>
-        <ScrollToTop />
+        <BrowserRouter>
+          <ScrollToTop />
 
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/coaching" element={<CoachingPage />} />
-          <Route path="/program" element={<ProgramPage />} />
-          <Route path="/blueprint" element={<BlueprintPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/coaching" element={<CoachingPage />} />
+            <Route path="/program" element={<ProgramPage />} />
+            <Route path="/blueprint" element={<BlueprintPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CmsProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
