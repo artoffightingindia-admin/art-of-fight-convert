@@ -1,12 +1,32 @@
 import { useState, useEffect } from "react";
+import { useCms } from "@/context/CmsContext";
 
-const videos = [
+const defaultVideos = [
   "zjcVWjWSJog",
   "xuAeRmO82Gk",
   "H49Y6b7wn58",
 ];
 
+// Helper to extract YouTube video ID from any link format
+const extractVideoId = (input: string): string => {
+  if (!input) return "";
+  const trimmed = input.trim();
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+  const match = trimmed.match(regExp);
+  if (match && match[2].length === 11) {
+    return match[2];
+  }
+  return trimmed;
+};
+
 const SocialProofSection = () => {
+  const { content } = useCms();
+  const rawVideos = content.home.socialProofVideos?.length
+    ? content.home.socialProofVideos
+    : defaultVideos;
+
+  const videos = rawVideos.map(extractVideoId).filter(Boolean);
+
   const [visibleCount, setVisibleCount] = useState(
     typeof window !== "undefined" && window.innerWidth < 768 ? 1 : 3
   );
@@ -14,6 +34,10 @@ const SocialProofSection = () => {
   // Track muted state for each video individually
   const [mutedStates, setMutedStates] = useState(videos.map(() => true));
   const [currentVideo, setCurrentVideo] = useState(0);
+
+  useEffect(() => {
+    setMutedStates(videos.map(() => true));
+  }, [videos.length]);
 
   useEffect(() => {
     const onResize = () => {
@@ -27,7 +51,7 @@ const SocialProofSection = () => {
     };
   }, []);
 
-  const handleToggleMute = (index) => {
+  const handleToggleMute = (index: number) => {
     if (visibleCount === 1) {
       // Mobile: Toggle all videos to share the same mute state
       const newMuteState = !mutedStates[index];
@@ -50,17 +74,13 @@ const SocialProofSection = () => {
       <div className="w-[92%] md:w-[60%] mx-auto px-4">
         {/* Heading */}
         <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-          <h2 className="font-display text-[clamp(30px,4vw,60px)] text-foreground leading-none">
-            SEE HOW WE TEACH.
-            <br />
-            <span className="text-primary">
-              SEE HOW WE TRAIN.
-            </span>
+          <h2 className="font-display text-[clamp(30px,4vw,60px)] text-foreground leading-none uppercase whitespace-pre-line">
+            {content.home.socialProofTitle || "SEE HOW WE TEACH.\nSEE HOW WE TRAIN."}
           </h2>
 
           <p className="text-muted-foreground text-xs md:text-sm">
-            5,000+ MMA fans follow AOF to learn, improve, and stay connected to
-            the sport.
+            <span className="text-primary font-bold">{content.home.socialProofCount || "5,000+"}</span>{" "}
+            {content.home.socialProofSubheading || "MMA fans follow AOF to learn, improve, and stay connected to the sport."}
           </p>
         </div>
 
@@ -73,7 +93,7 @@ const SocialProofSection = () => {
 
             return (
               <div
-                key={videoId}
+                key={`${videoId}-${actualIndex}`}
                 className="relative aspect-[9/16] w-[70%] md:w-[28%] max-w-[260px] rounded-xl overflow-hidden bg-card border border-border"
               >
                 <iframe
@@ -90,7 +110,7 @@ const SocialProofSection = () => {
                 {/* Mute / Unmute */}
                 <button
                   onClick={() => handleToggleMute(actualIndex)}
-                  className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black/90 text-white text-xs px-3 py-1 rounded-full transition"
+                  className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black/90 text-white text-xs px-3 py-1 rounded-full transition cursor-pointer"
                 >
                   {isMuted ? "🔇 Unmute" : "🔊 Mute"}
                 </button>
@@ -100,7 +120,7 @@ const SocialProofSection = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {visibleCount === 1 && (
+        {visibleCount === 1 && videos.length > 1 && (
           <div className="flex justify-center items-center gap-3 mt-5">
             {/* Prev */}
             <button
@@ -113,7 +133,7 @@ const SocialProofSection = () => {
               className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
                 currentVideo === 0
                   ? "text-white/30 cursor-not-allowed"
-                  : "text-[#07b4ba] hover:opacity-80"
+                  : "text-[#07b4ba] hover:opacity-80 cursor-pointer"
               }`}
             >
               ←
@@ -135,10 +155,10 @@ const SocialProofSection = () => {
               className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
                 currentVideo === videos.length - 1
                   ? "text-white/30 cursor-not-allowed"
-                  : "text-[#07b4ba] hover:opacity-80"
+                  : "text-[#07b4ba] hover:opacity-80 cursor-pointer"
               }`}
             >
-               →
+              →
             </button>
           </div>
         )}
