@@ -18,7 +18,20 @@ export const AdminPanel: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState<"visibility" | "home_hero" | "home_cards" | "home_testimonials" | "coaches" | "program_main" | "program_roadmap" | "program_feedbacks" | "program_bonuses" | "contact">("visibility");
+  const [activeTab, setActiveTab] = useState<
+    | "visibility"
+    | "home_hero"
+    | "home_cards"
+    | "home_videos"
+    | "home_testimonials"
+    | "coaches"
+    | "program_main"
+    | "program_roadmap"
+    | "program_feedbacks"
+    | "program_bonuses"
+    | "contact"
+  >("visibility");
+
   const [formData, setFormData] = useState<SiteContent>(content);
 
   useEffect(() => {
@@ -146,8 +159,9 @@ export const AdminPanel: React.FC = () => {
             {[
               { id: "visibility", label: "Section ON/OFF" },
               { id: "home_hero", label: "Home: Hero & Intro" },
-              { id: "home_cards", label: "Home: Choose Path & CTA" },
-              { id: "home_testimonials", label: "Home: Videos & Reviews" },
+              { id: "home_cards", label: "Home: Path & CTA" },
+              { id: "home_videos", label: "Home: All 4 Videos" },
+              { id: "home_testimonials", label: "Home: Student Reviews" },
               { id: "coaches", label: "Coaches Master" },
               { id: "program_main", label: "Program: Core & Pricing" },
               { id: "program_roadmap", label: "Program: 5-Week Roadmap" },
@@ -171,7 +185,7 @@ export const AdminPanel: React.FC = () => {
           </div>
 
           <form onSubmit={handleContentSave} className="p-6 overflow-y-auto flex-1 space-y-6">
-            {/* VISIBILITY TOGGLES */}
+            {/* TAB: VISIBILITY */}
             {activeTab === "visibility" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/40 space-y-3">
@@ -214,7 +228,7 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* HOME: HERO & INTRO */}
+            {/* TAB: HOME HERO & INTRO */}
             {activeTab === "home_hero" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -247,7 +261,7 @@ export const AdminPanel: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-zinc-400 mb-1">Background Image URL</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Hero Image Path</label>
                     <input
                       type="text"
                       value={formData.home.heroImage}
@@ -258,18 +272,9 @@ export const AdminPanel: React.FC = () => {
                 </div>
 
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Why AOF / Intro Section</h4>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Why AOF Section</h4>
                   <div>
-                    <label className="block text-xs text-zinc-400 mb-1">Tagline</label>
-                    <input
-                      type="text"
-                      value={formData.home.introTagline}
-                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, introTagline: e.target.value } })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-zinc-400 mb-1">Heading</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Intro Heading</label>
                     <input
                       type="text"
                       value={formData.home.introHeading}
@@ -299,7 +304,7 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* HOME: CHOOSE PATH & CTA */}
+            {/* TAB: HOME PATH & CTA */}
             {activeTab === "home_cards" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -308,14 +313,14 @@ export const AdminPanel: React.FC = () => {
                     type="text"
                     value={formData.home.servicesTagline}
                     onChange={(e) => setFormData({ ...formData, home: { ...formData.home, servicesTagline: e.target.value } })}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-2"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     placeholder="Tagline"
                   />
                   <input
                     type="text"
                     value={formData.home.servicesHeading}
                     onChange={(e) => setFormData({ ...formData, home: { ...formData.home, servicesHeading: e.target.value } })}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-2"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     placeholder="Heading"
                   />
                   <input
@@ -323,17 +328,24 @@ export const AdminPanel: React.FC = () => {
                     value={formData.home.servicesDesc}
                     onChange={(e) => setFormData({ ...formData, home: { ...formData.home, servicesDesc: e.target.value } })}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    placeholder="Subtitle Description"
+                    placeholder="Subtitle"
                   />
                 </div>
 
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">1-on-1 Card</h4>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Card 1 (1-on-1 Transformation)</h4>
+                  <input
+                    type="text"
+                    value={formData.home.card1Badge}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card1Badge: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-white focus:border-[#07b4ba] focus:outline-none mb-1"
+                    placeholder="Badge Text"
+                  />
                   <input
                     type="text"
                     value={formData.home.card1Title}
                     onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card1Title: e.target.value } })}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-2"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-1"
                   />
                   <textarea
                     rows={2}
@@ -344,12 +356,19 @@ export const AdminPanel: React.FC = () => {
                 </div>
 
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">30-Day Striking Card</h4>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Card 2 (30-Day Striking)</h4>
+                  <input
+                    type="text"
+                    value={formData.home.card2Badge}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card2Badge: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-white focus:border-[#07b4ba] focus:outline-none mb-1"
+                    placeholder="Badge Text"
+                  />
                   <input
                     type="text"
                     value={formData.home.card2Title}
                     onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card2Title: e.target.value } })}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-2"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-1"
                   />
                   <textarea
                     rows={2}
@@ -361,31 +380,68 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* HOME: VIDEOS & REVIEWS */}
-            {activeTab === "home_testimonials" && (
+            {/* TAB: ALL 4 HOME VIDEOS */}
+            {activeTab === "home_videos" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">See How We Teach / Train (3 YouTube Videos)</h4>
-                  {formData.home.socialProofVideos.map((url, i) => (
-                    <div key={i}>
-                      <label className="block text-xs text-zinc-400 mb-1">Video {i + 1} Embed URL</label>
-                      <input
-                        type="text"
-                        value={url}
-                        onChange={(e) => {
-                          const updated = [...formData.home.socialProofVideos];
-                          updated[i] = e.target.value;
-                          setFormData({ ...formData, home: { ...formData.home, socialProofVideos: updated } });
-                        }}
-                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                      />
-                    </div>
-                  ))}
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Showcase Short 1 (Vertical)</h4>
+                  <input
+                    type="text"
+                    value={formData.home.socialProofVideo1}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, socialProofVideo1: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    placeholder="e.g. zjcVWjWSJog or YouTube Link"
+                  />
                 </div>
 
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Showcase Short 2 (Vertical)</h4>
+                  <input
+                    type="text"
+                    value={formData.home.socialProofVideo2}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, socialProofVideo2: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    placeholder="e.g. xuAeRmO82Gk or YouTube Link"
+                  />
+                </div>
+
+                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Showcase Short 3 (Vertical)</h4>
+                  <input
+                    type="text"
+                    value={formData.home.socialProofVideo3}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, socialProofVideo3: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    placeholder="e.g. H49Y6b7wn58 or YouTube Link"
+                  />
+                </div>
+
+                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Video 4: Testimonial Player Video (Horizontal 16:9)</h4>
+                  <input
+                    type="text"
+                    value={formData.home.testimonialVideoHeading}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, testimonialVideoHeading: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none mb-2"
+                    placeholder="Video Title Callout"
+                  />
+                  <input
+                    type="text"
+                    value={formData.home.testimonialVideoUrl}
+                    onChange={(e) => setFormData({ ...formData, home: { ...formData.home, testimonialVideoUrl: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    placeholder="e.g. KTlqLcAeisU or YouTube Link"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* TAB: STUDENT TESTIMONIALS */}
+            {activeTab === "home_testimonials" && (
+              <div className="space-y-4">
+                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
                   <div className="flex justify-between items-center">
-                    <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Client Success Stories</h4>
+                    <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Client Testimonials (Add/Delete/Edit)</h4>
                     <button
                       type="button"
                       onClick={() =>
@@ -395,7 +451,7 @@ export const AdminPanel: React.FC = () => {
                             ...formData.home,
                             testimonials: [
                               ...formData.home.testimonials,
-                              { id: Date.now().toString(), author: "New Athlete", role: "Fighter", text: "Great guidance!" }
+                              { id: Date.now().toString(), author: "New Member", role: "Member", text: "Excellent experience!" }
                             ]
                           }
                         })
@@ -412,7 +468,7 @@ export const AdminPanel: React.FC = () => {
                         <input
                           type="text"
                           value={t.author}
-                          placeholder="Author Name"
+                          placeholder="Name"
                           onChange={(e) => {
                             const updated = [...formData.home.testimonials];
                             updated[idx].author = e.target.value;
@@ -423,13 +479,13 @@ export const AdminPanel: React.FC = () => {
                         <input
                           type="text"
                           value={t.role || ""}
-                          placeholder="Role (e.g. Member, Fighter)"
+                          placeholder="Role (Member/Fighter)"
                           onChange={(e) => {
                             const updated = [...formData.home.testimonials];
                             updated[idx].role = e.target.value;
                             setFormData({ ...formData, home: { ...formData.home, testimonials: updated } });
                           }}
-                          className="w-32 bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white"
+                          className="w-28 bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white"
                         />
                         <button
                           type="button"
@@ -442,10 +498,21 @@ export const AdminPanel: React.FC = () => {
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
+                      <input
+                        type="text"
+                        value={t.image || ""}
+                        placeholder="Image URL"
+                        onChange={(e) => {
+                          const updated = [...formData.home.testimonials];
+                          updated[idx].image = e.target.value;
+                          setFormData({ ...formData, home: { ...formData.home, testimonials: updated } });
+                        }}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white"
+                      />
                       <textarea
                         rows={2}
                         value={t.text}
-                        placeholder="Feedback Text"
+                        placeholder="Review Text"
                         onChange={(e) => {
                           const updated = [...formData.home.testimonials];
                           updated[idx].text = e.target.value;
@@ -459,7 +526,7 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* COACHES */}
+            {/* TAB: COACHES */}
             {activeTab === "coaches" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -508,14 +575,14 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* PROGRAM CORE & PRICING */}
+            {/* TAB: PROGRAM CORE & PRICING */}
             {activeTab === "program_main" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Pricing, Batch & Checkout Link</h4>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Pricing, Countdown & Checkout Link</h4>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-xs text-zinc-400 mb-1">Offer Price</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Discount Price</label>
                       <input
                         type="text"
                         value={formData.program.priceDiscount}
@@ -534,7 +601,7 @@ export const AdminPanel: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs text-zinc-400 mb-1">Timer Countdown Target Date</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Countdown Date (YYYY-MM-DDTHH:MM:SS)</label>
                     <input
                       type="text"
                       value={formData.program.targetCountdownDate}
@@ -543,7 +610,7 @@ export const AdminPanel: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-zinc-400 mb-1">Razorpay / Payment Gateway Link</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Payment Gateway Link</label>
                     <input
                       type="text"
                       value={formData.program.buyNowUrl}
@@ -555,12 +622,10 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* PROGRAM ROADMAP */}
+            {/* TAB: PROGRAM ROADMAP */}
             {activeTab === "program_roadmap" && (
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">5-Week Roadmap Blueprint Cards</h4>
-                </div>
+                <h4 className="font-bold text-xs uppercase text-[#07b4ba]">5-Week Roadmap Blueprint</h4>
                 {formData.program.roadmapCards.map((card, idx) => (
                   <div key={card.id || idx} className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg space-y-2">
                     <div className="grid grid-cols-2 gap-2">
@@ -594,14 +659,14 @@ export const AdminPanel: React.FC = () => {
                         setFormData({ ...formData, program: { ...formData.program, roadmapCards: updated } });
                       }}
                       className="w-full bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-xs text-white"
-                      placeholder="Card Image URL"
+                      placeholder="Image URL"
                     />
                   </div>
                 ))}
               </div>
             )}
 
-            {/* PROGRAM FEEDBACKS */}
+            {/* TAB: PROGRAM FEEDBACKS */}
             {activeTab === "program_feedbacks" && (
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
@@ -615,7 +680,7 @@ export const AdminPanel: React.FC = () => {
                           ...formData.program,
                           feedbacks: [
                             ...formData.program.feedbacks,
-                            { id: Date.now().toString(), author: "New Student", text: "Training was clear and effective!" }
+                            { id: Date.now().toString(), author: "New Student", text: "The training is clear and disciplined!" }
                           ]
                         }
                       })
@@ -666,7 +731,7 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* BONUSES & FAQS */}
+            {/* TAB: BONUSES & FAQS */}
             {activeTab === "program_bonuses" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -741,7 +806,7 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* CONTACT & FOOTER */}
+            {/* TAB: CONTACT */}
             {activeTab === "contact" && (
               <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
                 <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Global Contact Info</h4>
