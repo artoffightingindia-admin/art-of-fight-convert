@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 import { Volume2, VolumeX } from "lucide-react";
+import { useCms } from "@/context/CmsContext";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
@@ -108,7 +109,7 @@ const feedbackCards = [
   { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
   { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
   { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
-  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose",image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
+  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose", image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
 ];
 
 function InfiniteFeedbackSlider() {
@@ -227,7 +228,7 @@ function InfiniteFeedbackSlider() {
 }
 
 /* ── FAQ ── */
-const faqItems = [
+const defaultFaqItems = [
   { question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee" },
   { question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
   { question: "How much time do I need each day?", answer: "Most sessions take around 30–45 minutes, making it easy to fit into a busy schedule." },
@@ -237,7 +238,18 @@ const faqItems = [
 ];
 
 function FAQSection() {
+  const { content } = useCms();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqItems = [
+    { question: content.faq1Question || defaultFaqItems[0].question, answer: content.faq1Answer || defaultFaqItems[0].answer },
+    { question: content.faq2Question || defaultFaqItems[1].question, answer: content.faq2Answer || defaultFaqItems[1].answer },
+    { question: content.faq3Question || defaultFaqItems[2].question, answer: content.faq3Answer || defaultFaqItems[2].answer },
+    defaultFaqItems[3],
+    defaultFaqItems[4],
+    defaultFaqItems[5],
+  ];
+
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,0.05) 1px,transparent .4px)", backgroundSize: "40px 40px" }}>
       <div style={{ width: "100%", paddingLeft: "1cm", paddingRight: "1cm", paddingTop: "64px", paddingBottom: "64px", boxSizing: "border-box", position: "relative", zIndex: 10 }}>
@@ -287,7 +299,6 @@ const IconConfidenceMindset = () => (
   </svg>
 );
 
-// New Bonus Icons Optimized
 const IconStretch = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
     <circle cx="14" cy="5" r="2.5" />
@@ -327,12 +338,6 @@ const painPoints = [
   "Can't find structured MMA guidance in Tamil",
 ];
 
-const coachCredentials = [
-  "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
-  "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
-  "Specialized in Developing Strong Fundamentals for Beginners",
-];
-
 const stats = [
   { val: "2,000+", label: "Clients Coached" },
   { val: "10+", label: "Years Experience" },
@@ -345,6 +350,7 @@ const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 
 export default function ProgramPage() {
   const navigate = useNavigate();
+  const { content } = useCms();
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
@@ -353,10 +359,6 @@ export default function ProgramPage() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-
-  // Hero Section Video Ref/State
-  const heroVideoRef = useRef<HTMLIFrameElement>(null);
-  const [isHeroVideoMuted, setIsHeroVideoMuted] = useState(true);
 
   // Testimonial Section Video Refs/States
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
@@ -374,9 +376,8 @@ export default function ProgramPage() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Timer Countdown Logic using exact target date
   useEffect(() => {
-const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
+    const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
@@ -394,18 +395,16 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
 
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
-
     return () => clearInterval(timerInterval);
   }, []);
 
-  // Autoplay Testimonial Video on Scroll
   useEffect(() => {
     const el = testimonialSectionRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsTestimonialInView(true);
-        obs.disconnect(); // Stop observing once triggered
+        obs.disconnect();
       }
     }, { threshold: 0.2 });
     
@@ -414,26 +413,16 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
   }, []);
 
   const handlePayment = () => {
-    window.location.href = "https://rzp.io/rzp/aof30dayprogram";
+    window.location.href = content.programBuyLink || "https://rzp.io/rzp/aof30dayprogram";
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "919385431051"; 
+    const phoneNumber = content.contactPhone?.replace(/[^0-9]/g, "") || "919385431051"; 
     const message = "Hey Team, I've a doubt about AOF 30 days program.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // Pain Section Video Play/Pause Toggle
-  const togglePlay = () => {
-    if (videoRef.current && videoRef.current.contentWindow) {
-      const func = isVideoPlaying ? 'pauseVideo' : 'playVideo';
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsVideoPlaying(!isVideoPlaying);
-    }
-  };
-
-  // Pain Section Video Overlay Mute Toggle
   const toggleMute = () => {
     if (videoRef.current && videoRef.current.contentWindow) {
       const func = isVideoMuted ? 'unMute' : 'mute';
@@ -442,19 +431,6 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
     }
   };
 
-  // Hero Section Video Audio Toggle
-  const toggleHeroVideoMute = () => {
-    if (heroVideoRef.current && heroVideoRef.current.contentWindow) {
-      const command = isHeroVideoMuted ? 'unMute' : 'mute';
-      heroVideoRef.current.contentWindow.postMessage(
-        JSON.stringify({ event: 'command', func: command, args: [] }), 
-        '*'
-      );
-      setIsHeroVideoMuted(!isHeroVideoMuted);
-    }
-  };
-
-  // Localized frame message pipe poster for Testimonial Clean Player
   const toggleTestimonialMute = () => {
     if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
       const func = isTestimonialMuted ? 'unMute' : 'mute';
@@ -464,11 +440,17 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
   };
 
   const roadmapCards = [
-    { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation",   image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
-    { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense",  image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+    { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+    { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
     { title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
     { title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
     { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
+  ];
+
+  const coachCredentials = [
+    content.coach1Point1 || "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
+    content.coach1Point2 || "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
+    content.coach1Point3 || "Specialized in Developing Strong Fundamentals for Beginners",
   ];
 
   const maxRoadmapIndex = isMobileView ? roadmapCards.length - 1 : roadmapCards.length - 2;
@@ -512,7 +494,9 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
 
           <div className="w-full relative z-10" style={GUTTER}>
             <Reveal type="fade-down" delay={200} duration={1200}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase mb-3 md:mb-4 drop-shadow-[0_0_8px_rgba(7,180,186,0.3)]">AOF 30-Day Online Program</p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase mb-3 md:mb-4 drop-shadow-[0_0_8px_rgba(7,180,186,0.3)]">
+                {content.programPageHeroTitle || "AOF 30-Day Online Program"}
+              </p>
             </Reveal>
             <Reveal type="fade-right" delay={400} duration={1200}>
               <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5">
@@ -521,11 +505,9 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
             </Reveal>
             <Reveal type="fade-up" delay={600} duration={1200}>
               <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
-                A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before.
+                {content.programPageHeroSubtitle || "A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before."}
               </p>
             </Reveal>
-
-          
 
             <Reveal type="scale-up" delay={800} duration={1200}>
               <button
@@ -575,15 +557,9 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  
-                  {/* Pointer events canvas cover to prevent interacting with hidden YouTube UI */}
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
 
-                  {/* Custom Play/Pause and Mute Controls (Visible on all devices) */}
                   <div className="absolute bottom-3 left-3 z-20 flex gap-2 pointer-events-auto">
-                    {/* Play/Pause Toggle */}
-                  
-                    {/* Mute/Unmute Toggle */}
                     <button
                       onClick={toggleMute}
                       className="flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-[#07b4ba] hover:text-black hover:border-transparent transition-all backdrop-blur shadow-md"
@@ -653,7 +629,7 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
               <div className="flex flex-col gap-4">
                 <Reveal type="fade-up" delay={200} duration={800}>
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
-                    The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible.Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day.
+                    {content.introText || "The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible. Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day."}
                   </p>
                 </Reveal>
                 <Reveal type="fade-up" delay={400} duration={800}>
@@ -823,8 +799,8 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-center md:items-start flex-wrap">
             <Reveal type="fade-right" duration={1200}>
               <img
-                src="https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"
-                alt="Head Coach"
+                src={content.coach1Image || "https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"}
+                alt={content.coach1Name || "Head Coach"}
                 className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 mx-auto md:mx-0 premium-hover"
                 style={{
                   boxShadow:
@@ -834,8 +810,12 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
             </Reveal>
             <div className="flex-1 w-full md:min-w-[280px] flex flex-col items-center md:items-start text-center md:text-left">
               <Reveal type="fade-left" delay={100} duration={1000} className="w-full">
-                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">Purushothaman MK</h2>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">Head Coach and MMA Fighter</p>
+                <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">
+                  {content.coach1Name || "Purushothaman MK"}
+                </h2>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">
+                  {content.coach1Title || "Head Coach and MMA Fighter"}
+                </p>
               </Reveal>
               <div className="mb-5 md:mb-6 flex flex-col items-center md:items-start w-full">
                 <div className="inline-block text-left">
@@ -978,14 +958,19 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center lg:items-start w-full">
             <div className="w-full lg:flex-1 max-w-2xl mx-auto">
               <Reveal type="fade-right" duration={1000}>
-                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">Ready To Start?</p>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">Ready To Start?</p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
                   DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK</span>
                 </h2>
                 <p className="text-white/50 text-[14px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
                   No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day.
                 </p>
-                 {["Complete 30-Day MMA Striking Roadmap", "Direct Coach Support & Technique Feedback", "Train From Home In Just 30-40 Minutes A Day", "Conditional Refund Policy"].map((item, i) => (
+                {[
+                  content.programFeature1 || "Complete 30-Day MMA Striking Roadmap", 
+                  content.programFeature2 || "Direct Coach Support & Technique Feedback", 
+                  content.programFeature3 || "Train From Home In Just 30-40 Minutes A Day", 
+                  "Conditional Refund Policy"
+                ].map((item, i) => (
                   <Reveal key={i} type="fade-up" delay={i * 150} duration={800} className="flex items-start gap-2.5 mb-3">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
@@ -1031,8 +1016,9 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
                     START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
-<span className="font-['Bebas_Neue'] text-[32px] md:text-[32px] text-white/100 leading-none">₹4,999</span>
-            
+                    <span className="font-['Bebas_Neue'] text-[32px] md:text-[32px] text-white/100 leading-none">
+                      {content.programDiscountPrice || "₹4,999"}
+                    </span>
                   </div>
                   <button
                     className="btn-glow w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer"
@@ -1083,9 +1069,9 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">CONTACT</h3>
             <div className="flex flex-col gap-3 md:gap-4">
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">+91 93854 31051</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">info@artoffighting.in</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">Chennai, Tamil Nadu, India</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contactPhone || "+91 93854 31051"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contactEmail || "info@artoffighting.in"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contactAddress || "Chennai, Tamil Nadu, India"}</p>
             </div>
           </div>
           <div>
@@ -1100,7 +1086,9 @@ const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] pt-4 md:pt-5 mb-3 flex">
               <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
             </h3>
-            <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] leading-[1.8] max-w-[320px]">Art of Fighting Academy — building champions through proven systems and disciplined training.</p>
+            <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] leading-[1.8] max-w-[320px]">
+              {content.footerTagline || "Art of Fighting Academy — building champions through proven systems and disciplined training."}
+            </p>
           </div>
         </div>
         <div className="w-full mt-6 pt-3 border-t border-white/10 text-center font-['Barlow'] text-[12px] md:text-[13px] text-white/30 pb-[80px] md:pb-0" style={GUTTER}>
