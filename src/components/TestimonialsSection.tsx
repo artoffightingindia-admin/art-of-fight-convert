@@ -1,39 +1,46 @@
 import { Star, ChevronLeft, ChevronRight, Volume2, VolumeX, Play, Pause, RotateCcw, RotateCw, Maximize } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { useCms, TestimonialItem } from "@/context/CmsContext";
 
-const testimonials = [
+const defaultTestimonials: TestimonialItem[] = [
   { 
-    name: "Pradeep",    
+    id: "1",
+    author: "Pradeep",    
     role: "Member",  
     text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence.",
     image: "https://i.postimg.cc/ZYjqbkYs/Pradeep-(1).jpg" 
   },
   { 
-    name: "Rahul",   
+    id: "2",
+    author: "Rahul",   
     role: "Member",  
     text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply.",
     image: "https://i.postimg.cc/7PXLHvPV/Rahul-(1).jpg"  
   },
   { 
-    name: "Bharathwaj",   
+    id: "3",
+    author: "Bharathwaj",   
     role: "Member",  
     text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward.",
     image: "https://i.postimg.cc/bYLvyXYF/Bharathwaj-(1).jpg"  
   },
   { 
-    name: "Surya", 
+    id: "4",
+    author: "Surya", 
     role: "Fighter", 
     text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
     image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg"  
   },
   { 
-    name: "Madhan",    
+    id: "5",
+    author: "Madhan",    
     role: "Member",  
     text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.",
     image: "https://i.postimg.cc/q7HbD53j/Madan-jpg.jpg"
   },
   { 
-    name: "Sohail Mohammad",  
+    id: "6",
+    author: "Sohail Mohammad",  
     role: "Athlete", 
     text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.",
     image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" 
@@ -42,11 +49,21 @@ const testimonials = [
 
 const VISIBLE = 3;
 
-const TiltCard = ({ t, animClass, delay }) => {
-  const ref = useRef(null);
+// Helper to convert any YouTube URL into an embed link
+const getYoutubeEmbedUrl = (url: string) => {
+  if (!url) return "https://www.youtube.com/embed/KTlqLcAeisU";
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11
+    ? `https://www.youtube.com/embed/${match[2]}`
+    : url;
+};
+
+const TiltCard = ({ t, animClass, delay }: { t: TestimonialItem; animClass: string; delay: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0, scale: 1 });
 
-  const onMove = (e) => {
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -95,13 +112,13 @@ const TiltCard = ({ t, animClass, delay }) => {
           style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
         >
           {t.image ? (
-            <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+            <img src={t.image} alt={t.author} className="w-full h-full object-cover" />
           ) : (
             <span
               className="text-[14px] font-bold"
               style={{ color: "#07b4ba", fontFamily: "'Barlow', sans-serif" }}
             >
-              {t.name.charAt(0).toUpperCase()}
+              {t.author?.charAt(0).toUpperCase()}
             </span>
           )}
         </div>
@@ -110,13 +127,13 @@ const TiltCard = ({ t, animClass, delay }) => {
             className="text-sm font-bold text-white m-0"
             style={{ fontFamily: "'Barlow', sans-serif" }}
           >
-            {t.name}
+            {t.author}
           </p>
           <p
             className="text-[12px] m-0"
             style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.4)" }}
           >
-            {t.role}
+            {t.role || "Member"}
           </p>
         </div>
       </div>
@@ -125,22 +142,28 @@ const TiltCard = ({ t, animClass, delay }) => {
 };
 
 const TestimonialsSection = () => {
+  const { content } = useCms();
+  const rawList = content.home.testimonials?.length
+    ? content.home.testimonials
+    : defaultTestimonials;
+
+  const testimonials = rawList;
+
   const [start, setStart]         = useState(0);
   const [paused, setPaused]       = useState(false);
-  const [animDir, setAnimDir]     = useState(null);
+  const [animDir, setAnimDir]     = useState<string | null>(null);
   const [animating, setAnimating] = useState(false);
 
-  const iframeRef = useRef(null);
-  const playerRef = useRef(null);
-  const containerRef = useRef(null);
-  const hideTimerRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const playerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isMuted, setIsMuted]     = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [playerReady, setPlayerReady] = useState(false);
   const [showControls, setShowControls] = useState(true);
 
-  // Auto-fade controls after 5s of inactivity; click/tap on video reveals them again
   const revealControls = () => {
     setShowControls(true);
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
@@ -154,28 +177,29 @@ const TestimonialsSection = () => {
     };
   }, []);
 
-  // Load YouTube IFrame API once and bind it to our existing iframe
   useEffect(() => {
     const createPlayer = () => {
-      playerRef.current = new window.YT.Player(iframeRef.current, {
-        events: {
-          onReady: () => setPlayerReady(true),
-          onStateChange: (e) => {
-            setIsPlaying(e.data === window.YT.PlayerState.PLAYING);
+      if ((window as any).YT && (window as any).YT.Player) {
+        playerRef.current = new (window as any).YT.Player(iframeRef.current, {
+          events: {
+            onReady: () => setPlayerReady(true),
+            onStateChange: (e: any) => {
+              setIsPlaying(e.data === (window as any).YT.PlayerState.PLAYING);
+            },
           },
-        },
-      });
+        });
+      }
     };
 
-    if (window.YT && window.YT.Player) {
+    if ((window as any).YT && (window as any).YT.Player) {
       createPlayer();
     } else {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
       document.body.appendChild(tag);
 
-      const prevCallback = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
+      const prevCallback = (window as any).onYouTubeIframeAPIReady;
+      (window as any).onYouTubeIframeAPIReady = () => {
         if (typeof prevCallback === "function") prevCallback();
         createPlayer();
       };
@@ -183,20 +207,29 @@ const TestimonialsSection = () => {
   }, []);
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || testimonials.length <= VISIBLE) return;
     const id = setInterval(() => triggerNext(), 3500);
     return () => clearInterval(id);
-  }, [paused, start]);
+  }, [paused, start, testimonials.length]);
 
   const triggerNext = () => {
-    if (animating) return;
-    setAnimDir("next"); setAnimating(true);
-    setTimeout(() => { setStart(s => (s + 1) % testimonials.length); setAnimating(false); }, 320);
+    if (animating || testimonials.length === 0) return;
+    setAnimDir("next");
+    setAnimating(true);
+    setTimeout(() => {
+      setStart((s) => (s + 1) % testimonials.length);
+      setAnimating(false);
+    }, 320);
   };
+
   const triggerPrev = () => {
-    if (animating) return;
-    setAnimDir("prev"); setAnimating(true);
-    setTimeout(() => { setStart(s => (s - 1 + testimonials.length) % testimonials.length); setAnimating(false); }, 320);
+    if (animating || testimonials.length === 0) return;
+    setAnimDir("prev");
+    setAnimating(true);
+    setTimeout(() => {
+      setStart((s) => (s - 1 + testimonials.length) % testimonials.length);
+      setAnimating(false);
+    }, 320);
   };
 
   const togglePlay = () => {
@@ -206,7 +239,7 @@ const TestimonialsSection = () => {
     else player.playVideo();
   };
 
-  const skip = (seconds) => {
+  const skip = (seconds: number) => {
     const player = playerRef.current;
     if (!player || !playerReady) return;
     const current = player.getCurrentTime();
@@ -224,21 +257,24 @@ const TestimonialsSection = () => {
   const toggleFullscreen = () => {
     const el = containerRef.current;
     if (!el) return;
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
+    if (document.fullscreenElement || (document as any).webkitFullscreenElement) {
       if (document.exitFullscreen) document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if ((document as any).webkitExitFullscreen) (document as any).webkitExitFullscreen();
     } else {
       if (el.requestFullscreen) el.requestFullscreen();
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen();
     }
   };
 
-  const visible = Array.from({ length: VISIBLE }, (_, i) =>
+  const visibleCount = Math.min(VISIBLE, testimonials.length);
+  const visible = Array.from({ length: visibleCount }, (_, i) =>
     testimonials[(start + i) % testimonials.length]
   );
 
   const controlBtnClass =
     "flex items-center justify-center w-9 h-9 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 backdrop-blur-sm cursor-pointer";
+
+  const videoSrc = getYoutubeEmbedUrl(content.home.socialProofVideos?.[0] || "https://www.youtube.com/embed/KTlqLcAeisU");
 
   return (
     <section
@@ -281,14 +317,13 @@ const TestimonialsSection = () => {
       `}</style>
 
       <div className="max-w-[1100px] mx-auto px-6">
-
         {/* Section heading */}
         <div className="text-center mb-[52px]">
           <p
             className="text-sm font-bold uppercase tracking-[4px] mb-2"
             style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba" }}
           >
-            Results and Success Stories
+            {content.home.testimonialsTagline || "Results and Success Stories"}
           </p>
           <h2
             className="uppercase m-0 leading-[1.2]"
@@ -299,17 +334,16 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-            Real People,{" "}
+            {content.home.testimonialsHeading || "Real People, "}{" "}
             <br className="md:hidden" />
             <span className="text-[#07b4ba]">
-              Real Progress
+              {content.home.testimonialsSubheading ? "" : "Real Progress"}
             </span>
           </h2>
         </div>
 
         {/* 2-col layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
           {/* LEFT: Video frame with custom control bar */}
           <div className="flex flex-col">
             <h3
@@ -322,7 +356,7 @@ const TestimonialsSection = () => {
                 letterSpacing: "0.5px",
               }}
             >
-              Hear Directly From People Who Have Trained Under Coach Purushothaman
+              {content.home.testimonialsSubheading || "Hear Directly From People Who Have Trained Under Coach Purushothaman"}
             </h3>
 
             <div ref={containerRef} className="testimonial-video-container w-full relative group">
@@ -331,20 +365,20 @@ const TestimonialsSection = () => {
                   ref={iframeRef}
                   id="testimonials-yt-player"
                   className="absolute inset-0 w-full h-full border-0 scale-105"
-                  src="https://www.youtube.com/embed/KTlqLcAeisU?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&playsinline=1"
-                  title="Coach Purushothaman MMA Training Testimonials"
+                  src={`${videoSrc}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&playsinline=1`}
+                  title="MMA Training Testimonials"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
 
-                {/* Click-to-reveal surface: also blocks clicks from reaching the iframe/YouTube logo */}
+                {/* Click-to-reveal surface */}
                 <div
                   className="absolute inset-0 bg-transparent z-10 cursor-pointer"
                   onClick={revealControls}
                 />
               </div>
 
-              {/* Custom control bar — fades after 5s idle, click on video to bring back */}
+              {/* Custom control bar */}
               <div
                 onClick={revealControls}
                 className={`absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between gap-2 transition-opacity duration-300 ${
@@ -407,7 +441,7 @@ const TestimonialsSection = () => {
             <div className="flex flex-col gap-[14px]">
               {visible.map((t, i) => (
                 <TiltCard
-                  key={`${t.name}-${start}-${i}`}
+                  key={`${t.author}-${start}-${i}`}
                   t={t}
                   animClass={animating ? (animDir === "next" ? "card-next" : "card-prev") : ""}
                   delay={i * 50}
@@ -416,25 +450,27 @@ const TestimonialsSection = () => {
             </div>
 
             {/* Nav arrows */}
-            <div className="flex gap-[10px] mt-5 justify-end">
-              {[
-                { label: "Previous", icon: <ChevronLeft size={17} />, fn: triggerPrev },
-                { label: "Next",     icon: <ChevronRight size={17} />, fn: triggerNext },
-              ].map(({ label, icon, fn }) => (
-                <button
-                  key={label}
-                  onClick={fn}
-                  aria-label={label}
-                  className="w-10 h-10 rounded-full border flex items-center justify-center cursor-pointer bg-transparent transition-[border-color,color] duration-200 hover:border-[#07b4ba] hover:text-[#07b4ba]"
-                  style={{
-                    borderColor: "rgba(255,255,255,0.18)",
-                    color: "rgba(255,255,255,0.6)",
-                  }}
-                >
-                  {icon}
-                </button>
-              ))}
-            </div>
+            {testimonials.length > VISIBLE && (
+              <div className="flex gap-[10px] mt-5 justify-end">
+                {[
+                  { label: "Previous", icon: <ChevronLeft size={17} />, fn: triggerPrev },
+                  { label: "Next",     icon: <ChevronRight size={17} />, fn: triggerNext },
+                ].map(({ label, icon, fn }) => (
+                  <button
+                    key={label}
+                    onClick={fn}
+                    aria-label={label}
+                    className="w-10 h-10 rounded-full border flex items-center justify-center cursor-pointer bg-transparent transition-[border-color,color] duration-200 hover:border-[#07b4ba] hover:text-[#07b4ba]"
+                    style={{
+                      borderColor: "rgba(255,255,255,0.18)",
+                      color: "rgba(255,255,255,0.6)",
+                    }}
+                  >
+                    {icon}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
