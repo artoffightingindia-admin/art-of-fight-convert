@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Phone, Mail, MapPin, Camera, Video, Users } from "lucide-react";
+import { useCms } from "@/context/CmsContext";
 
 const Footer = () => {
+  const { content } = useCms();
   const [clickCount, setClickCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,43 +33,53 @@ const Footer = () => {
   return (
     <footer className="bg-background border-t border-border">
       <div className="container py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        
-        {/* Contact Section */}
+        {/* Contact Section - Dynamic from Admin Panel */}
         <div>
-          <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Contact</h4>
+          <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">
+            Contact
+          </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-center gap-2">
-              <Phone size={14} className="text-primary" /> +91 93854 31051
+              <Phone size={14} className="text-primary" />{" "}
+              {content.contactPhone || "+91 93854 31051"}
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={14} className="text-primary" /> info@artoffighting.in
+              <Mail size={14} className="text-primary" />{" "}
+              {content.contactEmail || "info@artoffighting.in"}
             </li>
             <li className="flex items-start gap-2">
-              <MapPin size={14} className="text-primary mt-0.5" /> Chennai, Tamil Nadu, India
+              <MapPin size={14} className="text-primary mt-0.5 shrink-0" />{" "}
+              <span>{content.contactAddress || "Chennai, Tamil Nadu, India"}</span>
             </li>
           </ul>
         </div>
 
         {/* Dynamic Quick Links Section */}
         <div>
-          <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Quick Links</h4>
+          <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">
+            Quick Links
+          </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             {isBlueprintPage ? (
-              // Navigation ONLY for the Blueprint Page
               <>
                 <li>
-                  <button onClick={() => navigate("/")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
+                  <button
+                    onClick={() => navigate("/")}
+                    className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
+                  >
                     Home
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => navigate("/program")} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left">
-                    30 Days Program 
+                  <button
+                    onClick={() => navigate("/program")}
+                    className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
+                  >
+                    30 Days Program
                   </button>
                 </li>
               </>
             ) : (
-              // Default Navigation for the rest of the site
               <>
                 <li>
                   <a href="#home" className="hover:text-primary transition-colors">
@@ -96,38 +108,45 @@ const Footer = () => {
 
         {/* Dynamic Programs Section */}
         <div>
-          <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">Programs</h4>
+          <h4 className="font-display text-sm text-foreground uppercase tracking-wider mb-4">
+            Programs
+          </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             {isBlueprintPage ? (
-              // Custom text or links for the Blueprint page program section
               <li>
                 <span className="text-muted-foreground/70">
                   Currently viewing: MMA Beginners Blueprint
                 </span>
               </li>
             ) : (
-              // Default Program links
               <>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
+                  <button
+                    onClick={() => navigate("/program")}
+                    className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
+                  >
                     30 Days Program
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
+                  <button
+                    onClick={() => navigate("/coaching")}
+                    className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-left"
+                  >
                     1-on-1 Coaching
-                  </a>
+                  </button>
                 </li>
               </>
             )}
           </ul>
         </div>
 
-        {/* Brand Section */}
+        {/* Brand Section - Dynamic Tagline */}
         <div className="space-y-3">
           <p className="font-display text-2xl text-primary">AOF</p>
           <p className="text-muted-foreground text-xs leading-relaxed">
-            Art of Fighting Academy — building champions through proven systems and disciplined training.
+            {content.footerTagline ||
+              "Art of Fighting Academy — building champions through proven systems and disciplined training."}
           </p>
           <div className="flex items-center gap-3 pt-2">
             <a
@@ -162,7 +181,10 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <span>
-              <span onClick={handleYearClick} className="cursor-pointer hover:text-primary transition-colors">
+              <span
+                onClick={handleYearClick}
+                className="cursor-pointer hover:text-primary transition-colors"
+              >
                 {new Date().getFullYear()}
               </span>{" "}
               Art of Fighting Academy
