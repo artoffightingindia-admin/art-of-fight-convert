@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCms } from "@/context/CmsContext";
 
-const defaultVideos = [
-  "zjcVWjWSJog",
-  "xuAeRmO82Gk",
-  "H49Y6b7wn58",
-];
-
-// Helper to extract YouTube video ID from any link format
 const extractVideoId = (input: string): string => {
   if (!input) return "";
   const trimmed = input.trim();
@@ -21,17 +14,17 @@ const extractVideoId = (input: string): string => {
 
 const SocialProofSection = () => {
   const { content } = useCms();
-  const rawVideos = content.home.socialProofVideos?.length
-    ? content.home.socialProofVideos
-    : defaultVideos;
 
-  const videos = rawVideos.map(extractVideoId).filter(Boolean);
+  const v1 = extractVideoId(content.home.socialProofVideo1 || "zjcVWjWSJog");
+  const v2 = extractVideoId(content.home.socialProofVideo2 || "xuAeRmO82Gk");
+  const v3 = extractVideoId(content.home.socialProofVideo3 || "H49Y6b7wn58");
+
+  const videos = [v1, v2, v3].filter(Boolean);
 
   const [visibleCount, setVisibleCount] = useState(
     typeof window !== "undefined" && window.innerWidth < 768 ? 1 : 3
   );
 
-  // Track muted state for each video individually
   const [mutedStates, setMutedStates] = useState(videos.map(() => true));
   const [currentVideo, setCurrentVideo] = useState(0);
 
@@ -43,31 +36,22 @@ const SocialProofSection = () => {
     const onResize = () => {
       setVisibleCount(window.innerWidth < 768 ? 1 : 3);
     };
-
     window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const handleToggleMute = (index: number) => {
     if (visibleCount === 1) {
-      // Mobile: Toggle all videos to share the same mute state
       const newMuteState = !mutedStates[index];
       setMutedStates(videos.map(() => newMuteState));
     } else {
-      // Desktop: Unmute selected video, mute all others
       setMutedStates((prev) =>
         prev.map((isMuted, i) => (i === index ? !isMuted : true))
       );
     }
   };
 
-  const visibleVideos =
-    visibleCount === 1
-      ? [videos[currentVideo]]
-      : videos;
+  const visibleVideos = visibleCount === 1 ? [videos[currentVideo]] : videos;
 
   return (
     <section className="py-12 md:py-16 bg-card/50 w-full">
@@ -87,8 +71,7 @@ const SocialProofSection = () => {
         {/* Videos */}
         <div className="flex justify-center md:justify-between items-center gap-4 w-full">
           {visibleVideos.map((videoId, index) => {
-            const actualIndex =
-              visibleCount === 1 ? currentVideo : index;
+            const actualIndex = visibleCount === 1 ? currentVideo : index;
             const isMuted = mutedStates[actualIndex];
 
             return (
@@ -107,7 +90,6 @@ const SocialProofSection = () => {
                   allowFullScreen
                 />
 
-                {/* Mute / Unmute */}
                 <button
                   onClick={() => handleToggleMute(actualIndex)}
                   className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black/90 text-white text-xs px-3 py-1 rounded-full transition cursor-pointer"
@@ -122,12 +104,9 @@ const SocialProofSection = () => {
         {/* Mobile Navigation */}
         {visibleCount === 1 && videos.length > 1 && (
           <div className="flex justify-center items-center gap-3 mt-5">
-            {/* Prev */}
             <button
               onClick={() => {
-                if (currentVideo > 0) {
-                  setCurrentVideo(currentVideo - 1);
-                }
+                if (currentVideo > 0) setCurrentVideo(currentVideo - 1);
               }}
               disabled={currentVideo === 0}
               className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
@@ -139,17 +118,13 @@ const SocialProofSection = () => {
               ←
             </button>
 
-            {/* Counter */}
             <div className="text-white/60 text-sm font-medium min-w-[40px] text-center">
               {currentVideo + 1} / {videos.length}
             </div>
 
-            {/* Next */}
             <button
               onClick={() => {
-                if (currentVideo < videos.length - 1) {
-                  setCurrentVideo(currentVideo + 1);
-                }
+                if (currentVideo < videos.length - 1) setCurrentVideo(currentVideo + 1);
               }}
               disabled={currentVideo === videos.length - 1}
               className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
