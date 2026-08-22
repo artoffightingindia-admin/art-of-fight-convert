@@ -2,61 +2,17 @@ import { Star, ChevronLeft, ChevronRight, Volume2, VolumeX, Play, Pause, RotateC
 import { useState, useEffect, useRef } from "react";
 import { useCms, TestimonialItem } from "@/context/CmsContext";
 
-const defaultTestimonials: TestimonialItem[] = [
-  { 
-    id: "1",
-    author: "Pradeep",    
-    role: "Member",  
-    text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence.",
-    image: "https://i.postimg.cc/ZYjqbkYs/Pradeep-(1).jpg" 
-  },
-  { 
-    id: "2",
-    author: "Rahul",   
-    role: "Member",  
-    text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply.",
-    image: "https://i.postimg.cc/7PXLHvPV/Rahul-(1).jpg"  
-  },
-  { 
-    id: "3",
-    author: "Bharathwaj",   
-    role: "Member",  
-    text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward.",
-    image: "https://i.postimg.cc/bYLvyXYF/Bharathwaj-(1).jpg"  
-  },
-  { 
-    id: "4",
-    author: "Surya", 
-    role: "Fighter", 
-    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
-    image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg"  
-  },
-  { 
-    id: "5",
-    author: "Madhan",    
-    role: "Member",  
-    text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.",
-    image: "https://i.postimg.cc/q7HbD53j/Madan-jpg.jpg"
-  },
-  { 
-    id: "6",
-    author: "Sohail Mohammad",  
-    role: "Athlete", 
-    text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.",
-    image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" 
-  },
-];
-
 const VISIBLE = 3;
 
-// Helper to convert any YouTube URL into an embed link
-const getYoutubeEmbedUrl = (url: string) => {
-  if (!url) return "https://www.youtube.com/embed/KTlqLcAeisU";
+const extractVideoId = (input: string): string => {
+  if (!input) return "KTlqLcAeisU";
+  const trimmed = input.trim();
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
-  const match = url.match(regExp);
-  return match && match[2].length === 11
-    ? `https://www.youtube.com/embed/${match[2]}`
-    : url;
+  const match = trimmed.match(regExp);
+  if (match && match[2].length === 11) {
+    return match[2];
+  }
+  return trimmed;
 };
 
 const TiltCard = ({ t, animClass, delay }: { t: TestimonialItem; animClass: string; delay: number }) => {
@@ -90,14 +46,12 @@ const TiltCard = ({ t, animClass, delay }: { t: TestimonialItem; animClass: stri
           : "0 2px 12px rgba(0,0,0,0.4)",
       }}
     >
-      {/* Stars */}
       <div className="flex gap-[3px] mb-[10px]">
         {[...Array(5)].map((_, s) => (
           <Star key={s} className="w-[15px] h-[15px]" style={{ color: "#07b4ba", fill: "#07b4ba" }} />
         ))}
       </div>
 
-      {/* Quote */}
       <p
         className="text-sm leading-[1.65] italic mb-[14px]"
         style={{ fontFamily: "'Barlow', sans-serif", color: "rgba(255,255,255,0.75)" }}
@@ -105,7 +59,6 @@ const TiltCard = ({ t, animClass, delay }: { t: TestimonialItem; animClass: stri
         "{t.text}"
       </p>
 
-      {/* Author */}
       <div className="flex items-center gap-[10px]">
         <div
           className="w-[34px] h-[34px] rounded-full flex items-center justify-center shrink-0 overflow-hidden"
@@ -143,11 +96,7 @@ const TiltCard = ({ t, animClass, delay }: { t: TestimonialItem; animClass: stri
 
 const TestimonialsSection = () => {
   const { content } = useCms();
-  const rawList = content.home.testimonials?.length
-    ? content.home.testimonials
-    : defaultTestimonials;
-
-  const testimonials = rawList;
+  const testimonials = content.home.testimonials || [];
 
   const [start, setStart]         = useState(0);
   const [paused, setPaused]       = useState(false);
@@ -163,6 +112,8 @@ const TestimonialsSection = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [playerReady, setPlayerReady] = useState(false);
   const [showControls, setShowControls] = useState(true);
+
+  const rawVideoId = extractVideoId(content.home.testimonialVideoUrl || "KTlqLcAeisU");
 
   const revealControls = () => {
     setShowControls(true);
@@ -274,8 +225,6 @@ const TestimonialsSection = () => {
   const controlBtnClass =
     "flex items-center justify-center w-9 h-9 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 backdrop-blur-sm cursor-pointer";
 
-  const videoSrc = getYoutubeEmbedUrl(content.home.socialProofVideos?.[0] || "https://www.youtube.com/embed/KTlqLcAeisU");
-
   return (
     <section
       id="testimonials"
@@ -317,7 +266,6 @@ const TestimonialsSection = () => {
       `}</style>
 
       <div className="max-w-[1100px] mx-auto px-6">
-        {/* Section heading */}
         <div className="text-center mb-[52px]">
           <p
             className="text-sm font-bold uppercase tracking-[4px] mb-2"
@@ -342,7 +290,6 @@ const TestimonialsSection = () => {
           </h2>
         </div>
 
-        {/* 2-col layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* LEFT: Video frame with custom control bar */}
           <div className="flex flex-col">
@@ -356,7 +303,7 @@ const TestimonialsSection = () => {
                 letterSpacing: "0.5px",
               }}
             >
-              {content.home.testimonialsSubheading || "Hear Directly From People Who Have Trained Under Coach Purushothaman"}
+              {content.home.testimonialVideoHeading || "Hear Directly From People Who Have Trained Under Coach Purushothaman"}
             </h3>
 
             <div ref={containerRef} className="testimonial-video-container w-full relative group">
@@ -365,20 +312,18 @@ const TestimonialsSection = () => {
                   ref={iframeRef}
                   id="testimonials-yt-player"
                   className="absolute inset-0 w-full h-full border-0 scale-105"
-                  src={`${videoSrc}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&playsinline=1`}
-                  title="MMA Training Testimonials"
+                  src={`https://www.youtube.com/embed/${rawVideoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&playsinline=1`}
+                  title="Coach Purushothaman MMA Training Testimonials"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
 
-                {/* Click-to-reveal surface */}
                 <div
                   className="absolute inset-0 bg-transparent z-10 cursor-pointer"
                   onClick={revealControls}
                 />
               </div>
 
-              {/* Custom control bar */}
               <div
                 onClick={revealControls}
                 className={`absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between gap-2 transition-opacity duration-300 ${
@@ -449,7 +394,6 @@ const TestimonialsSection = () => {
               ))}
             </div>
 
-            {/* Nav arrows */}
             {testimonials.length > VISIBLE && (
               <div className="flex gap-[10px] mt-5 justify-end">
                 {[
