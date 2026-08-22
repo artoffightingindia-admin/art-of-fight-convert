@@ -1,140 +1,460 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+export interface TestimonialItem {
+  id: string;
+  text: string;
+  author: string;
+  image?: string;
+  role?: string;
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface RoadmapItem {
+  id: string;
+  title: string;
+  days: string;
+  image: string;
+  points: string[];
+}
+
+export interface BonusItem {
+  id: string;
+  title: string;
+  desc: string;
+}
+
 export interface SiteContent {
-  // --- HERO & INTRO ---
-  heroTitle: string;
-  heroSubtitle: string;
-  heroImage: string;
-  introHeading: string;
-  introText: string;
+  // Visibility Toggles (Section ON/OFF)
+  visibility: {
+    heroSection: boolean;
+    trustIndicators: boolean;
+    introSection: boolean;
+    servicesSection: boolean;
+    coachSection: boolean;
+    socialProofSection: boolean;
+    testimonialsSection: boolean;
+    ctaPairSection: boolean;
+    faqSection: boolean;
+    stickyAd: boolean;
+    
+    // Program Page Toggles
+    programHero: boolean;
+    programTrust: boolean;
+    programPain: boolean;
+    programIntro: boolean;
+    programWhy: boolean;
+    programRoadmap: boolean;
+    programPromise: boolean;
+    programCoach: boolean;
+    programTestimonials: boolean;
+    programBonuses: boolean;
+    programCta: boolean;
+    programFaq: boolean;
 
-  // --- COACHES ---
-  coach1Name: string;
-  coach1Title: string;
-  coach1Image: string;
-  coach1Bio: string;
-  coach1Point1: string;
-  coach1Point2: string;
-  coach1Point3: string;
-  coach2Name: string;
-  coach2Title: string;
-  coach2Image: string;
-  coach2Bio: string;
-  coach2Point1: string;
-  coach2Point2: string;
-  coach2Point3: string;
+    // Coaching Page Toggles
+    coachingHero: boolean;
+    coachingCurriculum: boolean;
+    coachingBenefits: boolean;
+    coachingCta: boolean;
 
-  // --- SERVICES & STICKY AD ---
-  servicesHeading: string;
-  servicesSubheading: string;
-  stickyAdText: string;
-  stickyAdButtonText: string;
-  stickyAdLink: string;
+    // Lead Page Toggles
+    leadHero: boolean;
+    leadForm: boolean;
+  };
 
-  // --- SOCIAL PROOF & TESTIMONIALS ---
-  socialProofHeading: string;
-  testimonial1Name: string;
-  testimonial1Role: string;
-  testimonial1Text: string;
-  testimonial2Name: string;
-  testimonial2Role: string;
-  testimonial2Text: string;
+  // --- HOME / LANDING PAGE ---
+  home: {
+    heroTagline: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    heroImage: string;
+    heroBtn1Text: string;
+    heroBtn2Text: string;
+    trustPillar1: string;
+    trustPillar2: string;
+    trustPillar3: string;
+    introTagline: string;
+    introHeading: string;
+    introText: string;
+    introImage: string;
+    servicesTagline: string;
+    servicesHeading: string;
+    servicesDesc: string;
+    ctaPairHeading: string;
+    ctaPairSubtitle: string;
+    ctaPairBgImage: string;
+    ctaPairBtn1Text: string;
+    ctaPairBtn1Link: string;
+    ctaPairBtn2Text: string;
+    ctaPairBtn2Link: string;
+    stickyAdText: string;
+    stickyAdBtnText: string;
+    stickyAdLink: string;
+  };
 
-  // --- FAQ & CONTACT & FOOTER ---
-  faq1Question: string;
-  faq1Answer: string;
-  faq2Question: string;
-  faq2Answer: string;
-  faq3Question: string;
-  faq3Answer: string;
-  contactEmail: string;
-  contactPhone: string;
-  contactAddress: string;
-  footerTagline: string;
+  // --- COACHES (SHARED) ---
+  coaches: {
+    sectionTagline: string;
+    coach1Name: string;
+    coach1Title: string;
+    coach1Image: string;
+    coach1Bio: string;
+    coach1Points: string[];
+    coach2Name: string;
+    coach2Title: string;
+    coach2Image: string;
+    coach2Bio: string;
+    coach2Points: string[];
+  };
 
   // --- PROGRAM PAGE ---
-  programPageHeroTitle: string;
-  programPageHeroSubtitle: string;
-  programPrice: string;
-  programDiscountPrice: string;
-  programBuyLink: string;
-  programFeature1: string;
-  programFeature2: string;
-  programFeature3: string;
-  programYoutubeUrl: string;
+  program: {
+    tagline: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    heroBgImage: string;
+    trust1: string;
+    trust2: string;
+    trust3: string;
+    painTitle: string;
+    painSubheading: string;
+    painVideoUrl: string;
+    painPoints: string[];
+    introTagline: string;
+    introHeading: string;
+    introText1: string;
+    introText2: string;
+    introImage: string;
+    whyTagline: string;
+    whyHeading: string;
+    whyCards: { title: string; desc: string }[];
+    roadmapTagline: string;
+    roadmapHeading: string;
+    roadmapSubtitle: string;
+    roadmapCards: RoadmapItem[];
+    promiseHeading: string;
+    promiseQuote: string;
+    promiseBtnText: string;
+    coachTagline: string;
+    coachName: string;
+    coachTitle: string;
+    coachImage: string;
+    coachCreds: string[];
+    stats: { val: string; label: string }[];
+    testimonialTagline: string;
+    testimonialHeading: string;
+    testimonialSubheading: string;
+    testimonialVideoUrl: string;
+    testimonialQuote: string;
+    testimonialText: string;
+    testimonialAuthor: string;
+    feedbacks: TestimonialItem[];
+    bonusTagline: string;
+    bonusHeading: string;
+    bonusSubtitle: string;
+    bonusWorth: string;
+    bonuses: BonusItem[];
+    ctaTagline: string;
+    ctaHeading: string;
+    ctaDesc: string;
+    ctaFeatures: string[];
+    guaranteeTitle: string;
+    guaranteeText: string;
+    ribbonSaveText: string;
+    ribbonOfferText: string;
+    membersLimitText: string;
+    ctaCardHeading: string;
+    priceRegular: string;
+    priceDiscount: string;
+    ctaBtnText: string;
+    batchNotice: string;
+    targetCountdownDate: string;
+    buyNowUrl: string;
+    whatsappNumber: string;
+    whatsappMessage: string;
+    faqs: FaqItem[];
+  };
 
   // --- COACHING PAGE ---
-  coachingHeroTitle: string;
-  coachingHeroSubtitle: string;
-  coachingPrice: string;
-  coachingApplyLink: string;
-  coachingYoutubeUrl: string;
+  coaching: {
+    heroTagline: string;
+    heroTitle: string;
+    heroSubtitle: string;
+    heroImage: string;
+    videoUrl: string;
+    price: string;
+    applyLink: string;
+    benefitsHeading: string;
+    benefits: string[];
+    featuresHeading: string;
+    features: string[];
+  };
+
+  // --- LEAD PAGE ---
+  lead: {
+    heroTitle: string;
+    heroSubtitle: string;
+    heroImage: string;
+    bulletPoints: string[];
+    submitButtonText: string;
+    redirectUrl: string;
+  };
+
+  // --- FOOTER & CONTACT ---
+  contact: {
+    phone: string;
+    email: string;
+    address: string;
+    footerTagline: string;
+    instagramUrl: string;
+    youtubeUrl: string;
+    facebookUrl: string;
+  };
 }
 
 export const defaultContent: SiteContent = {
-  heroTitle: "STOP DOUBTING.\nSTART LEARNING MMA\nTHE RIGHT WAY.",
-  heroSubtitle: "Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results.",
-  heroImage: "/images/Hero.jpg",
-  introHeading: "WHAT IS ART OF FIGHTING?",
-  introText: "A premier academy designed to give you professional combat training without the fluff. Step-by-step progress, elite coaching, and real combat science.",
-
-  coach1Name: "Purushothaman MK",
-  coach1Title: "Head Coach | Professional MMA Fighter",
-  coach1Image: "https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg",
-  coach1Bio: "Purushothaman helps beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.",
-  coach1Point1: "Only Tamil Fighter to compete in MFN and a Multiple-Time National Medalist.",
-  coach1Point2: "Trained 2000+ MMA students, including national champions across multiple disciplines.",
-  coach1Point3: "10+ Years in MMA with 20+ Fights Competed Nationally & Internationally.",
-
-  coach2Name: "Kaviarasu K",
-  coach2Title: "Program Development | MMA Athlete",
-  coach2Image: "https://i.postimg.cc/Zn2hykcD/Kaviarasu-jpg.jpg",
-  coach2Bio: "Kaviarasu oversees program development and student support at Art of Fighting, ensuring every member has the guidance, accountability, and structure needed to succeed.",
-  coach2Point1: "State Boxing Champion & Pro-Am National Muay Thai Champion.",
-  coach2Point2: "5+ Years of Mixed Martial Arts Experience.",
-  coach2Point3: "Co-Creator of AOF's Programs & Content.",
-
-  servicesHeading: "OUR TRAINING PROGRAMS",
-  servicesSubheading: "Engineered for pure progression from ground fundamentals to championship striking.",
-  stickyAdText: "Join the next AOF 30-Day Training Intake. Limited slots remaining!",
-  stickyAdButtonText: "Enroll Now",
-  stickyAdLink: "/program",
-
-  socialProofHeading: "PROVEN BY CHAMPIONS & FIGHT ENTHUSIASTS",
-  testimonial1Name: "Arun K.",
-  testimonial1Role: "Amateur Kickboxer",
-  testimonial1Text: "The structure and technical breakdowns changed my striking game completely within 4 weeks.",
-  testimonial2Name: "Dinesh M.",
-  testimonial2Role: "Fitness Enthusiast",
-  testimonial2Text: "Started from zero martial arts background. The coaches build you up from day one.",
-
-  faq1Question: "Can complete beginners join?",
-  faq1Answer: "Yes! Every fundamental is taught step-by-step from day one.",
-  faq2Question: "What gear do I need to start?",
-  faq2Answer: "Comfortable workout clothes. Hand wraps and boxing gloves will be introduced as you progress.",
-  faq3Question: "Is there personal feedback on techniques?",
-  faq3Answer: "Yes, our coaches review your form through interactive modules and private channels.",
-
-  contactEmail: "artoffightinginfo@gmail.com",
-  contactPhone: "+91 98765 43210",
-  contactAddress: "Art of Fight Combat Academy, Tamil Nadu, India",
-  footerTagline: "Forging discipline, endurance, and elite combat skills.",
-
-  programPageHeroTitle: "AOF 30 DAYS MMA PROGRAM",
-  programPageHeroSubtitle: "Master the fundamental striking, defense, and conditioning drills used by professional fighters.",
-  programPrice: "₹4,999",
-  programDiscountPrice: "₹1,999",
-  programBuyLink: "https://pages.razorpay.com/artoffight",
-  programFeature1: "30 Complete Guided Video Workouts",
-  programFeature2: "Daily Striking & Footwork Blueprints",
-  programFeature3: "Direct Coach Accountability Group",
-  programYoutubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-
-  coachingHeroTitle: "1 ON 1 ELITE COACHING",
-  coachingHeroSubtitle: "Custom personalized fighter development plan directly mentored by Head Coach Purushothaman.",
-  coachingPrice: "₹9,999 / Month",
-  coachingApplyLink: "/contact",
-  coachingYoutubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  visibility: {
+    heroSection: true,
+    trustIndicators: true,
+    introSection: true,
+    servicesSection: true,
+    coachSection: true,
+    socialProofSection: true,
+    testimonialsSection: true,
+    ctaPairSection: true,
+    faqSection: true,
+    stickyAd: true,
+    programHero: true,
+    programTrust: true,
+    programPain: true,
+    programIntro: true,
+    programWhy: true,
+    programRoadmap: true,
+    programPromise: true,
+    programCoach: true,
+    programTestimonials: true,
+    programBonuses: true,
+    programCta: true,
+    programFaq: true,
+    coachingHero: true,
+    coachingCurriculum: true,
+    coachingBenefits: true,
+    coachingCta: true,
+    leadHero: true,
+    leadForm: true,
+  },
+  home: {
+    heroTagline: "Art of Fighting Academy",
+    heroTitle: "STOP DOUBTING.\nSTART LEARNING MMA\nTHE RIGHT WAY.",
+    heroSubtitle: "Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results.",
+    heroImage: "/images/Hero.jpg",
+    heroBtn1Text: "1 on 1 Coaching (Coming Soon)",
+    heroBtn2Text: "AOF 30 Days Program",
+    trustPillar1: "Proven System",
+    trustPillar2: "Tamil Team",
+    trustPillar3: "Real Results",
+    introTagline: "The Starting Point",
+    introHeading: "WHAT IS ART OF FIGHTING?",
+    introText: "A premier academy designed to give you professional combat training without the fluff. Step-by-step progress, elite coaching, and real combat science.",
+    introImage: "https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg",
+    servicesTagline: "Training Tracks",
+    servicesHeading: "OUR TRAINING PROGRAMS",
+    servicesDesc: "Engineered for pure progression from ground fundamentals to championship striking.",
+    ctaPairHeading: "READY TO TRANSFORM YOUR BODY & MIND?",
+    ctaPairSubtitle: "Join over 2,000 students mastering martial arts fundamentals step by step.",
+    ctaPairBgImage: "/images/Hero.jpg",
+    ctaPairBtn1Text: "Explore 30-Day Program",
+    ctaPairBtn1Link: "/program",
+    ctaPairBtn2Text: "1 on 1 Mentorship",
+    ctaPairBtn2Link: "/coaching",
+    stickyAdText: "Join the next AOF 30-Day Training Intake. Limited slots remaining!",
+    stickyAdBtnText: "Enroll Now",
+    stickyAdLink: "/program",
+  },
+  coaches: {
+    sectionTagline: "LED BY",
+    coach1Name: "Purushothaman MK",
+    coach1Title: "Head Coach | Professional MMA Fighter",
+    coach1Image: "https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg",
+    coach1Bio: "Purushothaman helps beginners and athletes build real skills, confidence and discipline through structured training, clear fundamentals, and a proven path to lasting progress.",
+    coach1Points: [
+      "Only Tamil Fighter to compete in MFN and a Multiple-Time National Medalist.",
+      "Trained 2000+ MMA students, including national champions across multiple disciplines.",
+      "10+ Years in MMA with 20+ Fights Competed Nationally & Internationally."
+    ],
+    coach2Name: "Kaviarasu K",
+    coach2Title: "Program Development | MMA Athlete",
+    coach2Image: "https://i.postimg.cc/Zn2hykcD/Kaviarasu-jpg.jpg",
+    coach2Bio: "Kaviarasu oversees program development and student support at Art of Fighting, ensuring every member has the guidance, accountability, and structure needed to succeed.",
+    coach2Points: [
+      "State Boxing Champion & Pro-Am National Muay Thai Champion.",
+      "5+ Years of Mixed Martial Arts Experience.",
+      "Co-Creator of AOF's Programs & Content."
+    ]
+  },
+  program: {
+    tagline: "AOF 30-Day Online Program",
+    heroTitle: "BUILD REAL\nMMA STRIKING\nFUNDAMENTALS",
+    heroSubtitle: "A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before.",
+    heroBgImage: "/images/Program page Hero.jpeg",
+    trust1: "Proven System",
+    trust2: "Tamil Team",
+    trust3: "Real Results",
+    painTitle: "5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION",
+    painSubheading: "YOU WANT TO LEARN MMA. BUT HAVEN'T STARTED BECAUSE YOU:",
+    painVideoUrl: "https://www.youtube.com/embed/79xvYiiBFfk",
+    painPoints: [
+      "Don't know where to begin",
+      "Don't have access to a quality MMA gym",
+      "Don't have a training partner or equipment",
+      "Can't commit hours every day to training",
+      "Can't find structured MMA guidance in Tamil"
+    ],
+    introTagline: "Introducing AOF 30-Day Program",
+    introHeading: "THE STARTING POINT\nYOU'VE BEEN LOOKING FOR.",
+    introText1: "The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible. Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day.",
+    introText2: "We've built the roadmap. You just need to follow it.",
+    introImage: "https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg",
+    whyTagline: "WHY THIS PROGRAM WORKS?",
+    whyHeading: "BUILT AROUND THE REAL CHALLENGES OF BEGINNERS",
+    whyCards: [
+      { title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
+      { title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
+      { title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
+      { title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
+      { title: "LEARN IN Tamil", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." }
+    ],
+    roadmapTagline: "THE AOF BLUEPRINT",
+    roadmapHeading: "A CLEARPATH TO MMA STRIKING.",
+    roadmapSubtitle: "Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.",
+    roadmapCards: [
+      { id: "1", title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+      { id: "2", title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+      { id: "3", title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+      { id: "4", title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+      { id: "5", title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] }
+    ],
+    promiseHeading: "Our Promise",
+    promiseQuote: "In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and shadowbox confidently on your own. Commit to the process, and we'll show you the path.",
+    promiseBtnText: "Join Now",
+    coachTagline: "LED BY",
+    coachName: "Purushothaman MK",
+    coachTitle: "Head Coach and MMA Fighter",
+    coachImage: "https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg",
+    coachCreds: [
+      "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
+      "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
+      "Specialized in Developing Strong Fundamentals for Beginners"
+    ],
+    stats: [
+      { val: "2,000+", label: "Clients Coached" },
+      { val: "10+", label: "Years Experience" },
+      { val: "20+", label: "MMA Fights" },
+      { val: "10K+", label: "AOF Community" }
+    ],
+    testimonialTagline: "FROM OUR FIRST BATCH",
+    testimonialHeading: "WHAT HAPPENED AFTER 30 DAYS",
+    testimonialSubheading: "Hear directly from people who completed the AOF 30-Day MMA Striking Program",
+    testimonialVideoUrl: "https://www.youtube.com/embed/4Z8PSdk6Ak0",
+    testimonialQuote: "The More I Progressed, The More I Wanted To Train",
+    testimonialText: "I started with doubts and made mistakes. But as I progressed through the program my technique improved and my confidence grew. I even found myself drilling techniques whenever I had free time.",
+    testimonialAuthor: "Palanippan, AOF 30 Days Program Member.",
+    feedbacks: [
+      { id: "1", text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
+      { id: "2", text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
+      { id: "3", text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
+      { id: "4", text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose", image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" }
+    ],
+    bonusTagline: "BEYOND THE CORE PROGRAM",
+    bonusHeading: "EVERYTHING DESIGNED TO HELP YOU SUCCEED",
+    bonusSubtitle: "Enroll now and receive exclusive bonus resources designed to maximize your results.",
+    bonusWorth: "₹2,999",
+    bonuses: [
+      { id: "1", title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
+      { id: "2", title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
+      { id: "3", title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
+      { id: "4", title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
+      { id: "5", title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." }
+    ],
+    ctaTagline: "Ready To Start?",
+    ctaHeading: "DON'T SPEND ANOTHER MONTH FEELING STUCK",
+    ctaDesc: "No gym. No training partner. No confusion. Just a clear roadmap, proper guidance, and 30–40 minutes a day.",
+    ctaFeatures: [
+      "Complete 30-Day MMA Striking Roadmap",
+      "Direct Coach Support & Technique Feedback",
+      "Train From Home In Just 30-40 Minutes A Day",
+      "Conditional Refund Policy"
+    ],
+    guaranteeTitle: "CONDITIONAL PROGRESS GUARANTEE",
+    guaranteeText: "Complete the program, submit your training work, and follow the process. If you don't achieve the promised outcome, we'll make it right.",
+    ribbonSaveText: "SAVE ₹1200",
+    ribbonOfferText: "2Yrs of AOF Offer",
+    membersLimitText: "LIMITED TO 20 MEMBERS",
+    ctaCardHeading: "START YOUR\nMMA JOURNEY",
+    priceRegular: "₹4,999",
+    priceDiscount: "₹4,999",
+    ctaBtnText: "JOIN THE NEXT BATCH",
+    batchNotice: "Batch 3 Starting 7th September",
+    targetCountdownDate: "2026-09-07T23:59:59",
+    buyNowUrl: "https://rzp.io/rzp/aof30dayprogram",
+    whatsappNumber: "919385431051",
+    whatsappMessage: "Hey Team, I've a doubt about AOF 30 days program.",
+    faqs: [
+      { id: "1", question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee." },
+      { id: "2", question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
+      { id: "3", question: "How much time do I need each day?", answer: "Most sessions take around 30–45 minutes, making it easy to fit into a busy schedule." },
+      { id: "4", question: "What equipment do I need?", answer: "Comfortable training clothes and a small training space are enough to get started. Additional equipment is optional." },
+      { id: "5", question: "What happens after I join?", answer: "You'll receive access to the program, onboarding instructions, and a clear roadmap showing exactly what to do each day." },
+      { id: "6", question: "How many sessions should I train per week?", answer: "You can reach out through the designated support channels and receive guidance from the AOF team." }
+    ]
+  },
+  coaching: {
+    heroTagline: "Direct Mentorship",
+    heroTitle: "1 ON 1 ELITE\nFIGHTER COACHING",
+    heroSubtitle: "Direct one-on-one personal coaching program tailored precisely to your biomechanics, power output, and combat aspirations.",
+    heroImage: "/images/Hero.jpg",
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    price: "₹9,999 / Month",
+    applyLink: "/contact",
+    benefitsHeading: "Why Choose 1-on-1 Coaching?",
+    benefits: [
+      "Custom personalized video feedback and technique corrections",
+      "Weekly live strategy calls with Head Coach Purushothaman",
+      "Tailored nutritional guidance & combat strength protocol"
+    ],
+    featuresHeading: "What's Included?",
+    features: [
+      "24/7 direct access coach messaging channel",
+      "Fight footage breakdown & sparring simulation",
+      "Complete competitive pathway support"
+    ]
+  },
+  lead: {
+    heroTitle: "CLAIM YOUR MMA\nBEGINNER BLUEPRINT",
+    heroSubtitle: "Get instant access to our comprehensive starting guide, daily drills, and basic striking checklist.",
+    heroImage: "/images/Program page Hero.jpeg",
+    bulletPoints: [
+      "10-Minute Daily Hand-Speed Workout Blueprint",
+      "The 5 Fatal Stance Mistakes Most Beginners Make",
+      "Foundational Combat Breathing & Guard Alignment"
+    ],
+    submitButtonText: "Download Free Guide",
+    redirectUrl: "/program"
+  },
+  contact: {
+    phone: "+91 93854 31051",
+    email: "info@artoffighting.in",
+    address: "Chennai, Tamil Nadu, India",
+    footerTagline: "Art of Fighting Academy — building champions through proven systems and disciplined training.",
+    instagramUrl: "https://instagram.com",
+    youtubeUrl: "https://youtube.com",
+    facebookUrl: "https://facebook.com"
+  }
 };
 
 interface CmsContextType {
@@ -155,7 +475,7 @@ const CmsContext = createContext<CmsContextType | undefined>(undefined);
 export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<SiteContent>(() => {
     try {
-      const saved = localStorage.getItem("aof_site_content");
+      const saved = localStorage.getItem("aof_site_content_v3");
       return saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
     } catch {
       return defaultContent;
@@ -175,12 +495,8 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (
-        e.ctrlKey &&
-        e.shiftKey &&
-        e.metaKey &&
-        (e.key === "A" || e.key === "a")
-      ) {
+      // Shortcut: CTRL + SHIFT + WINDOWS(Meta) + A or a
+      if (e.ctrlKey && e.shiftKey && e.metaKey && (e.key === "A" || e.key === "a")) {
         e.preventDefault();
         if (isAuthenticated) {
           setIsPanelOpen((prev) => !prev);
@@ -198,7 +514,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const updated = { ...content, ...newContent };
     setContent(updated);
     try {
-      localStorage.setItem("aof_site_content", JSON.stringify(updated));
+      localStorage.setItem("aof_site_content_v3", JSON.stringify(updated));
     } catch (err) {
       console.error("Storage error:", err);
     }
@@ -207,19 +523,19 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const resetContent = () => {
     setContent(defaultContent);
     try {
-      localStorage.removeItem("aof_site_content");
+      localStorage.removeItem("aof_site_content_v3");
     } catch (err) {
       console.error("Storage error:", err);
     }
   };
 
   const login = (email: string, pass: string) => {
-    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24") {
+    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24")[cite: 1] {
       setIsAuthenticated(true);
       try {
         sessionStorage.setItem("aof_admin_auth", "true");
       } catch (err) {
-        console.error("Session storage error:", err);
+        console.error("Session error:", err);
       }
       setIsAuthModalOpen(false);
       setIsPanelOpen(true);
@@ -233,7 +549,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       sessionStorage.removeItem("aof_admin_auth");
     } catch (err) {
-      console.error("Session storage error:", err);
+      console.error("Session error:", err);
     }
     setIsPanelOpen(false);
   };
