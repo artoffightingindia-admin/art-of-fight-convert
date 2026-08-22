@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useCms } from "../context/CmsContext";
+import { useCms, SiteContent, TestimonialItem, FaqItem, RoadmapItem, BonusItem } from "../context/CmsContext";
+import { Trash2, Plus, Eye, EyeOff } from "lucide-react";
 
 export const AdminPanel: React.FC = () => {
   const {
@@ -17,8 +18,8 @@ export const AdminPanel: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState<"home" | "coaches" | "program" | "coaching" | "faq_contact">("home");
-  const [formData, setFormData] = useState(content);
+  const [activeTab, setActiveTab] = useState<"visibility" | "home" | "coaches" | "program" | "coaching" | "lead" | "contact">("visibility");
+  const [formData, setFormData] = useState<SiteContent>(content);
 
   useEffect(() => {
     setFormData(content);
@@ -39,20 +40,31 @@ export const AdminPanel: React.FC = () => {
   const handleContentSave = (e: React.FormEvent) => {
     e.preventDefault();
     updateContent(formData);
-    alert("Website content updated successfully across all sections!");
+    alert("Website content & settings updated successfully!");
+  };
+
+  // Helper for visibility toggles
+  const toggleVisibility = (key: keyof SiteContent["visibility"]) => {
+    setFormData((prev) => ({
+      ...prev,
+      visibility: {
+        ...prev.visibility,
+        [key]: !prev.visibility[key]
+      }
+    }));
   };
 
   return (
     <>
       {/* Login Modal */}
       {isAuthModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
           <div className="bg-zinc-950 border border-zinc-800 rounded-xl max-w-md w-full p-6 text-white shadow-2xl">
             <h2 className="text-xl font-bold tracking-wider text-[#07b4ba] mb-1">
-              ADMIN VERIFICATION
+              AOF MASTER VERIFICATION
             </h2>
             <p className="text-xs text-zinc-400 mb-4">
-              Enter authorized credentials to access complete website settings.
+              Enter master credentials to access the live administrative console.
             </p>
 
             {error && (
@@ -109,11 +121,11 @@ export const AdminPanel: React.FC = () => {
 
       {/* Admin Panel Drawer */}
       {isPanelOpen && (
-        <div className="fixed inset-y-0 right-0 z-[100] w-full max-w-2xl bg-zinc-950 border-l border-zinc-800 text-white shadow-2xl flex flex-col">
-          <div className="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
+        <div className="fixed inset-y-0 right-0 z-[1000] w-full max-w-2xl bg-zinc-950 border-l border-zinc-800 text-white shadow-2xl flex flex-col font-sans">
+          <div className="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/80">
             <div>
-              <h2 className="font-bold text-lg text-[#07b4ba]">AOF Master Control</h2>
-              <span className="text-xs text-zinc-400">Website Global Content Manager</span>
+              <h2 className="font-bold text-lg text-[#07b4ba]">AOF Master Control Panel</h2>
+              <span className="text-xs text-zinc-400">Total Website & Section Visibility Manager</span>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -135,147 +147,149 @@ export const AdminPanel: React.FC = () => {
 
           {/* Navigation Tabs */}
           <div className="flex border-b border-zinc-800 overflow-x-auto text-xs bg-zinc-950">
-            <button
-              type="button"
-              onClick={() => setActiveTab("home")}
-              className={`px-4 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
-                activeTab === "home"
-                  ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900"
-                  : "border-transparent text-zinc-400 hover:text-white"
-              }`}
-            >
-              Hero & Intro
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("coaches")}
-              className={`px-4 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
-                activeTab === "coaches"
-                  ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900"
-                  : "border-transparent text-zinc-400 hover:text-white"
-              }`}
-            >
-              Coaches
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("program")}
-              className={`px-4 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
-                activeTab === "program"
-                  ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900"
-                  : "border-transparent text-zinc-400 hover:text-white"
-              }`}
-            >
-              Program Page
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("coaching")}
-              className={`px-4 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
-                activeTab === "coaching"
-                  ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900"
-                  : "border-transparent text-zinc-400 hover:text-white"
-              }`}
-            >
-              1 on 1 Coaching
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("faq_contact")}
-              className={`px-4 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
-                activeTab === "faq_contact"
-                  ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900"
-                  : "border-transparent text-zinc-400 hover:text-white"
-              }`}
-            >
-              FAQ & Contact
-            </button>
+            {[
+              { id: "visibility", label: "Section ON/OFF" },
+              { id: "home", label: "Home Page" },
+              { id: "coaches", label: "Coaches" },
+              { id: "program", label: "30-Day Program" },
+              { id: "coaching", label: "Coaching Page" },
+              { id: "lead", label: "Lead / Blueprint" },
+              { id: "contact", label: "Contact & Footer" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`px-3.5 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
+                  activeTab === tab.id
+                    ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900"
+                    : "border-transparent text-zinc-400 hover:text-white"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
 
           <form onSubmit={handleContentSave} className="p-6 overflow-y-auto flex-1 space-y-6">
-            {/* TAB: HERO & INTRO */}
+            
+            {/* TAB: VISIBILITY ON/OFF */}
+            {activeTab === "visibility" && (
+              <div className="space-y-4">
+                <p className="text-xs text-zinc-400">
+                  Toggle sections ON or OFF across every page. Disabled sections will immediately hide on the live site.
+                </p>
+
+                <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/40 space-y-3">
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Landing Page Sections</h4>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    {Object.entries(formData.visibility).slice(0, 10).map(([key, val]) => (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => toggleVisibility(key as any)}
+                        className={`flex items-center justify-between p-2 rounded border transition-all ${
+                          val ? "bg-[#07b4ba]/10 border-[#07b4ba] text-white" : "bg-zinc-900 border-zinc-800 text-zinc-500"
+                        }`}
+                      >
+                        <span className="capitalize">{key.replace(/([A-Z])/g, " $1")}</span>
+                        {val ? <Eye className="w-3.5 h-3.5 text-[#07b4ba]" /> : <EyeOff className="w-3.5 h-3.5" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/40 space-y-3">
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Program Page Sections</h4>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    {Object.entries(formData.visibility).slice(10, 22).map(([key, val]) => (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => toggleVisibility(key as any)}
+                        className={`flex items-center justify-between p-2 rounded border transition-all ${
+                          val ? "bg-[#07b4ba]/10 border-[#07b4ba] text-white" : "bg-zinc-900 border-zinc-800 text-zinc-500"
+                        }`}
+                      >
+                        <span className="capitalize">{key.replace("program", "").replace(/([A-Z])/g, " $1")}</span>
+                        {val ? <Eye className="w-3.5 h-3.5 text-[#07b4ba]" /> : <EyeOff className="w-3.5 h-3.5" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* TAB: HOME PAGE */}
             {activeTab === "home" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Hero Banner Section</h3>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Hero Section</h4>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Heading Text</label>
-                    <textarea
-                      rows={2}
-                      value={formData.heroTitle}
-                      onChange={(e) => setFormData({ ...formData, heroTitle: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Subtitle Text</label>
-                    <textarea
-                      rows={2}
-                      value={formData.heroSubtitle}
-                      onChange={(e) => setFormData({ ...formData, heroSubtitle: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Hero Image Path / URL</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Tagline</label>
                     <input
                       type="text"
-                      value={formData.heroImage}
-                      onChange={(e) => setFormData({ ...formData, heroImage: e.target.value })}
+                      value={formData.home.heroTagline}
+                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, heroTagline: e.target.value } })}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-zinc-400 mb-1">Title</label>
+                    <textarea
+                      rows={2}
+                      value={formData.home.heroTitle}
+                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, heroTitle: e.target.value } })}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-zinc-400 mb-1">Subtitle</label>
+                    <textarea
+                      rows={2}
+                      value={formData.home.heroSubtitle}
+                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, heroSubtitle: e.target.value } })}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-zinc-400 mb-1">Background Image URL</label>
+                    <input
+                      type="text"
+                      value={formData.home.heroImage}
+                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, heroImage: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Intro Section</h3>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Sticky Announcement Bar</h4>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Intro Heading</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Ad Caption Text</label>
                     <input
                       type="text"
-                      value={formData.introHeading}
-                      onChange={(e) => setFormData({ ...formData, introHeading: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Intro Text</label>
-                    <textarea
-                      rows={3}
-                      value={formData.introText}
-                      onChange={(e) => setFormData({ ...formData, introText: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Sticky Ad & Services</h3>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Sticky Bar Text</label>
-                    <input
-                      type="text"
-                      value={formData.stickyAdText}
-                      onChange={(e) => setFormData({ ...formData, stickyAdText: e.target.value })}
+                      value={formData.home.stickyAdText}
+                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, stickyAdText: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Button Text</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Button Text</label>
                       <input
                         type="text"
-                        value={formData.stickyAdButtonText}
-                        onChange={(e) => setFormData({ ...formData, stickyAdButtonText: e.target.value })}
+                        value={formData.home.stickyAdBtnText}
+                        onChange={(e) => setFormData({ ...formData, home: { ...formData.home, stickyAdBtnText: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Button Target Link</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Button Link</label>
                       <input
                         type="text"
-                        value={formData.stickyAdLink}
-                        onChange={(e) => setFormData({ ...formData, stickyAdLink: e.target.value })}
+                        value={formData.home.stickyAdLink}
+                        onChange={(e) => setFormData({ ...formData, home: { ...formData.home, stickyAdLink: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
@@ -288,138 +302,84 @@ export const AdminPanel: React.FC = () => {
             {activeTab === "coaches" && (
               <div className="space-y-4">
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Head Coach</h3>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Head Coach (Coach 1)</h4>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Name</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Name</label>
                       <input
                         type="text"
-                        value={formData.coach1Name}
-                        onChange={(e) => setFormData({ ...formData, coach1Name: e.target.value })}
+                        value={formData.coaches.coach1Name}
+                        onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach1Name: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Title</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Title</label>
                       <input
                         type="text"
-                        value={formData.coach1Title}
-                        onChange={(e) => setFormData({ ...formData, coach1Title: e.target.value })}
+                        value={formData.coaches.coach1Title}
+                        onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach1Title: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Photo Image URL</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Image URL</label>
                     <input
                       type="text"
-                      value={formData.coach1Image}
-                      onChange={(e) => setFormData({ ...formData, coach1Image: e.target.value })}
+                      value={formData.coaches.coach1Image}
+                      onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach1Image: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Biography</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Biography</label>
                     <textarea
                       rows={3}
-                      value={formData.coach1Bio}
-                      onChange={(e) => setFormData({ ...formData, coach1Bio: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Bullet Point 1</label>
-                    <input
-                      type="text"
-                      value={formData.coach1Point1}
-                      onChange={(e) => setFormData({ ...formData, coach1Point1: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Bullet Point 2</label>
-                    <input
-                      type="text"
-                      value={formData.coach1Point2}
-                      onChange={(e) => setFormData({ ...formData, coach1Point2: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Bullet Point 3</label>
-                    <input
-                      type="text"
-                      value={formData.coach1Point3}
-                      onChange={(e) => setFormData({ ...formData, coach1Point3: e.target.value })}
+                      value={formData.coaches.coach1Bio}
+                      onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach1Bio: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Team Coach</h3>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Team Coach (Coach 2)</h4>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Name</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Name</label>
                       <input
                         type="text"
-                        value={formData.coach2Name}
-                        onChange={(e) => setFormData({ ...formData, coach2Name: e.target.value })}
+                        value={formData.coaches.coach2Name}
+                        onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach2Name: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Title</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Title</label>
                       <input
                         type="text"
-                        value={formData.coach2Title}
-                        onChange={(e) => setFormData({ ...formData, coach2Title: e.target.value })}
+                        value={formData.coaches.coach2Title}
+                        onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach2Title: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Photo Image URL</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Image URL</label>
                     <input
                       type="text"
-                      value={formData.coach2Image}
-                      onChange={(e) => setFormData({ ...formData, coach2Image: e.target.value })}
+                      value={formData.coaches.coach2Image}
+                      onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach2Image: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Biography</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Biography</label>
                     <textarea
                       rows={3}
-                      value={formData.coach2Bio}
-                      onChange={(e) => setFormData({ ...formData, coach2Bio: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Bullet Point 1</label>
-                    <input
-                      type="text"
-                      value={formData.coach2Point1}
-                      onChange={(e) => setFormData({ ...formData, coach2Point1: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Bullet Point 2</label>
-                    <input
-                      type="text"
-                      value={formData.coach2Point2}
-                      onChange={(e) => setFormData({ ...formData, coach2Point2: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Bullet Point 3</label>
-                    <input
-                      type="text"
-                      value={formData.coach2Point3}
-                      onChange={(e) => setFormData({ ...formData, coach2Point3: e.target.value })}
+                      value={formData.coaches.coach2Bio}
+                      onChange={(e) => setFormData({ ...formData, coaches: { ...formData.coaches, coach2Bio: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
@@ -427,251 +387,318 @@ export const AdminPanel: React.FC = () => {
               </div>
             )}
 
-            {/* TAB: PROGRAM PAGE */}
+            {/* TAB: 30-DAY PROGRAM PAGE */}
             {activeTab === "program" && (
-              <div className="space-y-4">
+              <div className="space-y-5">
+                {/* Hero Section */}
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">30-Day Program Page Settings</h3>
+                  <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Program Hero & Pricing</h4>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Program Hero Title</label>
-                    <input
-                      type="text"
-                      value={formData.programPageHeroTitle}
-                      onChange={(e) => setFormData({ ...formData, programPageHeroTitle: e.target.value })}
+                    <label className="block text-xs text-zinc-400 mb-1">Hero Title</label>
+                    <textarea
+                      rows={2}
+                      value={formData.program.heroTitle}
+                      onChange={(e) => setFormData({ ...formData, program: { ...formData.program, heroTitle: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Program Subtitle</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Subtitle</label>
                     <textarea
                       rows={2}
-                      value={formData.programPageHeroSubtitle}
-                      onChange={(e) => setFormData({ ...formData, programPageHeroSubtitle: e.target.value })}
+                      value={formData.program.heroSubtitle}
+                      onChange={(e) => setFormData({ ...formData, program: { ...formData.program, heroSubtitle: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Regular Price</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Discount Offer Price</label>
                       <input
                         type="text"
-                        value={formData.programPrice}
-                        onChange={(e) => setFormData({ ...formData, programPrice: e.target.value })}
+                        value={formData.program.priceDiscount}
+                        onChange={(e) => setFormData({ ...formData, program: { ...formData.program, priceDiscount: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Offer / Discount Price</label>
+                      <label className="block text-xs text-zinc-400 mb-1">Countdown Date (YYYY-MM-DDTHH:MM:SS)</label>
                       <input
                         type="text"
-                        value={formData.programDiscountPrice}
-                        onChange={(e) => setFormData({ ...formData, programDiscountPrice: e.target.value })}
+                        value={formData.program.targetCountdownDate}
+                        onChange={(e) => setFormData({ ...formData, program: { ...formData.program, targetCountdownDate: e.target.value } })}
                         className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Payment Checkout Link</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Payment Checkout URL</label>
                     <input
                       type="text"
-                      value={formData.programBuyLink}
-                      onChange={(e) => setFormData({ ...formData, programBuyLink: e.target.value })}
+                      value={formData.program.buyNowUrl}
+                      onChange={(e) => setFormData({ ...formData, program: { ...formData.program, buyNowUrl: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Program Video Trailer (YouTube Link)</label>
-                    <input
-                      type="text"
-                      value={formData.programYoutubeUrl}
-                      onChange={(e) => setFormData({ ...formData, programYoutubeUrl: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                      placeholder="https://www.youtube.com/watch?v=..."
-                    />
+                </div>
+
+                {/* Feedbacks / Testimonials Array Editor */}
+                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Student Feedbacks (Add/Delete/Edit)</h4>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          program: {
+                            ...formData.program,
+                            feedbacks: [
+                              ...formData.program.feedbacks,
+                              { id: Date.now().toString(), author: "New Student", text: "Training changed my perspective!" }
+                            ]
+                          }
+                        })
+                      }
+                      className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                    >
+                      <Plus className="w-3 h-3" /> Add Review
+                    </button>
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Feature 1</label>
-                    <input
-                      type="text"
-                      value={formData.programFeature1}
-                      onChange={(e) => setFormData({ ...formData, programFeature1: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
+                  {formData.program.feedbacks.map((item, idx) => (
+                    <div key={item.id || idx} className="p-3 bg-zinc-950 border border-zinc-800 rounded space-y-2">
+                      <div className="flex justify-between items-center">
+                        <input
+                          type="text"
+                          value={item.author}
+                          placeholder="Author Name"
+                          onChange={(e) => {
+                            const updated = [...formData.program.feedbacks];
+                            updated[idx].author = e.target.value;
+                            setFormData({ ...formData, program: { ...formData.program, feedbacks: updated } });
+                          }}
+                          className="bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = formData.program.feedbacks.filter((_, i) => i !== idx);
+                            setFormData({ ...formData, program: { ...formData.program, feedbacks: updated } });
+                          }}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <textarea
+                        rows={2}
+                        value={item.text}
+                        placeholder="Review Text"
+                        onChange={(e) => {
+                          const updated = [...formData.program.feedbacks];
+                          updated[idx].text = e.target.value;
+                          setFormData({ ...formData, program: { ...formData.program, feedbacks: updated } });
+                        }}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* FAQ Array Editor */}
+                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Program FAQs (Add/Delete/Edit)</h4>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          program: {
+                            ...formData.program,
+                            faqs: [
+                              ...formData.program.faqs,
+                              { id: Date.now().toString(), question: "New Question?", answer: "Answer details here." }
+                            ]
+                          }
+                        })
+                      }
+                      className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                    >
+                      <Plus className="w-3 h-3" /> Add FAQ
+                    </button>
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Feature 2</label>
-                    <input
-                      type="text"
-                      value={formData.programFeature2}
-                      onChange={(e) => setFormData({ ...formData, programFeature2: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Feature 3</label>
-                    <input
-                      type="text"
-                      value={formData.programFeature3}
-                      onChange={(e) => setFormData({ ...formData, programFeature3: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
+                  {formData.program.faqs.map((item, idx) => (
+                    <div key={item.id || idx} className="p-3 bg-zinc-950 border border-zinc-800 rounded space-y-2">
+                      <div className="flex justify-between items-center">
+                        <input
+                          type="text"
+                          value={item.question}
+                          placeholder="Question"
+                          onChange={(e) => {
+                            const updated = [...formData.program.faqs];
+                            updated[idx].question = e.target.value;
+                            setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
+                          }}
+                          className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-white mr-2"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = formData.program.faqs.filter((_, i) => i !== idx);
+                            setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
+                          }}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <textarea
+                        rows={2}
+                        value={item.answer}
+                        placeholder="Answer"
+                        onChange={(e) => {
+                          const updated = [...formData.program.faqs];
+                          updated[idx].answer = e.target.value;
+                          setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
+                        }}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
 
             {/* TAB: COACHING PAGE */}
             {activeTab === "coaching" && (
-              <div className="space-y-4">
-                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">1 on 1 Coaching Page</h3>
+              <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                <h4 className="font-bold text-xs uppercase text-[#07b4ba]">1 on 1 Coaching Page</h4>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Title</label>
+                  <input
+                    type="text"
+                    value={formData.coaching.heroTitle}
+                    onChange={(e) => setFormData({ ...formData, coaching: { ...formData.coaching, heroTitle: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Subtitle</label>
+                  <textarea
+                    rows={2}
+                    value={formData.coaching.heroSubtitle}
+                    onChange={(e) => setFormData({ ...formData, coaching: { ...formData.coaching, heroSubtitle: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Coaching Title</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Price</label>
                     <input
                       type="text"
-                      value={formData.coachingHeroTitle}
-                      onChange={(e) => setFormData({ ...formData, coachingHeroTitle: e.target.value })}
+                      value={formData.coaching.price}
+                      onChange={(e) => setFormData({ ...formData, coaching: { ...formData.coaching, price: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Subtitle</label>
-                    <textarea
-                      rows={2}
-                      value={formData.coachingHeroSubtitle}
-                      onChange={(e) => setFormData({ ...formData, coachingHeroSubtitle: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Fee / Price Label</label>
+                    <label className="block text-xs text-zinc-400 mb-1">Application URL</label>
                     <input
                       type="text"
-                      value={formData.coachingPrice}
-                      onChange={(e) => setFormData({ ...formData, coachingPrice: e.target.value })}
+                      value={formData.coaching.applyLink}
+                      onChange={(e) => setFormData({ ...formData, coaching: { ...formData.coaching, applyLink: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Application / Booking Link</label>
-                    <input
-                      type="text"
-                      value={formData.coachingApplyLink}
-                      onChange={(e) => setFormData({ ...formData, coachingApplyLink: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Preview Video (YouTube Link)</label>
-                    <input
-                      type="text"
-                      value={formData.coachingYoutubeUrl}
-                      onChange={(e) => setFormData({ ...formData, coachingYoutubeUrl: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Video Link (YouTube Embed)</label>
+                  <input
+                    type="text"
+                    value={formData.coaching.videoUrl}
+                    onChange={(e) => setFormData({ ...formData, coaching: { ...formData.coaching, videoUrl: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
                 </div>
               </div>
             )}
 
-            {/* TAB: FAQ, TESTIMONIALS & CONTACT */}
-            {activeTab === "faq_contact" && (
-              <div className="space-y-4">
-                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Testimonials</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Client 1 Name</label>
-                      <input
-                        type="text"
-                        value={formData.testimonial1Name}
-                        onChange={(e) => setFormData({ ...formData, testimonial1Name: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Role</label>
-                      <input
-                        type="text"
-                        value={formData.testimonial1Role}
-                        onChange={(e) => setFormData({ ...formData, testimonial1Role: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                      />
-                    </div>
+            {/* TAB: LEAD / BLUEPRINT */}
+            {activeTab === "lead" && (
+              <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Blueprint & Lead Generation</h4>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Hero Title</label>
+                  <input
+                    type="text"
+                    value={formData.lead.heroTitle}
+                    onChange={(e) => setFormData({ ...formData, lead: { ...formData.lead, heroTitle: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Subtitle</label>
+                  <textarea
+                    rows={2}
+                    value={formData.lead.heroSubtitle}
+                    onChange={(e) => setFormData({ ...formData, lead: { ...formData.lead, heroSubtitle: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Button Call to Action</label>
+                  <input
+                    type="text"
+                    value={formData.lead.submitButtonText}
+                    onChange={(e) => setFormData({ ...formData, lead: { ...formData.lead, submitButtonText: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* TAB: CONTACT & FOOTER */}
+            {activeTab === "contact" && (
+              <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Global Contact Info & Socials</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs text-zinc-400 mb-1">Phone</label>
+                    <input
+                      type="text"
+                      value={formData.contact.phone}
+                      onChange={(e) => setFormData({ ...formData, contact: { ...formData.contact, phone: e.target.value } })}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                    />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Review 1</label>
-                    <textarea
-                      rows={2}
-                      value={formData.testimonial1Text}
-                      onChange={(e) => setFormData({ ...formData, testimonial1Text: e.target.value })}
+                    <label className="block text-xs text-zinc-400 mb-1">Email</label>
+                    <input
+                      type="text"
+                      value={formData.contact.email}
+                      onChange={(e) => setFormData({ ...formData, contact: { ...formData.contact, email: e.target.value } })}
                       className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
                     />
                   </div>
                 </div>
-
-                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Frequently Asked Questions</h3>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Question 1</label>
-                    <input
-                      type="text"
-                      value={formData.faq1Question}
-                      onChange={(e) => setFormData({ ...formData, faq1Question: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Answer 1</label>
-                    <textarea
-                      rows={2}
-                      value={formData.faq1Answer}
-                      onChange={(e) => setFormData({ ...formData, faq1Answer: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Address</label>
+                  <input
+                    type="text"
+                    value={formData.contact.address}
+                    onChange={(e) => setFormData({ ...formData, contact: { ...formData.contact, address: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
                 </div>
-
-                <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
-                  <h3 className="font-bold text-sm text-[#07b4ba]">Contact Info & Footer</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Email</label>
-                      <input
-                        type="text"
-                        value={formData.contactEmail}
-                        onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-zinc-400 mb-1">Phone</label>
-                      <input
-                        type="text"
-                        value={formData.contactPhone}
-                        onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Address</label>
-                    <input
-                      type="text"
-                      value={formData.contactAddress}
-                      onChange={(e) => setFormData({ ...formData, contactAddress: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-400 mb-1">Footer Tagline</label>
-                    <input
-                      type="text"
-                      value={formData.footerTagline}
-                      onChange={(e) => setFormData({ ...formData, footerTagline: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-xs text-zinc-400 mb-1">Footer Tagline</label>
+                  <input
+                    type="text"
+                    value={formData.contact.footerTagline}
+                    onChange={(e) => setFormData({ ...formData, contact: { ...formData.contact, footerTagline: e.target.value } })}
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white focus:border-[#07b4ba] focus:outline-none"
+                  />
                 </div>
               </div>
             )}
@@ -688,7 +715,7 @@ export const AdminPanel: React.FC = () => {
                 onClick={resetContent}
                 className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 text-xs rounded transition"
               >
-                Reset
+                Reset Defaults
               </button>
             </div>
           </form>
