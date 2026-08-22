@@ -481,7 +481,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   const login = (email: string, pass: string) => {
-    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24")[cite: 1] {
+    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24") {
       setIsAuthenticated(true);
       try {
         sessionStorage.setItem("aof_admin_auth", "true");
