@@ -96,7 +96,11 @@ export interface SiteContent {
     socialProofTitle: string;
     socialProofSubheading: string;
     socialProofCount: string;
-    socialProofVideos: string[];
+    socialProofVideo1: string;
+    socialProofVideo2: string;
+    socialProofVideo3: string;
+    testimonialVideoUrl: string;
+    testimonialVideoHeading: string;
     testimonialsTagline: string;
     testimonialsHeading: string;
     testimonialsSubheading: string;
@@ -261,18 +265,21 @@ export const defaultContent: SiteContent = {
     socialProofTitle: "SEE HOW WE TEACH.\nSEE HOW WE TRAIN.",
     socialProofSubheading: "MMA fans follow AOF to learn, improve, and stay connected to the sport.",
     socialProofCount: "5,000+",
-    socialProofVideos: [
-      "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "https://www.youtube.com/embed/dQw4w9WgXcQ"
-    ],
+    socialProofVideo1: "zjcVWjWSJog",
+    socialProofVideo2: "xuAeRmO82Gk",
+    socialProofVideo3: "H49Y6b7wn58",
+    testimonialVideoUrl: "KTlqLcAeisU",
+    testimonialVideoHeading: "Hear Directly From People Who Have Trained Under Coach Purushothaman",
     testimonialsTagline: "Results and Success Stories",
     testimonialsHeading: "Real People, Real Progress",
     testimonialsSubheading: "Hear Directly From People Who Have Trained Under Coach Purushothaman",
     testimonials: [
-      { id: "1", text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.", author: "Surya", role: "Fighter" },
-      { id: "2", text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.", author: "Madhan", role: "Member" },
-      { id: "3", text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.", author: "Sohail Mohammad", role: "Athlete" }
+      { id: "1", text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence.", author: "Pradeep", role: "Member", image: "https://i.postimg.cc/ZYjqbkYs/Pradeep-(1).jpg" },
+      { id: "2", text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply.", author: "Rahul", role: "Member", image: "https://i.postimg.cc/7PXLHvPV/Rahul-(1).jpg" },
+      { id: "3", text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward.", author: "Bharathwaj", role: "Member", image: "https://i.postimg.cc/bYLvyXYF/Bharathwaj-(1).jpg" },
+      { id: "4", text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.", author: "Surya", role: "Fighter", image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg" },
+      { id: "5", text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.", author: "Madhan", role: "Member", image: "https://i.postimg.cc/q7HbD53j/Madan-jpg.jpg" },
+      { id: "6", text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.", author: "Sohail Mohammad", role: "Athlete", image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" }
     ],
     ctaPairHeading: "Start Your New Journey",
     ctaPairSubtitle: "How Do You Want To Train?",
@@ -296,7 +303,7 @@ export const defaultContent: SiteContent = {
     trust3: "Real Results",
     painTitle: "5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION",
     painSubheading: "YOU WANT TO LEARN MMA. BUT HAVEN'T STARTED BECAUSE YOU:",
-    painVideoUrl: "https://www.youtube.com/embed/79xvYiiBFfk",
+    painVideoUrl: "79xvYiiBFfk",
     painPoints: [
       "Don't know where to begin",
       "Don't have access to a quality MMA gym",
@@ -349,7 +356,7 @@ export const defaultContent: SiteContent = {
     testimonialTagline: "FROM OUR FIRST BATCH",
     testimonialHeading: "WHAT HAPPENED AFTER 30 DAYS",
     testimonialSubheading: "Hear directly from people who completed the AOF 30-Day MMA Striking Program",
-    testimonialVideoUrl: "https://www.youtube.com/embed/4Z8PSdk6Ak0",
+    testimonialVideoUrl: "4Z8PSdk6Ak0",
     testimonialQuote: "The More I Progressed,The More I Wanted To Train",
     testimonialText: "I started with doubts and made mistakes. But as I progressed through the program my technique improved and my confidence grew. I even found myself drilling techniques whenever I had free time.",
     testimonialAuthor: "Palanippan, AOF 30 Days Program Member.",
@@ -427,7 +434,7 @@ const CmsContext = createContext<CmsContextType | undefined>(undefined);
 export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<SiteContent>(() => {
     try {
-      const saved = localStorage.getItem("aof_master_cms_v4");
+      const saved = localStorage.getItem("aof_master_cms_v5");
       return saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
     } catch {
       return defaultContent;
@@ -465,7 +472,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const updated = { ...content, ...newContent };
     setContent(updated);
     try {
-      localStorage.setItem("aof_master_cms_v4", JSON.stringify(updated));
+      localStorage.setItem("aof_master_cms_v5", JSON.stringify(updated));
     } catch (err) {
       console.error("Storage error:", err);
     }
@@ -474,7 +481,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const resetContent = () => {
     setContent(defaultContent);
     try {
-      localStorage.removeItem("aof_master_cms_v4");
+      localStorage.removeItem("aof_master_cms_v5");
     } catch (err) {
       console.error("Storage error:", err);
     }
