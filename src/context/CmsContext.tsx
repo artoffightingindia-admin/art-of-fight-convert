@@ -22,6 +22,12 @@ export interface RoadmapItem {
   points: string[];
 }
 
+export interface WhyCardItem {
+  id: string;
+  title: string;
+  desc: string;
+}
+
 export interface BonusItem {
   id: string;
   title: string;
@@ -83,6 +89,7 @@ export interface SiteContent {
     card2Desc: string;
     card2Points: string[];
     card2BtnText: string;
+    coachSectionTagline: string;
     coach1Name: string;
     coach1Title: string;
     coach1Image: string;
@@ -108,6 +115,7 @@ export interface SiteContent {
     ctaPairHeading: string;
     ctaPairSubtitle: string;
     ctaPairDesc: string;
+    ctaPairBgImage: string;
     ctaCard1Title: string;
     ctaCard1Desc: string;
     ctaCard2Title: string;
@@ -123,10 +131,12 @@ export interface SiteContent {
     heroTitle: string;
     heroSubtitle: string;
     heroBgImage: string;
+    heroBtnText: string;
     trust1: string;
     trust2: string;
     trust3: string;
     painTitle: string;
+    painTagline: string;
     painSubheading: string;
     painVideoUrl: string;
     painPoints: string[];
@@ -137,10 +147,11 @@ export interface SiteContent {
     introText2: string;
     whyTagline: string;
     whyHeading: string;
-    whyCards: { title: string; desc: string }[];
+    whyCards: WhyCardItem[];
     roadmapTagline: string;
     roadmapHeading: string;
     roadmapSubtitle: string;
+    roadmapFootnote: string;
     roadmapCards: RoadmapItem[];
     promiseHeading: string;
     promiseQuote: string;
@@ -174,6 +185,8 @@ export interface SiteContent {
     ribbonOfferText: string;
     membersLimitText: string;
     ctaCardHeading: string;
+    originalPrice: string;
+    showOriginalPriceStrike: boolean;
     priceDiscount: string;
     ctaBtnText: string;
     batchNotice: string;
@@ -244,6 +257,7 @@ export const defaultContent: SiteContent = {
     card2Desc: "A structured online coaching experience designed to help beginners learn MMA striking fundamentals from home with confidence.",
     card2Points: ["Step-by-step roadmap", "Learn at your own pace", "Coach feedback included"],
     card2BtnText: "SEE HOW IT WORKS",
+    coachSectionTagline: "Led By",
     coach1Name: "Purushothaman MK",
     coach1Title: "Head Coach | Professional MMA Fighter",
     coach1Image: "https://i.postimg.cc/gjQP69D1/Purushoth-Coach-jpg.jpg",
@@ -284,6 +298,7 @@ export const defaultContent: SiteContent = {
     ctaPairHeading: "Start Your New Journey",
     ctaPairSubtitle: "How Do You Want To Train?",
     ctaPairDesc: "Choose The Coaching Experience That Fits Your Goals.",
+    ctaPairBgImage: "https://i.postimg.cc/g2KvzG4M/CTA-Image-jpg.jpg",
     ctaCard1Title: "1-1 Coaching (Coming Soon)",
     ctaCard1Desc: "Personalized coaching tailored to your goals, lifestyle, and schedule.",
     ctaCard2Title: "30-Days Program",
@@ -298,11 +313,13 @@ export const defaultContent: SiteContent = {
     heroTitle: "BUILD REAL\nMMA STRIKING\nFUNDAMENTALS",
     heroSubtitle: "A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before.",
     heroBgImage: "/images/Program page Hero.jpeg",
+    heroBtnText: "JOIN NOW",
     trust1: "Proven System",
     trust2: "Tamil Team",
     trust3: "Real Results",
     painTitle: "5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION",
-    painSubheading: "YOU WANT TO LEARN MMA. BUT HAVEN'T STARTED BECAUSE YOU:",
+    painTagline: "Sounds Familiar?",
+    painSubheading: "YOU WANT TO LEARN MMA.\nBUT HAVEN'T STARTED BECAUSE YOU:",
     painVideoUrl: "79xvYiiBFfk",
     painPoints: [
       "Don't know where to begin",
@@ -319,15 +336,16 @@ export const defaultContent: SiteContent = {
     whyTagline: "WHY THIS PROGRAM WORKS?",
     whyHeading: "BUILT AROUND THE REAL CHALLENGES OF BEGINNERS",
     whyCards: [
-      { title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
-      { title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
-      { title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
-      { title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
-      { title: "LEARN IN Tamil", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." }
+      { id: "1", title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
+      { id: "2", title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
+      { id: "3", title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
+      { id: "4", title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
+      { id: "5", title: "LEARN IN Tamil", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." }
     ],
     roadmapTagline: "THE AOF BLUEPRINT",
     roadmapHeading: "A CLEARPATH TO MMA STRIKING.",
     roadmapSubtitle: "Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.",
+    roadmapFootnote: "Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library. Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program.",
     roadmapCards: [
       { id: "1", title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
       { id: "2", title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
@@ -392,6 +410,8 @@ export const defaultContent: SiteContent = {
     ribbonOfferText: "2Yrs of AOF Offer",
     membersLimitText: "LIMITED TO 20 MEMBERS",
     ctaCardHeading: "START YOUR\nMMA JOURNEY",
+    originalPrice: "₹6,199",
+    showOriginalPriceStrike: true,
     priceDiscount: "₹4,999",
     ctaBtnText: "JOIN THE NEXT BATCH",
     batchNotice: "Batch 3 Starting 7th September",
@@ -400,7 +420,7 @@ export const defaultContent: SiteContent = {
     whatsappNumber: "919385431051",
     whatsappMessage: "Hey Team, I've a doubt about AOF 30 days program.",
     faqs: [
-      { id: "1", question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee" },
+      { id: "1", question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee." },
       { id: "2", question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
       { id: "3", question: "How much time do I need each day?", answer: "Most sessions take around 30–45 minutes, making it easy to fit into a busy schedule." },
       { id: "4", question: "What equipment do I need?", answer: "Comfortable training clothes and a small training space are enough to get started. Additional equipment is optional." },
@@ -434,7 +454,7 @@ const CmsContext = createContext<CmsContextType | undefined>(undefined);
 export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<SiteContent>(() => {
     try {
-      const saved = localStorage.getItem("aof_master_cms_v5");
+      const saved = localStorage.getItem("aof_master_cms_v6");
       return saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
     } catch {
       return defaultContent;
@@ -472,7 +492,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const updated = { ...content, ...newContent };
     setContent(updated);
     try {
-      localStorage.setItem("aof_master_cms_v5", JSON.stringify(updated));
+      localStorage.setItem("aof_master_cms_v6", JSON.stringify(updated));
     } catch (err) {
       console.error("Storage error:", err);
     }
@@ -481,14 +501,14 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const resetContent = () => {
     setContent(defaultContent);
     try {
-      localStorage.removeItem("aof_master_cms_v5");
+      localStorage.removeItem("aof_master_cms_v6");
     } catch (err) {
       console.error("Storage error:", err);
     }
   };
 
   const login = (email: string, pass: string) => {
-    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24") {
+    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24")[cite: 1] {
       setIsAuthenticated(true);
       try {
         sessionStorage.setItem("aof_admin_auth", "true");
