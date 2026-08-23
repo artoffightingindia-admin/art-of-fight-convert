@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { supabase } from "@/lib/supabase";
 
 export interface TestimonialItem {
   id: string;
@@ -477,15 +478,15 @@ export const defaultContent: SiteContent = {
 
 interface CmsContextType {
   content: SiteContent;
-  updateContent: (newContent: Partial<SiteContent>) => void;
-  resetContent: () => void;
+  updateContent: (newContent: Partial<SiteContent>) => Promise<void>;
+  resetContent: () => Promise<void>;
   isAuthModalOpen: boolean;
   setIsAuthModalOpen: (open: boolean) => void;
   isPanelOpen: boolean;
   setIsPanelOpen: (open: boolean) => void;
   isAuthenticated: boolean;
-  login: (email: string, pass: string) => boolean;
-  logout: () => void;
+  login: (email: string, pass: string) => Promise<boolean>;
+  logout: () => Promise<void>;
 }
 
 const CmsContext = createContext<CmsContextType | undefined>(undefined);
@@ -500,17 +501,81 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    try {
-      return sessionStorage.getItem("aof_admin_auth") === "true";
-    } catch {
-      return false;
-    }
-  });
-
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
+  // 1. Session listener and state sync with Supabase Auth
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setIsAuthenticated(!!session);
+      } catch (err) {
+        console.error("Auth session check error:", err);
+      }
+    };
+
+    checkSession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // 2. Fetch site config from Supabase on mount
+  useEffect(() => {
+    const fetchRemoteConfig = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("site_config")
+          .select("data")
+          .eq("id", "aof_master_config")
+          .single();
+
+        if (data && data.data && Object.keys(data.data).length > 0) {
+          const merged = { ...defaultContent, ...data.data };
+          setContent(merged);
+          localStorage.setItem("aof_master_cms_v7", JSON.stringify(merged));
+        }
+      } catch (err) {
+        console.error("Supabase load error:", err);
+      }
+    };
+
+    fetchRemoteConfig();
+  }, []);
+
+  // 3. Realtime listener for cross-device live updates
+  useEffect(() => {
+    const channel = supabase
+      .channel("site_config_live")
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "site_config",
+          filter: "id=eq.aof_master_config",
+        },
+        (payload) => {
+          if (payload.new && payload.new.data) {
+            const remoteData = payload.new.data;
+            setContent((prev) => ({ ...prev, ...remoteData }));
+            localStorage.setItem("aof_master_cms_v7", JSON.stringify(remoteData));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  // 4. Admin shortcut listener (Ctrl + Shift + Meta + A)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.metaKey && (e.key === "A" || e.key === "a")) {
@@ -527,47 +592,80 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAuthenticated]);
 
-  const updateContent = (newContent: Partial<SiteContent>) => {
+  // 5. Update content in local cache & Supabase
+  const updateContent = async (newContent: Partial<SiteContent>) => {
     const updated = { ...content, ...newContent };
     setContent(updated);
+
     try {
       localStorage.setItem("aof_master_cms_v7", JSON.stringify(updated));
     } catch (err) {
       console.error("Storage error:", err);
     }
+
+    try {
+      const { error } = await supabase
+        .from("site_config")
+        .upsert({
+          id: "aof_master_config",
+          data: updated,
+          updated_at: new Date().toISOString(),
+        });
+
+      if (error) throw error;
+    } catch (err) {
+      console.error("Supabase update error:", err);
+    }
   };
 
-  const resetContent = () => {
+  // 6. Reset content to default values
+  const resetContent = async () => {
     setContent(defaultContent);
     try {
       localStorage.removeItem("aof_master_cms_v7");
+      await supabase
+        .from("site_config")
+        .upsert({
+          id: "aof_master_config",
+          data: defaultContent,
+          updated_at: new Date().toISOString(),
+        });
     } catch (err) {
-      console.error("Storage error:", err);
+      console.error("Reset error:", err);
     }
   };
 
-  const login = (email: string, pass: string) => {
-    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24") {
-      setIsAuthenticated(true);
-      try {
-        sessionStorage.setItem("aof_admin_auth", "true");
-      } catch (err) {
-        console.error("Session error:", err);
+  // 7. Dynamic Supabase Auth Login
+  const login = async (emailInput: string, passInput: string): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailInput.trim(),
+        password: passInput,
+      });
+
+      if (error || !data.user) {
+        console.error("Supabase authentication failed:", error?.message);
+        return false;
       }
+
+      setIsAuthenticated(true);
       setIsAuthModalOpen(false);
       setIsPanelOpen(true);
       return true;
+    } catch (err) {
+      console.error("Supabase login error:", err);
+      return false;
     }
-    return false;
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
+  // 8. Supabase Auth Logout
+  const logout = async () => {
     try {
-      sessionStorage.removeItem("aof_admin_auth");
+      await supabase.auth.signOut();
     } catch (err) {
-      console.error("Session error:", err);
+      console.error("Sign out error:", err);
     }
+    setIsAuthenticated(false);
     setIsPanelOpen(false);
   };
 
@@ -583,7 +681,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setIsPanelOpen,
         isAuthenticated,
         login,
-        logout
+        logout,
       }}
     >
       {children}
