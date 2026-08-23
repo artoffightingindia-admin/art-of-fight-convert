@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import TrustIndicators from "@/components/TrustIndicators";
 import { useNavigate } from "react-router-dom";
 import { useCms } from "@/context/CmsContext";
 
@@ -57,6 +58,11 @@ const HeroSection = () => {
             </Button>
           </div>
         </div>
+      </div>
+
+      {/* Trust Strip */}
+      <div className="relative z-10 w-full">
+        <TrustIndicators />
       </div>
     </section>
   );
