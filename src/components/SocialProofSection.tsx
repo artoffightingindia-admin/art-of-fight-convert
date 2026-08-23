@@ -14,10 +14,11 @@ const extractVideoId = (input: string): string => {
 
 const SocialProofSection = () => {
   const { content } = useCms();
+  const h = content.home;
 
-  const v1 = extractVideoId(content.home.socialProofVideo1 || "zjcVWjWSJog");
-  const v2 = extractVideoId(content.home.socialProofVideo2 || "xuAeRmO82Gk");
-  const v3 = extractVideoId(content.home.socialProofVideo3 || "H49Y6b7wn58");
+  const v1 = extractVideoId(h.socialProofVideo1 || "zjcVWjWSJog");
+  const v2 = extractVideoId(h.socialProofVideo2 || "xuAeRmO82Gk");
+  const v3 = extractVideoId(h.socialProofVideo3 || "H49Y6b7wn58");
 
   const videos = [v1, v2, v3].filter(Boolean);
 
@@ -58,13 +59,32 @@ const SocialProofSection = () => {
       <div className="w-[92%] md:w-[60%] mx-auto px-4">
         {/* Heading */}
         <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-          <h2 className="font-display text-[clamp(30px,4vw,60px)] text-foreground leading-none uppercase whitespace-pre-line">
-            {content.home.socialProofTitle || "SEE HOW WE TEACH.\nSEE HOW WE TRAIN."}
+          <h2 className="font-display text-[clamp(30px,4vw,60px)] text-foreground leading-none">
+            {h.socialProofTitle ? (
+              h.socialProofTitle.includes("SEE HOW WE TRAIN.") ? (
+                <>
+                  {h.socialProofTitle.replace("SEE HOW WE TRAIN.", "").replace("SEE HOW WE TRAIN", "")}
+                  <br />
+                  <span className="text-primary">SEE HOW WE TRAIN.</span>
+                </>
+              ) : (
+                h.socialProofTitle
+              )
+            ) : (
+              <>
+                SEE HOW WE TEACH.
+                <br />
+                <span className="text-primary">SEE HOW WE TRAIN.</span>
+              </>
+            )}
           </h2>
 
           <p className="text-muted-foreground text-xs md:text-sm">
-            <span className="text-primary font-bold">{content.home.socialProofCount || "5,000+"}</span>{" "}
-            {content.home.socialProofSubheading || "MMA fans follow AOF to learn, improve, and stay connected to the sport."}
+            <span className="text-primary font-bold">
+              {h.socialProofCount || "5,000+"}
+            </span>{" "}
+            {h.socialProofSubheading ||
+              "MMA fans follow AOF to learn, improve, and stay connected to the sport."}
           </p>
         </div>
 
@@ -90,6 +110,7 @@ const SocialProofSection = () => {
                   allowFullScreen
                 />
 
+                {/* Mute / Unmute */}
                 <button
                   onClick={() => handleToggleMute(actualIndex)}
                   className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black/90 text-white text-xs px-3 py-1 rounded-full transition cursor-pointer"
@@ -104,9 +125,12 @@ const SocialProofSection = () => {
         {/* Mobile Navigation */}
         {visibleCount === 1 && videos.length > 1 && (
           <div className="flex justify-center items-center gap-3 mt-5">
+            {/* Prev */}
             <button
               onClick={() => {
-                if (currentVideo > 0) setCurrentVideo(currentVideo - 1);
+                if (currentVideo > 0) {
+                  setCurrentVideo(currentVideo - 1);
+                }
               }}
               disabled={currentVideo === 0}
               className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
@@ -118,13 +142,17 @@ const SocialProofSection = () => {
               ←
             </button>
 
+            {/* Counter */}
             <div className="text-white/60 text-sm font-medium min-w-[40px] text-center">
               {currentVideo + 1} / {videos.length}
             </div>
 
+            {/* Next */}
             <button
               onClick={() => {
-                if (currentVideo < videos.length - 1) setCurrentVideo(currentVideo + 1);
+                if (currentVideo < videos.length - 1) {
+                  setCurrentVideo(currentVideo + 1);
+                }
               }}
               disabled={currentVideo === videos.length - 1}
               className={`px-4 py-2 font-bold text-sm transition bg-transparent ${
