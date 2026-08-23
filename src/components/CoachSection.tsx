@@ -1,21 +1,21 @@
 import { Star } from "lucide-react";
 import { useCms } from "@/context/CmsContext";
 
+const defaultCoach1Points = [
+  "Only Tamil Fighter to compete in MFN and a Multiple-Time National Medalist.",
+  "Trained 2000+ MMA students, including national champions across multiple disciplines.",
+  "10+ Years in MMA with 20+ Fights Competed Nationally & Internationally."
+];
+
+const defaultCoach2Points = [
+  "State Boxing Champion & Pro-Am National Muay Thai Champion.",
+  "5+ Years of Mixed Martial Arts Experience.",
+  "Co-Creator of AOF's Programs & Content."
+];
+
 const CoachSection = () => {
   const { content } = useCms();
   const c = content.home;
-
-  const defaultCoach1Points = [
-    "Only Tamil Fighter to compete in MFN and a Multiple-Time National Medalist.",
-    "Trained 2000+ MMA students, including national champions across multiple disciplines.",
-    "10+ Years in MMA with 20+ Fights Competed Nationally & Internationally."
-  ];
-
-  const defaultCoach2Points = [
-    "State Boxing Champion & Pro-Am National Muay Thai Champion.",
-    "5+ Years of Mixed Martial Arts Experience.",
-    "Co-Creator of AOF's Programs & Content."
-  ];
 
   const coach1Points = c.coach1Points?.length ? c.coach1Points : defaultCoach1Points;
   const coach2Points = c.coach2Points?.length ? c.coach2Points : defaultCoach2Points;
