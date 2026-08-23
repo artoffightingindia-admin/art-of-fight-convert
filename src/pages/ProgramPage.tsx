@@ -547,8 +547,22 @@ export default function ProgramPage() {
               </p>
             </Reveal>
             <Reveal type="fade-right" delay={400} duration={1200}>
-            <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5 whitespace-pre-line">
-  {p.heroTitle || "BUILD REAL\nMMA STRIKING\nFUNDAMENTALS"}
+     <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5 whitespace-pre-line">
+  {(() => {
+    const text = p.heroTitle || "BUILD REAL\nMMA STRIKING\nFUNDAMENTALS";
+    const regex = /(mma striking)/i;
+    if (text.match(regex)) {
+      const parts = text.split(regex);
+      return (
+        <>
+          {parts[0]}
+          <span className="text-[#07b4ba]">{parts[1]}</span>
+          {parts[2]}
+        </>
+      );
+    }
+    return text;
+  })()}
 </h1>
             </Reveal>
             <Reveal type="fade-up" delay={600} duration={1200}>
