@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCms, SiteContent, RoadmapItem, TestimonialItem, FaqItem, BonusItem, WhyCardItem } from "../context/CmsContext";
-import { Plus, Trash2, Eye, EyeOff, X, ArrowUp, ArrowDown } from "lucide-react";
+import { Plus, Trash2, Eye, EyeOff, X, ArrowUp, ArrowDown, Loader2 } from "lucide-react";
 
 export const AdminPanel: React.FC = () => {
   const {
@@ -18,6 +18,9 @@ export const AdminPanel: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
   const [activeTab, setActiveTab] = useState<
     | "visibility"
     | "home_hero"
@@ -54,11 +57,16 @@ export const AdminPanel: React.FC = () => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [isPanelOpen, isAuthModalOpen, setIsPanelOpen, setIsAuthModalOpen]);
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(email, password);
+    setIsLoggingIn(true);
+    setError("");
+
+    const success = await login(email, password);
+    setIsLoggingIn(false);
+
     if (!success) {
-      setError("Invalid Email ID or Password.");
+      setError("Invalid Email ID or Password. Check your Supabase Authentication users.");
     } else {
       setError("");
       setEmail("");
@@ -66,10 +74,17 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
-  const handleContentSave = (e: React.FormEvent) => {
+  const handleContentSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateContent(formData);
-    alert("All changes saved successfully to live site!");
+    setIsSaving(true);
+    const success = await updateContent(formData);
+    setIsSaving(false);
+
+    if (success) {
+      alert("All changes successfully saved and published live to Supabase!");
+    } else {
+      alert("Failed to save changes to Supabase. Check console logs or verify your admin permissions.");
+    }
   };
 
   const toggleVisibility = (key: keyof SiteContent["visibility"]) => {
@@ -111,7 +126,7 @@ export const AdminPanel: React.FC = () => {
               <X className="w-5 h-5" />
             </button>
             <h2 className="text-xl font-bold tracking-wider text-[#07b4ba] mb-1">AOF MASTER CONTROL</h2>
-            <p className="text-xs text-zinc-400 mb-4">Enter credentials to unlock site management.</p>
+            <p className="text-xs text-zinc-400 mb-4">Enter Supabase admin credentials to unlock site management.</p>
             {error && <div className="bg-red-500/10 border border-red-500/50 text-red-400 text-xs p-2 rounded mb-4">{error}</div>}
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
@@ -135,8 +150,15 @@ export const AdminPanel: React.FC = () => {
                 />
               </div>
               <div className="flex gap-2 pt-2">
-                <button type="submit" className="flex-1 bg-[#07b4ba] hover:bg-[#069ca1] text-black font-bold py-2 rounded text-sm transition">Authorize</button>
-                <button type="button" onClick={() => setIsAuthModalOpen(false)} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm rounded transition">Cancel</button>
+                <button 
+                  type="submit" 
+                  disabled={isLoggingIn}
+                  className="flex-1 bg-[#07b4ba] hover:bg-[#069ca1] text-black font-bold py-2 rounded text-sm transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {isLoggingIn && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {isLoggingIn ? "Verifying..." : "Authorize"}
+                </button>
+                <button type="button" onClick={() => setIsAuthModalOpen(false)} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm rounded transition cursor-pointer">Cancel</button>
               </div>
             </form>
           </div>
@@ -155,8 +177,8 @@ export const AdminPanel: React.FC = () => {
                 <span className="text-xs text-zinc-400">Complete Master Control System</span>
               </div>
               <div className="flex items-center gap-2">
-                <button type="button" onClick={logout} className="text-xs bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded text-zinc-300">Logout</button>
-                <button type="button" onClick={() => setIsPanelOpen(false)} className="p-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white" title="Close Panel">
+                <button type="button" onClick={logout} className="text-xs bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded text-zinc-300 cursor-pointer">Logout</button>
+                <button type="button" onClick={() => setIsPanelOpen(false)} className="p-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white cursor-pointer" title="Close Panel">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -186,7 +208,7 @@ export const AdminPanel: React.FC = () => {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-3.5 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 ${
+                  className={`px-3.5 py-3 font-semibold whitespace-nowrap transition-colors border-b-2 cursor-pointer ${
                     activeTab === tab.id ? "border-[#07b4ba] text-[#07b4ba] bg-zinc-900" : "border-transparent text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -209,7 +231,7 @@ export const AdminPanel: React.FC = () => {
                           key={key}
                           type="button"
                           onClick={() => toggleVisibility(key as any)}
-                          className={`flex items-center justify-between p-2 rounded border transition-all ${
+                          className={`flex items-center justify-between p-2 rounded border transition-all cursor-pointer ${
                             val ? "bg-[#07b4ba]/10 border-[#07b4ba] text-white" : "bg-zinc-900 border-zinc-800 text-zinc-500"
                           }`}
                         >
@@ -227,7 +249,7 @@ export const AdminPanel: React.FC = () => {
                           key={key}
                           type="button"
                           onClick={() => toggleVisibility(key as any)}
-                          className={`flex items-center justify-between p-2 rounded border transition-all ${
+                          className={`flex items-center justify-between p-2 rounded border transition-all cursor-pointer ${
                             val ? "bg-[#07b4ba]/10 border-[#07b4ba] text-white" : "bg-zinc-900 border-zinc-800 text-zinc-500"
                           }`}
                         >
@@ -383,7 +405,7 @@ export const AdminPanel: React.FC = () => {
                             testimonials: [...formData.home.testimonials, { id: Date.now().toString(), author: "New Member", role: "Member", text: "Training was amazing!", image: "" }]
                           }
                         })}
-                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold cursor-pointer"
                       >
                         <Plus className="w-3 h-3" /> Add Testimonial
                       </button>
@@ -405,7 +427,7 @@ export const AdminPanel: React.FC = () => {
                           <button type="button" onClick={() => {
                             const updated = formData.home.testimonials.filter((_, i) => i !== idx);
                             setFormData({ ...formData, home: { ...formData.home, testimonials: updated } });
-                          }} className="text-red-400 p-1"><Trash2 className="w-4 h-4" /></button>
+                          }} className="text-red-400 p-1 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
                         </div>
                         <input type="text" value={t.image || ""} placeholder="Profile Image URL (leave empty for automatic letter icon)" onChange={(e) => {
                           const updated = [...formData.home.testimonials];
@@ -470,7 +492,7 @@ export const AdminPanel: React.FC = () => {
                             }
                           })
                         }
-                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold cursor-pointer"
                       >
                         <Plus className="w-3 h-3" /> Add FAQ
                       </button>
@@ -495,7 +517,7 @@ export const AdminPanel: React.FC = () => {
                               const updated = formData.home.homeFaqs.filter((_, i) => i !== idx);
                               setFormData({ ...formData, home: { ...formData.home, homeFaqs: updated } });
                             }}
-                            className="text-red-400 p-1"
+                            className="text-red-400 p-1 cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -569,7 +591,7 @@ export const AdminPanel: React.FC = () => {
                             whyCards: [...formData.program.whyCards, { id: Date.now().toString(), title: "NEW REASON", desc: "Description here." }]
                           }
                         })}
-                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold cursor-pointer"
                       >
                         <Plus className="w-3 h-3" /> Add Card
                       </button>
@@ -587,9 +609,9 @@ export const AdminPanel: React.FC = () => {
                             setFormData({ ...formData, program: { ...formData.program, whyCards: updated } });
                           }} className="flex-1 bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white font-bold" />
                           <div className="flex items-center gap-1">
-                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, whyCards: moveArrayItem(formData.program.whyCards, idx, "up") } })} className="p-1 text-zinc-400 hover:text-white"><ArrowUp className="w-3.5 h-3.5" /></button>
-                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, whyCards: moveArrayItem(formData.program.whyCards, idx, "down") } })} className="p-1 text-zinc-400 hover:text-white"><ArrowDown className="w-3.5 h-3.5" /></button>
-                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, whyCards: formData.program.whyCards.filter((_, i) => i !== idx) } })} className="p-1 text-red-400"><Trash2 className="w-3.5 h-3.5" /></button>
+                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, whyCards: moveArrayItem(formData.program.whyCards, idx, "up") } })} className="p-1 text-zinc-400 hover:text-white cursor-pointer"><ArrowUp className="w-3.5 h-3.5" /></button>
+                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, whyCards: moveArrayItem(formData.program.whyCards, idx, "down") } })} className="p-1 text-zinc-400 hover:text-white cursor-pointer"><ArrowDown className="w-3.5 h-3.5" /></button>
+                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, whyCards: formData.program.whyCards.filter((_, i) => i !== idx) } })} className="p-1 text-red-400 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
                           </div>
                         </div>
                         <textarea rows={2} value={card.desc} onChange={(e) => {
@@ -723,7 +745,7 @@ export const AdminPanel: React.FC = () => {
                             feedbacks: [...formData.program.feedbacks, { id: Date.now().toString(), author: "New Student", text: "Great structure and feedback!", role: "Member", image: "" }]
                           }
                         })}
-                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold cursor-pointer"
                       >
                         <Plus className="w-3 h-3" /> Add Feedback
                       </button>
@@ -745,7 +767,7 @@ export const AdminPanel: React.FC = () => {
                           <button type="button" onClick={() => {
                             const updated = formData.program.feedbacks.filter((_, i) => i !== idx);
                             setFormData({ ...formData, program: { ...formData.program, feedbacks: updated } });
-                          }} className="text-red-400 p-1"><Trash2 className="w-4 h-4" /></button>
+                          }} className="text-red-400 p-1 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
                         </div>
                         <input type="text" value={f.image || ""} placeholder="Profile Image URL (leave empty for automatic letter initials)" onChange={(e) => {
                           const updated = [...formData.program.feedbacks];
@@ -778,7 +800,7 @@ export const AdminPanel: React.FC = () => {
                             bonuses: [...formData.program.bonuses, { id: Date.now().toString(), title: "NEW BONUS", desc: "Bonus description" }]
                           }
                         })}
-                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold cursor-pointer"
                       >
                         <Plus className="w-3 h-3" /> Add Bonus
                       </button>
@@ -798,9 +820,9 @@ export const AdminPanel: React.FC = () => {
                             setFormData({ ...formData, program: { ...formData.program, bonuses: updated } });
                           }} className="flex-1 bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white font-bold" />
                           <div className="flex items-center gap-1">
-                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, bonuses: moveArrayItem(formData.program.bonuses, idx, "up") } })} className="p-1 text-zinc-400 hover:text-white"><ArrowUp className="w-3.5 h-3.5" /></button>
-                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, bonuses: moveArrayItem(formData.program.bonuses, idx, "down") } })} className="p-1 text-zinc-400 hover:text-white"><ArrowDown className="w-3.5 h-3.5" /></button>
-                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, bonuses: formData.program.bonuses.filter((_, i) => i !== idx) } })} className="p-1 text-red-400"><Trash2 className="w-3.5 h-3.5" /></button>
+                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, bonuses: moveArrayItem(formData.program.bonuses, idx, "up") } })} className="p-1 text-zinc-400 hover:text-white cursor-pointer"><ArrowUp className="w-3.5 h-3.5" /></button>
+                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, bonuses: moveArrayItem(formData.program.bonuses, idx, "down") } })} className="p-1 text-zinc-400 hover:text-white cursor-pointer"><ArrowDown className="w-3.5 h-3.5" /></button>
+                            <button type="button" onClick={() => setFormData({ ...formData, program: { ...formData.program, bonuses: formData.program.bonuses.filter((_, i) => i !== idx) } })} className="p-1 text-red-400 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
                           </div>
                         </div>
                         <textarea rows={2} value={bonus.desc} onChange={(e) => {
@@ -848,7 +870,7 @@ export const AdminPanel: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setFormData({ ...formData, program: { ...formData.program, showOriginalPriceStrike: !formData.program.showOriginalPriceStrike } })}
-                        className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors ${formData.program.showOriginalPriceStrike ? "bg-[#07b4ba] justify-end" : "bg-zinc-700 justify-start"}`}
+                        className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors cursor-pointer ${formData.program.showOriginalPriceStrike ? "bg-[#07b4ba] justify-end" : "bg-zinc-700 justify-start"}`}
                       >
                         <div className="bg-black w-4 h-4 rounded-full shadow-md" />
                       </button>
@@ -908,7 +930,7 @@ export const AdminPanel: React.FC = () => {
                             }
                           })
                         }
-                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold cursor-pointer"
                       >
                         <Plus className="w-3 h-3" /> Add FAQ
                       </button>
@@ -933,7 +955,7 @@ export const AdminPanel: React.FC = () => {
                               const updated = formData.program.faqs.filter((_, i) => i !== idx);
                               setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
                             }}
-                            className="text-red-400 p-1"
+                            className="text-red-400 p-1 cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -967,9 +989,16 @@ export const AdminPanel: React.FC = () => {
 
               {/* Bottom Actions */}
               <div className="pt-4 border-t border-zinc-800 flex gap-2">
-                <button type="submit" className="flex-1 bg-[#07b4ba] hover:bg-[#069ca1] text-black font-bold py-2.5 rounded text-sm transition">Save All Changes</button>
-                <button type="button" onClick={resetContent} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 text-xs rounded transition">Reset</button>
-                <button type="button" onClick={() => setIsPanelOpen(false)} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs rounded transition">Close</button>
+                <button 
+                  type="submit" 
+                  disabled={isSaving}
+                  className="flex-1 bg-[#07b4ba] hover:bg-[#069ca1] text-black font-bold py-2.5 rounded text-sm transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {isSaving && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {isSaving ? "Publishing Changes..." : "Save All Changes"}
+                </button>
+                <button type="button" onClick={resetContent} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 text-xs rounded transition cursor-pointer">Reset</button>
+                <button type="button" onClick={() => setIsPanelOpen(false)} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs rounded transition cursor-pointer">Close</button>
               </div>
             </form>
           </div>
