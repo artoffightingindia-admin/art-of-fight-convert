@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import TrustIndicators from "@/components/TrustIndicators";
 import IntroSection from "@/components/IntroSection";
 import ServicesSection from "@/components/ServicesSection";
 import CoachSection from "@/components/CoachSection";
@@ -24,7 +23,6 @@ const Index = () => {
       <Navbar />
 
       {v.heroSection && <HeroSection />}
-      {v.trustIndicators && <TrustIndicators />}
 
       {v.introSection && (
         <Reveal type="fade-up">
