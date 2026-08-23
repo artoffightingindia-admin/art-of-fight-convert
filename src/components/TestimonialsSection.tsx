@@ -4,6 +4,51 @@ import { useCms, TestimonialItem } from "@/context/CmsContext";
 
 const VISIBLE = 3;
 
+const defaultTestimonials: TestimonialItem[] = [
+  { 
+    id: "1",
+    author: "Pradeep",    
+    role: "Member",  
+    text: "Even as a complete beginner, I was able to understand the techniques clearly and execute them with confidence.",
+    image: "https://i.postimg.cc/ZYjqbkYs/Pradeep-(1).jpg" 
+  },
+  { 
+    id: "2",
+    author: "Rahul",   
+    role: "Member",  
+    text: "He breaks down even complex techniques into simple steps, which made it easy to understand and apply.",
+    image: "https://i.postimg.cc/7PXLHvPV/Rahul-(1).jpg"  
+  },
+  { 
+    id: "3",
+    author: "Bharathwaj",   
+    role: "Member",  
+    text: "I'm a slow learner, but he was patient and made sure I understood every technique before moving forward.",
+    image: "https://i.postimg.cc/bYLvyXYF/Bharathwaj-(1).jpg"  
+  },
+  { 
+    id: "4",
+    author: "Surya", 
+    role: "Fighter", 
+    text: "He gives individual attention to everyone, whether you're a beginner learning the basics or an experienced fighter preparing to compete.",
+    image: "https://i.postimg.cc/mZVrLxZd/Surya-(1).jpg"  
+  },
+  { 
+    id: "5",
+    author: "Madhan",    
+    role: "Member",  
+    text: "He doesn't just coach MMA. He guides you like a mentor with training, fitness, mindset, and long-term development.",
+    image: "https://i.postimg.cc/q7HbD53j/Madan-jpg.jpg"
+  },
+  { 
+    id: "6",
+    author: "Sohail Mohammad",  
+    role: "Athlete", 
+    text: "I was doubtful when I started, but his guidance and structured approach helped me improve far more than I expected.",
+    image: "https://i.postimg.cc/Dz3jpMXj/sohail.jpg" 
+  },
+];
+
 const extractVideoId = (input: string): string => {
   if (!input) return "KTlqLcAeisU";
   const trimmed = input.trim();
@@ -96,7 +141,8 @@ const TiltCard = ({ t, animClass, delay }: { t: TestimonialItem; animClass: stri
 
 const TestimonialsSection = () => {
   const { content } = useCms();
-  const testimonials = content.home.testimonials || [];
+  const c = content.home;
+  const testimonials = c.testimonials?.length ? c.testimonials : defaultTestimonials;
 
   const [start, setStart]         = useState(0);
   const [paused, setPaused]       = useState(false);
@@ -113,7 +159,7 @@ const TestimonialsSection = () => {
   const [playerReady, setPlayerReady] = useState(false);
   const [showControls, setShowControls] = useState(true);
 
-  const rawVideoId = extractVideoId(content.home.testimonialVideoUrl || "KTlqLcAeisU");
+  const rawVideoId = extractVideoId(c.testimonialVideoUrl || "KTlqLcAeisU");
 
   const revealControls = () => {
     setShowControls(true);
@@ -130,7 +176,7 @@ const TestimonialsSection = () => {
 
   useEffect(() => {
     const createPlayer = () => {
-      if ((window as any).YT && (window as any).YT.Player) {
+      if ((window as any).YT && (window as any).YT.Player && iframeRef.current) {
         playerRef.current = new (window as any).YT.Player(iframeRef.current, {
           events: {
             onReady: () => setPlayerReady(true),
@@ -266,12 +312,13 @@ const TestimonialsSection = () => {
       `}</style>
 
       <div className="max-w-[1100px] mx-auto px-6">
+        {/* Section Heading */}
         <div className="text-center mb-[52px]">
           <p
             className="text-sm font-bold uppercase tracking-[4px] mb-2"
             style={{ fontFamily: "'Barlow', sans-serif", color: "#07b4ba" }}
           >
-            {content.home.testimonialsTagline || "Results and Success Stories"}
+            {c.testimonialsTagline || "Results and Success Stories"}
           </p>
           <h2
             className="uppercase m-0 leading-[1.2]"
@@ -282,11 +329,23 @@ const TestimonialsSection = () => {
               color: "#fff",
             }}
           >
-            {content.home.testimonialsHeading || "Real People, "}{" "}
-            <br className="md:hidden" />
-            <span className="text-[#07b4ba]">
-              {content.home.testimonialsSubheading ? "" : "Real Progress"}
-            </span>
+            {c.testimonialsHeading ? (
+              c.testimonialsHeading.includes("Real Progress") ? (
+                <>
+                  {c.testimonialsHeading.replace("Real Progress", "").replace("Real Progress.", "")}
+                  <br className="md:hidden" />
+                  <span className="text-[#07b4ba]">Real Progress</span>
+                </>
+              ) : (
+                c.testimonialsHeading
+              )
+            ) : (
+              <>
+                Real People,{" "}
+                <br className="md:hidden" />
+                <span className="text-[#07b4ba]">Real Progress</span>
+              </>
+            )}
           </h2>
         </div>
 
@@ -303,7 +362,7 @@ const TestimonialsSection = () => {
                 letterSpacing: "0.5px",
               }}
             >
-              {content.home.testimonialVideoHeading || "Hear Directly From People Who Have Trained Under Coach Purushothaman"}
+              {c.testimonialVideoHeading || "Hear Directly From People Who Have Trained Under Coach Purushothaman"}
             </h3>
 
             <div ref={containerRef} className="testimonial-video-container w-full relative group">
@@ -377,7 +436,7 @@ const TestimonialsSection = () => {
             </div>
           </div>
 
-          {/* RIGHT: cards + nav */}
+          {/* RIGHT: Cards + Navigation */}
           <div
             className="[perspective:800px]"
             onMouseEnter={() => setPaused(true)}
