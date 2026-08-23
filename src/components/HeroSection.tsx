@@ -1,97 +1,71 @@
-import { Button } from "@/components/ui/button";
-import TrustIndicators from "@/components/TrustIndicators";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useCms } from "@/context/CmsContext";
+import Reveal from "@/components/Reveal";
+import { Link } from "react-router-dom";
 
-const HeroSection = () => {
-  const navigate = useNavigate();
+const HeroSection: React.FC = () => {
   const { content } = useCms();
   const h = content.home;
 
-  const getYoutubeEmbedUrl = (url?: string) => {
-    if (!url) return "";
-    const trimmed = url.trim();
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = trimmed.match(regExp);
-    if (match && match[2].length === 11) {
-      return `https://www.youtube.com/embed/${match[2]}`;
-    }
-    if (trimmed.length === 11) {
-      return `https://www.youtube.com/embed/${trimmed}`;
-    }
-    return trimmed.startsWith("http") ? trimmed : "";
-  };
-
-  const embedUrl = getYoutubeEmbedUrl(h.socialProofVideo1);
-
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex flex-col justify-between overflow-hidden"
-    >
-      {/* Background Image (Managed by Admin Panel) */}
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 pb-16">
+      {/* Background Image & Overlays */}
       <div className="absolute inset-0 z-0">
         <img
           src={h.heroImage || "/images/Hero.jpg"}
-          alt="MMA Fighter"
-          className="w-full h-full object-cover opacity-50 md:opacity-100"
+          alt="Hero Background"
+          className="w-full h-full object-cover object-center filter brightness-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent to-background/90" />
       </div>
 
-      {/* Content */}
-      <div className="container relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-between pt-24 pb-12 gap-8">
-        <div className="max-w-xl space-y-5">
-          <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">
-            {h.heroTagline || "Art of Fighting Academy"}
-          </p>
-
-          <h1 className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground uppercase whitespace-pre-line">
-            {h.heroTitle || "STOP DOUBTING.\nSTART LEARNING MMA\nTHE RIGHT WAY."}
-          </h1>
-
-          <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-md">
-            {h.heroSubtitle ||
-              "Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results."}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <Button
-              size="lg"
-              variant="outline"
-              disabled
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-sm uppercase tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              {h.heroBtn1Text || "1 on 1 Coaching (Coming Soon)"}
-            </Button>
-
-            <Button
-              size="lg"
-              onClick={() => navigate("/program")}
-              className="font-semibold text-sm uppercase tracking-wide cursor-pointer"
-            >
-              {h.heroBtn2Text || "AOF 30 Days Program"}
-            </Button>
-          </div>
-        </div>
-
-        {/* Featured YouTube Video (Optional - Shows if a valid URL exists) */}
-        {embedUrl && (
-          <div className="w-full max-w-md lg:max-w-lg aspect-video rounded-xl overflow-hidden shadow-2xl border border-zinc-800 bg-black/40">
-            <iframe
-              className="w-full h-full"
-              src={embedUrl}
-              title="AOF Featured Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+      <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
+        {h.heroTagline !== "" && (
+          <Reveal type="fade-down" delay={100}>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#07b4ba]/10 border border-[#07b4ba]/30 text-[#07b4ba] text-xs md:text-sm font-semibold tracking-widest uppercase mb-6">
+              {h.heroTagline ?? "Art of Fighting Academy"}
+            </span>
+          </Reveal>
         )}
-      </div>
 
-      {/* Trust Strip */}
-      <div className="relative z-10 w-full">
-        <TrustIndicators />
+        {h.heroTitle !== "" && (
+          <Reveal type="fade-up" delay={200}>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.05] whitespace-pre-line">
+              {h.heroTitle ?? "STOP DOUBTING.\nSTART LEARNING MMA\nTHE RIGHT WAY."}
+            </h1>
+          </Reveal>
+        )}
+
+        {h.heroSubtitle !== "" && (
+          <Reveal type="fade-up" delay={300}>
+            <p className="text-base sm:text-lg md:text-xl text-zinc-300 mb-10 max-w-2xl mx-auto font-normal leading-relaxed whitespace-pre-line">
+              {h.heroSubtitle ?? "Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results."}
+            </p>
+          </Reveal>
+        )}
+
+        <Reveal type="scale-up" delay={400}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {h.heroBtn1Text !== "" && (
+              <button
+                disabled
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-800/80 border border-zinc-700 text-zinc-400 font-bold text-sm tracking-wider uppercase cursor-not-allowed opacity-80"
+              >
+                {h.heroBtn1Text ?? "1 on 1 Coaching (Coming Soon)"}
+              </button>
+            )}
+
+            {h.heroBtn2Text !== "" && (
+              <Link
+                to="/program"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#07b4ba] hover:bg-[#069ca1] text-black font-bold text-sm tracking-wider uppercase transition-all duration-300 shadow-[0_0_20px_rgba(7,180,186,0.3)] hover:shadow-[0_0_30px_rgba(7,180,186,0.5)] flex items-center justify-center"
+              >
+                {h.heroBtn2Text ?? "AOF 30 Days Program"}
+              </Link>
+            )}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
