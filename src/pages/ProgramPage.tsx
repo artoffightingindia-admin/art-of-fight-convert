@@ -69,7 +69,7 @@ const extractVideoId = (input: string): string => {
 };
 
 /* ── UPGRADED PREMIUM REVEAL ── */
-function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 1000, className = "" }: { children: ReactNode; style?: CSSProperties; delay?: number; type?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale-up" | "fade"; duration?: number; className?: string }) {
+function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 1000, className = "", onClick }: { children: ReactNode; style?: CSSProperties; delay?: number; type?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale-up" | "fade"; duration?: number; className?: string; onClick?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -79,7 +79,7 @@ function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 
     const obs = new IntersectionObserver(
       ([e]) => { 
         if (e.isIntersecting) { 
-          setIsVisible(true);
+          setIsVisible(true); 
           obs.unobserve(el);
         } 
       },
@@ -104,6 +104,7 @@ function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 
     <div 
       ref={ref} 
       className={className}
+      onClick={onClick}
       style={{ 
         ...baseStyle, 
         transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`, 
@@ -115,18 +116,95 @@ function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 
   );
 }
 
-/* ── DEFAULT FEEDBACKS ── */
+/* ── DEFAULT ICONS & DATA ── */
+const IconPlan = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" /></svg>);
+const IconChat = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>);
+const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" /></svg>);
+const IconClock = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+const IconConfidenceMindset = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <polyline points="16 11 19 8 22 11" />
+    <line x1="19" y1="16" x2="19" y2="8" />
+  </svg>
+);
+
+const IconStretch = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
+    <circle cx="14" cy="5" r="2.5" />
+    <path d="M13 8 C11 12 10 14 9 21" />
+    <path d="M10.5 14 L14 21" />
+    <path d="M13 8 C11 5 7 4 6 7" />
+    <path d="M13 9 L16 12 L13 14" />
+  </svg>
+);
+const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></svg>);
+const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>);
+const IconFlashcards = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
+    <path d="M7 6h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" transform="rotate(-9 11 13)" />
+    <path d="M9 4h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" transform="rotate(6 13 11)" fill="#0b0b0b" />
+  </svg>
+);
+const IconStopwatch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2" /><path d="M10 3h4" /><path d="M12 3v2" /><path d="M6 6l-2-2" /></svg>);
+
+const IconShieldW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>);
+const IconUsersW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>);
+const IconTrophyW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16M12 17v5M7 4v6a5 5 0 0 0 10 0V4H7z" /></svg>);
+
 const defaultFeedbackCards = [
-  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
-  { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
-  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
-  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose", image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
+  { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran", role: "AOF Member" },
+  { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi", role: "AOF Member" },
+  { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan", role: "AOF Member" },
+  { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose", role: "AOF Member", image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
 ];
+
+const defaultFaqItems = [
+  { question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainees." },
+  { question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
+  { question: "How much time do I need each day?", answer: "Most sessions take around 30–45 minutes, making it easy to fit into a busy schedule." },
+  { question: "What equipment do I need?", answer: "Comfortable training clothes and a small training space are enough to get started. Additional equipment is optional." },
+  { question: "What happens after I join?", answer: "You'll receive access to the program, onboarding instructions, and a clear roadmap showing exactly what to do each day." },
+  { question: "How many sessions should I train per week?", answer: "You can reach out through the designated support channels and receive guidance from the AOF team." },
+];
+
+const defaultWhatCards = [
+  { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
+  { icon: <IconClock />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
+  { icon: <IconConfidenceMindset />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
+  { icon: <IconLeaf />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
+  { icon: <IconChat />, title: "LEARN IN TAMIL", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." },
+];
+
+const defaultBonuses = [
+  { icon: <IconStretch />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
+  { icon: <IconBrain />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
+  { icon: <IconSearch />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
+  { icon: <IconFlashcards />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
+  { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
+];
+
+const defaultRoadmapCards = [
+  { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+  { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+  { title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+  { title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+  { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
+];
+
+const whatIcons = [<IconPlan key="1" />, <IconClock key="2" />, <IconConfidenceMindset key="3" />, <IconLeaf key="4" />, <IconChat key="5" />];
+const bonusIcons = [<IconStretch key="1" />, <IconBrain key="2" />, <IconSearch key="3" />, <IconFlashcards key="4" />, <IconStopwatch key="5" />];
 
 /* ── FEEDBACK SLIDER ── */
 function InfiniteFeedbackSlider() {
   const { content } = useCms();
-  const feedbackCards = content.program.feedbacks?.length ? content.program.feedbacks : defaultFeedbackCards;
+  const feedbackCards = content?.program?.feedbacks?.length ? content.program.feedbacks : defaultFeedbackCards;
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -149,7 +227,7 @@ function InfiniteFeedbackSlider() {
     const slider = sliderRef.current;
     const track = trackRef.current;
     if (!slider || !track) return;
-    const speed = 0;
+    const speed = 0.5;
     const getHalfWidth = () => track.scrollWidth / 2;
     const animate = () => {
       if (!isPausedRef.current) {
@@ -242,20 +320,11 @@ function InfiniteFeedbackSlider() {
   );
 }
 
-/* ── DEFAULT FAQS ── */
-const defaultFaqItems = [
-  { question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee" },
-  { question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
-  { question: "How much time do I need each day?", answer: "Most sessions take around 30–45 minutes, making it easy to fit into a busy schedule." },
-  { question: "What equipment do I need?", answer: "Comfortable training clothes and a small training space are enough to get started. Additional equipment is optional." },
-  { question: "What happens after I join?", answer: "You'll receive access to the program, onboarding instructions, and a clear roadmap showing exactly what to do each day." },
-  { question: "How many sessions should I train per week?", answer: "You can reach out through the designated support channels and receive guidance from the AOF team." },
-];
-
+/* ── FAQ SECTION ── */
 function FAQSection() {
   const { content } = useCms();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const faqItems = content.program.faqs?.length ? content.program.faqs : defaultFaqItems;
+  const faqItems = content?.program?.faqs?.length ? content.program.faqs : defaultFaqItems;
 
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,0.05) 1px,transparent .4px)", backgroundSize: "40px 40px" }}>
@@ -287,79 +356,15 @@ function FAQSection() {
   );
 }
 
-/* ── ICONS ── */
-const IconPlan = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" /></svg>);
-const IconChat = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>);
-const IconLeaf = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><path d="M12 22V12M12 12C12 7 17 3 21 2c0 5-2 9-9 10zM12 12C12 7 7 3 3 2c0 5 2 9 9 10z" /></svg>);
-const IconClock = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
-  </svg>
-);
-const IconConfidenceMindset = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <polyline points="16 11 19 8 22 11" />
-    <line x1="19" y1="16" x2="19" y2="8" />
-  </svg>
-);
-
-const IconStretch = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
-    <circle cx="14" cy="5" r="2.5" />
-    <path d="M13 8 C11 12 10 14 9 21" />
-    <path d="M10.5 14 L14 21" />
-    <path d="M13 8 C11 5 7 4 6 7" />
-    <path d="M13 9 L16 12 L13 14" />
-  </svg>
-);
-const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" /><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" /></svg>);
-const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>);
-const IconFlashcards = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14">
-    <path d="M7 6h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" transform="rotate(-9 11 13)" />
-    <path d="M9 4h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" transform="rotate(6 13 11)" fill="#0b0b0b" />
-  </svg>
-);
-const IconStopwatch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#07b4ba" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12 md:w-14 md:h-14"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2 2" /><path d="M10 3h4" /><path d="M12 3v2" /><path d="M6 6l-2-2" /></svg>);
-
-const IconShieldW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>);
-const IconUsersW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>);
-const IconTrophyW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16M12 17v5M7 4v6a5 5 0 0 0 10 0V4H7z" /></svg>);
-
-const defaultWhatCards = [
-  { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
-  { icon: <IconClock />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
-  { icon: <IconConfidenceMindset />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
-  { icon: <IconLeaf />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
-  { icon: <IconChat />, title: "LEARN IN Tamil", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." },
-];
-
-const defaultBonuses = [
-  { icon: <IconStretch />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
-  { icon: <IconBrain />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
-  { icon: <IconSearch />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
-  { icon: <IconFlashcards />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
-  { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
-];
-
-const defaultRoadmapCards = [
-  { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
-  { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
-  { title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
-  { title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
-  { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
-];
-
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
 const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 
 export default function ProgramPage() {
   const navigate = useNavigate();
   const { content } = useCms();
-  const p = content.program;
+  const p = content?.program || {};
+  const contact = content?.contact || {};
+
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
@@ -462,7 +467,7 @@ export default function ProgramPage() {
 
   const whatCards = p.whyCards?.length 
     ? p.whyCards.map((c, i) => ({
-        icon: defaultWhatCards[i % defaultWhatCards.length].icon,
+        icon: whatIcons[i % whatIcons.length],
         title: c.title,
         desc: c.desc
       }))
@@ -470,7 +475,7 @@ export default function ProgramPage() {
 
   const bonuses = p.bonuses?.length
     ? p.bonuses.map((b, i) => ({
-        icon: defaultBonuses[i % defaultBonuses.length].icon,
+        icon: bonusIcons[i % bonusIcons.length],
         title: b.title,
         desc: b.desc
       }))
@@ -701,7 +706,7 @@ export default function ProgramPage() {
                 </h2>
               </Reveal>
 
-              {/* Mobile Image (Hidden on Desktop) wedged under heading */}
+              {/* Mobile Image (Hidden on Desktop) */}
               <div className="block md:hidden w-full mb-6">
                 <Reveal type="fade-right" duration={1200}>
                   <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10 premium-hover shadow-[0_0_30px_rgba(7,180,186,0.1)]">
@@ -808,7 +813,7 @@ export default function ProgramPage() {
                       </p>
                       <div className={`w-[12px] h-[12px] md:w-[18px] md:h-[18px] rounded-full border-[1.5px] md:border-2 transition-all duration-500 cubic-bezier(0.22, 1, 0.36, 1) ${isActive ? 'bg-[#07b4ba] border-[#07b4ba] shadow-[0_0_15px_rgba(7,180,186,1)] scale-125' : 'bg-[#0b0b0b] border-white/20 group-hover:border-white/50 group-hover:scale-110'} relative z-10`} />
                     </Reveal>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -856,7 +861,7 @@ export default function ProgramPage() {
             </div>
           </div>
 
-          {/* Consistency box between roadmap cards and promise strip */}
+          {/* Consistency box */}
           <div className="w-full max-w-4xl mx-auto mt-10 md:mt-12" style={GUTTER}>
             <Reveal type="fade-up" duration={1000}>
               <div className="flex items-start md:items-center gap-3.5 md:gap-4 p-4 md:p-6 border border-[#07b4ba]/25 rounded-[14px] md:rounded-[16px] bg-gradient-to-b from-[#0d1a24]/90 to-[#070e16]/90 relative overflow-hidden premium-hover shadow-[0_0_20px_rgba(7,180,186,0.1)] md:shadow-none">
@@ -864,13 +869,11 @@ export default function ProgramPage() {
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="M8 21h8" /><path d="M12 17v4" /><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" /><path d="M5 4H3v2a4 4 0 0 0 4 4" /><path d="M19 4h2v2a4 4 0 0 1-4 4" /></svg>
                 </div>
                 <div className="flex-1 w-full md:max-w-[620px]">
-                  {/* Desktop Title & Text */}
                   <h3 className="hidden md:block text-white/90 font-['Bebas_Neue'] text-[20px] tracking-[1px] leading-none mb-1.5">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
                   <p className="hidden md:block text-[#07b4ba] font-['Barlow'] text-[14px] leading-[1.4] m-0">
                     {p.roadmapFootnote || "Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library. Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program."}
                   </p>
                   
-                  {/* Mobile Title & Text */}
                   <p className="md:hidden text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">MORE THAN JUST TECHNICAL SESSIONS</p>
                   <p className="md:hidden font-['Barlow'] text-[13.5px] text-white/65 leading-[1.65] m-0">
                     {p.roadmapFootnote || "Includes mindset coaching, movement training, and many exclusive bonus learning resources."}
@@ -890,7 +893,7 @@ export default function ProgramPage() {
                 <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
                 <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-                  {p.promiseQuote || "In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and shadowbox confidently on your own.Commit to the process, and we'll show you the path."}
+                  {p.promiseQuote || "In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and shadowbox confidently on your own. Commit to the process, and we'll show you the path."}
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
                 </p>
               </Reveal>
@@ -992,7 +995,6 @@ export default function ProgramPage() {
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
             
-            {/* SWAPPED TESTIMONIAL VIDEO COMPONENT FRAME */}
             <div ref={testimonialSectionRef} className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
               <Reveal type="fade-right" duration={1200}>
                 <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
@@ -1008,7 +1010,6 @@ export default function ProgramPage() {
                 </div>
               </Reveal>
 
-              {/* Custom floating localized controller block layer */}
               <button
                 onClick={toggleTestimonialMute}
                 className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
@@ -1142,7 +1143,8 @@ export default function ProgramPage() {
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
                   </Reveal>
                 ))}
-                {/* ── CONDITIONAL PROGRESS GUARANTEE BOX ── */}
+                
+                {/* Guarantee Box */}
                 <Reveal type="fade-up" delay={600} duration={1000}>
                   <div className="mt-5 md:mt-6 flex items-start gap-4 md:gap-3.5 p-4 md:p-5 border border-[#07b4ba]/35 rounded-[14px] bg-gradient-to-b from-[#0d1a24]/80 to-[#070e16]/80 premium-hover shadow-[0_0_20px_rgba(7,180,186,0.1)]">
                     <div className="flex w-10 h-10 shrink-0 items-center justify-center border border-[#07b4ba] rounded-full text-[#07b4ba] mt-0.5 transition-transform duration-500 hover:rotate-[360deg]">
@@ -1164,12 +1166,12 @@ export default function ProgramPage() {
               </Reveal>
             </div>
 
-            {/* ── CTA Card with offer ribbon ── */}
+            {/* CTA Card */}
             <div className="w-full lg:w-[420px] max-w-md mx-auto shrink-0">
               <Reveal type="scale-up" delay={300} duration={1200}>
                 <div className="bg-[#05070b] border border-[#07b4ba]/30 rounded-2xl px-4 pb-7 pt-[90px] md:px-10 md:pb-10 md:pt-[90px] text-center relative overflow-hidden flex flex-col items-center w-[calc(100%+32px)] -ml-4 sm:w-full sm:ml-0 shadow-[0_0_40px_rgba(7,180,186,0.15)] premium-hover">
 
-                  {/* ── ANNIVERSARY / OFFER RIBBON ── */}
+                  {/* Anniversary / Offer Ribbon */}
                   <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "190px", height: "190px", pointerEvents: "none" }}>
                     <div className="shimmer-ribbon" style={{ position: "absolute", top: "36px", left: "-65px", width: "280px", transform: "rotate(-45deg)", padding: "10px 0", textAlign: "center", boxShadow: "0 5px 15px rgba(0,0,0,0.5)" }}>
                       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#111", lineHeight: "1" }}>
@@ -1199,7 +1201,7 @@ export default function ProgramPage() {
                     )}
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
-                    {p.showOriginalPriceStrike && (
+                    {p.showOriginalPriceStrike !== false && (
                       <span className="text-xl md:text-2xl line-through text-zinc-500 font-bold font-['Bebas_Neue']">
                         {p.originalPrice || "₹6,199"}
                       </span>
@@ -1259,15 +1261,15 @@ export default function ProgramPage() {
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">CONTACT</h3>
             <div className="flex flex-col gap-3 md:gap-4">
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contact.phone || "+91 93854 31051"}</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contact.email || "info@artoffighting.in"}</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contact.address || "Chennai, Tamil Nadu, India"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{contact.phone || "+91 93854 31051"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{contact.email || "info@artoffighting.in"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{contact.address || "Chennai, Tamil Nadu, India"}</p>
             </div>
           </div>
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">NAVIGATION</h3>
             <div className="flex flex-wrap gap-x-5 gap-y-2.5 md:flex-col md:gap-2.5">
-              {([] as [string, string][]).map(([href, label]) => (
+              {[["/", "Home"], ["/#about", "About"], ["/#programs", "Programs"], ["#faq", "FAQs"]].map(([href, label]) => (
                 <a key={href} href={href} className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] no-underline hover:text-[#07b4ba] active:text-[#07b4ba] transition-colors">{label}</a>
               ))}
             </div>
@@ -1277,7 +1279,7 @@ export default function ProgramPage() {
               <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
             </h3>
             <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] leading-[1.8] max-w-[320px]">
-              {content.contact.footerTagline || "Art of Fighting Academy — building champions through proven systems and disciplined training."}
+              {contact.footerTagline || "Art of Fighting Academy — building champions through proven systems and disciplined training."}
             </p>
           </div>
         </div>
