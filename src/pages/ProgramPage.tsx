@@ -547,21 +547,9 @@ export default function ProgramPage() {
               </p>
             </Reveal>
             <Reveal type="fade-right" delay={400} duration={1200}>
-              <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5">
-                {p.heroTitle ? (
-                  p.heroTitle.includes("MMA STRIKING") ? (
-                    <>
-                      {p.heroTitle.split("MMA STRIKING")[0]}
-                      <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.2)]">MMA STRIKING</span>
-                      {p.heroTitle.split("MMA STRIKING")[1]}
-                    </>
-                  ) : (
-                    p.heroTitle
-                  )
-                ) : (
-                  <>BUILD REAL<br /><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.2)]">MMA STRIKING</span><br />FUNDAMENTALS</>
-                )}
-              </h1>
+            <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5 whitespace-pre-line">
+  {p.heroTitle || "BUILD REAL\nMMA STRIKING\nFUNDAMENTALS"}
+</h1>
             </Reveal>
             <Reveal type="fade-up" delay={600} duration={1200}>
               <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
