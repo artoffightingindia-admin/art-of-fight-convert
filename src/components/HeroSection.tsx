@@ -6,17 +6,23 @@ import { useCms } from "@/context/CmsContext";
 const HeroSection = () => {
   const navigate = useNavigate();
   const { content } = useCms();
+  const h = content.home;
 
-  const getYoutubeEmbedUrl = (url: string) => {
+  const getYoutubeEmbedUrl = (url?: string) => {
     if (!url) return "";
+    const trimmed = url.trim();
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11
-      ? `https://www.youtube.com/embed/${match[2]}`
-      : url;
+    const match = trimmed.match(regExp);
+    if (match && match[2].length === 11) {
+      return `https://www.youtube.com/embed/${match[2]}`;
+    }
+    if (trimmed.length === 11) {
+      return `https://www.youtube.com/embed/${trimmed}`;
+    }
+    return trimmed.startsWith("http") ? trimmed : "";
   };
 
-  const embedUrl = getYoutubeEmbedUrl(content.youtubeVideoUrl);
+  const embedUrl = getYoutubeEmbedUrl(h.socialProofVideo1);
 
   return (
     <section
@@ -26,7 +32,7 @@ const HeroSection = () => {
       {/* Background Image (Managed by Admin Panel) */}
       <div className="absolute inset-0 z-0">
         <img
-          src={content.heroImage || "/images/Hero.jpg"}
+          src={h.heroImage || "/images/Hero.jpg"}
           alt="MMA Fighter"
           className="w-full h-full object-cover opacity-50 md:opacity-100"
         />
@@ -37,15 +43,15 @@ const HeroSection = () => {
       <div className="container relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-between pt-24 pb-12 gap-8">
         <div className="max-w-xl space-y-5">
           <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3">
-            Art of Fighting Academy
+            {h.heroTagline || "Art of Fighting Academy"}
           </p>
 
           <h1 className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground uppercase whitespace-pre-line">
-            {content.heroTitle || "STOP DOUBTING.\nSTART LEARNING MMA\nTHE RIGHT WAY."}
+            {h.heroTitle || "STOP DOUBTING.\nSTART LEARNING MMA\nTHE RIGHT WAY."}
           </h1>
 
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-md">
-            {content.heroSubtitle ||
+            {h.heroSubtitle ||
               "Whether you're starting at home or want to train with a coach, AOF provides the structure, guidance, and accountability to achieve real results."}
           </p>
 
@@ -56,15 +62,15 @@ const HeroSection = () => {
               disabled
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-sm uppercase tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              1 on 1 Coaching (Coming Soon)
+              {h.heroBtn1Text || "1 on 1 Coaching (Coming Soon)"}
             </Button>
 
             <Button
               size="lg"
               onClick={() => navigate("/program")}
-              className="font-semibold text-sm uppercase tracking-wide"
+              className="font-semibold text-sm uppercase tracking-wide cursor-pointer"
             >
-              AOF 30 Days Program
+              {h.heroBtn2Text || "AOF 30 Days Program"}
             </Button>
           </div>
         </div>
