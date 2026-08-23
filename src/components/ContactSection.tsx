@@ -42,10 +42,9 @@ const defaultFaqItems = [
 
 const ContactSection = () => {
   const { content } = useCms();
+  const c = content.home;
+  const faqItems = c.homeFaqs?.length ? c.homeFaqs : defaultFaqItems;
   const [open, setOpen] = useState<number | null>(null);
-
-  // Read FAQs dynamically from the CMS if available, otherwise fallback to defaults
-  const faqList = content.program.faqs?.length ? content.program.faqs : defaultFaqItems;
 
   return (
     <section
@@ -59,19 +58,20 @@ const ContactSection = () => {
     >
       <div className="w-[92%] max-w-[1400px] mx-auto">
         {/* Header */}
-        <p className="text-center text-[#07b4ba] font-bold text-[14px] tracking-[4px] uppercase mb-3">
-          Got Questions?
+        <p className="text-center text-[#07b4ba] font-bold text-[14px] tracking-[4px] uppercase mb-3 font-['Barlow']">
+          {c.contactEyebrow || "Got Questions?"}
         </p>
 
         <h2 className="text-center font-['Bebas_Neue'] text-[36px] md:text-[60px] tracking-[3px] text-white leading-none mb-2">
-          Frequently Asked <span className="text-[#07b4ba]">Questions</span>
+          {c.contactHeadingMain || "Frequently Asked"}{" "}
+          <span className="text-[#07b4ba]">{c.contactHeadingAccent || "Questions"}</span>
         </h2>
 
         <div className="w-14 h-[2px] bg-[#07b4ba] mx-auto mt-4 mb-12 rounded-full" />
 
         {/* FAQ Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {faqList.map((item, i) => (
+          {faqItems.map((item, i) => (
             <div
               key={item.id || i}
               className={
@@ -97,8 +97,8 @@ const ContactSection = () => {
                 <span
                   className={
                     open === i
-                      ? "w-7 h-7 rounded-full border border-[#07b4ba] text-[#07b4ba] flex items-center justify-center rotate-45 transition-all duration-300"
-                      : "w-7 h-7 rounded-full border border-white/20 text-white/60 flex items-center justify-center transition-all duration-300"
+                      ? "w-7 h-7 rounded-full border border-[#07b4ba] text-[#07b4ba] flex items-center justify-center rotate-45 transition-all duration-300 font-mono text-sm"
+                      : "w-7 h-7 rounded-full border border-white/20 text-white/60 flex items-center justify-center transition-all duration-300 font-mono text-sm"
                   }
                 >
                   +
@@ -108,7 +108,10 @@ const ContactSection = () => {
               <div
                 style={{
                   maxHeight: open === i ? "300px" : "0px",
-                  padding: open === i ? "0 24px 20px 24px" : "0 24px 0 24px",
+                  padding:
+                    open === i
+                      ? "0 24px 20px 24px"
+                      : "0 24px 0 24px",
                 }}
                 className="overflow-hidden transition-all duration-300"
               >
