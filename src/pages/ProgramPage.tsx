@@ -57,6 +57,17 @@ const premiumStyles = `
   }
 `;
 
+const extractVideoId = (input: string): string => {
+  if (!input) return "";
+  const trimmed = input.trim();
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+  const match = trimmed.match(regExp);
+  if (match && match[2].length === 11) {
+    return match[2];
+  }
+  return trimmed;
+};
+
 /* ── UPGRADED PREMIUM REVEAL ── */
 function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 1000, className = "" }: { children: ReactNode; style?: CSSProperties; delay?: number; type?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale-up" | "fade"; duration?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -104,15 +115,19 @@ function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 
   );
 }
 
-/* ── FEEDBACK SLIDER ── */
-const feedbackCards = [
+/* ── DEFAULT FEEDBACKS ── */
+const defaultFeedbackCards = [
   { text: "I used to watch YouTube tutorials and understand nothing. Everything felt confusing. But AOF's learning modules felt just like in-person training. Online was never a roadblock.", author: "Saran" },
   { text: "The step-by-step teaching was excellent. Even complex concepts like power generation and hip rotation were explained so clearly that I understood everything just by watching the videos.", author: "Mani Bharathi" },
   { text: "Whenever I wasn't sure about something, I would record my technique and send it to the coach. The feedback was quick, clear, and helped me fix mistakes immediately.", author: "Thirumurugan" },
   { text: "At first I was doubtful about online training, but as I progressed, I knew I was on the right path and improving every week. I haven't seen any other online MMA content explained with this level of clarity and detail.", author: "Afrose", image: "https://i.postimg.cc/LszHGw0Q/Adobe-Express-file.jpg" },
 ];
 
+/* ── FEEDBACK SLIDER ── */
 function InfiniteFeedbackSlider() {
+  const { content } = useCms();
+  const feedbackCards = content.program.feedbacks?.length ? content.program.feedbacks : defaultFeedbackCards;
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number>(0);
@@ -156,7 +171,7 @@ function InfiniteFeedbackSlider() {
     };
   }, [isMobile]);
 
-  const currentCard = feedbackCards[mobilePage % feedbackCards.length];
+  const currentCard = feedbackCards[mobilePage % feedbackCards.length] || feedbackCards[0];
 
   if (isMobile) {
     return (
@@ -169,12 +184,12 @@ function InfiniteFeedbackSlider() {
               {currentCard.image ? (
                 <img src={currentCard.image} alt={currentCard.author} className="w-full h-full object-cover" />
               ) : (
-                <span className="text-[#07b4ba] font-['Barlow'] font-bold">{currentCard.author.charAt(0).toUpperCase()}</span>
+                <span className="text-[#07b4ba] font-['Barlow'] font-bold">{currentCard.author?.charAt(0).toUpperCase()}</span>
               )}
             </div>
             <div>
               <p className="m-0 mb-0.5 text-white font-['Barlow'] text-[15px] font-bold leading-none">{currentCard.author}</p>
-              <span className="text-[#07b4ba]/70 font-['Barlow'] text-[12px] uppercase tracking-wider font-semibold leading-none">AOF Member</span>
+              <span className="text-[#07b4ba]/70 font-['Barlow'] text-[12px] uppercase tracking-wider font-semibold leading-none">{currentCard.role || "AOF Member"}</span>
             </div>
           </div>
         </div>
@@ -207,12 +222,12 @@ function InfiniteFeedbackSlider() {
                   {card.image ? (
                     <img src={card.image} alt={card.author} className="w-full h-full object-cover" />
                   ) : (
-                    <span className="text-[#07b4ba] font-['Barlow'] font-bold">{card.author.charAt(0).toUpperCase()}</span>
+                    <span className="text-[#07b4ba] font-['Barlow'] font-bold">{card.author?.charAt(0).toUpperCase()}</span>
                   )}
                 </div>
                 <div>
                   <p className="font-['Barlow'] font-bold text-white text-[15px] mb-0.5">{card.author}</p>
-                  <span className="font-['Barlow'] font-normal text-white/40 text-[13px]">Member</span>
+                  <span className="font-['Barlow'] font-normal text-white/40 text-[13px]">{card.role || "Member"}</span>
                 </div>
               </div>
             </div>
@@ -227,7 +242,7 @@ function InfiniteFeedbackSlider() {
   );
 }
 
-/* ── FAQ ── */
+/* ── DEFAULT FAQS ── */
 const defaultFaqItems = [
   { question: "Is this program beginner friendly?", answer: "Absolutely. The program is designed to guide beginners step-by-step while still providing value to more experienced trainee" },
   { question: "What will I learn in 30 days?", answer: "You'll build striking fundamentals, footwork, combinations, defensive awareness, conditioning, and training discipline through a structured progression system." },
@@ -240,15 +255,7 @@ const defaultFaqItems = [
 function FAQSection() {
   const { content } = useCms();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqItems = [
-    { question: content.faq1Question || defaultFaqItems[0].question, answer: content.faq1Answer || defaultFaqItems[0].answer },
-    { question: content.faq2Question || defaultFaqItems[1].question, answer: content.faq2Answer || defaultFaqItems[1].answer },
-    { question: content.faq3Question || defaultFaqItems[2].question, answer: content.faq3Answer || defaultFaqItems[2].answer },
-    defaultFaqItems[3],
-    defaultFaqItems[4],
-    defaultFaqItems[5],
-  ];
+  const faqItems = content.program.faqs?.length ? content.program.faqs : defaultFaqItems;
 
   return (
     <div id="faq" className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,0.05) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,0.05) 1px,transparent .4px)", backgroundSize: "40px 40px" }}>
@@ -322,27 +329,28 @@ const IconShieldW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" st
 const IconUsersW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>);
 const IconTrophyW = () => (<svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16M12 17v5M7 4v6a5 5 0 0 0 10 0V4H7z" /></svg>);
 
-const whatCards = [
+const defaultWhatCards = [
   { icon: <IconPlan />, title: "CLEAR ROADMAP", desc: "Know exactly what to train, when to train, and how to progress throughout the program." },
   { icon: <IconClock />, title: "TRAIN ON YOUR SCHEDULE", desc: "Access pre-recorded sessions and train whenever it suits you. Most sessions take just 30–40 minutes a day." },
-  { icon: <IconConfidenceMindset  />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
+  { icon: <IconConfidenceMindset />, title: "TRAIN WITH CONFIDENCE", desc: "Receive direct coach feedback and guidance so you know you're practicing techniques correctly." },
   { icon: <IconLeaf />, title: "BEGINNER FRIENDLY", desc: "Start with confidence, even if you've never trained MMA before." },
   { icon: <IconChat />, title: "LEARN IN Tamil", desc: "Understand concepts faster through coaching delivered in Tamil and simple English." },
 ];
 
-const painPoints = [
-  "Don't know where to begin",
-  "Don't have access to a quality MMA gym",
-  "Don't have a training partner or equipment",
-  "Can't commit hours every day to training",
-  "Can't find structured MMA guidance in Tamil",
+const defaultBonuses = [
+  { icon: <IconStretch />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
+  { icon: <IconBrain />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
+  { icon: <IconSearch />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
+  { icon: <IconFlashcards />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
+  { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
 ];
 
-const stats = [
-  { val: "2,000+", label: "Clients Coached" },
-  { val: "10+", label: "Years Experience" },
-  { val: "20+", label: "MMA Fights" },
-  { val: "10K+", label: "AOF Community" },
+const defaultRoadmapCards = [
+  { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
+  { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
+  { title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
+  { title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
+  { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
 ];
 
 const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
@@ -351,6 +359,7 @@ const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 export default function ProgramPage() {
   const navigate = useNavigate();
   const { content } = useCms();
+  const p = content.program;
   const footerRef = useRef<HTMLDivElement>(null);
   const [roadmapIndex, setRoadmapIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
@@ -358,7 +367,6 @@ export default function ProgramPage() {
   // Pain Section Video Refs/States
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
 
   // Testimonial Section Video Refs/States
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
@@ -377,7 +385,7 @@ export default function ProgramPage() {
   }, []);
 
   useEffect(() => {
-    const TARGET_DATE = new Date("2026-09-07T23:59:59").getTime();
+    const TARGET_DATE = new Date(p.targetCountdownDate || "2026-09-07T23:59:59").getTime();
     const updateTimer = () => {
       const now = new Date().getTime();
       const difference = TARGET_DATE - now;
@@ -396,7 +404,7 @@ export default function ProgramPage() {
     updateTimer();
     const timerInterval = setInterval(updateTimer, 1000);
     return () => clearInterval(timerInterval);
-  }, []);
+  }, [p.targetCountdownDate]);
 
   useEffect(() => {
     const el = testimonialSectionRef.current;
@@ -413,12 +421,12 @@ export default function ProgramPage() {
   }, []);
 
   const handlePayment = () => {
-    window.location.href = content.programBuyLink || "https://rzp.io/rzp/aof30dayprogram";
+    window.location.href = p.buyNowUrl || "https://rzp.io/rzp/aof30dayprogram";
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = content.contactPhone?.replace(/[^0-9]/g, "") || "919385431051"; 
-    const message = "Hey Team, I've a doubt about AOF 30 days program.";
+    const phoneNumber = p.whatsappNumber?.replace(/[^0-9]/g, "") || "919385431051"; 
+    const message = p.whatsappMessage || "Hey Team, I've a doubt about AOF 30 days program.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
@@ -439,18 +447,53 @@ export default function ProgramPage() {
     }
   };
 
-  const roadmapCards = [
-    { title: "Week 01", days: "DAYS 1 - 7 : Build your foundation", image: "https://i.postimg.cc/1zSH9ZXw/Week-1-jpg.jpg", points: ["Stance & Guard", "Core Punches", "Basic Combinations", "Strong Technical Fundamentals"] },
-    { title: "Week 02", days: "DAYS 8 - 14 : Defense to Offense", image: "https://i.postimg.cc/pdvZ2trB/Week-2-jpg.jpg", points: ["Punch Defenses", "Punch Combinations", "Punch Counters", "Roundhouse Kicks"] },
-    { title: "Week 03", days: "DAYS 15 - 21 : BEYOND THE HANDS", image: "https://i.postimg.cc/0Nvf8qjn/Week-3-jpg.jpg", points: ["Push Kicks", "Switch Kick", "Kick Defenses", "Punch-Kick Combinations"] },
-    { title: "Week 04", days: "DAYS 22 - 28 : Expanding Your Arsenal", image: "https://i.postimg.cc/jjTXsr2X/Week-4-jpg.jpg", points: ["Kick Counters", "Knees & Elbows", "Advanced Combinations", "Structured Shadowboxing"] },
-    { title: "Week 05", days: "DAYS 29 - 30 : PUTTING IT ALL TOGETHER", image: "https://i.postimg.cc/bvPTzjrm/Week-5-jpg.jpg", points: ["Complete Striking Integration", "Shadowboxing Fundamentals", "Developing Flow", "Independent Training"] },
+  const painVid = extractVideoId(p.painVideoUrl || "79xvYiiBFfk");
+  const testimonialVid = extractVideoId(p.testimonialVideoUrl || "4Z8PSdk6Ak0");
+
+  const painPoints = p.painPoints?.length ? p.painPoints : [
+    "Don't know where to begin",
+    "Don't have access to a quality MMA gym",
+    "Don't have a training partner or equipment",
+    "Can't commit hours every day to training",
+    "Can't find structured MMA guidance in Tamil",
   ];
 
-  const coachCredentials = [
-    content.coach1Point1 || "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
-    content.coach1Point2 || "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
-    content.coach1Point3 || "Specialized in Developing Strong Fundamentals for Beginners",
+  const roadmapCards = p.roadmapCards?.length ? p.roadmapCards : defaultRoadmapCards;
+
+  const whatCards = p.whyCards?.length 
+    ? p.whyCards.map((c, i) => ({
+        icon: defaultWhatCards[i % defaultWhatCards.length].icon,
+        title: c.title,
+        desc: c.desc
+      }))
+    : defaultWhatCards;
+
+  const bonuses = p.bonuses?.length
+    ? p.bonuses.map((b, i) => ({
+        icon: defaultBonuses[i % defaultBonuses.length].icon,
+        title: b.title,
+        desc: b.desc
+      }))
+    : defaultBonuses;
+
+  const coachCredentials = p.coachCreds?.length ? p.coachCreds : [
+    "Only Tamil MMA Fighter in MFN and Multiple-Time National Medalist",
+    "Coached 2000+ Students, Including National Champions Across Multiple Disciplines",
+    "Specialized in Developing Strong Fundamentals for Beginners",
+  ];
+
+  const stats = p.stats?.length ? p.stats : [
+    { val: "2,000+", label: "Clients Coached" },
+    { val: "10+", label: "Years Experience" },
+    { val: "20+", label: "MMA Fights" },
+    { val: "10K+", label: "AOF Community" },
+  ];
+
+  const ctaFeatures = p.ctaFeatures?.length ? p.ctaFeatures : [
+    "Complete 30-Day MMA Striking Roadmap",
+    "Direct Coach Support & Technique Feedback",
+    "Train From Home In Just 30-40 Minutes A Day",
+    "Conditional Refund Policy"
   ];
 
   const maxRoadmapIndex = isMobileView ? roadmapCards.length - 1 : roadmapCards.length - 2;
@@ -472,7 +515,7 @@ export default function ProgramPage() {
             className="h-9 px-4 md:px-6 rounded-md bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[15px] md:text-[17px] tracking-[2px] border-none cursor-pointer hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(7,180,186,0.5)] transition-all duration-300"
             onClick={handlePayment}
           >
-            JOIN NOW
+            {p.heroBtnText || "JOIN NOW"}
           </button>
         </div>
       </nav>
@@ -486,7 +529,7 @@ export default function ProgramPage() {
         ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; }}
       >
         <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
-          <div className="absolute inset-0 z-0 bg-center bg-cover opacity-0 animate-subtle-pan" style={{ backgroundImage: "url('/images/Program page Hero.jpeg')" }} />
+          <div className="absolute inset-0 z-0 bg-center bg-cover opacity-0 animate-subtle-pan" style={{ backgroundImage: `url('${p.heroBgImage || "/images/Program page Hero.jpeg"}')` }} />
           <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/30 to-transparent" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/20 to-[#06080c] md:via-[#06080c]/20" />
@@ -495,17 +538,29 @@ export default function ProgramPage() {
           <div className="w-full relative z-10" style={GUTTER}>
             <Reveal type="fade-down" delay={200} duration={1200}>
               <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase mb-3 md:mb-4 drop-shadow-[0_0_8px_rgba(7,180,186,0.3)]">
-                {content.programPageHeroTitle || "AOF 30-Day Online Program"}
+                {p.heroTagline || "AOF 30-Day Online Program"}
               </p>
             </Reveal>
             <Reveal type="fade-right" delay={400} duration={1200}>
               <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5">
-                BUILD REAL<br /><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.2)]">MMA STRIKING</span><br />FUNDAMENTALS
+                {p.heroTitle ? (
+                  p.heroTitle.includes("MMA STRIKING") ? (
+                    <>
+                      {p.heroTitle.split("MMA STRIKING")[0]}
+                      <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.2)]">MMA STRIKING</span>
+                      {p.heroTitle.split("MMA STRIKING")[1]}
+                    </>
+                  ) : (
+                    p.heroTitle
+                  )
+                ) : (
+                  <>BUILD REAL<br /><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.2)]">MMA STRIKING</span><br />FUNDAMENTALS</>
+                )}
               </h1>
             </Reveal>
             <Reveal type="fade-up" delay={600} duration={1200}>
               <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
-                {content.programPageHeroSubtitle || "A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before."}
+                {p.heroSubtitle || "A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before."}
               </p>
             </Reveal>
 
@@ -514,7 +569,7 @@ export default function ProgramPage() {
                 className="btn-glow inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer"
                 onClick={handlePayment}
               >
-                JOIN NOW
+                {p.heroBtnText || "JOIN NOW"}
               </button>
             </Reveal>
           </div>
@@ -525,15 +580,15 @@ export default function ProgramPage() {
           <div className="w-full flex items-center justify-between md:justify-start gap-0">
             <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={100} duration={800}>
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconShieldW /></div>
-              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Proven System</span>
+              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">{p.trust1 || "Proven System"}</span>
             </Reveal>
             <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={250} duration={800}>
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
-              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Tamil Team</span>
+              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">{p.trust2 || "Tamil Team"}</span>
             </Reveal>
             <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={400} duration={800}>
               <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
-              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">Real Results</span>
+              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">{p.trust3 || "Real Results"}</span>
             </Reveal>
           </div>
         </div>
@@ -545,14 +600,14 @@ export default function ProgramPage() {
           <div className="flex-1 w-full md:max-w-[500px] md:order-2">
             <Reveal type="fade-left" duration={1200}>
               <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
-                5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION
+                {p.painTitle || "5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION"}
               </h3>
               <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                 <div className="relative w-full aspect-video group">
                   <iframe
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src="https://www.youtube.com/embed/79xvYiiBFfk?autoplay=1&mute=1&loop=1&playlist=79xvYiiBFfk&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1"
+                    src={`https://www.youtube.com/embed/${painVid}?autoplay=1&mute=1&loop=1&playlist=${painVid}&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1`}
                     title="AOF Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -574,17 +629,33 @@ export default function ProgramPage() {
           </div>
           <div className="flex-1 w-full md:min-w-[260px] md:order-1">
             <Reveal type="fade-right" duration={1000}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">Sounds Familiar?</p>
-              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
+                {p.painTagline || "Sounds Familiar?"}
+              </p>
+              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4 whitespace-pre-line">
+                {p.painSubheading ? (
+                  p.painSubheading.includes("HAVEN'T STARTED") ? (
+                    <>
+                      {p.painSubheading.split("HAVEN'T STARTED")[0]}
+                      <span className="text-[#FF0000]">HAVEN'T STARTED </span>
+                      {p.painSubheading.split("HAVEN'T STARTED")[1]}
+                    </>
+                  ) : (
+                    p.painSubheading
+                  )
+                ) : (
+                  <>
+                    YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
+                  </>
+                )}
               </h2>
               <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
             </Reveal>
-            {painPoints.map((p, i) => (
+            {painPoints.map((point, i) => (
               <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
                 <div className="flex items-start gap-4 mb-3">
                   <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{p}</p>
+                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{point}</p>
                 </div>
               </Reveal>
             ))}
@@ -601,7 +672,7 @@ export default function ProgramPage() {
             <div className="hidden md:block flex-1 w-full md:max-w-[500px]">
               <Reveal type="fade-right" duration={1200}>
                 <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10 premium-hover shadow-[0_0_30px_rgba(7,180,186,0.1)]">
-                  <img src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center image-hover-zoom" />
+                  <img src={p.introImage || "https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg"} alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center image-hover-zoom" />
                 </div>
               </Reveal>
             </div>
@@ -610,10 +681,23 @@ export default function ProgramPage() {
             <div className="flex-1 w-full md:min-w-[260px]">
               <Reveal type="fade-left" duration={1000}>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
-                  Introducing AOF 30-Day Program
+                  {p.introTagline || "Introducing AOF 30-Day Program"}
                 </p>
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4">
-                  THE STARTING POINT <br /> <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
+                  {p.introHeading ? (
+                    p.introHeading.includes("YOU'VE BEEN LOOKING FOR") ? (
+                      <>
+                        {p.introHeading.split("YOU'VE BEEN LOOKING FOR")[0]}
+                        <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
+                      </>
+                    ) : (
+                      p.introHeading
+                    )
+                  ) : (
+                    <>
+                      THE STARTING POINT <br /> <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
+                    </>
+                  )}
                 </h2>
               </Reveal>
 
@@ -621,7 +705,7 @@ export default function ProgramPage() {
               <div className="block md:hidden w-full mb-6">
                 <Reveal type="fade-right" duration={1200}>
                   <div className="relative aspect-video w-full rounded-[14px] overflow-hidden border border-white/10 premium-hover shadow-[0_0_30px_rgba(7,180,186,0.1)]">
-                    <img src="https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg" alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center image-hover-zoom" />
+                    <img src={p.introImage || "https://i.postimg.cc/kMyztfKs/Program-Intro-jpg.jpg"} alt="AOF Program Intro" className="absolute inset-0 w-full h-full object-cover object-center image-hover-zoom" />
                   </div>
                 </Reveal>
               </div>
@@ -629,12 +713,12 @@ export default function ProgramPage() {
               <div className="flex flex-col gap-4">
                 <Reveal type="fade-up" delay={200} duration={800}>
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/70 leading-[1.75]">
-                    {content.introText || "The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible. Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day."}
+                    {p.introText1 || "The AOF 30-Day MMA Striking Program was built to make learning MMA simple, structured, and accessible. Train from home, follow a proven roadmap, receive direct support from coaches, and develop real striking fundamentals without needing a gym, training partner, or hours of free time every day."}
                   </p>
                 </Reveal>
                 <Reveal type="fade-up" delay={400} duration={800}>
                   <p className="font-['Barlow'] text-[14px] md:text-[15px] text-white/60 leading-[1.75]">
-                    We've built the roadmap. You just need to follow it.
+                    {p.introText2 || "We've built the roadmap. You just need to follow it."}
                   </p>
                 </Reveal>
               </div>
@@ -647,8 +731,23 @@ export default function ProgramPage() {
       <section className="relative overflow-hidden bg-[#0b0b0b]" style={{ backgroundImage: "linear-gradient(rgba(7,180,186,.07) 1px,transparent .4px),linear-gradient(90deg,rgba(7,180,186,.07) 1px,transparent .4px)", backgroundSize: "30px 30px" }}>
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
-            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">WHY THIS PROGRAM WORKS?</p>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS  </span></h2>
+            <p className="text-center text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">
+              {p.whyTagline || "WHY THIS PROGRAM WORKS?"}
+            </p>
+            <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] text-white text-center leading-none mb-8 md:mb-12">
+              {p.whyHeading ? (
+                p.whyHeading.includes("CHALLENGES OF BEGINNERS") ? (
+                  <>
+                    {p.whyHeading.split("CHALLENGES OF BEGINNERS")[0]}
+                    <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS </span>
+                  </>
+                ) : (
+                  p.whyHeading
+                )
+              ) : (
+                <>BUILT AROUND THE REAL <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">CHALLENGES OF BEGINNERS </span></>
+              )}
+            </h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-[16px]">
             {whatCards.map((item, i) => (
@@ -672,9 +771,26 @@ export default function ProgramPage() {
           
           <div className="text-center mb-7 md:mb-12" style={GUTTER}>
             <Reveal type="fade-down" duration={1000}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">THE AOF BLUEPRINT</p>
-              <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white"><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">A CLEARPATH </span>TO MMA STRIKING.</h2>
-              <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques.</p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[3px] md:tracking-[4px] uppercase mb-2 md:mb-3">
+                {p.roadmapTagline || "THE AOF BLUEPRINT"}
+              </p>
+              <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">
+                {p.roadmapHeading ? (
+                  p.roadmapHeading.includes("A CLEARPATH") ? (
+                    <>
+                      <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">A CLEARPATH </span>
+                      {p.roadmapHeading.replace("A CLEARPATH", "")}
+                    </>
+                  ) : (
+                    p.roadmapHeading
+                  )
+                ) : (
+                  <><span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">A CLEARPATH </span>TO MMA STRIKING.</>
+                )}
+              </h2>
+              <p className="mt-3 md:mt-4 text-white/60 text-[14px] md:text-[15px] font-['Barlow']">
+                {p.roadmapSubtitle || "Follow a structured progression designed to take you from complete beginner to confidently performing fundamental MMA striking techniques."}
+              </p>
             </Reveal>
           </div>
 
@@ -700,11 +816,11 @@ export default function ProgramPage() {
             {/* Slider Container */}
             <div className="relative w-full overflow-visible md:overflow-hidden" style={GUTTER}>
               <button 
-                onClick={() => setRoadmapIndex(p => Math.max(0, p - 1))} 
+                onClick={() => setRoadmapIndex(prev => Math.max(0, prev - 1))} 
                 className={`absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:-translate-x-1 transition-all duration-300 ${roadmapIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >‹</button>
               <button 
-                onClick={() => setRoadmapIndex(p => Math.min(maxRoadmapIndex, p + 1))} 
+                onClick={() => setRoadmapIndex(prev => Math.min(maxRoadmapIndex, prev + 1))} 
                 className={`absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-12 md:h-12 bg-[#0d1117] border border-white/10 rounded-[8px] md:rounded-[12px] flex items-center justify-center text-white/70 text-lg md:text-2xl cursor-pointer hover:text-white hover:border-[#07b4ba]/50 hover:shadow-[0_0_15px_rgba(7,180,186,0.3)] hover:translate-x-1 transition-all duration-300 ${roadmapIndex === maxRoadmapIndex ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               >›</button>
 
@@ -751,14 +867,13 @@ export default function ProgramPage() {
                   {/* Desktop Title & Text */}
                   <h3 className="hidden md:block text-white/90 font-['Bebas_Neue'] text-[20px] tracking-[1px] leading-none mb-1.5">MORE THAN JUST THE TECHNICAL SESSIONS</h3>
                   <p className="hidden md:block text-[#07b4ba] font-['Barlow'] text-[14px] leading-[1.4] m-0">
-                    Every week includes Movement Fundamentals and White Belt Mentality sessions,
-                    along with access to the Mistake Library. Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program.
+                    {p.roadmapFootnote || "Every week includes Movement Fundamentals and White Belt Mentality sessions, along with access to the Mistake Library. Technique Cue Cards and Warm-Up & Cooldown Guide support your learning throughout the program."}
                   </p>
                   
                   {/* Mobile Title & Text */}
                   <p className="md:hidden text-[#07b4ba] font-['Barlow'] font-bold text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">MORE THAN JUST TECHNICAL SESSIONS</p>
                   <p className="md:hidden font-['Barlow'] text-[13.5px] text-white/65 leading-[1.65] m-0">
-                    Includes mindset coaching, movement training, and many exclusive bonus learning resources.
+                    {p.roadmapFootnote || "Includes mindset coaching, movement training, and many exclusive bonus learning resources."}
                   </p>
                 </div>
               </div>
@@ -769,11 +884,13 @@ export default function ProgramPage() {
           <div className="w-full mt-12 md:mt-16" style={GUTTER}>
             <div className="w-full mx-auto text-center px-5 md:px-10 py-7 md:py-8">
               <Reveal type="fade-up" duration={800}>
-                <p className="font-['Bebas_Neue'] text-[26px] md:text-[30px] tracking-[2px] text-white mb-3">Our Promise</p>
+                <p className="font-['Bebas_Neue'] text-[26px] md:text-[30px] tracking-[2px] text-white mb-3">
+                  {p.promiseHeading || "Our Promise"}
+                </p>
                 <div className="w-[70px] h-0.5 bg-[#07b4ba] mx-auto mb-5 rounded-full" />
                 <p className="font-['Barlow'] text-[14px] md:text-[19px] leading-[1.85] md:leading-[1.9] text-white/75 italic">
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-2.5">"</span>
-                  In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and shadowbox confidently on your own.Commit to the process, and we'll show you the path.
+                  {p.promiseQuote || "In 30 days, our goal is simple: Take you from knowing nothing about MMA striking to performing fundamental techniques correctly and shadowbox confidently on your own.Commit to the process, and we'll show you the path."}
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-2.5">"</span>
                 </p>
               </Reveal>
@@ -783,7 +900,7 @@ export default function ProgramPage() {
                 className="w-full py-4 bg-transparent border-none cursor-pointer text-white font-['Bebas_Neue'] text-[20px] tracking-[3px] transition-all duration-300 hover:bg-white hover:text-[#07b4ba] hover:tracking-[5px] active:bg-white active:text-[#07b4ba]"
                 onClick={handlePayment}
               >
-                Join Now
+                {p.promiseBtnText || "Join Now"}
               </button>
             </div>
           </div>
@@ -794,13 +911,15 @@ export default function ProgramPage() {
       <div className="bg-[#0f1115]">
         <div className={`w-full py-10 md:py-12 pb-8 md:pb-10 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
-            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6 text-center md:text-left">LED BY</p>
+            <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] md:text-[17px] tracking-[2px] uppercase mb-5 md:mb-6 text-center md:text-left">
+              {p.coachTagline || "LED BY"}
+            </p>
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-14 items-center md:items-start flex-wrap">
             <Reveal type="fade-right" duration={1200}>
               <img
-                src={content.coach1Image || "https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"}
-                alt={content.coach1Name || "Head Coach"}
+                src={p.coachImage || "https://i.postimg.cc/dV05DLwc/IMG-20260628-WA0108.jpg"}
+                alt={p.coachName || "Head Coach"}
                 className="w-full md:w-[240px] h-[220px] md:h-[300px] object-cover object-top rounded-xl border border-[#07b4ba]/30 shrink-0 mx-auto md:mx-0 premium-hover"
                 style={{
                   boxShadow:
@@ -811,10 +930,10 @@ export default function ProgramPage() {
             <div className="flex-1 w-full md:min-w-[280px] flex flex-col items-center md:items-start text-center md:text-left">
               <Reveal type="fade-left" delay={100} duration={1000} className="w-full">
                 <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[48px] tracking-[2px] text-white mb-1">
-                  {content.coach1Name || "Purushothaman MK"}
+                  {p.coachName || "Purushothaman MK"}
                 </h2>
                 <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[14px] tracking-[2px] md:tracking-[3px] uppercase mb-4 md:mb-5">
-                  {content.coach1Title || "Head Coach and MMA Fighter"}
+                  {p.coachTitle || "Head Coach and MMA Fighter"}
                 </p>
               </Reveal>
               <div className="mb-5 md:mb-6 flex flex-col items-center md:items-start w-full">
@@ -849,11 +968,26 @@ export default function ProgramPage() {
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
           <Reveal type="fade-down" duration={1000}>
             <div className="text-center mb-8 md:mb-11">
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase">FROM OUR FIRST BATCH</p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase">
+                {p.testimonialTagline || "FROM OUR FIRST BATCH"}
+              </p>
               <h2 className="font-['Bebas_Neue'] text-[clamp(28px,7vw,60px)] tracking-[2px] md:tracking-[3px] text-white mt-2 leading-none">
-                WHAT HAPPENED  <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">AFTER 30 DAYS</span>
+                {p.testimonialHeading ? (
+                  p.testimonialHeading.includes("AFTER 30 DAYS") ? (
+                    <>
+                      {p.testimonialHeading.split("AFTER 30 DAYS")[0]}
+                      <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">AFTER 30 DAYS</span>
+                    </>
+                  ) : (
+                    p.testimonialHeading
+                  )
+                ) : (
+                  <>WHAT HAPPENED  <span className="text-[#07b4ba] drop-shadow-[0_0_15px_rgba(7,180,186,0.15)]">AFTER 30 DAYS</span></>
+                )}
               </h2>
-              <p className="text-white/40 mt-2 text-[13px] md:text-[15px]">Hear directly from people who completed the AOF 30-Day MMA Striking Program</p>
+              <p className="text-white/40 mt-2 text-[13px] md:text-[15px]">
+                {p.testimonialSubheading || "Hear directly from people who completed the AOF 30-Day MMA Striking Program"}
+              </p>
             </div>
           </Reveal>
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center mb-8 md:mb-10 flex-wrap">
@@ -865,7 +999,7 @@ export default function ProgramPage() {
                   <iframe
                     ref={testimonialVideoRef}
                     className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src={isTestimonialInView ? "https://www.youtube.com/embed/4Z8PSdk6Ak0?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1" : ""}
+                    src={isTestimonialInView ? `https://www.youtube.com/embed/${testimonialVid}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1` : ""}
                     title="AOF 30-Day Batch Student Results"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -888,13 +1022,26 @@ export default function ProgramPage() {
               <Reveal type="fade-left" delay={200} duration={1000}>
                 <h3 className="font-['Bebas_Neue'] text-[clamp(24px,6vw,42px)] tracking-[1.5px] leading-[1.1] mb-4 text-white">
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none mr-1.5 font-serif relative top-0">"</span>
-                  The More I Progressed,<span className="text-[#07b4ba]">The More I Wanted To Train</span>
+                  {p.testimonialQuote ? (
+                    p.testimonialQuote.includes("The More I Wanted To Train") ? (
+                      <>
+                        {p.testimonialQuote.split("The More I Wanted To Train")[0]}
+                        <span className="text-[#07b4ba]">The More I Wanted To Train</span>
+                      </>
+                    ) : (
+                      p.testimonialQuote
+                    )
+                  ) : (
+                    <>The More I Progressed,<span className="text-[#07b4ba]">The More I Wanted To Train</span></>
+                  )}
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-0">"</span>
                 </h3>
                 <p className="text-white/65 text-[14px] md:text-[15px] leading-[1.75]">
-                  I started with doubts and made mistakes. But as I progressed through the program my technique improved and my confidence grew. I even found myself drilling techniques whenever I had free time.
+                  {p.testimonialText || "I started with doubts and made mistakes. But as I progressed through the program my technique improved and my confidence grew. I even found myself drilling techniques whenever I had free time."}
                 </p>
-                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">— Palanippan, AOF 30 Days Program Member.</p>
+                <p className="mt-3 md:mt-3.5 text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px]">
+                  — {p.testimonialAuthor || "Palanippan, AOF 30 Days Program Member."}
+                </p>
               </Reveal>
             </div>
           </div>
@@ -907,28 +1054,37 @@ export default function ProgramPage() {
         <div className="w-full py-10 md:py-12" style={GUTTER}>
           <Reveal type="fade-down" duration={1000}>
             <div className="text-center mb-8 md:mb-10">
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase mb-2 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">BEYOND THE CORE PROGRAM</p>
+              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[3px] uppercase mb-2 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">
+                {p.bonusTagline || "BEYOND THE CORE PROGRAM"}
+              </p>
               <h2 className="font-['Bebas_Neue'] text-[clamp(26px,7vw,60px)] leading-[.95] tracking-[2px] md:tracking-[3px] text-white">
-                EVERYTHING DESIGNED TO<span className="text-[#07b4ba]"> HELP YOU SUCCEED</span>
+                {p.bonusHeading ? (
+                  p.bonusHeading.includes("HELP YOU SUCCEED") ? (
+                    <>
+                      {p.bonusHeading.split("HELP YOU SUCCEED")[0]}
+                      <span className="text-[#07b4ba]">HELP YOU SUCCEED</span>
+                    </>
+                  ) : (
+                    p.bonusHeading
+                  )
+                ) : (
+                  <>EVERYTHING DESIGNED TO<span className="text-[#07b4ba]"> HELP YOU SUCCEED</span></>
+                )}
               </h2>
-              <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">Enroll now and receive exclusive bonus resources designed to maximize your results.</p>
+              <p className="text-white/50 mt-2 text-[13px] md:text-[15px]">
+                {p.bonusSubtitle || "Enroll now and receive exclusive bonus resources designed to maximize your results."}
+              </p>
             </div>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-2">
-            {[
-              { icon: <IconStretch />, title: "MOVEMENT FUNDAMENTALS", desc: "4 guided modules to improve your mobility, balance, coordination, and body control." },
-              { icon: <IconBrain />, title: "WHITE BELT MENTALITY", desc: "4 lessons to help beginners train smarter, stay consistent, and avoid common mistakes." },
-              { icon: <IconSearch />, title: "THE MISTAKE LIBRARY", desc: "50+ side-by-side corrections showing common mistakes and how to fix them." },
-              { icon: <IconFlashcards />, title: "TECHNIQUE CUE CARDS", desc: "Simple visual references designed to help you remember key techniques faster." },
-              { icon: <IconStopwatch />, title: "Warm Up & Cool Down Guide", desc: "Prepare your body before training and recover properly after every session." },
-            ].map((item, i) => (
+            {bonuses.map((item, i) => (
               <Reveal key={i} type="scale-up" delay={i * 120} duration={800}>
                 <div className={`bg-gradient-to-b from-[#0f1115] to-[#0a0f14] border border-[#07b4ba]/30 rounded-[16px] md:rounded-[18px] p-5 md:p-4 relative overflow-hidden min-h-min md:min-h-[220px] flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-5 md:gap-0 premium-hover ${i === 4 ? "col-span-1 md:col-span-2 lg:col-span-1" : ""}`}>
                   <div className="absolute top-0 right-0 md:top-3 md:left-3 md:right-auto bg-[#07b4ba] text-[#111] font-['Bebas_Neue'] text-[12px] md:text-[14px] tracking-[1px] px-2.5 py-1.5 md:py-0.5 rounded-bl-[10px] md:rounded-none md:rounded-[5px] leading-none">#{i + 1}</div>
                   <div className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center mb-0 mt-0 md:mb-2 md:mt-4 shrink-0 transition-transform duration-500 hover:scale-110">{item.icon}</div>
                   <div className="flex flex-col items-start md:items-center w-full mt-0 md:mt-0">
                     <h3 className="font-['Bebas_Neue'] text-[16px] md:text-[18px] leading-[1.1] tracking-[1px] md:tracking-[1.5px] text-white mb-2 md:mb-1.5">{item.title}</h3>
-                    <p className="font-['Barlow'] text-[13px] md:text-[14px]text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
+                    <p className="font-['Barlow'] text-[13px] md:text-[14px] text-white/60 leading-[1.55] px-0 md:px-1 m-0">{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -940,7 +1096,9 @@ export default function ProgramPage() {
                 <img src="https://i.postimg.cc/pr1bYVdc/Chat-GPT-Image-May-22-2026-12-03-35-AM.png" alt="Gift Box" className="w-[55px] h-[55px] md:w-[70px] md:h-[70px] object-contain drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] animate-float" />
                 <div>
                   <p className="text-white/45 text-[11px] md:text-[12px] tracking-[2px] uppercase mb-1 leading-none">BONUSES WORTH </p>
-                  <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] shimmer-text">₹2,999</h2>
+                  <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] leading-none tracking-[2px] shimmer-text">
+                    {p.bonusWorth || "₹2,999"}
+                  </h2>
                 </div>
               </div>
               <div className="pl-4 md:pl-5 border-l border-white/10 flex flex-col justify-center">
@@ -958,19 +1116,27 @@ export default function ProgramPage() {
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center lg:items-start w-full">
             <div className="w-full lg:flex-1 max-w-2xl mx-auto">
               <Reveal type="fade-right" duration={1000}>
-                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">Ready To Start?</p>
+                <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">
+                  {p.ctaTagline || "Ready To Start?"}
+                </p>
                 <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 text-white">
-                  DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK</span>
+                  {p.ctaHeading ? (
+                    p.ctaHeading.includes("MONTH FEELING STUCK") ? (
+                      <>
+                        {p.ctaHeading.split("MONTH FEELING STUCK")[0]}
+                        <span className="text-[#07b4ba]">MONTH FEELING STUCK</span>
+                      </>
+                    ) : (
+                      p.ctaHeading
+                    )
+                  ) : (
+                    <>DON'T SPEND ANOTHER<br /><span className="text-[#07b4ba]">MONTH FEELING STUCK</span></>
+                  )}
                 </h2>
                 <p className="text-white/50 text-[14px] md:text-[14px] leading-[1.7] mb-5 md:mb-7 max-w-[380px]">
-                  No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day.
+                  {p.ctaDesc || "No gym. No training partner. No confusion. Just a clear roadmap, proper guidance , and 30–40 minutes a day."}
                 </p>
-                {[
-                  content.programFeature1 || "Complete 30-Day MMA Striking Roadmap", 
-                  content.programFeature2 || "Direct Coach Support & Technique Feedback", 
-                  content.programFeature3 || "Train From Home In Just 30-40 Minutes A Day", 
-                  "Conditional Refund Policy"
-                ].map((item, i) => (
+                {ctaFeatures.map((item, i) => (
                   <Reveal key={i} type="fade-up" delay={i * 150} duration={800} className="flex items-start gap-2.5 mb-3">
                     <span className="text-[#07b4ba] text-[16px] shrink-0 mt-0.5">✓</span>
                     <p className="text-[14px] md:text-[16px] text-white leading-[1.55]">{item}</p>
@@ -986,8 +1152,12 @@ export default function ProgramPage() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">CONDITIONAL PROGRESS GUARANTEE</p>
-                      <p className="font-['Barlow'] text-[13.5px] md:text-[14px] text-white/65 leading-[1.65] m-0">Complete the program, submit your training work, and follow the process. If you don't achieve the promised outcome, we'll make it right.</p>
+                      <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[12px] tracking-[2px] uppercase mb-1.5 leading-none">
+                        {p.guaranteeTitle || "CONDITIONAL PROGRESS GUARANTEE"}
+                      </p>
+                      <p className="font-['Barlow'] text-[13.5px] md:text-[14px] text-white/65 leading-[1.65] m-0">
+                        {p.guaranteeText || "Complete the program, submit your training work, and follow the process. If you don't achieve the promised outcome, we'll make it right."}
+                      </p>
                     </div>
                   </div>
                 </Reveal>
@@ -999,34 +1169,54 @@ export default function ProgramPage() {
               <Reveal type="scale-up" delay={300} duration={1200}>
                 <div className="bg-[#05070b] border border-[#07b4ba]/30 rounded-2xl px-4 pb-7 pt-[90px] md:px-10 md:pb-10 md:pt-[90px] text-center relative overflow-hidden flex flex-col items-center w-[calc(100%+32px)] -ml-4 sm:w-full sm:ml-0 shadow-[0_0_40px_rgba(7,180,186,0.15)] premium-hover">
 
-                  {/* ── 50% OFF ANNIVERSARY RIBBON ── */}
+                  {/* ── ANNIVERSARY / OFFER RIBBON ── */}
                   <div className="absolute top-0 left-0 z-20 overflow-hidden rounded-tl-2xl" style={{ width: "190px", height: "190px", pointerEvents: "none" }}>
                     <div className="shimmer-ribbon" style={{ position: "absolute", top: "36px", left: "-65px", width: "280px", transform: "rotate(-45deg)", padding: "10px 0", textAlign: "center", boxShadow: "0 5px 15px rgba(0,0,0,0.5)" }}>
                       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "18px", letterSpacing: "1.5px", color: "#111", lineHeight: "1" }}>
-                        SAVE ₹1200
+                        {p.ribbonSaveText || "SAVE ₹1200"}
                       </div>
                       <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: "13px", fontWeight: 800, letterSpacing: "1px", color: "#111", textTransform: "uppercase", marginTop: "2px" }}>
-                        2Yrs of AOF Offer
+                        {p.ribbonOfferText || "2Yrs of AOF Offer"}
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 mt-4 md:mt-0 relative z-30 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">LIMITED TO 20 MEMBERS</p>
+                  <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[12px] md:text-[13px] tracking-[2px] md:tracking-[2.5px] uppercase mb-3 mt-4 md:mt-0 relative z-30 drop-shadow-[0_0_5px_rgba(7,180,186,0.3)]">
+                    {p.membersLimitText || "LIMITED TO 20 MEMBERS"}
+                  </p>
                   <h2 className="font-['Bebas_Neue'] text-[clamp(30px,8vw,54px)] tracking-[2px] leading-none mb-4 md:mb-5 text-white">
-                    START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span>
+                    {p.ctaCardHeading ? (
+                      p.ctaCardHeading.includes("MMA JOURNEY") ? (
+                        <>
+                          {p.ctaCardHeading.split("MMA JOURNEY")[0]}
+                          <span className="text-[#07b4ba]">MMA JOURNEY</span>
+                        </>
+                      ) : (
+                        p.ctaCardHeading
+                      )
+                    ) : (
+                      <>START YOUR<br /><span className="text-[#07b4ba]">MMA JOURNEY</span></>
+                    )}
                   </h2>
                   <div className="flex items-center justify-center gap-4 md:gap-5 mb-4 md:mb-5">
-                    <span className="font-['Bebas_Neue'] text-[32px] md:text-[32px] text-white/100 leading-none">
-                      {content.programDiscountPrice || "₹4,999"}
+                    {p.showOriginalPriceStrike && (
+                      <span className="text-xl md:text-2xl line-through text-zinc-500 font-bold font-['Bebas_Neue']">
+                        {p.originalPrice || "₹6,199"}
+                      </span>
+                    )}
+                    <span className="font-['Bebas_Neue'] text-[32px] md:text-[40px] text-white/100 leading-none">
+                      {p.priceDiscount || "₹4,999"}
                     </span>
                   </div>
                   <button
                     className="btn-glow w-full py-4 md:py-4 border-none rounded-xl bg-[#07b4ba] text-white font-['Bebas_Neue'] text-[24px] md:text-[26px] tracking-[2px] cursor-pointer"
                     onClick={handlePayment}
                   >
-                    JOIN THE NEXT BATCH
+                    {p.ctaBtnText || "JOIN THE NEXT BATCH"}
                   </button>
-                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">Batch 3 Starting 7th September</p>
+                  <p className="mt-3 md:mt-4 font-['Barlow'] text-[13px] md:text-[14px] leading-[1.7] text-white/70">
+                    {p.batchNotice || "Batch 3 Starting 7th September"}
+                  </p>
                   <div className="flex justify-center gap-2.5 md:gap-3 mt-4 md:mt-5">
                     {[
                       [timeLeft.days, "DAYS"],
@@ -1069,9 +1259,9 @@ export default function ProgramPage() {
           <div>
             <h3 className="font-['Bebas_Neue'] text-[22px] md:text-[24px] tracking-[1px] text-white pt-4 md:pt-5 mb-3">CONTACT</h3>
             <div className="flex flex-col gap-3 md:gap-4">
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contactPhone || "+91 93854 31051"}</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contactEmail || "info@artoffighting.in"}</p>
-              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contactAddress || "Chennai, Tamil Nadu, India"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contact.phone || "+91 93854 31051"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contact.email || "info@artoffighting.in"}</p>
+              <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px]">{content.contact.address || "Chennai, Tamil Nadu, India"}</p>
             </div>
           </div>
           <div>
@@ -1087,7 +1277,7 @@ export default function ProgramPage() {
               <span className="text-[#07b4ba]">A</span><span className="text-white">O</span><span className="text-[#07b4ba]">F</span>
             </h3>
             <p className="font-['Barlow'] text-white/50 text-[14px] md:text-[15px] leading-[1.8] max-w-[320px]">
-              {content.footerTagline || "Art of Fighting Academy — building champions through proven systems and disciplined training."}
+              {content.contact.footerTagline || "Art of Fighting Academy — building champions through proven systems and disciplined training."}
             </p>
           </div>
         </div>
