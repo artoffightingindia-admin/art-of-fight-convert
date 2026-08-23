@@ -121,6 +121,10 @@ export interface SiteContent {
     ctaCard2Title: string;
     ctaCard2Desc: string;
     ctaBottomText: string;
+    contactEyebrow: string;
+    contactHeadingMain: string;
+    contactHeadingAccent: string;
+    homeFaqs: FaqItem[];
     stickyAdText: string;
     stickyAdBtnText: string;
     stickyAdLink: string;
@@ -304,6 +308,41 @@ export const defaultContent: SiteContent = {
     ctaCard2Title: "30-Days Program",
     ctaCard2Desc: "Learn MMA online with a structured, beginner-friendly roadmap.",
     ctaBottomText: "Progress starts when you stop guessing and start training.",
+    contactEyebrow: "Got Questions?",
+    contactHeadingMain: "Frequently Asked",
+    contactHeadingAccent: "Questions",
+    homeFaqs: [
+      {
+        id: "1",
+        question: "What is AOF?",
+        answer: "AOF is a coaching platform focused on helping people build real fighting skills, fitness, discipline, and confidence through structured training systems."
+      },
+      {
+        id: "2",
+        question: "Which program is right for me?",
+        answer: "Choose the 30-Day Program if you want a structured online system. Choose 1-on-1 Coaching if you want personalized guidance and direct coach support."
+      },
+      {
+        id: "3",
+        question: "Do I need prior MMA experience?",
+        answer: "No. Both beginners and experienced athletes can benefit from our programs."
+      },
+      {
+        id: "4",
+        question: "Can I train from home?",
+        answer: "Yes. Our programs are designed to be practical and accessible, even if you don't train at a gym every day."
+      },
+      {
+        id: "5",
+        question: "Will I receive coach support?",
+        answer: "Yes. The level of support depends on the program you choose, with 1-on-1 Coaching offering the most direct guidance."
+      },
+      {
+        id: "6",
+        question: "How do I get started?",
+        answer: "Simply explore the program that best fits your goals and follow the enrollment process on the next page."
+      }
+    ],
     stickyAdText: "Join the next AOF 30-Day Training Intake. Limited slots remaining!",
     stickyAdBtnText: "Enroll Now",
     stickyAdLink: "/program"
@@ -455,7 +494,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [content, setContent] = useState<SiteContent>(() => {
     try {
       const saved = localStorage.getItem("aof_master_cms_v7");
-      return saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
+      return saved ? JSON.parse(saved) : defaultContent;
     } catch {
       return defaultContent;
     }
@@ -569,7 +608,6 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       contact: { ...content.contact, ...(newContent.contact || {}) },
     };
 
-    // Instant local UI state reflection
     setContent(updated);
     try {
       localStorage.setItem("aof_master_cms_v7", JSON.stringify(updated));
@@ -577,7 +615,6 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       console.error("Storage error:", err);
     }
 
-    // Persist to Supabase
     try {
       const { error } = await supabase
         .from("site_config")
