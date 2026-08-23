@@ -1,55 +1,87 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-const services = [
-  {
-    title: "1-ON-1 HOME TRANSFORMATION",
-    desc: "A fully customized coaching experience combining MMA training, fitness, nutrition, accountability, and lifestyle guidance.",
-    bullets: [
-      "Personalized Coaching",
-      "Tailored to your goal",
-      "Built Around Your Lifestyle",
-    ],
-    cta: "START YOUR TRANSFORMATION (COMING SOON)",
-    badge: "Most Personalized",
-    route: null, // No route yet
-  },
-  {
-    title: "30-DAY MMA STRIKING PROGRAM",
-    desc: "A structured online coaching experience designed to help beginners learn MMA striking fundamentals from home with confidence.",
-    bullets: [
-      "Step-by-step roadmap",
-      "Learn at your own pace",
-      "Coach feedback included",
-    ],
-    cta: "SEE HOW IT WORKS",
-    badge: "BEST FOR SELF-LEARNERS",
-    route: "/program", // Added the route here
-  },
-];
+import { useCms } from "@/context/CmsContext";
 
 const ServicesSection = () => {
   const navigate = useNavigate();
+  const { content } = useCms();
+  const c = content.home;
+
+  const defaultCard1Points = [
+    "Personalized Coaching",
+    "Tailored to your goal",
+    "Built Around Your Lifestyle",
+  ];
+
+  const defaultCard2Points = [
+    "Step-by-step roadmap",
+    "Learn at your own pace",
+    "Coach feedback included",
+  ];
+
+  const card1Points = c.card1Points?.length ? c.card1Points : defaultCard1Points;
+  const card2Points = c.card2Points?.length ? c.card2Points : defaultCard2Points;
+
+  const services = [
+    {
+      title: c.card1Title || "1-ON-1 HOME TRANSFORMATION",
+      desc:
+        c.card1Desc ||
+        "A fully customized coaching experience combining MMA training, fitness, nutrition, accountability, and lifestyle guidance.",
+      bullets: card1Points,
+      cta: c.card1BtnText || "START YOUR TRANSFORMATION (COMING SOON)",
+      badge: c.card1Badge || "Most Personalized",
+      route: null, // Disabled until mentorship intake opens
+    },
+    {
+      title: c.card2Title || "30-DAY MMA STRIKING PROGRAM",
+      desc:
+        c.card2Desc ||
+        "A structured online coaching experience designed to help beginners learn MMA striking fundamentals from home with confidence.",
+      bullets: card2Points,
+      cta: c.card2BtnText || "SEE HOW IT WORKS",
+      badge: c.card2Badge || "BEST FOR SELF-LEARNERS",
+      route: "/program",
+    },
+  ];
 
   return (
     <section id="programs" className="pt-4 pb-16 md:pt-6 md:pb-24 bg-card/50 texture-grid">
       <div className="container">
+        {/* Eyebrow */}
         <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[14px] tracking-[4px] uppercase mb-3 text-center">
-          CHOOSE YOUR PATH
+          {c.servicesTagline || "CHOOSE YOUR PATH"}
         </p>
+
+        {/* Main Heading */}
         <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-3">
-          TWO PATHS.
-          {/* This breaks the line on mobile, but disappears on desktop */}
-         
-          ONE GOAL.
-           <br className="md:hidden" />
-          <span className="text-[#07b4ba]"> REAL TRANSFORMATION. </span>
+          {c.servicesHeading ? (
+            c.servicesHeading.includes("REAL TRANSFORMATION") ? (
+              <>
+                {c.servicesHeading.replace("REAL TRANSFORMATION.", "").replace("REAL TRANSFORMATION", "")}
+                <br className="md:hidden" />
+                <span className="text-[#07b4ba]"> REAL TRANSFORMATION. </span>
+              </>
+            ) : (
+              c.servicesHeading
+            )
+          ) : (
+            <>
+              TWO PATHS. ONE GOAL.
+              <br className="md:hidden" />
+              <span className="text-[#07b4ba]"> REAL TRANSFORMATION. </span>
+            </>
+          )}
         </h2>
 
+        {/* Subtitle */}
         <p className="text-muted-foreground text-sm leading-relaxed text-center max-w-2xl mx-auto mb-10">
-          Choose the coaching experience that best matches your goals, schedule, and lifestyle.
+          {c.servicesSubtitle ||
+            "Choose the coaching experience that best matches your goals, schedule, and lifestyle."}
         </p>
+
+        {/* 2-Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {services.map((s, idx) => (
             <div
@@ -62,8 +94,10 @@ const ServicesSection = () => {
                   {s.badge}
                 </span>
               )}
+
               <h3 className="font-display text-3xl text-foreground">{s.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+
               <ul className="flex flex-col gap-3 w-full">
                 {s.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-3 text-sm text-foreground">
@@ -72,8 +106,9 @@ const ServicesSection = () => {
                   </li>
                 ))}
               </ul>
-              <Button 
-                className="font-semibold uppercase text-xs tracking-wide mt-auto w-full transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+
+              <Button
+                className="font-semibold uppercase text-xs tracking-wide mt-auto w-full transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
                 onClick={() => s.route && navigate(s.route)}
                 disabled={!s.route}
               >
