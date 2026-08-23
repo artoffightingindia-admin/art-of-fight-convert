@@ -478,15 +478,15 @@ export const defaultContent: SiteContent = {
 
 interface CmsContextType {
   content: SiteContent;
-  updateContent: (newContent: Partial<SiteContent>) => Promise<void>;
-  resetContent: () => Promise<void>;
+  updateContent: (newContent: Partial<SiteContent>) => void;
+  resetContent: () => void;
   isAuthModalOpen: boolean;
   setIsAuthModalOpen: (open: boolean) => void;
   isPanelOpen: boolean;
   setIsPanelOpen: (open: boolean) => void;
   isAuthenticated: boolean;
   login: (email: string, pass: string) => Promise<boolean>;
-  logout: () => Promise<void>;
+  logout: () => void;
 }
 
 const CmsContext = createContext<CmsContextType | undefined>(undefined);
@@ -505,7 +505,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-  // 1. Session listener and state sync with Supabase Auth
+  // 1. Session state listener via Supabase native Auth
   useEffect(() => {
     const checkSession = async () => {
       try {
@@ -525,7 +525,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => subscription.unsubscribe();
   }, []);
 
-  // 2. Fetch site config from Supabase on mount
+  // 2. Fetch site configuration from Supabase table on load
   useEffect(() => {
     const fetchRemoteConfig = async () => {
       try {
@@ -548,19 +548,19 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     fetchRemoteConfig();
   }, []);
 
-  // 3. Realtime listener for cross-device live updates
+  // 3. Realtime listener for instant updates across devices
   useEffect(() => {
     const channel = supabase
       .channel("site_config_live")
       .on(
-        "postgres_changes",
+        "postgres_changes" as any,
         {
           event: "UPDATE",
           schema: "public",
           table: "site_config",
           filter: "id=eq.aof_master_config",
         },
-        (payload) => {
+        (payload: any) => {
           if (payload.new && payload.new.data) {
             const remoteData = payload.new.data;
             setContent((prev) => ({ ...prev, ...remoteData }));
@@ -575,7 +575,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     };
   }, []);
 
-  // 4. Admin shortcut listener (Ctrl + Shift + Meta + A)
+  // 4. Admin shortcut (Ctrl + Shift + Meta + A)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.metaKey && (e.key === "A" || e.key === "a")) {
@@ -592,8 +592,8 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAuthenticated]);
 
-  // 5. Update content in local cache & Supabase
-  const updateContent = async (newContent: Partial<SiteContent>) => {
+  // 5. Update content in local cache and push to Supabase
+  const updateContent = (newContent: Partial<SiteContent>) => {
     const updated = { ...content, ...newContent };
     setContent(updated);
 
@@ -603,39 +603,40 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       console.error("Storage error:", err);
     }
 
-    try {
-      const { error } = await supabase
-        .from("site_config")
-        .upsert({
-          id: "aof_master_config",
-          data: updated,
-          updated_at: new Date().toISOString(),
-        });
-
-      if (error) throw error;
-    } catch (err) {
-      console.error("Supabase update error:", err);
-    }
+    supabase
+      .from("site_config")
+      .upsert({
+        id: "aof_master_config",
+        data: updated,
+        updated_at: new Date().toISOString(),
+      })
+      .then(({ error }) => {
+        if (error) console.error("Supabase update error:", error);
+      });
   };
 
-  // 6. Reset content to default values
-  const resetContent = async () => {
+  // 6. Reset content
+  const resetContent = () => {
     setContent(defaultContent);
     try {
       localStorage.removeItem("aof_master_cms_v7");
-      await supabase
-        .from("site_config")
-        .upsert({
-          id: "aof_master_config",
-          data: defaultContent,
-          updated_at: new Date().toISOString(),
-        });
     } catch (err) {
       console.error("Reset error:", err);
     }
+
+    supabase
+      .from("site_config")
+      .upsert({
+        id: "aof_master_config",
+        data: defaultContent,
+        updated_at: new Date().toISOString(),
+      })
+      .then(({ error }) => {
+        if (error) console.error("Reset error:", error);
+      });
   };
 
-  // 7. Dynamic Supabase Auth Login
+  // 7. Supabase Authentication Login
   const login = async (emailInput: string, passInput: string): Promise<boolean> => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -644,7 +645,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       });
 
       if (error || !data.user) {
-        console.error("Supabase authentication failed:", error?.message);
+        console.error("Supabase login failed:", error?.message);
         return false;
       }
 
@@ -653,18 +654,14 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setIsPanelOpen(true);
       return true;
     } catch (err) {
-      console.error("Supabase login error:", err);
+      console.error("Login error:", err);
       return false;
     }
   };
 
-  // 8. Supabase Auth Logout
-  const logout = async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch (err) {
-      console.error("Sign out error:", err);
-    }
+  // 8. Supabase Authentication Logout
+  const logout = () => {
+    supabase.auth.signOut().catch((err) => console.error("Signout error:", err));
     setIsAuthenticated(false);
     setIsPanelOpen(false);
   };
