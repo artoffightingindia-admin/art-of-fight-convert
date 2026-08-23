@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { supabase } from "@/lib/supabase";
 
 export interface TestimonialItem {
   id: string;
@@ -122,10 +121,6 @@ export interface SiteContent {
     ctaCard2Title: string;
     ctaCard2Desc: string;
     ctaBottomText: string;
-    contactEyebrow: string;
-    contactHeadingMain: string;
-    contactHeadingAccent: string;
-    homeFaqs: FaqItem[];
     stickyAdText: string;
     stickyAdBtnText: string;
     stickyAdLink: string;
@@ -309,41 +304,6 @@ export const defaultContent: SiteContent = {
     ctaCard2Title: "30-Days Program",
     ctaCard2Desc: "Learn MMA online with a structured, beginner-friendly roadmap.",
     ctaBottomText: "Progress starts when you stop guessing and start training.",
-    contactEyebrow: "Got Questions?",
-    contactHeadingMain: "Frequently Asked",
-    contactHeadingAccent: "Questions",
-    homeFaqs: [
-      {
-        id: "1",
-        question: "What is AOF?",
-        answer: "AOF is a coaching platform focused on helping people build real fighting skills, fitness, discipline, and confidence through structured training systems."
-      },
-      {
-        id: "2",
-        question: "Which program is right for me?",
-        answer: "Choose the 30-Day Program if you want a structured online system. Choose 1-on-1 Coaching if you want personalized guidance and direct coach support."
-      },
-      {
-        id: "3",
-        question: "Do I need prior MMA experience?",
-        answer: "No. Both beginners and experienced athletes can benefit from our programs."
-      },
-      {
-        id: "4",
-        question: "Can I train from home?",
-        answer: "Yes. Our programs are designed to be practical and accessible, even if you don't train at a gym every day."
-      },
-      {
-        id: "5",
-        question: "Will I receive coach support?",
-        answer: "Yes. The level of support depends on the program you choose, with 1-on-1 Coaching offering the most direct guidance."
-      },
-      {
-        id: "6",
-        question: "How do I get started?",
-        answer: "Simply explore the program that best fits your goals and follow the enrollment process on the next page."
-      }
-    ],
     stickyAdText: "Join the next AOF 30-Day Training Intake. Limited slots remaining!",
     stickyAdBtnText: "Enroll Now",
     stickyAdLink: "/program"
@@ -485,7 +445,7 @@ interface CmsContextType {
   isPanelOpen: boolean;
   setIsPanelOpen: (open: boolean) => void;
   isAuthenticated: boolean;
-  login: (email: string, pass: string) => Promise<boolean>;
+  login: (email: string, pass: string) => boolean;
   logout: () => void;
 }
 
@@ -494,88 +454,24 @@ const CmsContext = createContext<CmsContextType | undefined>(undefined);
 export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<SiteContent>(() => {
     try {
-      const saved = localStorage.getItem("aof_master_cms_v7");
+      const saved = localStorage.getItem("aof_master_cms_v6");
       return saved ? { ...defaultContent, ...JSON.parse(saved) } : defaultContent;
     } catch {
       return defaultContent;
     }
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem("aof_admin_auth") === "true";
+    } catch {
+      return false;
+    }
+  });
+
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-  // 1. Session state listener via Supabase native Auth
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        setIsAuthenticated(!!session);
-      } catch (err) {
-        console.error("Auth session check error:", err);
-      }
-    };
-
-    checkSession();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(!!session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  // 2. Fetch site configuration from Supabase table on load
-  useEffect(() => {
-    const fetchRemoteConfig = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("site_config")
-          .select("data")
-          .eq("id", "aof_master_config")
-          .single();
-
-        if (data && data.data && Object.keys(data.data).length > 0) {
-          const merged = { ...defaultContent, ...data.data };
-          setContent(merged);
-          localStorage.setItem("aof_master_cms_v7", JSON.stringify(merged));
-        }
-      } catch (err) {
-        console.error("Supabase load error:", err);
-      }
-    };
-
-    fetchRemoteConfig();
-  }, []);
-
-  // 3. Realtime listener for instant updates across devices
-  useEffect(() => {
-    const channel = supabase
-      .channel("site_config_live")
-      .on(
-        "postgres_changes" as any,
-        {
-          event: "UPDATE",
-          schema: "public",
-          table: "site_config",
-          filter: "id=eq.aof_master_config",
-        },
-        (payload: any) => {
-          if (payload.new && payload.new.data) {
-            const remoteData = payload.new.data;
-            setContent((prev) => ({ ...prev, ...remoteData }));
-            localStorage.setItem("aof_master_cms_v7", JSON.stringify(remoteData));
-          }
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
-
-  // 4. Admin shortcut (Ctrl + Shift + Meta + A)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.metaKey && (e.key === "A" || e.key === "a")) {
@@ -592,77 +488,47 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAuthenticated]);
 
-  // 5. Update content in local cache and push to Supabase
   const updateContent = (newContent: Partial<SiteContent>) => {
     const updated = { ...content, ...newContent };
     setContent(updated);
-
     try {
-      localStorage.setItem("aof_master_cms_v7", JSON.stringify(updated));
+      localStorage.setItem("aof_master_cms_v6", JSON.stringify(updated));
     } catch (err) {
       console.error("Storage error:", err);
     }
-
-    supabase
-      .from("site_config")
-      .upsert({
-        id: "aof_master_config",
-        data: updated,
-        updated_at: new Date().toISOString(),
-      })
-      .then(({ error }) => {
-        if (error) console.error("Supabase update error:", error);
-      });
   };
 
-  // 6. Reset content
   const resetContent = () => {
     setContent(defaultContent);
     try {
-      localStorage.removeItem("aof_master_cms_v7");
+      localStorage.removeItem("aof_master_cms_v6");
     } catch (err) {
-      console.error("Reset error:", err);
+      console.error("Storage error:", err);
     }
-
-    supabase
-      .from("site_config")
-      .upsert({
-        id: "aof_master_config",
-        data: defaultContent,
-        updated_at: new Date().toISOString(),
-      })
-      .then(({ error }) => {
-        if (error) console.error("Reset error:", error);
-      });
   };
 
-  // 7. Supabase Authentication Login
-  const login = async (emailInput: string, passInput: string): Promise<boolean> => {
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: emailInput.trim(),
-        password: passInput,
-      });
-
-      if (error || !data.user) {
-        console.error("Supabase login failed:", error?.message);
-        return false;
-      }
-
+  const login = (email: string, pass: string) => {
+    if (email === "artoffightinginfo@gmail.com" && pass === "AOFADMIN24") {
       setIsAuthenticated(true);
+      try {
+        sessionStorage.setItem("aof_admin_auth", "true");
+      } catch (err) {
+        console.error("Session error:", err);
+      }
       setIsAuthModalOpen(false);
       setIsPanelOpen(true);
       return true;
-    } catch (err) {
-      console.error("Login error:", err);
-      return false;
     }
+    return false;
   };
 
-  // 8. Supabase Authentication Logout
   const logout = () => {
-    supabase.auth.signOut().catch((err) => console.error("Signout error:", err));
     setIsAuthenticated(false);
+    try {
+      sessionStorage.removeItem("aof_admin_auth");
+    } catch (err) {
+      console.error("Session error:", err);
+    }
     setIsPanelOpen(false);
   };
 
@@ -678,7 +544,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setIsPanelOpen,
         isAuthenticated,
         login,
-        logout,
+        logout
       }}
     >
       {children}
