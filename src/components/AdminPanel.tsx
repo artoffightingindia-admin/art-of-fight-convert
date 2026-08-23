@@ -25,6 +25,7 @@ export const AdminPanel: React.FC = () => {
     | "home_coaches"
     | "home_videos"
     | "home_testimonials"
+    | "home_faqs"
     | "prog_hero_pain"
     | "prog_intro_why"
     | "prog_roadmap"
@@ -81,7 +82,6 @@ export const AdminPanel: React.FC = () => {
     }));
   };
 
-  // Helper for dynamic array item shifts (Card positioning)
   const moveArrayItem = (list: any[], index: number, direction: "up" | "down") => {
     const newIndex = direction === "up" ? index - 1 : index + 1;
     if (newIndex < 0 || newIndex >= list.length) return list;
@@ -171,6 +171,7 @@ export const AdminPanel: React.FC = () => {
                 { id: "home_coaches", label: "Home: Coaches" },
                 { id: "home_videos", label: "Home: All 4 Videos" },
                 { id: "home_testimonials", label: "Home: Testimonials" },
+                { id: "home_faqs", label: "Home: FAQ Questions" },
                 { id: "prog_hero_pain", label: "Prog: Hero & Pain Video" },
                 { id: "prog_intro_why", label: "Prog: Intro & Why Cards" },
                 { id: "prog_roadmap", label: "Prog: 5-Week Blueprint" },
@@ -197,7 +198,7 @@ export const AdminPanel: React.FC = () => {
             {/* Scrollable Form Body */}
             <form onSubmit={handleContentSave} className="p-6 overflow-y-auto flex-1 space-y-6">
               
-              {/* 1. VISIBILITY TOGGLES */}
+              {/* 1. VISIBILITY */}
               {activeTab === "visibility" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/40 space-y-3">
@@ -267,7 +268,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 3. HOME: CHOOSE PATH & BULLET POINTS */}
+              {/* 3. HOME: CHOOSE PATH */}
               {activeTab === "home_cards" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -282,7 +283,6 @@ export const AdminPanel: React.FC = () => {
                     <input type="text" value={formData.home.card1Badge} onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card1Badge: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Badge" />
                     <input type="text" value={formData.home.card1Title} onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card1Title: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white" placeholder="Title" />
                     <textarea rows={2} value={formData.home.card1Desc} onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card1Desc: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Desc" />
-                    
                     <label className="block text-xs text-zinc-400 font-semibold mt-2">Card 1 Bullet Points (1 per line):</label>
                     <textarea
                       rows={3}
@@ -298,7 +298,6 @@ export const AdminPanel: React.FC = () => {
                     <input type="text" value={formData.home.card2Badge} onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card2Badge: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Badge" />
                     <input type="text" value={formData.home.card2Title} onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card2Title: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white" placeholder="Title" />
                     <textarea rows={2} value={formData.home.card2Desc} onChange={(e) => setFormData({ ...formData, home: { ...formData.home, card2Desc: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Desc" />
-                    
                     <label className="block text-xs text-zinc-400 font-semibold mt-2">Card 2 Bullet Points (1 per line):</label>
                     <textarea
                       rows={3}
@@ -311,7 +310,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 4. HOME: COACHES SECTION WITH FULL BULLET POINTS */}
+              {/* 4. HOME: COACHES */}
               {activeTab === "home_coaches" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -424,7 +423,100 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 7. PROGRAM: HERO & SOUND FAMILIAR (PAIN SECTION) */}
+              {/* 7. HOME: FAQS */}
+              {activeTab === "home_faqs" && (
+                <div className="space-y-4">
+                  <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                    <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Header Customization</h4>
+                    <input
+                      type="text"
+                      value={formData.home.contactEyebrow}
+                      onChange={(e) => setFormData({ ...formData, home: { ...formData.home, contactEyebrow: e.target.value } })}
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white"
+                      placeholder="Eyebrow Tagline (e.g. Got Questions?)"
+                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <input
+                        type="text"
+                        value={formData.home.contactHeadingMain}
+                        onChange={(e) => setFormData({ ...formData, home: { ...formData.home, contactHeadingMain: e.target.value } })}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white"
+                        placeholder="Heading Main (e.g. Frequently Asked)"
+                      />
+                      <input
+                        type="text"
+                        value={formData.home.contactHeadingAccent}
+                        onChange={(e) => setFormData({ ...formData, home: { ...formData.home, contactHeadingAccent: e.target.value } })}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white font-bold"
+                        placeholder="Accent (e.g. Questions)"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Home Frequently Asked Questions</h4>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData({
+                            ...formData,
+                            home: {
+                              ...formData.home,
+                              homeFaqs: [
+                                ...formData.home.homeFaqs,
+                                { id: Date.now().toString(), question: "New Question?", answer: "Answer here." }
+                              ]
+                            }
+                          })
+                        }
+                        className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
+                      >
+                        <Plus className="w-3 h-3" /> Add FAQ
+                      </button>
+                    </div>
+
+                    {formData.home.homeFaqs.map((faq, idx) => (
+                      <div key={faq.id || idx} className="p-3 bg-zinc-950 border border-zinc-800 rounded space-y-2">
+                        <div className="flex justify-between items-center gap-2">
+                          <input
+                            type="text"
+                            value={faq.question}
+                            onChange={(e) => {
+                              const updated = [...formData.home.homeFaqs];
+                              updated[idx].question = e.target.value;
+                              setFormData({ ...formData, home: { ...formData.home, homeFaqs: updated } });
+                            }}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white font-semibold"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = formData.home.homeFaqs.filter((_, i) => i !== idx);
+                              setFormData({ ...formData, home: { ...formData.home, homeFaqs: updated } });
+                            }}
+                            className="text-red-400 p-1"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <textarea
+                          rows={2}
+                          value={faq.answer}
+                          onChange={(e) => {
+                            const updated = [...formData.home.homeFaqs];
+                            updated[idx].answer = e.target.value;
+                            setFormData({ ...formData, home: { ...formData.home, homeFaqs: updated } });
+                          }}
+                          className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 8. PROGRAM: HERO & SOUND FAMILIAR */}
               {activeTab === "prog_hero_pain" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -439,7 +531,7 @@ export const AdminPanel: React.FC = () => {
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
                     <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Sounds Familiar (Pain Section)</h4>
                     <input type="text" value={formData.program.painTitle} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, painTitle: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white" placeholder="Pain Title" />
-                    <input type="text" value={formData.program.painTagline} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, painTagline: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Pain Tagline (e.g. Sounds Familiar?)" />
+                    <input type="text" value={formData.program.painTagline} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, painTagline: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Pain Tagline" />
                     <textarea rows={2} value={formData.program.painSubheading} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, painSubheading: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Subheading" />
                     <input type="text" value={formData.program.painVideoUrl} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, painVideoUrl: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white" placeholder="YouTube Embed URL / ID" />
                     <label className="block text-xs text-zinc-400 font-semibold mt-2">Pain Bullet Points (1 per line):</label>
@@ -453,7 +545,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 8. PROGRAM: INTRO & WHY THIS PROGRAM WORKS (WITH CARD REORDERING) */}
+              {/* 9. PROGRAM: INTRO & WHY THIS PROGRAM WORKS */}
               {activeTab === "prog_intro_why" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -511,7 +603,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 9. PROGRAM: 5-WEEK ROADMAP BLUEPRINT (COMPLETE CONTROL) */}
+              {/* 10. PROGRAM: 5-WEEK ROADMAP */}
               {activeTab === "prog_roadmap" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -560,7 +652,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 10. PROGRAM: PROMISE & LED BY COACH SECTION */}
+              {/* 11. PROGRAM: PROMISE & LED BY COACH */}
               {activeTab === "prog_promise_coach" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -576,7 +668,6 @@ export const AdminPanel: React.FC = () => {
                     <input type="text" value={formData.program.coachName} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, coachName: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-sm text-white" placeholder="Coach Name" />
                     <input type="text" value={formData.program.coachTitle} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, coachTitle: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Coach Title" />
                     <input type="text" value={formData.program.coachImage} onChange={(e) => setFormData({ ...formData, program: { ...formData.program, coachImage: e.target.value } })} className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs text-white" placeholder="Coach Image URL" />
-                    
                     <label className="block text-xs text-zinc-400 font-semibold mt-2">Coach Credentials (1 per line):</label>
                     <textarea
                       rows={3}
@@ -606,7 +697,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 11. PROGRAM: FROM OUR FIRST BATCH (VIDEO & STUDENT FEEDBACKS WITH AVATAR / INITIALS) */}
+              {/* 12. PROGRAM: FROM OUR FIRST BATCH */}
               {activeTab === "prog_reviews" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -672,7 +763,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 12. PROGRAM: BONUSES & POSITIONING */}
+              {/* 13. PROGRAM: BONUSES */}
               {activeTab === "prog_bonuses" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -723,7 +814,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 13. PROGRAM: READY TO START CTA CARD & STRIKE-OUT PRICING SWITCH */}
+              {/* 14. PROGRAM: CTA CARD & STRIKE-OUT PRICING SWITCH */}
               {activeTab === "prog_cta" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -797,7 +888,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* 14. PROGRAM: FAQS */}
+              {/* 15. PROGRAM: FAQS */}
               {activeTab === "prog_faqs" && (
                 <div className="space-y-4">
                   <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
@@ -805,13 +896,18 @@ export const AdminPanel: React.FC = () => {
                       <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Frequently Asked Questions</h4>
                       <button
                         type="button"
-                        onClick={() => setFormData({
-                          ...formData,
-                          program: {
-                            ...formData.program,
-                            faqs: [...formData.program.faqs, { id: Date.now().toString(), question: "New FAQ Question?", answer: "Detailed answer." }]
-                          }
-                        })}
+                        onClick={() =>
+                          setFormData({
+                            ...formData,
+                            program: {
+                              ...formData.program,
+                              faqs: [
+                                ...formData.program.faqs,
+                                { id: Date.now().toString(), question: "New FAQ Question?", answer: "Detailed answer." }
+                              ]
+                            }
+                          })
+                        }
                         className="flex items-center gap-1 text-xs bg-[#07b4ba] text-black px-2.5 py-1 rounded font-bold"
                       >
                         <Plus className="w-3 h-3" /> Add FAQ
@@ -821,28 +917,44 @@ export const AdminPanel: React.FC = () => {
                     {formData.program.faqs.map((faq, idx) => (
                       <div key={faq.id || idx} className="p-3 bg-zinc-950 border border-zinc-800 rounded space-y-2">
                         <div className="flex justify-between items-center gap-2">
-                          <input type="text" value={faq.question} onChange={(e) => {
-                            const updated = [...formData.program.faqs];
-                            updated[idx].question = e.target.value;
-                            setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
-                          }} className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white font-semibold" />
-                          <button type="button" onClick={() => {
-                            const updated = formData.program.faqs.filter((_, i) => i !== idx);
-                            setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
-                          }} className="text-red-400 p-1"><Trash2 className="w-4 h-4" /></button>
+                          <input
+                            type="text"
+                            value={faq.question}
+                            onChange={(e) => {
+                              const updated = [...formData.program.faqs];
+                              updated[idx].question = e.target.value;
+                              setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
+                            }}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white font-semibold"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = formData.program.faqs.filter((_, i) => i !== idx);
+                              setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
+                            }}
+                            className="text-red-400 p-1"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
                         </div>
-                        <textarea rows={2} value={faq.answer} onChange={(e) => {
-                          const updated = [...formData.program.faqs];
-                          updated[idx].answer = e.target.value;
-                          setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
-                        }} className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white" />
+                        <textarea
+                          rows={2}
+                          value={faq.answer}
+                          onChange={(e) => {
+                            const updated = [...formData.program.faqs];
+                            updated[idx].answer = e.target.value;
+                            setFormData({ ...formData, program: { ...formData.program, faqs: updated } });
+                          }}
+                          className="w-full bg-zinc-900 border border-zinc-800 rounded p-1.5 text-xs text-white"
+                        />
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* 15. CONTACT & FOOTER */}
+              {/* 16. CONTACT & FOOTER */}
               {activeTab === "contact" && (
                 <div className="border border-zinc-800 rounded-lg p-4 space-y-3 bg-zinc-900/40">
                   <h4 className="font-bold text-xs uppercase text-[#07b4ba]">Global Contact Info</h4>
@@ -853,7 +965,7 @@ export const AdminPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* Bottom Actions Bar */}
+              {/* Bottom Actions */}
               <div className="pt-4 border-t border-zinc-800 flex gap-2">
                 <button type="submit" className="flex-1 bg-[#07b4ba] hover:bg-[#069ca1] text-black font-bold py-2.5 rounded text-sm transition">Save All Changes</button>
                 <button type="button" onClick={resetContent} className="px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 text-xs rounded transition">Reset</button>
