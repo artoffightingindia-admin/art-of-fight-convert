@@ -48,7 +48,6 @@ export interface SiteContent {
     contactSection: boolean;
     stickyAd: boolean;
 
-    // Program Page Toggles
     programHero: boolean;
     programTrust: boolean;
     programPain: boolean;
@@ -439,8 +438,8 @@ export const defaultContent: SiteContent = {
 
 interface CmsContextType {
   content: SiteContent;
-  updateContent: (newContent: Partial<SiteContent>) => void;
-  resetContent: () => void;
+  updateContent: (newContent: Partial<SiteContent>) => Promise<boolean>;
+  resetContent: () => Promise<void>;
   isAuthModalOpen: boolean;
   setIsAuthModalOpen: (open: boolean) => void;
   isPanelOpen: boolean;
@@ -466,18 +465,11 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
-  // 1. Session state listener via Supabase native Auth
+  // 1. Session check & Auth listener
   useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        setIsAuthenticated(!!session);
-      } catch (err) {
-        console.error("Auth session check error:", err);
-      }
-    };
-
-    checkSession();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+    });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setIsAuthenticated(!!session);
@@ -486,7 +478,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => subscription.unsubscribe();
   }, []);
 
-  // 2. Fetch site configuration from Supabase table on load
+  // 2. Fetch site config from Supabase on load
   useEffect(() => {
     const fetchRemoteConfig = async () => {
       try {
@@ -496,8 +488,18 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           .eq("id", "aof_master_config")
           .single();
 
-        if (data && data.data && Object.keys(data.data).length > 0) {
-          const merged = { ...defaultContent, ...data.data };
+        if (error) {
+          console.warn("Supabase fetch warning:", error.message);
+          return;
+        }
+
+        if (data && data.data && typeof data.data === "object" && Object.keys(data.data).length > 0) {
+          const merged: SiteContent = {
+            visibility: { ...defaultContent.visibility, ...(data.data.visibility || {}) },
+            home: { ...defaultContent.home, ...(data.data.home || {}) },
+            program: { ...defaultContent.program, ...(data.data.program || {}) },
+            contact: { ...defaultContent.contact, ...(data.data.contact || {}) },
+          };
           setContent(merged);
           localStorage.setItem("aof_master_cms_v7", JSON.stringify(merged));
         }
@@ -509,7 +511,7 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     fetchRemoteConfig();
   }, []);
 
-  // 3. Realtime listener for instant updates across devices
+  // 3. Realtime listener for cross-tab sync
   useEffect(() => {
     const channel = supabase
       .channel("site_config_live")
@@ -524,7 +526,12 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         (payload: any) => {
           if (payload.new && payload.new.data) {
             const remoteData = payload.new.data;
-            setContent((prev) => ({ ...prev, ...remoteData }));
+            setContent((prev) => ({
+              visibility: { ...prev.visibility, ...(remoteData.visibility || {}) },
+              home: { ...prev.home, ...(remoteData.home || {}) },
+              program: { ...prev.program, ...(remoteData.program || {}) },
+              contact: { ...prev.contact, ...(remoteData.contact || {}) },
+            }));
             localStorage.setItem("aof_master_cms_v7", JSON.stringify(remoteData));
           }
         }
@@ -553,48 +560,59 @@ export const CmsProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAuthenticated]);
 
-  // 5. Update content in local cache and push to Supabase
-  const updateContent = (newContent: Partial<SiteContent>) => {
-    const updated = { ...content, ...newContent };
-    setContent(updated);
+  // 5. Update content in local cache & Supabase
+  const updateContent = async (newContent: Partial<SiteContent>): Promise<boolean> => {
+    const updated: SiteContent = {
+      visibility: { ...content.visibility, ...(newContent.visibility || {}) },
+      home: { ...content.home, ...(newContent.home || {}) },
+      program: { ...content.program, ...(newContent.program || {}) },
+      contact: { ...content.contact, ...(newContent.contact || {}) },
+    };
 
+    // Instant local UI state reflection
+    setContent(updated);
     try {
       localStorage.setItem("aof_master_cms_v7", JSON.stringify(updated));
     } catch (err) {
       console.error("Storage error:", err);
     }
 
-    supabase
-      .from("site_config")
-      .upsert({
-        id: "aof_master_config",
-        data: updated,
-        updated_at: new Date().toISOString(),
-      })
-      .then(({ error }) => {
-        if (error) console.error("Supabase update error:", error);
-      });
+    // Persist to Supabase
+    try {
+      const { error } = await supabase
+        .from("site_config")
+        .upsert({
+          id: "aof_master_config",
+          data: updated,
+          updated_at: new Date().toISOString(),
+        });
+
+      if (error) {
+        console.error("Supabase update error:", error.message);
+        return false;
+      }
+      return true;
+    } catch (err) {
+      console.error("Supabase upsert failed:", err);
+      return false;
+    }
   };
 
   // 6. Reset content
-  const resetContent = () => {
+  const resetContent = async () => {
     setContent(defaultContent);
     try {
       localStorage.removeItem("aof_master_cms_v7");
+      await supabase
+        .from("site_config")
+        .upsert({
+          id: "aof_master_config",
+          data: defaultContent,
+          updated_at: new Date().toISOString(),
+        });
     } catch (err) {
       console.error("Reset error:", err);
     }
-
-    supabase
-      .from("site_config")
-      .upsert({
-        id: "aof_master_config",
-        data: defaultContent,
-        updated_at: new Date().toISOString(),
-      })
-      .then(({ error }) => {
-        if (error) console.error("Reset error:", error);
-      });
   };
 
   // 7. Supabase Authentication Login
