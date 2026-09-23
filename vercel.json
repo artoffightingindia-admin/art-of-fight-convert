@@ -1,6 +1,42 @@
 {
   "rewrites": [
     {
+      "source": "/workshop",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/"
+    },
+    {
+      "source": "/workshop/:path*",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/:path*"
+    },
+    {
+      "source": "/_next/:path*",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/_next/:path*"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/media/:path*"
+    },
+    {
+      "source": "/api/media/:path*",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/api/media/:path*"
+    },
+    {
+      "source": "/api/register",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/api/register"
+    },
+    {
+      "source": "/confirmed",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/confirmed"
+    },
+    {
+      "source": "/privacy",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/privacy"
+    },
+    {
+      "source": "/favicon.svg",
+      "destination": "https://aof-workshop-preview.artoffightin-0656.chatgpt.site/favicon.svg"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
