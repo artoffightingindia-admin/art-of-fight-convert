@@ -11,6 +11,7 @@ import BlueprintPage from "./pages/BlueprintPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 import ScrollToTop from "./components/ScrollToTop";
+import MetaRouteEvents from "./components/MetaRouteEvents";
 
 // CMS & Admin Panel Imports
 import { CmsProvider } from "./context/CmsContext";
@@ -28,6 +29,7 @@ const App = () => (
 
         <BrowserRouter>
           <ScrollToTop />
+          <MetaRouteEvents />
 
           <Routes>
             <Route path="/" element={<Index />} />
