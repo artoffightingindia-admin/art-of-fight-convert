@@ -397,7 +397,7 @@ export default function ProgramPage() {
   const testimonialVideoRef = useRef<HTMLDivElement>(null);
   const testimonialPlayerRef = useRef<Player | null>(null);
   const testimonialSectionRef = useRef<HTMLDivElement>(null);
-  const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
+  const [isTestimonialMuted, setIsTestimonialMuted] = useState(false);
   const [isTestimonialInView, setIsTestimonialInView] = useState(false);
   const [isTestimonialReady, setIsTestimonialReady] = useState(false);
   const [testimonialNeedsPlay, setTestimonialNeedsPlay] = useState(false);
@@ -456,7 +456,7 @@ export default function ProgramPage() {
     const iframe = document.createElement("iframe");
     iframe.className = "absolute inset-0 w-full h-full border-0 scale-105";
     const embedUrl = new URL(TESTIMONIAL_VIMEO_URL);
-    Object.entries({ autoplay: "1", muted: "1", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+    Object.entries({ autoplay: "1", muted: "0", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     iframe.src = embedUrl.toString();
     iframe.title = "AOF 30-Day Batch Student Results";
     iframe.allow = "autoplay; fullscreen; encrypted-media";
@@ -476,7 +476,16 @@ export default function ProgramPage() {
       if (disposed) return;
       setIsTestimonialReady(true);
       try { await player.play(); }
-      catch { if (!disposed) setTestimonialNeedsPlay(true); }
+      catch {
+        if (disposed) return;
+        // If audible autoplay is blocked, keep the existing mute control and retry silently.
+        try {
+          const muted = await player.setMuted(true);
+          if (disposed) return;
+          setIsTestimonialMuted(muted);
+          await player.play();
+        } catch { if (!disposed) setTestimonialNeedsPlay(true); }
+      }
     }).catch(onError);
     return () => {
       disposed = true;
