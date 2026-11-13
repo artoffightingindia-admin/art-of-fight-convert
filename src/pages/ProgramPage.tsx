@@ -2,9 +2,35 @@ import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
 import { Download, Volume2, VolumeX } from "lucide-react";
 import { useCms } from "@/context/CmsContext";
+import ProgramIntroVideo from "@/components/ProgramIntroVideo";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
+  /* Approved opening: compact hero, centered video, then the pain-point grid. */
+  .aof-program-opening { padding-top: 62px; background: #090b0d; }
+  .aof-program-hero { padding: 40px 6% 8px; text-align: center; background: radial-gradient(ellipse at 50% 0%, #123033 0%, #0c1518 42%, #090b0d 80%); }
+  .aof-program-kicker { color: #07b4ba; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+  .aof-program-hero h1 { max-width: 800px; margin: 13px auto; font-family: 'Bebas Neue', sans-serif; font-size: clamp(41px, 6.3vw, 66px); font-weight: 400; line-height: 1.01; letter-spacing: .4px; }
+  .aof-program-hero h1 span { color: #07b4ba; }
+  .aof-program-subtitle { max-width: 610px; margin: 0 auto; color: #c0c8ca; font-size: 15px; line-height: 1.6; }
+  .aof-program-video { padding: 10px 4% 0; }
+  .aof-program-player { width: 100%; max-width: 960px; margin: 0 auto; }
+  .aof-program-pain { padding: 54px 4% 42px; text-align: center; }
+  .aof-program-pain h2 { margin: 12px auto 26px; font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 4.7vw, 50px); font-weight: 400; line-height: 1.05; letter-spacing: -.4px; white-space: nowrap; }
+  .aof-program-pain h2 span { color: #f12a37; }
+  .aof-program-points { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; max-width: 810px; margin: 0 auto; padding: 0; list-style: none; }
+  .aof-program-points li { display: flex; grid-column: span 2; align-items: center; gap: 11px; min-height: 54px; padding: 12px 16px; border: 1px solid #232b2e; border-radius: 3px; background: #131719; color: #d6dcde; text-align: left; font-size: 13px; font-weight: 500; line-height: 1.35; }
+  .aof-program-points li:nth-child(4) { grid-column: 2 / span 2; }
+  .aof-program-points li::before { content: ''; flex: none; width: 3px; height: 24px; border-radius: 2px; background: #f12a37; }
+  @media (max-width: 600px) {
+    .aof-program-hero { padding: 32px 6% 8px; }
+    .aof-program-subtitle { font-size: 14px; }
+    .aof-program-pain { padding-top: 30px; }
+    .aof-program-pain h2 { font-size: clamp(26px, 6.6vw, 38px); white-space: normal; }
+    .aof-program-points { grid-template-columns: 1fr; max-width: 400px; gap: 6px; }
+    .aof-program-points li, .aof-program-points li:nth-child(4) { grid-column: 1; min-height: 41px; padding: 9px 13px; }
+    .aof-program-points li::before { height: 18px; }
+  }
   @keyframes subtle-pan {
     0% { transform: scale(1.1); opacity: 0; }
     10% { opacity: 1; }
@@ -370,8 +396,6 @@ export default function ProgramPage() {
   const [isMobileView, setIsMobileView] = useState(false);
   
   // Pain Section Video Refs/States
-  const videoRef = useRef<HTMLIFrameElement>(null);
-  const [isVideoMuted, setIsVideoMuted] = useState(true);
 
   // Testimonial Section Video Refs/States
   const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
@@ -436,13 +460,6 @@ export default function ProgramPage() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const toggleMute = () => {
-    if (videoRef.current && videoRef.current.contentWindow) {
-      const func = isVideoMuted ? 'unMute' : 'mute';
-      videoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsVideoMuted(!isVideoMuted);
-    }
-  };
 
   const toggleTestimonialMute = () => {
     if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
@@ -452,15 +469,14 @@ export default function ProgramPage() {
     }
   };
 
-  const painVid = extractVideoId(p.painVideoUrl || "79xvYiiBFfk");
   const testimonialVid = extractVideoId(p.testimonialVideoUrl || "4Z8PSdk6Ak0");
 
-  const painPoints = p.painPoints?.length ? p.painPoints : [
-    "Don't know where to begin",
-    "Don't have access to a quality MMA gym",
-    "Don't have a training partner or equipment",
-    "Can't commit hours every day to training",
-    "Can't find structured MMA guidance in Tamil",
+  const painPoints = [
+    "Unsure where to start",
+    "No quality MMA gym nearby",
+    "No partner or equipment",
+    "Little time to train",
+    "No structured guidance in Tamil",
   ];
 
   const roadmapCards = p.roadmapCards?.length ? p.roadmapCards : defaultRoadmapCards;
@@ -528,148 +544,33 @@ export default function ProgramPage() {
       {/* Mobile Back Button */}
       <button className="md:hidden fixed bottom-[18px] left-[18px] z-[999] flex items-center justify-center w-[52px] h-[52px] border border-white/10 rounded-full bg-[#13171d] text-[#07b4ba] text-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer hover:scale-110 hover:bg-[#07b4ba] hover:text-white transition-all duration-300" onClick={() => navigate("/")} aria-label="Back to home">←</button>
 
-      {/* ── HERO + TRUST BAR ── */}
-      <div 
-        className="relative flex flex-col w-full overflow-hidden min-h-[115dvh] md:min-h-[100dvh]" 
-        ref={(el) => { if (!el) return; el.style.paddingTop = "62px"; }}
-      >
-        <section className="relative w-full flex items-center overflow-hidden flex-1 min-h-0" style={{ background: "radial-gradient(circle at top,rgba(7,180,186,.12),transparent 45%),#06080c" }}>
-          <div className="absolute inset-0 z-0 bg-center bg-cover opacity-0 animate-subtle-pan" style={{ backgroundImage: `url('${p.heroBgImage || "/images/Program page Hero.jpeg"}')` }} />
-          <div className="absolute inset-0 z-[1] bg-[repeating-linear-gradient(transparent_0px,transparent_2px,rgba(0,0,0,0.2)_2px,rgba(0,0,0,0.2)_4px)]" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06080c] via-[#06080c]/30 to-transparent" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-[#06080c]/20 to-[#06080c] md:via-[#06080c]/20" />
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 z-[3] bg-gradient-to-t from-[#06080c] to-transparent md:hidden" />
+      {/* ── APPROVED HERO, VIDEO, AND PAIN SECTION ── */}
+      <div className="aof-program-opening">
+        <section className="aof-program-hero" aria-labelledby="program-hero-title">
+          <p className="aof-program-kicker">AOF 30-DAY ONLINE PROGRAM</p>
+          <h1 id="program-hero-title">
+            BUILD MMA STRIKING FUNDAMENTALS<br />
+            <span>AT HOME. IN 30 DAYS.</span>
+          </h1>
+          <p className="aof-program-subtitle">
+            A clear, step-by-step path from complete beginner to confident practice—with guidance from your coach.
+          </p>
+        </section>
 
-          <div className="w-full relative z-10" style={GUTTER}>
-            <Reveal type="fade-down" delay={200} duration={1200}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[11px] md:text-[12px] tracking-[3px] uppercase mb-3 md:mb-4 drop-shadow-[0_0_8px_rgba(7,180,186,0.3)]">
-                {p.heroTagline || "AOF 30-Day Online Program"}
-              </p>
-            </Reveal>
-            <Reveal type="fade-right" delay={400} duration={1200}>
-     <h1 className="font-['Bebas_Neue'] text-[clamp(40px,11vw,72px)] leading-[.93] tracking-[2px] uppercase text-white mb-4 md:mb-5 whitespace-pre-line">
-  {(() => {
-    const text = p.heroTitle || "BUILD REAL\nMMA STRIKING\nFUNDAMENTALS";
-    const regex = /(mma striking)/i;
-    if (text.match(regex)) {
-      const parts = text.split(regex);
-      return (
-        <>
-          {parts[0]}
-          <span className="text-[#07b4ba]">{parts[1]}</span>
-          {parts[2]}
-        </>
-      );
-    }
-    return text;
-  })()}
-</h1>
-            </Reveal>
-            <Reveal type="fade-up" delay={600} duration={1200}>
-              <p className="text-white/60 text-[14px] md:text-[16px] leading-[1.65] max-w-[480px] mb-6 md:mb-8">
-                {p.heroSubtitle || "A step-by-step online system designed for complete beginners to learn proper MMA striking from home — Even if you've never trained before."}
-              </p>
-            </Reveal>
-
-            <Reveal type="scale-up" delay={800} duration={1200}>
-              <button
-                className="btn-glow inline-flex items-center justify-center w-full md:w-auto px-[60px] py-4 rounded-lg bg-[#07b4ba] text-white font-['Barlow'] font-bold text-[15px] md:text-[14px] uppercase tracking-[1px] border border-[#07b4ba] cursor-pointer"
-                onClick={handlePayment}
-              >
-                {p.heroBtnText || "JOIN NOW"}
-              </button>
-            </Reveal>
+        <section className="aof-program-video" aria-label="AOF program introduction video">
+          <div className="aof-program-player">
+            <ProgramIntroVideo videoUrl="https://player.vimeo.com/video/1246696746" />
           </div>
         </section>
 
-        {/* Trust Bar */}
-        <div className="w-full bg-[#07b4ba] relative z-20 flex items-center shrink-0 shadow-[0_-5px_20px_rgba(7,180,186,0.2)]" style={{ height: "1.5cm", paddingLeft: isMobileView ? "0" : "1cm", paddingRight: isMobileView ? "0" : "1cm" }}>
-          <div className="w-full flex items-center justify-between md:justify-start gap-0">
-            <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={100} duration={800}>
-              <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconShieldW /></div>
-              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">{p.trust1 || "Proven System"}</span>
-            </Reveal>
-            <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={250} duration={800}>
-              <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconUsersW /></div>
-              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">{p.trust2 || "Tamil Team"}</span>
-            </Reveal>
-            <Reveal className="flex-1 flex items-center justify-center gap-1.5 md:gap-3" type="fade-right" delay={400} duration={800}>
-              <div className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center shrink-0"><IconTrophyW /></div>
-              <span className="font-['Bebas_Neue'] text-[13px] md:text-[22px] tracking-[1px] md:tracking-[2px] text-white leading-none whitespace-nowrap">{p.trust3 || "Real Results"}</span>
-            </Reveal>
-          </div>
-        </div>
+        <section className="aof-program-pain" aria-labelledby="program-pain-title">
+          <p className="aof-program-kicker">SOUNDS FAMILIAR?</p>
+          <h2 id="program-pain-title">YOU WANT TO LEARN MMA. BUT <span>YOU HAVEN'T STARTED.</span></h2>
+          <ul className="aof-program-points">
+            {painPoints.map((point) => <li key={point}>{point}</li>)}
+          </ul>
+        </section>
       </div>
-
-      {/* ── PAIN SECTION ── */}
-      <section className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>
-        <div className="flex flex-col md:flex-row gap-10 md:gap-24 items-center flex-wrap">
-          <div className="flex-1 w-full md:max-w-[500px] md:order-2">
-            <Reveal type="fade-left" duration={1200}>
-              <h3 className="mb-4 text-center italic" style={{ fontFamily: "'Barlow', sans-serif", fontSize: "22px", fontWeight: 600, color: "#ffffff", letterSpacing: "0.5px" }}>
-                {p.painTitle || "5 MINUTES THAT COULD SAVE YOU MONTHS OF CONFUSION"}
-              </h3>
-              <div className="premium-hover rounded-[14px] overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                <div className="relative w-full aspect-video group">
-                  <iframe
-                    ref={videoRef}
-                    className="absolute inset-0 w-full h-full pointer-events-auto"
-                    src={`https://www.youtube.com/embed/${painVid}?autoplay=1&mute=1&loop=1&playlist=${painVid}&controls=0&rel=0&disablekb=1&modestbranding=1&enablejsapi=1`}
-                    title="AOF Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                  <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-
-                  <div className="absolute bottom-3 left-3 z-20 flex gap-2 pointer-events-auto">
-                    <button
-                      onClick={toggleMute}
-                      className="flex items-center justify-center w-10 h-10 bg-black/60 rounded-full border border-white/20 text-white cursor-pointer hover:bg-[#07b4ba] hover:text-black hover:border-transparent transition-all backdrop-blur shadow-md"
-                      aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
-                    >
-                      {isVideoMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-          <div className="flex-1 w-full md:min-w-[260px] md:order-1">
-            <Reveal type="fade-right" duration={1000}>
-              <p className="text-[#07b4ba] font-['Barlow'] font-bold text-[13px] md:text-[14px] tracking-[3px] uppercase mb-2">
-                {p.painTagline || "Sounds Familiar?"}
-              </p>
-              <h2 className="font-['Bebas_Neue'] text-[28px] md:text-[42px] tracking-[2px] text-white leading-[1.1] mb-4 whitespace-pre-line">
-                {p.painSubheading ? (
-                  p.painSubheading.includes("HAVEN'T STARTED") ? (
-                    <>
-                      {p.painSubheading.split("HAVEN'T STARTED")[0]}
-                      <span className="text-[#FF0000]">HAVEN'T STARTED </span>
-                      {p.painSubheading.split("HAVEN'T STARTED")[1]}
-                    </>
-                  ) : (
-                    p.painSubheading
-                  )
-                ) : (
-                  <>
-                    YOU WANT TO LEARN MMA.<br />BUT <span className="text-[#FF0000]">HAVEN'T STARTED  </span> BECAUSE YOU:
-                  </>
-                )}
-              </h2>
-              <div className="w-20 h-[3px] bg-[#e53e3e] rounded mb-5 md:mb-6 animate-pulse-red" />
-            </Reveal>
-            {painPoints.map((point, i) => (
-              <Reveal key={i} type="fade-right" delay={400 + (i * 150)} duration={800}>
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="w-[3px] h-[22px] bg-[#ff2d2d] rounded shrink-0 mt-1 animate-pulse-red" />
-                  <p className="text-white/70 text-[14px] md:text-[15px] leading-[1.5]">{point}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── AOF INTRO SECTION ── */}
       <div className="bg-[#0b0b0b]" style={{ backgroundImage: "repeating-linear-gradient(-45deg,rgba(7,180,186,.05) 0px,rgba(7,180,186,.05) 1px,transparent 1px,transparent 5px)" }}>
         <div className={`w-full py-10 md:py-12 ${SECTION_INSET_RESPONSIVE}`}>

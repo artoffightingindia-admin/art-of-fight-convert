@@ -1,0 +1,78 @@
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import ProgramIntroVideo from "./ProgramIntroVideo";
+
+const mock = vi.hoisted(() => ({ instances: [] as any[], blockAutoplay: false }));
+vi.mock("@vimeo/player", () => ({
+  default: class {
+    listeners = new Map<string, (data?: unknown) => void>();
+    iframe: HTMLIFrameElement;
+    ready = vi.fn().mockResolvedValue(undefined);
+    getDuration = vi.fn().mockResolvedValue(300);
+    play = vi.fn(async () => {
+      if (mock.blockAutoplay) { mock.blockAutoplay = false; throw new Error("NotAllowedError"); }
+      this.emit("play");
+    });
+    setCurrentTime = vi.fn(async (value: number) => value);
+    setMuted = vi.fn(async (value: boolean) => value);
+    destroy = vi.fn().mockResolvedValue(undefined);
+    requestFullscreen = vi.fn().mockResolvedValue(undefined);
+    exitFullscreen = vi.fn().mockResolvedValue(undefined);
+    on = vi.fn((name: string, callback: (data?: unknown) => void) => this.listeners.set(name, callback));
+    off = vi.fn((name: string) => this.listeners.delete(name));
+    emit(name: string, data?: unknown) { this.listeners.get(name)?.(data); }
+    constructor(iframe: HTMLIFrameElement) {
+      this.iframe = iframe;
+      mock.instances.push(this);
+    }
+  },
+}));
+
+describe("ProgramIntroVideo", () => {
+  beforeEach(() => { mock.instances.length = 0; mock.blockAutoplay = false; });
+
+  it("autoplays muted without pause controls and respects external pauses", async () => {
+    const { unmount } = render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
+    const params = new URL(player.iframe.src).searchParams;
+    expect(Object.fromEntries(params)).toMatchObject({ autoplay: "1", muted: "1", controls: "0", keyboard: "0", loop: "0" });
+    expect(screen.queryByRole("button", { name: /pause/i })).not.toBeInTheDocument();
+    act(() => player.emit("pause"));
+    expect(screen.getByRole("button", { name: "Play introduction" })).toBeInTheDocument();
+    expect(player.play).toHaveBeenCalledTimes(1);
+    unmount();
+    expect(player.destroy).toHaveBeenCalledOnce();
+    expect(player.listeners.size).toBe(0);
+  });
+
+  it("preserves the unlisted privacy hash when creating a restricted embed", async () => {
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456/abcdef" />);
+    const player = mock.instances[0];
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
+    expect(new URL(player.iframe.src).searchParams.get("h")).toBe("abcdef");
+    expect(player.iframe.referrerPolicy).toBe("strict-origin-when-cross-origin");
+  });
+
+  it("allows user-initiated playback when autoplay is blocked", async () => {
+    mock.blockAutoplay = true;
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    const play = await screen.findByRole("button", { name: "Play introduction" });
+    fireEvent.click(play);
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
+    expect(screen.queryByRole("button", { name: "Play introduction" })).not.toBeInTheDocument();
+  });
+
+  it("seeks from the timeline and enables sound through the SDK", async () => {
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    const timeline = screen.getByRole("slider", { name: "Video timeline" });
+    await waitFor(() => expect(timeline).toBeEnabled());
+    fireEvent.change(timeline, { target: { value: "120" } });
+    await waitFor(() => expect(player.setCurrentTime).toHaveBeenCalledWith(120));
+    fireEvent.click(screen.getByRole("button", { name: "Unmute video" }));
+    await waitFor(() => expect(player.setMuted).toHaveBeenCalledWith(false));
+    expect(await screen.findByRole("button", { name: "Mute video" })).toBeInTheDocument();
+  });
+});
