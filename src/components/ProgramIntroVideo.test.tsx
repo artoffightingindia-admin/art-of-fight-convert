@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProgramIntroVideo from "./ProgramIntroVideo";
 
-const mock = vi.hoisted(() => ({ instances: [] as any[], blockAutoplay: false }));
+const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0 }));
 vi.mock("@vimeo/player", () => ({
   default: class {
     listeners = new Map<string, (data?: unknown) => void>();
@@ -10,7 +10,7 @@ vi.mock("@vimeo/player", () => ({
     ready = vi.fn().mockResolvedValue(undefined);
     getDuration = vi.fn().mockResolvedValue(300);
     play = vi.fn(async () => {
-      if (mock.blockAutoplay) { mock.blockAutoplay = false; throw new Error("NotAllowedError"); }
+      if (mock.blockedAttempts > 0) { mock.blockedAttempts -= 1; throw new Error("NotAllowedError"); }
       this.emit("play");
     });
     setCurrentTime = vi.fn(async (value: number) => value);
@@ -29,14 +29,16 @@ vi.mock("@vimeo/player", () => ({
 }));
 
 describe("ProgramIntroVideo", () => {
-  beforeEach(() => { mock.instances.length = 0; mock.blockAutoplay = false; });
+  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; });
 
-  it("autoplays muted without pause controls and respects external pauses", async () => {
+  it("autoplays with sound when allowed, without pause controls or pause traps", async () => {
     const { unmount } = render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
     await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
     const params = new URL(player.iframe.src).searchParams;
-    expect(Object.fromEntries(params)).toMatchObject({ autoplay: "1", muted: "1", controls: "0", keyboard: "0", loop: "0" });
+    expect(Object.fromEntries(params)).toMatchObject({ autoplay: "1", muted: "0", controls: "0", keyboard: "0", loop: "0" });
+    expect(player.setMuted).not.toHaveBeenCalled();
+    expect(screen.getByRole("button", { name: "Mute video" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /pause/i })).not.toBeInTheDocument();
     act(() => player.emit("pause"));
     expect(screen.getByRole("button", { name: "Play introduction" })).toBeInTheDocument();
@@ -54,17 +56,29 @@ describe("ProgramIntroVideo", () => {
     expect(player.iframe.referrerPolicy).toBe("strict-origin-when-cross-origin");
   });
 
-  it("allows user-initiated playback when autoplay is blocked", async () => {
-    mock.blockAutoplay = true;
+  it("falls back to muted autoplay with a sound control when audible autoplay is blocked", async () => {
+    mock.blockedAttempts = 1;
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
+    expect(player.setMuted).toHaveBeenCalledWith(true);
+    expect(await screen.findByRole("button", { name: "Unmute video" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Play introduction" })).not.toBeInTheDocument();
+  });
+
+  it("allows user-initiated playback when both audible and muted autoplay are blocked", async () => {
+    mock.blockedAttempts = 2;
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
     const play = await screen.findByRole("button", { name: "Play introduction" });
     fireEvent.click(play);
-    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(3));
     expect(screen.queryByRole("button", { name: "Play introduction" })).not.toBeInTheDocument();
   });
 
   it("seeks from the timeline and enables sound through the SDK", async () => {
+    mock.blockedAttempts = 1;
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
     const timeline = screen.getByRole("slider", { name: "Video timeline" });

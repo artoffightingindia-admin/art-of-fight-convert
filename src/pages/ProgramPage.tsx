@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
-import { Download, Volume2, VolumeX } from "lucide-react";
+import { Download, Play, Volume2, VolumeX } from "lucide-react";
+import Player from "@vimeo/player";
 import { useCms } from "@/context/CmsContext";
 import ProgramIntroVideo from "@/components/ProgramIntroVideo";
+
+const TESTIMONIAL_VIMEO_URL = "https://player.vimeo.com/video/REPLACE_WITH_TESTIMONIAL_VIMEO_ID";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
   /* Approved opening: compact hero, centered video, then the pain-point grid. */
   .aof-program-opening { padding-top: 62px; background: #090b0d; }
   .aof-program-hero { padding: 40px 6% 8px; text-align: center; background: radial-gradient(ellipse at 50% 0%, #123033 0%, #0c1518 42%, #090b0d 80%); }
-  .aof-program-kicker { color: #07b4ba; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+  .aof-program-kicker { color: #07b4ba; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
   .aof-program-hero h1 { max-width: 800px; margin: 13px auto; font-family: 'Bebas Neue', sans-serif; font-size: clamp(41px, 6.3vw, 66px); font-weight: 400; line-height: 1.01; letter-spacing: .4px; }
   .aof-program-hero h1 span { color: #07b4ba; }
-  .aof-program-subtitle { max-width: 610px; margin: 0 auto; color: #c0c8ca; font-size: 15px; line-height: 1.6; }
+  .aof-program-subtitle { max-width: 960px; margin: 0 auto; color: #c0c8ca; font-size: 15px; line-height: 1.6; }
   .aof-program-video { padding: 10px 4% 0; }
   .aof-program-player { width: 100%; max-width: 960px; margin: 0 auto; }
   .aof-program-pain { padding: 54px 4% 42px; text-align: center; }
@@ -22,6 +25,10 @@ const premiumStyles = `
   .aof-program-points li { display: flex; grid-column: span 2; align-items: center; gap: 11px; min-height: 54px; padding: 12px 16px; border: 1px solid #232b2e; border-radius: 3px; background: #131719; color: #d6dcde; text-align: left; font-size: 13px; font-weight: 500; line-height: 1.35; }
   .aof-program-points li:nth-child(4) { grid-column: 2 / span 2; }
   .aof-program-points li::before { content: ''; flex: none; width: 3px; height: 24px; border-radius: 2px; background: #f12a37; }
+  @media (min-width: 768px) {
+    .aof-program-kicker { font-size: 14px; }
+    .aof-program-subtitle { font-size: clamp(14px, 1.7vw, 15px); white-space: nowrap; }
+  }
   @media (max-width: 600px) {
     .aof-program-hero { padding: 32px 6% 8px; }
     .aof-program-subtitle { font-size: 14px; }
@@ -82,17 +89,6 @@ const premiumStyles = `
     transform: scale(1.08);
   }
 `;
-
-const extractVideoId = (input: string): string => {
-  if (!input) return "";
-  const trimmed = input.trim();
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
-  const match = trimmed.match(regExp);
-  if (match && match[2].length === 11) {
-    return match[2];
-  }
-  return trimmed;
-};
 
 /* ── UPGRADED PREMIUM REVEAL ── */
 function Reveal({ children, style = {}, delay = 0, type = "fade-up", duration = 1000, className = "", onClick }: { children: ReactNode; style?: CSSProperties; delay?: number; type?: "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale-up" | "fade"; duration?: number; className?: string; onClick?: () => void }) {
@@ -398,10 +394,14 @@ export default function ProgramPage() {
   // Pain Section Video Refs/States
 
   // Testimonial Section Video Refs/States
-  const testimonialVideoRef = useRef<HTMLIFrameElement>(null);
+  const testimonialVideoRef = useRef<HTMLDivElement>(null);
+  const testimonialPlayerRef = useRef<Player | null>(null);
   const testimonialSectionRef = useRef<HTMLDivElement>(null);
   const [isTestimonialMuted, setIsTestimonialMuted] = useState(true);
   const [isTestimonialInView, setIsTestimonialInView] = useState(false);
+  const [isTestimonialReady, setIsTestimonialReady] = useState(false);
+  const [testimonialNeedsPlay, setTestimonialNeedsPlay] = useState(false);
+  const [testimonialError, setTestimonialError] = useState("");
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -449,6 +449,45 @@ export default function ProgramPage() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const mount = testimonialVideoRef.current;
+    if (!isTestimonialInView || !mount) return;
+    let disposed = false;
+    const iframe = document.createElement("iframe");
+    iframe.className = "absolute inset-0 w-full h-full border-0 scale-105";
+    const embedUrl = new URL(TESTIMONIAL_VIMEO_URL);
+    Object.entries({ autoplay: "1", muted: "1", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+    iframe.src = embedUrl.toString();
+    iframe.title = "AOF 30-Day Batch Student Results";
+    iframe.allow = "autoplay; fullscreen; encrypted-media";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.tabIndex = -1;
+    mount.appendChild(iframe);
+    const player = new Player(iframe);
+    testimonialPlayerRef.current = player;
+    const onVolume = ({ muted }: { muted: boolean }) => { if (!disposed) setIsTestimonialMuted(muted); };
+    const onPlay = () => { if (!disposed) { setTestimonialNeedsPlay(false); setTestimonialError(""); } };
+    const onError = () => { if (!disposed) setTestimonialError("The video could not load. Please refresh and try again."); };
+    player.on("volumechange", onVolume);
+    player.on("play", onPlay);
+    player.on("error", onError);
+    void player.ready().then(async () => {
+      if (disposed) return;
+      setIsTestimonialReady(true);
+      try { await player.play(); }
+      catch { if (!disposed) setTestimonialNeedsPlay(true); }
+    }).catch(onError);
+    return () => {
+      disposed = true;
+      player.off("volumechange", onVolume);
+      player.off("play", onPlay);
+      player.off("error", onError);
+      if (testimonialPlayerRef.current === player) testimonialPlayerRef.current = null;
+      void player.destroy().catch(() => {}).finally(() => iframe.remove());
+    };
+  }, [isTestimonialInView]);
+
   const handlePayment = () => {
     window.location.href = p.buyNowUrl || "https://rzp.io/rzp/aof30dayprogram";
   };
@@ -461,15 +500,19 @@ export default function ProgramPage() {
   };
 
 
-  const toggleTestimonialMute = () => {
-    if (testimonialVideoRef.current && testimonialVideoRef.current.contentWindow) {
-      const func = isTestimonialMuted ? 'unMute' : 'mute';
-      testimonialVideoRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      setIsTestimonialMuted(!isTestimonialMuted);
-    }
+  const toggleTestimonialMute = async () => {
+    const player = testimonialPlayerRef.current;
+    if (!player) return;
+    try {
+      const muted = await player.setMuted(!isTestimonialMuted);
+      if (testimonialPlayerRef.current === player) setIsTestimonialMuted(muted);
+    } catch { setTestimonialError("Sound could not be changed. Please try again."); }
   };
 
-  const testimonialVid = extractVideoId(p.testimonialVideoUrl || "4Z8PSdk6Ak0");
+  const playTestimonial = async () => {
+    try { await testimonialPlayerRef.current?.play(); }
+    catch { setTestimonialError("Playback could not start. Please try again."); }
+  };
 
   const painPoints = [
     "Unsure where to start",
@@ -901,20 +944,20 @@ export default function ProgramPage() {
             <div ref={testimonialSectionRef} className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
               <Reveal type="fade-right" duration={1200}>
                 <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
-                  <iframe
-                    ref={testimonialVideoRef}
-                    className="absolute inset-0 w-full h-full border-0 scale-105"
-                    src={isTestimonialInView ? `https://www.youtube.com/embed/${testimonialVid}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1` : ""}
-                    title="AOF 30-Day Batch Student Results"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  <div ref={testimonialVideoRef} className="absolute inset-0" />
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
+                  {testimonialNeedsPlay && (
+                    <button type="button" onClick={playTestimonial} className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 text-white pointer-events-auto" aria-label="Play student results video">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#07b4ba]"><Play aria-hidden="true" /></span>
+                    </button>
+                  )}
+                  {testimonialError && <p role="status" className="absolute top-3 left-3 right-3 z-30 rounded bg-black/85 p-3 text-center text-sm text-white">{testimonialError}</p>}
                 </div>
               </Reveal>
 
               <button
                 onClick={toggleTestimonialMute}
+                disabled={!isTestimonialReady}
                 className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
                 aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
               >

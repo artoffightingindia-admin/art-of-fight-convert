@@ -22,7 +22,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [ended, setEnded] = useState(false);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
   const [mutePending, setMutePending] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -40,7 +40,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     setReady(false);
     setPlaying(false);
     setEnded(false);
-    setMuted(true);
+    setMuted(false);
     setMutePending(false);
     setPosition(0);
     setDuration(0);
@@ -59,7 +59,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       embedUrl = new URL(`https://player.vimeo.com/video/${id}`);
       const hash = source.searchParams.get("h") || (!isPlayer ? path[1] : undefined);
       if (hash) embedUrl.searchParams.set("h", hash);
-      Object.entries({ autoplay: "1", muted: "1", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+      Object.entries({ autoplay: "1", muted: "0", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     } catch {
       setError("The video is unavailable. Please try again later.");
       host.remove();
@@ -118,8 +118,18 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       try {
         await player.play();
       } catch {
-        // Muted autoplay is still blocked by some browsers/low-power modes.
-        if (!disposed) setPlaying(false);
+        if (disposed) return;
+        // Browsers commonly reject audible autoplay. Keep the video moving silently
+        // with an explicit Sound on control instead of promising a bypass.
+        try {
+          const value = await player.setMuted(true);
+          if (disposed) return;
+          setMuted(value);
+          await player.play();
+        } catch {
+          // Low-power modes can block even muted autoplay; retain a Play fallback.
+          if (!disposed) setPlaying(false);
+        }
       }
     }).catch(onError);
 
@@ -229,7 +239,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       <div className="flex min-h-[52px] items-center gap-2 bg-[#10171a] px-2 sm:gap-3 sm:px-4">
         <button type="button" onClick={toggleMute} disabled={!ready || mutePending} className="flex h-11 shrink-0 items-center justify-center gap-2 rounded px-2 text-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba] disabled:opacity-40" aria-label={muted ? "Unmute video" : "Mute video"}>
           {muted ? <VolumeX className="h-5 w-5" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
-          {muted && <span className="hidden text-xs font-semibold sm:inline">Sound on</span>}
+          {muted && <span className="text-xs font-semibold">Sound on</span>}
         </button>
         <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(shownPosition)} / {formatTime(duration)}</span>
         <input
