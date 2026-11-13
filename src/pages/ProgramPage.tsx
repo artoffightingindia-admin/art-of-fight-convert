@@ -5,7 +5,7 @@ import Player from "@vimeo/player";
 import { useCms } from "@/context/CmsContext";
 import ProgramIntroVideo from "@/components/ProgramIntroVideo";
 
-const TESTIMONIAL_VIMEO_URL = "https://player.vimeo.com/video/REPLACE_WITH_TESTIMONIAL_VIMEO_ID";
+const TESTIMONIAL_VIMEO_URL = "https://player.vimeo.com/video/1246699301";
 
 /* ── PREMIUM STYLES INJECTION ── */
 const premiumStyles = `
