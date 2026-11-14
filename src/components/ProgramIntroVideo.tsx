@@ -169,14 +169,18 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       // a muted autoplay stream when it becomes audible through the iframe SDK.
       const muteRequest = player.setMuted(nextMuted);
       const playbackRequest = keepPlaying ? player.play().catch(() => {}) : Promise.resolve();
-      const value = await muteRequest;
+      // Vimeo may leave the SDK promise pending even after its volume event fires.
+      // Release the control promptly so visitors can always change their mind.
+      const value = await Promise.race([
+        muteRequest,
+        new Promise<boolean>(resolve => window.setTimeout(() => resolve(nextMuted), 1200)),
+      ]);
       if (playerRef.current !== player) return;
       setMuted(value);
-      await playbackRequest;
-      // Recover only this explicit unmute action; external pause events still remain paused.
-      if (keepPlaying && playerRef.current === player && await player.getPaused()) {
-        await player.play();
-      }
+      void playbackRequest.then(async () => {
+        // Recover only this explicit unmute action; external pauses remain paused.
+        if (keepPlaying && playerRef.current === player && await player.getPaused()) await player.play();
+      }).catch(() => {});
     } catch {
       if (playerRef.current === player) setError("Sound or playback could not be updated. Please try again.");
     } finally {
