@@ -255,7 +255,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
             <span className="text-sm font-semibold">{ended ? "Watch again" : "Play video"}</span>
           </button>
         )}
-        <button type="button" onClick={toggleMute} disabled={!ready || mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-[#07b4ba] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
+        <button type="button" onClick={toggleMute} disabled={!ready || mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
           {muted ? <VolumeX className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
         </button>
         {error && <p role="status" className="absolute left-4 right-4 top-4 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
