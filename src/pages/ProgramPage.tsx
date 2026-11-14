@@ -382,6 +382,7 @@ const GUTTER: CSSProperties = { paddingLeft: "1cm", paddingRight: "1cm" };
 const SECTION_INSET_RESPONSIVE = "px-[1cm] md:px-[140px]";
 
 export default function ProgramPage() {
+  const isInstagram = /Instagram/i.test(navigator.userAgent);
   const navigate = useNavigate();
   const { content } = useCms();
   const p = content?.program || {};
@@ -395,6 +396,7 @@ export default function ProgramPage() {
 
   // Testimonial Section Video Refs/States
   const testimonialVideoRef = useRef<HTMLDivElement>(null);
+  const testimonialIframeRef = useRef<HTMLIFrameElement | null>(null);
   const testimonialPlayerRef = useRef<Player | null>(null);
   const testimonialMuteActionId = useRef(0);
   const testimonialUnmuteRecoveryRef = useRef(false);
@@ -405,6 +407,10 @@ export default function ProgramPage() {
   const [isTestimonialInView, setIsTestimonialInView] = useState(false);
   const [testimonialNeedsPlay, setTestimonialNeedsPlay] = useState(false);
   const [testimonialError, setTestimonialError] = useState("");
+
+  useEffect(() => {
+    if (testimonialIframeRef.current) testimonialIframeRef.current.style.pointerEvents = isInstagram && isTestimonialMuted ? "auto" : "none";
+  }, [isInstagram, isTestimonialMuted]);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -457,15 +463,17 @@ export default function ProgramPage() {
     if (!isTestimonialInView || !mount) return;
     let disposed = false;
     const iframe = document.createElement("iframe");
-    iframe.className = "absolute inset-0 w-full h-full border-0 scale-105";
+    iframe.className = `absolute inset-0 w-full h-full border-0 ${isInstagram ? "" : "scale-105"}`;
     const embedUrl = new URL(TESTIMONIAL_VIMEO_URL);
-    Object.entries({ autoplay: "1", muted: "0", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+    Object.entries({ autoplay: "1", muted: isInstagram ? "1" : "0", controls: isInstagram ? "1" : "0", unmute_button: isInstagram ? "1" : "0", progress_bar: "0", volume: "0", fullscreen: "0", quality_selector: "0", speed: "0", skipping_forward: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     iframe.src = embedUrl.toString();
     iframe.title = "AOF 30-Day Batch Student Results";
     iframe.allow = "autoplay; fullscreen; encrypted-media";
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.tabIndex = -1;
+    iframe.style.pointerEvents = isInstagram ? "auto" : "none";
+    testimonialIframeRef.current = iframe;
     mount.appendChild(iframe);
     const player = new Player(iframe);
     testimonialPlayerRef.current = player;
@@ -515,9 +523,10 @@ export default function ProgramPage() {
       player.off("pause", onPause);
       player.off("error", onError);
       if (testimonialPlayerRef.current === player) testimonialPlayerRef.current = null;
+      if (testimonialIframeRef.current === iframe) testimonialIframeRef.current = null;
       void player.destroy().catch(() => {}).finally(() => iframe.remove());
     };
-  }, [isTestimonialInView]);
+  }, [isTestimonialInView, isInstagram]);
 
   const handlePayment = () => {
     window.location.href = p.buyNowUrl || "https://rzp.io/rzp/aof30dayprogram";
@@ -1008,26 +1017,26 @@ export default function ProgramPage() {
             
             <div ref={testimonialSectionRef} className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
               <Reveal type="fade-right" duration={1200}>
-                <div className="relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] pointer-events-none select-none">
+                <div className={`relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] select-none ${isInstagram && isTestimonialMuted ? "pointer-events-auto" : "pointer-events-none"}`}>
                   <div ref={testimonialVideoRef} className="absolute inset-0" />
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-                  {testimonialNeedsPlay && (
+                  {testimonialNeedsPlay && !(isInstagram && isTestimonialMuted) && (
                     <button type="button" onClick={playTestimonial} className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 text-white pointer-events-auto" aria-label="Play student results video">
                       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#07b4ba]"><Play aria-hidden="true" /></span>
                     </button>
                   )}
-                  {testimonialError && <p role="status" className="absolute top-3 left-3 right-3 z-30 rounded bg-black/85 p-3 text-center text-sm text-white">{testimonialError}</p>}
+                  {testimonialError && !(isInstagram && isTestimonialMuted) && <p role="status" className="pointer-events-none absolute top-3 left-3 right-3 z-30 rounded bg-black/85 p-3 text-center text-sm text-white">{testimonialError}</p>}
                 </div>
               </Reveal>
 
-              <button
+              {!(isInstagram && isTestimonialMuted) && <button
                 onClick={toggleTestimonialMute}
                 disabled={testimonialMutePending}
                 className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
                 aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
               >
                 {isTestimonialMuted ? <VolumeX className="w-[18px] h-[18px]" /> : <Volume2 className="w-[18px] h-[18px]" />}
-              </button>
+              </button>}
             </div>
 
             <div className="flex-1 w-full md:min-w-[260px]">

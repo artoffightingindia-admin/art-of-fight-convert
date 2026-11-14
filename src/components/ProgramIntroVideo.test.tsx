@@ -40,6 +40,7 @@ vi.mock("@vimeo/player", () => ({
     }
     constructor(iframe: HTMLIFrameElement) {
       this.iframe = iframe;
+      this.isMuted = new URL(iframe.src).searchParams.get("muted") === "1";
       mock.instances.push(this);
     }
   },
@@ -183,6 +184,30 @@ describe("ProgramIntroVideo", () => {
       expect(screen.getByRole("status")).toHaveTextContent("Sound could not be enabled");
     } finally {
       vi.useRealTimers();
+    }
+  });
+
+  it("exposes Vimeo's native sound control in Instagram until audio is enabled", async () => {
+    const userAgent = vi.spyOn(navigator, "userAgent", "get").mockReturnValue("Instagram 400.0 Android");
+    try {
+      render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+      const player = mock.instances[0];
+      await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
+      const params = new URL(player.iframe.src).searchParams;
+      expect(params.get("muted")).toBe("1");
+      expect(params.get("controls")).toBe("1");
+      expect(params.get("unmute_button")).toBe("1");
+      expect(params.get("progress_bar")).toBe("0");
+      expect(player.iframe.style.pointerEvents).toBe("auto");
+      expect(screen.queryByRole("button", { name: "Unmute video" })).not.toBeInTheDocument();
+      act(() => player.emit("volumechange", { muted: false }));
+      expect(await screen.findByRole("button", { name: "Mute video" })).toBeInTheDocument();
+      expect(player.iframe.style.pointerEvents).toBe("none");
+      act(() => player.emit("volumechange", { muted: true }));
+      expect(screen.queryByRole("button", { name: "Unmute video" })).not.toBeInTheDocument();
+      expect(player.iframe.style.pointerEvents).toBe("auto");
+    } finally {
+      userAgent.mockRestore();
     }
   });
 });

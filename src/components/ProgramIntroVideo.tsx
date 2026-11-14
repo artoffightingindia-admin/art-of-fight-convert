@@ -14,8 +14,10 @@ const formatTime = (seconds: number) => {
 
 /** No pause button: playback can still be paused by the browser or operating system. */
 export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) {
+  const isInstagram = /Instagram/i.test(navigator.userAgent);
   const containerRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const playerRef = useRef<Player | null>(null);
   const muteActionId = useRef(0);
   const unmuteRecoveryRef = useRef(false);
@@ -25,7 +27,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const [playing, setPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [ended, setEnded] = useState(false);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(isInstagram);
   const [mutePending, setMutePending] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -36,6 +38,10 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   useEffect(() => () => {
     if (hideControlsTimer.current !== null) window.clearTimeout(hideControlsTimer.current);
   }, []);
+
+  useEffect(() => {
+    if (iframeRef.current) iframeRef.current.style.pointerEvents = isInstagram && muted ? "auto" : "none";
+  }, [isInstagram, muted]);
 
   const revealTouchControls = () => {
     setShowControls(true);
@@ -59,7 +65,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     setEnded(false);
     // Instagram's WebView commonly starts muted while Vimeo is still booting.
     // Show an actionable sound control before the SDK ready promise settles.
-    setMuted(/Instagram/i.test(navigator.userAgent));
+    setMuted(isInstagram);
     setMutePending(false);
     setPosition(0);
     setDuration(0);
@@ -75,7 +81,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       embedUrl = new URL(`https://player.vimeo.com/video/${id}`);
       const hash = source.searchParams.get("h") || (!isPlayer ? path[1] : undefined);
       if (hash) embedUrl.searchParams.set("h", hash);
-      Object.entries({ autoplay: "1", muted: "0", preload: "auto", initial_quality: "360p", quality: "auto", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+      Object.entries({ autoplay: "1", muted: isInstagram ? "1" : "0", preload: "auto", initial_quality: "360p", quality: "auto", controls: isInstagram ? "1" : "0", unmute_button: isInstagram ? "1" : "0", progress_bar: "0", volume: "0", fullscreen: "0", quality_selector: "0", speed: "0", skipping_forward: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     } catch {
       setError("The video is unavailable. Please try again later.");
       host.remove();
@@ -90,8 +96,9 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.tabIndex = -1;
-    iframe.style.pointerEvents = "none";
+    iframe.style.pointerEvents = isInstagram ? "auto" : "none";
     iframe.style.border = "0";
+    iframeRef.current = iframe;
     host.appendChild(iframe);
     const player = new Player(iframe);
     playerRef.current = player;
@@ -199,9 +206,10 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       player.off("error", onError);
       player.off("fullscreenchange", onVimeoFullscreen);
       if (playerRef.current === player) playerRef.current = null;
+      if (iframeRef.current === iframe) iframeRef.current = null;
       void player.destroy().catch(() => {}).finally(() => host.remove());
     };
-  }, [videoUrl]);
+  }, [videoUrl, isInstagram]);
 
   useEffect(() => {
     const onChange = () => setFullscreen(document.fullscreenElement === containerRef.current);
@@ -310,18 +318,18 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     >
       <div className="relative aspect-video w-full" style={fullscreen ? { aspectRatio: "auto", height: "100%" } : undefined}>
         <div ref={mountRef} className="absolute inset-0 [&_iframe]:pointer-events-none [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
-        {!hasStarted && <img src="/images/program-intro-thumbnail.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
-        {ready && !playing && (
+        {!hasStarted && !(isInstagram && ready) && <img src="/images/program-intro-thumbnail.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
+        {ready && !playing && !(isInstagram && muted) && (
           <button type="button" onClick={startPlayback} className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba]" aria-label={ended ? "Replay introduction" : "Play introduction"}>
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#07b4ba] text-black">{ended ? <RotateCcw aria-hidden="true" /> : <Play aria-hidden="true" />}</span>
             <span className="text-sm font-semibold">{ended ? "Watch again" : "Play video"}</span>
           </button>
         )}
-        <button type="button" onClick={toggleMute} disabled={mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
+        {!(isInstagram && muted) && <button type="button" onClick={toggleMute} disabled={mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
           {muted ? <VolumeX className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
-        </button>
-        {error && <p role="status" className="pointer-events-none absolute bottom-14 left-4 right-4 z-20 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
-        <div className={`absolute inset-x-0 bottom-0 z-20 flex h-[52px] items-center gap-2 bg-gradient-to-t from-black/85 to-transparent px-2 transition-opacity duration-300 sm:gap-3 sm:px-4 ${showControls ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+        </button>}
+        {error && !(isInstagram && muted) && <p role="status" className="pointer-events-none absolute bottom-14 left-4 right-4 z-20 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
+        <div className={`absolute inset-x-0 bottom-0 z-20 flex h-[52px] items-center gap-2 bg-gradient-to-t from-black/85 to-transparent px-2 transition-opacity duration-300 sm:gap-3 sm:px-4 ${showControls && !(isInstagram && muted) ? "opacity-100" : "pointer-events-none opacity-0"}`}>
           <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(position)} / {formatTime(duration)}</span>
           <div role="progressbar" aria-label="Video timeline" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)} aria-valuetext={`${formatTime(position)} of ${formatTime(duration)}`} className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25">
             <div className="h-full rounded-full bg-[#07b4ba] transition-[width] duration-200" style={{ width: `${progress}%` }} />
