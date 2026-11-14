@@ -28,6 +28,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const [hasStarted, setHasStarted] = useState(false);
   const [ended, setEnded] = useState(false);
   const [muted, setMuted] = useState(isInstagram);
+  const [nativeAudioUnlocked, setNativeAudioUnlocked] = useState(false);
   const [mutePending, setMutePending] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -40,8 +41,8 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   }, []);
 
   useEffect(() => {
-    if (iframeRef.current) iframeRef.current.style.pointerEvents = isInstagram && muted ? "auto" : "none";
-  }, [isInstagram, muted]);
+    if (iframeRef.current) iframeRef.current.style.pointerEvents = isInstagram && muted && !nativeAudioUnlocked ? "auto" : "none";
+  }, [isInstagram, muted, nativeAudioUnlocked]);
 
   const revealTouchControls = () => {
     setShowControls(true);
@@ -66,6 +67,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     // Instagram's WebView commonly starts muted while Vimeo is still booting.
     // Show an actionable sound control before the SDK ready promise settles.
     setMuted(isInstagram);
+    setNativeAudioUnlocked(false);
     setMutePending(false);
     setPosition(0);
     setDuration(0);
@@ -162,7 +164,10 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const onVolume = (data: { muted: boolean }) => {
       if (disposed) return;
       setMuted(data.muted);
-      if (!data.muted) setError("");
+      if (!data.muted) {
+        setNativeAudioUnlocked(true);
+        setError("");
+      }
     };
     const onError = () => {
       if (!disposed) setError("The video could not load. Please refresh the page and try again.");
@@ -183,7 +188,11 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       if (disposed) return;
       setReady(true);
       void player.getDuration().then(value => { if (!disposed) setDuration(value); }).catch(() => {});
-      void player.getMuted().then(value => { if (!disposed) setMuted(value); }).catch(() => {});
+      void player.getMuted().then(value => {
+        if (disposed) return;
+        setMuted(value);
+        if (!value) setNativeAudioUnlocked(true);
+      }).catch(() => {});
       // Start the sound-on attempt immediately. If the browser neither begins
       // playback nor rejects promptly, fall back without waiting indefinitely.
       if (playbackConfirmed) return;
@@ -318,18 +327,18 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     >
       <div className="relative aspect-video w-full" style={fullscreen ? { aspectRatio: "auto", height: "100%" } : undefined}>
         <div ref={mountRef} className="absolute inset-0 [&_iframe]:pointer-events-none [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
-        {!hasStarted && !(isInstagram && ready) && <img src="/images/program-intro-thumbnail.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
-        {ready && !playing && !(isInstagram && muted) && (
+        {!hasStarted && !(isInstagram && ready && !nativeAudioUnlocked) && <img src="/images/program-intro-thumbnail.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
+        {ready && !playing && !(isInstagram && muted && !nativeAudioUnlocked) && (
           <button type="button" onClick={startPlayback} className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba]" aria-label={ended ? "Replay introduction" : "Play introduction"}>
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#07b4ba] text-black">{ended ? <RotateCcw aria-hidden="true" /> : <Play aria-hidden="true" />}</span>
             <span className="text-sm font-semibold">{ended ? "Watch again" : "Play video"}</span>
           </button>
         )}
-        {!(isInstagram && muted) && <button type="button" onClick={toggleMute} disabled={mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
+        {!(isInstagram && muted && !nativeAudioUnlocked) && <button type="button" onClick={toggleMute} disabled={mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
           {muted ? <VolumeX className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
         </button>}
-        {error && !(isInstagram && muted) && <p role="status" className="pointer-events-none absolute bottom-14 left-4 right-4 z-20 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
-        <div className={`absolute inset-x-0 bottom-0 z-20 flex h-[52px] items-center gap-2 bg-gradient-to-t from-black/85 to-transparent px-2 transition-opacity duration-300 sm:gap-3 sm:px-4 ${showControls && !(isInstagram && muted) ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+        {error && !(isInstagram && muted && !nativeAudioUnlocked) && <p role="status" className="pointer-events-none absolute bottom-14 left-4 right-4 z-20 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
+        <div className={`absolute inset-x-0 bottom-0 z-20 flex h-[52px] items-center gap-2 bg-gradient-to-t from-black/85 to-transparent px-2 transition-opacity duration-300 sm:gap-3 sm:px-4 ${showControls && !(isInstagram && muted && !nativeAudioUnlocked) ? "opacity-100" : "pointer-events-none opacity-0"}`}>
           <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(position)} / {formatTime(duration)}</span>
           <div role="progressbar" aria-label="Video timeline" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)} aria-valuetext={`${formatTime(position)} of ${formatTime(duration)}`} className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25">
             <div className="h-full rounded-full bg-[#07b4ba] transition-[width] duration-200" style={{ width: `${progress}%` }} />

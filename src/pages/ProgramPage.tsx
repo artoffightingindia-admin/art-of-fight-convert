@@ -403,14 +403,15 @@ export default function ProgramPage() {
   const testimonialUnmuteRecoveryTimer = useRef<number | null>(null);
   const testimonialSectionRef = useRef<HTMLDivElement>(null);
   const [isTestimonialMuted, setIsTestimonialMuted] = useState(() => /Instagram/i.test(navigator.userAgent));
+  const [testimonialNativeAudioUnlocked, setTestimonialNativeAudioUnlocked] = useState(false);
   const [testimonialMutePending, setTestimonialMutePending] = useState(false);
   const [isTestimonialInView, setIsTestimonialInView] = useState(false);
   const [testimonialNeedsPlay, setTestimonialNeedsPlay] = useState(false);
   const [testimonialError, setTestimonialError] = useState("");
 
   useEffect(() => {
-    if (testimonialIframeRef.current) testimonialIframeRef.current.style.pointerEvents = isInstagram && isTestimonialMuted ? "auto" : "none";
-  }, [isInstagram, isTestimonialMuted]);
+    if (testimonialIframeRef.current) testimonialIframeRef.current.style.pointerEvents = isInstagram && isTestimonialMuted && !testimonialNativeAudioUnlocked ? "auto" : "none";
+  }, [isInstagram, isTestimonialMuted, testimonialNativeAudioUnlocked]);
 
   // Dynamic Real-time Timer State
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00" });
@@ -462,6 +463,7 @@ export default function ProgramPage() {
     const mount = testimonialVideoRef.current;
     if (!isTestimonialInView || !mount) return;
     let disposed = false;
+    setTestimonialNativeAudioUnlocked(false);
     const iframe = document.createElement("iframe");
     iframe.className = `absolute inset-0 w-full h-full border-0 ${isInstagram ? "" : "scale-105"}`;
     const embedUrl = new URL(TESTIMONIAL_VIMEO_URL);
@@ -480,7 +482,10 @@ export default function ProgramPage() {
     const onVolume = ({ muted }: { muted: boolean }) => {
       if (disposed) return;
       setIsTestimonialMuted(muted);
-      if (!muted) setTestimonialError("");
+      if (!muted) {
+        setTestimonialNativeAudioUnlocked(true);
+        setTestimonialError("");
+      }
     };
     const onPlay = () => { if (!disposed) { setTestimonialNeedsPlay(false); setTestimonialError(""); } };
     const onPause = () => {
@@ -500,7 +505,11 @@ export default function ProgramPage() {
     player.on("error", onError);
     void player.ready().then(async () => {
       if (disposed) return;
-      void player.getMuted().then(value => { if (!disposed) setIsTestimonialMuted(value); }).catch(() => {});
+      void player.getMuted().then(value => {
+        if (disposed) return;
+        setIsTestimonialMuted(value);
+        if (!value) setTestimonialNativeAudioUnlocked(true);
+      }).catch(() => {});
       try { await player.play(); }
       catch {
         if (disposed) return;
@@ -1017,19 +1026,19 @@ export default function ProgramPage() {
             
             <div ref={testimonialSectionRef} className="flex-1 max-w-full md:max-w-[550px] w-full relative group">
               <Reveal type="fade-right" duration={1200}>
-                <div className={`relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] select-none ${isInstagram && isTestimonialMuted ? "pointer-events-auto" : "pointer-events-none"}`}>
+                <div className={`relative w-full aspect-video overflow-hidden rounded-[10px] bg-black shadow-[0_0_30px_rgba(0,0,0,0.5)] select-none ${isInstagram && isTestimonialMuted && !testimonialNativeAudioUnlocked ? "pointer-events-auto" : "pointer-events-none"}`}>
                   <div ref={testimonialVideoRef} className="absolute inset-0" />
                   <div className="absolute inset-0 bg-transparent pointer-events-none z-10" />
-                  {testimonialNeedsPlay && !(isInstagram && isTestimonialMuted) && (
+                  {testimonialNeedsPlay && !(isInstagram && isTestimonialMuted && !testimonialNativeAudioUnlocked) && (
                     <button type="button" onClick={playTestimonial} className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 text-white pointer-events-auto" aria-label="Play student results video">
                       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#07b4ba]"><Play aria-hidden="true" /></span>
                     </button>
                   )}
-                  {testimonialError && !(isInstagram && isTestimonialMuted) && <p role="status" className="pointer-events-none absolute top-3 left-3 right-3 z-30 rounded bg-black/85 p-3 text-center text-sm text-white">{testimonialError}</p>}
+                  {testimonialError && !(isInstagram && isTestimonialMuted && !testimonialNativeAudioUnlocked) && <p role="status" className="pointer-events-none absolute top-3 left-3 right-3 z-30 rounded bg-black/85 p-3 text-center text-sm text-white">{testimonialError}</p>}
                 </div>
               </Reveal>
 
-              {!(isInstagram && isTestimonialMuted) && <button
+              {!(isInstagram && isTestimonialMuted && !testimonialNativeAudioUnlocked) && <button
                 onClick={toggleTestimonialMute}
                 disabled={testimonialMutePending}
                 className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"

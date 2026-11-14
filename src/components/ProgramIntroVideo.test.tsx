@@ -36,6 +36,7 @@ vi.mock("@vimeo/player", () => ({
     emit(name: string, data?: unknown) {
       if (name === "play") this.paused = false;
       if (name === "pause") this.paused = true;
+      if (name === "volumechange") this.isMuted = (data as { muted: boolean }).muted;
       this.listeners.get(name)?.(data);
     }
     constructor(iframe: HTMLIFrameElement) {
@@ -201,11 +202,14 @@ describe("ProgramIntroVideo", () => {
       expect(player.iframe.style.pointerEvents).toBe("auto");
       expect(screen.queryByRole("button", { name: "Unmute video" })).not.toBeInTheDocument();
       act(() => player.emit("volumechange", { muted: false }));
+      const mute = await screen.findByRole("button", { name: "Mute video" });
+      expect(player.iframe.style.pointerEvents).toBe("none");
+      fireEvent.click(mute);
+      const unmute = await screen.findByRole("button", { name: "Unmute video" });
+      expect(player.iframe.style.pointerEvents).toBe("none");
+      fireEvent.click(unmute);
       expect(await screen.findByRole("button", { name: "Mute video" })).toBeInTheDocument();
       expect(player.iframe.style.pointerEvents).toBe("none");
-      act(() => player.emit("volumechange", { muted: true }));
-      expect(screen.queryByRole("button", { name: "Unmute video" })).not.toBeInTheDocument();
-      expect(player.iframe.style.pointerEvents).toBe("auto");
     } finally {
       userAgent.mockRestore();
     }
