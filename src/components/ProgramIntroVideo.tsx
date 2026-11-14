@@ -17,8 +17,6 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
-  const scrubbingRef = useRef(false);
-  const seekVersionRef = useRef(0);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [ended, setEnded] = useState(false);
@@ -26,7 +24,6 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const [mutePending, setMutePending] = useState(false);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [seekPosition, setSeekPosition] = useState<number | null>(null);
   const [fullscreen, setFullscreen] = useState(false);
   const [error, setError] = useState("");
 
@@ -44,10 +41,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     setMutePending(false);
     setPosition(0);
     setDuration(0);
-    setSeekPosition(null);
     setError("");
-    scrubbingRef.current = false;
-    seekVersionRef.current += 1;
 
     let embedUrl: URL;
     try {
@@ -190,23 +184,6 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     }
   };
 
-  const seek = async (seconds: number) => {
-    const player = playerRef.current;
-    if (!player || duration <= 0) return;
-    const version = ++seekVersionRef.current;
-    try {
-      const actual = await player.setCurrentTime(Math.max(0, Math.min(seconds, duration)));
-      if (playerRef.current !== player || version !== seekVersionRef.current) return;
-      setPosition(actual);
-      setEnded(actual >= duration);
-      setSeekPosition(null);
-    } catch {
-      if (playerRef.current !== player || version !== seekVersionRef.current) return;
-      setSeekPosition(null);
-      setError("That position could not be reached. Please try again.");
-    }
-  };
-
   const toggleFullscreen = async () => {
     const container = containerRef.current;
     const player = playerRef.current;
@@ -228,7 +205,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     }
   };
 
-  const shownPosition = seekPosition ?? position;
+  const progress = duration > 0 ? Math.min(100, Math.max(0, (position / duration) * 100)) : 0;
   return (
     <div
       ref={containerRef}
@@ -252,29 +229,10 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
         {error && <p role="status" className="absolute left-4 right-4 top-4 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
       </div>
       <div className="flex min-h-[52px] items-center gap-2 bg-[#10171a] px-2 sm:gap-3 sm:px-4">
-        <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(shownPosition)} / {formatTime(duration)}</span>
-        <input
-          type="range"
-          aria-label="Video timeline"
-          aria-valuetext={`${formatTime(shownPosition)} of ${formatTime(duration)}`}
-          min={0}
-          max={duration || 1}
-          step={0.1}
-          value={Math.min(shownPosition, duration || 1)}
-          disabled={!ready || duration <= 0}
-          className="h-11 min-w-0 flex-1 cursor-pointer accent-[#07b4ba] disabled:opacity-40"
-          onPointerDown={event => { scrubbingRef.current = true; event.currentTarget.setPointerCapture(event.pointerId); }}
-          onChange={event => {
-            const value = Number(event.currentTarget.value);
-            setSeekPosition(value);
-            if (!scrubbingRef.current) void seek(value);
-          }}
-          onPointerUp={event => { scrubbingRef.current = false; void seek(Number(event.currentTarget.value)); }}
-          onPointerCancel={() => { scrubbingRef.current = false; setSeekPosition(null); }}
-          onBlur={event => {
-            if (scrubbingRef.current) { scrubbingRef.current = false; void seek(Number(event.currentTarget.value)); }
-          }}
-        />
+        <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(position)} / {formatTime(duration)}</span>
+        <div role="progressbar" aria-label="Video timeline" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)} aria-valuetext={`${formatTime(position)} of ${formatTime(duration)}`} className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25">
+          <div className="h-full rounded-full bg-[#07b4ba] transition-[width] duration-200" style={{ width: `${progress}%` }} />
+        </div>
         <button type="button" onClick={toggleFullscreen} disabled={!ready} className="flex h-11 w-11 shrink-0 items-center justify-center rounded text-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba] disabled:opacity-40" aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
           {fullscreen ? <Minimize className="h-5 w-5" aria-hidden="true" /> : <Maximize className="h-5 w-5" aria-hidden="true" />}
         </button>

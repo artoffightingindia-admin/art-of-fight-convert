@@ -86,17 +86,21 @@ describe("ProgramIntroVideo", () => {
     expect(screen.queryByRole("button", { name: "Play introduction" })).not.toBeInTheDocument();
   });
 
-  it("seeks from the timeline and enables sound through the SDK", async () => {
+  it("shows progress without seeking and lets visitors mute or unmute", async () => {
     mock.blockedAttempts = 1;
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
-    const timeline = screen.getByRole("slider", { name: "Video timeline" });
-    await waitFor(() => expect(timeline).toBeEnabled());
-    fireEvent.change(timeline, { target: { value: "120" } });
-    await waitFor(() => expect(player.setCurrentTime).toHaveBeenCalledWith(120));
-    fireEvent.click(screen.getByRole("button", { name: "Unmute video" }));
+    const timeline = screen.getByRole("progressbar", { name: "Video timeline" });
+    act(() => player.emit("timeupdate", { seconds: 120, duration: 300 }));
+    expect(timeline).toHaveAttribute("aria-valuenow", "40");
+    expect(screen.queryByRole("slider", { name: "Video timeline" })).not.toBeInTheDocument();
+    fireEvent.click(timeline);
+    expect(player.setCurrentTime).not.toHaveBeenCalled();
+    fireEvent.click(await screen.findByRole("button", { name: "Unmute video" }));
     await waitFor(() => expect(player.setMuted).toHaveBeenCalledWith(false));
-    expect(await screen.findByRole("button", { name: "Mute video" })).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole("button", { name: "Mute video" }));
+    await waitFor(() => expect(player.setMuted).toHaveBeenCalledWith(true));
+    expect(await screen.findByRole("button", { name: "Unmute video" })).toBeInTheDocument();
   });
 
   it("continues playing if the browser pauses the stream while unmuting", async () => {
