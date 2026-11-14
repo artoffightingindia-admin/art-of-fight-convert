@@ -267,7 +267,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     >
       <div className="relative aspect-video w-full" style={fullscreen ? { aspectRatio: "auto", height: "100%" } : undefined}>
         <div ref={mountRef} className="absolute inset-0 [&_iframe]:pointer-events-none [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
-        {!hasStarted && <img src="/images/program-intro-poster.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
+        {!hasStarted && <img src="/images/program-intro-thumbnail.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
         {ready && !playing && (
           <button type="button" onClick={startPlayback} className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba]" aria-label={ended ? "Replay introduction" : "Play introduction"}>
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#07b4ba] text-black">{ended ? <RotateCcw aria-hidden="true" /> : <Play aria-hidden="true" />}</span>
