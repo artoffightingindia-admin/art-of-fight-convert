@@ -17,6 +17,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
+  const hideControlsTimer = useRef<number | null>(null);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -27,6 +28,17 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const [duration, setDuration] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
   const [error, setError] = useState("");
+  const [showControls, setShowControls] = useState(false);
+
+  useEffect(() => () => {
+    if (hideControlsTimer.current !== null) window.clearTimeout(hideControlsTimer.current);
+  }, []);
+
+  const revealTouchControls = () => {
+    setShowControls(true);
+    if (hideControlsTimer.current !== null) window.clearTimeout(hideControlsTimer.current);
+    hideControlsTimer.current = window.setTimeout(() => setShowControls(false), 3000);
+  };
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -225,11 +237,16 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     <div
       ref={containerRef}
       className="relative mx-auto w-full overflow-hidden rounded-lg border border-white/15 bg-black shadow-[0_18px_60px_rgba(0,0,0,0.4)] fullscreen:rounded-none"
+      onMouseEnter={() => setShowControls(true)}
+      onMouseLeave={() => setShowControls(false)}
+      onPointerDown={event => { if (event.pointerType === "touch") revealTouchControls(); }}
+      onFocusCapture={() => setShowControls(true)}
+      onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setShowControls(false); }}
       style={fullscreen ? { width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" } : undefined}
       role="region"
       aria-label="AOF program introduction video"
     >
-      <div className="relative aspect-video w-full" style={fullscreen ? { aspectRatio: "auto", height: "calc(100% - 52px)" } : undefined}>
+      <div className="relative aspect-video w-full" style={fullscreen ? { aspectRatio: "auto", height: "100%" } : undefined}>
         <div ref={mountRef} className="absolute inset-0 [&_iframe]:pointer-events-none [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
         {!hasStarted && <img src="/images/program-intro-poster.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
         {ready && !playing && (
@@ -238,19 +255,19 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
             <span className="text-sm font-semibold">{ended ? "Watch again" : "Play video"}</span>
           </button>
         )}
-        <button type="button" onClick={toggleMute} disabled={!ready || mutePending} className="absolute left-3 top-3 z-20 flex h-14 w-14 items-center justify-center rounded-full border border-white/30 bg-black/65 text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-[#07b4ba] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 sm:h-16 sm:w-16" aria-label={muted ? "Unmute video" : "Mute video"}>
-          {muted ? <VolumeX className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" /> : <Volume2 className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />}
+        <button type="button" onClick={toggleMute} disabled={!ready || mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-[#07b4ba] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
+          {muted ? <VolumeX className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
         </button>
         {error && <p role="status" className="absolute left-4 right-4 top-4 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
-      </div>
-      <div className="flex min-h-[52px] items-center gap-2 bg-[#10171a] px-2 sm:gap-3 sm:px-4">
-        <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(position)} / {formatTime(duration)}</span>
-        <div role="progressbar" aria-label="Video timeline" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)} aria-valuetext={`${formatTime(position)} of ${formatTime(duration)}`} className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25">
-          <div className="h-full rounded-full bg-[#07b4ba] transition-[width] duration-200" style={{ width: `${progress}%` }} />
+        <div className={`absolute inset-x-0 bottom-0 z-20 flex h-[52px] items-center gap-2 bg-gradient-to-t from-black/85 to-transparent px-2 transition-opacity duration-300 sm:gap-3 sm:px-4 ${showControls ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+          <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(position)} / {formatTime(duration)}</span>
+          <div role="progressbar" aria-label="Video timeline" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)} aria-valuetext={`${formatTime(position)} of ${formatTime(duration)}`} className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25">
+            <div className="h-full rounded-full bg-[#07b4ba] transition-[width] duration-200" style={{ width: `${progress}%` }} />
+          </div>
+          <button type="button" onClick={toggleFullscreen} disabled={!ready} className="flex h-11 w-11 shrink-0 items-center justify-center rounded text-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba] disabled:opacity-40" aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
+            {fullscreen ? <Minimize className="h-5 w-5" aria-hidden="true" /> : <Maximize className="h-5 w-5" aria-hidden="true" />}
+          </button>
         </div>
-        <button type="button" onClick={toggleFullscreen} disabled={!ready} className="flex h-11 w-11 shrink-0 items-center justify-center rounded text-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba] disabled:opacity-40" aria-label={fullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
-          {fullscreen ? <Minimize className="h-5 w-5" aria-hidden="true" /> : <Maximize className="h-5 w-5" aria-hidden="true" />}
-        </button>
       </div>
     </div>
   );
