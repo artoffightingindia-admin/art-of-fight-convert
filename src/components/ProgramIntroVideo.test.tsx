@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProgramIntroVideo from "./ProgramIntroVideo";
 
-const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0, blockedMutedAttempts: 0, holdAudibleAttempt: false, pauseOnUnmute: false }));
+const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0, blockedMutedAttempts: 0, holdAudibleAttempt: false, holdUnmuteRequest: false, rejectUnmuteRequest: false, pauseOnUnmute: false }));
 vi.mock("@vimeo/player", () => ({
   default: class {
     listeners = new Map<string, (data?: unknown) => void>();
@@ -20,11 +20,14 @@ vi.mock("@vimeo/player", () => ({
     });
     setCurrentTime = vi.fn(async (value: number) => value);
     setMuted = vi.fn(async (value: boolean) => {
+      if (!value && mock.holdUnmuteRequest) return await new Promise<boolean>(() => {});
+      if (!value && mock.rejectUnmuteRequest) throw new Error("NotAllowedError");
       this.isMuted = value;
       if (!value && mock.pauseOnUnmute) queueMicrotask(() => this.emit("pause"));
       return value;
     });
     getPaused = vi.fn(async () => this.paused);
+    getMuted = vi.fn(async () => this.isMuted);
     destroy = vi.fn().mockResolvedValue(undefined);
     requestFullscreen = vi.fn().mockResolvedValue(undefined);
     exitFullscreen = vi.fn().mockResolvedValue(undefined);
@@ -43,7 +46,7 @@ vi.mock("@vimeo/player", () => ({
 }));
 
 describe("ProgramIntroVideo", () => {
-  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; mock.blockedMutedAttempts = 0; mock.holdAudibleAttempt = false; mock.pauseOnUnmute = false; });
+  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; mock.blockedMutedAttempts = 0; mock.holdAudibleAttempt = false; mock.holdUnmuteRequest = false; mock.rejectUnmuteRequest = false; mock.pauseOnUnmute = false; });
 
   it("autoplays with sound when allowed, without pause controls or pause traps", async () => {
     const { unmount } = render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
@@ -141,7 +144,7 @@ describe("ProgramIntroVideo", () => {
     expect(screen.getByRole("button", { name: "Mute video" })).toBeInTheDocument();
   });
 
-  it("does not resume a previously paused video just because sound is enabled", async () => {
+  it("resumes a previously paused video from an explicit unmute tap", async () => {
     mock.blockedAttempts = 1;
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
@@ -149,7 +152,37 @@ describe("ProgramIntroVideo", () => {
     act(() => player.emit("pause"));
     fireEvent.click(screen.getByRole("button", { name: "Unmute video" }));
     await waitFor(() => expect(screen.getByRole("button", { name: "Mute video" })).toBeEnabled());
-    expect(player.play).toHaveBeenCalledTimes(2);
-    expect(player.paused).toBe(true);
+    expect(player.play).toHaveBeenCalledTimes(3);
+    expect(player.paused).toBe(false);
+  });
+
+  it("keeps the button clickable and reports a rejected unmute accurately", async () => {
+    mock.blockedAttempts = 1;
+    mock.rejectUnmuteRequest = true;
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    const button = await screen.findByRole("button", { name: "Unmute video" });
+    fireEvent.click(button);
+    await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Sound could not be enabled"));
+    expect(screen.getByRole("button", { name: "Unmute video" })).toBeEnabled();
+    expect(player.getMuted).toHaveBeenCalled();
+  });
+
+  it("does not claim sound is on when Vimeo's unmute request remains pending", async () => {
+    mock.blockedAttempts = 1;
+    mock.holdUnmuteRequest = true;
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    const button = await screen.findByRole("button", { name: "Unmute video" });
+    vi.useFakeTimers();
+    try {
+      fireEvent.click(button);
+      await act(async () => { await vi.advanceTimersByTimeAsync(1200); });
+      expect(player.getMuted).toHaveBeenCalled();
+      expect(screen.getByRole("button", { name: "Unmute video" })).toBeEnabled();
+      expect(screen.getByRole("status")).toHaveTextContent("Sound could not be enabled");
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

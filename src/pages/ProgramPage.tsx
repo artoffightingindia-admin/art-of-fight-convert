@@ -396,10 +396,13 @@ export default function ProgramPage() {
   // Testimonial Section Video Refs/States
   const testimonialVideoRef = useRef<HTMLDivElement>(null);
   const testimonialPlayerRef = useRef<Player | null>(null);
+  const testimonialMuteActionId = useRef(0);
+  const testimonialUnmuteRecoveryRef = useRef(false);
+  const testimonialUnmuteRecoveryTimer = useRef<number | null>(null);
   const testimonialSectionRef = useRef<HTMLDivElement>(null);
-  const [isTestimonialMuted, setIsTestimonialMuted] = useState(false);
+  const [isTestimonialMuted, setIsTestimonialMuted] = useState(() => /Instagram/i.test(navigator.userAgent));
+  const [testimonialMutePending, setTestimonialMutePending] = useState(false);
   const [isTestimonialInView, setIsTestimonialInView] = useState(false);
-  const [isTestimonialReady, setIsTestimonialReady] = useState(false);
   const [testimonialNeedsPlay, setTestimonialNeedsPlay] = useState(false);
   const [testimonialError, setTestimonialError] = useState("");
 
@@ -466,15 +469,30 @@ export default function ProgramPage() {
     mount.appendChild(iframe);
     const player = new Player(iframe);
     testimonialPlayerRef.current = player;
-    const onVolume = ({ muted }: { muted: boolean }) => { if (!disposed) setIsTestimonialMuted(muted); };
+    const onVolume = ({ muted }: { muted: boolean }) => {
+      if (disposed) return;
+      setIsTestimonialMuted(muted);
+      if (!muted) setTestimonialError("");
+    };
     const onPlay = () => { if (!disposed) { setTestimonialNeedsPlay(false); setTestimonialError(""); } };
+    const onPause = () => {
+      if (disposed || !testimonialUnmuteRecoveryRef.current) return;
+      testimonialUnmuteRecoveryRef.current = false;
+      void player.play().catch(() => {
+        if (!disposed) {
+          setTestimonialNeedsPlay(true);
+          setTestimonialError("Playback paused while enabling sound. Tap Play to continue.");
+        }
+      });
+    };
     const onError = () => { if (!disposed) setTestimonialError("The video could not load. Please refresh and try again."); };
     player.on("volumechange", onVolume);
     player.on("play", onPlay);
+    player.on("pause", onPause);
     player.on("error", onError);
     void player.ready().then(async () => {
       if (disposed) return;
-      setIsTestimonialReady(true);
+      void player.getMuted().then(value => { if (!disposed) setIsTestimonialMuted(value); }).catch(() => {});
       try { await player.play(); }
       catch {
         if (disposed) return;
@@ -489,8 +507,12 @@ export default function ProgramPage() {
     }).catch(onError);
     return () => {
       disposed = true;
+      testimonialMuteActionId.current += 1;
+      testimonialUnmuteRecoveryRef.current = false;
+      if (testimonialUnmuteRecoveryTimer.current !== null) window.clearTimeout(testimonialUnmuteRecoveryTimer.current);
       player.off("volumechange", onVolume);
       player.off("play", onPlay);
+      player.off("pause", onPause);
       player.off("error", onError);
       if (testimonialPlayerRef.current === player) testimonialPlayerRef.current = null;
       void player.destroy().catch(() => {}).finally(() => iframe.remove());
@@ -511,11 +533,45 @@ export default function ProgramPage() {
 
   const toggleTestimonialMute = async () => {
     const player = testimonialPlayerRef.current;
-    if (!player) return;
+    if (!player || testimonialMutePending) return;
+    const nextMuted = !isTestimonialMuted;
+    const actionId = ++testimonialMuteActionId.current;
+    const isCurrent = () => testimonialPlayerRef.current === player && testimonialMuteActionId.current === actionId;
+    let timeoutId: number | null = null;
+    setTestimonialMutePending(true);
+    setTestimonialError("");
     try {
-      const muted = await player.setMuted(!isTestimonialMuted);
-      if (testimonialPlayerRef.current === player) setIsTestimonialMuted(muted);
-    } catch { setTestimonialError("Sound could not be changed. Please try again."); }
+      const muteRequest = player.setMuted(nextMuted);
+      if (!nextMuted) {
+        testimonialUnmuteRecoveryRef.current = true;
+        if (testimonialUnmuteRecoveryTimer.current !== null) window.clearTimeout(testimonialUnmuteRecoveryTimer.current);
+        testimonialUnmuteRecoveryTimer.current = window.setTimeout(() => { testimonialUnmuteRecoveryRef.current = false; }, 1600);
+      } else {
+        testimonialUnmuteRecoveryRef.current = false;
+      }
+      const playbackRequest = nextMuted ? Promise.resolve() : player.play();
+      const result = await Promise.race([
+        Promise.allSettled([muteRequest, playbackRequest]),
+        new Promise<null>(resolve => { timeoutId = window.setTimeout(() => resolve(null), 1200); }),
+      ]);
+      if (!isCurrent()) return;
+      if (result && result[0].status === "fulfilled" && result[0].value === nextMuted && result[1].status === "fulfilled") {
+        setIsTestimonialMuted(nextMuted);
+        return;
+      }
+      const actual = await Promise.race([
+        player.getMuted().catch(() => null),
+        new Promise<null>(resolve => window.setTimeout(() => resolve(null), 350)),
+      ]);
+      if (!isCurrent()) return;
+      if (actual !== null) setIsTestimonialMuted(actual);
+      setTestimonialError(nextMuted ? "Sound could not be changed. Please try again." : actual === false ? "Sound is on. Tap Play to continue." : "Sound could not be enabled here. Please open this page in your browser.");
+    } catch {
+      if (isCurrent()) setTestimonialError("Sound could not be changed. Please try again.");
+    } finally {
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+      if (isCurrent()) setTestimonialMutePending(false);
+    }
   };
 
   const playTestimonial = async () => {
@@ -966,7 +1022,7 @@ export default function ProgramPage() {
 
               <button
                 onClick={toggleTestimonialMute}
-                disabled={!isTestimonialReady}
+                disabled={testimonialMutePending}
                 className="absolute bottom-4 left-4 z-20 flex items-center justify-center p-3 bg-black/60 hover:bg-[#07b4ba] text-white hover:text-black rounded-full border border-white/20 transition-all duration-300 shadow-md backdrop-blur-sm cursor-pointer pointer-events-auto"
                 aria-label={isTestimonialMuted ? "Unmute feedback video" : "Mute feedback video"}
               >

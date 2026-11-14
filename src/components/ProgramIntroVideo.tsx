@@ -17,6 +17,9 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
+  const muteActionId = useRef(0);
+  const unmuteRecoveryRef = useRef(false);
+  const unmuteRecoveryTimer = useRef<number | null>(null);
   const hideControlsTimer = useRef<number | null>(null);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -54,7 +57,9 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     setPlaying(false);
     setHasStarted(false);
     setEnded(false);
-    setMuted(false);
+    // Instagram's WebView commonly starts muted while Vimeo is still booting.
+    // Show an actionable sound control before the SDK ready promise settles.
+    setMuted(/Instagram/i.test(navigator.userAgent));
     setMutePending(false);
     setPosition(0);
     setDuration(0);
@@ -134,13 +139,24 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       setError("");
     };
     const onPlaying = () => confirmPlayback();
-    const onPause = () => { if (!disposed) setPlaying(false); };
+    const onPause = () => {
+      if (disposed) return;
+      setPlaying(false);
+      if (unmuteRecoveryRef.current) {
+        unmuteRecoveryRef.current = false;
+        void player.play().catch(() => setError("Playback paused while enabling sound. Tap Play to continue."));
+      }
+    };
     const onEnded = () => {
       if (disposed) return;
       setPlaying(false);
       setEnded(true);
     };
-    const onVolume = (data: { muted: boolean }) => { if (!disposed) setMuted(data.muted); };
+    const onVolume = (data: { muted: boolean }) => {
+      if (disposed) return;
+      setMuted(data.muted);
+      if (!data.muted) setError("");
+    };
     const onError = () => {
       if (!disposed) setError("The video could not load. Please refresh the page and try again.");
     };
@@ -160,6 +176,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       if (disposed) return;
       setReady(true);
       void player.getDuration().then(value => { if (!disposed) setDuration(value); }).catch(() => {});
+      void player.getMuted().then(value => { if (!disposed) setMuted(value); }).catch(() => {});
       // Start the sound-on attempt immediately. If the browser neither begins
       // playback nor rejects promptly, fall back without waiting indefinitely.
       if (playbackConfirmed) return;
@@ -169,6 +186,9 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
 
     return () => {
       disposed = true;
+      muteActionId.current += 1;
+      unmuteRecoveryRef.current = false;
+      if (unmuteRecoveryTimer.current !== null) window.clearTimeout(unmuteRecoveryTimer.current);
       clearStartupTimer();
       player.off("timeupdate", onTime);
       player.off("play", onPlay);
@@ -204,29 +224,52 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const player = playerRef.current;
     if (!player || mutePending) return;
     const nextMuted = !muted;
-    const keepPlaying = !nextMuted && playing;
+    const actionId = ++muteActionId.current;
+    const isCurrent = () => playerRef.current === player && muteActionId.current === actionId;
     setMutePending(true);
+    setError("");
+    let timeoutId: number | null = null;
     try {
-      // Send both requests during the click's user activation. Some browsers pause
-      // a muted autoplay stream when it becomes audible through the iframe SDK.
+      // Both calls must begin inside the tap's user activation, including when
+      // the video was paused by the browser's autoplay policy.
       const muteRequest = player.setMuted(nextMuted);
-      const playbackRequest = keepPlaying ? player.play().catch(() => {}) : Promise.resolve();
-      // Vimeo may leave the SDK promise pending even after its volume event fires.
-      // Release the control promptly so visitors can always change their mind.
-      const value = await Promise.race([
-        muteRequest,
-        new Promise<boolean>(resolve => window.setTimeout(() => resolve(nextMuted), 1200)),
+      if (!nextMuted) {
+        unmuteRecoveryRef.current = true;
+        if (unmuteRecoveryTimer.current !== null) window.clearTimeout(unmuteRecoveryTimer.current);
+        unmuteRecoveryTimer.current = window.setTimeout(() => { unmuteRecoveryRef.current = false; }, 1600);
+      } else {
+        unmuteRecoveryRef.current = false;
+      }
+      const playbackRequest = nextMuted ? Promise.resolve() : player.play();
+      const result = await Promise.race([
+        Promise.allSettled([muteRequest, playbackRequest]),
+        new Promise<null>(resolve => { timeoutId = window.setTimeout(() => resolve(null), 1200); }),
       ]);
-      if (playerRef.current !== player) return;
-      setMuted(value);
-      void playbackRequest.then(async () => {
-        // Recover only this explicit unmute action; external pauses remain paused.
-        if (keepPlaying && playerRef.current === player && await player.getPaused()) await player.play();
-      }).catch(() => {});
+      if (!isCurrent()) return;
+      if (result && result[0].status === "fulfilled" && result[0].value === nextMuted && result[1].status === "fulfilled") {
+        setMuted(nextMuted);
+        return;
+      }
+      // A rejected or stalled SDK request is not evidence that sound changed.
+      // Query Vimeo briefly without claiming success if the query also stalls.
+      const actual = await Promise.race([
+        player.getMuted().catch(() => null),
+        new Promise<null>(resolve => window.setTimeout(() => resolve(null), 350)),
+      ]);
+      if (!isCurrent()) return;
+      if (actual !== null) setMuted(actual);
+      if (nextMuted) {
+        setError("Sound could not be changed here. Please try again.");
+      } else if (actual === false) {
+        setError("Sound is on. Tap Play to continue.");
+      } else {
+        setError("Sound could not be enabled here. Please open this page in your browser.");
+      }
     } catch {
-      if (playerRef.current === player) setError("Sound or playback could not be updated. Please try again.");
+      if (isCurrent()) setError("Sound could not be updated. Please try again.");
     } finally {
-      if (playerRef.current === player) setMutePending(false);
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+      if (isCurrent()) setMutePending(false);
     }
   };
 
@@ -274,10 +317,10 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
             <span className="text-sm font-semibold">{ended ? "Watch again" : "Play video"}</span>
           </button>
         )}
-        <button type="button" onClick={toggleMute} disabled={!ready || mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
+        <button type="button" onClick={toggleMute} disabled={mutePending} className={`absolute left-3 top-3 z-20 flex items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#07b4ba] disabled:opacity-40 sm:left-4 sm:top-4 ${muted ? "h-14 w-14 border-white/30 bg-black/65 text-white sm:h-16 sm:w-16" : "h-10 w-10 border-white/10 bg-black/25 text-white/60 sm:h-11 sm:w-11"}`} aria-label={muted ? "Unmute video" : "Mute video"}>
           {muted ? <VolumeX className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
         </button>
-        {error && <p role="status" className="absolute left-4 right-4 top-4 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
+        {error && <p role="status" className="pointer-events-none absolute bottom-14 left-4 right-4 z-20 rounded bg-black/85 px-4 py-3 text-center text-sm text-white">{error}</p>}
         <div className={`absolute inset-x-0 bottom-0 z-20 flex h-[52px] items-center gap-2 bg-gradient-to-t from-black/85 to-transparent px-2 transition-opacity duration-300 sm:gap-3 sm:px-4 ${showControls ? "opacity-100" : "pointer-events-none opacity-0"}`}>
           <span className="shrink-0 text-[11px] tabular-nums text-white/75">{formatTime(position)} / {formatTime(duration)}</span>
           <div role="progressbar" aria-label="Video timeline" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)} aria-valuetext={`${formatTime(position)} of ${formatTime(duration)}`} className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/25">
