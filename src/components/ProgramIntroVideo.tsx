@@ -167,12 +167,24 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const toggleMute = async () => {
     const player = playerRef.current;
     if (!player || mutePending) return;
+    const nextMuted = !muted;
+    const keepPlaying = !nextMuted && playing;
     setMutePending(true);
     try {
-      const value = await player.setMuted(!muted);
-      if (playerRef.current === player) setMuted(value);
+      // Send both requests during the click's user activation. Some browsers pause
+      // a muted autoplay stream when it becomes audible through the iframe SDK.
+      const muteRequest = player.setMuted(nextMuted);
+      const playbackRequest = keepPlaying ? player.play().catch(() => {}) : Promise.resolve();
+      const value = await muteRequest;
+      if (playerRef.current !== player) return;
+      setMuted(value);
+      await playbackRequest;
+      // Recover only this explicit unmute action; external pause events still remain paused.
+      if (keepPlaying && playerRef.current === player && await player.getPaused()) {
+        await player.play();
+      }
     } catch {
-      setError("Sound could not be changed. Please try again.");
+      if (playerRef.current === player) setError("Sound or playback could not be updated. Please try again.");
     } finally {
       if (playerRef.current === player) setMutePending(false);
     }
