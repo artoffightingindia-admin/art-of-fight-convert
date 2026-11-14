@@ -2,16 +2,17 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProgramIntroVideo from "./ProgramIntroVideo";
 
-const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0, blockedMutedAttempts: 0, pauseOnUnmute: false }));
+const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0, blockedMutedAttempts: 0, holdAudibleAttempt: false, pauseOnUnmute: false }));
 vi.mock("@vimeo/player", () => ({
   default: class {
     listeners = new Map<string, (data?: unknown) => void>();
     iframe: HTMLIFrameElement;
     paused = true;
-    isMuted = true;
+    isMuted = false;
     ready = vi.fn().mockResolvedValue(undefined);
     getDuration = vi.fn().mockResolvedValue(300);
     play = vi.fn(async () => {
+      if (!this.isMuted && mock.holdAudibleAttempt) return await new Promise<void>(() => {});
       if (this.isMuted && mock.blockedMutedAttempts > 0) { mock.blockedMutedAttempts -= 1; throw new Error("NotAllowedError"); }
       if (!this.isMuted && mock.blockedAttempts > 0) { mock.blockedAttempts -= 1; throw new Error("NotAllowedError"); }
       this.emit("play");
@@ -42,20 +43,20 @@ vi.mock("@vimeo/player", () => ({
 }));
 
 describe("ProgramIntroVideo", () => {
-  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; mock.blockedMutedAttempts = 0; mock.pauseOnUnmute = false; });
+  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; mock.blockedMutedAttempts = 0; mock.holdAudibleAttempt = false; mock.pauseOnUnmute = false; });
 
   it("autoplays with sound when allowed, without pause controls or pause traps", async () => {
     const { unmount } = render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
-    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
     const params = new URL(player.iframe.src).searchParams;
-    expect(Object.fromEntries(params)).toMatchObject({ autoplay: "1", muted: "1", controls: "0", keyboard: "0", loop: "0" });
-    expect(player.setMuted).toHaveBeenCalledWith(false);
+    expect(Object.fromEntries(params)).toMatchObject({ autoplay: "1", muted: "0", initial_quality: "360p", quality: "auto", controls: "0", keyboard: "0", loop: "0" });
+    expect(player.setMuted).not.toHaveBeenCalled();
     expect(screen.getByRole("button", { name: "Mute video" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /pause/i })).not.toBeInTheDocument();
     act(() => player.emit("pause"));
     expect(screen.getByRole("button", { name: "Play introduction" })).toBeInTheDocument();
-    expect(player.play).toHaveBeenCalledTimes(2);
+    expect(player.play).toHaveBeenCalledTimes(1);
     unmount();
     expect(player.destroy).toHaveBeenCalledOnce();
     expect(player.listeners.size).toBe(0);
@@ -64,7 +65,7 @@ describe("ProgramIntroVideo", () => {
   it("preserves the unlisted privacy hash when creating a restricted embed", async () => {
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456/abcdef" />);
     const player = mock.instances[0];
-    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
     expect(new URL(player.iframe.src).searchParams.get("h")).toBe("abcdef");
     expect(player.iframe.referrerPolicy).toBe("strict-origin-when-cross-origin");
   });
@@ -79,11 +80,30 @@ describe("ProgramIntroVideo", () => {
     expect(screen.queryByRole("button", { name: "Play introduction" })).not.toBeInTheDocument();
   });
 
+  it("switches to muted playback after 800ms when audible playback never settles", async () => {
+    vi.useFakeTimers();
+    try {
+      mock.holdAudibleAttempt = true;
+      render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+      const player = mock.instances[0];
+      await act(async () => { await Promise.resolve(); });
+      expect(player.play).toHaveBeenCalledTimes(1);
+      expect(player.setMuted).not.toHaveBeenCalled();
+      await act(async () => { await vi.advanceTimersByTimeAsync(800); });
+      expect(player.setMuted).toHaveBeenCalledWith(true);
+      expect(player.play).toHaveBeenCalledTimes(2);
+      expect(screen.getByRole("button", { name: "Unmute video" })).toBeInTheDocument();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("allows user-initiated playback when both audible and muted autoplay are blocked", async () => {
+    mock.blockedAttempts = 1;
     mock.blockedMutedAttempts = 1;
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
-    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(player.play).toHaveBeenCalledTimes(2));
     const play = await screen.findByRole("button", { name: "Play introduction" });
     fireEvent.click(play);
     await waitFor(() => expect(player.play).toHaveBeenCalledTimes(3));
@@ -95,12 +115,13 @@ describe("ProgramIntroVideo", () => {
     render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
     const player = mock.instances[0];
     const timeline = screen.getByRole("progressbar", { name: "Video timeline" });
+    const unmute = await screen.findByRole("button", { name: "Unmute video" });
     act(() => player.emit("timeupdate", { seconds: 120, duration: 300 }));
     expect(timeline).toHaveAttribute("aria-valuenow", "40");
     expect(screen.queryByRole("slider", { name: "Video timeline" })).not.toBeInTheDocument();
     fireEvent.click(timeline);
     expect(player.setCurrentTime).not.toHaveBeenCalled();
-    fireEvent.click(await screen.findByRole("button", { name: "Unmute video" }));
+    fireEvent.click(unmute);
     await waitFor(() => expect(player.setMuted).toHaveBeenCalledWith(false));
     fireEvent.click(await screen.findByRole("button", { name: "Mute video" }));
     await waitFor(() => expect(player.setMuted).toHaveBeenCalledWith(true));

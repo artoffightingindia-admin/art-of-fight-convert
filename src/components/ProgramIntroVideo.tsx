@@ -44,12 +44,9 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const mount = mountRef.current;
     if (!mount || !videoUrl) return;
     let disposed = false;
-    let playbackStarted = false;
-    let sdkReady = false;
-    let firstFrameSeen = false;
-    let soundAttempted = false;
-    let soundAttemptStarted = false;
-    let soundFallbackStarted = false;
+    let playbackConfirmed = false;
+    let fallbackStarted = false;
+    let startupTimer: number | null = null;
     // Give every effect its own node so Strict Mode cleanup cannot remove a new player.
     const host = document.createElement("div");
     mount.appendChild(host);
@@ -57,7 +54,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     setPlaying(false);
     setHasStarted(false);
     setEnded(false);
-    setMuted(true);
+    setMuted(false);
     setMutePending(false);
     setPosition(0);
     setDuration(0);
@@ -73,9 +70,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       embedUrl = new URL(`https://player.vimeo.com/video/${id}`);
       const hash = source.searchParams.get("h") || (!isPlayer ? path[1] : undefined);
       if (hash) embedUrl.searchParams.set("h", hash);
-      // Muted autoplay can begin as soon as Vimeo loads, before the SDK is ready.
-      // We still request sound once playback starts and keep it when allowed.
-      Object.entries({ autoplay: "1", muted: "1", preload: "auto", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+      Object.entries({ autoplay: "1", muted: "0", preload: "auto", initial_quality: "360p", quality: "auto", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     } catch {
       setError("The video is unavailable. Please try again later.");
       host.remove();
@@ -96,32 +91,31 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const player = new Player(iframe);
     playerRef.current = player;
 
-    const restoreMutedPlayback = async () => {
-      if (disposed || soundFallbackStarted) return;
-      soundFallbackStarted = true;
+    const clearStartupTimer = () => {
+      if (startupTimer !== null) window.clearTimeout(startupTimer);
+      startupTimer = null;
+    };
+
+    const confirmPlayback = () => {
+      if (disposed) return;
+      playbackConfirmed = true;
+      clearStartupTimer();
+      setHasStarted(true);
+    };
+
+    const startMutedFallback = async () => {
+      if (disposed || fallbackStarted || playbackConfirmed) return;
+      fallbackStarted = true;
+      clearStartupTimer();
       try {
         const value = await player.setMuted(true);
         if (disposed) return;
         setMuted(value);
-        if (await player.getPaused()) await player.play();
+        // The audible play promise may still be pending. A fresh muted request
+        // proceeds without waiting for that browser rejection.
+        await player.play();
       } catch {
         if (!disposed) setPlaying(false);
-      }
-    };
-
-    const trySoundAfterPlayback = async () => {
-      if (disposed || !sdkReady || !firstFrameSeen || soundAttempted) return;
-      soundAttempted = true;
-      soundAttemptStarted = true;
-      try {
-        const value = await player.setMuted(false);
-        if (disposed || soundFallbackStarted) return;
-        await player.play();
-        if (disposed || soundFallbackStarted) return;
-        setMuted(value);
-        soundAttemptStarted = false;
-      } catch {
-        void restoreMutedPlayback();
       }
     };
 
@@ -129,25 +123,18 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       if (disposed) return;
       setPosition(data.seconds);
       if (data.seconds > 0) {
-        firstFrameSeen = true;
-        setHasStarted(true);
-        void trySoundAfterPlayback();
+        confirmPlayback();
       }
       if (data.duration > 0) setDuration(data.duration);
     };
     const onPlay = () => {
       if (disposed) return;
-      playbackStarted = true;
       setPlaying(true);
       setEnded(false);
       setError("");
     };
-    const onPlaying = () => { if (!disposed) setHasStarted(true); };
-    const onPause = () => {
-      if (disposed) return;
-      setPlaying(false);
-      if (soundAttemptStarted && !soundFallbackStarted) void restoreMutedPlayback();
-    };
+    const onPlaying = () => confirmPlayback();
+    const onPause = () => { if (!disposed) setPlaying(false); };
     const onEnded = () => {
       if (disposed) return;
       setPlaying(false);
@@ -171,24 +158,18 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
 
     void player.ready().then(async () => {
       if (disposed) return;
-      sdkReady = true;
       setReady(true);
       void player.getDuration().then(value => { if (!disposed) setDuration(value); }).catch(() => {});
-      // Vimeo may have already started muted playback from the iframe URL.
-      try {
-        if (!playbackStarted) await player.play();
-      } catch {
-        if (disposed) return;
-        // Low-power modes can block even muted autoplay; retain a Play fallback.
-        setPlaying(false);
-        return;
-      }
-      // The sound request never holds up the first moving frame.
-      void trySoundAfterPlayback();
+      // Start the sound-on attempt immediately. If the browser neither begins
+      // playback nor rejects promptly, fall back without waiting indefinitely.
+      if (playbackConfirmed) return;
+      startupTimer = window.setTimeout(() => { void startMutedFallback(); }, 800);
+      void player.play().catch(() => { void startMutedFallback(); });
     }).catch(onError);
 
     return () => {
       disposed = true;
+      clearStartupTimer();
       player.off("timeupdate", onTime);
       player.off("play", onPlay);
       player.off("playing", onPlaying);
