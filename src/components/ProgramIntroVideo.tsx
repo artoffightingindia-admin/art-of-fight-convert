@@ -19,6 +19,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
   const playerRef = useRef<Player | null>(null);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [ended, setEnded] = useState(false);
   const [muted, setMuted] = useState(false);
   const [mutePending, setMutePending] = useState(false);
@@ -31,11 +32,13 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const mount = mountRef.current;
     if (!mount || !videoUrl) return;
     let disposed = false;
+    let playbackStarted = false;
     // Give every effect its own node so Strict Mode cleanup cannot remove a new player.
     const host = document.createElement("div");
     mount.appendChild(host);
     setReady(false);
     setPlaying(false);
+    setHasStarted(false);
     setEnded(false);
     setMuted(false);
     setMutePending(false);
@@ -53,7 +56,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       embedUrl = new URL(`https://player.vimeo.com/video/${id}`);
       const hash = source.searchParams.get("h") || (!isPlayer ? path[1] : undefined);
       if (hash) embedUrl.searchParams.set("h", hash);
-      Object.entries({ autoplay: "1", muted: "0", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+      Object.entries({ autoplay: "1", muted: "0", preload: "auto", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     } catch {
       setError("The video is unavailable. Please try again later.");
       host.remove();
@@ -62,6 +65,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     // A direct iframe avoids an oEmbed lookup, which can fail for domain-restricted videos.
     const iframe = document.createElement("iframe");
     iframe.src = embedUrl.toString();
+    iframe.loading = "eager";
     iframe.title = "AOF 30-Day MMA Striking Program introduction";
     iframe.allow = "autoplay; fullscreen; encrypted-media";
     iframe.allowFullscreen = true;
@@ -76,14 +80,17 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const onTime = (data: { seconds: number; duration: number }) => {
       if (disposed) return;
       setPosition(data.seconds);
+      if (data.seconds > 0) setHasStarted(true);
       if (data.duration > 0) setDuration(data.duration);
     };
     const onPlay = () => {
       if (disposed) return;
+      playbackStarted = true;
       setPlaying(true);
       setEnded(false);
       setError("");
     };
+    const onPlaying = () => { if (!disposed) setHasStarted(true); };
     const onPause = () => { if (!disposed) setPlaying(false); };
     const onEnded = () => {
       if (disposed) return;
@@ -99,6 +106,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     };
     player.on("timeupdate", onTime);
     player.on("play", onPlay);
+    player.on("playing", onPlaying);
     player.on("pause", onPause);
     player.on("ended", onEnded);
     player.on("volumechange", onVolume);
@@ -109,6 +117,8 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       if (disposed) return;
       setReady(true);
       void player.getDuration().then(value => { if (!disposed) setDuration(value); }).catch(() => {});
+      // The iframe can already be autoplaying; avoid a redundant playback request.
+      if (playbackStarted) return;
       try {
         await player.play();
       } catch {
@@ -131,6 +141,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       disposed = true;
       player.off("timeupdate", onTime);
       player.off("play", onPlay);
+      player.off("playing", onPlaying);
       player.off("pause", onPause);
       player.off("ended", onEnded);
       player.off("volumechange", onVolume);
@@ -220,7 +231,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     >
       <div className="relative aspect-video w-full" style={fullscreen ? { aspectRatio: "auto", height: "calc(100% - 52px)" } : undefined}>
         <div ref={mountRef} className="absolute inset-0 [&_iframe]:pointer-events-none [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:h-full [&_iframe]:w-full" />
-        {!ready && !error && <p className="absolute inset-0 grid place-items-center text-sm text-white/70">Loading video…</p>}
+        {!hasStarted && <img src="/images/program-intro-poster.jpg" alt="" loading="eager" {...{ fetchpriority: "high" }} decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />}
         {ready && !playing && (
           <button type="button" onClick={startPlayback} className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#07b4ba]" aria-label={ended ? "Replay introduction" : "Play introduction"}>
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#07b4ba] text-black">{ended ? <RotateCcw aria-hidden="true" /> : <Play aria-hidden="true" />}</span>
