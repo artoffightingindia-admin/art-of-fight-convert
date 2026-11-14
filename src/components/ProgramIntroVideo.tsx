@@ -115,6 +115,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       playbackConfirmed = true;
       clearStartupTimer();
       setHasStarted(true);
+      setError(current => current.includes("Tap Play to continue") ? "" : current);
     };
 
     const startMutedFallback = async () => {
@@ -275,10 +276,17 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       ]);
       if (!isCurrent()) return;
       if (actual !== null) setMuted(actual);
-      if (nextMuted) {
+      if (nextMuted && actual === true) {
+        setError("");
+      } else if (nextMuted) {
         setError("Sound could not be changed here. Please try again.");
       } else if (actual === false) {
-        setError("Sound is on. Tap Play to continue.");
+        const paused = await Promise.race([
+          player.getPaused().catch(() => null),
+          new Promise<null>(resolve => window.setTimeout(() => resolve(null), 350)),
+        ]);
+        if (!isCurrent()) return;
+        setError(paused === true ? "Sound is on. Tap Play to continue." : "");
       } else {
         setError("Sound could not be enabled here. Please open this page in your browser.");
       }

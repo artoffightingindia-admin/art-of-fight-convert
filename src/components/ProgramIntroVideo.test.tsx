@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProgramIntroVideo from "./ProgramIntroVideo";
 
-const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0, blockedMutedAttempts: 0, holdAudibleAttempt: false, holdUnmuteRequest: false, rejectUnmuteRequest: false, pauseOnUnmute: false }));
+const mock = vi.hoisted(() => ({ instances: [] as any[], blockedAttempts: 0, blockedMutedAttempts: 0, holdAudibleAttempt: false, holdUnmuteRequest: false, rejectUnmuteRequest: false, rejectUnmutePlay: false, pauseOnUnmute: false }));
 vi.mock("@vimeo/player", () => ({
   default: class {
     listeners = new Map<string, (data?: unknown) => void>();
@@ -15,6 +15,7 @@ vi.mock("@vimeo/player", () => ({
       if (!this.isMuted && mock.holdAudibleAttempt) return await new Promise<void>(() => {});
       if (this.isMuted && mock.blockedMutedAttempts > 0) { mock.blockedMutedAttempts -= 1; throw new Error("NotAllowedError"); }
       if (!this.isMuted && mock.blockedAttempts > 0) { mock.blockedAttempts -= 1; throw new Error("NotAllowedError"); }
+      if (!this.isMuted && mock.rejectUnmutePlay) throw new Error("NotAllowedError");
       this.emit("play");
       this.emit("timeupdate", { seconds: 0.1, duration: 300 });
     });
@@ -48,7 +49,7 @@ vi.mock("@vimeo/player", () => ({
 }));
 
 describe("ProgramIntroVideo", () => {
-  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; mock.blockedMutedAttempts = 0; mock.holdAudibleAttempt = false; mock.holdUnmuteRequest = false; mock.rejectUnmuteRequest = false; mock.pauseOnUnmute = false; });
+  beforeEach(() => { mock.instances.length = 0; mock.blockedAttempts = 0; mock.blockedMutedAttempts = 0; mock.holdAudibleAttempt = false; mock.holdUnmuteRequest = false; mock.rejectUnmuteRequest = false; mock.rejectUnmutePlay = false; mock.pauseOnUnmute = false; });
 
   it("autoplays with sound when allowed, without pause controls or pause traps", async () => {
     const { unmount } = render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
@@ -213,5 +214,30 @@ describe("ProgramIntroVideo", () => {
     } finally {
       userAgent.mockRestore();
     }
+  });
+
+  it("does not say Tap Play when sound is on and the video is already playing", async () => {
+    mock.blockedAttempts = 1;
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    const unmute = await screen.findByRole("button", { name: "Unmute video" });
+    mock.rejectUnmutePlay = true;
+    fireEvent.click(unmute);
+    await waitFor(() => expect(player.getPaused).toHaveBeenCalled());
+    expect(player.paused).toBe(false);
+    expect(screen.queryByText("Sound is on. Tap Play to continue.")).not.toBeInTheDocument();
+  });
+
+  it("shows Tap Play only when Vimeo confirms a pause, then clears it on progress", async () => {
+    mock.blockedAttempts = 1;
+    render(<ProgramIntroVideo videoUrl="https://vimeo.com/123456" />);
+    const player = mock.instances[0];
+    const unmute = await screen.findByRole("button", { name: "Unmute video" });
+    act(() => player.emit("pause"));
+    mock.rejectUnmutePlay = true;
+    fireEvent.click(unmute);
+    expect(await screen.findByText("Sound is on. Tap Play to continue.")).toBeInTheDocument();
+    act(() => player.emit("timeupdate", { seconds: 5, duration: 300 }));
+    expect(screen.queryByText("Sound is on. Tap Play to continue.")).not.toBeInTheDocument();
   });
 });

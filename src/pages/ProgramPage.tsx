@@ -488,6 +488,9 @@ export default function ProgramPage() {
       }
     };
     const onPlay = () => { if (!disposed) { setTestimonialNeedsPlay(false); setTestimonialError(""); } };
+    const onTime = ({ seconds }: { seconds: number }) => {
+      if (!disposed && seconds > 0) setTestimonialError(current => current.includes("Tap Play to continue") ? "" : current);
+    };
     const onPause = () => {
       if (disposed || !testimonialUnmuteRecoveryRef.current) return;
       testimonialUnmuteRecoveryRef.current = false;
@@ -501,6 +504,7 @@ export default function ProgramPage() {
     const onError = () => { if (!disposed) setTestimonialError("The video could not load. Please refresh and try again."); };
     player.on("volumechange", onVolume);
     player.on("play", onPlay);
+    player.on("timeupdate", onTime);
     player.on("pause", onPause);
     player.on("error", onError);
     void player.ready().then(async () => {
@@ -529,6 +533,7 @@ export default function ProgramPage() {
       if (testimonialUnmuteRecoveryTimer.current !== null) window.clearTimeout(testimonialUnmuteRecoveryTimer.current);
       player.off("volumechange", onVolume);
       player.off("play", onPlay);
+      player.off("timeupdate", onTime);
       player.off("pause", onPause);
       player.off("error", onError);
       if (testimonialPlayerRef.current === player) testimonialPlayerRef.current = null;
@@ -583,7 +588,20 @@ export default function ProgramPage() {
       ]);
       if (!isCurrent()) return;
       if (actual !== null) setIsTestimonialMuted(actual);
-      setTestimonialError(nextMuted ? "Sound could not be changed. Please try again." : actual === false ? "Sound is on. Tap Play to continue." : "Sound could not be enabled here. Please open this page in your browser.");
+      if (nextMuted && actual === true) {
+        setTestimonialError("");
+      } else if (nextMuted) {
+        setTestimonialError("Sound could not be changed. Please try again.");
+      } else if (actual === false) {
+        const paused = await Promise.race([
+          player.getPaused().catch(() => null),
+          new Promise<null>(resolve => window.setTimeout(() => resolve(null), 350)),
+        ]);
+        if (!isCurrent()) return;
+        setTestimonialError(paused === true ? "Sound is on. Tap Play to continue." : "");
+      } else {
+        setTestimonialError("Sound could not be enabled here. Please open this page in your browser.");
+      }
     } catch {
       if (isCurrent()) setTestimonialError("Sound could not be changed. Please try again.");
     } finally {
