@@ -45,6 +45,11 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     if (!mount || !videoUrl) return;
     let disposed = false;
     let playbackStarted = false;
+    let sdkReady = false;
+    let firstFrameSeen = false;
+    let soundAttempted = false;
+    let soundAttemptStarted = false;
+    let soundFallbackStarted = false;
     // Give every effect its own node so Strict Mode cleanup cannot remove a new player.
     const host = document.createElement("div");
     mount.appendChild(host);
@@ -52,7 +57,7 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     setPlaying(false);
     setHasStarted(false);
     setEnded(false);
-    setMuted(false);
+    setMuted(true);
     setMutePending(false);
     setPosition(0);
     setDuration(0);
@@ -68,7 +73,9 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       embedUrl = new URL(`https://player.vimeo.com/video/${id}`);
       const hash = source.searchParams.get("h") || (!isPlayer ? path[1] : undefined);
       if (hash) embedUrl.searchParams.set("h", hash);
-      Object.entries({ autoplay: "1", muted: "0", preload: "auto", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
+      // Muted autoplay can begin as soon as Vimeo loads, before the SDK is ready.
+      // We still request sound once playback starts and keep it when allowed.
+      Object.entries({ autoplay: "1", muted: "1", preload: "auto", controls: "0", keyboard: "0", loop: "0", playsinline: "1", title: "0", byline: "0", portrait: "0", pip: "0", vimeo_logo: "0", disable_context_menu: "1" }).forEach(([name, value]) => embedUrl.searchParams.set(name, value));
     } catch {
       setError("The video is unavailable. Please try again later.");
       host.remove();
@@ -89,10 +96,43 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
     const player = new Player(iframe);
     playerRef.current = player;
 
+    const restoreMutedPlayback = async () => {
+      if (disposed || soundFallbackStarted) return;
+      soundFallbackStarted = true;
+      try {
+        const value = await player.setMuted(true);
+        if (disposed) return;
+        setMuted(value);
+        if (await player.getPaused()) await player.play();
+      } catch {
+        if (!disposed) setPlaying(false);
+      }
+    };
+
+    const trySoundAfterPlayback = async () => {
+      if (disposed || !sdkReady || !firstFrameSeen || soundAttempted) return;
+      soundAttempted = true;
+      soundAttemptStarted = true;
+      try {
+        const value = await player.setMuted(false);
+        if (disposed || soundFallbackStarted) return;
+        await player.play();
+        if (disposed || soundFallbackStarted) return;
+        setMuted(value);
+        soundAttemptStarted = false;
+      } catch {
+        void restoreMutedPlayback();
+      }
+    };
+
     const onTime = (data: { seconds: number; duration: number }) => {
       if (disposed) return;
       setPosition(data.seconds);
-      if (data.seconds > 0) setHasStarted(true);
+      if (data.seconds > 0) {
+        firstFrameSeen = true;
+        setHasStarted(true);
+        void trySoundAfterPlayback();
+      }
       if (data.duration > 0) setDuration(data.duration);
     };
     const onPlay = () => {
@@ -103,7 +143,11 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
       setError("");
     };
     const onPlaying = () => { if (!disposed) setHasStarted(true); };
-    const onPause = () => { if (!disposed) setPlaying(false); };
+    const onPause = () => {
+      if (disposed) return;
+      setPlaying(false);
+      if (soundAttemptStarted && !soundFallbackStarted) void restoreMutedPlayback();
+    };
     const onEnded = () => {
       if (disposed) return;
       setPlaying(false);
@@ -127,26 +171,20 @@ export default function ProgramIntroVideo({ videoUrl }: ProgramIntroVideoProps) 
 
     void player.ready().then(async () => {
       if (disposed) return;
+      sdkReady = true;
       setReady(true);
       void player.getDuration().then(value => { if (!disposed) setDuration(value); }).catch(() => {});
-      // The iframe can already be autoplaying; avoid a redundant playback request.
-      if (playbackStarted) return;
+      // Vimeo may have already started muted playback from the iframe URL.
       try {
-        await player.play();
+        if (!playbackStarted) await player.play();
       } catch {
         if (disposed) return;
-        // Browsers commonly reject audible autoplay. Keep the video moving silently
-        // with an accessible speaker control instead of promising a bypass.
-        try {
-          const value = await player.setMuted(true);
-          if (disposed) return;
-          setMuted(value);
-          await player.play();
-        } catch {
-          // Low-power modes can block even muted autoplay; retain a Play fallback.
-          if (!disposed) setPlaying(false);
-        }
+        // Low-power modes can block even muted autoplay; retain a Play fallback.
+        setPlaying(false);
+        return;
       }
+      // The sound request never holds up the first moving frame.
+      void trySoundAfterPlayback();
     }).catch(onError);
 
     return () => {
