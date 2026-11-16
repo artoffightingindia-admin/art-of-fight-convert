@@ -1075,13 +1075,14 @@ export default function ProgramPage() {
                     p.testimonialQuote.includes("The More I Wanted To Train") ? (
                       <>
                         {p.testimonialQuote.split("The More I Wanted To Train")[0]}
+                        <br />
                         <span className="text-[#07b4ba]">The More I Wanted To Train</span>
                       </>
                     ) : (
                       p.testimonialQuote
                     )
                   ) : (
-                    <>The More I Progressed,<span className="text-[#07b4ba]">The More I Wanted To Train</span></>
+                    <>The More I Progressed,<br /><span className="text-[#07b4ba]">The More I Wanted To Train</span></>
                   )}
                   <span className="text-[#07b4ba] text-[36px] md:text-[42px] leading-none ml-1.5 font-serif relative top-0">"</span>
                 </h3>
@@ -1173,6 +1174,7 @@ export default function ProgramPage() {
                     p.ctaHeading.includes("MONTH FEELING STUCK") ? (
                       <>
                         {p.ctaHeading.split("MONTH FEELING STUCK")[0]}
+                        <br />
                         <span className="text-[#07b4ba]">MONTH FEELING STUCK</span>
                       </>
                     ) : (
