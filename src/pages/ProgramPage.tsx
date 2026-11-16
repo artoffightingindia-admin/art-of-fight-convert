@@ -740,6 +740,7 @@ export default function ProgramPage() {
                     p.introHeading.includes("YOU'VE BEEN LOOKING FOR") ? (
                       <>
                         {p.introHeading.split("YOU'VE BEEN LOOKING FOR")[0]}
+                        <br />
                         <span className="text-[#07b4ba]">YOU'VE BEEN LOOKING FOR.</span>
                       </>
                     ) : (
@@ -1238,6 +1239,7 @@ export default function ProgramPage() {
                       p.ctaCardHeading.includes("MMA JOURNEY") ? (
                         <>
                           {p.ctaCardHeading.split("MMA JOURNEY")[0]}
+                          <br />
                           <span className="text-[#07b4ba]">MMA JOURNEY</span>
                         </>
                       ) : (
