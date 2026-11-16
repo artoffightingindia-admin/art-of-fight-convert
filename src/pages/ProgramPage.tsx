@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import { useNavigate } from "react-router-dom";
-import { Download, Play, Volume2, VolumeX } from "lucide-react";
+import { Play, Volume2, VolumeX } from "lucide-react";
 import Player from "@vimeo/player";
 import { useCms } from "@/context/CmsContext";
 import ProgramIntroVideo from "@/components/ProgramIntroVideo";
@@ -1283,16 +1283,9 @@ export default function ProgramPage() {
             </div>
           </div>
 
-          {/* Free roadmap and contact */}
+          {/* Contact */}
           <Reveal type="fade-up" delay={500} duration={1000}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-8 max-w-[680px] mx-auto mt-8 md:mt-10">
-              <div className="flex flex-col items-center gap-3 text-center">
-                <p className="text-white font-['Barlow'] font-bold text-[14px] md:text-[15px]">Free Roadmap Guide</p>
-                <a href="/downloads/AOF-Start-MMA-at-Home-Roadmap.pdf" download="AOF-Start-MMA-at-Home-Roadmap.pdf" className="inline-flex w-full max-w-[285px] min-h-[56px] justify-center items-center gap-2.5 bg-[#07b4ba] text-white py-3.5 px-6 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] no-underline hover:bg-[#089da2] transition-all duration-300 hover:scale-105 shadow-[0_4px_18px_rgba(7,180,186,.3)]">
-                  <Download size={21} aria-hidden="true" />
-                  Download Roadmap
-                </a>
-              </div>
+            <div className="flex justify-center mt-8 md:mt-10">
               <div className="flex flex-col items-center gap-3 text-center">
                 <p className="text-white font-['Barlow'] font-bold text-[14px] md:text-[15px]">Any Queries?</p>
                 <button onClick={handleWhatsAppClick} className="inline-flex w-full max-w-[285px] min-h-[56px] justify-center items-center gap-2.5 bg-[#25D366] text-white py-3.5 px-6 rounded-full font-['Barlow'] font-bold text-[14px] md:text-[15px] border-none cursor-pointer hover:bg-[#1ebe57] transition-all duration-300 hover:scale-105 shadow-[0_4px_18px_rgba(37,211,102,.35)]">
